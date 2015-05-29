@@ -173,7 +173,7 @@ Together, the HTML mappings and the Conceptual Mappings combine to mean that Mar
 
 ## How Complete is the Markua Specification and Markua Implementations?
 
-This is an in-progress, alpha quality specification. It is being constantly updated at <https://leanpub.com/markua>.
+This is an in-progress, alpha quality specification. It is being constantly updated at <https://leanpub.com/markua>. To read the specification in PDF, EPUB, MOBI or HTML format, go there.
 
 To read the specification manuscript in Markua, see <https://github.com/markuadoc/markua>. (Until Markua is fully supported in Leanpub, the Markua spec is a strange hybrid of Markua and Leanpub Flavoured Markdown.)
 
