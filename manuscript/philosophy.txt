@@ -175,6 +175,8 @@ Together, the HTML mappings and the Conceptual Mappings combine to mean that Mar
 
 This is an in-progress, alpha quality specification. It is being constantly updated at <https://leanpub.com/markua>.
 
+To read the specification manuscript in Markua, see <https://github.com/markuadoc/markua>. (Until Markua is fully supported in Leanpub, the Markua spec is a strange hybrid of Markua and Leanpub Flavoured Markdown.)
+
 In the next few months we're going to publish an open source reference implementation of a Markua parser + HTML generation, along with an open source, minimalist, in-browser editor.
 
 In terms of Markua support in Leanpub, currently Leanpub only supports Leanpub Flavoured Markdown (LFM). We are adding support for this version of the Markua specification to Leanpub. It will live alongside Leanpub Flavoured Markdown (LFM). Leanpub Flavoured Markdown will be the default for new books until this specification is at least at beta quality. At that point, we'll make Markua the default for new books, and provide a 1-click migration from LFM to Markua.
