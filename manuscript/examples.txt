@@ -1,0 +1,676 @@
+# Examples
+
+The following examples are referenced throughout the Markua specification. Interested readers can use them to understand Markua at a deeper level, and implementors of Markua Processors can use them as unit tests. In fact, we generate unit tests from these examples; to learn more visit TODO.
+
+## Block Elements
+
+### Paragraphs
+
+[Back To Section](#paragraphs_exs)
+
+{#paragraphs_1}
+#### Example 1
+
+Here's an example of three paragraphs...
+
+##### Markua Syntax
+
+{#input_paragraphs_1}
+```
+This is a paragraph. The number of sentences does not matter.
+
+This is another paragraph.
+
+This is a third paragraph.
+```
+
+##### HTML Output
+
+{#output_paragraphs_1}
+```
+<p>This is a paragraph. The number of sentences does not matter.</p>
+<p>This is another paragraph.</p>
+<p>This is a third paragraph.</p>
+```
+
+##### Example Output
+
+This is a paragraph. The number of sentences does not matter.
+
+This is another paragraph.
+
+This is a third paragraph.
+
+### Lists
+
+#### Bulleted Lists
+
+[Back To Section](#bulleted_lists_exs)
+
+{#bulleted_lists_1}
+##### Example 1
+
+###### Markua Syntax
+
+{#input_bulleted_lists_1}
+```
+* foo
+* bar
+* baz
+```
+
+###### HTML Output
+
+{#output_bulleted_lists_1}
+```
+<ul>
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ul>
+```
+
+###### Example Output
+
+* foo
+* bar
+* baz
+
+{#bulleted_lists_2}
+##### Example 2
+
+###### Markua Syntax
+
+{#input_bulleted_lists_2}
+```
+* foo
+```
+
+###### HTML Output
+
+{#output_bulleted_lists_2}
+```
+<ul>
+<li>foo</li>
+</ul>
+```
+
+###### Example Output
+
+* foo
+
+#### Numbered Lists
+
+[Back To Section](#numbered_lists_exs)
+
+{#numbered_lists_1}
+##### Example 1
+
+###### Markua Syntax
+
+{#input_numbered_lists_1}
+```
+1. foo
+2. bar
+3. baz
+```
+
+###### HTML Output
+
+{#output_numbered_lists_1}
+```
+<ol>
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+```
+
+###### Example Output
+
+1. foo
+2. bar
+3. baz
+
+{#numbered_lists_2}
+##### Example 2
+
+###### Markua Syntax
+
+{#input_numbered_lists_2}
+```
+1. foo
+```
+
+###### HTML Output
+
+{#output_numbered_lists_2}
+```
+<ol>
+<li>foo</li>
+</ol>
+```
+
+###### Example Output
+
+1. foo
+
+{#numbered_lists_3}
+##### Example 3
+
+###### Markua Syntax
+
+{#input_numbered_lists_3}
+```
+9. foo
+10. bar
+11. baz
+```
+
+###### HTML Output
+
+{#output_numbered_lists_3}
+```
+<ol start="9">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+9. foo
+10. bar
+11. baz
+
+#### Uppercase Alphabetical List
+
+[Back To Section](#uppercase_alphabetical_list_exs)
+
+{#uppercase_alphabetical_lists_1}
+##### Example 1
+
+###### Markua Syntax
+
+{#input_uppercase_alphabetical_lists_1}
+```
+A) foo
+B) bar
+```
+
+###### HTML Output
+
+Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
+
+{#output_uppercase_alphabetical_lists_1}
+```
+<ol type="A">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+A) foo
+B) bar
+
+{#uppercase_alphabetical_lists_2}
+##### Example 2
+
+###### Markua Syntax
+
+{#input_uppercase_alphabetical_lists_2}
+```
+A. foo
+B. bar
+```
+
+###### HTML Output
+
+{#output_uppercase_alphabetical_lists_2}
+```
+<ol type="A">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+A. foo
+B. bar
+
+{#uppercase_alphabetical_lists_3}
+##### Example 3
+
+###### Markua Syntax
+
+{#input_uppercase_alphabetical_lists_3}
+```
+D) foo
+E) bar
+```
+
+###### HTML Output
+
+{#output_uppercase_alphabetical_lists_3}
+```
+<ol type="A" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+D) foo
+E) bar
+
+{#uppercase_alphabetical_lists_4}
+##### Example 4
+
+###### Markua Syntax
+
+{#input_uppercase_alphabetical_lists_4}
+```
+D. foo
+E. bar
+```
+
+###### HTML Output
+
+{#output_uppercase_alphabetical_lists_4}
+```
+<ol type="A" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+D. foo
+E. bar
+
+#### Lowercase Alphabetical List
+
+[Back To Section](#lowercase_alphabetical_list_exs)
+
+{#lowercase_alphabetical_lists_1}
+##### Example 1
+
+###### Markua Syntax
+
+{#input_lowercase_alphabetical_lists_1}
+```
+a) foo
+b) bar
+```
+
+###### HTML Output
+
+Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
+
+{#output_lowercase_alphabetical_lists_1}
+```
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+a) foo
+b) bar
+
+{#lowercase_alphabetical_lists_2}
+##### Example 2
+
+###### Markua Syntax
+
+{#input_lowercase_alphabetical_lists_2}
+```
+a. foo
+b. bar
+```
+
+###### HTML Output
+
+{#output_lowercase_alphabetical_lists_2}
+```
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+a. foo
+b. bar
+
+{#lowercase_alphabetical_lists_3}
+##### Example 3
+
+###### Markua Syntax
+
+{#input_lowercase_alphabetical_lists_3}
+```
+d) foo
+e) bar
+```
+
+###### HTML Output
+
+{#output_lowercase_alphabetical_lists_3}
+```
+<ol type="a" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+d) foo
+e) bar
+
+{#lowercase_alphabetical_lists_4}
+##### Example 4
+
+###### Markua Syntax
+
+{#input_lowercase_alphabetical_lists_4}
+```
+d. foo
+e. bar
+```
+
+###### HTML Output
+
+{#output_lowercase_alphabetical_lists_4}
+```
+<ol type="a" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+d. foo
+e. bar
+
+#### Uppercase Roman Numeral List
+
+[Back To Section](#uppercase_roman_numeral_list_exs)
+
+{#uppercase_roman_numeral_lists_1}
+##### Example 1
+
+###### Markua Syntax
+
+{#input_uppercase_roman_numeral_lists_1}
+```
+I) foo
+II) bar
+```
+
+###### HTML Output
+
+Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
+
+{#output_uppercase_roman_numeral_lists_1}
+```
+<ol type="I">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+I) foo
+II) bar
+
+{#uppercase_roman_numeral_lists_2}
+##### Example 2
+
+###### Markua Syntax
+
+{#input_uppercase_roman_numeral_lists_2}
+```
+I. foo
+II. bar
+```
+
+###### HTML Output
+
+{#output_uppercase_roman_numeral_lists_2}
+```
+<ol type="I">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+I. foo
+II. bar
+
+{#uppercase_roman_numeral_lists_3}
+##### Example 3
+
+###### Markua Syntax
+
+{#input_uppercase_roman_numeral_lists_3}
+```
+IV) foo
+V) bar
+```
+
+###### HTML Output
+
+{#output_uppercase_roman_numeral_lists_3}
+```
+<ol type="I" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+IV) foo
+V) bar
+
+{#uppercase_roman_numeral_lists_4}
+##### Example 4
+
+###### Markua Syntax
+
+{#input_uppercase_roman_numeral_lists_4}
+```
+IV. foo
+V. bar
+```
+
+###### HTML Output
+
+{#output_uppercase_roman_numeral_lists_4}
+```
+<ol type="I" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+IV. foo
+V. bar
+
+#### Lowercase Roman Numeral List
+
+[Back To Section](#lowercase_roman_numeral_list_exs)
+
+{#lowercase_roman_numeral_lists_1}
+##### Example 1
+
+###### Markua Syntax
+
+{#input_lowercase_roman_numeral_lists_1}
+```
+i) foo
+ii) bar
+```
+
+###### HTML Output
+
+Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
+
+{#output_lowercase_roman_numeral_lists_1}
+```
+<ol type="i">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+i) foo
+ii) bar
+
+{#lowercase_roman_numeral_lists_2}
+##### Example 2
+
+###### Markua Syntax
+
+{#input_lowercase_roman_numeral_lists_2}
+```
+i. foo
+ii. bar
+```
+
+###### HTML Output
+
+{#output_lowercase_roman_numeral_lists_2}
+```
+<ol type="i">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+i. foo
+ii. bar
+
+{#lowercase_roman_numeral_lists_3}
+##### Example 3
+
+###### Markua Syntax
+
+{#input_lowercase_roman_numeral_lists_3}
+```
+iv) foo
+v) bar
+```
+
+###### HTML Output
+
+{#output_lowercase_roman_numeral_lists_3}
+```
+<ol type="i" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+iv) foo
+v) bar
+
+{#lowercase_roman_numeral_lists_4}
+##### Example 4
+
+###### Markua Syntax
+
+{#input_lowercase_roman_numeral_lists_4}
+```
+iv. foo
+v. bar
+```
+
+###### HTML Output
+
+{#output_lowercase_roman_numeral_lists_4}
+```
+<ol type="i" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+###### Example Output
+
+{class: warning}
+B> FIXME: This Example Output is broken until Markua support is in Leanpub.
+
+iv. foo
+v. bar

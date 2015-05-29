@@ -1,0 +1,928 @@
+# Block Elements
+
+As Markua is inspired by Markdown, there are two types of elements in Markua: Block Elements and Span Elements.
+
+Every block element in Markua is separated from every other block element in Markua by at least one blank line. (This is not just one newline: a blank line is formed by the addition of two newlines.)
+
+Note that there is an assumed blank line at the top and bottom of each Markua file, so at the top of a file you only need a blank line below the first block element, and at the bottom of a Markua file you only need a blank line above the last block element. You cannot make a block element span Markua source files--there is always a blank line added by the addition of two newlines during the concatenation.
+
+Block elements can also have attributes. These modify the block element that they are attached to. An attribute is associated with the block element below it; to learn more see [attributes](#attributes).
+
+Span elements are always contained inside a block element.
+
+Markua is a plain-text format designed for the writing of books and documents.
+
+Since Markua is a format in which all semantic and syntax formatting is typed by the author, we want Markua to be as readable as possible and as economical of keystrokes as possible.
+
+Almost all formatting in Markua means the same thing regardless of whether the Markua document is being used to generate a book or document. The one huge exception to this, however, is in headings.
+
+### Heading Types
+
+Conceptually, the most important element types in Markua are the headings. A Markua document is typically organized into one or more levels of headings.
+
+To make a heading, you start a line with some number of pound signs (`#`), followed by a space, followed by some words or numbers.
+
+Headings must be separated from other block elements by blank lines both before and after them. Because of the [way that Markua concatenates files](#multiple-file-concatenating), headings at the top of a Markua document automatically have a blank line above them. So, headings at the top of a document only need a blank line below them.
+
+There is no other way to make headings.
+
+{class: warning}
+B> Headings cannot have optional pound signs at the end of them. If this is the case, those pound signs are considered to be text in the heading. (This is different than the "ATX headings" in Markdown, which can have any number of optional pound signs at the end of them.)
+
+### No Setext Headers
+
+Specifically, the "Setext" style of headings is **not** supported in Markua. (In the Setext-style of headings, which is supported in both Gruber Markdown and Leanpub Flavoured Markdown, top level headings can be made by adding a row of equals signs `========`, and second level headings can be made by adding a row of minus signs `--------`. This style of heading is inconsistent (only supporting two levels), confusing (how many equals signs do you need to use?), ugly and cluttered. So, it is not supported in Markua.
+
+### Six Heading Levels: `#`, `##`, `###`, `####`, `#####` and `######`
+
+In Markua, the type of heading is determined by the number of `#`s that are used. There are 6 levels of headings:
+
+1. `#`, the top-level heading
+2. `##`, the second-level heading
+3. `###`, the third-level heading
+4. `####`, the fourth-level heading
+5. `#####`, the fifth-level heading
+6. `######`, the sixth-level heading
+
+{#html-mapping-heading}
+### HTML Mapping of Heading Types
+
+The HTML mapping of headings is exactly the same as in Gruber Markdown, mapping the number of `#` signs to the heading level in HTML:
+
+1. `#` means `h1`
+2. `##` means `h2`
+3. `###` means `h3`
+4. `####` means `h4`
+5. `#####` means `h5`
+6. `######` means `h6`
+
+The HTML element  mapping of these heading types is identical regardless of what type of Markua document is being written.
+
+Note that the class used in the HTML mapping is affected by the `type` of the Markua document. This is so that Markua processors can use CSS to style these headings appropriately based on what type of Markua document they are generating.
+
+As discussed in the [metadata](#metadata) chapter, there are three legal values of the [`type`](#setting-keys-and-values) setting:
+
+1. A Book (`book`).
+2. A Multi-Part Book (`multi-part-book`).
+3. A Document (`document`).
+
+These affect the classes which are added as follows:
+
+#### HTML Mapping with `type` of `book` (the default)
+
+```
+<h1 class="chapter">...</h1>
+<h2 class="section">...</h2>
+<h3 class="sub-section">...</h3>
+<h4 class="sub-sub-section">...</h4>
+<h5 class="sub-sub-sub-section">...</h5>
+<h6 class="sub-sub-sub-sub-section">...</h6>
+```
+
+#### HTML Mapping with `type` of `multi-part-book`
+
+```
+<h1 class="part">...</h1>
+<h2 class="chapter">...</h2>
+<h3 class="section">...</h3>
+<h4 class="sub-section">...</h4>
+<h5 class="sub-sub-section">...</h5>
+<h6 class="sub-sub-sub-section">...</h6>
+```
+
+#### HTML Mapping with `type` of `document`
+
+```
+<h1 class="section">...</h1>
+<h2 class="sub-section">...</h2>
+<h3 class="sub-sub-section">...</h3>
+<h4 class="sub-sub-sub-section">...</h4>
+<h5 class="sub-sub-sub-sub-section">...</h5>
+<h6 class="sub-sub-sub-sub-sub-section">...</h6>
+```
+
+### Conceptual Mapping of Headings in Different Document Types
+
+What headings *mean*, however, is determined by what type of Markua document is being written.
+
+There are **three** types of Markua documents:
+
+1. A Book (`book`).
+2. A Multi-Part Book (`multi-part-book`).
+3. A Document (`document`).
+
+The default type of a Markua document is `book`. If no document type is specified, this is the type.
+
+From the perspective of the author, the only difference between these types of Markua documents are what the headings mean--what the conceptual mapping is from the Markua heading levels to book or document structures.
+
+#### Headings in Books (`type: book`, the default)
+
+In a normal book, the topmost unit of organization is the chapter. Thus, the topmost heading maps to a chapter.
+
+This is the mapping from Markua headings in a normal book:
+
+1. `#` means Chapter
+2. `##` means Section
+3. `###` means Sub-Section
+4. `####` means Sub-Sub-Section
+5. `#####` means Sub-Sub-Sub-Section
+6. `######` means Sub-Sub-Sub-Sub-Section
+
+#### Headings in Books with Parts (`type: multi-part-book`)
+
+In a book with parts, the topmost unit of organization is the part. Thus, the topmost heading maps to a part.
+
+This is the mapping from Markua headings in a book with parts:
+
+1. `#` means Part
+2. `##` means Chapter
+3. `###` means Section
+4. `####` means Sub-Section
+5. `#####` means Sub-Sub-Section
+6. `######` means Sub-Sub-Sub-Section
+
+#### Headings in Documents (`type: document`)
+
+In a document, there are just differing levels of section. Thus, the topmost heading is just the topmost section.
+
+This is the mapping from Markua headings in a document:
+
+1. `#` means Section
+2. `##` means Sub-Section
+3. `###` means Sub-Sub-Section
+4. `####` means Sub-Sub-Sub-Section
+5. `#####` means Sub-Sub-Sub-Sub-Section
+6. `######` means Sub-Sub-Sub-Sub-Sub-Section
+
+## Paragraphs
+
+Like every block element, a paragraph has a blank line both above and below it.
+
+The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading, or like all the remaining block elements below) are paragraphs.
+
+Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, as with all other block elements, you cannot make a paragraph span Markua source files.
+
+{#paragraphs_exs}
+Examples:
+
+* [Example 1](#paragraphs_1)
+
+## Lists
+
+Markua defines substantially more list types than Markdown.
+
+In Markdown, the only types of lists supported are HTML ordered lists with numbers and HTML unordered lists with bullets. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list. Specifically, besides supporting bulleted (i.e. "unordered" lists), every type of "ordered" list format specified by HTML (decimal numbers, uppercase and lowercase letters, and uppercase and lowercase Roman numerals) must be supported. Each of these types of list are specified below.
+
+Furthermore, these lists are not called "ordered" and "unordered" for three reasons:
+
+1. The terms "ordered list" and "unordered list" come from HTML, and have more of a "programming" feeling to them than a "writing" feeling. Markua is a format for writers.
+2. The terms "ordered list" and "unordered list" imply an HTML implementation, and Markua is used to generate PDF, EPUB, MOBI and HTML. Furthermore, the HTML implementation of ordered lists always uses a period as the delimiter, and that is not true in Markua. So using the same term would be incorrect.
+3. All lists have an order--otherwise they would not be lists! So, the term "unordered list" is inherently absurd.
+
+Furthermore, besides ordered and unordered lists, [definition lists](#dl) are also supported. We strongly believe in their value.
+
+All lists must have a blank line before and after them.
+
+There are a number of list types. Each is specified in turn below.
+
+### Bulleted Lists
+
+To make a bulleted list you start one or more consecutive lines with an asterisk (\*), followed by one space, followed by text content:
+
+```
+* foo
+* bar
+* baz
+```
+
+No other line start other than an asterisk is correct Markua syntax. Also, there are an arbitrary number of spaces or tabs after a list bullet.
+
+{#bulleted_lists_exs}
+Examples:
+
+* [Example 1](#bulleted_lists_1)
+* [Example 2](#bulleted_lists_2)
+
+{#numbered_lists}
+### Numbered Lists
+
+Numbered lists are more fully featured in Markua than in Markdown.
+
+To make a numbered list you start one or more consecutive lines with a consecutive number, followed by a period, followed by whitespace, followed by text content:
+
+```
+1. foo
+2. bar
+3. baz
+```
+
+Unlike in Markdown, the number that begins the list in the manuscript is the number that begins the list in the output.
+
+Also, unlike in Markdown, numbers must be consecutive. The following is not legal Markua:
+
+```
+1. foo
+1. bar
+```
+
+Note that there are one or more spaces after the period. The reason that more spaces are allowed is to allow authors to line up their lists, if they choose to.
+
+{#numbered_lists_exs}
+Examples:
+
+* [Example 1](#numbered_lists_1)
+* [Example 2](#numbered_lists_2)
+* [Example 3](#numbered_lists_3)
+
+### Uppercase Alphabetical List
+
+To make an uppercase alphabetical list you start one or more consecutive lines with an uppercase letter, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
+
+```
+A) foo
+B) bar
+```
+
+The letter that begins the list in the manuscript is the letter that begins the list in the output. Also, letters must be consecutive.
+
+{#uppercase_alphabetical_list_exs}
+Examples:
+
+* [Example 1](#uppercase_alphabetical_lists_1)
+* [Example 2](#uppercase_alphabetical_lists_2)
+* [Example 3](#uppercase_alphabetical_lists_3)
+* [Example 4](#uppercase_alphabetical_lists_4)
+
+### Lowercase Alphabetical List
+
+To make a lowercase alphabetical list you start one or more consecutive lines with a lowercase letter, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
+
+```
+a) foo
+b) bar
+```
+
+The letter that begins the list in the manuscript is the letter that begins the list in the output. Also, letters must be consecutive.
+
+{#lowercase_alphabetical_list_exs}
+Examples:
+
+* [Example 1](#lowercase_alphabetical_lists_1)
+* [Example 2](#lowercase_alphabetical_lists_2)
+* [Example 3](#lowercase_alphabetical_lists_3)
+* [Example 4](#lowercase_alphabetical_lists_4)
+
+### Uppercase Roman Numeral List
+
+To make an uppercase Roman numeral list you start one or more consecutive lines with an uppercase Roman numeral, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
+
+```
+I) foo
+II) bar
+```
+
+If you want to line up the Roman numerals, you can do so by adding spaces or by using tabs instead of spaces.
+
+The Roman numeral that begins the list in the manuscript is the Roman numeral that begins the list in the output. Also, Roman numerals must be consecutive--if you want to use them, you have to know them.
+
+{#uppercase_roman_numeral_list_exs}
+Examples:
+
+* [Example 1](#uppercase_roman_numeral_lists_1)
+* [Example 2](#uppercase_roman_numeral_lists_2)
+* [Example 3](#uppercase_roman_numeral_lists_3)
+* [Example 4](#uppercase_roman_numeral_lists_4)
+
+### Lowercase Roman Numeral List
+
+To make a lowercase Roman numeral list you start one or more consecutive lines with a lowercase Roman numeral, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
+
+```
+i) foo
+ii) bar
+```
+
+If you want to line up the Roman numerals, you can do so by adding spaces or by using tabs instead of spaces.
+
+The Roman numeral that begins the list in the manuscript is the Roman numeral that begins the list in the output. Also, Roman numerals must be consecutive--if you want to use them, you have to know them.
+
+{#lowercase_roman_numeral_list_exs}
+Examples:
+
+* [Example 1](#lowercase_roman_numeral_lists_1)
+* [Example 2](#lowercase_roman_numeral_lists_2)
+* [Example 3](#lowercase_roman_numeral_lists_3)
+* [Example 4](#lowercase_roman_numeral_lists_4)
+
+{#dl}
+### Definition Lists
+
+Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, we strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, we see definition lists as having more of a future than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
+
+To define a definition list in Markua, use the following syntax:
+
+```
+term 1
+: definition 1
+
+term 2
+: definition 2
+```
+
+For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.
+
+## Block Quotes
+
+Block quotes can span multiple pages. They are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
+
+
+TODO
+
+
+
+
+A blockquote can contain other block-level elements, most commonly paragraphs. To start a new block level element within a blockquote, just put a line starting with a `>` followed by an optional space. It is equivalent to placing a `> ` in front of every line of the paragraphs.
+
+Block quotes can be multi-paragraph. Each newline followed by a `> ` creates a new paragraph in the block quote.
+
+{class: warning}
+B> The nesting of block quotes in Markdown is not supported in Markua.
+
+A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
+
+### Example
+
+#### Markua Syntax
+
+```
+> block quotes
+> can be multi-paragraph
+> like this
+```
+
+#### HTML Output
+
+The HTML output for a block quote is simply a `div`, not a `section` or an `aside`, since an arbitrary block quote is not something which is a top-level element of a book.
+
+```
+<blockquote>
+<p>block quotes</p>
+<p>can be multi-line</p>
+<p>like this</p>
+</blockquote>
+```
+
+#### Example Output
+
+> block quotes
+> can be multi-paragraph
+> like this
+
+## Asides
+
+Asides can span multiple pages.
+
+Asides can be created like block quotes, but using `A>` line prefixes.
+
+### Example
+
+#### Markua Syntax
+
+```
+A> aside text
+A> can be multi-paragraph
+A> like this
+```
+
+#### HTML Output
+
+The HTML output for an Aside is simply a `div`, not a `section` or an `aside`, since an arbitrary aside is not something which is a top-level element of a book.
+
+```
+<div class="aside">
+<p>aside text</p>
+<p>can be multi-line</p>
+<p>like this</p>
+</div>
+```
+
+#### Example Output
+
+A> aside text
+A> can be multi-paragraph
+A> like this
+
+## Blurbs
+
+{class: warning}
+B> TODO - Rewrite using conventions. Explain newline handling.
+
+Blurbs are like asides, but with two differences.
+
+1. They are created with `B> ` not `A> ` prefixed lines.
+2. They are intended to be short, and thus do not need to support page breaks inside them.
+3. They can have an optional `class`, which can be used by Markua processors to decorate the blurb (e.g. with icons).
+
+An blurb looks like this:
+
+```
+B> blurb text
+B> multi-line
+```
+
+### Classes of Blurbs
+
+Like all Markua block elements, blurbs can have a `class` attribute attached to them. Here's an example:
+
+```
+{class: warning}
+B> Warning text. Don't do this!
+```
+
+There are no required CSS rules in Markua, and thus, there is no required special support for any specific class attributes on a blurb or anywhere else.
+
+For example, Leanpub produces a lot of computer programming books, so it understands the following values for the `class` attribute on a blurb:
+
+* `discussion`
+* `error`
+* `exercise`
+* `information`
+* `question`
+* `tip`
+* `warning`
+
+### Using Extension Attributes on Blurbs to add Icons
+
+As discussed later, Markua blocks can support any number of [extension attributes](#extension-attributes).
+
+Blurbs provide an example of an extension attributes.
+
+Leanpub's Markua implementation supports an `icon` attribute on blurbs. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
+
+~~~
+{icon: automobile}
+B> Len thinks that cars will all be driverless soon.
+B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
+~~~
+
+This produces output like this:
+
+{icon: automobile}
+B> Len thinks that cars will all be driverless soon.
+B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
+
+In any other Markua implementation that does not produce
+
+{#code-blocks}
+## Code Blocks
+
+Code blocks can be defined inline or can import external code samples. Many attributes work the same way in both cases. The inline code block approach will be shown first.
+
+{class: warning}
+B> TODO - reference attribute list thing here, need to have a list of every element and attribute in appendix etc etc
+
+### Inline Code Blocks in Markua Text
+
+You can create an inline code block by surrounding it using three backticks (`\``).
+
+(You can also create an inline code block by surrounding it with three tildes (`~~~`), but the only reason this alternative exists is to enable writing about Markua code blocks that are surrounded with backticks in Markua. The correct approach in normal cases is to use three backticks.)
+
+Here's an example of a code block:
+
+~~~
+```
+def foo
+  2
+end
+```
+~~~
+
+{class: warning}
+B> The "four space indent" method of creating code blocks in Markdown is not supported in Markua.
+
+Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
+
+Markua also supports defining the language that a code sample is written in using the GitHub Flavoured Markdown style language specification, in which the language name is added after the three opening backticks that start a code block:
+
+~~~
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+Markua Processors may guess at the language of a code block. To explicitly turn this off for a give code block, it can be forced to be plain text like this:
+
+~~~
+```text
+def foo
+  2
+end
+```
+~~~
+
+If a Markua Processor knows how to format the code using the specified language (if it has a "lexer" for it), it can do so. Otherwise, it must format the code using plain text as though `text` was specified as the language.
+
+Note that this language definition is just a shorthand for a more general metadata feature of markua called [attributes](#attributes). Briefly, attributes comma-separated key-value pairs enclosed in a pair of curly braces (`{` ... `}`) and separated by a newline but **not** by a blank line from the thing that they are an attribute of.
+
+You can define the language of a code block explicitly using the language attribute:
+
+~~~
+{language: ruby}
+```
+def foo
+  2
+end
+```
+~~~
+
+Markua also supports adding other information to attributes of code blocks. For example, you can explicitly turn line numbering on an off using the `line-numbers` attribute:
+
+~~~
+{language: ruby, line-numbers: off}
+```
+def foo
+  2
+end
+```
+~~~
+
+You can mix-and-match the attribute syntax and the GitHub-style syntax. The following is legal in Markua:
+
+~~~
+{line-numbers: on}
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+If the attribute and the GitHub-style syntax conflict, the attribute wins. The following will be formatted as plain text, not ruby:
+
+~~~
+{language: text, line-numbers: on, number-from: 3}
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+A> # Line Wrapping
+A>
+A> Code blocks should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors must wrap lines to ensure that all code is visible, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
+
+#### ASCII art
+
+{class: warning}
+B> TODO: possibly support {language: `asciiart`} on a code block, which tightens line spacing and turns off page breaks so that ASCII art looks better.
+
+### Importing Code Samples from External Files
+
+To import a code sample from an external file, you use a syntax very similar to the image insertion syntax:
+
+```
+<<(sample1.rb)
+```
+
+All external code samples must live inside the code subdirectory or one of its subdirectories.
+
+A> In Leanpub Flavoured Markdown, the paths included `code/`. This was redundant, since all code had to live in the code directory. So, Markua omits `code/` from the path.
+
+External code samples can also have attributes added to them on import. These can set a caption, determine what subset of the code example to show, as well as set the line number to start the numbering on.
+
+The following will show a code sample with the caption of "My Brilliant Algorithm". The code sample will contain 6 lines (lines 10-15 inclusive), and it will number them 10, 11, 12, 13, 14 and 15 since those are the line numbers of the given lines in the file:
+
+```
+{caption: "My Brilliant Algorithm", language: ruby, crop-start: 10, crop-end: 15, line-numbers: on}
+<<(sample1.rb)
+```
+
+If this is not desired, you can choose to start the numbering wherever you want with `number-from`. Choosing `1` is a good choice.
+
+The following will show 6 lines (lines 10-15 inclusive), and it will number them 1, 2, 3, 4, 5 and 6:
+
+```
+{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 1}
+<<(sample1.rb)
+```
+
+Or, if you wish to make things annoying, you can number from any non-negative integer you want. The following will show 6 lines (lines 10-15 inclusive), and it will number them 3, 4, 5, 6, 7 and 8:
+
+```
+{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 3}
+<<(sample1.rb)
+```
+
+A> The Leanpub Flavoured Markdown syntax of putting a code sample caption is not supported. This syntax looked like the alt text on images, but as discussed there, this was an incorrecct use of the image syntax.
+
+## Scene Breaks
+
+To make a scene break, place exactly three hyphens on a line by themselves. Scene breaks must have a blank line above them and below them.
+
+Markua Processors can take great liberties in how they display scene breaks in non-HTML outputs. For example, scene breaks can be displayed as a few centered asterisks, an image, or just a blank line, depending on whether the book is fiction or another type of book.
+
+Scene breaks map to the `hr` element in HTML.
+
+### Example
+
+#### Markua Syntax
+
+```
+Yada yada yada.
+
+---
+
+Yada yada yada.
+```
+
+#### HTML Output
+
+```
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+```
+
+#### Example Output
+
+Yada yada yada.
+
+---
+
+Yada yada yada.
+
+## Tables
+
+{class: warning}
+B> TODO (with titles)
+
+## Poetry
+
+Poetry is easily supported in Markua: just hit a single newline to force a line break.
+
+This works great for sonnets: you can write them just by typing. No fancy formatting is required to produce them.
+
+New stanzas can be created by adding a blank line, just as would happen with new stanzas.
+
+Note that the "two space trick" for line breaks is neither supported nor necessary in Markua: every newline in a normal paragraph produces a line break, regardless of whether there are any trailing spaces.  Two newlines produce a new paragraph or stanza.
+
+If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`.
+
+### Example 1: A Shakesperean Sonnet
+
+Shakespeare could have sat down and typed this in Markua:
+
+#### Markua Syntax
+
+```
+My mistress' eyes are nothing like the sun;
+Coral is far more red than her lips' red;
+If snow be white, why then her breasts are dun;
+If hairs be wires, black wires grow on her head.
+I have seen roses damasked, red and white,
+But no such roses see I in her cheeks;
+And in some perfumes is there more delight
+Than in the breath that from my mistress reeks.
+I love to hear her speak, yet well I know
+That music hath a far more pleasing sound;
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+     And yet, by heaven, I think my love as rare
+     As any she belied with false compare.
+```
+
+#### HTML Output
+
+<p>
+My mistress' eyes are nothing like the sun;<br/>
+Coral is far more red than her lips' red;<br/>
+If snow be white, why then her breasts are dun;<br/>
+If hairs be wires, black wires grow on her head.<br/>
+I have seen roses damasked, red and white,<br/>
+But no such roses see I in her cheeks;<br/>
+And in some perfumes is there more delight<br/>
+Than in the breath that from my mistress reeks.<br/>
+I love to hear her speak, yet well I know<br/>
+That music hath a far more pleasing sound;<br/>
+I grant I never saw a goddess go;<br/>
+My mistress when she walks treads on the ground.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
+</p>
+
+#### Example Output
+
+{class: warning}
+B> FIXME This is broken until Markua support is in Leanpub
+
+My mistress' eyes are nothing like the sun;
+Coral is far more red than her lips' red;
+If snow be white, why then her breasts are dun;
+If hairs be wires, black wires grow on her head.
+I have seen roses damasked, red and white,
+But no such roses see I in her cheeks;
+And in some perfumes is there more delight
+Than in the breath that from my mistress reeks.
+I love to hear her speak, yet well I know
+That music hath a far more pleasing sound;
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+     And yet, by heaven, I think my love as rare
+     As any she belied with false compare.
+
+### Example 2: e e cummings Style Poetry
+
+If you want to write e e cummings style poetry, go for it:
+
+###### Markua Syntax
+
+~~~
+{code: poetry}
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+~~~
+
+###### HTML Output
+
+{class: warning}
+B> TODO
+
+{code: poetry}
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+
+###### Example Output
+
+{code: poetry}
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+
+{#math-blocks}
+## Math Blocks
+
+You can put mathematical equations in your book, in either block elements (described below) or in [span elements](#math-span).
+
+To create a math block, you insert it like a code block and you add a `math` attribute. The key is `math` and the value can either be `latex`, `mathml` or some other term.  This value specifies the markup language of the Math block.
+
+**Markua procesors do NOT need to support any given Math markup language.**
+
+However, if a Markua processor does not understand a given Math markup language specified by the value of a `math` attribute (say, if it supports LaTeX math but not MathML), it **MUST** output the content of the math block **as a code block formatted as text**.
+
+### LaTeX Math with `{math: latex}`
+
+To add LaTeX math, use `{math: latex}`:
+
+#### Markua Syntax
+
+~~~
+Here is some paragraph text.
+
+{math: latex}
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here is some more paragraph text.
+~~~
+
+#### HTML Output
+
+Markua processors can do whatever they want here. They can even output the entire thing as an image and insert the image, since that works on the most legacy ebook readers. Accessibility for old devices and accessibility for people with visual disabilities are often in conflict, and it's up to the Markua Processor to decide what to do.
+
+#### Example Output
+
+{class: warning}
+B> FIXME - broken until Leanpub switches from the \{$$} LFM syntax in Markua documents
+
+Here is some paragraph text.
+
+{math: latex}
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here is some more paragraph text.
+
+### MathML Math with `{math: mathml}`
+
+To add MathML math, use `{math: mathml}`:
+
+A> MathML is not supported in Leanpub, so we have no idea if supporting it is a good idea or not.
+
+#### Markua Syntax
+
+~~~
+Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
+
+{math: mathml}
+```
+<apply>
+  <plus/>
+  <apply>
+    <times/>
+    <ci>a</ci>
+    <apply>
+      <power/>
+      <ci>x</ci>
+      <cn>2</cn>
+    </apply>
+  </apply>
+  <apply>
+    <times/>
+    <ci>b</ci>
+    <ci>x</ci>
+  </apply>
+  <ci>c</ci>
+</apply>
+```
+
+Here is some more paragraph text.
+~~~
+
+#### HTML Output
+
+Markua processors can do whatever they want here as well.
+
+#### Example Output
+
+Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
+
+{math: mathml}
+```
+<apply>
+  <plus/>
+  <apply>
+    <times/>
+    <ci>a</ci>
+    <apply>
+      <power/>
+      <ci>x</ci>
+      <cn>2</cn>
+    </apply>
+  </apply>
+  <apply>
+    <times/>
+    <ci>b</ci>
+    <ci>x</ci>
+  </apply>
+  <ci>c</ci>
+</apply>
+```
+
+Here is some more paragraph text.
+
+### Math Blocks with Default `math`
+
+Note that there is a default markup language for math in a Markua document. It is determined by the value of the `math` attribute which is set in the metadata. The default value of the `math` attribute is `latex`.
+
+Because of this, you can also insert math like this:
+
+#### Markua Syntax
+
+~~~
+Here is some paragraph text.
+
+```math
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here is some more paragraph text.
+~~~
+
+#### HTML Output
+
+Markua processors can do whatever they want here as well.
+
+#### Example Output
+
+Here is some paragraph text.
+
+```math
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here is some more paragraph text.

@@ -1,0 +1,190 @@
+{#structure}
+# Markua Filename and Directory Structure
+
+Markua manuscripts can be written anywhere, including on computers, mobile devices, tablets and in web browsers.
+
+If a Markua manuscript is being written somewhere (like in a web browser) in which the author(s) do not interact with files and directories, there are no constraints about how the files and directories (if any) are structured. In this case, Markua is just a syntax format.
+
+However, if a Markua manuscript is being written or exported to a computer in which the author(s) do interact with files and directories, there are some strict requirements about the directory structure and filename conventions.
+
+These requirements are specified here.
+
+Markua manuscripts can be assembled from one source file or from multiple source files. Also, they can have images and code samples included. So, there needs to be some way of defining how this all fits together. This could either be done by configuration (say a file which defined where everything lived), or by a strictly enforced set of conventions. This Ruby on Rails style approach of "convention over configuration" is what Markua chooses. The choice of convention over configuration ensures that Markua authors have a consistent experience when writing Markua manuscripts.
+
+Markua manuscripts are all contained in one directory. This directory can be named any legal name for the given filesystem.
+
+The manuscript directory contains two optional subdirectories: `images` and `code`. The `images` directory is for any images which are referenced in the manuscript; the `code` directory is for any computer programming code samples which are referenced in the manuscript. Both the `images` and `code` directories can contain an entire tree of subdirectories, to help authors organize their images or code. The `images` and `code` names are the required names for these directories. This is true regardless of the language being used.
+
+There are two ways that a manuscript can be structured:
+
+1. Single File Approach: `manuscript.txt`
+2. Multiple Files Approach: `book.txt`, `sample.txt`, `settings.txt` and multiple files
+
+## Single File Approach: `manuscript.txt`
+
+Markua manuscripts can be written all in one file. If so, this file must be named `manuscript.txt`.
+
+If this approach is used, here's the initial directory structure of a Markua book manuscript directory:
+
+```
+manuscript.txt
+images/
+code/
+```
+
+The author writes the manuscript entirely in the file called `manuscript.txt`. It can reference images in the `images` directory (and any of its subdirectories) and code in the `code` directory (and any of its subdirectories). It can also contain inline metadata, as described in the [Metadata](#metadata) chapter.
+
+{#multiple-files}
+## Multiple Files Approach: `book.txt`, `sample.txt`, `settings.txt` and multiple files
+
+Markua manuscripts can be written in multiple files.
+
+If this approach is used, here's the initial directory structure that contains the Markua manuscript:
+
+```
+book.txt
+sample.txt
+settings.txt
+images/
+code/
+```
+
+There are four parts to this approach:
+
+1. A file named `book.txt` lists the manuscript files to be included in the book or document, one per line.
+2. A file named `sample.txt` lists the manuscript files to be included in the sample book or document preview, one per line.
+3. A file named `settings.txt` contains metadata about the book manuscript. This file is described later, in the [Metadata](#metadata) chapter.
+4. The actual manuscript files are created. These files MUST live in the same directory as the `book.txt`, `sample.txt` and `settings.txt` files.
+
+W> The manuscript files themselves MUST live in the same directory as the `book.txt`, `sample.txt` and `settings.txt` files. They MUST NOT live in subdirectories of that directory.
+
+Each manuscript file can be named any legal name for the given filesystem. There are no requirements about file extensions for the multiple files: they can be `.txt`, `.md`, or any other file extension (or no extension at all).
+
+When a Markua Processor generates output files from a Markua manuscript, the `book.txt` and `sample.txt` files are read, and the files that are listed are concatenated together, with two newlines added between each file, to produce one temporary Markua manuscript file. This file does not need to be stored on disk; it can remain entirely in memory. The point is that functionally, in terms of generating the book or document, using this approach is identical to what would have been produced if the manuscript had been written in one file called `manuscript.txt`, as long as each of the files were concatenated together with two newlines between them.
+
+The primary advantages to the multiple files approach are:
+
+1. A sample can easily be generated based on the files listed in the `sample.txt` file. These files can be a subset of the files listed in the `book.txt` file, or they can be different files altogether.
+2. Splitting a manuscript into multiple files allows authors to use one file per part or chapter of a book, keeping files smaller and more manageable.
+
+The primary disadvantages to the multiple files approach are:
+
+1. It does not let the author see the entire book in one file (in text editors that support an outline function, such as Emacs outline mode).
+2. It is needlessly complicated for shorter documents, such as articles.
+
+If there are three files, say `foo.txt`, `bar.md` and `baz`, used to produce the Markua manuscript, and if only `foo.txt` and `bar.md` are going to be included in the sample, here's how this would look:
+
+First, the directory structure:
+
+```
+book.txt
+sample.txt
+settings.txt
+foo.txt
+bar.md
+baz
+images/
+code/
+```
+
+Next, the content of the `book.txt` file:
+
+```
+foo.txt
+bar.md
+baz
+```
+
+Next, the content of the `sample.txt` file:
+
+```
+foo.txt
+bar.md
+```
+
+The `foo.txt`, `bar.md` and `baz` files would contain normal Markua-formatted UTF-8 encoded text.
+
+{#multiple-file-concatenating}
+### A Blank Line is Added When Concatenating Multiple Files
+
+As discussed previously, if the multiple file approach is used, the listed files are concatenated together to produce one temporary Markua manuscript file.
+
+Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they are concatenated together with two newlines added, in order to separate the content of the two files with one blank line between them.
+
+For example, the following two manuscripts are equivalent:
+
+A manuscript produced by the `manuscript.txt` file approach:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+```
+
+A manuscript produced by the `book.txt` file approach:
+
+First, the content of the `book.txt` file:
+
+```
+foo.txt
+bar.txt
+```
+
+Next, the content of the `foo.txt` file:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+```
+
+Next, the content of the `bar.txt` file:
+
+```
+# Chapter Two
+
+Yada yada yada.
+```
+
+This produces the same Markua manuscript as the `manuscript.txt` file above:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+```
+
+If we did not add any newlines between files, then these files would produce the following manuscript:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.# Chapter Two
+
+Yada yada yada.
+```
+
+This would be very surprising and the source of a number of bugs--especially since a number of text editors such as Emacs have a "strip blank lines" setting.
+
+Furthermore, if we only added one newline when concatenating, this would produce the following manuscript:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+# Chapter Two
+
+Yada yada yada.
+```
+
+However, since Markua requires that headings be separated by blank lines above and below them, the `# Chapter Two` heading would not be a heading. It would be considered part of the previous paragraph. This would almost always not be what you want.
+
+The virtue of automatically adding two newlines between files means that regardless of the order of the files in the `book.txt` file, the meaning of what exists in Markua manuscript files is always apparent. There are no side-effects which are dependent on the content of other files above or below a given manuscript file. This is consistent with the Principle of Least Surprise, which is a good principle to keep in mind when designing a format which will be written and read by people.

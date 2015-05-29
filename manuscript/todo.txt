@@ -1,0 +1,85 @@
+# TODO
+
+{class: warning}
+B> TODO - Need to consider the following...
+
+* Typographic symbols: Smart quotes, n-dash, m-dash, ellipses, etc?
+* Images - Special attributes: width, float, etc?
+* CriticMarkup support?
+* It would be really nice to support linking to individual definition list items specifically, and to span elements in general.
+* Support commenting out files in book.txt and sample.txt with #
+* Centering text?
+* Font sizes etc with CSS class?
+* Should we have a book.css?
+* lemma, theorem, etc -- typed figures?
+- extension attributes?
+- definition list linking yes
+- table just table for linking?
+- align on a heading?
+- align {left, center, right, justified} on any heading?
+
+"the caption" clobbers "clobbered" here
+{caption: "the caption"}
+![](images/foo.png "clobbered")
+
+specify that magic {#id} syntax does not combine with other attrs
+
+Title Pages: If a file called `title_page.png`, `title_page.jpg` or `title_page.jpeg` exists in the `images` directory, then it will be used as the title page of the book. If more than one of these files exists, then the first one found alphabetically will be used.
+
+## Syntax for inline ids
+
+Inline IDs:
+
+```
+This is `a code span`{#foo}
+This is a word{#word}.
+This is a *nice thingy here*{#thingy}
+This is a *nice thingy{#thingy} here*
+```
+
+will result in
+
+```
+This is <code id='foo'>a code span</code>
+This is a <span id='word'>word</word>.
+This is a <em id='thingy'>nice thingy here</em>
+This is a <em>nice <span id='thingy'>thingy</span> here</em>
+```
+
+I.e. it attaches it the the previous span or word.
+
+### Syntax for index entries
+
+~~~
+a b c {i:C} d e
+
+...
+
+a b c{i:C} d e
+~~~
+
+results in:
+
+~~~
+a b <span id="__i__1__C">c</span> d e
+
+...
+
+a b <span id="__i__2_C">c</span> d e
+~~~
+
+spec: defining an index entry attaches it to prev word or to the next block.
+
+The id will be `__i__<number>__<index>`. Where `index` is everything inside of the curly braces after `i:` and before the `|`, with `*` replaced with nothing and `!` replaced with `__`.
+
+index = (The thing inside the curly braces after `i:`).split(/\|/).first.gsub(/\!/, '__').gsub(/\*/, '').lower
+
+`number` is the number of times `index` has been indexed in the document already, counting from 1.
+
+How handle punctuation in index entry?
+
+```
+Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Herman Melville{i: Melville, Herman}, the author of a book about a whale{i:Moby-Dick; or, The Whale}.
+```
+
+How chain ! and | in index entry?

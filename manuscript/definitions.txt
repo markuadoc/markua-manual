@@ -1,0 +1,43 @@
+{#definitions}
+# Definitions
+
+There are a number of key terms which are used throughout the Markua specification.
+
+book or document
+: If this phrase is used to refer to the files that the author is writing in, it is used to refer to a Markua manuscript. If this phrase is used to refer to a finished product, then it is referring to the output files produced by a Markua Processor from a Markua manuscript.
+
+ebook
+: Ebooks, or electronic books, are typically available in PDF, EPUB and/or MOBI formats. A Markua manuscript can be turned into an ebook by Markua Processors that are capable of generating these formats.
+
+Leanpub
+: Leanpub is the startup that created Leanpub Flavoured Markdown and Markua. The company that created, owns and operates Leanpub is Ruboss Technology Corporation, a British Columbia, Canada company.
+
+Leanpub Flavoured Markdown
+: The format which was the predecessor to Markua. It was focused primarily on the generation of books from a superset of Markdown, minus inline HTML support.
+
+Markua
+: Markua is a plain text format designed for the writing of books and documents.
+
+Markua manuscript
+: Also called "manuscript" or "manuscript files", a Markua manuscript is the Markua-formatted UTF-8 text file or files that the author actually writes in. The Markua manuscript is used as input by Markua Processors to generate Markua output files.
+
+Markua output files
+: The formatted output files generated from Markua manuscripts by Markua Processors. The formats generated can include ebook formats (PDF, EPUB and MOBI) as well as HTML and InDesign formats, among others. Only the mapping to HTML is precisely specified.
+
+Markua Processor
+: A Markua Processor can turn a Markua manuscript into Markua output files.
+
+must
+: This is a requirement of Markua. Markua Processors must behave this way to be compliant with this specification.
+
+newline
+: This is a carriage return, line feed, or a carriage return followed by a line feed. Pressing the enter or return key on your keyboard will produce one of these combinations on most modern operating systems.
+
+should
+: This is recommended by Markua. Markua Processors should behave this way, but do not have to.
+
+text content
+: These are letters, numbers, punctuation, etc.
+
+whitespace
+: Whitespace is one or more consecutive spaces or tabs. It does not include not newlines.

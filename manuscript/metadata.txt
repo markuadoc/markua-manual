@@ -1,0 +1,619 @@
+{#metadata}
+# Metadata
+
+Markua uses metadata to provide a bunch of advanced functionality.
+
+There are three types of metadata: attributes, index entries and directives.
+
+Attributes are used to do everything from specify the language of code blocks, add ids for crosslinkng and even support extensions to Markua. Index entries let authors or indexers produce professional-looking indexes in Markua books. Finally, directives control
+
+## A Note About Curly Braces (`{` and `}`)
+
+Metadata is added with curly braces. Curly braces are special in Markua. At the beginning of a line, an opening curly brace (`{`) starts an attribute. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block. So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`.
+
+{#attributes}
+## Attributes
+
+Attributes are a type of metadata which can be used by Markua Processors to format output.
+
+Attributes are a set of comma-separated key-value pairs enclosed in a pair of curly braces (`{` ... `}`) and separated by a newline--but **not** by a blank line--from the thing that they are an attribute of.
+
+This shows a code block, with the attribute `language` having the value `ruby`:
+
+~~~
+{language: ruby}
+```
+def foo
+  2
+end
+```
+~~~
+
+You can have more than one attribute. This shows a code block, with the attribute `language` having the value `ruby` and the attribute `line-numbers` having the value `off`:
+
+~~~
+{language: ruby, line-numbers: off}
+```
+def foo
+  2
+end
+```
+~~~
+
+Attribute values can be enclosed in quotation marks. These are optional, and are only needed if the attribute value contains a comma. However, for clarity, it is recommended to use quotation marks for any attribute values which are not single words or numbers.
+
+Here's the previous example, with the addition of quotation marks. This is identical to the previous example in meaning.
+
+~~~
+{language: "ruby", line-numbers: "off"}
+```
+def foo
+  2
+end
+```
+~~~
+
+Attributes can also have numeric values. These are the same, with or without quotes:
+
+```
+{language: ruby, crop-start: 10, crop-end: "15", line-numbers: on}
+<<(code/sample1.rb)
+```
+
+In this example, the numbers 10 and 15 are both treated as numbers.
+
+If you wish an attribute to have a value that contains a quotation mark, you need to escape it.
+
+Here's some fish that may not be very fresh:
+
+```
+{title: "\"Fresh\" Fish"}
+Filet of salmon, on sale now!
+```
+
+Markua defines a few built-in attributes which have special meaning.
+
+### Standard Attributes
+
+#### Defining `id` On Any Block
+
+As we saw in the [section on crosslinks](#crosslinks), attributes can be used to define ids on block elements.
+
+There are two ways to do this:
+
+```
+{#some-id}
+## Some Heading
+
+{id: some-id}
+## Some Heading
+```
+
+These are identical. The `{#some-id}` syntax is just syntactic sugar, which is convenient since it's possible to create a lot of id-only attributes.
+
+Note that these syntaxes work for any block element, not just headings.
+
+Here's the same syntaxes for paragraphs:
+
+```
+{#some-id}
+This is a paragraph with the id of `some-id`.
+
+{id: some-id}
+This is a paragraph with the id of `some-id`.
+```
+
+By the way, you can only use an `id` once in an entire Markua document, even one that is split over multiple files. So choose your `id`s carefully.
+
+You can also give `id`s to individual items in a list or definition list:
+
+```
+* lorem
+* ipsum
+{id: foo}
+* foo
+{#bar}
+* bar
+* baz
+* dolor
+
+term 1
+: definition 1
+
+{#term-2}
+term 2
+: definition 2
+
+{id: term-3}
+term 3
+: definition 3
+```
+
+You cannot, however, give ids to things inside tables.
+
+In terms of the value of an `id`, it has some special restrictions:
+
+1. The first character in the `id` has to be a lowercase or uppercase letter, i.e. [a-zA-Z] if you think in regular expressions.
+2. The remaining characters in the `id` have to be a lowercase or uppercase letter or a digit or a hyphen (-) or an underscore (_).
+3. You can only use an `id` value once in an entire Markua document, even one that is split over multiple files.
+
+These restrictions ensure that your `id`s can then be linked to by a crosslink from anywhere in the Markua document.
+
+Finally, note that crosslinks will work even if the `id` has not been defined yet.
+
+#### Attributes of Code Blocks
+
+As we saw in the [section on code blocks](#code-blocks), attributes can be used on code blocks. These include:
+
+* `language`
+* `crop-start`
+* `crop-end`
+* `line-numbers`
+* `number-from`
+
+{#extension-attributes}
+### Extension Attributes
+
+An author can annotate any Markua block element with any attribute at all, not just those understood by all compliant Markua processors.
+
+Markua processors which do not natively understand these additional attributes must silently remove them from all output formats.
+
+1. Set them as attributes on the block element that is produced by the HTML output.
+2. Silently remove them from all other output formats (e.g. EPUB, MOBI, PDF, LaTeX, etc).
+
+Any attribute not understood by a Markua processor must be set as an attribute on the block element that it is attached to in the HTML output only.
+
+A Markua Processor should remove this not understood attribute from other output formats (e.g. LaTeX, EPUB) which are known to be more strict about unknown attributes.
+
+Briefly, this means any Markua block element can be annotated with an attribute which is not built into Markua, and which Markua processors will probably not understand.
+
+This encourages competition in the Markua ecosystem, while ensuring that Markua implementations do not choke on Markua input which goes beyond their capabilities.
+
+This is an extension mechanism to allow for specialized uses of Markua: since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed.
+
+## Index Entries
+
+Markua supports adding index entries as metadata.
+
+Index entries can either be attached to block or span elements, using a syntax [inspired by LaTeX](https://en.wikibooks.org/wiki/LaTeX/Indexing).
+
+So as to not conflict with the names of directives, all index entries start with `i:` (i is for index).
+
+In its simplest form, an index entry is simply `{i:hello}`.
+
+Here's the various formats of an index entry:
+
+```
+{i:hello}
+{i:*hello*}
+{i:**hello**}
+{i:hello!Peter}
+{i:hello!*Peter*}
+{i:hello!**Peter**}
+{i:Peter|see{i:hello}}
+{i:Jen|seealso{i:Jenny}}
+```
+
+Here's what they do:
+
+`{i:hello}`
+: Adds an index entry for `hello`.
+
+`{i:*hello*}`
+: Adds an index entry for `hello`, with `hello` in *emphasis*.
+
+`{i:**hello**}`
+: Adds an index entry for `hello`, with `hello` in **strong emphasis**.
+
+`{i:_hello_}`
+: Adds an index entry for `hello`, with `hello` in _italics_.
+
+`{i:__hello__}`
+: Adds an index entry for `hello`, with `hello` in __bold__.
+
+`{i:hello!Peter}`
+: Adds an index entry for `Peter` which is a sub-entry of `hello`.
+
+`{i:hello!_Peter_}`
+: Adds an index entry for `Peter` (with _Peter_ in italics) which is a sub-entry of `hello`. Note that this cannot be combined with a see or seealso (the | syntax).
+
+`{i:hello!__Peter__}`
+: Adds an index entry for `Peter` (with __Peter__ in bold) which is a sub-entry of `hello`. Note that this cannot be combined with a see or seealso (the | syntax).
+
+`{i:hello!*Peter*}`
+: Adds an index entry for `Peter` (with *Peter* in emphasis) which is a sub-entry of `hello`. Note that this cannot be combined with a see or seealso (the | syntax).
+
+`{i:hello!**Peter**}`
+: Adds an index entry for `Peter` (with **Peter** in strong emphasis) which is a sub-entry of `hello`. Note that this cannot be combined with a see or seealso (the | syntax).
+
+`{i:Peter|see{i:hello}}`
+: Adds an index entry for `Peter`, which references the index entry `hello` with the equivalent of "see" in the language of the book. Note that this cannot be combined with a sub-entry (the ! syntax).
+
+`{i:Jen|seealso{i:Jenny}}`
+: Adds an index entry for `Jen`, which references the index entry `Jenny` with the equivalent of "see also" in the language of the book. Note that this cannot be combined with a sub-entry (the ! syntax).
+
+Index entries are case sensitive. For example, `{i:mark}` and `{i:Mark}` are distinct entries. (The first is for a result or a blotch on something, the second is a person's name.)
+
+To attach an index entry to the start of a block, put it on its own line above a block:
+
+```
+{i:hello}
+I just came to say hello, hello, hello, hello
+```
+
+(In this case, the index entry is identical in positioning to an id attribute definition.)
+
+To attach an index entry to a word, just add the index entry after the word:
+
+```
+I just came to say hello{i:hello}, hello, hello, hello
+```
+
+To attach an index entry to a span element, just add the index entry after the span element:
+
+```
+The first program that a programmer writes in a language is usually *Hello World*{i:Hello World}
+```
+
+Index entries can have commas and other punctuation (except colons) in their definition:
+
+```
+My wife read some book about a whale by Herman Melville{i: Melville, Herman}.
+```
+
+Multiple index entries can exist in a block, or even a sentence:
+```
+Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Herman Melville{i: Melville, Herman}, the author of a book about a whale{i:Moby-Dick; or, The Whale}.
+```
+
+
+
+## Directives
+
+Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
+
+### Book Section Directives
+
+Most published books have three types of material in them: the front matter, the text and the back matter.
+
+What authors write, the manuscript, is typically what goes into the text, or main matter, of the book. In style guidelines such as the Chicago Manual of Style this is called the text; in formats such as TeX and LaTeX it is called main matter.) It's what is numbered with Arabic numerals starting from 1.
+
+There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents (or ToC), Foreword, Preface, etc.) which comes before the text of the book. This is called "front matter". Some of the front matter comes before the ToC and is not numbered; the rest of the front matter that comes after the ToC gets numbered with Roman numerals.
+
+There's also a bunch of other stuff (acknowledgments, appendices, the index, etc) which comes after the main matter. This is called the "back matter".
+
+If Markua just relied on its [headings](#headings) support there would be no good way to accomplish the division of a manuscript into front matter, main matter and back matter. (We could try some convention about heading names, but that would be a highly objectionable, English-centric hack.) Furthermore, there would be no good way to determine which parts of the front matter got numbered and which did not.  Also, there would be no good way to give explicit hints to Markua processors about how to style the various parts of a book.
+
+Book section directives are the solution to this.
+
+Book section directives inform Markua Processors what section of a book they are in, in order to affect numbering, formatting and other concerns like the placement of the Table of Contents.
+
+Markua is a fairly minimalist format, so we want to accomplish all of the above with as few directives as possible. Furthermore, for authors who do not know about these directives, we do not want anything bad to happen.
+
+There are three types of book section directives:
+
+1. Front Matter Book Section Directives: these directives delineate various sections in the front matter
+2. The `{mainmatter}` directive: this indicates that the front matter is over
+3. Back Matter Book Section Directives: these delineate various sections in the back matter
+
+**You can write a book or document in Markua without using any directives at all, including book section directives.**
+
+However, if you add any of the Front Matter Book Section Directives, the `{mainmatter}` directive is required.
+
+Almost all of the directives will be added either:
+
+a) by someone working for a publisher
+b) automatically by book generation software
+
+The only directives that a typical author will use are `{dedication}` and `{mainmatter}`.
+
+A> For implementors of Markua Processors:
+A> It is perfectly legal to ignore all of the book section directives. Book section directives are only hints that are there for your benefit if you want to use them to add page breaks, switch to hanging indents, change the font size, use a custom layout or to do anything fancy with them. There is no requirement to do any of these things.
+
+Besides the `{mainmatter}` directive, there are named directives for each book section in the Chicago Manual of Style.
+
+Note, however, that there are **no** `{frontmatter}` and `{backmatter}` directives. These are redundant, since there is a `{mainmatter}` directive. All book section directives before the `{mainmatter}` are in the front matter, and the first book section directive after the `{mainmatter}` directive starts the back matter.
+
+The following is the entire list of book section directives, in the order they will typically be encountered. There is no requirement about any of their order; they are just hints. If you're familiar with the Chicago Manual of Style you'll recognize them.
+
+#### Front Matter Book Section Directives
+
+The following are the book section directives which can appear in the front matter.
+
+`{half-title}`
+: the book half title
+
+`{series-title}`
+: the series title (or frontispiece)
+
+`{title-page}`
+: the title page (note that if an image called `title_page.png`, `title_page.jpg` or `title_page.jpeg` exists it will be inserted as the first page of the book, but that any content in this section will also exist)
+
+`{copyright}`
+: the copyright page
+
+`{dedication}`
+: the dedication
+
+`{epigraph}`
+: the epigraph
+
+`{toc}`
+: the table of contents
+
+`{figures}`
+: the table of figures, or list of illustrations
+
+`{tables}`
+: the list of tables, or table of tables
+
+`{foreword}`
+: the foreword
+
+`{preface}`
+: the preface
+
+`{acknowledgments}`
+: the acknowledgments (note that this can also typically occur after the `{mainmatter}` book section directive)
+
+`{introduction}`
+: the introduction
+
+`{abbr}`
+: the abbreviations -- and yes, it's called `abbr` and not `abbreviations` (note that this can also typically occur after the `{mainmatter}` book section directive)
+
+`{chronology}`
+: the chronology (note that this can also typically occur after the `{mainmatter}` book section directive)
+
+#### The `{mainmatter}` Book Section Directive
+
+`{mainmatter}`
+: the first page of the text
+
+#### Back Matter Book Section Directives
+
+`{appendices}`
+: the appendix or appendices
+
+`{notes}`
+: the notes
+
+`{glossary}`
+: the glossary
+
+`{bibliography}`
+: the bibliography or references (note that a Markua processor may wish to format the text inside this section appropriately)
+
+`{contributors}`
+: the list of contributors
+
+`{illustration-credits}`
+: the credits for the illustrations
+
+`{index}`
+: the index(es)
+
+#### Book Section Directive Rules
+
+While these book section directives are mere hints, there are strict rules about their use:
+
+1. Each book section directive must be on a line by itself.
+2. Each book section directive must have a blank line above it, except at the beginning of a file.
+3. Each book section directive must have a blank line below it, except at the end of a file.
+4. Each book section directive can only appear once.
+5. The book section directives are all optional; it is legal to have a Markua document with no Book Section Directives.
+6. If any of the Front Matter Book Section Directives are present, the `{mainmatter}` directive is required.
+
+The upshot of all this is that authors new to Markua can completely ignore directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about directives. And using directives is very simple, despite how formally specified this section makes them.
+
+### Language Switching Directives
+
+In a Markua document, there is a primary language. This is specified in the [settings](#settings), and defaults to `eng` for English.
+
+It's possible to write a Markua document without specifying which language is being used. Since Markua files are UTF-8, most human languages are supported adequately.
+
+However, if a Markua Processor knows what language is being used, it can be smarter about layout. This is especially true with right-to-left languages and some Asian languages.
+
+It's also possible to write a Markua document in which the primary language switches back and forth.  To do this, language switching directives are used.
+
+Here's how it works:
+
+`
+People in the West like quoting Confucius, or Kongzi (孔子).
+
+{language:chi}
+
+十五向學,三十而立,四十而不惑,五十而知天命,六十而耳順,七十而從心欲，不踰矩.
+
+{language:eng}
+
+If you can tell whether that is a Confucius quote, you can either read Chinese or you can search Wikipedia.
+`
+
+### Unsupported Leanpub Flavoured Markdown Directives
+
+Markua is not supporting various Leanpub Flavoured Markdown directives which were added willy-nilly over the years. These directives being dropped include:
+
+* `{begin-hanging-paragraphs}`
+* `{end-hanging-paragraphs}`
+* `{footnotes-on}`
+* `{footnotes-off}`
+
+{#settings}
+## Settings
+
+As discussed [earlier](#structure), there are two ways that a manuscript can be structured:
+
+1. Single File Approach: `manuscript.txt`
+2. Multiple Files Approach: `book.txt`, `sample.txt` and `settings.txt`
+
+With both approaches to structuring a manuscript, there is a way to provide metadata along with the manuscript.
+
+The metadata contains information about the document. This will include things like the title, subtitle, copyright, author names, etc.
+
+It can also specify the type of manuscript with the `type` attribute. The legal values of the `type` attribute are `book`, `multi-part-book` and `document`. If the `type` is omitted, it is assumed to be `book`.
+
+The metadata is provided in different ways based on whether the manuscript uses the single file approach or the multiple file approach.
+
+### Settings Are Just Newline-Separated Key-Value Pairs
+
+As the title of this section states, Metadata is just newline-separated key-value pairs.
+
+Here's an example of metadata:
+
+```
+type: book
+title: Markua Specification
+authors: Peter Armstrong
+contributors: Scott Patten, Braden Simpson and Jordan Ell
+copyright: Peter Armstrong
+```
+
+The format of the metadata is one entry per line, with the keys and values separated by a colon and a whitespace.
+
+Any white-space at the beginning or end of the keys and values will be stripped. Only the first colon is important. Subsequent colons on a line will just be part of the value.
+
+Where this metadata lives depends on which approach is used by the manuscript.
+
+### Settings in the Single File Approach: Inline in `manuscript.txt`
+
+Markua manuscripts can be written all in one file called `manuscript.txt`. Since the goal of the one file approach is to have everything contained in one file for simplicity, this includes the metadata.
+
+With this approach, all the metadata lives in one newline-separated hash at the top of the file. Furthermore, there must be a blank line between this hash
+
+Here's an example of what this file looks like including metadata:
+
+```
+{
+title: Markua Specification
+}
+
+# Chapter One: Wisdom
+
+Why Markua is so wise.
+```
+
+Here's another example, which shows why there must be a blank line between the metadata and the following content: so that it can also have attributes attached, and so that the metadata is not interpreted as being an attribute of the first element:
+
+```
+{
+title: Markua Specification
+authors: Peter Armstrong
+contributors: Scott Patten, Braden Simpson and Jordan Ell
+copyright: Peter Armstrong
+}
+
+{id: ch1}
+# Chapter One: Wisdom
+
+Why Markua is so wise.
+
+# Chapter Two: Cleverness
+
+Why Markua is so clever. By the way, it is also [wise](#ch1).
+```
+
+### Settings in the Multiple Files Approach: `settings.txt`
+
+With the multiple-files approach, there is a separate file called `settings.txt` which contains the metadata.
+
+Here's an example of the content of this settings.txt file:
+
+```
+type: book
+title: Markua Specification
+authors: Peter Armstrong
+contributors: Scott Patten, Braden Simpson and Jordan Ell
+copyright: Peter Armstrong
+```
+
+With this approach, the following files would make this equivalent to the single file above:
+
+book.txt:
+
+```
+ch1.txt
+ch2.txt
+```
+
+ch1.txt:
+
+```
+{id: ch1}
+# Chapter One: Wisdom
+
+Why Markua is so wise.
+```
+
+ch2.txt:
+
+```
+# Chapter Two: Cleverness
+
+Why Markua is so clever. By the way, it is also [wise](#ch1).
+```
+
+{#setting-keys-and-values}
+### Settings Keys and Values
+
+The following keys can be used in the Metadata. None of theme are mandatory, although you will almost certainly want to provide a value for `authors`, `copyright` and `title`.
+
+authors
+: The authors of the Markua document. The default is "Anonymous".
+
+code
+: The language that code is. The default is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. There are other options. The `guess` option means to guess at the code language based on the syntax encountered (or the file extension for external code samples). The `poetry` option means to format the code as monospaced poetry, such as would be produced on a typewriter. Besides these options, you can specify the programming language used, such as `ruby` or `java`. If a Markua processor does not recognize the programming language specified, it must format it as `text`.
+
+code-sample-names
+: What to call code samples. The default is "Example".
+
+copyright
+: The text of the copyright holder. The default is "Anonymous".
+
+figure-names
+: What to call figures. The default is "Figure".
+
+filename
+: The filename (minus extension) of the generated output file(s). The default is "untitled".
+
+footnotes
+: The way that footnotes should be displayed. The choices are `page`, `chapter` and `book`. The default is `page`. The `page` value means the bottom of the page (a footnote); the `chapter` value means at the end of the chapter (an endnote), and the `book` value means at the end of the book or document (an endnote).
+
+language
+: The IS0 639-2 alpha-3 language code of the language that the Markua document is written in. The list of choices is here: <http://www.loc.gov/standards/iso639-2/php/code_list.php>. The default is `eng`.
+
+license
+: The copyright license used. The choices are `standard`, `public-domain`, `cc-by`, `cc-by-sa`, `cc-by-nd`, `cc-by-nc`, `cc-by-nc-sa` and `cc-by-nc-nd`. The `standard` choice means standard copyright. The `public-domain` means that the work is considered to be in the public domain. The other choices are Creative Commons licenses, specified here: <https://creativecommons.org/licenses/>. The default value is `standard`.
+
+math
+: The default markup language used for math blocks and spans. The default is `latex`, but any value can be present. For MathML, the value is `mathml`. If the value is unrecognized, the Markua processor must output the math block or span as plain text.
+
+number-chapters
+: This attribute sets how chapter numbering is done. The values are `off`, `chapter`, `section`, `sub-section`, `sub-sub-section` and `all`. The default is `chapter`, which means to number chapters but not sections or below.
+
+number-parts
+: This attribute sets whether parts are numbered, if present. The values are `on` and `off`. The default is `on`, which means to number parts.
+
+number-figures
+: This attribute sets whether figures are numbered, if present. The values are `off`, `single` and `double`. The default is `double`. The choice `single` means to number figures in one large list (Figure 1, Figure 2, etc.). The choice `double` means to number by chapter, e.g. `Figure 8.1` for the first figure in chapter 8. Per Chicago, figures in an Appendix would be listed as `Figure A.1` for Appendix A, etc.
+
+number-code-samples
+: This attribute sets whether code sample code samples are numbered, if present. The values are `off`, `single` and `double`. The default is `double`. The choice `single` means to number code samples in one large list (Example 1, Example 2, etc.). The choice `double` means to number by chapter, e.g. `Example 8.1` for the first code sample in chapter 8. Per Chicago, code samples in an Appendix would be listed as `Example A.1` for Appendix A, etc.
+
+number-tables
+: This attribute sets whether tables are numbered, if present. The values are `off`, `single` and `double`. The default is `double`. The choice `single` means to number tables in one large list (Table 1, Table 2, etc.). The choice `double` means to number by chapter, e.g. `Table 8.1` for the first table in chapter 8. Per Chicago, tables in an Appendix would be listed as `Table A.1` for Appendix A, etc.
+
+subtitle
+: The subtitle of the Markua document. The default is blank (an empty string, in programming terms).
+
+table-names
+: What to call tables. The default is "Table".
+
+title
+: The title of the Markua document. The default is "Untitled".
+
+type
+: The type of the Markua document. Legal values are `book`, `multi-part-book` and `document`. The default value is `book`. The value of the `type` key is very important, as it changes the meaning of what the headings are, and thus affects the book or document generation. To see the effects of this, see the [HTML Mapping of Heading Types](#html-mapping-heading) section
+
+urls
+: The way that URLs should be displayed when used as links like `[Markua](http://markua.com)`. The choices are `none`, `inline` and `footnote`. The default is `footnote`, in which the URL is made as a footnote (positioned at the bottom of the page, chapter or book per the value of the `footnotes` attribute) which is a clickable link. Note that angle-bracket URLs like <http://markua.com> never create a footnote.
