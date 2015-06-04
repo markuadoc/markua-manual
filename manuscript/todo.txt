@@ -18,6 +18,8 @@ B> TODO - Need to consider the following...
 - align on a heading?
 - align {left, center, right, justified} on any heading?
 
+* newlines in blockquotes are just br tags. ensure done that way.
+
 "the caption" clobbers "clobbered" here
 {caption: "the caption"}
 ![](images/foo.png "clobbered")
