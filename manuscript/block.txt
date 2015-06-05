@@ -934,83 +934,127 @@ For an example of a longer, more useful definition list used in Markua, see the 
 
 Block quotes can span multiple pages. They are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
 
-TODO
-
 A blockquote can contain other block-level elements, most commonly paragraphs. To start a new block level element within a blockquote, just put a line starting with a `>` followed by an optional space. It is equivalent to placing a `> ` in front of every line of the paragraphs.
 
-Block quotes can be multi-paragraph. Each newline followed by a `> ` creates a new paragraph in the block quote.
+Block quotes can be multi-paragraph. To create a multi-paragraph block quote, you need to separate each paragraph with a line containing a `>` and whitespace only.
 
-{class: warning}
-B> The nesting of block quotes in Markdown is not supported in Markua.
+Single newlines inside a block quote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
+
+A> The nesting of block quotes in Markdown is not supported in Markua.
 
 A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
 
-### Example
+### Examples
 
-#### Markua Syntax
+#### Example 1: A Block Quote Containing Three Paragaphs
 
+##### Markua Syntax
+
+{#input_block_quote_1}
 ```
-> block quotes
-> can be multi-paragraph
-> like this
+This is a paragraph before the block quote.
+
+> This is a paragraph in the block quote.
+>
+> This is a
+> second paragraph in the block quote
+> which contains newlines.
+>
+> This is a third paragraph in the block quote.
+
+This is a paragraph after the block quote.
 ```
 
-#### HTML Output
+##### HTML Output
 
 The HTML output for a block quote is simply a `div`, not a `section` or an `aside`, since an arbitrary block quote is not something which is a top-level element of a book.
 
+TODO - does `<blockquote>` cause problems for EPUB readers?
+
+{#output_block_quote_1}
 ```
+<p>This is a paragraph before the block quote.</p>
 <blockquote>
-<p>block quotes</p>
-<p>can be multi-line</p>
-<p>like this</p>
+<p>This is a paragraph in the block quote.</p>
+<p>This is a<br/>
+second paragraph in the block quote<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the block quote.</p>
 </blockquote>
+<p>This is a paragraph after the block quote.</p>
 ```
 
-#### Example Output
+##### Example Output
 
-> block quotes
-> can be multi-paragraph
-> like this
+This is a paragraph before the block quote.
+
+> This is a paragraph in the block quote.
+>
+> This is a
+> second paragraph in the block quote
+> which contains newlines.
+>
+> This is a third paragraph in the block quote.
+
+This is a paragraph after the block quote.
 
 ## Asides
 
-Asides can span multiple pages.
+Asides are text which is formatted separately from the main text by a Markua processor. Asides can span multiple pages.
 
-Asides can be created like block quotes, but using `A>` line prefixes.
+Asides can be created like block quotes, but using `A>` line prefixes. The same rules for newlines apply.
 
 ### Example
 
 #### Markua Syntax
 
+{#input_aside_1}
 ```
-A> aside text
-A> can be multi-paragraph
-A> like this
+This is a paragraph before the aside.
+
+A> This is a paragraph in the aside.
+A>
+A> This is a
+A> second paragraph in the aside
+A> which contains newlines.
+A>
+A> This is a third paragraph in the aside.
+
+This is a paragraph after the aside.
 ```
 
 #### HTML Output
 
-The HTML output for an Aside is simply a `div`, not a `section` or an `aside`, since an arbitrary aside is not something which is a top-level element of a book.
+The HTML output for an Aside is simply a `div`, not a `section` or an `aside`, since an arbitrary aside is not something which is a top-level element of a book. (Also, some legacy EPUB readers would choke on `section` or `aside`.)
 
+{#output_aside_1}
 ```
+<p>This is a paragraph before the aside.</p>
 <div class="aside">
-<p>aside text</p>
-<p>can be multi-line</p>
-<p>like this</p>
+<p>This is a paragraph in the aside.</p>
+<p>This is a<br/>
+second paragraph in the aside<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the aside.</p>
 </div>
+<p>This is a paragraph after the aside.</p>
 ```
 
 #### Example Output
 
-A> aside text
-A> can be multi-paragraph
-A> like this
+This is a paragraph before the aside.
+
+A> This is a paragraph in the aside.
+A>
+A> This is a
+A> second paragraph in the aside
+A> which contains newlines.
+A>
+A> This is a third paragraph in the aside.
+
+This is a paragraph after the aside.
 
 ## Blurbs
-
-{class: warning}
-B> TODO - Rewrite using conventions. Explain newline handling.
 
 Blurbs are like asides, but with two differences.
 
@@ -1018,12 +1062,55 @@ Blurbs are like asides, but with two differences.
 2. They are intended to be short, and thus do not need to support page breaks inside them.
 3. They can have an optional `class`, which can be used by Markua processors to decorate the blurb (e.g. with icons).
 
-An blurb looks like this:
+### Example
 
+#### Markua Syntax
+
+{#input_blurb_1}
 ```
-B> blurb text
-B> multi-line
+This is a paragraph before the blurb.
+
+B> This is a paragraph in the blurb.
+B>
+B> This is a
+B> second paragraph in the blurb
+B> which contains newlines.
+B>
+B> This is a third paragraph in the blurb.
+
+This is a paragraph after the blurb.
 ```
+
+#### HTML Output
+
+The HTML output for an Blurb is simply a `div` with a class of "blurb".
+
+{#output_blurb_1}
+```
+<p>This is a paragraph before the blurb.</p>
+<div class="blurb">
+<p>This is a paragraph in the blurb.</p>
+<p>This is a<br/>
+second paragraph in the blurb<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the blurb.</p>
+</div>
+<p>This is a paragraph after the blurb.</p>
+```
+
+#### Example Output
+
+This is a paragraph before the blurb.
+
+B> This is a paragraph in the blurb.
+B>
+B> This is a
+B> second paragraph in the blurb
+B> which contains newlines.
+B>
+B> This is a third paragraph in the blurb.
+
+This is a paragraph after the blurb.
 
 ### Classes of Blurbs
 
@@ -1032,6 +1119,8 @@ Like all Markua block elements, blurbs can have a `class` attribute attached to 
 ```
 {class: warning}
 B> Warning text. Don't do this!
+B>
+B> This is still part of the blurb. Note that the entire blurb gets the class element.
 ```
 
 There are no required CSS rules in Markua, and thus, there is no required special support for any specific class attributes on a blurb or anywhere else.
@@ -1046,27 +1135,87 @@ For example, Leanpub produces a lot of computer programming books, so it underst
 * `tip`
 * `warning`
 
+#### Example
+
+##### Markua Syntax
+
+{#input_blurb_1}
+```
+This is a paragraph before the blurb.
+
+{class: warning}
+B> This is a paragraph in the blurb.
+B>
+B> This is a
+B> second paragraph in the blurb
+B> which contains newlines.
+B>
+B> This is a third paragraph in the blurb.
+
+This is a paragraph after the blurb.
+```
+
+##### HTML Output
+
+The HTML output for an Blurb is simply a `div` with a class of "blurb".
+
+{#output_blurb_1}
+```
+<p>This is a paragraph before the blurb.</p>
+<div class="blurb warning">
+<p>This is a paragraph in the blurb.</p>
+<p>This is a<br/>
+second paragraph in the blurb<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the blurb.</p>
+</div>
+<p>This is a paragraph after the blurb.</p>
+```
+
+##### Example Output
+
+This is a paragraph before the blurb.
+
+{class: warning}
+B> This is a paragraph in the blurb.
+B>
+B> This is a
+B> second paragraph in the blurb
+B> which contains newlines.
+B>
+B> This is a third paragraph in the blurb.
+
+This is a paragraph after the blurb.
+
 ### Using Extension Attributes on Blurbs to add Icons
 
-As discussed later, Markua blocks can support any number of [extension attributes](#extension-attributes).
+As discussed later, Markua blocks can support any number of [extension attributes](#extension-attributes). An extension attribute is an attribute which is not part of the Markua specification.
 
 Blurbs provide an example of an extension attributes.
 
 Leanpub's Markua implementation supports an `icon` attribute on blurbs. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
 
-~~~
-{icon: automobile}
-B> Len thinks that cars will all be driverless soon.
-B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
-~~~
-
-This produces output like this:
+```
+This is a paragraph before the blurb.
 
 {icon: automobile}
 B> Len thinks that cars will all be driverless soon.
+B>
 B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
 
-In any other Markua implementation that does not produce
+This is a paragraph after the blurb.
+```
+
+In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon. In a Markua implementation that does not understand the icon attribute, nothing will be generated for that attribute -- it will be functionally equivalent to the attribute not being present.
+
+Let's see whether the Markua processor that produced this document understands the `icon` attribute:
+
+{icon: automobile}
+B> Len thinks that cars will all be driverless soon.
+B>
+B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
+
+If there was a car, it did; if there was no car, it did not.
 
 {#code-blocks}
 ## Code Blocks
