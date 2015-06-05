@@ -8,6 +8,5 @@ metadata.txt
 implementation.txt
 definitions.txt
 lfm_changes.txt
-examples.txt
 todo.txt
 acknowledgments.txt
