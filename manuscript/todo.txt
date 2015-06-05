@@ -30,23 +30,6 @@ Title Pages: If a file called `title_page.png`, `title_page.jpg` or `title_page.
 
 ## Syntax for inline ids
 
-Inline IDs:
-
-```
-This is `a code span`{#foo}
-This is a word{#word}.
-This is a *nice thingy here*{#thingy}
-This is a *nice thingy{#thingy} here*
-```
-
-will result in
-
-```
-This is <code id='foo'>a code span</code>
-This is a <span id='word'>word</word>.
-This is a <em id='thingy'>nice thingy here</em>
-This is a <em>nice <span id='thingy'>thingy</span> here</em>
-```
 
 I.e. it attaches it the the previous span or word.
 
