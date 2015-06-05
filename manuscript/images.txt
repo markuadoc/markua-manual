@@ -29,8 +29,7 @@ As discussed, all images are contained in a subdirectory of the manuscript direc
 * A file called `foo.jpg` in the `images` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](images/foo.jpg)` or  `![](/images/foo.jpg)`.
 * A file called `bar.png` in a subdirectory `foo` of the images directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](images/foo/bar.png)` or  `![](/images/foo/bar.png)`.
 
-{class: warning}
-B> In Leanpub Flavoured Markdown, we included the `images/` in the path of all images. This is redundant. We're fixing this mistake in Markua.
+A> In Leanpub Flavoured Markdown, we included the `images/` in the path of all images. This is not supported in Markua. Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is images/ in a path, a Markua processor must assume this is the name of a directory *inside* the images directory.
 
 In Markua, images can be inserted in one of two ways:
 
@@ -53,7 +52,19 @@ A> In Leanpub Flavoured Markdown, we used the alt text incorrectly as a figure c
 {class: warning}
 B> There is no support for Markdown's reference style images in Markua. One image syntax in figure and inline modes is plenty enough to remember.
 
-The following examples show how images can be inserted as inline images.
+## Inline Images (as Span Elements)
+
+Images can be inserted inline in the flow of text in a paragraph, with no alt text provided:
+
+```
+Markua has a spiffy ![](markua-logo-small.png) logo.
+```
+
+Images can also be inserted inline with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image:
+
+```
+Markua has a spiffy ![the word Markua with the two asterisk trees beside it](markua-logo-small.png) logo.
+```
 
 {#inline_images_exs}
 Examples:
