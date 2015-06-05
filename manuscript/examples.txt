@@ -2,13 +2,9 @@
 
 The following examples are referenced throughout the Markua specification. Interested readers can use them to understand Markua at a deeper level, and implementors of Markua Processors can use them as unit tests. In fact, we generate unit tests from these examples; to learn more visit TODO.
 
-## Images
-
 ## Inline Images (as Span Elements)
 
 [Back To Section](#inline_images_exs)
-
-Images can be inserted inline in the flow of text in a paragraph.
 
 {#inline_images_1}
 ### Example 1: Inline Images with no Alt Text

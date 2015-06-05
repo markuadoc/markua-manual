@@ -52,9 +52,11 @@ A> In Leanpub Flavoured Markdown, we used the alt text incorrectly as a figure c
 {class: warning}
 B> There is no support for Markdown's reference style images in Markua. One image syntax in figure and inline modes is plenty enough to remember.
 
-## Inline Images (as Span Elements)
+## Inline Images
 
-Images can be inserted inline in the flow of text in a paragraph, with no alt text provided:
+Images can be inserted inline in the flow of text in a paragraph. This is called a span element.
+
+At its simplest, inserting an image looks like this:
 
 ```
 Markua has a spiffy ![](markua-logo-small.png) logo.
@@ -66,6 +68,13 @@ Images can also be inserted inline with alt text. Again, the alt text is intende
 Markua has a spiffy ![the word Markua with the two asterisk trees beside it](markua-logo-small.png) logo.
 ```
 
+The syntax is a bit gross, and it's all requried: `![alt text](filename)`
+
+Regfunny square brackets are there so that alt
+
+
+
+
 {#inline_images_exs}
 Examples:
 
@@ -73,7 +82,7 @@ Examples:
 * [Example 2](#inline_images_2)
 * [Example 3](#inline_images_3)
 
-## Figures (as Block Elements)
+## Figures
 
 The most powerful way to insert an image in Markua is on its own as a block element, separated like any other block element by blank lines above and below. With this approach, the image is a Figure. If it has a caption, the image caption also shows up in the List of Illustrations, as a crosslink to the image caption associated with the figure itself.
 
