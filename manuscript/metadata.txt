@@ -175,13 +175,16 @@ This is an extension mechanism to allow for specialized uses of Markua: since CS
 
 Markua supports adding index entries as metadata.
 
-Index entries can either be attached to block or span elements, using a syntax [inspired by LaTeX](https://en.wikibooks.org/wiki/LaTeX/Indexing).
+Index entries can either be attached to block or span elements, using a curly brace syntax [which is very similar](#crosslinks) to how `id`s are defined.
+
+
+, using a syntax [inspired by LaTeX](https://en.wikibooks.org/wiki/LaTeX/Indexing).
 
 So as to not conflict with the names of directives, all index entries start with `i:` (i is for index).
 
 In its simplest form, an index entry is simply `{i:hello}`.
 
-Here's the various formats of an index entry:
+These are the various formats of an index entry:
 
 ```
 {i:hello}

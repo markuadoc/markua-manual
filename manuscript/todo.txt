@@ -26,11 +26,6 @@ specify that magic {#id} syntax does not combine with other attrs
 
 Title Pages: If a file called `title_page.png`, `title_page.jpg` or `title_page.jpeg` exists in the `images` directory, then it will be used as the title page of the book. If more than one of these files exists, then the first one found alphabetically will be used.
 
-## Syntax for inline ids
-
-
-I.e. it attaches it the the previous span or word.
-
 ### Syntax for index entries
 
 ~~~
