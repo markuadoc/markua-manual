@@ -377,6 +377,16 @@ There are two parts to making a crosslink.
 1. Define an id.
 2. Link to that id with a crosslink.
 
+### Defining an `id` on Block and Span Elements, Using `{#some-id}` Syntax Only
+
+To define an `id`, you create an `id` attribute on a block or span element.
+
+If you use `id`s, chances are you use a *lot* of them. So, if Markua supported a syntax of `{id: some-id}`, you'd be typing that a *lot*. Instead, Markua defines a shorthand syntax of `{#some-id}` to define an `id` attribute.
+
+W> This syntax of `{#some-id}` is the **only** way to define an `id`.
+
+
+
 To define an id, just create an `id` attribute above a block element or attached to a span element.
 
 ### Defining an `id` on a Block Element
@@ -396,8 +406,6 @@ Second, using a shorthand approach:
 {#some-id}
 This is a paragraph with the id of `some-id`.
 ```
-
-Normally there is only exactly one way to do everything in Markua. However, for people who define a lot of `id`s, the `{id: ` syntax is much more cumbersome than the `{#` syntax, so we're giving a nod to power users of `id`s here by providing a shorthand.
 
 ### Defining an `id` on a Span Element
 

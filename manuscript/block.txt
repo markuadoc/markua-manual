@@ -1112,7 +1112,7 @@ B> This is a third paragraph in the blurb.
 
 This is a paragraph after the blurb.
 
-### Classes of Blurbs
+### Classes of Blurbs and Syntactic Sugar
 
 Like all Markua block elements, blurbs can have a `class` attribute attached to them. Here's an example:
 
@@ -1123,9 +1123,11 @@ B>
 B> This is still part of the blurb. Note that the entire blurb gets the class element.
 ```
 
-There are no required CSS rules in Markua, and thus, there is no required special support for any specific class attributes on a blurb or anywhere else.
+#### Syntactic Sugar for Standard Blurb Classes
 
-For example, Leanpub produces a lot of computer programming books, so it understands the following values for the `class` attribute on a blurb:
+Markua has its origin in Leanpub, and Leanpub has its origin in authoring computer programming books.
+
+In computer programming books, there are a number of blurb types which are a defacto standard:
 
 * `discussion`
 * `error`
@@ -1135,9 +1137,33 @@ For example, Leanpub produces a lot of computer programming books, so it underst
 * `tip`
 * `warning`
 
-#### Example
+Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
 
-##### Markua Syntax
+So, Markua defines a standard shorthand syntax for these classes of blurbs. With this syntax, you use a different letter than `B` in the `B>`, to create a blurb with the appropriate class:
+
+```
+* `D>` for `discussion`
+* `E>` for `error`
+* `X>` for `exercise`
+* `I>` for `information`
+* `Q>` for `question`
+* `T>` for `tip`
+* `W>` for `warning`
+```
+
+W> TODO - sleep on this and decide if is this a good or bad idea to bring back ... With this and the `id` syntax question it's tempting to at least be consistent and either support both or just one, but it's odd to only do sugar for `id` and support both for blurb classes?!
+
+
+There are no required CSS rules in Markua, and thus, there is no required special support for any specific class attributes on a blurb or anywhere else.
+
+For example, Leanpub produces a lot of computer programming books, so it understands the following values for the `class` attribute on a blurb:
+
+
+#### Examples
+
+
+
+###### Markua Syntax
 
 {#input_blurb_1}
 ```
@@ -1155,7 +1181,7 @@ B> This is a third paragraph in the blurb.
 This is a paragraph after the blurb.
 ```
 
-##### HTML Output
+###### HTML Output
 
 The HTML output for an Blurb is simply a `div` with a class of "blurb".
 
@@ -1172,7 +1198,7 @@ which contains newlines.</p>
 <p>This is a paragraph after the blurb.</p>
 ```
 
-##### Example Output
+###### Example Output
 
 This is a paragraph before the blurb.
 

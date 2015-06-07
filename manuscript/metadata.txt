@@ -75,9 +75,14 @@ Markua defines a few built-in attributes which have special meaning.
 
 ### Standard Attributes
 
-#### Defining `id` On Any Block
+#### Defining `id` On Any Block, Using `{#some-id}` Syntax Only
 
 As we saw in the [section on crosslinks](#crosslinks), attributes can be used to define ids on block elements.
+
+
+
+Normally there is only exactly one way to do everything in Markua. However, for people who define a lot of `id`s, the `{id: ` syntax is much more cumbersome than the `{#` syntax, so we're giving a nod to power users of `id`s here by providing a shorthand.
+
 
 There are two ways to do this:
 
