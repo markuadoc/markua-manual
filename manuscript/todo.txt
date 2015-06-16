@@ -1,5 +1,124 @@
 # TODO
 
+- specify that 1) and 1. both work.
+
+1. blah
+5. foo
+11. bar
+
+is
+
+7.
+
+1. foo
+2. bar
+3. baz
+
+makes a numbered list starting at 1.
+
+41. foo
+42. bar
+43. baz
+
+makes a numbered list starting at 41.
+
+
+7. ways to say goodbye
+5. is the number that makes me want to boogie
+2. times a lady
+
+is just three sentences with br tags is a paragraph
+
+5. foo
+6. bar
+7. baz
+9. moo
+
+is just 4 sentences with br tags is a paragraph
+
+if the numbers are not right, it is not a numbered list.
+
+it will look just wrong enough
+
+the numbers that are shown are the numbers you get in the output
+
+1. foo
+3. bar
+    a) a
+    b) b
+        i. i
+        ii. ii
+  c) c
+3. baz
+4. moo
+
+1. foo
+2. bar
+    1. one
+    2. two
+3. baz
+
+1. foo
+2. bar
+   a) baz
+   b) aoeu
+
+
+philosophical debate: everything as lists, nothing as lists, only canonical case as lists
+
+1) foo
+2) bar
+3) baz
+
+
+1. foo
+2. bar
+3. baz
+
+= an ol
+
+* foo
+* bar
+* baz
+
+= a ul
+
+all else is break tags.
+
+3. foo
+4. bar
+5. baz
+
+= an ol
+
+3. foo
+5. bar
+
+is break tags
+
+TODO - differentiate between (strict and not strict) output modes (don't name it strict mode), and explain (in Leanpub we just have strict mode)
+
+Philosophically, the difference is that Markdown is a way of producing HTML, and Markua is a format to write in.
+
+So, Markdown tries to make HTML wherever possible. Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list; I don't write one element lists).
+
+sleep on this.
+
+nested lists
+
+is a one element list a list?
+
+no.
+
+a one element list is not a list
+
+significant whitespace =>
+ strip at the beginning of a paragraph
+ strip at end of line
+ collapse into one space in middle
+ at the beginning of a non-paragraph newline we preserve them
+
+
 {class: warning}
 B> TODO - Need to consider the following...
 

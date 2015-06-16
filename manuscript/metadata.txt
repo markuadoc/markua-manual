@@ -166,6 +166,9 @@ Markua processors which do not natively understand these additional attributes m
 1. Set them as attributes on the block element that is produced by the HTML output.
 2. Silently remove them from all other output formats (e.g. EPUB, MOBI, PDF, LaTeX, etc).
 
+TODO - differentiate between (strict and not strict) output modes (don't name it strict mode), and explain (in Leanpub we just have strict mode)
+
+
 Any attribute not understood by a Markua processor must be set as an attribute on the block element that it is attached to in the HTML output only.
 
 A Markua Processor should remove this not understood attribute from other output formats (e.g. LaTeX, EPUB) which are known to be more strict about unknown attributes.
