@@ -159,6 +159,18 @@ Supporting inline HTML would make Markua a worse format, both to write in and to
 
 One design consequence of the support for inline HTML in Markdown is that the syntax can stay very small--authors can always fall back to using HTML. Since Markua does not support inline HTML, any required output must be produceable by a Markua syntax input. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books and documentation often require tables, Markua needs to add a table syntax.
 
+{#input_phil_1}
+```
+Test!
+```
+
+##### HTML Output
+
+{#output_phil_1}
+```
+<p>Test!</p>
+```
+
 ## How this Specification is Structured
 
 This specification defines:
