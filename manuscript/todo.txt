@@ -96,11 +96,15 @@ all else is break tags.
 
 is break tags
 
-TODO - differentiate between (strict and not strict) output modes (don't name it strict mode), and explain (in Leanpub we just have strict mode)
+TODO - differentiate between (strict and not strict) output modes (don't name it strict mode?), and explain (in Leanpub we just have strict mode)
+
+non-strict mode would not strip out non-understood by Markua stuff. strict mode would only output attrs Markua understood.
 
 Philosophically, the difference is that Markdown is a way of producing HTML, and Markua is a format to write in.
 
 So, Markdown tries to make HTML wherever possible. Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list; I don't write one element lists).
+
+reconsider align attribute on images!?
 
 sleep on this.
 
@@ -108,7 +112,7 @@ nested lists
 
 is a one element list a list?
 
-no.
+no!
 
 a one element list is not a list
 
@@ -144,6 +148,20 @@ B> TODO - Need to consider the following...
 specify that magic {#id} syntax does not combine with other attrs
 
 Title Pages: If a file called `title_page.png`, `title_page.jpg` or `title_page.jpeg` exists in the `images` directory, then it will be used as the title page of the book. If more than one of these files exists, then the first one found alphabetically will be used.
+
+(#foo) vs. {#foo} vs. {id: foo}
+
+no mixing {a: b, #c, d: e}
+
+W>
+T>
+I>
+Q>
+
+is tasty sugar. keep these. maybe have fewer???
+
+the post-book index madness can be converting (#myid) to {id: #myid, i: blah}
+
 
 ### Syntax for index entries
 
