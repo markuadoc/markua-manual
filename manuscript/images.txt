@@ -153,8 +153,8 @@ Thanks Justin, it was fun making the logo with you!
 {#output_figures_1}
 ```
 <p>Markua has a spiffy logo:</p>
-<div class='figure'>
-  <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it" />
+<div class="figure">
+  <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
@@ -193,7 +193,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a spiffy logo:</p>
 <div class='figure'>
-  <img href="images/markua-logo.png" alt="" />
+  <img alt="" href="images/markua-logo.png"/>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
@@ -229,8 +229,8 @@ Thanks Justin, it was fun making the logo with you!
 {#output_figures_3}
 ```
 <p>Markua has a spiffy logo:</p>
-<div class='figure left'>
-  <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it" />
+<div class="figure left">
+  <img alt="the word Markua with the two asterisk trees beside it" href="images/markua-logo.png"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
