@@ -976,9 +976,7 @@ TODO - does `<blockquote>` cause problems for EPUB readers?
 <p>This is a paragraph before the block quote.</p>
 <blockquote>
 <p>This is a paragraph in the block quote.</p>
-<p>This is a<br/>
-second paragraph in the block quote<br/>
-which contains newlines.</p>
+<p>This is a<br/>second paragraph in the block quote<br/>which contains newlines.</p>
 <p>This is a third paragraph in the block quote.</p>
 </blockquote>
 <p>This is a paragraph after the block quote.</p>
@@ -1090,9 +1088,7 @@ The HTML output for an Blurb is simply a `div` with a class of "blurb".
 <p>This is a paragraph before the blurb.</p>
 <div class="blurb">
 <p>This is a paragraph in the blurb.</p>
-<p>This is a<br/>
-second paragraph in the blurb<br/>
-which contains newlines.</p>
+<p>This is a<br/>second paragraph in the blurb<br/>which contains newlines.</p>
 <p>This is a third paragraph in the blurb.</p>
 </div>
 <p>This is a paragraph after the blurb.</p>
@@ -1190,9 +1186,7 @@ The HTML output for an Blurb is simply a `div` with a class of "blurb".
 <p>This is a paragraph before the blurb.</p>
 <div class="blurb warning">
 <p>This is a paragraph in the blurb.</p>
-<p>This is a<br/>
-second paragraph in the blurb<br/>
-which contains newlines.</p>
+<p>This is a<br/>second paragraph in the blurb<br/>which contains newlines.</p>
 <p>This is a third paragraph in the blurb.</p>
 </div>
 <p>This is a paragraph after the blurb.</p>
