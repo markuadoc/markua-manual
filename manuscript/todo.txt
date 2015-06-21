@@ -1,57 +1,16 @@
 # TODO
 
-- specify that 1) and 1. both work.
-
-makes a numbered list starting at 41.
-
-is just three sentences with br tags is a paragraph
-
-1. foo
-3. bar
-    a) a
-    b) b
-        i. i
-        ii. ii
-  c) c
-3. baz
-4. moo
-
-1. foo
-2. bar
-    1. one
-    2. two
-3. baz
-
-1. foo
-2. bar
-   a) baz
-   b) aoeu
-
-
-philosophical debate: everything as lists, nothing as lists, only canonical case as lists
-
-1) foo
-2) bar
-3) baz
-
-break tags since ) not html
-
-TODO - differentiate between (strict and not strict) output modes (don't name it strict mode?), and explain (in Leanpub we just have strict mode)
-
-non-strict mode would not strip out non-understood by Markua stuff. strict mode would only output attrs Markua understood.
-
-reconsider align attribute on images!?
-
-sleep on this.
-
-nested lists
+- give up on ) in lists, blame w3c. using ) in a list makes it br tags like a sonnet
+- add reversed support
+- add nested list support (any type any level) with indent of 4 spaces or 1 tab
+- differentiate between (strict and not strict) output modes (don't name it strict mode?), and explain (in Leanpub we just have strict mode); non-strict mode would not strip out non-understood by Markua stuff, strict mode would only output attrs Markua understood
+- reconsider align attribute on images
 
 significant whitespace =>
  strip at the beginning of a paragraph
  strip at end of line
  collapse into one space in middle
  at the beginning of a non-paragraph newline we preserve them
-
 
 {class: warning}
 B> TODO - Need to consider the following...
