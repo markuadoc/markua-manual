@@ -330,6 +330,44 @@ End.
 
 {#input_list_consecutive_2}
 ```
+This does not make a list either, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+End.
+```
+
+###### HTML Output
+
+{#output_list_consecutive_2}
+```
+<p>This does not make a list either, since the numbers are not all consecutive:</p>
+<p>1. foo<br/>
+2. bar<br/>
+4. baz</p>
+<p>End.</p>
+```
+
+###### Example Output
+
+W> TODO - broken until Markua supported
+
+This does not make a list either, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+End.
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_list_consecutive_3}
+```
 This makes a list:
 
 1975. An amazing year.
@@ -340,7 +378,7 @@ End.
 
 ###### HTML Output
 
-{#output_list_consecutive_2}
+{#output_list_consecutive_3}
 ```
 <p>This makes a list:</p>
 <ol start="1975">
@@ -363,7 +401,7 @@ End.
 
 ###### Markua Syntax
 
-{#input_list_consecutive_3}
+{#input_list_consecutive_4}
 ```
 This does not make a list:
 
@@ -375,7 +413,7 @@ End.
 
 ###### HTML Output
 
-{#output_list_consecutive_3}
+{#output_list_consecutive_4}
 ```
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
@@ -392,11 +430,11 @@ This does not make a list:
 
 End.
 
-##### Example 4
+##### Example 5
 
 ###### Markua Syntax
 
-{#input_list_consecutive_4}
+{#input_list_consecutive_5}
 ```
 A list:
 
@@ -423,7 +461,7 @@ That's it!
 
 ###### HTML Output
 
-{#output_list_consecutive_4}
+{#output_list_consecutive_5}
 ```
 <p>A list:</p>
 <ol type="a">
