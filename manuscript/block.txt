@@ -293,70 +293,150 @@ If you want to prevent a list from being created with consecutive numbered items
 
 {#input_list_consecutive_1}
 ```
-This example shows that backslash escapes are rarely needed.
-
-A list:
-
-1975. An amazing year.
-1976. The year after 1975.
-
-Not a list:
+This does not make a list:
 
 1975. An amazing year.
 2010. The year Leanpub was launched.
 
-Not a list:
-
-1975\. An amazing year.
-1976\. The year after 1975.
-
-A list:
-
-a. a
-b. b
-
-A list:
-
-e. e
-f. f
-
-Not a list:
-
-a) a
-c) c
-
-That's it!
+End.
 ```
 
 ###### HTML Output
 
 {#output_list_consecutive_1}
 ```
-<p>This example shows that backslash escapes are rarely needed.</p>
-<p>A list:</p>
+<p>This does not make a list:</p>
+<p>1975. An amazing year.<br/>
+2010. The year Leanpub was launched.</p>
+<p>End.</p>
+```
+
+###### Example Output
+
+This does not make a list:
+
+1975. An amazing year.
+2010. The year Leanpub was launched.
+
+End.
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_list_consecutive_2}
+```
+This makes a list:
+
+1975. An amazing year.
+1976. The year after 1975.
+
+End.
+```
+
+###### HTML Output
+
+{#output_list_consecutive_2}
+```
+<p>This makes a list:</p>
 <ol start="1975">
   <li>An amazing year.</li>
   <li>The year after 1975.</li>
 </ol>
-<p>Not a list:</p>
+<p>End.</p>
+```
+
+###### Example Output
+
+This makes a list:
+
+1975. An amazing year.
+1976. The year after 1975.
+
+End.
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_list_consecutive_3}
+```
+This does not make a list:
+
+1975\. An amazing year.
+1976\. The year after 1975.
+
+End.
+```
+
+###### HTML Output
+
+{#output_list_consecutive_3}
+```
+<p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
-2010. The year Leanpub was launched.</p>
-<p>Not a list:</p>
-<p>1975\. An amazing year.<br/>
 1976\. The year after 1975.</p>
+<p>End.</p>
+```
+
+###### Example Output
+
+This does not make a list:
+
+1975\. An amazing year.
+1976\. The year after 1975.
+
+End.
+
+##### Example 4
+
+###### Markua Syntax
+
+{#input_list_consecutive_4}
+```
+A list:
+
+a. one
+b. two
+
+A list:
+
+e. five
+f. six
+
+Not a list:
+
+a\. one
+b\. two
+
+Not a list:
+
+a. one
+c. three
+
+That's it!
+```
+
+###### HTML Output
+
+{#output_list_consecutive_4}
+```
 <p>A list:</p>
 <ol type="a">
-  <li>a</li>
-  <li>b</li>
+  <li>one</li>
+  <li>two</li>
 </ol>
 <p>A list:</p>
 <ol type="a" start="5">
-  <li>e</li>
-  <li>f</li>
+  <li>five</li>
+  <li>six</li>
 </ol>
 <p>Not a list:</p>
-<p>a) a<br/>
-c) c</p>
+<p>a. one<br/>
+b. two</p>
+<p>Not a list:</p>
+<p>a. one<br/>
+c. three</p>
 <p>That's it!</p>
 ```
 
@@ -364,37 +444,25 @@ c) c</p>
 
 W> TODO - broken until Markua supported
 
-This example shows that backslash escapes are rarely needed.
+A list:
+
+a. one
+b. two
 
 A list:
 
-1975. An amazing year.
-1976. The year after 1975.
+e. five
+f. six
 
 Not a list:
 
-1975. An amazing year.
-2010. The year Leanpub was launched.
+a\. one
+b\. two
 
 Not a list:
 
-1975\. An amazing year.
-1976\. The year after 1975.
-
-A list:
-
-a. a
-b. b
-
-A list:
-
-e) e
-f) f
-
-Not a list:
-
-a) a
-c) c
+a. one
+c. three
 
 That's it!
 
