@@ -308,6 +308,7 @@ End.
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
 2010. The year Leanpub was launched.</p>
+THIS IS THE OUTPUT.
 <p>End.</p>
 ```
 
