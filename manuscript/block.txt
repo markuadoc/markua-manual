@@ -308,7 +308,6 @@ End.
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
 2010. The year Leanpub was launched.</p>
-THIS IS THE OUTPUT.
 <p>End.</p>
 ```
 
@@ -341,8 +340,8 @@ End.
 ```
 <p>This makes a list:</p>
 <ol start="1975">
-  <li>An amazing year.</li>
-  <li>The year after 1975.</li>
+<li>An amazing year.</li>
+<li>The year after 1975.</li>
 </ol>
 <p>End.</p>
 ```
