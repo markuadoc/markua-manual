@@ -22,11 +22,6 @@ makes a numbered list starting at 1.
 
 makes a numbered list starting at 41.
 
-
-7. ways to say goodbye
-5. is the number that makes me want to boogie
-2. times a lady
-
 is just three sentences with br tags is a paragraph
 
 5. foo
@@ -151,6 +146,9 @@ Title Pages: If a file called `title_page.png`, `title_page.jpg` or `title_page.
 
 (#foo) vs. {#foo} vs. {id: foo}
 
+(#foo) yes
+{id: foo} yes
+{#foo} no
 no mixing {a: b, #c, d: e}
 
 W>
@@ -159,6 +157,17 @@ I>
 Q>
 
 is tasty sugar. keep these. maybe have fewer???
+
+W> foo
+W>
+W> bar
+
+is same as
+
+{class: warning}
+B> foo
+B>
+B> bar
 
 the post-book index madness can be converting (#myid) to {id: #myid, i: blah}
 
