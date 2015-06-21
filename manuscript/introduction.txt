@@ -2,25 +2,31 @@
 
 Imagine you owned a magical typewriter.
 
-When you used this magical typewriter, you wrote with fewer distractions. You didn't just write better, you wrote faster.
+When you used this magical typewriter, you wrote with fewer distractions. You didn't just write faster, you wrote better.
 
-With this magical typewriter, you would never think about layout. The book would format itself.
+With your magical typewriter, you never worried about layout. The book formatted itself.
 
-You could create an ebook from your manuscript with one click. All ebook formats would be created, and they'd all look good. You'd have PDF for computers, MOBI for Kindle, and EPUB for everywhere else. The book would look great on phones.
+You could hit a key on your magical typewriter to create an ebook from your manuscript with one click.
 
-With this magical typewriter, you could publish your book before it was even done, and get feedback from readers all over the world. You could automatically share book updates with them, so whenever you published a new version with one click all your readers would have it instantly.
+All ebook formats would be created, and they'd all look good. You'd have PDF for computers, MOBI for Kindle, and EPUB for everywhere else. The book would look great on phones.
 
-With this magical typewriter, you could easily compare your manuscript to any other version of the manuscript that had ever existed. If you had a publisher and a development editor, they could easily do this too.
+With your magical typewriter, you could publish your book before it was even done, and get feedback from readers all over the world. You could automatically share book updates with them. You would press one key on your magical typewriter to publish a new version, and all your readers would have it instantly.
 
-When the book was done, the magical typewriter would generate InDesign with one click, as a starting point for producing a great looking print book.
+With your magical typewriter, you could easily compare your current manuscript to any other version of your manuscript that had ever existed. If you had a publisher, your development editor could easily do this too.
 
-Wouldn’t it be great if such a magical typewriter existed?
+When the book was done, if you decided to make a print book, you could press a key on your magical typewriter to generate InDesign with one click. Your publisher or contract book designer could use this as a starting point for producing a great looking print book.
 
-It can exist. At Leanpub, we like to think that we're building it.
+With your magical typewriter, as an author you'd only have to do one thing: Write.
 
-But the key to being able to build such a magical typewriter is to create a simple, coherent, open, plain text format for a book manuscript.
+Wouldn't it be great if such a magical typewriter existed?
+
+It does. At Leanpub, we're building it.
+
+But the key to being able to build this magical typewriter is to create a simple, coherent, open, plain text format for a book manuscript.
 
 This simple format will be the basis for the magical typewriter.
+
+This simple format is what authors will write their books in, instead of Word.
 
 This simple format is called Markua.
 
