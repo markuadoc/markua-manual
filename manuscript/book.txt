@@ -1,3 +1,4 @@
+introduction.txt
 philosophy.txt
 structure.txt
 images.txt
