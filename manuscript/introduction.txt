@@ -22,11 +22,11 @@ Wouldn't it be great if such a magical typewriter existed?
 
 It does. At Leanpub, we're building it.
 
-But there's one requirement for this magical typewriter to exist: a simple, coherent, open, free, plain text format for a book manuscript.
-
-This simple format will be the basis for the magical typewriter.
+But there's one requirement for this magical typewriter to exist: a simple, coherent, open source, free, plain text format for a book manuscript.
 
 This simple format is what authors will write their books in, instead of Word. It will enable an ecosystem of tools to emerge around it.
+
+This simple format will be the basis for the magical typewriter.
 
 This simple format is called Markua.
 
