@@ -375,7 +375,7 @@ End.
 ```
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
-1976\. The year after 1975.</p>
+1976. The year after 1975.</p>
 <p>End.</p>
 ```
 
