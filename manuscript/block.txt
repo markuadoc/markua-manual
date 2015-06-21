@@ -285,7 +285,7 @@ Baz
 
 #### In Markua, List Numbers Must be Consecutive Or It Is Not a List
 
-In Markua, list numbers must be consecutive, given the type of numbering (Arabic, Roman, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
+In Markua, list numbers **must all be consecutive**, given the type of numbering (Arabic, Roman, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
 
 The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output. A list will only be produced if this is the case.
 
@@ -399,7 +399,7 @@ This makes a list:
 
 End.
 
-##### Example 3
+##### Example 4
 
 ###### Markua Syntax
 
@@ -448,6 +448,13 @@ A list:
 e. five
 f. six
 
+A list:
+
+i. one
+ii. two
+iii. three
+iv. four
+
 Not a list:
 
 a\. one
@@ -457,6 +464,12 @@ Not a list:
 
 a. one
 c. three
+
+Not a list:
+
+i. one
+ii. two
+iv. four
 
 That's it!
 ```
@@ -475,12 +488,23 @@ That's it!
   <li>five</li>
   <li>six</li>
 </ol>
+<p>A list:</p>
+<ol type="i">
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ol>
 <p>Not a list:</p>
 <p>a. one<br/>
 b. two</p>
 <p>Not a list:</p>
 <p>a. one<br/>
 c. three</p>
+<p>Not a list:</p>
+<p>i. one<br/>
+ii. two<br/>
+iv. four</p>
 <p>That's it!</p>
 ```
 
@@ -498,6 +522,13 @@ A list:
 e. five
 f. six
 
+A list:
+
+i. one
+ii. two
+iii. three
+iv. four
+
 Not a list:
 
 a\. one
@@ -507,6 +538,12 @@ Not a list:
 
 a. one
 c. three
+
+Not a list:
+
+i. one
+ii. two
+iv. four
 
 That's it!
 

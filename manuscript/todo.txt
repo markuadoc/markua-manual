@@ -2,20 +2,6 @@
 
 - specify that 1) and 1. both work.
 
-1. blah
-5. foo
-11. bar
-
-is
-
-7.
-
-1. foo
-2. bar
-3. baz
-
-makes a numbered list starting at 1.
-
 41. foo
 42. bar
 43. baz
@@ -23,13 +9,6 @@ makes a numbered list starting at 1.
 makes a numbered list starting at 41.
 
 is just three sentences with br tags is a paragraph
-
-5. foo
-6. bar
-7. baz
-9. moo
-
-is just 4 sentences with br tags is a paragraph
 
 if the numbers are not right, it is not a numbered list.
 
