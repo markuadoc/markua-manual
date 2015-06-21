@@ -243,7 +243,7 @@ So, in Markua, the automatic creation of a numbered list only happens if you hav
 
 ###### Markua Syntax
 
-{#input_list_diffs}
+{#input_list_single_element_1}
 ```
 Foo
 
@@ -291,7 +291,7 @@ If you want to prevent a list from being created with consecutive numbered items
 
 ###### Markua Syntax
 
-{#input_list_diffs}
+{#input_list_consecutive_1}
 ```
 This example shows that backslash escapes are rarely needed.
 
@@ -330,7 +330,7 @@ That's it!
 
 ###### HTML Output
 
-{#output_list_single_element_1}
+{#output_list_consecutive_1}
 ```
 <p>This example shows that backslash escapes are rarely needed.</p>
 <p>A list:</p>
