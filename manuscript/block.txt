@@ -213,339 +213,7 @@ Furthermore, besides ordered and unordered lists, [definition lists](#dl) are al
 
 All lists must have a blank line before and after them.
 
-There are a number of list types. Each is specified in turn below. First, however, I want to highlight the many differences between Markua and Markdown lists.
-
-### Differences Between Markua and Markdown Lists
-
-There are a number of differences between Markua lists and Markdown lists.
-
-#### In Markua, A Single Element List is Not a List
-
-Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
-
-`1986. What a great season.`
-
-This would produce a single element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
-
-Now, in Markua, if we supported single element lists, this would produce a single element numbered list starting with `1968.` -- which would be almost as bad as in Markdown.
-
-(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1968\. What a great season.` to avoid this.)
-
-But what to do?
-
-The answer is simple: in Markua, **single element lists are not lists**.
-
-To me, the notion of a *list* is something with more than one thing in it. If I have a list of chores to do, there are many of them. If I have one chore to do, I don't call it a list of chores--I call it a chore.
-
-So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses. This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
-
-A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, Markdown tries to make HTML wherever possible. Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list; I don't write one element lists).
-
-##### Example 1
-
-###### Markua Syntax
-
-{#input_list_single_element_1}
-```
-Foo
-
-1975. An amazing year.
-
-Bar
-
-a. This isn't a list either.
-
-Baz
-```
-
-###### HTML Output
-
-{#output_list_single_element_1}
-```
-<p>Foo</p>
-<p>1975. An amazing year.</p>
-<p>Bar</p>
-<p>a. This isn't a list either.</p>
-<p>Baz</p>
-```
-
-###### Example Output
-
-W> TODO - broken until Markua supported
-
-Foo
-
-1975. An amazing year.
-
-Bar
-
-a. This isn't a list either.
-
-Baz
-
-#### In Markua, List Numbers Must be Consecutive Or It Is Not a List
-
-In Markua, list numbers **must all be consecutive**, given the type of numbering (Arabic, Roman, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
-
-The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output. A list will only be produced if this is the case.
-
-If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
-
-##### Example 1
-
-###### Markua Syntax
-
-{#input_list_consecutive_1}
-```
-This does not make a list:
-
-1975. An amazing year.
-2010. The year Leanpub was launched.
-
-End.
-```
-
-###### HTML Output
-
-{#output_list_consecutive_1}
-```
-<p>This does not make a list:</p>
-<p>1975. An amazing year.<br/>
-2010. The year Leanpub was launched.</p>
-<p>End.</p>
-```
-
-###### Example Output
-
-W> TODO - broken until Markua supported
-
-This does not make a list:
-
-1975. An amazing year.
-2010. The year Leanpub was launched.
-
-End.
-
-##### Example 2
-
-###### Markua Syntax
-
-{#input_list_consecutive_2}
-```
-This does not make a list either, since the numbers are not all consecutive:
-
-1. foo
-2. bar
-4. baz
-
-End.
-```
-
-###### HTML Output
-
-{#output_list_consecutive_2}
-```
-<p>This does not make a list either, since the numbers are not all consecutive:</p>
-<p>1. foo<br/>
-2. bar<br/>
-4. baz</p>
-<p>End.</p>
-```
-
-###### Example Output
-
-W> TODO - broken until Markua supported
-
-This does not make a list either, since the numbers are not all consecutive:
-
-1. foo
-2. bar
-4. baz
-
-End.
-
-##### Example 3
-
-###### Markua Syntax
-
-{#input_list_consecutive_3}
-```
-This makes a list:
-
-1975. An amazing year.
-1976. The year after 1975.
-
-End.
-```
-
-###### HTML Output
-
-{#output_list_consecutive_3}
-```
-<p>This makes a list:</p>
-<ol start="1975">
-<li>An amazing year.</li>
-<li>The year after 1975.</li>
-</ol>
-<p>End.</p>
-```
-
-###### Example Output
-
-This makes a list:
-
-1975. An amazing year.
-1976. The year after 1975.
-
-End.
-
-##### Example 4
-
-###### Markua Syntax
-
-{#input_list_consecutive_4}
-```
-This does not make a list:
-
-1975\. An amazing year.
-1976\. The year after 1975.
-
-End.
-```
-
-###### HTML Output
-
-{#output_list_consecutive_4}
-```
-<p>This does not make a list:</p>
-<p>1975. An amazing year.<br/>
-1976. The year after 1975.</p>
-<p>End.</p>
-```
-
-###### Example Output
-
-This does not make a list:
-
-1975\. An amazing year.
-1976\. The year after 1975.
-
-End.
-
-##### Example 5
-
-###### Markua Syntax
-
-{#input_list_consecutive_5}
-```
-A list:
-
-a. one
-b. two
-
-A list:
-
-e. five
-f. six
-
-A list:
-
-i. one
-ii. two
-iii. three
-iv. four
-
-Not a list:
-
-a\. one
-b\. two
-
-Not a list:
-
-a. one
-c. three
-
-Not a list:
-
-i. one
-ii. two
-iv. four
-
-That's it!
-```
-
-###### HTML Output
-
-{#output_list_consecutive_5}
-```
-<p>A list:</p>
-<ol type="a">
-  <li>one</li>
-  <li>two</li>
-</ol>
-<p>A list:</p>
-<ol type="a" start="5">
-  <li>five</li>
-  <li>six</li>
-</ol>
-<p>A list:</p>
-<ol type="i">
-  <li>one</li>
-  <li>two</li>
-  <li>three</li>
-  <li>four</li>
-</ol>
-<p>Not a list:</p>
-<p>a. one<br/>
-b. two</p>
-<p>Not a list:</p>
-<p>a. one<br/>
-c. three</p>
-<p>Not a list:</p>
-<p>i. one<br/>
-ii. two<br/>
-iv. four</p>
-<p>That's it!</p>
-```
-
-###### Example Output
-
-W> TODO - broken until Markua supported
-
-A list:
-
-a. one
-b. two
-
-A list:
-
-e. five
-f. six
-
-A list:
-
-i. one
-ii. two
-iii. three
-iv. four
-
-Not a list:
-
-a\. one
-b\. two
-
-Not a list:
-
-a. one
-c. three
-
-Not a list:
-
-i. one
-ii. two
-iv. four
-
-That's it!
+There are a number of list types. Each is specified in turn below.
 
 ### Bulleted Lists
 
@@ -1261,6 +929,338 @@ term 2
 ```
 
 For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.
+
+### Differences Between Markua and Markdown Lists
+
+If you are familiar with Markdown, you will have noted a number of differences between Markua lists and Markdown lists. This section specifies these differences explicitly.
+
+#### In Markua, A Single Element List is Not a List
+
+Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
+
+`1986. What a great season.`
+
+This would produce a single element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
+
+Now, in Markua, if we supported single element lists, this would produce a single element numbered list starting with `1968.` -- which would be almost as bad as in Markdown.
+
+(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1968\. What a great season.` to avoid this.)
+
+But what to do?
+
+The answer is simple: in Markua, **single element lists are not lists**.
+
+To me, the notion of a *list* is something with more than one thing in it. If I have a list of chores to do, there are many of them. If I have one chore to do, I don't call it a list of chores--I call it a chore.
+
+So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses. This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
+
+A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, Markdown tries to make HTML wherever possible. Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list; I don't write one element lists).
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_list_single_element_1}
+```
+Foo
+
+1975. An amazing year.
+
+Bar
+
+a. This isn't a list either.
+
+Baz
+```
+
+###### HTML Output
+
+{#output_list_single_element_1}
+```
+<p>Foo</p>
+<p>1975. An amazing year.</p>
+<p>Bar</p>
+<p>a. This isn't a list either.</p>
+<p>Baz</p>
+```
+
+###### Example Output
+
+W> TODO - broken until Markua supported
+
+Foo
+
+1975. An amazing year.
+
+Bar
+
+a. This isn't a list either.
+
+Baz
+
+#### In Markua, List Numbers Must be Consecutive Or It Is Not a List
+
+In Markua, list numbers **must all be consecutive**, given the type of numbering (Arabic, Roman, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
+
+The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output. A list will only be produced if this is the case.
+
+If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_list_consecutive_1}
+```
+This does not make a list:
+
+1975. An amazing year.
+2010. The year Leanpub was launched.
+
+End.
+```
+
+###### HTML Output
+
+{#output_list_consecutive_1}
+```
+<p>This does not make a list:</p>
+<p>1975. An amazing year.<br/>
+2010. The year Leanpub was launched.</p>
+<p>End.</p>
+```
+
+###### Example Output
+
+W> TODO - broken until Markua supported
+
+This does not make a list:
+
+1975. An amazing year.
+2010. The year Leanpub was launched.
+
+End.
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_list_consecutive_2}
+```
+This does not make a list either, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+End.
+```
+
+###### HTML Output
+
+{#output_list_consecutive_2}
+```
+<p>This does not make a list either, since the numbers are not all consecutive:</p>
+<p>1. foo<br/>
+2. bar<br/>
+4. baz</p>
+<p>End.</p>
+```
+
+###### Example Output
+
+W> TODO - broken until Markua supported
+
+This does not make a list either, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+End.
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_list_consecutive_3}
+```
+This makes a list:
+
+1975. An amazing year.
+1976. The year after 1975.
+
+End.
+```
+
+###### HTML Output
+
+{#output_list_consecutive_3}
+```
+<p>This makes a list:</p>
+<ol start="1975">
+<li>An amazing year.</li>
+<li>The year after 1975.</li>
+</ol>
+<p>End.</p>
+```
+
+###### Example Output
+
+This makes a list:
+
+1975. An amazing year.
+1976. The year after 1975.
+
+End.
+
+##### Example 4
+
+###### Markua Syntax
+
+{#input_list_consecutive_4}
+```
+This does not make a list:
+
+1975\. An amazing year.
+1976\. The year after 1975.
+
+End.
+```
+
+###### HTML Output
+
+{#output_list_consecutive_4}
+```
+<p>This does not make a list:</p>
+<p>1975. An amazing year.<br/>
+1976. The year after 1975.</p>
+<p>End.</p>
+```
+
+###### Example Output
+
+This does not make a list:
+
+1975\. An amazing year.
+1976\. The year after 1975.
+
+End.
+
+##### Example 5
+
+###### Markua Syntax
+
+{#input_list_consecutive_5}
+```
+A list:
+
+a. one
+b. two
+
+A list:
+
+e. five
+f. six
+
+A list:
+
+i. one
+ii. two
+iii. three
+iv. four
+
+Not a list:
+
+a\. one
+b\. two
+
+Not a list:
+
+a. one
+c. three
+
+Not a list:
+
+i. one
+ii. two
+iv. four
+
+That's it!
+```
+
+###### HTML Output
+
+{#output_list_consecutive_5}
+```
+<p>A list:</p>
+<ol type="a">
+  <li>one</li>
+  <li>two</li>
+</ol>
+<p>A list:</p>
+<ol type="a" start="5">
+  <li>five</li>
+  <li>six</li>
+</ol>
+<p>A list:</p>
+<ol type="i">
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ol>
+<p>Not a list:</p>
+<p>a. one<br/>
+b. two</p>
+<p>Not a list:</p>
+<p>a. one<br/>
+c. three</p>
+<p>Not a list:</p>
+<p>i. one<br/>
+ii. two<br/>
+iv. four</p>
+<p>That's it!</p>
+```
+
+###### Example Output
+
+W> TODO - broken until Markua supported
+
+A list:
+
+a. one
+b. two
+
+A list:
+
+e. five
+f. six
+
+A list:
+
+i. one
+ii. two
+iii. three
+iv. four
+
+Not a list:
+
+a\. one
+b\. two
+
+Not a list:
+
+a. one
+c. three
+
+Not a list:
+
+i. one
+ii. two
+iv. four
+
+That's it!
 
 ## Block Quotes
 
