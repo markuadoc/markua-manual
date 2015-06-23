@@ -16,6 +16,8 @@ Since Markua is a format in which all semantic and syntax formatting is typed by
 
 Almost all formatting in Markua means the same thing regardless of whether the Markua document is being used to generate a book or document. The one huge exception to this, however, is in headings.
 
+## Headings
+
 ### Heading Types
 
 Conceptually, the most important element types in Markua are the headings. A Markua document is typically organized into one or more levels of headings.
