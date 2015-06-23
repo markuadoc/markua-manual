@@ -1,0 +1,15 @@
+### Definition Lists
+
+Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, we strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, we see definition lists as having more of a future than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
+
+To define a definition list in Markua, use the following syntax:
+
+```
+term 1
+: definition 1
+
+term 2
+: definition 2
+```
+
+For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.

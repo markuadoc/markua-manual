@@ -3,6 +3,14 @@ philosophy.txt
 structure.txt
 images.txt
 block.txt
+headings.txt
+paragraphs.txt
+lists.txt
+definition_lists.txt
+asides_blurbs_block_quotes.txt
+code_blocks.txt
+tables.txt
+math.txt
 span.txt
 whitespace.txt
 metadata.txt
