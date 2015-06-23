@@ -1,8 +1,142 @@
 # TODO
 
+this is a bad time.
+
+- nested list => 2 spaces, 4 spaces, 1 tab, combination? (leaning: 2 spaces)
+
+- code blocks and new paragraphs inside list items
+
+> foo
+> bar
+>
+> baz
+
+
+* foo
+* bar
+
+* a
+* b
+
+  bar
+
+  baz
+* c
+
+* a
+* b
+c
+* d
+
+* a
+* b
+
+  c
+
+  d
+e
+* f
+
+* new list
+
+
+<ul>
+<li>a</li>
+<li>
+<p>b</p>
+<p>c</p>
+<p>d<br/>
+e</p>
+</li>
+<li>f</li>
+</ul>
+
+
+(2-4 spaces or a tab = continue)
+
+
+* a
+* b
+
+  ```
+aoue
+  ```
+
+* c
+
+
+  x
+  ```
+  yada
+  yada
+  ```
+  y
+* c
+
+* a
+* b
+d
+e
+* c
+
+yada
+
+* foo
+* bar
+  1. one
+  2. two
+* baz
+
+yada
+
+yada
+
+* foo
+* bar
+__1. one
+__2. two
+* baz
+
+yada
+
+yada
+
+*  foo
+*  bar
+__1. one
+__
+_____still one
+__2. two
+*  baz
+
+* a
+* b
+  1. c
+
+  2. d
+      i. yay
+      ii. boo
+
+
+* foo
+  * a
+  * b
+* bar
+* baz
+
+yada
+
+(2-4 spaces or 1 tab) more than prev level of indent
+
+
+
+
 - give up on ) in lists, blame w3c. using ) in a list makes it br tags like a sonnet
 - add reversed support
 - add nested list support (any type any level) with indent of 4 spaces or 1 tab
+
+- 2 / 4 / tab
+
 - differentiate between (strict and not strict) output modes (don't name it strict mode?), and explain (in Leanpub we just have strict mode); non-strict mode would not strip out non-understood by Markua stuff, strict mode would only output attrs Markua understood
 - reconsider align attribute on images
 
@@ -40,14 +174,90 @@ Title Pages: If a file called `title_page.png`, `title_page.jpg` or `title_page.
 
 (#foo) vs. {#foo} vs. {id: foo}
 
-(#foo) yes
+[blah]{lang:en} to override fonts
+
+[blah]{lang:zh} to override to Chinese and activate LTR
+[blah]{lang:ja} to override to Japanese and activate LTR
+[blah]{lang:ko} to override to Korean and activate LTR
+[blah]{lang:th} to override to Thai and activate LTR
+[blah]{lang:he} to override to Hebrew and activate RTL
+[blah]{lang:ar} to override to Arabic and activate RTL
+
+need blank line before list
+
+if you don't tack anything on to the [] then they are output
+
+<span dir="ltr" lang="ko">
+<span dir="rtl" lang="ar">
+
+TODO - get list of RTL languages
+
+no need for dir attr
+
+lang:en
+
 {id: foo} yes
-{#foo} no
+{#foo} yes
 no mixing {a: b, #c, d: e}
+no (#foo) -- too much collision
+
+{#foo}
+
+
+[human readable stuff](http://foo.com)
+[human readable stuff](image.png "alt text")
+[human readable stuff]{#id}
+[human readable stuff]{id: foo, lang:he}
+
+
+
+[some text]{i: blah}
+
+{i:"Armstrong, Peter"}
+
+{i:hello}
+{i:*hello*}
+{i:**hello**}
+{i:hello!Peter}
+{i:hello!*Peter*}
+{i:hello!**Peter**}
+{i:Peter|see{i:hello}}
+{i:Jen|seealso{i:Jenny}}
+
+{i: Moby Dick}
+{i:    Moby Dick   }
+{i:Moby Dick}
+{i: "Moby Dick: or, The Whale"}
+commas for quotes only
+
+yada [Peter Armstrong]{i:Peter} yada
+
+foo bar [some hebrew]{lang:he} baz
+
+
+rule for id characters
+rule for index entry syntax
+
+
+[some text]{i: blah}
+foo bar [hebrew text]{lang:he} baz
+
+
+{lang:ar}
+aoetuhnsato stnaoheu tnsoahu nstaoh nstaoh
+
+
+foo bar
+[Peter Armstrong]{i:Armstrong, Peter}
+
+
+index entry syntax is attr list syntax
 
 W>
 T>
 I>
+
+
 Q>
 
 is tasty sugar. keep these. maybe have fewer???
@@ -64,6 +274,10 @@ B>
 B> bar
 
 the post-book index madness can be converting (#myid) to {id: #myid, i: blah}
+
+{dir: rtl} on a block element
+
+no nesting
 
 
 ### Syntax for index entries

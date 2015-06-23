@@ -277,8 +277,6 @@ Multiple index entries can exist in a block, or even a sentence:
 Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Herman Melville{i: Melville, Herman}, the author of a book about a whale{i:Moby-Dick; or, The Whale}.
 ```
 
-
-
 ## Directives
 
 Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
@@ -417,31 +415,17 @@ While these book section directives are mere hints, there are strict rules about
 
 The upshot of all this is that authors new to Markua can completely ignore directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about directives. And using directives is very simple, despite how formally specified this section makes them.
 
-### Language Switching Directives
+### Directives That Are Not Understood Must Be Silently Ignored
 
-In a Markua document, there is a primary language. This is specified in the [settings](#settings), and defaults to `eng` for English.
+Directives that are not understood by Markua must be silently ignored.
 
-It's possible to write a Markua document without specifying which language is being used. Since Markua files are UTF-8, most human languages are supported adequately.
+This has three consequences:
 
-However, if a Markua Processor knows what language is being used, it can be smarter about layout. This is especially true with right-to-left languages and some Asian languages.
+1. New directives can be added to future versions of Markua without a negative effect on older Markua implementations.
+2. New versions of Markua can stop supporting directives in this version of Markua without needing to specify anything special.
+3. Any line which starts with an opening curly brace `{`, contains one word (with hypens), and ends with a closing curly brace `}` is assumed to be a directive, and will not be output by a Markua processor.
 
-It's also possible to write a Markua document in which the primary language switches back and forth.  To do this, language switching directives are used.
-
-Here's how it works:
-
-`
-People in the West like quoting Confucius, or Kongzi (孔子).
-
-{language:chi}
-
-十五向學,三十而立,四十而不惑,五十而知天命,六十而耳順,七十而從心欲，不踰矩.
-
-{language:eng}
-
-If you can tell whether that is a Confucius quote, you can either read Chinese or you can search Wikipedia.
-`
-
-### Unsupported Leanpub Flavoured Markdown Directives
+#### Unsupported Leanpub Flavoured Markdown Directives
 
 Markua is not supporting various Leanpub Flavoured Markdown directives which were added willy-nilly over the years. These directives being dropped include:
 
@@ -580,6 +564,9 @@ code-sample-names
 
 copyright
 : The text of the copyright holder. The default is "Anonymous".
+
+direction
+: `rtl` or `ltr`. The default is `ltr`.
 
 figure-names
 : What to call figures. The default is "Figure".

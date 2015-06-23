@@ -201,15 +201,27 @@ This is a third paragraph.
 
 Markua defines substantially more list types than Markdown.
 
-In Markdown, the only types of lists supported are HTML ordered lists with numbers and HTML unordered lists with bullets. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list. Specifically, besides supporting bulleted (i.e. "unordered" lists), every type of "ordered" list format specified by HTML (decimal numbers, uppercase and lowercase letters, and uppercase and lowercase Roman numerals) must be supported. Each of these types of list are specified below.
+In Markdown, the only types of lists supported are HTML ordered lists with decimal numbers and HTML unordered lists with bullets. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list.
 
-Furthermore, these lists are not called "ordered" and "unordered" for three reasons:
+Specifically, the following types of lists are supported:
 
-1. The terms "ordered list" and "unordered list" come from HTML, and have more of a "programming" feeling to them than a "writing" feeling. Markua is a format for writers.
-2. The terms "ordered list" and "unordered list" imply an HTML implementation, and Markua is used to generate PDF, EPUB, MOBI and HTML. Furthermore, the HTML implementation of ordered lists always uses a period as the delimiter, and that is not true in Markua. So using the same term would be incorrect.
-3. All lists have an order--otherwise they would not be lists! So, the term "unordered list" is inherently absurd.
+1. Bulleted (i.e. "unordered" lists).
+2. Every type of "ordered" list specified by HTML.
+  a. Decimal numbers
+  b. Uppercase letters
+  c. Lowercase letters
+  d. Uppercase roman numerals
+  e. Lowercase roman numerals
 
 Furthermore, besides ordered and unordered lists, [definition lists](#dl) are also supported. We strongly believe in their value.
+
+A> # Bulleted not Unordered
+A>
+A> Markua prefers the term "bulleted list" to "unordered list", even though a `<ul>` is produced in the HTML output, for the following reasons:
+A>
+A> 1. The terms "ordered list" and "unordered list" come from HTML, and have more of a "programming" feeling to them than a "writing" feeling. Markua is a format for writers.
+A> 2. The terms "ordered list" and "unordered list" imply an HTML implementation only, and Markua is used to generate PDF, EPUB, MOBI and HTML.
+A> 3. All lists have an order--otherwise they would not be lists! So, the term "unordered list" is inherently absurd.
 
 All lists must have a blank line before and after them.
 
@@ -1000,7 +1012,7 @@ Baz
 
 #### In Markua, List Numbers Must be Consecutive Or It Is Not a List
 
-In Markua, list numbers **must all be consecutive**, given the type of numbering (Arabic, Roman, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
+In Markua, list numbers **must all be consecutive**, given the type of numbering (decimal, Roman numeral, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
 
 The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output. A list will only be produced if this is the case.
 
