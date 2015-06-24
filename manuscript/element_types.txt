@@ -28,7 +28,7 @@ The following are the block elements in Markua:
 
 The following are the span elements in Markua:
 
-* Emphasis (Italics, Emphasis, Bold and Strong)
+* Text Semantics: Italics, Emphasis, Bold, Strong, Strikethrough, Superscript and Subscript
 * Links
 * Footnotes
 * Crosslinks

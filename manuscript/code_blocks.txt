@@ -1,11 +1,11 @@
-## Code Blocks
+# Code Blocks
 
 Code blocks can be defined inline or can import external code samples. Many attributes work the same way in both cases. The inline code block approach will be shown first.
 
 {class: warning}
 B> TODO - reference attribute list thing here, need to have a list of every element and attribute in appendix etc etc
 
-### Inline Code Blocks in Markua Text
+## Inline Code Blocks in Markua Text
 
 You can create an inline code block by surrounding it using three backticks (`\``).
 
@@ -98,12 +98,12 @@ A> # Line Wrapping
 A>
 A> Code blocks should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors must wrap lines to ensure that all code is visible, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
 
-#### ASCII art
+### ASCII art
 
 {class: warning}
 B> TODO: possibly support {language: `asciiart`} on a code block, which tightens line spacing and turns off page breaks so that ASCII art looks better.
 
-### Importing Code Samples from External Files
+## Importing Code Samples from External Files
 
 To import a code sample from an external file, you use a syntax very similar to the image insertion syntax:
 

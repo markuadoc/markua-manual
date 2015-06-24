@@ -1,4 +1,4 @@
-## Math Blocks
+# Math Blocks
 
 You can put mathematical equations in your book, in either block elements (described below) or in [span elements](#math-span).
 
@@ -8,11 +8,11 @@ To create a math block, you insert it like a code block and you add a `math` att
 
 However, if a Markua processor does not understand a given Math markup language specified by the value of a `math` attribute (say, if it supports LaTeX math but not MathML), it **MUST** output the content of the math block **as a code block formatted as text**.
 
-### LaTeX Math with `{math: latex}`
+## LaTeX Math with `{math: latex}`
 
 To add LaTeX math, use `{math: latex}`:
 
-#### Markua Syntax
+### Markua Syntax
 
 ~~~
 Here is some paragraph text.
@@ -28,11 +28,11 @@ Here is some paragraph text.
 Here is some more paragraph text.
 ~~~
 
-#### HTML Output
+### HTML Output
 
 Markua processors can do whatever they want here. They can even output the entire thing as an image and insert the image, since that works on the most legacy ebook readers. Accessibility for old devices and accessibility for people with visual disabilities are often in conflict, and it's up to the Markua Processor to decide what to do.
 
-#### Example Output
+### Example Output
 
 {class: warning}
 B> FIXME - broken until Leanpub switches from the \{$$} LFM syntax in Markua documents
@@ -49,13 +49,13 @@ Here is some paragraph text.
 
 Here is some more paragraph text.
 
-### MathML Math with `{math: mathml}`
+## MathML Math with `{math: mathml}`
 
 To add MathML math, use `{math: mathml}`:
 
 A> MathML is not supported in Leanpub, so we have no idea if supporting it is a good idea or not.
 
-#### Markua Syntax
+### Markua Syntax
 
 ~~~
 Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
@@ -85,11 +85,11 @@ Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
 Here is some more paragraph text.
 ~~~
 
-#### HTML Output
+### HTML Output
 
 Markua processors can do whatever they want here as well.
 
-#### Example Output
+### Example Output
 
 Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
 
@@ -117,13 +117,13 @@ Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
 
 Here is some more paragraph text.
 
-### Math Blocks with Default `math`
+## Math Blocks with Default `math`
 
 Note that there is a default markup language for math in a Markua document. It is determined by the value of the `math` attribute which is set in the metadata. The default value of the `math` attribute is `latex`.
 
 Because of this, you can also insert math like this:
 
-#### Markua Syntax
+### Markua Syntax
 
 ~~~
 Here is some paragraph text.
@@ -138,11 +138,11 @@ Here is some paragraph text.
 Here is some more paragraph text.
 ~~~
 
-#### HTML Output
+### HTML Output
 
 Markua processors can do whatever they want here as well.
 
-#### Example Output
+### Example Output
 
 Here is some paragraph text.
 

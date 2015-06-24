@@ -1,4 +1,4 @@
-## Paragraphs
+# Paragraphs
 
 Like every block element, a paragraph has a blank line both above and below it.
 
@@ -6,14 +6,14 @@ The distinguishing thing about a paragraph is that there is nothing else disting
 
 Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, as with all other block elements, you cannot make a paragraph span Markua source files.
 
-### Examples
+## Examples
 
 {#paragraphs_1}
-#### Example 1
+### Example 1
 
 Here's an example of three paragraphs...
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_paragraphs_1}
 ```
@@ -24,7 +24,7 @@ This is another paragraph.
 This is a third paragraph.
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_paragraphs_1}
 ```
@@ -33,7 +33,7 @@ This is a third paragraph.
 <p>This is a third paragraph.</p>
 ```
 
-##### Example Output
+#### Example Output
 
 This is a paragraph. The number of sentences does not matter.
 
@@ -41,7 +41,7 @@ This is another paragraph.
 
 This is a third paragraph.
 
-## Scene Breaks
+# Scene Breaks
 
 To make a scene break, place exactly three hyphens on a line by themselves. Scene breaks must have a blank line above them and below them.
 
@@ -49,9 +49,9 @@ Markua Processors can take great liberties in how they display scene breaks in n
 
 Scene breaks map to the `hr` element in HTML.
 
-### Example
+## Example
 
-#### Markua Syntax
+### Markua Syntax
 
 ```
 Yada yada yada.
@@ -61,7 +61,7 @@ Yada yada yada.
 Yada yada yada.
 ```
 
-#### HTML Output
+### HTML Output
 
 ```
 <p>Yada yada yada.</p>
@@ -69,7 +69,7 @@ Yada yada yada.
 <p>Yada yada yada.</p>
 ```
 
-#### Example Output
+### Example Output
 
 Yada yada yada.
 
@@ -77,7 +77,7 @@ Yada yada yada.
 
 Yada yada yada.
 
-## Poetry
+# Poetry
 
 Poetry is easily supported in Markua: just hit a single newline to force a line break.
 
@@ -89,11 +89,11 @@ Note that the "two space trick" for line breaks is neither supported nor necessa
 
 If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`.
 
-### Example 1: A Shakesperean Sonnet
+## Example 1: A Shakesperean Sonnet
 
 Shakespeare could have sat down and typed this in Markua:
 
-#### Markua Syntax
+### Markua Syntax
 
 ```
 My mistress' eyes are nothing like the sun;
@@ -112,7 +112,7 @@ My mistress when she walks treads on the ground.
      As any she belied with false compare.
 ```
 
-#### HTML Output
+### HTML Output
 
 <p>
 My mistress' eyes are nothing like the sun;<br/>
@@ -131,7 +131,7 @@ My mistress when she walks treads on the ground.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
 </p>
 
-#### Example Output
+### Example Output
 
 {class: warning}
 B> FIXME This is broken until Markua support is in Leanpub
@@ -151,11 +151,11 @@ My mistress when she walks treads on the ground.
      And yet, by heaven, I think my love as rare
      As any she belied with false compare.
 
-### Example 2: e e cummings Style Poetry
+## Example 2: e e cummings Style Poetry
 
 If you want to write e e cummings style poetry, go for it:
 
-###### Markua Syntax
+##### Markua Syntax
 
 ~~~
 {code: poetry}
@@ -166,7 +166,7 @@ i am a cat
 ```
 ~~~
 
-###### HTML Output
+##### HTML Output
 
 {class: warning}
 B> TODO
@@ -178,7 +178,7 @@ i am a cat
          me   ow
 ```
 
-###### Example Output
+##### Example Output
 
 {code: poetry}
 ```

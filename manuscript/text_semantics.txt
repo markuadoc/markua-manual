@@ -1,0 +1,327 @@
+# Text Semantics: Italics, Emphasis, Bold, Strong, Strikethrough, Superscript and Subscript
+
+Markua is a plain text format designed for the writing of books and documents.
+
+Books and documents have contained bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood.
+
+If you think this, you are clearly not familiar with the work of the W3C.
+
+## If You Want To Pretend This is Simple
+
+Use `_one underscore_` or `*one asterisk*` around a span of text to (essentially) make it italic. Use `__two underscores__` or `**two asterisks**` around a span of text to (essentially) make it bold.
+
+Here's what this looks like without the backticks:
+
+Use _one underscore_ or *one asterisk* around a span of text to (essentially) make it italic. Use __two underscores__ or **two asterisks** around a span of text to (essentially) make it bold.
+
+## The W3C and Semantic Emphasis
+
+The above two sentences were (essentially) untrue.
+
+There are four main ways of adding emphasis to text in HTML5:
+
+1. [`<strong>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-strong-element)
+2. [`<b>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-b-element)
+3. [`<em>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-em-element)
+4. [`<i>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-i-element)
+
+The `<strong>` and `<b>` tags can wrap a span of text and add bold-esque emphasis to it, while the `<em>` and `<i>` tags can wrap a span of text and add italic-esque emphasis to it. I say "esque" since there is no guarantee that any of the four tags will actually make anything bold or italic. All four tags have actually become semantic tags in HTML5. Seriously.
+
+So, what to do in Markua? Clearly we need to be able to make text bold and italic, since authors have been doing this in books for centuries.
+
+But EPUB is one of the output targets of Markua, and since EPUB is essentially just zipped up HTML, we need to use some HTML tags for empahasis.
+
+Now, what Markdown does is to just always generate `<strong>` and `<em>` tags. Both `**two asterisks**` and `__two underscores__` make a `<strong>` tag, and `*one asterisk*` and `_one underscore_` make an `<em>` tag. This means that in 2004, John Gruber was clearly in the camp of "the `<b>` and `<i>` tags are unsemantic and bad".
+
+(At that time, many people were in this camp, as HTML had gone to a dark place full of presentational attributes in tags. The "move all presentation to CSS" backlash was very necessary, but there were a couple places--such as this, and such as the deprecating of the `start` element of an `<ol>`--where semantic information was lumped in with presentation-only information and was unfairly maligned.)
+
+Now, since you can inline HTML in Markdown, if you wanted filthy `<b>` and `<i>` tags, you could just add them yourself. In Markua, however, we don't support inlining HTML, so that's not an option.
+
+So, what to do?
+
+Let's think about the goal of Markua:
+
+> Markua is intended to be extremely simple and powerful. We want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
+
+So, given this, we want to provide the power of picking what kind of emphasis that you want, while ensuring that Markua is simple to learn.
+
+We need to support all four ways of producing emphasis in Markdown (one and two asterisks and underscores), and we want to be able to produce all four of the (newly semantic!) emphasis tags in HTML5.
+
+That's exactly what we're going to do. Unlike Markdown which defines four input tags and only two outputs, we're going to map the four inputs to four outputs.
+
+There are actually a number of benefits to this:
+
+* Publishers can style `<b>` and `<strong>` differently. The `<strong>` tag can produce text which is using an even heavier-weight font than the `<b>` tag.
+* Authors can italicize things they are supposed to (e.g. the titles of books), without implying the kind of semantic emphasis of the `<em>` tag.
+* Since the four combinations of asterisks and underscores produces different output, which to choose will be determined by the desired output, not personal taste of "do you prefer underscores or asterisks". This means that multi-author Markua projects won't have to have pointless writing style debates about which type of Markua markup to use.
+* All Markdown text which has any of the four kinds of emphasis will still generate emphasis that looks like this in Markua.
+* Text editors (e.g. iA Writer) which know how to show emphasis for Markdown syntax will do so with Markua emphasis syntax.
+
+## Italics with `_Single Undersores_` (`<i>`)
+
+You can surround a span with `_single underscores_` to make it italic. This will produce the `<i>` tag in HTML. Markua Processors must make this look italic if generating a PDF from the Markua document.
+
+### Markua Syntax
+
+```
+This is some _italicized with an old-school but now semantic i tag_ text.
+```
+
+### HTML Output
+
+```
+<p>This is some <i>italicized with an old-school but now semantic i tag</i> text.</p>
+```
+
+### Example Output
+
+This is some _italicized with an old-school but now semantic i tag_ text.
+
+## Emphasis with `*Single Asterisks*` (`<em>`)
+
+You can surround a span with `*single underscores*` to make it have emphasis. This will produce the `<em>` tag in HTML. Markua Processors should make this look italic if generating a PDF from the Markua document.
+
+### Markua Syntax
+
+```
+This is some *emphasized with a new school, semantic but still usually italic, em tag* text.
+```
+
+### HTML Output
+
+```
+<p>This is some <em>emphasized with a new school, semantic but still usually italic, em tag</em> text.</p>
+```
+
+### Example Output
+
+This is some *emphasized with a new school, semantic but still usually italic, em tag* text.
+
+## Bold with `__Double Undersores__` (`<b>`)
+
+You can surround a span with `__double underscores__` to make it bold. This will produce the `<b>` tag in HTML. Markua Processors must make this look bold if generating a PDF from the Markua document.
+
+### Markua Syntax
+
+```
+This is some __bolded with an old-school, but also now semantic, b tag__ text.
+```
+
+### HTML Output
+
+```
+<p>This is some <b>bolded with an old-school, but also now semantic, b tag</b> text.</p>
+```
+
+### Example Output
+
+This is some __bolded with an old-school, but also now semantic, b tag__ text.
+
+## Strong with `**Double Asterisks**` (`<strong>`)
+
+You can surround a span with `**double asterisks**` to make it strongly bold. This will produce the `<strong>` tag in HTML. Markua Processors should make this look bold if generating a PDF from the Markua document.
+
+One option for Markua processors is to make it look even heavier-weight than `__double underscore__` bold text. For example, __double underscore__ text could be a bold font, and **double asterisk** text could be a "heavy" or "black" font. (For example, fonts such as Avenir have a "heavy" weight a "black" weight version, as well as lighter versions.)
+
+### Markua Syntax
+
+```
+This is some **strongly emphasized with a new school, semantic but still usually bold, strong tag** text.
+```
+
+### HTML Output
+
+```
+<p>This is some <strong>strongly emphasized with a new school, semantic but still usually bold, strong tag</strong> text.</p>
+```
+
+### Example Output
+
+This is some **strongly emphasized with a new school, semantic but still usually bold, strong tag** text.
+
+## Bold and Italic with `___Three Underscores___` (`<b><i>`)
+
+One consequence of specifying bold and italic this way is that Markua gets the bold + italic combination essentially for free: three underscores wrapping text makes it both bold and italic. This is both elegant and logically consistent: one underscore makes a span of text italic, and two underscores make it bold, so naturally three would make it both bold and italic.
+
+### Markua Syntax
+
+```
+This is some ___bold and italic___ text.
+```
+
+### HTML Output
+
+Note that in Markua-generated HTML the `<b>` tag is on the outside wrapping the `<i>` tag on the inside.
+
+```
+<p>This is some <b><i>bold and italic</i></b> text.</p>
+```
+
+### Example Output
+
+This is some ___bold and italic___ text.
+
+## Strong and Emphasis with `***Three Asterisks***` (`<strong><em>`)
+
+One consequence of specifying strong and emphasis this way is that Markua gets the strong + emphasis combination essentially for free: three asterisks wrapping text makes it both strong and with emphasis. This is both elegant and logically consistent: one asterisk makes a span of text have emphasis, and two underscores make it strong, so naturally three would make it both strong and with emphasis.
+
+### Markua Syntax
+
+```
+This is some ***strong and with emphasis*** text.
+```
+
+### HTML Output
+
+Note that in Markua-generated HTML the `<strong>` tag is on the outside wrapping the `<em>` tag on the inside.
+
+```
+<p>This is some <strong><em>strong and with emphasis</em></strong> text.</p>
+```
+
+### Example Output
+
+This is some ***strong and with emphasis*** text.
+
+## Underlines with `____Four____` Underscores
+
+Believe it or not, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
+
+So, how to support this in Markua?
+
+The combination of one, two and three underscores have all been taken. So have the combination of one, two and three asterisks. So, we're left with `____four underscores____` for underlining. This is a bit gross, but thankfully, underlining is a lot less used than bold and italics in most languages.
+
+### Markua Syntax
+
+```
+This is ____some underlined____ text.
+```
+
+### HTML Output
+
+Markua processors can either generate `<span class="underline">` or `<u>` in this case, depending on whether they wish to target EPUB 2 or HTML5.
+
+EPUB 2:
+
+```
+<p>This is some <span class="underline">bold and italic</span> text.</p>
+```
+
+HTML5:
+
+```
+<p>This is some <u>bold and italic</u> text.</p>
+```
+
+### Example Output
+
+This is ____some underlined____ text.
+
+## Other Amusing Combinations Are Also Legal If Nested Properly
+
+You can also combine underscores and asterisks for amusement, as long as there is proper nesting.
+
+The following all work as expected:
+
+* `**_Strong and Italic_**` produces `<strong><i>Strong and Italic</i></strong>`
+* `_**Italic and Strong**_` produces `<i><strong>Italic and Strong</strong></i>`
+* `__*Bold and Emphasis*__` produces `<b><em>Bold and Emphasis</em></b>`
+* `*__Emphasis and Bold__*` produces `<em><b>Emphasis and Bold</b></em>`
+
+You can also use all the tags intermingled with other text, again, as long as there is proper nesting.
+
+### Markua Syntax:
+
+```
+I know *this is __silly__ of course but **it will _work_** however it will drive you _mad_* and you don't want that.
+```
+
+### HTML Output
+
+```
+I know <em>this is <b>silly</b> of course but <strong>it will <i>work</i></strong> however it will drive you <i>mad</i></em> and you don't want that.
+```
+
+### Example Output
+
+I know *this is __silly__ of course but **it will _work_** however it will drive you _mad_* and you don't want that.
+
+## Invalid Nesting Is Illegal
+
+If emphasis is nested in an invalid combination, Markua processors must simply output the formatting instead of exploding.
+
+The following are all invalid Markua:
+
+* `This is **_not nested**_ properly.`
+* `This is also *__not nested*__ properly.`
+* `This __*must__* fail too.`
+
+## Strikethrough
+
+Strikethrough is made with `~~two tildes~~` surrounding the text. (This is the same syntax as is used by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
+
+### Markua Syntax
+
+```
+Strikethrough is made with ~~two tildes~~ surrounding the text.
+```
+
+### HTML Output
+
+```
+<p>Strikethrough is made with <span class="strikethrough">two tildes</span> surrounding the text.</p>
+```
+
+Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations.
+
+However, in this case, the following CSS rule is strongly recommended:
+
+```
+.strikethrough {
+  text-decoration: line-through;
+}
+```
+
+### Example Output
+
+Strikethrough is made with ~~two tildes~~ surrounding the text.
+
+## Superscript
+
+To make a span be in superscript, you surround it with carets. (This is the same syntax as is used by pandoc.)
+
+### Markua Syntax
+
+```
+5^3^ is 125.
+```
+
+### HTML Output
+
+```
+<p>5<sup>3</sup> is 125.</p>
+```
+
+### Example Output
+
+5^3^ is 125.
+
+## Subscript
+
+To make a span be in subscript, you surround it with one tilde each. (This is the same syntax as is used by pandoc.)
+
+### Markua Syntax
+
+```
+What he thought was H~2~O was H~2~SO~4~.
+```
+
+### HTML Output
+
+```
+<p>What he thought was H<sub>2</sub>O was H<sub>2</sub>SO<sub>4</sub>.
+```
+
+### Example Output
+
+What he thought was H~2~O was H~2~SO~4~.

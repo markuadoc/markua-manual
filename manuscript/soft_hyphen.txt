@@ -1,0 +1,23 @@
+# Soft hyphen
+
+In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hypenation can be done.
+
+This attribute makes us sad. However, it's a nod to reality. Hopefully this attribute is never used by authors writing the first draft of anything.
+
+Soft hyphens are not output in HTML.
+
+To insert a soft hyphen, used a backslash followed by a hyphen:
+
+## Markua Syntax
+
+```
+You can use soft hyphens to suggest where to break long words like Rumpel\-stiltskin if you wish.
+```
+
+## HTML Output
+
+<p>You can use soft hyphens to suggest where to break long words like Rumpel&shy;stiltskin if you wish.</p>
+
+## Example Output
+
+You can use soft hyphens to suggest where to break long words like Rumpel-stiltskin if you wish.

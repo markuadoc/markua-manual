@@ -1,4 +1,4 @@
-## Lists
+# Lists
 
 Markua defines substantially more list types than Markdown.
 
@@ -28,18 +28,18 @@ All lists must have a blank line before and after them.
 
 There are a number of list types. Each is specified in turn below.
 
-### Bulleted Lists
+## Bulleted Lists
 
 To make a bulleted list you start one or more consecutive lines with an asterisk (\*), followed by one space, followed by text content.
 
 No other line start other than an asterisk is correct Markua syntax. Also, there are an arbitrary number of spaces or tabs after a list bullet.
 
-#### Examples
+### Examples
 
 {#bulleted_lists_1}
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_bulleted_lists_1}
 ```
@@ -48,7 +48,7 @@ No other line start other than an asterisk is correct Markua syntax. Also, there
 * baz
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_bulleted_lists_1}
 ```
@@ -59,23 +59,23 @@ No other line start other than an asterisk is correct Markua syntax. Also, there
 </ul>
 ```
 
-###### Example Output
+##### Example Output
 
 * foo
 * bar
 * baz
 
 {#bulleted_lists_2}
-##### Example 2
+#### Example 2
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_bulleted_lists_2}
 ```
 * foo
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_bulleted_lists_2}
 ```
@@ -84,12 +84,12 @@ No other line start other than an asterisk is correct Markua syntax. Also, there
 </ul>
 ```
 
-###### Example Output
+##### Example Output
 
 * foo
 
 {#numbered_lists}
-### Numbered Lists
+## Numbered Lists
 
 Numbered lists are more fully featured in Markua than in Markdown.
 
@@ -112,12 +112,12 @@ Also, unlike in Markdown, numbers must be consecutive. The following is not lega
 
 Note that there are one or more spaces after the period. The reason that more spaces are allowed is to allow authors to line up their lists, if they choose to.
 
-#### Examples
+### Examples
 
 {#numbered_lists_1}
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_numbered_lists_1}
 ```
@@ -126,7 +126,7 @@ Note that there are one or more spaces after the period. The reason that more sp
 3. baz
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_numbered_lists_1}
 ```
@@ -137,23 +137,23 @@ Note that there are one or more spaces after the period. The reason that more sp
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 1. foo
 2. bar
 3. baz
 
 {#numbered_lists_2}
-##### Example 2
+#### Example 2
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_numbered_lists_2}
 ```
 1. foo
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_numbered_lists_2}
 ```
@@ -162,14 +162,14 @@ Note that there are one or more spaces after the period. The reason that more sp
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 1. foo
 
 {#numbered_lists_3}
-##### Example 3
+#### Example 3
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_numbered_lists_3}
 ```
@@ -178,7 +178,7 @@ Note that there are one or more spaces after the period. The reason that more sp
 11. baz
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_numbered_lists_3}
 ```
@@ -189,7 +189,7 @@ Note that there are one or more spaces after the period. The reason that more sp
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -198,7 +198,7 @@ B> FIXME: This Example Output is broken until Markua support is in Leanpub.
 10. bar
 11. baz
 
-### Uppercase Alphabetical List
+## Uppercase Alphabetical List
 
 To make an uppercase alphabetical list you start one or more consecutive lines with an uppercase letter, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
 
@@ -209,12 +209,12 @@ B) bar
 
 The letter that begins the list in the manuscript is the letter that begins the list in the output. Also, letters must be consecutive.
 
-#### Examples
+### Examples
 
 {#uppercase_alphabetical_lists_1}
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_alphabetical_lists_1}
 ```
@@ -222,7 +222,7 @@ A) foo
 B) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
 
@@ -234,7 +234,7 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -243,9 +243,9 @@ A) foo
 B) bar
 
 {#uppercase_alphabetical_lists_2}
-##### Example 2
+#### Example 2
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_alphabetical_lists_2}
 ```
@@ -253,7 +253,7 @@ A. foo
 B. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_uppercase_alphabetical_lists_2}
 ```
@@ -263,7 +263,7 @@ B. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -272,9 +272,9 @@ A. foo
 B. bar
 
 {#uppercase_alphabetical_lists_3}
-##### Example 3
+#### Example 3
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_alphabetical_lists_3}
 ```
@@ -282,7 +282,7 @@ D) foo
 E) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_uppercase_alphabetical_lists_3}
 ```
@@ -292,7 +292,7 @@ E) bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -301,9 +301,9 @@ D) foo
 E) bar
 
 {#uppercase_alphabetical_lists_4}
-##### Example 4
+#### Example 4
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_alphabetical_lists_4}
 ```
@@ -311,7 +311,7 @@ D. foo
 E. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_uppercase_alphabetical_lists_4}
 ```
@@ -321,7 +321,7 @@ E. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -329,7 +329,7 @@ B> FIXME: This Example Output is broken until Markua support is in Leanpub.
 D. foo
 E. bar
 
-### Lowercase Alphabetical List
+## Lowercase Alphabetical List
 
 To make a lowercase alphabetical list you start one or more consecutive lines with a lowercase letter, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
 
@@ -340,12 +340,12 @@ b) bar
 
 The letter that begins the list in the manuscript is the letter that begins the list in the output. Also, letters must be consecutive.
 
-#### Examples
+### Examples
 
 {#lowercase_alphabetical_lists_1}
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_alphabetical_lists_1}
 ```
@@ -353,7 +353,7 @@ a) foo
 b) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
 
@@ -365,7 +365,7 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -374,9 +374,9 @@ a) foo
 b) bar
 
 {#lowercase_alphabetical_lists_2}
-##### Example 2
+#### Example 2
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_alphabetical_lists_2}
 ```
@@ -384,7 +384,7 @@ a. foo
 b. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_lowercase_alphabetical_lists_2}
 ```
@@ -394,7 +394,7 @@ b. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -403,9 +403,9 @@ a. foo
 b. bar
 
 {#lowercase_alphabetical_lists_3}
-##### Example 3
+#### Example 3
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_alphabetical_lists_3}
 ```
@@ -413,7 +413,7 @@ d) foo
 e) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_lowercase_alphabetical_lists_3}
 ```
@@ -423,7 +423,7 @@ e) bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -432,9 +432,9 @@ d) foo
 e) bar
 
 {#lowercase_alphabetical_lists_4}
-##### Example 4
+#### Example 4
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_alphabetical_lists_4}
 ```
@@ -442,7 +442,7 @@ d. foo
 e. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_lowercase_alphabetical_lists_4}
 ```
@@ -452,7 +452,7 @@ e. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -460,7 +460,7 @@ B> FIXME: This Example Output is broken until Markua support is in Leanpub.
 d. foo
 e. bar
 
-### Uppercase Roman Numeral List
+## Uppercase Roman Numeral List
 
 To make an uppercase Roman numeral list you start one or more consecutive lines with an uppercase Roman numeral, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
 
@@ -473,12 +473,12 @@ If you want to line up the Roman numerals, you can do so by adding spaces or by 
 
 The Roman numeral that begins the list in the manuscript is the Roman numeral that begins the list in the output. Also, Roman numerals must be consecutive--if you want to use them, you have to know them.
 
-#### Examples
+### Examples
 
 {#uppercase_roman_numeral_lists_1}
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_roman_numeral_lists_1}
 ```
@@ -486,7 +486,7 @@ I) foo
 II) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
 
@@ -498,7 +498,7 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -507,9 +507,9 @@ I) foo
 II) bar
 
 {#uppercase_roman_numeral_lists_2}
-##### Example 2
+#### Example 2
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_roman_numeral_lists_2}
 ```
@@ -517,7 +517,7 @@ I. foo
 II. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_uppercase_roman_numeral_lists_2}
 ```
@@ -527,7 +527,7 @@ II. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -536,9 +536,9 @@ I. foo
 II. bar
 
 {#uppercase_roman_numeral_lists_3}
-##### Example 3
+#### Example 3
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_roman_numeral_lists_3}
 ```
@@ -546,7 +546,7 @@ IV) foo
 V) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_uppercase_roman_numeral_lists_3}
 ```
@@ -556,7 +556,7 @@ V) bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -565,9 +565,9 @@ IV) foo
 V) bar
 
 {#uppercase_roman_numeral_lists_4}
-##### Example 4
+#### Example 4
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_uppercase_roman_numeral_lists_4}
 ```
@@ -575,7 +575,7 @@ IV. foo
 V. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_uppercase_roman_numeral_lists_4}
 ```
@@ -585,7 +585,7 @@ V. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -593,7 +593,7 @@ B> FIXME: This Example Output is broken until Markua support is in Leanpub.
 IV. foo
 V. bar
 
-### Lowercase Roman Numeral List
+## Lowercase Roman Numeral List
 
 To make a lowercase Roman numeral list you start one or more consecutive lines with a lowercase Roman numeral, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
 
@@ -606,12 +606,12 @@ If you want to line up the Roman numerals, you can do so by adding spaces or by 
 
 The Roman numeral that begins the list in the manuscript is the Roman numeral that begins the list in the output. Also, Roman numerals must be consecutive--if you want to use them, you have to know them.
 
-#### Examples
+### Examples
 
 {#lowercase_roman_numeral_lists_1}
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_roman_numeral_lists_1}
 ```
@@ -619,7 +619,7 @@ i) foo
 ii) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 Note that in HTML the parentheses are ignored and periods are used instead. In PDF and other output formats, the Markua Processor should respect the choice of parentheses.
 
@@ -631,7 +631,7 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -640,9 +640,9 @@ i) foo
 ii) bar
 
 {#lowercase_roman_numeral_lists_2}
-##### Example 2
+#### Example 2
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_roman_numeral_lists_2}
 ```
@@ -650,7 +650,7 @@ i. foo
 ii. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_lowercase_roman_numeral_lists_2}
 ```
@@ -660,7 +660,7 @@ ii. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -669,9 +669,9 @@ i. foo
 ii. bar
 
 {#lowercase_roman_numeral_lists_3}
-##### Example 3
+#### Example 3
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_roman_numeral_lists_3}
 ```
@@ -679,7 +679,7 @@ iv) foo
 v) bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_lowercase_roman_numeral_lists_3}
 ```
@@ -689,7 +689,7 @@ v) bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -698,9 +698,9 @@ iv) foo
 v) bar
 
 {#lowercase_roman_numeral_lists_4}
-##### Example 4
+#### Example 4
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_lowercase_roman_numeral_lists_4}
 ```
@@ -708,7 +708,7 @@ iv. foo
 v. bar
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_lowercase_roman_numeral_lists_4}
 ```
@@ -718,7 +718,7 @@ v. bar
 </ol>
 ```
 
-###### Example Output
+##### Example Output
 
 {class: warning}
 B> FIXME: This Example Output is broken until Markua support is in Leanpub.
@@ -727,11 +727,11 @@ iv. foo
 v. bar
 
 {#dl}
-### Differences Between Markua and Markdown Lists
+## Differences Between Markua and Markdown Lists
 
 If you are familiar with Markdown, you will have noted a number of differences between Markua lists and Markdown lists. This section specifies these differences explicitly.
 
-#### In Markua, A Single Element List is Not a List
+### In Markua, A Single Element List is Not a List
 
 Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
 
@@ -753,9 +753,9 @@ So, in Markua, the automatic creation of a numbered list only happens if you hav
 
 A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, Markdown tries to make HTML wherever possible. Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list; I don't write one element lists).
 
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_list_single_element_1}
 ```
@@ -770,7 +770,7 @@ a. This isn't a list either.
 Baz
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_list_single_element_1}
 ```
@@ -781,7 +781,7 @@ Baz
 <p>Baz</p>
 ```
 
-###### Example Output
+##### Example Output
 
 W> TODO - broken until Markua supported
 
@@ -795,7 +795,7 @@ a. This isn't a list either.
 
 Baz
 
-#### In Markua, List Numbers Must be Consecutive Or It Is Not a List
+### In Markua, List Numbers Must be Consecutive Or It Is Not a List
 
 In Markua, list numbers **must all be consecutive**, given the type of numbering (decimal, Roman numeral, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
 
@@ -803,9 +803,9 @@ The principle is the following: the numbers which are shown in the manuscript mu
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
-##### Example 1
+#### Example 1
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_list_consecutive_1}
 ```
@@ -817,7 +817,7 @@ This does not make a list:
 End.
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_list_consecutive_1}
 ```
@@ -827,7 +827,7 @@ End.
 <p>End.</p>
 ```
 
-###### Example Output
+##### Example Output
 
 W> TODO - broken until Markua supported
 
@@ -838,9 +838,9 @@ This does not make a list:
 
 End.
 
-##### Example 2
+#### Example 2
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_list_consecutive_2}
 ```
@@ -853,7 +853,7 @@ This does not make a list either, since the numbers are not all consecutive:
 End.
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_list_consecutive_2}
 ```
@@ -864,7 +864,7 @@ End.
 <p>End.</p>
 ```
 
-###### Example Output
+##### Example Output
 
 W> TODO - broken until Markua supported
 
@@ -876,9 +876,9 @@ This does not make a list either, since the numbers are not all consecutive:
 
 End.
 
-##### Example 3
+#### Example 3
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_list_consecutive_3}
 ```
@@ -890,7 +890,7 @@ This makes a list:
 End.
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_list_consecutive_3}
 ```
@@ -902,7 +902,7 @@ End.
 <p>End.</p>
 ```
 
-###### Example Output
+##### Example Output
 
 This makes a list:
 
@@ -911,9 +911,9 @@ This makes a list:
 
 End.
 
-##### Example 4
+#### Example 4
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_list_consecutive_4}
 ```
@@ -925,7 +925,7 @@ This does not make a list:
 End.
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_list_consecutive_4}
 ```
@@ -935,7 +935,7 @@ End.
 <p>End.</p>
 ```
 
-###### Example Output
+##### Example Output
 
 This does not make a list:
 
@@ -944,9 +944,9 @@ This does not make a list:
 
 End.
 
-##### Example 5
+#### Example 5
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_list_consecutive_5}
 ```
@@ -986,7 +986,7 @@ iv. four
 That's it!
 ```
 
-###### HTML Output
+##### HTML Output
 
 {#output_list_consecutive_5}
 ```
@@ -1020,7 +1020,7 @@ iv. four</p>
 <p>That's it!</p>
 ```
 
-###### Example Output
+##### Example Output
 
 W> TODO - broken until Markua supported
 

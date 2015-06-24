@@ -1,0 +1,32 @@
+# Links
+
+{class: warning}
+B> There is no support for Markdown's reference style images in Markua.
+
+## Automatic Links
+
+You can make automatic links to URLs by putting the URL in angle brackets like `<http://markua.com>` this: <http://markua.com>
+
+Automatic links do not create footnotes.
+
+## Links
+
+You can create normal hyperlinks.
+
+The way that links should be displayed is determined by the value of the `urls` [setting](#setting-keys-and-values).
+
+### Markua Syntax
+
+```
+This is [link text](http://markua.com) a link.
+```
+
+### HTML Output
+
+```
+<p>This is <a href="http://markua.com">link text</a> a link.</p>
+```
+
+### Example Output
+
+This is [link text](http://markua.com) a link.

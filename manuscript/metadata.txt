@@ -279,6 +279,8 @@ Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Her
 
 ## Directives
 
+W> TODO - Define how directives and attrs that are not understood are handled, and explain how this does not include syntax like CriticMarkup which just get output verbatim if not understood. Also say that encountering CriticMarkup tags and outputting CriticMarkup is optional. Doing stuff inside curly braces which is not understood by Markua is OK, etc.
+
 Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
 
 ### Book Section Directives

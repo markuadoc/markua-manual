@@ -1,0 +1,40 @@
+{#math-span}
+# Math Spans: Verbose and \{$$}
+
+Math can be inserted as span elements as well as as a [block element](#math-blocks).
+
+To do this, there's a verbose syntax and a syntactic sugar syntax.
+
+The verbose syntax:
+
+```
+blah blah {math: mathml}here's your math{/math: mathml} blah blah
+
+blah blah {math: latex}math here too!{/math: latex} blah blah
+```
+
+Note that since these are span elements, LaTeX math will look a lot better than MathML.
+
+Also, this is very verbose. So, this is also supported:
+
+```
+blah blah {$$}math here too!{/$$} blah blah
+```
+
+This uses the default math engine. Chances are if you're using this syntax, you're using LaTeX math.
+
+Here's a longer example:
+
+### Markua Syntax
+
+```
+The four kinematics equations are {$$}d = v_i t + \frac{1}{2} a t^2{/$$}, {$$}v_f^2 = v_i^2 + 2 a d{/$$}, {$$}v_f = v_i + a t{/$$} and {$$}d = \frac{1}{2}(v_i + v_f) t{/$$}.
+```
+
+### HTML Output
+
+Markua processors can do whatever they want here as well.
+
+### Example Output
+
+The four kinematics equations are {$$}d = v_i t + \frac{1}{2} a t^2{/$$}, {$$}v_f^2 = v_i^2 + 2 a d{/$$}, {$$}v_f = v_i + a t{/$$} and {$$}d = \frac{1}{2}(v_i + v_f) t{/$$}.

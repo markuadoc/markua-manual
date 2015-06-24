@@ -1,4 +1,4 @@
-## Block Quotes
+# Block Quotes
 
 Block quotes can span multiple pages. They are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
 
@@ -12,11 +12,11 @@ A> The nesting of block quotes in Markdown is not supported in Markua.
 
 A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
 
-### Examples
+## Examples
 
-#### Example 1: A Block Quote Containing Three Paragaphs
+### Example 1: A Block Quote Containing Three Paragaphs
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_block_quote_1}
 ```
@@ -33,7 +33,7 @@ This is a paragraph before the block quote.
 This is a paragraph after the block quote.
 ```
 
-##### HTML Output
+#### HTML Output
 
 The HTML output for a block quote is simply a `div`, not a `section` or an `aside`, since an arbitrary block quote is not something which is a top-level element of a book.
 
@@ -52,7 +52,7 @@ which contains newlines.</p>
 <p>This is a paragraph after the block quote.</p>
 ```
 
-##### Example Output
+#### Example Output
 
 This is a paragraph before the block quote.
 
@@ -66,15 +66,15 @@ This is a paragraph before the block quote.
 
 This is a paragraph after the block quote.
 
-## Asides
+# Asides
 
 Asides are text which is formatted separately from the main text by a Markua processor. Asides can span multiple pages.
 
 Asides can be created like block quotes, but using `A>` line prefixes. The same rules for newlines apply.
 
-### Example
+## Example
 
-#### Markua Syntax
+### Markua Syntax
 
 {#input_aside_1}
 ```
@@ -91,7 +91,7 @@ A> This is a third paragraph in the aside.
 This is a paragraph after the aside.
 ```
 
-#### HTML Output
+### HTML Output
 
 The HTML output for an Aside is simply a `div`, not a `section` or an `aside`, since an arbitrary aside is not something which is a top-level element of a book. (Also, some legacy EPUB readers would choke on `section` or `aside`.)
 
@@ -108,7 +108,7 @@ which contains newlines.</p>
 <p>This is a paragraph after the aside.</p>
 ```
 
-#### Example Output
+### Example Output
 
 This is a paragraph before the aside.
 
@@ -122,7 +122,7 @@ A> This is a third paragraph in the aside.
 
 This is a paragraph after the aside.
 
-## Blurbs
+# Blurbs
 
 Blurbs are like asides, but with two differences.
 
@@ -130,9 +130,9 @@ Blurbs are like asides, but with two differences.
 2. They are intended to be short, and thus do not need to support page breaks inside them.
 3. They can have an optional `class`, which can be used by Markua processors to decorate the blurb (e.g. with icons).
 
-### Example
+## Example
 
-#### Markua Syntax
+### Markua Syntax
 
 {#input_blurb_1}
 ```
@@ -149,7 +149,7 @@ B> This is a third paragraph in the blurb.
 This is a paragraph after the blurb.
 ```
 
-#### HTML Output
+### HTML Output
 
 The HTML output for an Blurb is simply a `div` with a class of "blurb".
 
@@ -166,7 +166,7 @@ which contains newlines.</p>
 <p>This is a paragraph after the blurb.</p>
 ```
 
-#### Example Output
+### Example Output
 
 This is a paragraph before the blurb.
 
@@ -180,7 +180,7 @@ B> This is a third paragraph in the blurb.
 
 This is a paragraph after the blurb.
 
-### Classes of Blurbs and Syntactic Sugar
+## Classes of Blurbs and Syntactic Sugar
 
 Like all Markua block elements, blurbs can have a `class` attribute attached to them. Here's an example:
 
@@ -191,7 +191,7 @@ B>
 B> This is still part of the blurb. Note that the entire blurb gets the class element.
 ```
 
-#### Syntactic Sugar for Standard Blurb Classes
+### Syntactic Sugar for Standard Blurb Classes
 
 Markua has its origin in Leanpub, and Leanpub has its origin in authoring computer programming books.
 
@@ -227,11 +227,11 @@ There are no required CSS rules in Markua, and thus, there is no required specia
 For example, Leanpub produces a lot of computer programming books, so it understands the following values for the `class` attribute on a blurb:
 
 
-#### Examples
+### Examples
 
 
 
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_blurb_1}
 ```
@@ -249,7 +249,7 @@ B> This is a third paragraph in the blurb.
 This is a paragraph after the blurb.
 ```
 
-###### HTML Output
+##### HTML Output
 
 The HTML output for an Blurb is simply a `div` with a class of "blurb".
 
@@ -266,7 +266,7 @@ which contains newlines.</p>
 <p>This is a paragraph after the blurb.</p>
 ```
 
-###### Example Output
+##### Example Output
 
 This is a paragraph before the blurb.
 
@@ -281,7 +281,7 @@ B> This is a third paragraph in the blurb.
 
 This is a paragraph after the blurb.
 
-### Using Extension Attributes on Blurbs to add Icons
+## Using Extension Attributes on Blurbs to add Icons
 
 As discussed later, Markua blocks can support any number of [extension attributes](#extension-attributes). An extension attribute is an attribute which is not part of the Markua specification.
 

@@ -11,7 +11,13 @@ asides_blurbs_block_quotes.txt
 code_blocks.txt
 tables.txt
 math.txt
-span.txt
+text_semantics.txt
+links.txt
+footnotes.txt
+crosslinks.txt
+code_spans.txt
+math_spans.txt
+soft_hyphen.txt
 whitespace.txt
 metadata.txt
 implementation.txt

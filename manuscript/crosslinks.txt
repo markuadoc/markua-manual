@@ -1,0 +1,192 @@
+{#crosslinks}
+# Crosslinks and `id`s
+
+There are two parts to making a crosslink.
+
+1. Define an id.
+2. Link to that id with a crosslink.
+
+## Defining an `id` on Block and Span Elements, Using `{#some-id}` Syntax Only
+
+To define an `id`, you create an `id` attribute on a block or span element.
+
+If you use `id`s, chances are you use a *lot* of them. So, if Markua supported a syntax of `{id: some-id}`, you'd be typing that a *lot*. Instead, Markua defines a shorthand syntax of `{#some-id}` to define an `id` attribute.
+
+W> This syntax of `{#some-id}` is the **only** way to define an `id`.
+
+To define an id, just create an `id` attribute above a block element or attached to a span element.
+
+## Defining an `id` on a Block Element
+
+There are two ways to define an `id` on a block element.
+
+First, using an `id` attribute:
+
+```
+{id: some-id}
+This is a paragraph with the id of `some-id`.
+```
+
+Second, using a shorthand approach:
+
+```
+{#some-id}
+This is a paragraph with the id of `some-id`.
+```
+
+## Defining an `id` on a Span Element
+
+You can define an `id` on a span element. To do this, simply add an `id` attribute definition (either the explicit `{id: foo}` or the shorthand `{#foo}` version) in curly braces following any span element.
+
+### Examples
+
+TODO - single or double quotes on id attrs in HTML?
+
+#### Example 1: Defining an `id` on a single word
+
+##### Markua Syntax
+
+{#input_span_id_1}
+```
+The words foo{#foo} and bar{id: bar} both have ids.
+```
+
+##### HTML Output
+
+{#output_span_id_1}
+```
+<p>The words <span id="foo">foo</span> and <span id="bar">bar</span> both have ids.</p>
+```
+
+##### Example Output
+
+The words foo{#foo} and bar{id: bar} both have ids.
+
+#### Example 2: Defining an `id` on a code span
+
+Code spans, like any span, can have `id`s.
+
+##### Markua Syntax
+
+{#input_span_id_2}
+```
+Java code is verbose, e.g. `public static void main(String[] args)`{#java}.
+```
+
+##### HTML Output
+
+{#output_span_id_2}
+```
+<p>Java code is verbose, e.g. <code id="java">public static void main(String[] args)`</code>.</p>
+```
+
+##### Example Output
+
+Java code is verbose, e.g. `public static void main(String[] args)`{#java}.
+
+#### Example 3: Defining an `id` on a span of emphasized text
+
+Any span can have `id`s -- even spans which are produced by formatting characters. (Note that in this contrived example, these would be better served by index entries than ids.)
+
+##### Markua Syntax
+
+{#input_span_id_3}
+```
+The ideas behind *Leanpub*{id: leanpub} are explained in Peter's book _Lean Publishing_{#lean}.
+```
+
+##### HTML Output
+
+{#output_span_id_3}
+```
+<p>The ideas behind <em id="leanpub">Leanpub</em> are explained in Peter's book <i id="lean">Lean Publishing</i>.</p>
+```
+
+##### Example Output
+
+The ideas behind *Leanpub*{id: leanpub} are explained in Peter's book _Lean Publishing_{#lean}.
+
+#### Example 4: Nesting `id` definitions inside spans
+
+An `id` attribute can be defined on a span or word regardless of whether it is contained in a span.
+
+##### Markua Syntax
+
+{#input_span_id_4}
+```
+This is *a **very very{#very} contrived** example{id: example}*{#contrived} showing this.
+```
+
+##### HTML Output
+
+{#output_span_id_4}
+```
+<p>This is <em id="contrived">a <strong>very <span id="very">very</span> contrived</strong> <span id="example">example</span></em> showing this.</p>
+```
+
+##### Example Output
+
+This is *a **very very{#very} contrived** example{id: example}*{#contrived} showing this.
+
+## Referencing an `id` With a Crosslink
+
+Now, regardless of how you defined the id, you then link to it to create a crosslink. To do this, you use the `#` character and the id in a link:
+
+```
+[link text](#some-id)
+```
+
+This syntax is intended to be reminiscent of HTML anchor tags, not of `h1` titles in Markua.
+
+Special rules:
+
+* If a Markua document contains duplicate `id` attribute values, the first one is used and the subsequent ones are ignored. A Markua Processor should output a warning about duplicate `id`s.
+* Crosslinks that reference an unused `id` may either be created as a (broken, non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also [output a warning](#implementor-rules) about this somewhere, but not in the actual document text itself.
+
+## Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
+
+Chapters, sections and figures with captions often have two useful properties for writers:
+
+1. A name which is often short and useful to reference.
+2. A number, if numbering is turned on.
+
+Whether the numbers exist is determined by the `number-chapters`, `number-parts` and `number-figures` [attributes](#setting-keys-and-values).
+
+Here's how these references to titles and numbers work:
+
+* `#t` is for "title"
+* `#n` is for "number"
+* `#d` is for "description" (e.g. "Figure", "Chapter", "Section", "Example")
+* `#f` is for "full title"
+
+So, for "Figure 8.2: Anatomy of a Squirrel", these are:
+
+* `#t` is "Anatomy of a Squirrel"
+* `#n` is "8.2"
+* `#d` is "Figure"
+* `#f` is "Figure 8.2: Anatomy of a Squirrel"
+
+Note that in this example, "Anatomy of a Squirrel" was typed by the author, whereas "Figure 8.2: " was generated by the Markua Processor. It does not matter; both can be referenced.
+
+Also, note that regardless of section level, sections referenced in `#d` or `#f` are all called "Section" (not "Sub-Section", "Sub-Sub-Section", etc.)
+
+The expectation is that `#f` will be used by authors who don't mind verbosity, and #t and #n will be used by authors who prefer control and brevity. The #d is for very lazy authors who like saving keystrokes and/or who don't know whether their publisher will call the code samples "Listing", "Example" or some other word and want to protect themselves against extra work.
+
+The `code-sample-names`, 'figure-names` and `table-names` [settings](#setting-keys-and-values) control the words used to name things.
+
+Examples:
+
+`This is discussed in [section #n, #t](#crosslinks).`
+
+`This is discussed in [#f](#crosslinks).`
+
+`This is discussed in a [#d](#crosslinks) above.`
+
+`See [chapter #n](#span-elements), which is the best chapter in this book.`
+
+`This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this document.`
+
+{class: warning}
+B> TODO - specify HTML
+
+A> Figures, chapters, code samples, etc all have implicit numbering.  So, #n always works even if numbering is off.  You'll just confuse readers.  If numbering is off, the `#f` will not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
