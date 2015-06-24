@@ -1,5 +1,7 @@
 ## Headings
 
+W> TODO - rewrite this section to improve wording and to have executable tests
+
 ### Heading Types
 
 Conceptually, the most important element types in Markua are the headings. A Markua document is typically organized into one or more levels of headings.
@@ -98,6 +100,12 @@ There are **three** types of Markua documents:
 The default type of a Markua document is `book`. If no document type is specified, this is the type.
 
 From the perspective of the author, the only difference between these types of Markua documents are what the headings mean--what the conceptual mapping is from the Markua heading levels to book or document structures.
+
+Markua is a plain-text format designed for the writing of books and documents.
+
+Since Markua is a format in which all semantic and syntax formatting is typed by the author, we want Markua to be as readable as possible and as economical of keystrokes as possible.
+
+Almost all formatting in Markua means the same thing regardless of whether the Markua document is being used to generate a book or document. The one huge exception to this, however, is in headings.
 
 #### Headings in Books (`type: book`, the default)
 

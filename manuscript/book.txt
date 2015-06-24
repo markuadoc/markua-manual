@@ -2,7 +2,7 @@ introduction.txt
 philosophy.txt
 structure.txt
 images.txt
-block.txt
+element_types.txt
 headings.txt
 paragraphs.txt
 lists.txt
