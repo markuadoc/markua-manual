@@ -1,0 +1,51 @@
+# Block Elements, Span Elements and Metadata
+
+Broadly speaking, Markua defines three things: block elements, span elements and metadata.
+
+* Every block element in Markua is separated from every other block element in Markua by at least one blank line. (This is not just one newline: a blank line is formed by the addition of two newlines.)
+* Span elements are always contained inside a block element.
+* Metadata is typically attached to a block or span element, either above the block element or after the span element.
+
+## Block Elements
+
+The following are the block elements in Markua:
+
+* Headings
+* Paragraphs
+* Scene Breaks
+* Unordered Lists
+* Ordered Lists
+* Definition Lists
+* Block Quotes
+* Asides
+* Blurbs
+* Code Blocks
+* Tables
+* Math Blocks
+* Images as Figures
+
+## Span Elements
+
+The following are the span elements in Markua:
+
+* Emphasis (Italics, Emphasis, Bold and Strong)
+* Links
+* Footnotes
+* Crosslinks
+* Code Spans
+* Math Spans
+* Soft Hyphens
+* Inline Images
+
+## Metadata
+
+The following are the types of metadata in Markua:
+
+* [Attributes](#attributes)
+* Index entries
+* Directives
+* Settings
+
+## Blank Lines and File Concatenation
+
+There is an assumed blank line at the top and bottom of each Markua file, so at the top of a file you only need a blank line below the first block element, and at the bottom of a Markua file you only need a blank line above the last block element. You cannot make a block element span Markua source files--there is always a blank line added by the addition of two newlines during the concatenation.
