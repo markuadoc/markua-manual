@@ -4,7 +4,7 @@ In Markua, images can be inserted either inline as a span element, or on their o
 
 When an image is inserted as a span element, it looks very similar to the Markdown hyperlink syntax. It just lives anywhere any text content can live. The image is inserted inline, and positioned according to the preference of the Markua Processor.
 
-When an image is on its own line as a block element, it is referred to as a Figure. Figures are formatted specially, and show up in the List of Illustrations if one is present. Figures also support an attribute list.
+When an image is on its own line as a block element, it is referred to as a Figure. Figures are formatted specially, and show up in the List of Illustrations if one is present.
 
 ## Important Difference Between Markdown and Markua Image Syntax
 
@@ -148,27 +148,7 @@ Markua has a spiffy ![](markua-logo-small.png "the word Markua with the two aste
 
 ## Figures (as Block Elements)
 
-The most powerful way to insert an image in Markua is on its own as a block element, separated like any other block element by blank lines above and below. With this approach, the image is a Figure. If it has a caption, the image caption also shows up in the List of Illustrations, as a crosslink to the image caption associated with the figure itself.
-
-Figures can also define the alt text and caption in an attribute instead of in the image syntax itself.
-
-For Figures, besides specifying the alt text and a caption inline using Markdown syntax, Markua also supports specifying them as attributes. Furthermore, the image can also have alignment properties specified as the value of the `align` attribute. If the document is single-column, the `align` attribute must be respected; if the document is producing a multi-column layout, the `align` attribute can be ignored and the image can be positioned arbitrarily.
-
-TODO - reconsider align attribute? starting to think it's a stupid half-assed idea...
-
-There are five legal values of the `align` attribute:
-
-1. `middle` (the default)
-2. `left`
-3. `right`
-4. `inside`
-5. `outside`
-
-If the `align` is `middle`, then the image is centered on the page, and there is whitespace to the left and right of it.
-
-A> We use `middle` instead of `center` since there is only one spelling of `middle`, whereas there are two spellings of center: `center` and `centre`. The only drawback here is that typically programs use `middle` to refer to vertical centering and `center` to refer to horizontal centering, and we are using `middle` to refer to horizontal centering. However, since this is just a US-centric convention, and since we don't do vertical centering, we think that `middle` is a preferable choice.
-
-If the `align` is `left`, `right`, `inside` or `outside`, the image is floated to left or right of the page and the text wraps around it on the other side. The values `inside` and `outside` only have relevance when being printed, and function as identical to `left` and `right` for ebooks.
+The most powerful way to insert an image in Markua is on its own as a block element, separated like any other block element by blank lines above and below. With this approach, the image is a Figure. If it has a caption, the image caption also shows up in the List of Illustrations, as a crosslink to the image caption associated with the figure itself. Both the alt text and the caption can be present or absent, and these vary independently from each other.
 
 ### Examples
 
@@ -201,9 +181,6 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 ##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is backwards and broken until Markua support is in Leanpub.
 
 Markua has a spiffy logo:
 
@@ -240,11 +217,80 @@ Thanks Justin, it was fun making the logo with you!
 
 ##### Example Output
 
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
 Markua has a spiffy logo:
 
 ![](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+
+{#figures_3}
+#### Example 1: Figures with Alt Text but no Caption
+
+The alt text and caption are both optional. This example shows a figure with alt text but no caption.
+
+##### Markua Syntax
+
+{#input_figures_3}
+```
+Markua has a spiffy logo:
+
+![](markua-logo.png "the word Markua with the two asterisk trees beside it")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+##### HTML Output
+
+{#output_figures_3}
+```
+<p>Markua has a spiffy logo:</p>
+<div class="figure">
+  <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example Output
+
+Markua has a spiffy logo:
+
+![](markua-logo.png "the word Markua with the two asterisk trees beside it")
+
+Thanks Justin, it was fun making the logo with you!
+
+
+{#figures_4}
+#### Example 1: Figures with a Caption but no Alt Text
+
+The alt text and caption are both optional. This example shows a figure with a caption but no alt text.
+
+##### Markua Syntax
+
+{#input_figures_4}
+```
+Markua has a spiffy logo:
+
+![The Markua Logo](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+##### HTML Output
+
+{#output_figures_4}
+```
+<p>Markua has a spiffy logo:</p>
+<div class="figure">
+  <img href="images/markua-logo.png"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example Output
+
+Markua has a spiffy logo:
+
+![The Markua Logo](markua-logo.png)
 
 Thanks Justin, it was fun making the logo with you!
