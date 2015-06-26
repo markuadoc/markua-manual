@@ -18,19 +18,23 @@ The alt text and the caption are both optional. If neither are provided, the ima
 
 (Yes, the empty square brackets are required in Markdown.)
 
-Markua uses a similar syntax, but with one **huge** change: the alt text and title are reversed.
-
-Here's the Markua image syntax:
+Markua uses a similar syntax, but with one **huge** change: the alt text and title are reversed. Here's the Markua image syntax:
 
 `![Optional Figure Caption](path/to/image.png "Optional Alt Text")`
 
-I do not take this change lightly. Here's the reasoning behind it:
-
-My opinion is that Markdown is inconsistent. To be more consistent, Markdown should have been:
+I do not take this change lightly. My opinion is that Markdown is inconsistent here. To be more consistent, Markdown should have been:
 
 `![Optional Title](path/to/image.png "Optional Alt Text")`
 
 The alt text is only used in situations where you cannot see the image, for example, for readers who have visual disabilities and who are using screen readers, or for people whose browsers do not load images. Conceptually, the alt text is a replacement for the image. So, since the image is inside the parentheses, the alt text should be in there with the image.
+
+This, which is how Markua does it, has inherent symmentry:
+
+`[Optional Title](RepresentationOne "Representation Two")`
+
+This, which is how Markdown does it, does not have inherent symmentry:
+
+`[Representation Two](RepresentationOne "Optional Title")`
 
 Then, the title attribute would move to being inside the square brackets. This makes sense, since it mirrors the syntax for links. When you write a link in Markdown, you do so like this:
 
