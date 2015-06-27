@@ -2,7 +2,14 @@
 
 The way that Markua inserts images looks very similar to how it's done in Markdown. However, there's one important difference, which is [discussed later](#image_syntax_diff).
 
-The Markua image syntax is as follows:
+In Markua, images can be inserted in one of two ways:
+
+1. As an **Inline** image, as part of the flow of text of a paragraph.
+2. As a **Figure**, on a line by itself with blank lines above and below it.
+
+ either inline or as a figure. With an inline image, the inserted as part of the flow of text in a paragraph. With a figure, the image inserted on a line by itself, with blank lines above and below it.
+
+The Markua image syntax is the same for both inline images and figures:
 
 `![Optional Figure Caption](path/to/image.png "Optional Alt Text")`
 
@@ -34,38 +41,12 @@ In Markua, images can be inserted in one of two ways:
 
 In Markua, the alt text works the same way in both Inline Images and Figures: you enclose it in quotation marks `"` and `"`.
 
-The Optional Figure Caption is enclosed in square brackets. It is text which is intended to displayed near the image (typically above or below it) to provide a caption for the image. In Markua, **the caption is only supported if the image is a Figure**, i.e. is being inserted as a block element, separated by blank lines from other content. If an image is inserted inline, the caption must be silently ignored.
-
-For Figures, the caption shows up in two places:
-
-1. somewhere near the image, typically above or below it, per the preference of the Markua Processor
-2. as the name of the Figure in the List of Illustrations (a.k.a. Table of Figures)
-
-
-float & width on figures
-
-- is it a figure with
-- width: 50%
-
-blah blah
-img
-blah blah
-
-is left-aligned
-
-
-
-float: left, right only
-width: x% x is 1 to 100, integer
-
-
-
 {class: warning}
 B> There is no support for Markdown's reference style images in Markua. One image syntax in figure and inline modes is plenty enough to remember.
 
 ## Inline Images (as Span Elements)
 
-Images can be inserted inline in the flow of text in a paragraph. This is called a span element.
+Images can be inserted inline in the flow of text in a paragraph. This is called a span element. When an image is inserted inline, it must be positioned where it is inserted -- it cannot be floated and repositioned.
 
 ### Examples:
 
@@ -85,10 +66,8 @@ Markua has a spiffy ![](markua-logo-small.png) logo!
 
 {#output_inline_images_1}
 ```
-<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt=""/> logo!</p>
+<p>Markua has a spiffy <img href="images/markua-logo-small.png"/> logo!</p>
 ```
-
-A> The `alt=""` is required for legacy EPUB support.
 
 ##### Example Output
 
@@ -119,9 +98,56 @@ Markua has a spiffy ![](markua-logo-small.png "the word Markua with the two aste
 
 Markua has a spiffy ![](markua-logo-small.png "the word Markua with the two asterisk trees beside it") logo!
 
+{#inline_images_3}
+#### Example 3: Inline Images Separated With One Newline
+
+In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph. If an image is inserted on its own line, with single newlines above and below it, it is still an inline image and must be positioned where it is inserted.
+
+##### Markua Syntax
+
+{#input_inline_images_1}
+```
+Markua has a spiffy
+![](markua-logo-small.png)
+logo!
+```
+
+##### HTML Output
+
+{#output_inline_images_1}
+```
+<p>Markua has a spiffy<br/>
+<img href="images/markua-logo-small.png"/><br/>
+logo!</p>
+```
+
+##### Example Output
+
+Markua has a spiffy
+![](markua-logo-small.png)
+logo!
+
 ## Figures (as Block Elements)
 
 The most powerful way to insert an image in Markua is on its own as a block element, separated like any other block element by blank lines above and below. With this approach, the image is a Figure. If it has a caption, the image caption also shows up in the List of Illustrations, as a crosslink to the image caption associated with the figure itself. Both the alt text and the caption can be present or absent, and these vary independently from each other.
+
+The Optional Figure Caption is enclosed in square brackets. It is text which is intended to displayed near the image (typically above or below it) to provide a caption for the image. In Markua, **the caption is only supported if the image is a Figure**, i.e. is being inserted as a block element, separated by blank lines from other content. If an image is inserted inline, the caption must be silently ignored.
+
+For Figures, the caption shows up in two places:
+
+1. somewhere near the image, typically above or below it, per the preference of the Markua Processor
+2. as the name of the Figure in the List of Illustrations (a.k.a. Table of Figures)
+
+
+float & width on figures
+
+- is it a figure with
+- width: 50%
+
+float: left, right only
+width: x% x is 1 to 100, integer
+
+
 
 ### Examples
 
