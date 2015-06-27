@@ -1,66 +1,6 @@
 # Images
 
-In Markua, images can be inserted either inline as a span element, or on their own as a block element separated like any other block element by blank lines above and below.
-
-When an image is inserted as a span element, it looks very similar to the Markdown hyperlink syntax. It just lives anywhere any text content can live. The image is inserted inline, and positioned according to the preference of the Markua Processor.
-
-When an image is on its own line as a block element, it is referred to as a Figure. Figures are formatted specially, and show up in the List of Illustrations if one is present.
-
-## Important Difference Between Markdown and Markua Image Syntax
-
-In Markdown, images are inserted with the following syntax:
-
-`![Optional Alt Text](path/to/image.png "Optional Title")`
-
-The alt text and the caption are both optional. If neither are provided, the image is inserted like this:
-
-`![](path/to/image.png)`
-
-(Yes, the empty square brackets are required in Markdown.)
-
-Markua uses a similar syntax, but with one **huge** change: the alt text and title are reversed. Here's the Markua image syntax:
-
-`![Optional Figure Caption](path/to/image.png "Optional Alt Text")`
-
-I do not take this change lightly. My opinion is that Markdown is inconsistent here. To be more consistent, Markdown should have been:
-
-`![Optional Title](path/to/image.png "Optional Alt Text")`
-
-The alt text is only used in situations where you cannot see the image, for example, for readers who have visual disabilities and who are using screen readers, or for people whose browsers do not load images. Conceptually, the alt text is a replacement for the image. So, since the image is inside the parentheses, the alt text should be in there with the image.
-
-This, which is how Markua does it, has inherent symmentry:
-
-`[Optional Title](RepresentationOne "Representation Two")`
-
-This, which is how Markdown does it, does not have inherent symmentry:
-
-`[Representation Two](RepresentationOne "Optional Title")`
-
-Then, the title attribute would move to being inside the square brackets. This makes sense, since it mirrors the syntax for links. When you write a link in Markdown, you do so like this:
-
-`[link text to display](the url)`
-
-The stuff inside the square brackets is what is shown to readers of the HTML document.
-
-Now, Markua is a format for producing books, not HTML.
-
-So, in books, images may or may not have figure captions. However, figure captions, when present, are definitely displayed to the reader. They function like the text which is displayed for a link: the reader reads them.
-
-`![Optional Figure Caption](path/to/image.png "Optional Alt Text")`
-
-Now, it's important to have alt text, even in books. Alt text is not the same thing as a figure caption.
-
-The alt text is text which is intended to be provided for readers who cannot see the image. This includes readers who are visually impaired, readers whose ebook readers do not display images and readers who are listening to the text as an audio book.
-
-For example, a figure caption may be "Washington Crossing the Delaware" and the alt text would be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
-
-The downside of this decision is that it does mean that many authors will skip providing alt text, thereby making the reading experience worse for readers wwho cannot see the images. The way that skipping alt text would be done is like this:
-
-`![Optional Figure Caption](path/to/image.png)`
-
-While skipping alt text would be an unfortunate decision, this syntax is perfectly valid Markua.
-
-## Markua Image Syntax Explained
+The way that Markua inserts images looks very similar to how it's done in Markdown. However, there's one important difference, which is [discussed later](#image_syntax_diff).
 
 The Markua image syntax is as follows:
 
@@ -68,14 +8,24 @@ The Markua image syntax is as follows:
 
 * The optional figure caption is enclosed in square brackets `[` and `]`.
 * The alt text is in quotes, with a space after the path to the image.
-* The `path/to/image.png` part is the relative path to the image inside the `images` directory. The `images/` is not included.
+* The `path/to/image.png` part is the relative path to the image inside the `images` directory. The `images/` directory is not included in the path.
 
-As discussed, all images are contained in a subdirectory of the manuscript directory called `images`, either top level or in nested subdirectories inside it. This `images` directory is the assumed root of the path. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+A> As discussed, all images are contained in a subdirectory of the manuscript directory called `images`, either top level or in nested subdirectories inside it. This `images` directory is the assumed root of the path, and is not included in the path itself.
+
+W> Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+
+Image paths work like this:
 
 * A file called `foo.jpg` in the `images` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](images/foo.jpg)` or  `![](/images/foo.jpg)`.
 * A file called `bar.png` in a subdirectory `foo` of the images directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](images/foo/bar.png)` or  `![](/images/foo/bar.png)`.
 
-A> In Leanpub Flavoured Markdown, we included the `images/` in the path of all images. This is not supported in Markua. Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is images/ in a path, a Markua processor must assume this is the name of a directory *inside* the images directory.
+W> In Leanpub Flavoured Markdown, we included the `images/` in the path of all images. This is not supported in Markua. Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is images/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the images directory.
+
+In Markua, images can be inserted either inline as a span element, or on their own as a block element separated like any other block element by blank lines above and below.
+
+When an image is inserted as a span element, it looks very similar to the Markdown hyperlink syntax. It just lives anywhere any text content can live. The image is inserted inline, and positioned according to the preference of the Markua Processor.
+
+When an image is on its own line as a block element, it is referred to as a Figure. Figures are formatted specially, and show up in the List of Illustrations if one is present.
 
 In Markua, images can be inserted in one of two ways:
 
@@ -90,6 +40,25 @@ For Figures, the caption shows up in two places:
 
 1. somewhere near the image, typically above or below it, per the preference of the Markua Processor
 2. as the name of the Figure in the List of Illustrations (a.k.a. Table of Figures)
+
+
+float & width on figures
+
+- is it a figure with
+- width: 50%
+
+blah blah
+img
+blah blah
+
+is left-aligned
+
+
+
+float: left, right only
+width: x% x is 1 to 100, integer
+
+
 
 {class: warning}
 B> There is no support for Markdown's reference style images in Markua. One image syntax in figure and inline modes is plenty enough to remember.
@@ -298,3 +267,60 @@ Markua has a spiffy logo:
 ![The Markua Logo](markua-logo.png)
 
 Thanks Justin, it was fun making the logo with you!
+
+{#image_syntax_diff}
+## Important Difference Between Markdown and Markua Image Syntax
+
+If you have a deep understanding of Markdown, you may have noticed that there is an important difference between how images are inserted in Markdown and how they're inserted in Markua.
+
+In Markdown, images are inserted with the following syntax:
+
+`![Optional Alt Text](path/to/image.png "Optional Title")`
+
+The alt text and the caption are both optional. If neither are provided, the image is inserted like this:
+
+`![](path/to/image.png)`
+
+(Yes, the empty square brackets are required in Markdown.)
+
+Markua uses a similar syntax, but with one **huge** change: the alt text and title are reversed. Here's the Markua image syntax:
+
+`![Optional Figure Caption](path/to/image.png "Optional Alt Text")`
+
+I do not take this change lightly. My opinion is that Markdown is inconsistent here. To be more consistent, Markdown should have been:
+
+`![Optional Title](path/to/image.png "Optional Alt Text")`
+
+The alt text is only used in situations where you cannot see the image, for example, for readers who have visual disabilities and who are using screen readers, or for people whose browsers do not load images. Conceptually, the alt text is a replacement for the image. So, since the image is inside the parentheses, the alt text should be in there with the image.
+
+This, which is how Markua does it, has inherent symmentry:
+
+`[Optional Title](RepresentationOne "Representation Two")`
+
+This, which is how Markdown does it, does not have inherent symmentry:
+
+`[Representation Two](RepresentationOne "Optional Title")`
+
+Then, the title attribute would move to being inside the square brackets. This makes sense, since it mirrors the syntax for links. When you write a link in Markdown, you do so like this:
+
+`[link text to display](the url)`
+
+The stuff inside the square brackets is what is shown to readers of the HTML document.
+
+Now, Markua is a format for producing books, not HTML.
+
+So, in books, images may or may not have figure captions. However, figure captions, when present, are definitely displayed to the reader. They function like the text which is displayed for a link: the reader reads them.
+
+`![Optional Figure Caption](path/to/image.png "Optional Alt Text")`
+
+Now, it's important to have alt text, even in books. Alt text is not the same thing as a figure caption.
+
+The alt text is text which is intended to be provided for readers who cannot see the image. This includes readers who are visually impaired, readers whose ebook readers do not display images and readers who are listening to the text as an audio book.
+
+For example, a figure caption may be "Washington Crossing the Delaware" and the alt text would be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+
+The downside of this decision is that it does mean that many authors will skip providing alt text, thereby making the reading experience worse for readers wwho cannot see the images. The way that skipping alt text would be done is like this:
+
+`![Optional Figure Caption](path/to/image.png)`
+
+While skipping alt text would be an unfortunate decision, this syntax is perfectly valid Markua.
