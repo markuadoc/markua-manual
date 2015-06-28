@@ -8,11 +8,10 @@ paragraphs.txt
 scene_breaks.txt
 poetry.txt
 lists.txt
-definition_lists.txt
 asides_blurbs_block_quotes.txt
 code_blocks.txt
 tables.txt
-math.txt
+math_blocks.txt
 text_semantics.txt
 links.txt
 footnotes.txt

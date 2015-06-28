@@ -1,3 +1,4 @@
+{#codespans}
 # Code Spans
 
 Code like `hello world` can be inserted using backticks inside a paragraph, heading, or any other block element.

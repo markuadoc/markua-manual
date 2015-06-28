@@ -1,3 +1,4 @@
+{#textsemantics}
 # Text Semantics: Italics, Emphasis, Bold, Strong, Strikethrough, Superscript and Subscript
 
 Markua is a plain text format designed for the writing of books and documents.

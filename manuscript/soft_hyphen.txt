@@ -1,3 +1,4 @@
+{#softhyphens}
 # Soft hyphen
 
 In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hypenation can be done.

@@ -1,3 +1,4 @@
+{#mathblocks}
 # Math Blocks
 
 You can put mathematical equations in your book, in either block elements (described below) or in [span elements](#math-span).

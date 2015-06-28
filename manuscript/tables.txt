@@ -1,4 +1,4 @@
+{#tables}
 # Tables
 
-{class: warning}
-B> TODO (with titles)
+W> TODO (with titles)

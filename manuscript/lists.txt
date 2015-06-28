@@ -1,95 +1,75 @@
+{#lists}
 # Lists
 
-Markua defines substantially more list types than Markdown.
+In Markua, lists are a block element, meaning that all lists must have a blank line before and after them.
 
-In Markdown, the only types of lists supported are HTML ordered lists with decimal numbers and HTML unordered lists with bullets. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list.
+Markua defines substantially more list types than Markdown. In Markdown, the only types of lists supported are ordered lists with decimal numbers and unordered lists. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list. Specifically, the following types of lists are supported:
 
-Specifically, the following types of lists are supported:
-
-1. Bulleted (i.e. "unordered" lists).
-2. Every type of "ordered" list specified by HTML.
+1. Unordered lists (i.e. bulleted lists)
+2. Ordered lists, with the following numbering choices:
   a. Decimal numbers
   b. Uppercase letters
   c. Lowercase letters
   d. Uppercase roman numerals
   e. Lowercase roman numerals
+3. Definition lists
 
-Furthermore, besides ordered and unordered lists, [definition lists](#dl) are also supported. We strongly believe in their value.
+A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and roman numerals, this term is superior to numbered lists in that regard.)
 
-A> # Bulleted not Unordered
-A>
-A> Markua prefers the term "bulleted list" to "unordered list", even though a `<ul>` is produced in the HTML output, for the following reasons:
-A>
-A> 1. The terms "ordered list" and "unordered list" come from HTML, and have more of a "programming" feeling to them than a "writing" feeling. Markua is a format for writers.
-A> 2. The terms "ordered list" and "unordered list" imply an HTML implementation only, and Markua is used to generate PDF, EPUB, MOBI and HTML.
-A> 3. All lists have an order--otherwise they would not be lists! So, the term "unordered list" is inherently absurd.
 
-All lists must have a blank line before and after them.
 
-There are a number of list types. Each is specified in turn below.
+Differences Between Markua and Markdown Lists
 
-## Bulleted Lists
+{#unorderedlists}
+## Unordered Lists
 
-To make a bulleted list you start one or more consecutive lines with an asterisk (\*), followed by one space, followed by text content.
+To make an unordered list you start one or more consecutive lines with an asterisk (\*), followed by one space, followed by text content.
 
 No other line start other than an asterisk is correct Markua syntax. Also, there are an arbitrary number of spaces or tabs after a list bullet.
 
 ### Examples
 
-{#bulleted_lists_1}
+{#unordered_lists_1}
 #### Example 1
 
 ##### Markua Syntax
 
-{#input_bulleted_lists_1}
+{#input_unordered_lists_1}
 ```
+before
+
 * foo
 * bar
 * baz
+
+after
 ```
 
 ##### HTML Output
 
-{#output_bulleted_lists_1}
+{#output_unordered_lists_1}
 ```
+<p>before</p>
 <ul>
 <li>foo</li>
 <li>bar</li>
 <li>baz</li>
 </ul>
+<p>after</p>
 ```
 
 ##### Example Output
+
+before
 
 * foo
 * bar
 * baz
 
-{#bulleted_lists_2}
-#### Example 2
+after
 
-##### Markua Syntax
-
-{#input_bulleted_lists_2}
-```
-* foo
-```
-
-##### HTML Output
-
-{#output_bulleted_lists_2}
-```
-<ul>
-<li>foo</li>
-</ul>
-```
-
-##### Example Output
-
-* foo
-
-{#numbered_lists}
-## Numbered Lists
+{#ordered_lists}
+## Ordered Lists
 
 Numbered lists are more fully featured in Markua than in Markdown.
 
@@ -726,7 +706,6 @@ B> FIXME: This Example Output is broken until Markua support is in Leanpub.
 iv. foo
 v. bar
 
-{#dl}
 ## Differences Between Markua and Markdown Lists
 
 If you are familiar with Markdown, you will have noted a number of differences between Markua lists and Markdown lists. This section specifies these differences explicitly.
@@ -752,6 +731,8 @@ To me, the notion of a *list* is something with more than one thing in it. If I 
 So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses. This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
 A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, Markdown tries to make HTML wherever possible. Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list; I don't write one element lists).
+
+Now, there's an interesting corollary here: since a single element ordered list is not a list, a single element unordered list is also not a list. It would be just too surprising otherwise--and, again, a list is something with more than one thing in it.
 
 #### Example 1
 
@@ -795,11 +776,37 @@ a. This isn't a list either.
 
 Baz
 
-### In Markua, List Numbers Must be Consecutive Or It Is Not a List
+{#unordered_lists_2}
+#### Example 2: A One Element List is Not a List
 
-In Markua, list numbers **must all be consecutive**, given the type of numbering (decimal, Roman numeral, alphabetical) that is used. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it.
+##### Markua Syntax
 
-The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output. A list will only be produced if this is the case.
+{#input_unordered_lists_2}
+```
+foo
+
+* bar
+
+baz
+```
+
+##### HTML Output
+
+{#output_unordered_lists_2}
+```
+<p>foo</p>
+<p>* bar</p>
+<p>baz</p>
+```
+
+##### Example Output
+
+* foo
+
+
+### In Markua, List Numbers Must Either be Consecutive Or The Same As The First Number, Or It's Not a List
+
+In Markua, list numbers must **all** either be **consecutive**, given the type of numbering (decimal, Roman numeral, alphabetical) that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
@@ -807,7 +814,45 @@ If you want to prevent a list from being created with consecutive numbered items
 
 ##### Markua Syntax
 
-{#input_list_consecutive_1}
+{#input_list_consecutive_or_same_1}
+```
+This makes an ordered list with decimal numbers:
+
+1. one
+1. two
+1. three
+
+End.
+```
+
+##### HTML Output
+
+{#output_list_consecutive_or_same_1}
+```
+<p>This makes an ordered list with decimal numbers:</p>
+<ol>
+<li>one</li>
+<li>two</li>
+<li>three</li>
+</ol>
+<p>End.</p>
+```
+
+##### Example Output
+
+This makes an ordered list with decimal numbers:
+
+1. one
+1. two
+1. three
+
+End.
+
+#### Example 2
+
+##### Markua Syntax
+
+{#input_list_consecutive_or_same_2}
 ```
 This does not make a list:
 
@@ -819,7 +864,7 @@ End.
 
 ##### HTML Output
 
-{#output_list_consecutive_1}
+{#output_list_consecutive_or_same_2}
 ```
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
@@ -838,11 +883,11 @@ This does not make a list:
 
 End.
 
-#### Example 2
+#### Example 3
 
 ##### Markua Syntax
 
-{#input_list_consecutive_2}
+{#input_list_consecutive_or_same_3}
 ```
 This does not make a list either, since the numbers are not all consecutive:
 
@@ -855,7 +900,7 @@ End.
 
 ##### HTML Output
 
-{#output_list_consecutive_2}
+{#output_list_consecutive_or_same_3}
 ```
 <p>This does not make a list either, since the numbers are not all consecutive:</p>
 <p>1. foo<br/>
@@ -876,11 +921,11 @@ This does not make a list either, since the numbers are not all consecutive:
 
 End.
 
-#### Example 3
+#### Example 4
 
 ##### Markua Syntax
 
-{#input_list_consecutive_3}
+{#input_list_consecutive_or_same_4}
 ```
 This makes a list:
 
@@ -892,7 +937,7 @@ End.
 
 ##### HTML Output
 
-{#output_list_consecutive_3}
+{#output_list_consecutive_or_same_4}
 ```
 <p>This makes a list:</p>
 <ol start="1975">
@@ -911,11 +956,11 @@ This makes a list:
 
 End.
 
-#### Example 4
+#### Example 5
 
 ##### Markua Syntax
 
-{#input_list_consecutive_4}
+{#input_list_consecutive_or_same_5}
 ```
 This does not make a list:
 
@@ -927,7 +972,7 @@ End.
 
 ##### HTML Output
 
-{#output_list_consecutive_4}
+{#input_list_consecutive_or_same_5}
 ```
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
@@ -943,6 +988,9 @@ This does not make a list:
 1976\. The year after 1975.
 
 End.
+
+
+
 
 #### Example 5
 
@@ -1058,3 +1106,20 @@ ii. two
 iv. four
 
 That's it!
+
+{#definitionlists}
+## Definition Lists
+
+Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, we strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, we see definition lists as having more of a future than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
+
+To define a definition list in Markua, use the following syntax:
+
+```
+term 1
+: definition 1
+
+term 2
+: definition 2
+```
+
+For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.

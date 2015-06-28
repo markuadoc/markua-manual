@@ -1,4 +1,4 @@
-{#math-span}
+{#mathspans}
 # Math Spans: Verbose and \{$$}
 
 Math can be inserted as span elements as well as as a [block element](#math-blocks).

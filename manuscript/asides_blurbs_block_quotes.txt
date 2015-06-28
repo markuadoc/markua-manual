@@ -1,3 +1,4 @@
+{#blockquotes}
 # Block Quotes
 
 Block quotes can span multiple pages. They are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
@@ -66,6 +67,7 @@ This is a paragraph before the block quote.
 
 This is a paragraph after the block quote.
 
+{#asides}
 # Asides
 
 Asides are text which is formatted separately from the main text by a Markua processor. Asides can span multiple pages.
@@ -122,6 +124,7 @@ A> This is a third paragraph in the aside.
 
 This is a paragraph after the aside.
 
+{#blurbs}
 # Blurbs
 
 Blurbs are like asides, but with two differences.
@@ -312,5 +315,3 @@ B>
 B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
 
 If there was a car, it did; if there was no car, it did not.
-
-{#code-blocks}

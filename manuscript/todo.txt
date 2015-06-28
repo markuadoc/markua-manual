@@ -1,7 +1,5 @@
 # TODO
 
-this is a bad time.
-
 - nested list => 2 spaces, 4 spaces, 1 tab, combination? (leaning: 2 spaces)
 
 - code blocks and new paragraphs inside list items

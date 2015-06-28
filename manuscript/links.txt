@@ -1,3 +1,4 @@
+{#links}
 # Links
 
 {class: warning}

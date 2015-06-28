@@ -1,3 +1,4 @@
+{#paragraphs}
 # Paragraphs and Line Breaks
 
 When writing normal prose, you break your writing into paragraphs.

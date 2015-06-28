@@ -60,6 +60,7 @@ The supported file extensions are:
 .xml
 : The image is treated as an SVG image.
 
+{#inlineimages}
 ## Inline Images
 
 Images can be inserted inline in the flow of text in a paragraph. When an image is inserted inline, it must be positioned where it is inserted -- it cannot be floated and repositioned by Markua processors.

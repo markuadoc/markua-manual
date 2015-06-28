@@ -1,3 +1,4 @@
+{#scenebreaks}
 # Scene Breaks
 
 To make a scene break, place exactly three hyphens on a line by themselves. Scene breaks must have a blank line above them and below them.
