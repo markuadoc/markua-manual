@@ -10,11 +10,11 @@ Markua defines substantially more list types than Markdown. In Markdown, the onl
   a. Decimal numbers
   b. Uppercase letters
   c. Lowercase letters
-  d. Uppercase roman numerals
-  e. Lowercase roman numerals
+  d. Uppercase Roman numerals
+  e. Lowercase Roman numerals
 3. Definition lists
 
-A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and roman numerals, this term is superior to numbered lists in that regard.)
+A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
 
 
@@ -804,9 +804,64 @@ baz
 * foo
 
 
-### In Markua, List Numbers Must Either be Consecutive Or The Same As The First Number, Or It's Not a List
+### Ordered List Numbering Rules
 
-In Markua, list numbers must **all** either be **consecutive**, given the type of numbering (decimal, Roman numeral, alphabetical) that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
+There are a number of rules about what does and does not trigger the creation of an ordered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
+
+If, because of the correct application of these rules, an ordered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
+
+In theory, Markua supports creating an ordered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive number.
+2. Every item in the list begins with the same number.
+
+This is not actually quite true.
+
+See, the notion of "consecutive" is easy to explain and to check for decimal numbers: `1, 2, 3, ...` or `456, 457, 458, ...` are all easily verified as consecutive, both by humans and computers.
+
+However, Markua also supports ordered lists using uppercase and lowercase alphabetical numbering, as well as uppercase and lowercase Roman numeral numbering.
+
+In the case of alphabetical numbering, checking "consecutive" is harder. It's relatively straightforward for the first 26 items, but then all bets are off. In case you're curious, here is the sequence used in HTML:
+
+`a, b, ..., z, aa, ab, ..., az, ba, bb, ... bz, za, zb, ..., zz, aaa, aab, ..., aaz, aba, abb, ...`
+
+In terms of Roman numerals, it's even worse. I'm sure that someone in a Classics department (or in the NFL) knows the algorithm by heart, but I don't.
+
+So, what are Markua authors and implementors of Markua processors to do?
+
+Markua makes this simpler by specifying the following rules.
+
+Markua *actually* supports creating an ordered list based on a different set of conditions based on the numbering type.
+
+For decimal numbers, Markua actually supports creating an ordered list when either of the following two conditions occur:
+
+1. Every item in the list begins with the same number.
+2. Every item in the list begins with a consecutive number.
+
+For uppercase and lowercase alphabetical numbering, Markua actually supports creating an ordered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase or `Z.` for uppercase. (This way, implementors of Markua processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
+2. Every item in the list begins with the same single letter, followed by a period.
+
+The term "single letter" means that consecutive `c.`s start an ordered list which starts with `c, d, e, ...`, but that consecutive `aa.`s or `aba.`s do not start an ordered list. Again, this greatly simplifies life (you're welcome!) for implementors of Markua processors, who otherwise would need to figure out what number in the sequence `aba` is, in order to generate the correct HTML.
+
+For uppercase and lowercase Roman numeral numbering, Markua actually supports creating an ordered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive Roman numeral, followed by a period, and the lettering does not extend past `xii.` for lowercase Roman numerals or `XII.` for uppercase Roman numerals. To be clear, this means that the only valid consecutive lowercase Roman numerals are `i, ii, iii, iv, v, vi, vii, viii, ix, x, xi, xii`, and that the only valid consecutive uppercase Roman numerals are `I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII`.
+2. Every item in the list begins with `i.` for lowercase Roman numerals or `I.` for uppercase Roman numerals.
+
+The combination of the rules for Roman numeral numbering means that you can have an arbitrarily long Roman numeral list starting from `i.` or `I.`, but that implementors of Markua processors don't need to write code to figure out whether `MCMLXXV` is a valid Roman numeral, and what the consecutive Roman numeral sequence after it is.
+
+If you're wondering why I picked `xii` and `XII` for the last consecutive lowercase and uppercase Roman numerals to respect: this is Roman numeral 12, and the main usage of Roman numerals in modern life is in clock faces.
+
+Speaking of clock faces, I have bad news for fans of watches and antique clocks:
+
+* The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
+* The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
+
+It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
+
+In Markua, list numbers must **all** either be **consecutive**, given the type of numbering  that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
@@ -816,11 +871,64 @@ If you want to prevent a list from being created with consecutive numbered items
 
 {#input_list_consecutive_or_same_1}
 ```
-This makes an ordered list with decimal numbers:
+This makes an ordered list with decimal numbers (1, 2, 3):
 
 1. one
 1. two
 1. three
+
+This does not make a list, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+This makes a list (1975, 1976):
+
+1975. An amazing year.
+1976. The year after 1975.
+
+This does not make a list:
+
+1975. An amazing year.
+2010. The year Leanpub was launched.
+
+This makes a lowercase alphabetical ordered list (a, b):
+
+a. one
+b. two
+
+This makes a lowercase alphabetical ordered list (e, f):
+
+e. five
+f. six
+
+This makes a lowercase alphabetical ordered list (i, ii, iii, iv):
+
+i. one
+ii. two
+iii. three
+iv. four
+
+Not a list:
+
+a\. one
+b\. two
+
+Not a list:
+
+a. one
+c. three
+
+Not a list:
+
+i. one
+ii. two
+iv. four
+
+That's it!
+```
+
 
 End.
 ```
@@ -835,103 +943,27 @@ End.
 <li>two</li>
 <li>three</li>
 </ol>
-<p>End.</p>
-```
-
-##### Example Output
-
-This makes an ordered list with decimal numbers:
-
-1. one
-1. two
-1. three
-
-End.
-
-#### Example 2
-
-##### Markua Syntax
-
-{#input_list_consecutive_or_same_2}
-```
-This does not make a list:
-
-1975. An amazing year.
-2010. The year Leanpub was launched.
-
-End.
-```
-
-##### HTML Output
-
-{#output_list_consecutive_or_same_2}
-```
+<p>This does not make a list, since the numbers are not all consecutive:</p>
+<p>1. foo<br/>
+2. bar<br/>
+4. baz</p>
+<p>This makes a list:</p>
+<ol start="1975">
+<li>An amazing year.</li>
+<li>The year after 1975.</li>
+</ol>
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
 2010. The year Leanpub was launched.</p>
 <p>End.</p>
-```
 
-##### Example Output
 
-W> TODO - broken until Markua supported
 
-This does not make a list:
-
-1975. An amazing year.
-2010. The year Leanpub was launched.
-
-End.
-
-#### Example 3
-
-##### Markua Syntax
-
-{#input_list_consecutive_or_same_3}
-```
-This does not make a list either, since the numbers are not all consecutive:
-
-1. foo
-2. bar
-4. baz
-
-End.
-```
-
-##### HTML Output
-
-{#output_list_consecutive_or_same_3}
-```
-<p>This does not make a list either, since the numbers are not all consecutive:</p>
-<p>1. foo<br/>
-2. bar<br/>
-4. baz</p>
 <p>End.</p>
 ```
 
-##### Example Output
-
-W> TODO - broken until Markua supported
-
-This does not make a list either, since the numbers are not all consecutive:
-
-1. foo
-2. bar
-4. baz
-
-End.
-
-#### Example 4
-
-##### Markua Syntax
-
 {#input_list_consecutive_or_same_4}
 ```
-This makes a list:
-
-1975. An amazing year.
-1976. The year after 1975.
-
 End.
 ```
 
@@ -939,11 +971,6 @@ End.
 
 {#output_list_consecutive_or_same_4}
 ```
-<p>This makes a list:</p>
-<ol start="1975">
-<li>An amazing year.</li>
-<li>The year after 1975.</li>
-</ol>
 <p>End.</p>
 ```
 
@@ -996,43 +1023,6 @@ End.
 
 ##### Markua Syntax
 
-{#input_list_consecutive_5}
-```
-A list:
-
-a. one
-b. two
-
-A list:
-
-e. five
-f. six
-
-A list:
-
-i. one
-ii. two
-iii. three
-iv. four
-
-Not a list:
-
-a\. one
-b\. two
-
-Not a list:
-
-a. one
-c. three
-
-Not a list:
-
-i. one
-ii. two
-iv. four
-
-That's it!
-```
 
 ##### HTML Output
 
