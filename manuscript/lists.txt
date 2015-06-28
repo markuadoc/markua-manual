@@ -16,124 +16,7 @@ Markua defines substantially more list types than Markdown. In Markdown, the onl
 
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
-If you are familiar with Markdown, as you read the sections below you will note a number of differences between Markua lists and Markdown lists. However, before all that starts, I want to highlight one important one which applies to both unordered and ordered lists.
-
-## In Markua, A Single Element List is Not a List
-
-Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
-
-`1986. What a great season.`
-
-This would produce a single element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
-
-Now, in Markua, if we supported single element lists, this would produce a single element numbered list starting with `1968.` -- which would be almost as bad as in Markdown.
-
-(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1968\. What a great season.` to avoid this.)
-
-But what to do?
-
-The answer is simple: in Markua, **single element lists are not lists**. This is true for both unordered and ordered lists.
-
-To me, the notion of a *list* is something with more than one thing in it. If I have a list of chores to do, there are many of them. If I have one chore to do, I don't call it a list of chores--I call it a chore.
-
-So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses. Similarly, a single element unordered list is also not a list. The automatic creation of an unordered list only happens if you have two or more lines starting with asterisks followed by a space (`* `).
-
-This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
-
-A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
-
-{#single_element_1}
-### Example
-
-#### Markua Syntax
-
-{#input_single_element_1}
-```
-foo
-
-* This isn't a list.
-
-bar
-
-1. This isn't a list either.
-
-baz
-
-1975. Also, not a list.
-
-lorem
-
-a. This isn't a list either.
-
-ipsum
-
-A. This isn't a list either.
-
-dolor
-
-i. This isn't a list either.
-
-sit
-
-I. This isn't a list either.
-
-amet
-```
-
-#### HTML Output
-
-{#output_list_single_element_1}
-```
-<p>foo</p>
-<p>* This isn't a list.</p>
-<p>bar</p>
-<p>1. This isn't a list either.</p>
-<p>baz</p>
-<p>1975. Also, not a list.</p>
-<p>lorem</p>
-<p>a. This isn't a list either.</p>
-<p>ipsum</p>
-<p>A. This isn't a list either.</p>
-<p>dolor
-<p>i. This isn't a list either.</p>
-<p>sit</p>
-<p>I. This isn't a list either.</p>
-<p>amet</p>
-```
-
-#### Example Output
-
-W> TODO - broken until Markua supported
-
-foo
-
-* This isn't a list.
-
-bar
-
-1. This isn't a list either.
-
-baz
-
-1975. Also, not a list.
-
-lorem
-
-a. This isn't a list either.
-
-ipsum
-
-A. This isn't a list either.
-
-dolor
-
-i. This isn't a list either.
-
-sit
-
-I. This isn't a list either.
-
-amet
+If you are familiar with Markdown, as you read the sections below you will note a number of differences between Markua lists and Markdown lists.
 
 {#unorderedlists}
 ## Unordered Lists
@@ -146,12 +29,12 @@ To make an unordered list you start one or more consecutive lines with an asteri
 * A varied number of spaces or tabs does not create an unordered list.
 * The preferred amount of whitespace after the asterisk is one space.
 
-### Examples
+Note that a single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk would be even stupider.
 
 {#unordered_lists_1}
-#### Example 1
+### Example
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_unordered_lists_1}
 ```
@@ -184,10 +67,14 @@ Not a list:
 *   bar
 *  baz
 
+A list:
+
+*  foo
+
 End!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_unordered_lists_1}
 ```
@@ -222,10 +109,14 @@ End!
 <p>*    foo<br/>
 *   bar<br/>
 *  baz</p>
+<p>A list:</p>
+<ul>
+  <li>foo</li>
+</ul>
 <p>End!</p>
 ```
 
-##### Example Output
+#### Example Output
 
 A list:
 
@@ -256,6 +147,10 @@ Not a list:
 *   bar
 *  baz
 
+A list:
+
+*  foo
+
 End!
 
 {#ordered_lists}
@@ -276,72 +171,167 @@ In Markua, an ordered list can vary the following:
 2. Numbering direction (ascending or descending)
 3. Initial number (or letter, or Roman numeral)
 
-To make a numbered list you start one or more consecutive lines with a consecutive number, followed by a period, followed by whitespace, followed by text content:
+To make a numbered list you start one or more consecutive lines with a consecutive number, followed by a period, followed by 1 or more spaces or 1 tab, followed by text content.
 
 ```
+foo
+
 1. foo
 2. bar
 3. baz
+
+bar
 ```
 
-Note that unlike with unordered lists, with ordered lists you are allowed to vary the number of spaces after
+Note that there are one or more spaces after the period. The reason that more spaces are allowed is to allow authors to line up their lists, if they choose to. Unlike with an unordered list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
 
+### In Markua, A Single Element Ordered List is Not a List
 
-Note that there are one or more spaces after the period. The reason that more spaces are allowed is to allow authors to line up their lists, if they choose to.
+Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
+
+`1986. What a great season.`
+
+This would produce a single element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
+
+Now, in Markua, if we supported single element ordered lists, this would produce a single element numbered list starting with `1968.` -- which would be almost as bad as in Markdown.
+
+(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1968\. What a great season.` to avoid this.)
+
+But what to do?
+
+The answer is simple: in Markua, **single element ordered lists are not lists**. This is true for ordered lists only -- single element unordered lists and single element definition lists are both lists. (In the case of an unordered list it's stupid, but the alternative is stupider. In the case of a definition list there's actually a legitimate usage of a single element definition list: a single definition.)
+
+To me, the notion of a *list* is something with more than one thing in it. If I have a list of chores to do, there are many of them. If I have one chore to do, I don't call it a list of chores--I call it a chore.
+
+So, in Markua, the automatic creation of an ordered list only happens if you have two or more lines starting with numbers and periods or parentheses.
+
+This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
+
+A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
 
 ### Examples
 
-{#numbered_lists_1}
-#### Example 1
+{#ordered_list_1}
+#### Example 1: A Single Element Ordered List is Not a List
 
 ##### Markua Syntax
 
-{#input_numbered_lists_1}
+{#input_ordered_list_1}
 ```
-1. foo
-2. bar
-3. baz
+foo
+
+1. This isn't a list.
+
+bar
+
+1975. Also, not a list.
+
+lorem
+
+a. This isn't a list either.
+
+ipsum
+
+A. This isn't a list either.
+
+dolor
+
+i. This isn't a list either.
+
+sit
+
+I. This isn't a list either.
+
+amet
+```
+
+##### HTML Output
+
+{#output_ordered_list_1}
+```
+<p>foo</p>
+<p>1. This isn't a list.</p>
+<p>bar</p>
+<p>1975. Also, not a list.</p>
+<p>lorem</p>
+<p>a. This isn't a list either.</p>
+<p>ipsum</p>
+<p>A. This isn't a list either.</p>
+<p>dolor
+<p>i. This isn't a list either.</p>
+<p>sit</p>
+<p>I. This isn't a list either.</p>
+<p>amet</p>
+```
+
+##### Example Output
+
+W> TODO - broken until Markua supported
+
+foo
+
+1. This isn't a list.
+
+bar
+
+1975. Also, not a list.
+
+lorem
+
+a. This isn't a list either.
+
+ipsum
+
+A. This isn't a list either.
+
+dolor
+
+i. This isn't a list either.
+
+sit
+
+I. This isn't a list either.
+
+amet
+
+{#ordered_list_2}
+#### Example 2
+
+##### Markua Syntax
+
+{#input_ordered_list_2}
+```
+lorem
+
+1. ipsum
+2. dolor
+3. sit
+
+amet
 ```
 
 ##### HTML Output
 
 {#output_numbered_lists_1}
 ```
+<p>lorem</p>
 <ol>
-<li>foo</li>
-<li>bar</li>
-<li>baz</li>
+  <li>ipsum</li>
+  <li>dolor</li>
+  <li>sit</li>
 </ol>
+<p>amet</p>
 ```
 
 ##### Example Output
 
-1. foo
-2. bar
-3. baz
+lorem
 
-{#numbered_lists_2}
-#### Example 2
+1. ipsum
+2. dolor
+3. sit
 
-##### Markua Syntax
-
-{#input_numbered_lists_2}
-```
-1. foo
-```
-
-##### HTML Output
-
-{#output_numbered_lists_2}
-```
-<ol>
-<li>foo</li>
-</ol>
-```
-
-##### Example Output
-
-1. foo
+amet
 
 {#numbered_lists_3}
 #### Example 3
@@ -350,20 +340,26 @@ Note that there are one or more spaces after the period. The reason that more sp
 
 {#input_numbered_lists_3}
 ```
+lorem
+
 9. foo
 10. bar
 11. baz
+
+ipsum
 ```
 
 ##### HTML Output
 
 {#output_numbered_lists_3}
 ```
+<p>lorem</p>
 <ol start="9">
 <li>foo</li>
 <li>bar</li>
 <li>baz</li>
 </ol>
+<p>ipsum</p>
 ```
 
 ##### Example Output
