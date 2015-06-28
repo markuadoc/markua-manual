@@ -271,7 +271,18 @@ End!
 
 Ordered lists are more fully featured in Markua than in Markdown.
 
-W> TODO - finish
+Unlike in Markdown, in Markua the number that begins the list in the manuscript is the number that begins the list in the output.
+
+In Markua, an ordered list can vary the following:
+
+1. Numbering system
+  a. Decimal numbers
+  b. Uppercase letters
+  c. Lowercase letters
+  d. Uppercase Roman numerals
+  e. Lowercase Roman numerals
+2. Numbering direction (ascending or descending)
+3. Initial number (or letter, or Roman numeral)
 
 To make a numbered list you start one or more consecutive lines with a consecutive number, followed by a period, followed by whitespace, followed by text content:
 
@@ -281,14 +292,8 @@ To make a numbered list you start one or more consecutive lines with a consecuti
 3. baz
 ```
 
-Unlike in Markdown, the number that begins the list in the manuscript is the number that begins the list in the output.
+Note that unlike with unordered lists, with ordered lists you are allowed to vary the number of spaces after
 
-Also, unlike in Markdown, numbers must be consecutive. The following is not legal Markua:
-
-```
-1. foo
-1. bar
-```
 
 Note that there are one or more spaces after the period. The reason that more spaces are allowed is to allow authors to line up their lists, if they choose to.
 
@@ -1174,4 +1179,76 @@ term 2
 : definition 2
 ```
 
+A definition list can define multiple definitions for a term:
+
+```
+term 3
+: definition 3a
+: definition 3b
+```
+
+Note that a single element definition list is a definition list, unlike a single element unordered list and a single element ordered list.
+
+
+
+The
 For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.
+
+#### Example 1
+
+##### Markua Syntax
+
+```
+foo
+
+term 1
+: definition 1
+
+term 2
+: definition 2a
+: definition 2b
+: definition 2c
+
+term 3
+: definition 3
+
+bar
+```
+
+##### HTML Output
+
+```
+<p>foo</p>
+<dl>
+  <dt>term 1</dt>
+  <dd>definition 1</dd>
+</dl>
+<dl>
+  <dt>term 2</dt>
+  <dd>definition 2a</dd>
+  <dd>definition 2b</dd>
+  <dd>definition 2c</dd>
+</dl>
+<dl>
+  <dt>term 3</dt>
+  <dd>definition 3</dd>
+</dl>
+<p>bar</p>
+```
+
+##### Example Output
+
+foo
+
+term 1
+: definition 1
+
+term 2
+: definition 2a
+: definition 2b
+: definition 2c
+
+term 3
+: definition 3
+
+bar
