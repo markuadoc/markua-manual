@@ -1,0 +1,111 @@
+# Poetry
+
+Poetry is easily supported in Markua: just hit a single newline to force a line break.
+
+This works great for sonnets: you can write them just by typing. No fancy formatting is required to produce them.
+
+New stanzas can be created by adding a blank line, just as would happen with new stanzas.
+
+Note that the "two space trick" for line breaks is neither supported nor necessary in Markua: every newline in a normal paragraph produces a line break, regardless of whether there are any trailing spaces.  Two newlines produce a new paragraph or stanza.
+
+If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`.
+
+## Example 1: A Shakesperean Sonnet
+
+Shakespeare could have sat down and typed this in Markua:
+
+### Markua Syntax
+
+```
+My mistress' eyes are nothing like the sun;
+Coral is far more red than her lips' red;
+If snow be white, why then her breasts are dun;
+If hairs be wires, black wires grow on her head.
+I have seen roses damasked, red and white,
+But no such roses see I in her cheeks;
+And in some perfumes is there more delight
+Than in the breath that from my mistress reeks.
+I love to hear her speak, yet well I know
+That music hath a far more pleasing sound;
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+     And yet, by heaven, I think my love as rare
+     As any she belied with false compare.
+```
+
+### HTML Output
+
+<p>
+My mistress' eyes are nothing like the sun;<br/>
+Coral is far more red than her lips' red;<br/>
+If snow be white, why then her breasts are dun;<br/>
+If hairs be wires, black wires grow on her head.<br/>
+I have seen roses damasked, red and white,<br/>
+But no such roses see I in her cheeks;<br/>
+And in some perfumes is there more delight<br/>
+Than in the breath that from my mistress reeks.<br/>
+I love to hear her speak, yet well I know<br/>
+That music hath a far more pleasing sound;<br/>
+I grant I never saw a goddess go;<br/>
+My mistress when she walks treads on the ground.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
+</p>
+
+### Example Output
+
+{class: warning}
+B> FIXME This is broken until Markua support is in Leanpub
+
+My mistress' eyes are nothing like the sun;
+Coral is far more red than her lips' red;
+If snow be white, why then her breasts are dun;
+If hairs be wires, black wires grow on her head.
+I have seen roses damasked, red and white,
+But no such roses see I in her cheeks;
+And in some perfumes is there more delight
+Than in the breath that from my mistress reeks.
+I love to hear her speak, yet well I know
+That music hath a far more pleasing sound;
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+     And yet, by heaven, I think my love as rare
+     As any she belied with false compare.
+
+## Example 2: e e cummings Style Poetry
+
+If you want to write e e cummings style poetry, go for it:
+
+##### Markua Syntax
+
+~~~
+{code: poetry}
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+~~~
+
+##### HTML Output
+
+{class: warning}
+B> TODO
+
+{code: poetry}
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+
+##### Example Output
+
+{code: poetry}
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+
+{#math-blocks}

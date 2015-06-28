@@ -1,0 +1,35 @@
+# Scene Breaks
+
+To make a scene break, place exactly three hyphens on a line by themselves. Scene breaks must have a blank line above them and below them.
+
+Markua Processors can take great liberties in how they display scene breaks in non-HTML outputs. For example, scene breaks can be displayed as a few centered asterisks, an image, or just a blank line, depending on whether the book is fiction or another type of book.
+
+Scene breaks map to the `hr` element in HTML.
+
+## Example
+
+### Markua Syntax
+
+```
+Yada yada yada.
+
+---
+
+Yada yada yada.
+```
+
+### HTML Output
+
+```
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+```
+
+### Example Output
+
+Yada yada yada.
+
+---
+
+Yada yada yada.
