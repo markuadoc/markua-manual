@@ -5,6 +5,8 @@ element_types.txt
 images.txt
 headings.txt
 paragraphs.txt
+scene_breaks.txt
+poetry.txt
 lists.txt
 definition_lists.txt
 asides_blurbs_block_quotes.txt

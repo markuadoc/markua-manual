@@ -107,8 +107,7 @@ There are lots of changes in Markua from Leanpub Flavoured Markdown (or LFM).
 
 The Markua spec is currently ahead of any implementation. We still need to implement this in Leanpub, and to create the Markua reference implementation.
 
-{class: warning}
-B> TODO - remove that when caught up!
+W> TODO - remove that when caught up!
 
 We are going to be adding a one-click, optional "Convert my book to Markua" button in Leanpub. We're also going to keep support for Leanpub Flavoured Markdown for the foreseeable future.)
 

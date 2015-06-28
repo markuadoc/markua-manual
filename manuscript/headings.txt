@@ -1,3 +1,4 @@
+{#headings}
 # Headings
 
 W> TODO - rewrite this section to improve wording and to have executable tests

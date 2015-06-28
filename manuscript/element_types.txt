@@ -10,41 +10,41 @@ Broadly speaking, Markua defines three things: block elements, span elements and
 
 The following are the block elements in Markua:
 
-* Headings
-* Paragraphs
-* Scene Breaks
-* Unordered Lists
-* Ordered Lists
-* Definition Lists
-* Block Quotes
-* Asides
-* Blurbs
-* Code Blocks
-* Tables
-* Math Blocks
-* Images as Figures
+* [Headings](#headings)
+* [Paragraphs](#paragraphs)
+* [Scene Breaks](#scenebreaks)
+* [Unordered Lists](#unorderedlists)
+* [Ordered Lists](#orderedlists)
+* [Definition Lists](#definitionlists)
+* [Block Quotes](#blockquotes)
+* [Asides](#asides)
+* [Blurbs](#blurbs)
+* [Code Blocks](#codeblocks)
+* [Tables](#tables)
+* [Math Blocks](#mathblocks)
+* [Images as Figures](#figures)
 
 ## Span Elements
 
 The following are the span elements in Markua:
 
-* Text Semantics: Italics, Emphasis, Bold, Strong, Strikethrough, Superscript and Subscript
-* Links
-* Footnotes
-* Crosslinks
-* Code Spans
-* Math Spans
-* Soft Hyphens
-* Inline Images
+* [Text Semantics: Italics, Emphasis, Bold, Strong, Strikethrough, Superscript and Subscript](#textsemantics)
+* [Links](#links)
+* [Footnotes](#footnotes)
+* [Crosslinks](#crosslinks)
+* [Code Spans](#codespans)
+* [Math Spans](#mathspans)
+* [Soft Hyphens](#softhyphens)
+* [Inline Images](#inlineimages)
 
 ## Metadata
 
 The following are the types of metadata in Markua:
 
 * [Attributes](#attributes)
-* Index entries
-* Directives
-* Settings
+* [Index entries](#indexentries)
+* [Directives](#directives)
+* [Settings](#settings)
 
 ## Blank Lines and File Concatenation
 
