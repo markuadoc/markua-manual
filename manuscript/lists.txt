@@ -1,4 +1,4 @@
-{#lists}
+<{#lists}
 # Lists
 
 In Markua, lists are a block element, meaning that all lists must have a blank line before and after them.
@@ -16,9 +16,31 @@ Markua defines substantially more list types than Markdown. In Markdown, the onl
 
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
+If you are familiar with Markdown, as you read the sections below you will note a number of differences between Markua lists and Markdown lists. However, before all that starts, I want to highlight one important one which applies to both unordered and ordered lists.
 
+## In Markua, A Single Element List is Not a List
 
-Differences Between Markua and Markdown Lists
+Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
+
+`1986. What a great season.`
+
+This would produce a single element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
+
+Now, in Markua, if we supported single element lists, this would produce a single element numbered list starting with `1968.` -- which would be almost as bad as in Markdown.
+
+(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1968\. What a great season.` to avoid this.)
+
+But what to do?
+
+The answer is simple: in Markua, **single element lists are not lists**. This is true for both unordered and ordered lists.
+
+To me, the notion of a *list* is something with more than one thing in it. If I have a list of chores to do, there are many of them. If I have one chore to do, I don't call it a list of chores--I call it a chore.
+
+So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses. Similarly, a single element unordered list is also not a list. The automatic creation of an unordered list only happens if you have two or more lines starting with asterisks followed by a space (`* `).
+
+This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
+
+A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
 
 {#unorderedlists}
 ## Unordered Lists
@@ -707,32 +729,6 @@ iv. foo
 v. bar
 
 ## Differences Between Markua and Markdown Lists
-
-If you are familiar with Markdown, you will have noted a number of differences between Markua lists and Markdown lists. This section specifies these differences explicitly.
-
-### In Markua, A Single Element List is Not a List
-
-Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
-
-`1986. What a great season.`
-
-This would produce a single element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
-
-Now, in Markua, if we supported single element lists, this would produce a single element numbered list starting with `1968.` -- which would be almost as bad as in Markdown.
-
-(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1968\. What a great season.` to avoid this.)
-
-But what to do?
-
-The answer is simple: in Markua, **single element lists are not lists**.
-
-To me, the notion of a *list* is something with more than one thing in it. If I have a list of chores to do, there are many of them. If I have one chore to do, I don't call it a list of chores--I call it a chore.
-
-So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses. This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
-
-A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, Markdown tries to make HTML wherever possible. Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list; I don't write one element lists).
-
-Now, there's an interesting corollary here: since a single element ordered list is not a list, a single element unordered list is also not a list. It would be just too surprising otherwise--and, again, a list is something with more than one thing in it.
 
 #### Example 1
 
