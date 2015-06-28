@@ -1,8 +1,8 @@
 introduction.txt
 philosophy.txt
 structure.txt
-images.txt
 element_types.txt
+images.txt
 headings.txt
 paragraphs.txt
 lists.txt

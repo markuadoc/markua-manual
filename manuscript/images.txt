@@ -17,9 +17,9 @@ The optional figure caption is described in the [Figures](#figures) section belo
 
 The alt text is text which is intended to take the place of the image if the image itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which do not display images.
 
-It is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly, like a mistake even, and it's a mistake to ignore the needs of readers with visual disabilities.
+It is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
 
-The alt text should not be the same thing as the figure caption, if the figure caption is present. The alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
 ## Image path
 
@@ -27,10 +27,9 @@ The `path/to/image.png` part is the relative path to the image inside the `image
 
 All images must be inside the `images` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
 
-Examples:
+A file called `foo.jpg` in the `images` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](images/foo.jpg)` or  `![](/images/foo.jpg)`.
 
-* A file called `foo.jpg` in the `images` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](images/foo.jpg)` or  `![](/images/foo.jpg)`.
-* A file called `bar.png` in a subdirectory `foo` of the images directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](images/foo/bar.png)` or  `![](/images/foo/bar.png)`.
+A file called `bar.png` in a subdirectory `foo` of the images directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](images/foo/bar.png)` or  `![](/images/foo/bar.png)`.
 
 W> In Leanpub Flavoured Markdown, we included the `images/` in the path of all images. This is not supported in Markua. Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is images/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the images directory.
 
@@ -61,13 +60,13 @@ The supported file extensions are:
 .xml
 : The image is treated as an SVG image.
 
-## Inline Images (as Span Elements)
+## Inline Images
 
 Images can be inserted inline in the flow of text in a paragraph. When an image is inserted inline, it must be positioned where it is inserted -- it cannot be floated and repositioned by Markua processors.
 
 An inline image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
-### Examples:
+### Examples
 
 {#inline_images_1}
 #### Example 1: Inline Images with Alt Text
@@ -78,19 +77,19 @@ Images can be inserted inline with alt text. Again, the alt text is intended to 
 
 {#input_inline_images_1}
 ```
-Markua has a spiffy ![the word Markua with the two asterisk trees beside it](markua-logo-small.png) logo!
+Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
 ```
 
 ##### HTML Output
 
 {#output_inline_images_1}
 ```
-<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="the word Markua with the two asterisk trees beside it"/> logo!</p>
+<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
 ##### Example Output
 
-Markua has a spiffy ![the word Markua with the two asterisk trees beside it](markua-logo-small.png) logo!
+Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
 
 {#inline_images_2}
 #### Example 2: Inline Images with no Alt Text
@@ -151,21 +150,21 @@ logo!
 
 {#input_inline_images_1}
 ```
-Markua has a spiffy ![the word Markua with the two asterisk trees beside it](markua-logo-small.png "This caption is ignored") logo!
+Markua has a spiffy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
 ```
 
 ##### HTML Output
 
 {#output_inline_images_1}
 ```
-<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="the word Markua with the two asterisk trees beside it"/> logo!</p>
+<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
 ##### Example Output
 
-Markua has a spiffy ![the word Markua with the two asterisk trees beside it](markua-logo-small.png "This caption is ignored") logo!
+Markua has a spiffy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
 
-## Figures (as Block Elements)
+## Figures
 
 The most powerful way to insert an image in Markua is as a Figure. To do this you add an image as a block element, separated like any other block element by blank lines above and below it.
 
@@ -176,7 +175,7 @@ A Figure can have a caption, which is shown associated with the image (typically
 
 Like the alt text, the figure caption is optional.
 
-A figure can also have three attributes: `float` and `width`. These are optional, and are expressed in an attribute list above the image.
+A figure can also have two attributes: `float` and `width`. These are optional, and are expressed in an attribute list above the image.
 
 `float`
 : The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
