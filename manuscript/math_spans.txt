@@ -34,7 +34,3 @@ The four kinematics equations are {$$}d = v_i t + \frac{1}{2} a t^2{/$$}, {$$}v_
 ### HTML Output
 
 Markua processors can do whatever they want here as well.
-
-### Example Output
-
-The four kinematics equations are {$$}d = v_i t + \frac{1}{2} a t^2{/$$}, {$$}v_f^2 = v_i^2 + 2 a d{/$$}, {$$}v_f = v_i + a t{/$$} and {$$}d = \frac{1}{2}(v_i + v_f) t{/$$}.

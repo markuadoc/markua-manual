@@ -58,10 +58,6 @@ The words foo{#foo} and bar{id: bar} both have ids.
 <p>The words <span id="foo">foo</span> and <span id="bar">bar</span> both have ids.</p>
 ```
 
-##### Example Output
-
-The words foo{#foo} and bar{id: bar} both have ids.
-
 #### Example 2: Defining an `id` on a code span
 
 Code spans, like any span, can have `id`s.
@@ -79,10 +75,6 @@ Java code is verbose, e.g. `public static void main(String[] args)`{#java}.
 ```
 <p>Java code is verbose, e.g. <code id="java">public static void main(String[] args)`</code>.</p>
 ```
-
-##### Example Output
-
-Java code is verbose, e.g. `public static void main(String[] args)`{#java}.
 
 #### Example 3: Defining an `id` on a span of emphasized text
 
@@ -102,10 +94,6 @@ The ideas behind *Leanpub*{id: leanpub} are explained in Peter's book _Lean Publ
 <p>The ideas behind <em id="leanpub">Leanpub</em> are explained in Peter's book <i id="lean">Lean Publishing</i>.</p>
 ```
 
-##### Example Output
-
-The ideas behind *Leanpub*{id: leanpub} are explained in Peter's book _Lean Publishing_{#lean}.
-
 #### Example 4: Nesting `id` definitions inside spans
 
 An `id` attribute can be defined on a span or word regardless of whether it is contained in a span.
@@ -123,10 +111,6 @@ This is *a **very very{#very} contrived** example{id: example}*{#contrived} show
 ```
 <p>This is <em id="contrived">a <strong>very <span id="very">very</span> contrived</strong> <span id="example">example</span></em> showing this.</p>
 ```
-
-##### Example Output
-
-This is *a **very very{#very} contrived** example{id: example}*{#contrived} showing this.
 
 ## Referencing an `id` With a Crosslink
 

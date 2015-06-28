@@ -27,7 +27,3 @@ This is [link text](http://markua.com) a link.
 ```
 <p>This is <a href="http://markua.com">link text</a> a link.</p>
 ```
-
-### Example Output
-
-This is [link text](http://markua.com) a link.

@@ -116,43 +116,6 @@ End!
 <p>End!</p>
 ```
 
-#### Example Output
-
-A list:
-
-* foo
-* bar
-* baz
-
-A list:
-
-*  foo
-*  bar
-*  baz
-
-A list (with tabs):
-
-* foo
-* bar
-* baz
-
-Not a list:
-
-- foo
-- bar
-
-Not a list:
-
-*    foo
-*   bar
-*  baz
-
-A list:
-
-*  foo
-
-End!
-
 {#ordered_lists}
 ## Ordered Lists
 
@@ -264,36 +227,6 @@ amet
 <p>amet</p>
 ```
 
-##### Example Output
-
-W> TODO - broken until Markua supported
-
-foo
-
-1. This isn't a list.
-
-bar
-
-1975. Also, not a list.
-
-lorem
-
-a. This isn't a list either.
-
-ipsum
-
-A. This isn't a list either.
-
-dolor
-
-i. This isn't a list either.
-
-sit
-
-I. This isn't a list either.
-
-amet
-
 {#ordered_list_2}
 #### Example 2
 
@@ -323,16 +256,6 @@ amet
 <p>amet</p>
 ```
 
-##### Example Output
-
-lorem
-
-1. ipsum
-2. dolor
-3. sit
-
-amet
-
 {#numbered_lists_3}
 #### Example 3
 
@@ -361,15 +284,6 @@ ipsum
 </ol>
 <p>ipsum</p>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-9. foo
-10. bar
-11. baz
 
 ## Uppercase Alphabetical List
 
@@ -407,14 +321,6 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-A) foo
-B) bar
-
 {#uppercase_alphabetical_lists_2}
 #### Example 2
 
@@ -435,14 +341,6 @@ B. bar
 <li>bar</li>
 </ol>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-A. foo
-B. bar
 
 {#uppercase_alphabetical_lists_3}
 #### Example 3
@@ -465,14 +363,6 @@ E) bar
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-D) foo
-E) bar
-
 {#uppercase_alphabetical_lists_4}
 #### Example 4
 
@@ -493,14 +383,6 @@ E. bar
 <li>bar</li>
 </ol>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-D. foo
-E. bar
 
 ## Lowercase Alphabetical List
 
@@ -538,14 +420,6 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-a) foo
-b) bar
-
 {#lowercase_alphabetical_lists_2}
 #### Example 2
 
@@ -566,14 +440,6 @@ b. bar
 <li>bar</li>
 </ol>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-a. foo
-b. bar
 
 {#lowercase_alphabetical_lists_3}
 #### Example 3
@@ -596,14 +462,6 @@ e) bar
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-d) foo
-e) bar
-
 {#lowercase_alphabetical_lists_4}
 #### Example 4
 
@@ -624,14 +482,6 @@ e. bar
 <li>bar</li>
 </ol>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-d. foo
-e. bar
 
 ## Uppercase Roman Numeral List
 
@@ -671,14 +521,6 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-I) foo
-II) bar
-
 {#uppercase_roman_numeral_lists_2}
 #### Example 2
 
@@ -699,14 +541,6 @@ II. bar
 <li>bar</li>
 </ol>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-I. foo
-II. bar
 
 {#uppercase_roman_numeral_lists_3}
 #### Example 3
@@ -729,14 +563,6 @@ V) bar
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-IV) foo
-V) bar
-
 {#uppercase_roman_numeral_lists_4}
 #### Example 4
 
@@ -757,14 +583,6 @@ V. bar
 <li>bar</li>
 </ol>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-IV. foo
-V. bar
 
 ## Lowercase Roman Numeral List
 
@@ -804,14 +622,6 @@ Note that in HTML the parentheses are ignored and periods are used instead. In P
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-i) foo
-ii) bar
-
 {#lowercase_roman_numeral_lists_2}
 #### Example 2
 
@@ -832,14 +642,6 @@ ii. bar
 <li>bar</li>
 </ol>
 ```
-
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-i. foo
-ii. bar
 
 {#lowercase_roman_numeral_lists_3}
 #### Example 3
@@ -862,14 +664,6 @@ v) bar
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-iv) foo
-v) bar
-
 {#lowercase_roman_numeral_lists_4}
 #### Example 4
 
@@ -891,13 +685,6 @@ v. bar
 </ol>
 ```
 
-##### Example Output
-
-{class: warning}
-B> FIXME: This Example Output is broken until Markua support is in Leanpub.
-
-iv. foo
-v. bar
 
 ### Ordered List Numbering Rules
 
@@ -1086,72 +873,6 @@ c. three</p>
 <p>That's it!</p>
 ```
 
-##### Example Output
-
-W> TODO - broken until Markua supported
-
-This makes an ordered list with decimal numbers (1, 2, 3):
-
-1. one
-1. two
-1. three
-
-This does not make a list, since the numbers are not all consecutive:
-
-1. foo
-2. bar
-4. baz
-
-This makes a list (1975, 1976):
-
-1975. An amazing year.
-1976. The year after 1975.
-
-This does not make a list:
-
-1975\. An amazing year.
-1976\. The year after 1975.
-
-This does not make a list:
-
-1975. An amazing year.
-2010. The year Leanpub was launched.
-
-This makes a lowercase alphabetical ordered list (a, b):
-
-a. one
-b. two
-
-This makes a lowercase alphabetical ordered list (e, f):
-
-e. five
-f. six
-
-This makes a lowercase alphabetical ordered list (i, ii, iii, iv):
-
-i. one
-ii. two
-iii. three
-iv. four
-
-Not a list:
-
-i. one
-ii. two
-iv. four
-
-Not a list:
-
-a\. one
-b\. two
-
-Not a list:
-
-a. one
-c. three
-
-That's it!
-
 {#definitionlists}
 ## Definition Lists
 
@@ -1170,16 +891,21 @@ term 2
 A definition list can define multiple definitions for a term:
 
 ```
-term 3
-: definition 3a
-: definition 3b
+term 1
+: definition 1a
+: definition 1b
+
+term 2
+: definition 2
 ```
 
-Note that a single element definition list is a definition list, unlike a single element unordered list and a single element ordered list.
+Note that a single term definition list is a definition list, regardless of how many definitions for the term exist.
 
+```
+term
+: definition
+```
 
-
-The
 For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.
 
 #### Example 1
@@ -1223,20 +949,3 @@ bar
 </dl>
 <p>bar</p>
 ```
-
-##### Example Output
-
-foo
-
-term 1
-: definition 1
-
-term 2
-: definition 2a
-: definition 2b
-: definition 2c
-
-term 3
-: definition 3
-
-bar

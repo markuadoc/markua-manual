@@ -18,7 +18,3 @@ You can use soft hyphens to suggest where to break long words like Rumpel\-stilt
 ## HTML Output
 
 <p>You can use soft hyphens to suggest where to break long words like Rumpel&shy;stiltskin if you wish.</p>
-
-## Example Output
-
-You can use soft hyphens to suggest where to break long words like Rumpel-stiltskin if you wish.

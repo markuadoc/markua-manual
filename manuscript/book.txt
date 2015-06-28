@@ -19,7 +19,6 @@ crosslinks.txt
 code_spans.txt
 math_spans.txt
 soft_hyphen.txt
-whitespace.txt
 metadata.txt
 implementation.txt
 definitions.txt

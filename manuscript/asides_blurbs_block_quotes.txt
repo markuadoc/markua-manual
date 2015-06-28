@@ -53,20 +53,6 @@ which contains newlines.</p>
 <p>This is a paragraph after the block quote.</p>
 ```
 
-#### Example Output
-
-This is a paragraph before the block quote.
-
-> This is a paragraph in the block quote.
->
-> This is a
-> second paragraph in the block quote
-> which contains newlines.
->
-> This is a third paragraph in the block quote.
-
-This is a paragraph after the block quote.
-
 {#asides}
 # Asides
 
@@ -109,20 +95,6 @@ which contains newlines.</p>
 </div>
 <p>This is a paragraph after the aside.</p>
 ```
-
-### Example Output
-
-This is a paragraph before the aside.
-
-A> This is a paragraph in the aside.
-A>
-A> This is a
-A> second paragraph in the aside
-A> which contains newlines.
-A>
-A> This is a third paragraph in the aside.
-
-This is a paragraph after the aside.
 
 {#blurbs}
 # Blurbs
@@ -168,20 +140,6 @@ which contains newlines.</p>
 </div>
 <p>This is a paragraph after the blurb.</p>
 ```
-
-### Example Output
-
-This is a paragraph before the blurb.
-
-B> This is a paragraph in the blurb.
-B>
-B> This is a
-B> second paragraph in the blurb
-B> which contains newlines.
-B>
-B> This is a third paragraph in the blurb.
-
-This is a paragraph after the blurb.
 
 ## Classes of Blurbs and Syntactic Sugar
 
@@ -268,23 +226,6 @@ which contains newlines.</p>
 </div>
 <p>This is a paragraph after the blurb.</p>
 ```
-
-##### Example Output
-
-TODO - default blurb is B> which has no icon at all, all other icons css not img (incorporate email feedback)
-
-This is a paragraph before the blurb.
-
-{class: warning}
-B> This is a paragraph in the blurb.
-B>
-B> This is a
-B> second paragraph in the blurb
-B> which contains newlines.
-B>
-B> This is a third paragraph in the blurb.
-
-This is a paragraph after the blurb.
 
 ## Using Extension Attributes on Blurbs to add Icons
 

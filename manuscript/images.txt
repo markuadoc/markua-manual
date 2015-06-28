@@ -88,10 +88,6 @@ Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
 <p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
-##### Example Output
-
-Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
-
 {#inline_images_2}
 #### Example 2: Inline Images with no Alt Text
 
@@ -110,10 +106,6 @@ Markua has a spiffy ![](markua-logo-small.png) logo!
 ```
 <p>Markua has a spiffy <img href="images/markua-logo-small.png"/> logo!</p>
 ```
-
-##### Example Output
-
-Markua has a spiffy ![](markua-logo-small.png) logo!
 
 {#inline_images_3}
 #### Example 3: Inline Images Separated With One Newline
@@ -138,12 +130,6 @@ logo!
 logo!</p>
 ```
 
-##### Example Output
-
-Markua has a spiffy
-![](markua-logo-small.png)
-logo!
-
 {#inline_images_4}
 #### Example 4: Inline Images Incorrectly Having a Caption
 
@@ -160,10 +146,6 @@ Markua has a spiffy ![Markua two trees logo](markua-logo-small.png "This caption
 ```
 <p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
-
-##### Example Output
-
-Markua has a spiffy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
 
 ## Figures
 
@@ -216,14 +198,6 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-##### Example Output
-
-Markua has a spiffy logo:
-
-![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
-
-Thanks Justin, it was fun making the logo with you!
-
 {#figures_2}
 #### Example 2: Figures with no Alt Text or Caption
 
@@ -250,14 +224,6 @@ Thanks Justin, it was fun making the logo with you!
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
-
-##### Example Output
-
-Markua has a spiffy logo:
-
-![](markua-logo.png)
-
-Thanks Justin, it was fun making the logo with you!
 
 {#figures_3}
 #### Example 3: Figures with Alt Text but no Caption
@@ -286,15 +252,6 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-##### Example Output
-
-Markua has a spiffy logo:
-
-![the word Markua with the two asterisk trees beside it](markua-logo.png "")
-
-Thanks Justin, it was fun making the logo with you!
-
-
 {#figures_4}
 #### Example 4: Figures with a Caption but no Alt Text
 
@@ -322,11 +279,3 @@ Thanks Justin, it was fun making the logo with you!
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
-
-##### Example Output
-
-Markua has a spiffy logo:
-
-![](markua-logo.png "The Markua Logo")
-
-Thanks Justin, it was fun making the logo with you!

@@ -26,11 +26,3 @@ Yada yada yada.
 <hr/>
 <p>Yada yada yada.</p>
 ```
-
-### Example Output
-
-Yada yada yada.
-
----
-
-Yada yada yada.

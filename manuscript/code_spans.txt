@@ -17,10 +17,6 @@ Here is some `hello world` span code.
 <p>Here is some <code>hello world</code> span code.</p>
 ```
 
-### Example Output
-
-Here is some `hello world` span code.
-
 ## Two Backticks to Enclose One Backtick
 
 Just as with Markdown, to show a literal backtick, you use *two* backticks to start and end your code span. (The Markdown spec says multiple backticks; Markua says exactly two.)
@@ -41,9 +37,3 @@ If you want to have a backtick by itself, just use you need to have spaces aroun
 <p>Here is some <code>code with a backtick (`) in it</code> and other text.</p>
 <p>If you want to have a backtick by itself, just use you need to have spaces around it like this <code>`</code>. The enclosed backtick cannot start or end the code block.</p>
 ```
-
-### Example Output
-
-Here is some ``code with a backtick (`) in it`` and other text.
-
-If you want to have a backtick by itself, just use you need to have spaces around it like this `` ` ``. The enclosed backtick cannot start or end the code block.
