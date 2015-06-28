@@ -138,16 +138,13 @@ amet
 {#unorderedlists}
 ## Unordered Lists
 
-To make an unordered list you start one or more consecutive lines with an asterisk (\*), followed by exactly one space, followed by text content.
+To make an unordered list you start one or more consecutive lines with an asterisk (\*), followed by 1 or more spaces or 1 tab, followed by text content.
 
 * No other line start other than an asterisk is correct Markua syntax. Specifically, unlike in Markdown, `- ` does not create an unordered list.
-* Only one space is allowed after the asterisk. No other number of spaces is correct Markua syntax. A tab is also not correct Markua syntax.
-
-There are three reasons that these rules are so restrictive:
-
-* to ensure that unordered lists have a consistent and simple formatting
-* an unordered list is so simple of a concept that there's no need for any complexity or variation
-* to simplify things for implementors of Markua processors
+* Any number of spaces is allowed after the asterisk, as long as it is the same number of spaces.
+* One tab is allowed after the asterisk, as long as tabs are used throughout the list.
+* A varied number of spaces or tabs does not create an unordered list.
+* The preferred amount of whitespace after the asterisk is one space.
 
 ### Examples
 
@@ -158,54 +155,23 @@ There are three reasons that these rules are so restrictive:
 
 {#input_unordered_lists_1}
 ```
-before
+A list:
 
 * foo
 * bar
 * baz
 
-after
-```
-
-##### HTML Output
-
-{#output_unordered_lists_1}
-```
-<p>before</p>
-<ul>
-<li>foo</li>
-<li>bar</li>
-<li>baz</li>
-</ul>
-<p>after</p>
-```
-
-##### Example Output
-
-before
-
-* foo
-* bar
-* baz
-
-after
-
-{#unordered_lists_2}
-#### Example 2
-
-##### Markua Syntax
-
-{#input_unordered_lists_2}
-```
-Not a list:
+A list:
 
 *  foo
 *  bar
+*  baz
 
-Not a list:
+A list (with tabs):
 
-*   foo
-*   bar
+* foo
+* bar
+* baz
 
 Not a list:
 
@@ -223,8 +189,26 @@ End!
 
 ##### HTML Output
 
-{#output_unordered_lists_2}
+{#output_unordered_lists_1}
 ```
+<p>A list:</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>A list:</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>A list (with tabs):</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
 <p>Not a list:</p>
 <p>*  foo<br/>
 *  bar</p>
@@ -243,15 +227,23 @@ End!
 
 ##### Example Output
 
-Not a list:
+A list:
+
+* foo
+* bar
+* baz
+
+A list:
 
 *  foo
 *  bar
+*  baz
 
-Not a list:
+A list (with tabs):
 
-*   foo
-*   bar
+* foo
+* bar
+* baz
 
 Not a list:
 
