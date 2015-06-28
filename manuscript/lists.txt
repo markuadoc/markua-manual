@@ -803,7 +803,6 @@ baz
 
 * foo
 
-
 ### Ordered List Numbering Rules
 
 There are a number of rules about what does and does not trigger the creation of an ordered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
@@ -890,6 +889,11 @@ This makes a list (1975, 1976):
 
 This does not make a list:
 
+1975\. An amazing year.
+1976\. The year after 1975.
+
+This does not make a list:
+
 1975. An amazing year.
 2010. The year Leanpub was launched.
 
@@ -912,6 +916,12 @@ iv. four
 
 Not a list:
 
+i. one
+ii. two
+iv. four
+
+Not a list:
+
 a\. one
 b\. two
 
@@ -920,17 +930,7 @@ Not a list:
 a. one
 c. three
 
-Not a list:
-
-i. one
-ii. two
-iv. four
-
 That's it!
-```
-
-
-End.
 ```
 
 ##### HTML Output
@@ -939,106 +939,36 @@ End.
 ```
 <p>This makes an ordered list with decimal numbers:</p>
 <ol>
-<li>one</li>
-<li>two</li>
-<li>three</li>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
 </ol>
 <p>This does not make a list, since the numbers are not all consecutive:</p>
 <p>1. foo<br/>
 2. bar<br/>
 4. baz</p>
-<p>This makes a list:</p>
+<p>This makes a list (1975, 1976):</p>
 <ol start="1975">
-<li>An amazing year.</li>
-<li>The year after 1975.</li>
+  <li>An amazing year.</li>
+  <li>The year after 1975.</li>
 </ol>
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
-2010. The year Leanpub was launched.</p>
-<p>End.</p>
-
-
-
-<p>End.</p>
-```
-
-{#input_list_consecutive_or_same_4}
-```
-End.
-```
-
-##### HTML Output
-
-{#output_list_consecutive_or_same_4}
-```
-<p>End.</p>
-```
-
-##### Example Output
-
-This makes a list:
-
-1975. An amazing year.
-1976. The year after 1975.
-
-End.
-
-#### Example 5
-
-##### Markua Syntax
-
-{#input_list_consecutive_or_same_5}
-```
-This does not make a list:
-
-1975\. An amazing year.
-1976\. The year after 1975.
-
-End.
-```
-
-##### HTML Output
-
-{#input_list_consecutive_or_same_5}
-```
+1976. The year after 1975.</p>
 <p>This does not make a list:</p>
 <p>1975. An amazing year.<br/>
-1976. The year after 1975.</p>
-<p>End.</p>
-```
-
-##### Example Output
-
-This does not make a list:
-
-1975\. An amazing year.
-1976\. The year after 1975.
-
-End.
-
-
-
-
-#### Example 5
-
-##### Markua Syntax
-
-
-##### HTML Output
-
-{#output_list_consecutive_5}
-```
-<p>A list:</p>
+2010. The year Leanpub was launched.</p>
+<p>This makes a lowercase alphabetical ordered list (a, b):</p>
 <ol type="a">
   <li>one</li>
   <li>two</li>
 </ol>
-<p>A list:</p>
+<p>This makes a lowercase alphabetical ordered list (e, f):</p>
 <ol type="a" start="5">
   <li>five</li>
   <li>six</li>
 </ol>
-<p>A list:</p>
+<p>This makes a lowercase alphabetical ordered list (i, ii, iii, iv):</p>
 <ol type="i">
   <li>one</li>
   <li>two</li>
@@ -1046,15 +976,15 @@ End.
   <li>four</li>
 </ol>
 <p>Not a list:</p>
-<p>a. one<br/>
-b. two</p>
-<p>Not a list:</p>
-<p>a. one<br/>
-c. three</p>
-<p>Not a list:</p>
 <p>i. one<br/>
 ii. two<br/>
 iv. four</p>
+<p>Not a list:</p>
+<p>a\. one<br/>
+b\. two</p>
+<p>Not a list:</p>
+<p>a. one<br/>
+c. three</p>
 <p>That's it!</p>
 ```
 
@@ -1062,21 +992,54 @@ iv. four</p>
 
 W> TODO - broken until Markua supported
 
-A list:
+This makes an ordered list with decimal numbers (1, 2, 3):
+
+1. one
+1. two
+1. three
+
+This does not make a list, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+This makes a list (1975, 1976):
+
+1975. An amazing year.
+1976. The year after 1975.
+
+This does not make a list:
+
+1975\. An amazing year.
+1976\. The year after 1975.
+
+This does not make a list:
+
+1975. An amazing year.
+2010. The year Leanpub was launched.
+
+This makes a lowercase alphabetical ordered list (a, b):
 
 a. one
 b. two
 
-A list:
+This makes a lowercase alphabetical ordered list (e, f):
 
 e. five
 f. six
 
-A list:
+This makes a lowercase alphabetical ordered list (i, ii, iii, iv):
 
 i. one
 ii. two
 iii. three
+iv. four
+
+Not a list:
+
+i. one
+ii. two
 iv. four
 
 Not a list:
@@ -1088,12 +1051,6 @@ Not a list:
 
 a. one
 c. three
-
-Not a list:
-
-i. one
-ii. two
-iv. four
 
 That's it!
 
