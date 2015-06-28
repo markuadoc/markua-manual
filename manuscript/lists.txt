@@ -1,4 +1,4 @@
-<{#lists}
+{#lists}
 # Lists
 
 In Markua, lists are a block element, meaning that all lists must have a blank line before and after them.
