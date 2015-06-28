@@ -143,10 +143,11 @@ To make an unordered list you start one or more consecutive lines with an asteri
 * No other line start other than an asterisk is correct Markua syntax. Specifically, unlike in Markdown, `- ` does not create an unordered list.
 * Only one space is allowed after the asterisk. No other number of spaces is correct Markua syntax. A tab is also not correct Markua syntax.
 
-There are two reasons that these rules are so restrictive:
+There are three reasons that these rules are so restrictive:
 
 * to ensure that unordered lists have a consistent and simple formatting
-* simplify things for implementors of Markua processors
+* an unordered list is so simple of a concept that there's no need for any complexity or variation
+* to simplify things for implementors of Markua processors
 
 ### Examples
 
