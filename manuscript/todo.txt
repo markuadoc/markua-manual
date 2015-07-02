@@ -271,7 +271,9 @@ foo bar
 index entry syntax is attr list syntax
 
 W>
+
 T>
+
 I>
 
 
