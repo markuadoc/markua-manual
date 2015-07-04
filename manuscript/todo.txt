@@ -1,5 +1,7 @@
 # TODO
 
+float left and right only
+
 - nested list => 2 spaces, 4 spaces, 1 tab, combination? (leaning: 2 spaces)
 
 - code blocks and new paragraphs inside list items
@@ -225,6 +227,23 @@ no (#foo) -- too much collision
 [human readable stuff](image.png "alt text")
 [human readable stuff]{#id}
 [human readable stuff]{id: foo, lang:he}
+
+
+oaue
+![alt](foo.png "The Foo")
+aoue
+
+
+
+aoeunsanoet usnatoh snthae nstaoeh sn
+> aonste asnote
+> satnoe
+natoeh nstaoe stnaoestnao
+
+link ref syntax bad for book because volume
+
+aaoue aoue
+
 
 
 

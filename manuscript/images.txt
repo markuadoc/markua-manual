@@ -1,7 +1,6 @@
 # Images
 
 The Markua image syntax can be briefly described as follows:
-
 `![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
 
 In Markua, images can be inserted in one of two ways:
@@ -15,9 +14,12 @@ The optional figure caption is described in the [Figures](#figures) section belo
 
 ## Alt text
 
+In the Markua image syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image:
+`![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+
 The alt text is text which is intended to take the place of the image if the image itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which do not display images.
 
-It is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
+While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
 
 The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
@@ -107,31 +109,10 @@ Markua has a spiffy ![](markua-logo-small.png) logo!
 <p>Markua has a spiffy <img href="images/markua-logo-small.png"/> logo!</p>
 ```
 
-{#inline_images_3}
-#### Example 3: Inline Images Separated With One Newline
-
-In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph. If an image is inserted on its own line, with single newlines above and below it, it is still an inline image and must be positioned where it is inserted.
-
-##### Markua Syntax
-
-{#input_inline_images_3}
-```
-Markua has a spiffy
-![](markua-logo-small.png)
-logo!
-```
-
-##### HTML Output
-
-{#output_inline_images_3}
-```
-<p>Markua has a spiffy<br/>
-<img href="images/markua-logo-small.png"/><br/>
-logo!</p>
-```
-
 {#inline_images_4}
-#### Example 4: Inline Images Incorrectly Having a Caption
+#### Example 3: Inline Images Incorrectly Having a Caption
+
+An inline image cannot have a caption. If one is present, it is ignored.
 
 ##### Markua Syntax
 
@@ -278,4 +259,40 @@ Thanks Justin, it was fun making the logo with you!
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+{#figures_5}
+#### Example 5: Figures Separated With One Newline
+
+In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph.
+
+If an image is inserted on its own line, with single newlines above and below it, it is still an inline image and must be positioned where it is inserted.
+
+W> TODO
+
+##### Markua Syntax
+
+{#input_figures_1}
+```
+This is paragraph 1.
+
+Markua has a spiffy logo:
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+Thanks Justin, it was fun making the logo with you!
+
+This is paragraph 3.
+```
+
+##### HTML Output
+
+{#output_figures_1}
+```
+<p>This is paragraph 1.</p>
+<div class="para">Markua has a spiffy logo:<br/>
+  <div class="figure">
+    <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+    <p class="caption">The Markua Logo</p>
+  </div><br/>Thanks Justin, it was fun making the logo with you!
+</div>
+<p>This is paragraph 3.</p>
 ```
