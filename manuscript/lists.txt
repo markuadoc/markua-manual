@@ -3,6 +3,8 @@
 
 Markua defines substantially more list types than Markdown. In Markdown, the only types of lists supported are ordered lists with decimal numbers and unordered lists. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list. Specifically, the following types of lists are supported:
 
+W> TODO - this list does not work until we support nested lists in Markua.
+
 1. Unordered lists
 2. Ordered lists, with the following numbering choices:
   a. Decimal numbers
