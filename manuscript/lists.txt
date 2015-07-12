@@ -19,11 +19,13 @@ If you are familiar with Markdown, as you read the sections below you will note 
 {#unorderedlists}
 ## Unordered Lists (i.e. Bulleted Lists)
 
-Like Markdown, Markua lets you start an unordered list with three types of bullet:
+Just as in Markdown, Markua lets you start an unordered list with three types of bullet:
 
 1. asterisks (`*`)
 2. hyphens (`-`)
 3. plus signs (`+`)
+
+(If you didn't know you could use `-` and `+` to start an unordered list in Markdown, now you do. The more you know.)
 
 To make an unordered list in Markua, you start one or more consecutive lines with one of these bullets, followed by between 1 and 4 spaces or 1 tab, followed by text content:
 
@@ -190,9 +192,9 @@ End!
 
 Ordered lists are more fully featured in Markua than in Markdown.
 
-Unlike in Markdown, in Markua the number that begins the list in the manuscript is the number that begins the list in the output.
+Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
 
-In Markua, an ordered list can vary the following:
+Also, in Markua, an ordered list can vary the following:
 
 1. Numbering system
   a. Decimal numbers
@@ -216,6 +218,8 @@ after
 ```
 
 Note that there are one or more spaces after the period. The reason that more spaces are allowed is to allow authors to line up their lists, if they choose to. Unlike with an unordered list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
+
+A> I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
 
 ### In Markua, A Single Element Ordered List is Not a List
 
