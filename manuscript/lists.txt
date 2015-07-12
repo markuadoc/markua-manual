@@ -40,9 +40,10 @@ after
 Here's how unordered lists work:
 
 * The preferred bullet type for an unordered list in Markua is the asterisk (`*`). However, all three bullet types are supported, since this would be a huge change for not that good of a reason.
-* Between 1 and 4 spaces is allowed after the bullet, as long as it is the same number of spaces and as long as spaces are used throughout the list.
-* One tab is allowed after the bullet, as long as tabs are used throughout the list.
-* A varied number of spaces or tabs does not create an unordered list.
+* Between 1 and 4 spaces or one tab is allowed after each bullet.
+* You cannot mix tabs and spaces: if a tab is used after a bullet, tabs must be used after each bullet.
+* If spaces are used after each bullet, the same number of spaces MUST be used after each bullet in the list.
+* A varied number of spaces or tabs or a mixture of tabs and spaces does not create an unordered list. Instead, it creates a paragraph with line breaks inside it, which produces break tags in HTML.
 * The preferred amount and type of whitespace after the bullet is one space.
 * The bullet type used is output as a class in the HTML, so that designers can optionally use CSS to vary the style of bullets based on the bullet type used by the author.
 * A single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk, plus or hyphen would be even stupider.
@@ -202,7 +203,7 @@ In Markua, an ordered list can vary the following:
 2. Numbering direction (ascending or descending)
 3. Initial number (or letter, or Roman numeral)
 
-To make a numbered list you start one or more consecutive lines with a consecutive number, followed by a period, followed by 1 or more spaces or 1 tab, followed by text content.
+To make an ordered list in Markua, you start one or more consecutive lines with a consecutive number (or letter or roman numeral), followed by between 1 and 4 spaces or 1 tab, followed by text content:
 
 ```
 before
