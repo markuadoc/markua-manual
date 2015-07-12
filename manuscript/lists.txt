@@ -17,17 +17,6 @@ Note that in HTML and in Markdown, the terminology is "unordered" vs. "ordered" 
 1. The terms "ordered list" and "unordered list" come from HTML, and have more of a "programming" feeling to them than a "writing" feeling. Markua is a format for writers.
 2. The terms "ordered list" and "unordered list" imply an HTML implementation only, and Markua is used to generate PDF, EPUB, MOBI and HTML.
 3. All lists have an order--otherwise they would not be lists! So, the term "unordered list" is inherently absurd. (In the W3C thinking, the order of the items in an unordered list does not matter, and they could be in any order. However, that's a narrow way of interpreting what a bulleted list means.)
-4. The term "bulleted list" is different than "unordered list", and Markua supports only asterisks as its delimiters, whereas in Markdown `-` and `+` are also supported. So choosing a different term highlights the differences.
-
-
-+* No other line start other than an asterisk is correct Markua syntax. Specifically, unlike in Markdown, `- ` does not create an unordered list.
-+* Any number of spaces is allowed after the asterisk, as long as it is the same number of spaces.
-+* One tab is allowed after the asterisk, as long as tabs are used throughout the list.
-+* A varied number of spaces or tabs does not create an unordered list.
-+* The preferred amount of whitespace after the asterisk is one space.
-
-
-* It feels more like writing than
 
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
