@@ -25,7 +25,17 @@ Like Markdown, Markua lets you start an unordered list with three types of bulle
 2. hyphens (`-`)
 3. plus signs (`+`)
 
-To make an unordered list in Markua, you start one or more consecutive lines with one of these bullets, followed by between 1 and 4 spaces or 1 tab, followed by text content.
+To make an unordered list in Markua, you start one or more consecutive lines with one of these bullets, followed by between 1 and 4 spaces or 1 tab, followed by text content:
+
+```
+before
+
+* foo
+* bar
+* baz
+
+after
+```
 
 Here's how unordered lists work:
 
@@ -37,7 +47,7 @@ Here's how unordered lists work:
 * The bullet type used is output as a class in the HTML, so that designers can optionally use CSS to vary the style of bullets based on the bullet type used by the author.
 * A single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk, plus or hyphen would be even stupider.
 
-A> In Markua, lists can be [embedded inside paragraphs](#embedding_inside_paragraph). However, this functions the same way regardless of the list type, so it is not discussed here.
+A> In Markua, lists can also be [embedded inside paragraphs](#embedding_inside_paragraph). However, this functions the same way regardless of the list type, so it is not discussed here.
 
 {#unordered_lists_1}
 ### Example
@@ -195,13 +205,13 @@ In Markua, an ordered list can vary the following:
 To make a numbered list you start one or more consecutive lines with a consecutive number, followed by a period, followed by 1 or more spaces or 1 tab, followed by text content.
 
 ```
-foo
+before
 
 1. foo
 2. bar
 3. baz
 
-bar
+after
 ```
 
 Note that there are one or more spaces after the period. The reason that more spaces are allowed is to allow authors to line up their lists, if they choose to. Unlike with an unordered list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
@@ -224,7 +234,7 @@ The answer is simple: in Markua, **single element ordered lists are not lists**.
 
 To me, the notion of a *list* is something with more than one thing in it. If I have a list of chores to do, there are many of them. If I have one chore to do, I don't call it a list of chores--I call it a chore.
 
-So, in Markua, the automatic creation of an ordered list only happens if you have two or more lines starting with numbers and periods or parentheses.
+So, in Markua, the automatic creation of an ordered list only happens if you have two or more lines starting with numbers and periods.
 
 This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
