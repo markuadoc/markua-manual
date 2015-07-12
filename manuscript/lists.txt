@@ -258,6 +258,12 @@ sit
 9. baz
 
 amet
+
+1. foo
+1. bar
+1. baz
+
+etc
 ```
 
 ##### HTML Output
@@ -289,13 +295,19 @@ amet
   <li>baz</li>
 </ol>
 <p>amet</p>
+<ol>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>etc</p>
 ```
 
 #### Example 2: Uppercase Letters
 
 ##### Markua Syntax
 
-{#input_ordered_list_1}
+{#input_ordered_list_2}
 ```
 lorem
 
@@ -322,11 +334,17 @@ J. bar
 I. baz
 
 amet
+
+A. foo
+A. bar
+A. baz
+
+etc
 ```
 
 ##### HTML Output
 
-{#output_ordered_list_1}
+{#output_ordered_list_2}
 ```
 <p>lorem</p>
 <ol type="A">
@@ -353,198 +371,240 @@ amet
   <li>baz</li>
 </ol>
 <p>amet</p>
+<ol type="A">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>etc</p>
 ```
 
 #### Example 3: Lowercase Letters
 
 ##### Markua Syntax
 
-{#input_ordered_list_1}
+{#input_ordered_list_3}
 ```
 lorem
 
-1. foo
-2. bar
-3. baz
+a. foo
+b. bar
+c. baz
 
 ipsum
 
-9. foo
-10. bar
-11. baz
+i. foo
+j. bar
+k. baz
 
 dolor
 
-3. foo
-2. bar
-1. baz
+c. foo
+b. bar
+a. baz
 
 sit
 
-11. foo
-10. bar
-9. baz
+k. foo
+j. bar
+i. baz
 
 amet
+
+a. foo
+a. bar
+a. baz
+
+etc
 ```
 
 ##### HTML Output
 
-{#output_ordered_list_1}
+{#output_ordered_list_3}
 ```
 <p>lorem</p>
-<ol>
+<ol type="a">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-<ol start="9">
+<ol type="a" start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>dolor</p>
-<ol start="3" reversed="true">
+<ol type="a" start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>sit</p>
-<ol start="11" reversed="true">
+<ol type="a" start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>amet</p>
+<ol type="a">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>etc</p>
 ```
 
 #### Example 4: Uppercase Roman numerals
 
 ##### Markua Syntax
 
-{#input_ordered_list_1}
+{#input_ordered_list_4}
 ```
 lorem
 
-1. foo
-2. bar
-3. baz
+I. foo
+II. bar
+III. baz
 
 ipsum
 
-9. foo
-10. bar
-11. baz
+IX. foo
+X. bar
+XI. baz
 
 dolor
 
-3. foo
-2. bar
-1. baz
+III. foo
+II. bar
+I. baz
 
 sit
 
-11. foo
-10. bar
-9. baz
+XI. foo
+X. bar
+IX. baz
 
 amet
+
+I. foo
+I. bar
+I. baz
+
+etc
 ```
 
 ##### HTML Output
 
-{#output_ordered_list_1}
+{#output_ordered_list_4}
 ```
 <p>lorem</p>
-<ol>
+<ol type="I">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-<ol start="9">
+<ol type="I" start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>dolor</p>
-<ol start="3" reversed="true">
+<ol type="I" start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>sit</p>
-<ol start="11" reversed="true">
+<ol type="I" start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>amet</p>
+<ol type="I">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>etc</p>
 ```
 
 #### Example 5: Lowercase Roman numerals
 
 ##### Markua Syntax
 
-{#input_ordered_list_1}
+{#input_ordered_list_5}
 ```
 lorem
 
-1. foo
-2. bar
-3. baz
+i. foo
+ii. bar
+iii. baz
 
 ipsum
 
-9. foo
-10. bar
-11. baz
+ix. foo
+x. bar
+xi. baz
 
 dolor
 
-3. foo
-2. bar
-1. baz
+iii. foo
+ii. bar
+i. baz
 
 sit
 
-11. foo
-10. bar
-9. baz
+xi. foo
+x. bar
+ix. baz
 
 amet
+
+i. foo
+i. bar
+i. baz
+
+etc
 ```
 
 ##### HTML Output
 
-{#output_ordered_list_1}
+{#output_ordered_list_5}
 ```
 <p>lorem</p>
-<ol>
+<ol type="i">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-<ol start="9">
+<ol type="i" start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>dolor</p>
-<ol start="3" reversed="true">
+<ol type="i" start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>sit</p>
-<ol start="11" reversed="true">
+<ol type="i" start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
 <p>amet</p>
+<ol type="i">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>etc</p>
 ```
 
 ### In Markua, A Single Element Ordered List is Not a List
@@ -639,16 +699,8 @@ amet
 </ol>
 ```
 
-## Lowercase Alphabetical List
 
-To make a lowercase alphabetical list you start one or more consecutive lines with a lowercase letter, followed by a right parentheses (`)`) or a period (`.`), followed by whitespace, followed by text content:
 
-```
-a) foo
-b) bar
-```
-
-The letter that begins the list in the manuscript is the letter that begins the list in the output. Also, letters must be consecutive.
 
 ### Examples
 
