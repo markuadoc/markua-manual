@@ -3,8 +3,8 @@
 
 Markua defines substantially more list types than Markdown. In Markdown, the only types of lists supported are ordered lists with decimal numbers and unordered lists. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list. Specifically, the following types of lists are supported:
 
-1. Bulleted lists
-2. Numbered lists, with the following numbering choices:
+1. Unordered lists
+2. Ordered lists, with the following numbering choices:
   a. Decimal numbers
   b. Uppercase letters
   c. Lowercase letters
@@ -12,39 +12,32 @@ Markua defines substantially more list types than Markdown. In Markdown, the onl
   e. Lowercase Roman numerals
 3. Definition lists
 
-Note that in HTML and in Markdown, the terminology is "unordered" vs. "ordered" lists. Markua uses "bulleted" vs. "numbered" list for the following reasons:
-
-1. The terms "ordered list" and "unordered list" come from HTML, and have more of a "programming" feeling to them than a "writing" feeling. Markua is a format for writers.
-2. The terms "ordered list" and "unordered list" imply an HTML implementation only, and Markua is used to generate PDF, EPUB, MOBI and HTML.
-3. All lists have an order--otherwise they would not be lists! So, the term "unordered list" is inherently absurd. (In the W3C thinking, the order of the items in an unordered list does not matter, and they could be in any order. However, that's a narrow way of interpreting what a bulleted list means.)
-
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
 If you are familiar with Markdown, as you read the sections below you will note a number of differences between Markua lists and Markdown lists.
 
 {#unorderedlists}
-## Unordered Lists
+## Unordered Lists (i.e. Bulleted Lists)
 
-To make an unordered list you start one or more consecutive lines with an asterisk (\*), followed by 1 or more spaces or 1 tab, followed by text content.
+Like Markdown, Markua lets you start an unordered list with three types of bullet:
 
-* No other line start other than an asterisk is correct Markua syntax; `-` and `+` are not allowed as bullets.
-* Any number of spaces is allowed after the asterisk, as long as it is the same number of spaces.
-* One tab is allowed after the asterisk, as long as tabs are used throughout the list.
+1. asterisks (`*`)
+2. hyphens (`-`)
+3. plus signs (`+`)
+
+To make an unordered list in Markua, you start one or more consecutive lines with one of these bullets, followed by between 1 and 4 spaces or 1 tab, followed by text content.
+
+Here's how unordered lists work:
+
+* The preferred bullet type for an unordered list in Markua is the asterisk (`*`). However, all three bullet types are supported, since this would be a huge change for not that good of a reason.
+* Between 1 and 4 spaces is allowed after the bullet, as long as it is the same number of spaces and as long as spaces are used throughout the list.
+* One tab is allowed after the bullet, as long as tabs are used throughout the list.
 * A varied number of spaces or tabs does not create an unordered list.
-* The preferred amount of whitespace after the asterisk is one space.
+* The preferred amount and type of whitespace after the bullet is one space.
+* The bullet type used is output as a class in the HTML, so that designers can optionally use CSS to vary the style of bullets based on the bullet type used by the author.
+* A single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk, plus or hyphen would be even stupider.
 
-Note that a single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk would be even stupider.
-
-W> In Markdown,
-
-*  aoue
-*  aouse
-*  aotnunh
-
-1. aoue
-1. aoeu
-* aoeu
-* aoue . Specifically, unlike in Markdown, in Markua multiple lines starting with `- ` or `+ ` do not create an unordered list:
+A> In Markua, lists can be [embedded inside paragraphs](#embedding_inside_paragraph). However, this functions the same way regardless of the list type, so it is not discussed here.
 
 {#unordered_lists_1}
 ### Example
@@ -53,35 +46,65 @@ W> In Markdown,
 
 {#input_unordered_lists_1}
 ```
-A list:
+A list (asterisks, one space after each):
+
 * foo
 * bar
 * baz
 
-A list:
+A list (asterisks, two spaces after each):
+
 *  foo
 *  bar
 *  baz
 
-A list (with tabs):
+A list (asterisks, three spaces after each):
+
+*   foo
+*   bar
+*   baz
+
+A list (asterisks, four spaces after each):
+
+*    foo
+*    bar
+*    baz
+
+A list (asterisks, one tab after each):
+
 * foo
 * bar
 * baz
 
-Not a list:
+A list (hyphens, one space after each):
 
 - foo
 - bar
+- baz
 
-Not a list:
+A list (pluses, one space after each):
+
++ foo
++ bar
++ baz
+
+A list (one element list with asterisk):
+
+* foo
+
+A list (one element list with hyphen):
+
+- foo
+
+A list (one element list with plus):
+
++ foo
+
+Not a list (variable number of spaces after bullets):
 
 *    foo
 *   bar
 *  baz
-
-A list:
-
-*  foo
 
 End!
 ```
@@ -90,46 +113,69 @@ End!
 
 {#output_unordered_lists_1}
 ```
-<p>A list:</p>
+<p>A list (asterisks, one space after each):</p>
 <ul>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ul>
-<p>A list:</p>
+<p>A list (asterisks, two spaces after each):</p>
 <ul>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ul>
-<p>A list (with tabs):</p>
+<p>A list (asterisks, three spaces after each):</p>
 <ul>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ul>
-<p>Not a list:</p>
-<p>*  foo<br/>
-*  bar</p>
-<p>Not a list:</p>
-<p>*   foo<br/>
-*   bar</p>
-<p>Not a list:</p>
-<p>- foo<br/>
-- bar</p>
-<p>Not a list:</p>
+<p>A list (asterisks, four spaces after each):</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>A list (asterisks, one tab after each):</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>A list (hyphens, one space after each):</p>
+<ul class="hyphen">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>A list (pluses, one space after each):</p>
+<ul class="plus">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>A list (one element list with asterisk):</p>
+<ul>
+  <li>foo</li>
+</ul>
+<p>A list (one element list with hyphen):</p>
+<ul class="hyphen">
+  <li>foo</li>
+</ul>
+<p>A list (one element list with plus):</p>
+<ul class="plus">
+  <li>foo</li>
+</ul>
+<p>Not a list (variable number of spaces after bullets):</p>
 <p>*    foo<br/>
 *   bar<br/>
 *  baz</p>
-<p>A list:</p>
-<ul>
-  <li>foo</li>
-</ul>
 <p>End!</p>
 ```
 
 {#ordered_lists}
-## Ordered Lists
+## Ordered Lists (i.e. Numbered Lists)
 
 Ordered lists are more fully featured in Markua than in Markdown.
 

@@ -1,5 +1,5 @@
 {#paragraphs}
-# Paragraphs,  Line Breaks and Whitespace
+# Paragraphs, Line Breaks and Whitespace
 
 When writing normal prose, you break your writing into paragraphs.
 
@@ -36,11 +36,12 @@ This is a third paragraph.
 <p>This is a third paragraph.</p>
 ```
 
-# TODO embedding lists, images, figures inside a paragraph.
+{#embedding_inside_paragraph}
+## TODO embedding lists, images, figures inside a paragraph.
 
 Yes, this is not valid HTML with a `<p>` tag, but it is with a `<div class="para">` and it is more appropriate for paragraphs to be how writers defined them than the W3C.
 
-# Whitespace
+## Whitespace
 
 Newlines, blank lines, leading spaces, trailing spaces and such in Markua are called whitespace.
 
@@ -54,23 +55,23 @@ Markdown is a tool for web writers. Markua is a tool for writers.
 
 Below are the rules which combine to accomplish this.
 
-## All Whitespace is Preserved in Code Blocks
+### All Whitespace is Preserved in Code Blocks
 
 Inside a code block, all whitespace is preserved. This includes leading and trailing whitespace, whether those are newlines, tabs or space characters.
 
 This is a lot simpler that trying to construct rules which would be complex and potentially brittle.
 
-## Trailing Whitespace is Ignored Except in Code Blocks
+### Trailing Whitespace is Ignored Except in Code Blocks
 
 Trailing whitespace at the end of a line has no meaning in Markua. It is ignored, except in code blocks.
 
 A> In Markdown, trailing whitespace sometimes has meaning. (You can add two spaces to the end of a line to force a line break.) However, since this is "invisible magic formatting", and since some text editors can be set to remove trailing spaces, this is ignored.
 
-## Leading Whitespace at the Beginning of a Paragraph is Ignored
+### Leading Whitespace at the Beginning of a Paragraph is Ignored
 
 This way, you can write paragraphs and it does not matter whether you indent or your text editor does.
 
-## Whitespace is Preserved Following a Single Newline
+### Whitespace is Preserved Following a Single Newline
 
 Poets: you're welcome. As discussed in [poetry](#poetry), you can write sonnets with no formatting characters.
 
@@ -79,7 +80,7 @@ Following a single (not double) newline:
 * A single space produces a single space (a "non-breaking" space, or `&nbsp;`, in HTML).
 * A single tab produces four spaces (four "non-breaking" spaces, or `&nbsp;&nbsp;&nbsp;&nbsp;`, in HTML).
 
-## Multiple Spaces Inside a Paragpraph are Collapsed to a Single Space
+### Multiple Spaces Inside a Paragpraph are Collapsed to a Single Space
 
 This has many benefits, but the largest is that it means Markua books and documents look the same regardless of whether the author uses one space after a period or two spaces after a period.
 
