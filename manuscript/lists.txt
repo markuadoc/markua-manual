@@ -70,139 +70,300 @@ Here's how unordered lists work:
 * The bullet type used is output as a class in the HTML, so that designers can optionally use CSS to vary the style of bullets based on the bullet type used by the author.
 * A single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk, plus or hyphen would be even stupider.
 
-{#unordered_lists_1}
-### Example
+### Examples
 
-#### Markua Syntax
+#### Example 1: A list (asterisks, one space after each)
 
-{#input_unordered_lists_1}
+##### Markua Syntax
+
+{#input_unordered_list_1}
 ```
-A list (asterisks, one space after each):
+lorem
 
 * foo
 * bar
 * baz
 
-A list (asterisks, two spaces after each):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_1}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 2: A list (asterisks, two spaces after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_2}
+```
+lorem
 
 *  foo
 *  bar
 *  baz
 
-A list (asterisks, three spaces after each):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_2}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 3: A list (asterisks, three spaces after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_3}
+```
+lorem
 
 *   foo
 *   bar
 *   baz
 
-A list (asterisks, four spaces after each):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_3}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 4: A list (asterisks, four spaces after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_4}
+```
+lorem
 
 *    foo
 *    bar
 *    baz
 
-A list (asterisks, one tab after each):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_4}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 5: A list (asterisks, one tab after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_5}
+```
+lorem
 
 * foo
 * bar
 * baz
 
-A list (hyphens, one space after each):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_5}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 6: A list (hyphens, one space after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_6}
+```
+lorem
 
 - foo
 - bar
 - baz
 
-A list (pluses, one space after each):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_6}
+```
+<p>lorem</p>
+<ul class="hyphen">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 7: A list (pluses, one space after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_7}
+```
+lorem
 
 + foo
 + bar
 + baz
 
-A list (one element list with asterisk):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_7}
+```
+<p>lorem</p>
+<ul class="plus">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 8: A list (one element list with asterisk)
+
+##### Markua Syntax
+
+{#input_unordered_list_8}
+```
+lorem
 
 * foo
 
-A list (one element list with hyphen):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_8}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 9: A list (one element list with hyphen)
+
+##### Markua Syntax
+
+{#input_unordered_list_9}
+```
+lorem
 
 - foo
 
-A list (one element list with plus):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_9}
+```
+<p>lorem</p>
+<ul class="hyphen">
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 10: A list (one element list with plus)
+
+##### Markua Syntax
+
+{#input_unordered_list_10}
+```
+lorem
 
 + foo
 
-Not a list (variable number of spaces after bullets):
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_10}
+```
+<p>lorem</p>
+<ul class="plus">
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 11: Not a list (variable number of spaces after bullets)
+
+##### Markua Syntax
+
+{#input_unordered_list_11}
+```
+lorem
 
 *    foo
 *   bar
 *  baz
 
-End!
+ipsum
 ```
 
-#### HTML Output
+##### HTML Output
 
-{#output_unordered_lists_1}
+{#output_unordered_list_11}
 ```
-<p>A list (asterisks, one space after each):</p>
-<ul>
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>A list (asterisks, two spaces after each):</p>
-<ul>
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>A list (asterisks, three spaces after each):</p>
-<ul>
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>A list (asterisks, four spaces after each):</p>
-<ul>
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>A list (asterisks, one tab after each):</p>
-<ul>
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>A list (hyphens, one space after each):</p>
-<ul class="hyphen">
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>A list (pluses, one space after each):</p>
-<ul class="plus">
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>A list (one element list with asterisk):</p>
-<ul>
-  <li>foo</li>
-</ul>
-<p>A list (one element list with hyphen):</p>
-<ul class="hyphen">
-  <li>foo</li>
-</ul>
-<p>A list (one element list with plus):</p>
-<ul class="plus">
-  <li>foo</li>
-</ul>
-<p>Not a list (variable number of spaces after bullets):</p>
+<p>lorem</p>
 <p>*    foo<br/>
 *   bar<br/>
 *  baz</p>
-<p>End!</p>
+<p>ipsum</p>
 ```
 
 {#ordered_lists}
