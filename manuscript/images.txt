@@ -1,14 +1,29 @@
 # Images
 
 The Markua image syntax can be briefly described as follows:
-`![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+`![Optional Alt Text](path_to_or_url_of_image "Optional Figure Caption")`
 
 In Markua, images can be inserted in one of two ways:
 
 1. As an **Inline** image, as part of the flow of text of a paragraph.
-2. As a **Figure**, on a line by itself with blank lines above and below it.
+2. As a **Figure**, on a line by itself.
 
-W> There is no support for Markdown's reference style images in Markua. One image syntax in two modes is plenty enough to remember.
+A> **NO Reference-Style Images**
+A>
+A> Markua does **NOT** support Markdown's reference style of images.
+A>
+A> In this syntax, an `id` is defined for an image, like this:
+A> `[image_id]: path_or_url_of_image "Optional title attribute"`
+A>
+A> This `id` can then be used to insert an image, like this:
+A> `![Optional alt text][image id]`
+A>
+A> While this seems like a good idea, it's not, for these reasons:
+A>
+A> 1. Defining the optional title attribute in one place with the image itself, while the alt text is defined with the image insertion syntax is difficult to remember.
+A> 2. Either the `id` is being defined and only used once or the `id` is being defined once and used multiple times. If the `id` is only used once, it is more cumbersome for no added benefit. If the `id` is being used multiple times...
+
+TODO - I think I may have gotten this wrong. (Emoji, short articles, cumbersome video syntax meaning media insertion by id is nice, etc.)
 
 The optional figure caption is described in the [Figures](#figures) section below; the alt text and image path are described below.
 
@@ -23,17 +38,25 @@ While the alt text is optional, it is important to have alt text. This is one re
 
 The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
-## Image path
+## Image Path or URL
 
-The `path/to/image.png` part is the relative path to the image inside the `images` directory. The `images/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
+The `path_to_or_url_of_image.png` part is the relative path to the image inside the `images` directory or the URL of the image on the internet. Both of these methods are described next.
 
-All images must be inside the `images` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+### Images Path Approach
+
+The `images/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
+
+All images identified with a directory path must be inside the `images` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
 
 A file called `foo.jpg` in the `images` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](images/foo.jpg)` or  `![](/images/foo.jpg)`.
 
 A file called `bar.png` in a subdirectory `foo` of the images directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](images/foo/bar.png)` or  `![](/images/foo/bar.png)`.
 
 W> In Leanpub Flavoured Markdown, we included the `images/` in the path of all images. This is not supported in Markua. Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is images/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the images directory.
+
+### Images URL Approach
+
+The URL approach with an image is simple: the URL is an absolute URL of an image on the internet. The URL must start with with either `http:` or `https:`; no other protocols are supported.
 
 ## Supported Image Types
 
@@ -69,10 +92,8 @@ Images can be inserted inline in the flow of text in a paragraph. When an image 
 
 An inline image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
-### Examples
-
 {#inline_images_1}
-#### Example 1: Inline Images with Alt Text
+### Example 1: Inline Images with Alt Text
 
 Images can be inserted inline with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
 
@@ -91,7 +112,7 @@ Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
 ```
 
 {#inline_images_2}
-#### Example 2: Inline Images with no Alt Text
+### Example 2: Inline Images with no Alt Text
 
 Images can be inserted inline with no alt text.
 
@@ -110,7 +131,7 @@ Markua has a spiffy ![](markua-logo-small.png) logo!
 ```
 
 {#inline_images_4}
-#### Example 3: Inline Images Incorrectly Having a Caption
+### Example 3: Inline Images Incorrectly Having a Caption
 
 An inline image cannot have a caption. If one is present, it is ignored.
 
@@ -128,9 +149,38 @@ Markua has a spiffy ![Markua two trees logo](markua-logo-small.png "This caption
 <p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
+{#inline_images_4}
+### Example 1: Inline Images with URL Syntax
+
+Images can be inserted inline with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
+
+##### Markua Syntax
+
+{#input_inline_images_1}
+```
+Markua has a spiffy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
+```
+
+##### HTML Output
+
+{#output_inline_images_1}
+```
+<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+```
+
 ## Figures
 
-The most powerful way to insert an image in Markua is as a Figure. To do this you add an image as a block element, separated like any other block element by blank lines above and below it.
+The most powerful way to insert an image in Markua is as a Figure. To do this you add an image on a line by itself.
+
+A figure can be inserted in one of two ways:
+
+Block
+: The figure has blank lines above and below it.
+
+Inline Block
+: The figure has no blank lines above or below it.
+
+
 
 A Figure can have a caption, which is shown associated with the image (typically above or below it). This caption shows up in two places:
 
@@ -139,7 +189,7 @@ A Figure can have a caption, which is shown associated with the image (typically
 
 Like the alt text, the figure caption is optional.
 
-A figure can also have two attributes: `float` and `width`. These are optional, and are expressed in an attribute list above the image. These turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
+A figure can also have two attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
 
 `float`
 : The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
@@ -147,10 +197,11 @@ A figure can also have two attributes: `float` and `width`. These are optional, 
 `width`
 : The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
 
-### Examples
+`type`
+: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting [audio](#audio) and [video](#video); see those chapters for details.
 
 {#figures_1}
-#### Example 1: Figures with Alt Text and a Caption
+### Example 1: Figures with Alt Text and a Caption
 
 Ideally, a figure should have both alt text and a caption. The alt text is intended for readers who can't see the image, and the caption is intended to complement the image.
 
@@ -178,7 +229,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_2}
-#### Example 2: Figures with no Alt Text or Caption
+### Example 2: Figures with no Alt Text or Caption
 
 Images can be inserted as a figure even with no alt text or caption. If this is done, the image is still styled as a figure, but the image has no caption and does **not** show up in the List of Illustrations.
 
@@ -205,7 +256,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_3}
-#### Example 3: Figures with Alt Text but no Caption
+### Example 3: Figures with Alt Text but no Caption
 
 The alt text and caption are both optional. This example shows a figure with alt text but no caption.
 
@@ -232,7 +283,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_4}
-#### Example 4: Figures with a Caption but no Alt Text
+### Example 4: Figures with a Caption but no Alt Text
 
 The alt text and caption are both optional. This example shows a figure with a caption but no alt text.
 
@@ -260,7 +311,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_5}
-#### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
+### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
 
 This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
 
@@ -289,7 +340,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_6}
-#### Example 6: A Figure with a `width` Attribute of `fullbleed`
+### Example 6: A Figure with a `width` Attribute of `fullbleed`
 
 This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
 
@@ -318,7 +369,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_7}
-#### Example 7: Figures Separated With One Newline
+### Example 7: Figures Separated With One Newline
 
 In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph.
 
