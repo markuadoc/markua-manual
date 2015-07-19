@@ -223,6 +223,8 @@ Also, in Markua, an ordered list can vary the following:
 2. Numbering direction (ascending or descending)
 3. Initial number (or letter, or Roman numeral)
 
+W> TODO - this list above renders wrong until we support nested lists in Markua
+
 To make an ordered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by between 1 and 4 spaces or 1 tab, followed by text content:
 
 ```
@@ -241,11 +243,11 @@ Note that there are one or more spaces after the period. Unlike with an unordere
 
 A> I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
 
-### Examples
+### Examples: Decimal Numbers
 
 This set of examples shows the normal use cases of lists. For the edge cases, see the next sections.
 
-#### Example 1: Decimal Numbers
+#### Example 1
 
 ##### Markua Syntax
 
@@ -258,30 +260,6 @@ lorem
 3. baz
 
 ipsum
-
-9. foo
-10. bar
-11. baz
-
-dolor
-
-3. foo
-2. bar
-1. baz
-
-sit
-
-11. foo
-10. bar
-9. baz
-
-amet
-
-1. foo
-1. bar
-1. baz
-
-etc
 ```
 
 ##### HTML Output
@@ -295,33 +273,129 @@ etc
   <li>baz</li>
 </ol>
 <p>ipsum</p>
+```
+
+#### Example 2
+
+##### Markua Syntax
+
+{#input_ordered_list_2}
+```
+lorem
+
+9. foo
+10. bar
+11. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_2}
+```
+<p>lorem</p>
 <ol start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>dolor</p>
+<p>ipsum</p>
+```
+
+#### Example 3
+
+##### Markua Syntax
+
+{#input_ordered_list_3}
+```
+lorem
+
+3. foo
+2. bar
+1. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_3}
+```
+<p>lorem</p>
 <ol start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>sit</p>
+<p>ipsum</p>
+```
+
+#### Example 4
+
+##### Markua Syntax
+
+{#input_ordered_list_4}
+```
+lorem
+
+11. foo
+10. bar
+9. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_4}
+```
+<p>lorem</p>
 <ol start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>amet</p>
+<p>ipsum</p>
+```
+
+#### Example 5
+
+{#input_ordered_list_5}
+```
+lorem
+
+1. foo
+1. bar
+1. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_5}
+```
+<p>lorem</p>
 <ol>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>etc</p>
+<p>ipsum</p>
 ```
 
-#### Example 2: Uppercase Letters
+### Examples: Uppercase Letters
+
+
+
+
+
+
+
+
+
+
 
 ##### Markua Syntax
 
