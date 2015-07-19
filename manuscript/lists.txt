@@ -3,8 +3,6 @@
 
 Markua defines substantially more list types than Markdown. In Markdown, the only types of lists supported are ordered lists with decimal numbers and unordered lists. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list. Specifically, the following types of lists are supported:
 
-W> TODO - this list does not work until we support nested lists in Markua.
-
 1. Unordered lists
 2. Ordered lists, with the following numbering choices:
   a. Decimal numbers
@@ -13,6 +11,8 @@ W> TODO - this list does not work until we support nested lists in Markua.
   d. Uppercase Roman numerals
   e. Lowercase Roman numerals
 3. Definition lists
+
+W> TODO - this list above renders wrong until we support nested lists in Markua
 
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
@@ -29,17 +29,35 @@ Just as in Markdown, Markua lets you start an unordered list with three types of
 
 (If you didn't know you could use `-` and `+` to start an unordered list in Markdown, now you do. The more you know.)
 
-To make an unordered list in Markua, you start one or more consecutive lines with one of these bullets, followed by between 1 and 4 spaces or 1 tab, followed by text content:
+To make an unordered list in Markua, you start one or more consecutive lines with one of these bullets, followed by between 1 and 4 spaces or 1 tab, followed by text content.
+
+A list can be top-level, like this:
 
 ```
-before
+Here's a paragraph before the list.
 
 * foo
 * bar
 * baz
 
-after
+Here's a paragraph after the list.
 ```
+
+Unlike in Markdown, in Markua a list can also be nested in a paragraph, like this:
+
+```
+This is paragraph one.
+
+This is paragraph two.
+* foo
+* bar
+* baz
+This is still paragraph two.
+
+This is paragraph three.
+```
+
+This is explained more [here](#embedding_inside_paragraph). In short, embedding a list in a paragraph works for all types of list.
 
 Here's how unordered lists work:
 
@@ -51,8 +69,6 @@ Here's how unordered lists work:
 * The preferred amount and type of whitespace after the bullet is one space.
 * The bullet type used is output as a class in the HTML, so that designers can optionally use CSS to vary the style of bullets based on the bullet type used by the author.
 * A single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk, plus or hyphen would be even stupider.
-
-A> In Markua, lists can also be [embedded inside paragraphs](#embedding_inside_paragraph). However, this functions the same way regardless of the list type, so it is not discussed here.
 
 {#unordered_lists_1}
 ### Example

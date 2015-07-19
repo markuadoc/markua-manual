@@ -13,12 +13,11 @@ Headings must be separated from other block elements by blank lines both before 
 
 There is no other way to make headings.
 
-{class: warning}
-B> Headings cannot have optional pound signs at the end of them. If this is the case, those pound signs are considered to be text in the heading. (This is different than the "ATX headings" in Markdown, which can have any number of optional pound signs at the end of them.)
+A> Headings cannot have optional pound signs at the end of them. If this is the case, those pound signs are considered to be text in the heading. (This is different than the "ATX headings" in Markdown, which can have any number of optional pound signs at the end of them.)
 
 ## No Setext Headers
 
-Specifically, the "Setext" style of headings is **not** supported in Markua. (In the Setext-style of headings, which is supported in both Gruber Markdown and Leanpub Flavoured Markdown, top level headings can be made by adding a row of equals signs `========`, and second level headings can be made by adding a row of minus signs `--------`. This style of heading is inconsistent (only supporting two levels), confusing (how many equals signs do you need to use?), ugly and cluttered. So, it is not supported in Markua.
+Specifically, even though I like using them in plain text emails, the "Setext" style of headings is **not** supported in Markua. (In the Setext-style of headings, which is supported in both Gruber Markdown and Leanpub Flavoured Markdown, top level headings can be made by adding a row of equals signs `========`, and second level headings can be made by adding a row of minus signs `--------`. This style of heading is inconsistent (only supporting two levels), confusing (how many equals signs do you need to use?), ugly and cluttered. So, it is not supported in Markua.
 
 ## Six Heading Levels: `#`, `##`, `###`, `####`, `#####` and `######`
 
