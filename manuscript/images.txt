@@ -25,7 +25,7 @@ The alt text should not be the same thing as the figure caption, if the figure c
 
 ## Image path
 
-The `path/to/image.png` part is the relative path to the image inside the `images` directory. The `images/` directory is not included in the path.
+The `path/to/image.png` part is the relative path to the image inside the `images` directory. The `images/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
 
 All images must be inside the `images` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
 
@@ -139,15 +139,13 @@ A Figure can have a caption, which is shown associated with the image (typically
 
 Like the alt text, the figure caption is optional.
 
-A figure can also have two attributes: `float` and `width`. These are optional, and are expressed in an attribute list above the image.
+A figure can also have two attributes: `float` and `width`. These are optional, and are expressed in an attribute list above the image. These turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
 
 `float`
 : The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
 
 `width`
-: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to resize the image to the full width of the page, ignoring margins. The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins (so `100` means to be 100% of the usable page width, but not spilling into the margins).
-
-W> TODO - discuss `fullbleed` and `auto`...
+: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
 
 ### Examples
 
@@ -217,7 +215,7 @@ The alt text and caption are both optional. This example shows a figure with alt
 ```
 Markua has a spiffy logo:
 
-![the word Markua with the two asterisk trees beside it](markua-logo.png "")
+![the word Markua with the two asterisk trees beside it](markua-logo.png)
 
 Thanks Justin, it was fun making the logo with you!
 ```
@@ -262,17 +260,73 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_5}
-#### Example 5: Figures Separated With One Newline
+#### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
 
-In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph.
-
-If an image is inserted on its own line, with single newlines above and below it, it is still an inline image and must be positioned where it is inserted.
-
-W> TODO
+This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
 
 ##### Markua Syntax
 
-{#input_figures_1}
+{#input_figures_5}
+```
+Markua has a spiffy logo:
+
+{float: "left", width: "50%"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+##### HTML Output
+
+{#output_figures_5}
+```
+<p>Markua has a spiffy logo:</p>
+<div class="figure">
+  <img href="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+{#figures_6}
+#### Example 6: A Figure with a `width` Attribute of `fullbleed`
+
+This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
+
+##### Markua Syntax
+
+{#input_figures_6}
+```
+Markua has a spiffy logo:
+
+{width: "fullbleed"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+##### HTML Output
+
+{#output_figures_6}
+```
+<p>Markua has a spiffy logo:</p>
+<div class="figure">
+  <img href="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+{#figures_7}
+#### Example 7: Figures Separated With One Newline
+
+In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph.
+
+If an image is inserted on its own line, with single newlines above and below it, it is inserted as an inline figure inside the paragraph, at that position exactly if not floated, or near that position if floated.
+
+##### Markua Syntax
+
+{#input_figures_7}
 ```
 This is paragraph 1.
 
@@ -285,14 +339,17 @@ This is paragraph 3.
 
 ##### HTML Output
 
-{#output_figures_1}
+W> TODO - do we add the br tags or not for inline figures?
+
+{#output_figures_7}
 ```
 <p>This is paragraph 1.</p>
 <div class="para">Markua has a spiffy logo:<br/>
   <div class="figure">
     <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
     <p class="caption">The Markua Logo</p>
-  </div><br/>Thanks Justin, it was fun making the logo with you!
+  </div><br/>
+  Thanks Justin, it was fun making the logo with you!
 </div>
 <p>This is paragraph 3.</p>
 ```
