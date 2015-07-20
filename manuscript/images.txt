@@ -112,87 +112,87 @@ The supported file extensions are:
 .xml
 : The image is treated as an SVG image.
 
-{#inlineimages}
-## Inline Images
+{#spanimages}
+## Span Images
 
-Images can be inserted inline in the flow of text in a paragraph. When an image is inserted inline, it must be positioned where it is inserted -- it cannot be floated and repositioned by Markua processors.
+Images can be inserted as a span image in the flow of text in a paragraph. When an image is inserted as a span image, it must be positioned where it is inserted -- it cannot be floated and repositioned by Markua processors.
 
-An inline image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
+A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
-{#inline_images_1}
-### Example 1: Inline Images with Alt Text
+{#span_images_1}
+### Example 1: Span Images with Alt Text
 
-Images can be inserted inline with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
+Images can be inserted as a span image with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
 
 ##### Markua Syntax
 
-{#input_inline_images_1}
+{#input_span_images_1}
 ```
 Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
 ```
 
 ##### HTML Output
 
-{#output_inline_images_1}
+{#output_span_images_1}
 ```
-<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua has a spiffy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
-{#inline_images_2}
-### Example 2: Inline Images with no Alt Text
+{#span_images_2}
+### Example 2: Span Images with no Alt Text
 
-Images can be inserted inline with no alt text.
+Images can be inserted as a span image with no alt text.
 
 ##### Markua Syntax
 
-{#input_inline_images_2}
+{#input_span_images_2}
 ```
 Markua has a spiffy ![](markua-logo-small.png) logo!
 ```
 
 ##### HTML Output
 
-{#output_inline_images_2}
+{#output_span_images_2}
 ```
-<p>Markua has a spiffy <img href="images/markua-logo-small.png"/> logo!</p>
+<p>Markua has a spiffy <img src="images/markua-logo-small.png"/> logo!</p>
 ```
 
-{#inline_images_4}
-### Example 3: Inline Images Incorrectly Having a Caption
+{#span_images_4}
+### Example 3: Span Images Incorrectly Having a Caption
 
-An inline image cannot have a caption. If one is present, it is ignored.
+A span image cannot have a caption. If one is present, it is ignored.
 
 ##### Markua Syntax
 
-{#input_inline_images_1}
+{#input_span_images_1}
 ```
 Markua has a spiffy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
 ```
 
 ##### HTML Output
 
-{#output_inline_images_1}
+{#output_span_images_1}
 ```
-<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua has a spiffy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
-{#inline_images_4}
-### Example 1: Inline Images with URL Syntax
+{#span_images_4}
+### Example 1: Span Images with URL Syntax
 
-Images can be inserted inline with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
+Images can be inserted as a span image with a URL for the path.
 
 ##### Markua Syntax
 
-{#input_inline_images_1}
+{#input_span_images_1}
 ```
 Markua has a spiffy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
 ```
 
 ##### HTML Output
 
-{#output_inline_images_1}
+{#output_span_images_1}
 ```
-<p>Markua has a spiffy <img href="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua has a spiffy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
 ## Figures
@@ -204,7 +204,7 @@ A figure can be inserted in one of two ways:
 Block
 : The figure has blank lines above and below it.
 
-Inline Block
+Span Block
 : The figure has no blank lines above or below it.
 
 
@@ -249,7 +249,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a spiffy logo:</p>
 <div class="figure">
-  <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+  <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
@@ -277,7 +277,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a spiffy logo:</p>
 <div class='figure'>
-  <img href="images/markua-logo.png"/>
+  <img src="images/markua-logo.png"/>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
@@ -304,7 +304,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a spiffy logo:</p>
 <div class="figure">
-  <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+  <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
@@ -331,7 +331,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a spiffy logo:</p>
 <div class="figure">
-  <img href="images/markua-logo.png"/>
+  <img src="images/markua-logo.png"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
@@ -360,7 +360,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a spiffy logo:</p>
 <div class="figure">
-  <img href="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <img src="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
@@ -389,7 +389,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a spiffy logo:</p>
 <div class="figure">
-  <img href="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <img src="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
@@ -424,7 +424,7 @@ W> TODO - do we add the br tags or not for inline figures?
 <p>This is paragraph 1.</p>
 <div class="para">Markua has a spiffy logo:<br/>
   <div class="figure">
-    <img href="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+    <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
     <p class="caption">The Markua Logo</p>
   </div><br/>
   Thanks Justin, it was fun making the logo with you!
