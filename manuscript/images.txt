@@ -56,7 +56,7 @@ The reference style of image definition and insertion is supported for the follo
 
 In the Markua image syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image insertion.  This is true for both inline and reference style of image insertion:
 
-* Inline: `![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+* Inline: `![Optional Alt Text](path/to/or/url/of/image "Optional Figure Caption")`
 * Reference: `![Optional Alt Text][image id]`
 
 The Optional Alt Text is text which is intended to take the place of the image if the image itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which do not display images.
@@ -124,18 +124,21 @@ A span image cannot have a caption. If a caption is present, a Markua processor 
 
 Images can be inserted as a span image with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_span_images_1}
 ```
-Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
+Markua has a fancy ![Markua two trees logo](markua-logo-small.png) logo!
+
+Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_span_images_1}
 ```
-<p>Markua has a spiffy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua has a fancy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua also has a fancy <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/> Twitter avatar!</p>
 ```
 
 {#span_images_2}
@@ -143,18 +146,18 @@ Markua has a spiffy ![Markua two trees logo](markua-logo-small.png) logo!
 
 Images can be inserted as a span image with no alt text.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_span_images_2}
 ```
-Markua has a spiffy ![](markua-logo-small.png) logo!
+Markua has a fancy ![](markua-logo-small.png) logo!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_span_images_2}
 ```
-<p>Markua has a spiffy <img src="images/markua-logo-small.png"/> logo!</p>
+<p>Markua has a fancy <img src="images/markua-logo-small.png"/> logo!</p>
 ```
 
 {#span_images_4}
@@ -162,37 +165,18 @@ Markua has a spiffy ![](markua-logo-small.png) logo!
 
 A span image cannot have a caption. If one is present, it is ignored.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_span_images_1}
 ```
-Markua has a spiffy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
+Markua has a fancy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_span_images_1}
 ```
-<p>Markua has a spiffy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
-```
-
-{#span_images_4}
-### Example 1: Span Images with URL Syntax
-
-Images can be inserted as a span image with a URL for the path.
-
-##### Markua Syntax
-
-{#input_span_images_1}
-```
-Markua has a spiffy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
-```
-
-##### HTML Output
-
-{#output_span_images_1}
-```
-<p>Markua has a spiffy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua has a fancy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
 ## Figures
@@ -206,8 +190,6 @@ Block
 
 Span Block
 : The figure has no blank lines above or below it.
-
-
 
 A Figure can have a caption, which is shown associated with the image (typically above or below it). This caption shows up in two places:
 
@@ -232,25 +214,34 @@ A figure can also have two attributes: `float`, `width` and `type`. These are op
 
 Ideally, a figure should have both alt text and a caption. The alt text is intended for readers who can't see the image, and the caption is intended to complement the image.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_figures_1}
 ```
-Markua has a spiffy logo:
+Markua has a fancy logo:
 
 ![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Markua also has a fancy Twitter avatar:
+
+![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png "The Markua Icon")
 
 Thanks Justin, it was fun making the logo with you!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_figures_1}
 ```
-<p>Markua has a spiffy logo:</p>
+<p>Markua has a fancy logo:</p>
 <div class="figure">
   <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
+</div>
+<p>Markua also has a fancy Twitter avatar:</p>
+<div class="figure">
+  <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/>
+  <p class="caption">The Markua Icon</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
@@ -260,22 +251,22 @@ Thanks Justin, it was fun making the logo with you!
 
 Images can be inserted as a figure even with no alt text or caption. If this is done, the image is still styled as a figure, but the image has no caption and does **not** show up in the List of Illustrations.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_figures_2}
 ```
-Markua has a spiffy logo:
+Markua has a fancy logo:
 
 ![](markua-logo.png)
 
 Thanks Justin, it was fun making the logo with you!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_figures_2}
 ```
-<p>Markua has a spiffy logo:</p>
+<p>Markua has a fancy logo:</p>
 <div class='figure'>
   <img src="images/markua-logo.png"/>
 </div>
@@ -287,22 +278,22 @@ Thanks Justin, it was fun making the logo with you!
 
 The alt text and caption are both optional. This example shows a figure with alt text but no caption.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_figures_3}
 ```
-Markua has a spiffy logo:
+Markua has a fancy logo:
 
 ![the word Markua with the two asterisk trees beside it](markua-logo.png)
 
 Thanks Justin, it was fun making the logo with you!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_figures_3}
 ```
-<p>Markua has a spiffy logo:</p>
+<p>Markua has a fancy logo:</p>
 <div class="figure">
   <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
 </div>
@@ -314,22 +305,22 @@ Thanks Justin, it was fun making the logo with you!
 
 The alt text and caption are both optional. This example shows a figure with a caption but no alt text.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_figures_4}
 ```
-Markua has a spiffy logo:
+Markua has a fancy logo:
 
 ![](markua-logo.png "The Markua Logo")
 
 Thanks Justin, it was fun making the logo with you!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_figures_4}
 ```
-<p>Markua has a spiffy logo:</p>
+<p>Markua has a fancy logo:</p>
 <div class="figure">
   <img src="images/markua-logo.png"/>
   <p class="caption">The Markua Logo</p>
@@ -342,11 +333,11 @@ Thanks Justin, it was fun making the logo with you!
 
 This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_figures_5}
 ```
-Markua has a spiffy logo:
+Markua has a fancy logo:
 
 {float: "left", width: "50%"}
 ![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
@@ -354,11 +345,11 @@ Markua has a spiffy logo:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_figures_5}
 ```
-<p>Markua has a spiffy logo:</p>
+<p>Markua has a fancy logo:</p>
 <div class="figure">
   <img src="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
@@ -371,11 +362,11 @@ Thanks Justin, it was fun making the logo with you!
 
 This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_figures_6}
 ```
-Markua has a spiffy logo:
+Markua has a fancy logo:
 
 {width: "fullbleed"}
 ![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
@@ -383,11 +374,11 @@ Markua has a spiffy logo:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-##### HTML Output
+#### HTML Output
 
 {#output_figures_6}
 ```
-<p>Markua has a spiffy logo:</p>
+<p>Markua has a fancy logo:</p>
 <div class="figure">
   <img src="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
@@ -402,27 +393,27 @@ In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph.
 
 If an image is inserted on its own line, with single newlines above and below it, it is inserted as an inline figure inside the paragraph, at that position exactly if not floated, or near that position if floated.
 
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_figures_7}
 ```
 This is paragraph 1.
 
-Markua has a spiffy logo:
+Markua has a fancy logo:
 ![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
 Thanks Justin, it was fun making the logo with you!
 
 This is paragraph 3.
 ```
 
-##### HTML Output
+#### HTML Output
 
 W> TODO - do we add the br tags or not for inline figures?
 
 {#output_figures_7}
 ```
 <p>This is paragraph 1.</p>
-<div class="para">Markua has a spiffy logo:<br/>
+<div class="para">Markua has a fancy logo:<br/>
   <div class="figure">
     <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
     <p class="caption">The Markua Logo</p>
