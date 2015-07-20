@@ -1,38 +1,65 @@
 # Images
 
+Just as in Markdown, in Markua images can be defined in one of two ways:
+
+Inline
+: The image is defined right where it is inserted.
+
+Reference
+: The image is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript.
+
+Regardless of whether it is Inline or Reference, an image can also inserted in one of two ways:
+
+Span
+: The image is inserted as part of the flow of text of a paragraph.
+
+Figure
+: The image is inserted on a line by itself. If there are blank lines above and below the Figure then it is top-level; if there are no blank lines above and below the figure then it is inserted directly in the paragraph that it is in.
+
+## Inline Images
+
 The Markua image syntax can be briefly described as follows:
-`![Optional Alt Text](path_to_or_url_of_image "Optional Figure Caption")`
 
-In Markua, images can be inserted in one of two ways:
+`![Optional Alt Text](path/to/or/url/of/image "Optional Figure Caption")`
 
-1. As an **Inline** image, as part of the flow of text of a paragraph.
-2. As a **Figure**, on a line by itself.
+This is the preferred way in Markua to insert normal images which are only used once. The optional alt text and the optional figure caption are discussed after the Reference Images syntax is explained, since they are relevant for both syntaxes.
 
-A> **NO Reference-Style Images**
-A>
-A> Markua does **NOT** support Markdown's reference style of images.
-A>
-A> In this syntax, an `id` is defined for an image, like this:
-A> `[image_id]: path_or_url_of_image "Optional title attribute"`
-A>
-A> This `id` can then be used to insert an image, like this:
-A> `![Optional alt text][image id]`
-A>
-A> While this seems like a good idea, it's not, for these reasons:
-A>
-A> 1. Defining the optional title attribute in one place with the image itself, while the alt text is defined with the image insertion syntax is difficult to remember.
-A> 2. Either the `id` is being defined and only used once or the `id` is being defined once and used multiple times. If the `id` is only used once, it is more cumbersome for no added benefit. If the `id` is being used multiple times...
+## Reference Images
 
-TODO - I think I may have gotten this wrong. (Emoji, short articles, cumbersome video syntax meaning media insertion by id is nice, etc.)
+In this syntax, an `id` is first defined for an image, like this:
 
-The optional figure caption is described in the [Figures](#figures) section below; the alt text and image path are described below.
+`[image_id]: path/to/or/url/of/image "Optional Figure Caption"`
+
+It is also acceptable to use a definition list style, and put the path on a subsequent line after the colon.
+
+```
+[image_id]
+: path/to/or/url/of/image "Optional Figure Caption"
+```
+
+The square bracket at the beginning of the line instructs the Markua processor that this is media, not a definition list.
+
+This `id` can then be used to insert an image, like this:
+
+`![Optional Alt Text][image id]`
+
+Note that the Optional Figure Caption is defined with the `id`, and this figure caption is used every single time the image is inserted via its `id`.
+
+The reference style of image definition and insertion is supported for the following four reasons:
+
+1. If an author who is familiar with Markdown strongly prefers it, there's no reason not to provide it. (There's nothing else that Markua would do with the reference syntax.)
+2. For images which are used frequently (e.g. emoji), it is much better to define it once and use it multiple times.
+3. For videos, the reference style of video definition allows multiple sources to be defined, as well as a fallback to image. So, if the reference style of video definition is supported, it would be capricious of Markua to not support the image reference style it's based on.
+4. The reference style of images is very similar to definition list syntax, so some authors might just prefer it.
 
 ## Alt text
 
-In the Markua image syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image:
-`![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+In the Markua image syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image insertion.  This is true for both inline and reference style of image insertion:
 
-The alt text is text which is intended to take the place of the image if the image itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which do not display images.
+* Inline: `![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+* Reference: `![Optional Alt Text][image id]`
+
+The Optional Alt Text is text which is intended to take the place of the image if the image itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which do not display images.
 
 While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
 

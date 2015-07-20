@@ -11,3 +11,16 @@ The optional figure caption is described in the [Figures](#figures) section belo
 
 In the Markua video syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image:
 `![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+
+`![Optional Alt Text](path/to/video.mp4 "Optional Figure Caption")`
+
+[meow]
+: path/or/url/to/video.mp4 "Optional Figure Caption"
+: path/or/url/to/replacment/video.webm
+: path/or/url/to/replacment/image.png
+
+[meow]: path/or/url/to/video.mp4 "Optional Figure Caption"
+: path/or/url/to/replacment/video.webm
+: path/or/url/to/replacment/image.png
+
+[meow]: path/or/url/to/video.mp4 "Optional Figure Caption"

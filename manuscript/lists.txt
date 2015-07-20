@@ -1406,6 +1406,8 @@ term 2
 : definition 2
 ```
 
+The term cannot start with a square bracket--this is reserved for the reference-style image syntax.
+
 A definition list can define multiple definitions for a term:
 
 ```

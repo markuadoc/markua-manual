@@ -6,6 +6,7 @@ paragraphs.txt
 scene_breaks.txt
 poetry.txt
 images.txt
+video.txt
 headings.txt
 lists.txt
 asides_blurbs_block_quotes.txt
