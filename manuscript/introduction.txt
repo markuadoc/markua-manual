@@ -1,4 +1,4 @@
-# IMPORTANT NOTE FOR LEANPUB AUTHORS: MARKUA IS NOT IN LEANPUB YET.
+# IMPORTANT NOTE FOR LEANPUB AUTHORS: MARKUA IS NOT IN LEANPUB YET...
 
 **Markua support is NOT live in Leanpub yet for anyone but admins. Heck, Markua is not even fully-specified yet. This spec is in-progress.**
 
