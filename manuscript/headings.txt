@@ -1,23 +1,27 @@
 {#headings}
 # Headings
 
-W> TODO - rewrite this section to improve wording and to have executable tests
+W> TODO - rewrite this section to improve wording, add Setext examples and to have executable tests.
 
-## Heading Types
+## Heading Styles: atx and Setext
 
 Conceptually, the most important element types in Markua are the headings. A Markua document is typically organized into one or more levels of headings.
 
-To make a heading, you start a line with some number of pound signs (`#`), followed by a space, followed by some words or numbers.
+Markua supports atx and Setext headers, just like [Markdown does](http://daringfireball.net/projects/markdown/syntax#header).
+
+I originally planned to only support atx headers with no trailing pound signs, but changed my mind. If an author who is familiar with Markdown strongly prefers either Setext headers or adding trailing pound signs in atx headers, there's no reason to take this away. (There's nothing else that Markua would do with the Setext header syntax, or with closing pound signs in atx headers.)
+
+Authors are strongly discouraged from mixing and matching atx and Setext headers: If you want more than two levels of heading, just use atx headers.
+
+To make a heading, you start a line with between 1 and 6 pound signs (`#`), followed by whitespace, followed by some words or numbers.
 
 Headings must be separated from other block elements by blank lines both before and after them. Because of the [way that Markua concatenates files](#multiple-file-concatenating), headings at the top of a Markua document automatically have a blank line above them. So, headings at the top of a document only need a blank line below them.
 
-There is no other way to make headings.
+The preferred way to define headers in Markua is the atx style with no trailing pound signs.
 
-A> Headings cannot have optional pound signs at the end of them. If this is the case, those pound signs are considered to be text in the heading. (This is different than the "ATX headings" in Markdown, which can have any number of optional pound signs at the end of them.)
+However, just as in Markdown, atx headings can have optional pound signs at the end of them. If this is the case, those pound signs are ignored.
 
-## No Setext Headers
-
-Specifically, even though I like using them in plain text emails, the "Setext" style of headings is **not** supported in Markua. (In the Setext-style of headings, which is supported in both Gruber Markdown and Leanpub Flavoured Markdown, top level headings can be made by adding a row of equals signs `========`, and second level headings can be made by adding a row of minus signs `--------`. This style of heading is inconsistent (only supporting two levels), confusing (how many equals signs do you need to use?), ugly and cluttered. So, it is not supported in Markua.
+In the Setext-style of headings, which is supported in both Gruber Markdown and in Markua, top level headings can be made by adding a row of equals signs `========`, and second level headings can be made by adding a row of minus signs `--------`.
 
 ## Six Heading Levels: `#`, `##`, `###`, `####`, `#####` and `######`
 
