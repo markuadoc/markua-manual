@@ -119,8 +119,6 @@ Images can be inserted as a span image in the flow of text in a paragraph. When 
 
 A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
-{pagebreak}
-
 {#span_images_1}
 ### Example 1: Span Images with Alt Text
 
@@ -143,8 +141,6 @@ Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_i
 <p>Markua also has a fancy <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/> Twitter avatar!</p>
 ```
 
-{pagebreak}
-
 {#span_images_2}
 ### Example 2: Span Images with no Alt Text
 
@@ -163,8 +159,6 @@ Markua has a fancy ![](markua-logo-small.png) logo!
 ```
 <p>Markua has a fancy <img src="images/markua-logo-small.png"/> logo!</p>
 ```
-
-{pagebreak}
 
 {#span_images_4}
 ### Example 3: Span Images Incorrectly Having a Caption
@@ -215,8 +209,6 @@ A figure can also have two attributes: `float`, `width` and `type`. These are op
 `type`
 : For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting [audio](#audio) and [video](#video); see those chapters for details.
 
-{pagebreak}
-
 {#figures_1}
 ### Example 1: Figures with Alt Text and a Caption
 
@@ -254,8 +246,6 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-{pagebreak}
-
 {#figures_2}
 ### Example 2: Figures with no Alt Text or Caption
 
@@ -282,8 +272,6 @@ Thanks Justin, it was fun making the logo with you!
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
-
-{pagebreak}
 
 {#figures_3}
 ### Example 3: Figures with Alt Text but no Caption
@@ -312,8 +300,6 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-{pagebreak}
-
 {#figures_4}
 ### Example 4: Figures with a Caption but no Alt Text
 
@@ -341,8 +327,6 @@ Thanks Justin, it was fun making the logo with you!
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
-
-{pagebreak}
 
 {#figures_5}
 ### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
@@ -373,8 +357,6 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-{pagebreak}
-
 {#figures_6}
 ### Example 6: A Figure with a `width` Attribute of `fullbleed`
 
@@ -403,8 +385,6 @@ Thanks Justin, it was fun making the logo with you!
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
-
-{pagebreak}
 
 {#figures_7}
 ### Example 7: Figures Separated With One Newline

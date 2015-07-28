@@ -10,8 +10,6 @@ Note that the "two space trick" for line breaks is neither supported nor necessa
 
 If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`.
 
-{pagebreak}
-
 ### Example 1: A Shakesperean Sonnet
 
 Shakespeare could have sat down and typed this in Markua:
@@ -53,8 +51,6 @@ My mistress when she walks treads on the ground.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
 </p>
-
-{pagebreak}
 
 ### Example 2: e e cummings Style Poetry
 
