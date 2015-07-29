@@ -1,5 +1,5 @@
 {#paragraphs}
-# Paragraphs, Line Breaks and Whitespace
+# Paragraphs, Whitespace and Newlines
 
 When writing normal prose, you break your writing into paragraphs.
 
@@ -8,8 +8,6 @@ Like every block element, a paragraph has a blank line both above and below it.
 The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading, or like all the remaining block elements below) are paragraphs.
 
 Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, as with all other block elements, you cannot make a paragraph span Markua source files.
-
-## Examples
 
 {#paragraphs_1}
 ### Example 1
@@ -37,9 +35,57 @@ This is a third paragraph.
 ```
 
 {#embedding_inside_paragraph}
-## TODO embedding lists, images, figures inside a paragraph.
+## Embedding Lists, Figures and Code Blocks Inside a Paragraph
 
-Yes, this is not valid HTML with a `<p>` tag, but it is with a `<div class="para">` and it is more appropriate for paragraphs to be how writers defined them than the W3C.
+In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
+
+> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
+
+So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
+
+Markua, on the other hand, is a way of authoring books and documents, not HTML. HTML is just one of the output formats of Markua.
+
+And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph.
+
+So, Markua supports this. But since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C in the HTML5 spec.
+
+Specifically, the HTML that is output for paragraphs that nest lists, figures or code blocks is `<div class="para">`. This way, book designers can style these `<div>` tags the same way as `<p>` tags.
+
+{#embedding_inside_paragraphs_1}
+### Example 1
+
+Here's an example of three paragraphs...
+
+#### Markua Syntax
+
+{#input_paragraphs_1}
+```
+This is a paragraph.
+
+The opinion of the W3C about lists inside paragraphs is:
+* myopic
+* rude
+* amusing
+This is still part of the second paragraph.
+
+This is a third paragraph.
+```
+
+#### HTML Output
+
+{#output_paragraphs_1}
+```
+<p>This is a paragraph.</p>
+<div class="para">The opinion of the W3C about lists inside paragraphs is:<br/>
+  <ul>
+    <li>myopic</li>
+    <li>rude</li>
+    <li>amusing</li>
+  </ul><br/>
+  This is still part of the second paragraph.
+</div>
+<p>This is a third paragraph.</p>
+```
 
 ## Whitespace
 
