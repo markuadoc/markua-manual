@@ -120,11 +120,11 @@ Images can be inserted as a span image in the flow of text in a paragraph. When 
 A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
 {#span_images_1}
-### Example 1: Span Images with Alt Text
+#### Example 1: Span Images with Alt Text
 
 Images can be inserted as a span image with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_span_images_1}
 ```
@@ -133,7 +133,7 @@ Markua has a fancy ![Markua two trees logo](markua-logo-small.png) logo!
 Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_span_images_1}
 ```
@@ -142,18 +142,18 @@ Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_i
 ```
 
 {#span_images_2}
-### Example 2: Span Images with no Alt Text
+#### Example 2: Span Images with no Alt Text
 
 Images can be inserted as a span image with no alt text.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_span_images_2}
 ```
 Markua has a fancy ![](markua-logo-small.png) logo!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_span_images_2}
 ```
@@ -161,18 +161,18 @@ Markua has a fancy ![](markua-logo-small.png) logo!
 ```
 
 {#span_images_4}
-### Example 3: Span Images Incorrectly Having a Caption
+#### Example 3: Span Images Incorrectly Having a Caption
 
 A span image cannot have a caption. If one is present, it is ignored.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_span_images_1}
 ```
 Markua has a fancy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_span_images_1}
 ```
@@ -210,11 +210,11 @@ A figure can also have two attributes: `float`, `width` and `type`. These are op
 : For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting [audio](#audio) and [video](#video); see those chapters for details.
 
 {#figures_1}
-### Example 1: Figures with Alt Text and a Caption
+#### Example 1: Figures with Alt Text and a Caption
 
 Ideally, a figure should have both alt text and a caption. The alt text is intended for readers who can't see the image, and the caption is intended to complement the image.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_figures_1}
 ```
@@ -229,7 +229,7 @@ Markua also has a fancy Twitter avatar:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_figures_1}
 ```
@@ -247,11 +247,11 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_2}
-### Example 2: Figures with no Alt Text or Caption
+#### Example 2: Figures with no Alt Text or Caption
 
 Images can be inserted as a figure even with no alt text or caption. If this is done, the image is still styled as a figure, but the image has no caption and does **not** show up in the List of Illustrations.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_figures_2}
 ```
@@ -262,7 +262,7 @@ Markua has a fancy logo:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_figures_2}
 ```
@@ -274,11 +274,11 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_3}
-### Example 3: Figures with Alt Text but no Caption
+#### Example 3: Figures with Alt Text but no Caption
 
 The alt text and caption are both optional. This example shows a figure with alt text but no caption.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_figures_3}
 ```
@@ -289,7 +289,7 @@ Markua has a fancy logo:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_figures_3}
 ```
@@ -301,11 +301,11 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_4}
-### Example 4: Figures with a Caption but no Alt Text
+#### Example 4: Figures with a Caption but no Alt Text
 
 The alt text and caption are both optional. This example shows a figure with a caption but no alt text.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_figures_4}
 ```
@@ -316,7 +316,7 @@ Markua has a fancy logo:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_figures_4}
 ```
@@ -329,11 +329,11 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_5}
-### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
+#### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
 
 This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_figures_5}
 ```
@@ -345,7 +345,7 @@ Markua has a fancy logo:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_figures_5}
 ```
@@ -358,11 +358,11 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_6}
-### Example 6: A Figure with a `width` Attribute of `fullbleed`
+#### Example 6: A Figure with a `width` Attribute of `fullbleed`
 
 This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_figures_6}
 ```
@@ -374,7 +374,7 @@ Markua has a fancy logo:
 Thanks Justin, it was fun making the logo with you!
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_figures_6}
 ```
@@ -387,13 +387,13 @@ Thanks Justin, it was fun making the logo with you!
 ```
 
 {#figures_7}
-### Example 7: Figures Separated With One Newline
+#### Example 7: Figures Separated With One Newline
 
 In Markua, adding a single newline makes a `<br/>` tag, not a new paragraph.
 
 If an image is inserted on its own line, with single newlines above and below it, it is inserted as an inline figure inside the paragraph, at that position exactly if not floated, or near that position if floated.
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_figures_7}
 ```
@@ -406,18 +406,18 @@ Thanks Justin, it was fun making the logo with you!
 This is paragraph 3.
 ```
 
-#### HTML Output
+##### HTML Output
 
 W> TODO - do we add the br tags or not for inline figures?
 
 {#output_figures_7}
 ```
 <p>This is paragraph 1.</p>
-<div class="para">Markua has a fancy logo:<br/>
+<div class="para">Markua has a fancy logo:
   <div class="figure">
     <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
     <p class="caption">The Markua Logo</p>
-  </div><br/>
+  </div>
   Thanks Justin, it was fun making the logo with you!
 </div>
 <p>This is paragraph 3.</p>

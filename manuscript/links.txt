@@ -1,8 +1,9 @@
 {#links}
 # Links
 
-{class: warning}
-B> There is no support for Markdown's reference style images in Markua.
+W> TODO - convert to executable tests
+
+W> TODO - ref style?
 
 ## Automatic Links
 

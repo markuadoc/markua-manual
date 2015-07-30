@@ -10,11 +10,13 @@ Note that the "two space trick" for line breaks is neither supported nor necessa
 
 If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`.
 
-### Example 1: A Shakesperean Sonnet
+### Examples
+
+#### Example 1: A Shakesperean Sonnet
 
 Shakespeare could have sat down and typed this in Markua:
 
-#### Markua Syntax
+##### Markua Syntax
 
 ```
 My mistress' eyes are nothing like the sun;
@@ -33,7 +35,7 @@ My mistress when she walks treads on the ground.
      As any she belied with false compare.
 ```
 
-#### HTML Output
+##### HTML Output
 
 <p>
 My mistress' eyes are nothing like the sun;<br/>
@@ -52,11 +54,11 @@ My mistress when she walks treads on the ground.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
 </p>
 
-### Example 2: e e cummings Style Poetry
+#### Example 2: e e cummings Style Poetry
 
 If you want to write e e cummings style poetry, go for it:
 
-#### Markua Syntax
+##### Markua Syntax
 
 ~~~
 {code: poetry}
@@ -67,7 +69,7 @@ i am a cat
 ```
 ~~~
 
-#### HTML Output
+##### HTML Output
 
 {class: warning}
 B> TODO

@@ -3,15 +3,17 @@
 
 Code like `hello world` can be inserted using backticks inside a paragraph, heading, or any other block element.
 
-## Example
+#### Example
 
-### Markua Syntax
+{#input_code_span_1}
+##### Markua Syntax
 
 ```
 Here is some `hello world` span code.
 ```
 
-### HTML Output
+{#output_code_span_1}
+##### HTML Output
 
 ```
 <p>Here is some <code>hello world</code> span code.</p>
@@ -23,7 +25,10 @@ Just as with Markdown, to show a literal backtick, you use *two* backticks to st
 
 Note that like Markdon, any leading or trailing spaces in a code span are removed.
 
-### Markua Syntax
+#### Example
+
+{#input_code_span_2}
+##### Markua Syntax
 
 ```
 Here is some ``code with a backtick (`) in it`` and other text.
@@ -31,7 +36,8 @@ Here is some ``code with a backtick (`) in it`` and other text.
 If you want to have a backtick by itself, just use you need to have spaces around it like this `` ` ``. The enclosed backtick cannot start or end the code block.
 ```
 
-### HTML Output
+{#output_code_span_2}
+##### HTML Output
 
 ```
 <p>Here is some <code>code with a backtick (`) in it</code> and other text.</p>

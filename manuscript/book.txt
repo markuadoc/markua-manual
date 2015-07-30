@@ -9,7 +9,9 @@ images.txt
 video.txt
 headings.txt
 lists.txt
-asides_blurbs_block_quotes.txt
+asides.txt
+blurbs.txt
+block_quotes.txt
 code_blocks.txt
 tables.txt
 math_blocks.txt

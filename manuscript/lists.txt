@@ -49,15 +49,15 @@ Unlike in Markdown, in Markua a list can also be nested in a paragraph, like thi
 This is paragraph one.
 
 This is paragraph two.
-* foo
-* bar
-* baz
+  * foo
+  * bar
+  * baz
 This is still paragraph two.
 
 This is paragraph three.
 ```
 
-This is explained more [here](#embedding_inside_paragraph). In short, embedding a list in a paragraph works for all types of list.
+This is explained more [here](#embedding_inside_paragraph). In short, embedding a list in a paragraph works for all types of list, but you need to indent the list with some amount of whitespace.
 
 Here's how unordered lists work:
 

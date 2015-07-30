@@ -1,0 +1,42 @@
+{#asides}
+# Asides
+
+Asides are text which is formatted separately from the main text by a Markua processor. Asides can span multiple pages.
+
+Asides can be created like block quotes, but using `A>` line prefixes. The same rules for newlines apply.
+
+#### Example
+
+##### Markua Syntax
+
+{#input_aside_1}
+```
+This is a paragraph before the aside.
+
+A> This is a paragraph in the aside.
+A>
+A> This is a
+A> second paragraph in the aside
+A> which contains newlines.
+A>
+A> This is a third paragraph in the aside.
+
+This is a paragraph after the aside.
+```
+
+##### HTML Output
+
+The HTML output for an Aside is simply a `div`, not a `section` or an `aside`, since an arbitrary aside is not something which is a top-level element of a book. (Also, some legacy EPUB readers would choke on `section` or `aside`.)
+
+{#output_aside_1}
+```
+<p>This is a paragraph before the aside.</p>
+<div class="aside">
+<p>This is a paragraph in the aside.</p>
+<p>This is a<br/>
+second paragraph in the aside<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the aside.</p>
+</div>
+<p>This is a paragraph after the aside.</p>
+```

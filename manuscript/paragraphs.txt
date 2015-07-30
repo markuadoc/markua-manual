@@ -9,12 +9,14 @@ The distinguishing thing about a paragraph is that there is nothing else disting
 
 Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, as with all other block elements, you cannot make a paragraph span Markua source files.
 
+### Examples
+
 {#paragraphs_1}
-### Example 1
+#### Example 1
 
 Here's an example of three paragraphs...
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_paragraphs_1}
 ```
@@ -25,7 +27,7 @@ This is another paragraph.
 This is a third paragraph.
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_paragraphs_1}
 ```
@@ -47,45 +49,115 @@ Markua, on the other hand, is a way of authoring books and documents, not HTML. 
 
 And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph.
 
-So, Markua supports this. But since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C in the HTML5 spec.
+So, Markua supports this.
+
+You need to prefix with whitespace.
+
+But since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C in the HTML5 spec.
 
 Specifically, the HTML that is output for paragraphs that nest lists, figures or code blocks is `<div class="para">`. This way, book designers can style these `<div>` tags the same way as `<p>` tags.
 
+### Examples
+
 {#embedding_inside_paragraphs_1}
-### Example 1
+#### Example 1
 
 Here's an example of three paragraphs...
 
-#### Markua Syntax
+##### Markua Syntax
 
 {#input_paragraphs_1}
 ```
 This is a paragraph.
 
 The opinion of the W3C about lists inside paragraphs is:
-* myopic
-* rude
-* amusing
+  * myopic
+  * rude
+  * amusing
+It also:
+   1. is not universally accepted
+   2. ignores historical precedent
+   3. encourages short paragraphs, which is admittedly a plus
 This is still part of the second paragraph.
 
 This is a third paragraph.
 ```
 
-#### HTML Output
+##### HTML Output
 
 {#output_paragraphs_1}
 ```
 <p>This is a paragraph.</p>
-<div class="para">The opinion of the W3C about lists inside paragraphs is:<br/>
+<div class="para">The opinion of the W3C about lists inside paragraphs is:
   <ul>
     <li>myopic</li>
     <li>rude</li>
     <li>amusing</li>
-  </ul><br/>
+  </ul>
+  It also:
+  <ol>
+    <li>is not universally accepted</li>
+    <li>ignores historical precedent</li>
+    <li>encourages short paragraphs, which is admittedly a plus</li>
+  </ol>
   This is still part of the second paragraph.
 </div>
 <p>This is a third paragraph.</p>
 ```
+
+{#embedding_inside_paragraphs_1}
+#### Example 1
+
+Here's an example of three paragraphs...
+
+##### Markua Syntax
+
+{#input_paragraphs_1}
+```
+This is a paragraph.
+
+The opinion of the W3C about lists inside paragraphs is:
+  * myopic
+  * rude
+  * amusing
+It also:
+   1. is not universally accepted
+   2. ignores historical precedent
+   3. encourages short paragraphs
+You don't need to have any spaces before your list.
+* this
+* is
+* also
+* embedded
+This is still part of the second paragraph.
+
+This is a third paragraph.
+```
+
+##### HTML Output
+
+{#output_paragraphs_1}
+```
+<p>This is a paragraph.</p>
+<div class="para">The opinion of the W3C about lists inside paragraphs is:
+  <ul>
+    <li>myopic</li>
+    <li>rude</li>
+    <li>amusing</li>
+  </ul>
+  It also:
+  <ol>
+    <li>is not universally accepted</li>
+    <li>2. ignores historical precedent</li>
+    <li>3. encourages short paragraphs</li>
+  </ol>
+  This is still part of the second paragraph.
+</div>
+<p>This is a third paragraph.</p>
+```
+
+
+
 
 ## Whitespace
 
@@ -140,7 +212,7 @@ A single newline inside a paragraph is a line break.
 
 This lets you write poetry without any formatting characters. This is appropriate, since formatting characters are not very poetic.
 
-#### Markua Syntax
+##### Markua Syntax
 
 ```
 I grant I never saw a goddess go;
@@ -149,7 +221,7 @@ My mistress when she walks treads on the ground.
      As any she belied with false compare.
 ```
 
-#### HTML Output
+##### HTML Output
 
 <p>
 I grant I never saw a goddess go;<br/>

@@ -5,8 +5,6 @@ There are lots of changes in Markua from Leanpub Flavoured Markdown (or LFM). Th
 
 * manuscript.txt for single-file books / documents
 * In multi-part-books, `#` is Part (not `-#`), `##` is Chapter (not `#`) and `###` is Section (not `##`). (In books without parts, which is the default in Markua, the behaviour is the same as in Leanpub Flavoured Markdown.
-* There is only one type of bulleted list delimiter, the asterisk (`*`).
 * In a numbered list, the number that begins the list is the number that begins the list in the output (as opposed to the output always starting with 1).
-* In a numbered list, numbers must be consecutive. You're not allowed to start every entry with `1.`.
 * There's no support for indented code blocks.
 * There is no support for comments (which are not output) in a Markua document.

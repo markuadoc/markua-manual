@@ -7,9 +7,9 @@ Markua Processors can take great liberties in how they display scene breaks in n
 
 Scene breaks map to the `hr` element in HTML.
 
-## Example
+#### Example
 
-### Markua Syntax
+##### Markua Syntax
 
 ```
 Yada yada yada.
@@ -19,7 +19,7 @@ Yada yada yada.
 Yada yada yada.
 ```
 
-### HTML Output
+##### HTML Output
 
 ```
 <p>Yada yada yada.</p>
