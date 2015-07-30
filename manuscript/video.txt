@@ -20,8 +20,11 @@ In the Markua video syntax, just as with the Markdown image syntax, the optional
 : path/or/url/to/video.mp4 "Optional Figure Caption A"
 : path/or/url/to/replacment/video.webm "Optional Figure Caption B"
 : path/or/url/to/replacment/image.png "Optional Figure Caption C"
+: path/or/url/to/replacment/image.png "Optional Figure Caption C"
 
 [meow]: path/or/url/to/video.mp4 "Optional Figure Caption"
 
 [meow]
 : path/or/url/to/video.mp4 "Optional Figure Caption"
+
+on Leanpub, if URL not path, then add link to video (as footnote?) on the caption of the fallback image as a footnote. spec that markua allows lots of markup around video...

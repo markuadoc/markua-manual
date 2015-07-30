@@ -1,0 +1,30 @@
+# Audio
+
+The Markua audio syntax can be briefly described as follows:
+`![Optional Alt Text](path_or_url_to_audio "Optional Figure Caption")`
+
+In Markua, audio can be inserted using the Figure syntax, on a line by itself.
+
+The optional figure caption is described in the [Figures](#figures) section below; the alt text and image path are described below.
+
+## Defining Audio Inline
+
+In the Markua audio syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image:
+`![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+
+`![Optional Alt Text](path/to/audio.mp4 "Optional Figure Caption")`
+
+# Defining Audio Reference
+
+[meow]
+: path/or/url/to/audio.mp4 "Optional Figure Caption A"
+: path/or/url/to/replacment/audio.webm "Optional Figure Caption B"
+: path/or/url/to/replacment/image.png "Optional Figure Caption C"
+: path/or/url/to/replacment/image.png "Optional Figure Caption C"
+
+[meow]: path/or/url/to/audio.mp4 "Optional Figure Caption"
+
+[meow]
+: path/or/url/to/audio.mp4 "Optional Figure Caption"
+
+on Leanpub, if URL not path, then add link to audio (as footnote?) on the caption of the fallback image as a footnote. spec that markua allows lots of markup around audio...

@@ -6,6 +6,7 @@ paragraphs.txt
 scene_breaks.txt
 poetry.txt
 images.txt
+audio.txt
 video.txt
 headings.txt
 lists.txt
