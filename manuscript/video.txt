@@ -14,7 +14,7 @@ In the Markua video syntax, just as with the Markdown image syntax, the optional
 
 `![Optional Alt Text](path/to/video.mp4 "Optional Figure Caption")`
 
-# Defining Video Reference
+## Defining Video by Reference
 
 [meow]
 : path/or/url/to/video.mp4 "Optional Figure Caption A"

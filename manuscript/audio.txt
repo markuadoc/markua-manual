@@ -14,7 +14,7 @@ In the Markua audio syntax, just as with the Markdown image syntax, the optional
 
 `![Optional Alt Text](path/to/audio.mp4 "Optional Figure Caption")`
 
-# Defining Audio Reference
+## Defining Audio by Reference
 
 [meow]
 : path/or/url/to/audio.mp4 "Optional Figure Caption A"
