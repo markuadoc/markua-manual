@@ -10,8 +10,6 @@ Note that Markdown's "two space trick" for line breaks (in which two trailing sp
 
 If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`.
 
-### Examples
-
 #### Example 1: A Shakesperean Sonnet
 
 Shakespeare could have sat down and typed this in Markua:

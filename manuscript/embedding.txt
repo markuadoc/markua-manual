@@ -13,6 +13,8 @@ However, since the HTML which is output can't embed a list in the paragraph, the
 
 Note that in all cases you need to add some amount of whitespace before the list, figure or code block, so that it appears embedded inside the paragraph. If you do not do this, what you will get is a paragraph with a bunch of break tags, one for each newline.
 
+W> TODO - Should I really enforce whitespace before the list or figure? It looks better for lists, but it's a bit arbitrary and punitive. Also, figures are so ugly it doesn't matter for them, and then I'm inconsistent.
+
 ### Examples
 
 {#embedding_inside_paragraphs_1}
@@ -98,6 +100,39 @@ This is still part of the second paragraph, but the above lists were not embedde
 <p>This is a third paragraph.</p>
 ```
 
+#### Example 3: Correct Figure Embedding
+
+If a figure is inserted on its own line, with single newlines above and below it, it is inserted as an inline figure inside the paragraph, at that position exactly if not floated, or near that position if floated.
+
+##### Markua Syntax
+
+{#input_figures_7}
+```
+This is paragraph 1.
+
+Markua has a fancy logo:
+  ![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+Thanks Justin, it was fun making the logo with you!
+
+This is paragraph 3.
+```
+
+##### HTML Output
+
+W> TODO - do we add the br tags or not for inline figures?
+
+{#output_figures_7}
+```
+<p>This is paragraph 1.</p>
+<div class="para">Markua has a fancy logo:
+  <div class="figure">
+    <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+    <p class="caption">The Markua Logo</p>
+  </div>
+  Thanks Justin, it was fun making the logo with you!
+</div>
+<p>This is paragraph 3.</p>
+```
 
 
 ## Whitespace
