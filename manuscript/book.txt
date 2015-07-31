@@ -3,13 +3,13 @@ philosophy.txt
 structure.txt
 element_types.txt
 paragraphs.txt
-scene_breaks.txt
 poetry.txt
 images.txt
 audio.txt
 video.txt
 headings.txt
 lists.txt
+embedding.txt
 asides.txt
 blurbs.txt
 block_quotes.txt
@@ -22,6 +22,8 @@ footnotes.txt
 crosslinks.txt
 code_spans.txt
 math_spans.txt
+whitespace.txt
+scene_breaks.txt
 soft_hyphen.txt
 metadata.txt
 implementation.txt

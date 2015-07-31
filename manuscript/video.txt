@@ -20,7 +20,6 @@ In the Markua video syntax, just as with the Markdown image syntax, the optional
 : path/or/url/to/video.mp4 "Optional Figure Caption A"
 : path/or/url/to/replacment/video.webm "Optional Figure Caption B"
 : path/or/url/to/replacment/image.png "Optional Figure Caption C"
-: path/or/url/to/replacment/image.png "Optional Figure Caption C"
 
 [meow]: path/or/url/to/video.mp4 "Optional Figure Caption"
 
