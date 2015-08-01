@@ -1,24 +1,3 @@
-# IMPORTANT NOTE FOR LEANPUB AUTHORS: MARKUA IS NOT YET LIVE IN LEANPUB!
-
-**Markua support is NOT live in Leanpub yet for anyone but admins. Heck, Markua is not even fully-specified yet. This spec is in-progress.**
-
-If you're reading this, you are a really, *really* early adopter of Markua.
-
-I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
-
-We should have Markua live in Leanpub the next 2-3 months.  In the meantime, what Leanpub books are written in is what they have been written in for about 5 years: [Leanpub Flavoured Markdown, which is documented at this link](https://leanpub.com/help/manual).
-
-The good news is that Leanpub Flavoured Markdown is very similar to Markua. So, if you've been thinking that you were writing in Markua and then wondered why a couple things didn't work, it's because they work differently in Leanpub Flavoured Markdown.
-
-When Markua support is live on Leanpub we will provide the option of writing either in Markua or in Leanpub Flavoured Markdown. We'll also have a 1-click "Convert my Manuscript to Markua" button.
-
-So, in the meantime, please enjoy using Leanpub and Leanpub Flavoured Markdown.
-
-I'm really sorry for the confusion that this has caused some Leanpub authors.
-
-Thanks,
-Peter Armstrong
-
 # The Magical Typewriter
 
 Imagine you owned a magical typewriter.

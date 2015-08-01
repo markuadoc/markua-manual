@@ -1,15 +1,19 @@
 {#headings}
 # Headings
 
-W> TODO - rewrite this section to improve wording, add Setext examples and to have executable tests.
+Markua supports atx and Setext headers, just like [Markdown does](http://daringfireball.net/projects/markdown/syntax#header).
+
+A> I originally planned to only support atx headers with no trailing pound signs, but changed my mind. If an author who is familiar with Markdown strongly prefers either Setext headers or adding trailing pound signs in atx headers, there's no reason to take this away. (There's nothing else that Markua would do with the Setext header syntax, or with closing pound signs in atx headers.)
+
+In Markua,...
 
 ## Heading Styles: atx and Setext
 
 Conceptually, the most important element types in Markua are the headings. A Markua document is typically organized into one or more levels of headings.
 
-Markua supports atx and Setext headers, just like [Markdown does](http://daringfireball.net/projects/markdown/syntax#header).
 
-I originally planned to only support atx headers with no trailing pound signs, but changed my mind. If an author who is familiar with Markdown strongly prefers either Setext headers or adding trailing pound signs in atx headers, there's no reason to take this away. (There's nothing else that Markua would do with the Setext header syntax, or with closing pound signs in atx headers.)
+
+
 
 Authors are strongly discouraged from mixing and matching atx and Setext headers: If you want more than two levels of heading, just use atx headers.
 
@@ -23,7 +27,7 @@ However, just as in Markdown, atx headings can have optional pound signs at the 
 
 In the Setext-style of headings, which is supported in both Gruber Markdown and in Markua, top level headings can be made by adding a row of equals signs `========`, and second level headings can be made by adding a row of minus signs `--------`.
 
-## Six Heading Levels: `#`, `##`, `###`, `####`, `#####` and `######`
+## Six Heading Levels: `#` or `========`, `##` or `--------`, `###`, `####`, `#####` and `######`
 
 In Markua, the type of heading is determined by the number of `#`s that are used. There are 6 levels of headings:
 

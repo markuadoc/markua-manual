@@ -8,7 +8,7 @@ New stanzas can be created by adding a blank line, just as would happen with new
 
 Note that Markdown's "two space trick" for line breaks (in which two trailing spaces are added to the end of a line to force a line break) is neither supported nor necessary in Markua: every newline in a normal paragraph produces a line break, regardless of whether there are any trailing spaces. (In fact, trailing spaces are ignored.)  Two newlines produce a new paragraph or stanza.
 
-If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`.
+If you wish to write e e cummings style monospaced typewriter poetry, you should do this in a code block with a `code` attribute of `poetry`. Some programmers think of code as poetry--this is the inverse.
 
 #### Example 1: A Shakesperean Sonnet
 
@@ -68,8 +68,6 @@ i am a cat
 ~~~
 
 ##### HTML Output
-
-W> TODO
 
 {code: poetry}
 ```
