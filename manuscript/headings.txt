@@ -3,128 +3,119 @@
 
 A Markua document is typically organized by adding one or more levels of headings. Adding headings is how you divide a book into chapters and sections (and even parts, for a multi-part book), and how you divide a document into sections.
 
-This section defines both the syntax for creating headings, and the mapping. If you already know the Markdown headers, you should still read this section to learn how Markua interprets them semantically.
-
-Markua supports "atx" and "Setext" headers, just like [Markdown does](http://daringfireball.net/projects/markdown/syntax#header). I originally planned to only support atx headers with no trailing pound signs, but changed my mind. If an author who is familiar with Markdown strongly prefers either Setext headers or adding trailing pound signs in atx headers, there's no reason to take this away. (There's nothing else that Markua would do with the Setext header syntax, or with closing pound signs in atx headers.)
-
-## Heading Semantics
-
 Markdown is a way of writing HTML, and HTML has 6 heading heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
-Markua is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections.
+Markua, however, is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections.
 
-What Markua does is uses the heading types to create the structure of the book or document.
+What Markua does is uses the heading types that Markdown uses to create HTML to create the structure of the book or document.
 
-In Markua, you define the `type` of the document in [metadata](#metadata). There are three legal values of the [`type`](#setting-keys-and-values) setting:
-
-1. `book`: a normal book (the default), which is divided into chapters, sections and/or subsections
-2. `multi-part-book`: a book which is divided into parts as well as divided into chapters, sections and/or subsections
-3. `document`: a document has no parts or chapters, just sections and subsections
-
-The meaning of the headings in the book vary based on the `type` of book. There are two ways to set the `type` attribute, based on whether the Markua document is a single-file document or a multiple-file document. The single-file way is shown in the examples below; both approaches are discussed further in the [metadata chapter](#metadata).
-
-### Headings with `type: book` (the default)
-
-In a Markua document with the `type` of `book` (the default), these are what the headings mean:
-
-1. `h1`: chapter
-2. `h2`: section
-3. `h3`: sub-section
-4. `h4`: sub-sub-section
-5. `h5`: sub-sub-sub-section
-6. `h6`: sub-sub-sub-sub-section
-
-### Headings with `type: multi-part-book`
-
-In a Markua document with the `type` of `multi-part-book`, these are what the headings mean:
-
-1. `h1`: part
-2. `h2`: chapter
-3. `h3`: section
-4. `h4`: sub-section
-5. `h5`: sub-sub-section
-6. `h6`: sub-sub-sub-section
-
-The key here is that `h1` in a `multi-part-book` is for a part, whereas in a `book` it is for a chapter. Everything else that follows is a consequence of this decision.
-
-Note that it's not possible to create sub-sub-sub-sub-section headings in a `multi-part-book`.
-
-### Headings with `type: document`
-
-In a Markua document with the `type` of `document`, these are what the headings mean:
-
-1. `h1`: section
-2. `h2`: sub-section
-3. `h3`: sub-sub-section
-4. `h4`: sub-sub-sub-section
-5. `h5`: sub-sub-sub-sub-section
-6. `h6`: sub-sub-sub-sub-sub-section
-
-The key here is that `h1` in a `document` is for a section, whereas in a `multi-part-book` it is for a part and in a `book` it is for a chapter. Everything else that follows is a consequence of this decision.
-
-Note that a `document` has two lower levels of heading than a `multi-part-book`.
+This section defines both the syntax to create headings, and their meaning in Markua.
 
 ## Heading Syntax
 
-Now that we know what the headings mean, how do we create them?
+Headings are created the same way in Markua as they are in Markdown. Actually, it's the same "ways" not "way", since Markdown defines two syntax styles for headings.
 
-So,
-
-Note that the class used in the HTML mapping is affected by the `type` of the Markua document. This is so that Markua processors can use CSS to style these headings appropriately based on what type of Markua document they are generating.
-
-As discussed in the
-
-
-
-
-
-## Heading Syntax Styles ("atx" and "Setext") and Level (h1 to h6)
-
-
-
-
-
-Authors are strongly discouraged from mixing and matching atx and Setext headers: If you want more than two levels of heading, just use atx headers.
-
-To make a heading, you start a line with between 1 and 6 pound signs (`#`), followed by whitespace, followed by some words or numbers.
+Markua supports "atx" and "Setext" headers, just like [Markdown does](http://daringfireball.net/projects/markdown/syntax#header). I originally planned to only support atx headers with no trailing pound signs, but changed my mind. If an author who is familiar with Markdown strongly prefers either Setext headers or adding trailing pound signs in atx headers, there's no reason to take this away. (There's nothing else that Markua would do with the Setext header syntax, or with closing pound signs in atx headers.)
 
 Headings must be separated from other block elements by blank lines both before and after them. Because of the [way that Markua concatenates files](#multiple-file-concatenating), headings at the top of a Markua document automatically have a blank line above them. So, headings at the top of a document only need a blank line below them.
 
-The preferred way to define headers in Markua is the atx style with no trailing pound signs.
+### "atx" Headings
 
-However, just as in Markdown, atx headings can have optional pound signs at the end of them. If this is the case, those pound signs are ignored.
+The preferred way of creating headings in Markua is by using "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown.
 
-In the Setext-style of headings, which is supported in both Gruber Markdown and in Markua, top level headings can be made by adding a row of equals signs `========`, and second level headings can be made by adding a row of minus signs `--------`.
+To create an atx heading, you put the following on a line by itself, with a blank line above and below it: one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text. The number of `#` characters determines the level of heading.
 
-## Six Heading Levels: `#` or `========`, `##` or `--------`, `###`, `####`, `#####` and `######`
+1. `#`: `h1`
+2. `##`: `h2`
+3. `###`: `h3`
+4. `####`: `h4`
+5. `#####`: `h5`
+6. `######`: `h6`
 
-In Markua, the type of heading is determined by the number of `#`s that are used. There are 6 levels of headings:
+Here are some examples:
 
-1. `#`, the top-level heading
-2. `##`, the second-level heading
-3. `###`, the third-level heading
-4. `####`, the fourth-level heading
-5. `#####`, the fifth-level heading
-6. `######`, the sixth-level heading
+```
+# This is an h1
 
-{#html-mapping-heading}
-## HTML Mapping of Heading Types
+## This is an h2
 
-The HTML mapping of headings is exactly the same as in Gruber Markdown, mapping the number of `#` signs to the heading level in HTML:
+### This is an h3
+```
 
-1. `#` means `h1`
-2. `##` means `h2`
-3. `###` means `h3`
-4. `####` means `h4`
-5. `#####` means `h5`
-6. `######` means `h6`
+Note that you can also add extra trailing `#` characters after the text, which will be ignored and not considered part of the text of the heading: `# foo ` and `# foo ############` are both `h1` headings whose text is "foo".
 
-The HTML element  mapping of these heading types is identical regardless of what type of Markua document is being written.
+```
+# This is an h1 ####################
 
+## This is an h2 ###################
 
-These affect the classes which are added as follows:
+### This is an h3 ##################
+```
 
-### HTML Mapping with `type` of `book` (the default)
+Just because you can do this doesn't mean you should. The preferred syntax for headings in Markua is to use atx headings with no trailing `#` characters. However, it's undeniable that (especially with short headings) adding a bunch of `#` characters can help your headings stand out. The challenge is in not wasting time keeping them consistent.
+
+### Setext Headings
+
+In the Setext-style of headings, which is supported in both Markdown and in Markua, top level headings (`h1`) can be made by adding a row of 1 or more equals signs (e.g. `========`) directly below a line which contains the text of the heading, and second level headings (`h2`) can be made by adding a row of 1 or more minus signs (e.g. `--------`) directly below a line which contains the text of the heading.
+
+Here's an example:
+
+```
+Chapter One
+===========
+
+This is a paragraph.
+
+Section One
+-----------
+
+This is a paragraph.
+
+This is another paragraph.
+
+Section Two
+-----------
+
+This is another paragraph.
+```
+
+In relatively short documents where only two levels of heading are used, Setext-style headings are arguably more readable than atx headings. In documents with more than two levels of heading, it is strongly recommended to only use atx headings, and not to mix and match atx and Setext headings. (That said, it *will* work--your manuscript will just look inconsistent and gross.
+
+## Heading Semantics and HTML Mapping
+
+As we saw above, in Markua, there are 6 heading levels, which can be created by using 1 to 6 pound signs (`#`) to create 6 heading heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
+
+Markua is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections. Markua uses headings to create the structure of the book or document.
+
+But what do these headings mean? The answer is: It depends.
+
+In Markua, you define the `type` of the document in [metadata](#metadata). There are three legal values of the [`type`](#setting-keys-and-values) setting:
+
+1. `book`: a normal book (the default), which can be divided into chapters, sections and/or subsections
+2. `multi-part-book`: a book which can be divided into parts, chapters, sections and/or subsections
+3. `document`: a document cannot be divided into parts or chapters, just sections and/or subsections
+
+The meaning of the headings in the book vary based on the `type` of book.
+
+There are two ways to set the `type` attribute, based on whether the Markua document is a single-file document or a multiple-file document. The single-file way is shown in the examples at the end of this section; both approaches are discussed further in the [metadata chapter](#metadata).
+
+Note that in all cases, the meaning of the heading is also stuck as a `class` on the heading in question in HTML. This allows for styling based on meaning.
+
+### Headings with `type: book` (the default)
+
+In a Markua document with the `type` of `book` (the default), these are the heading levels:
+
+{caption: The Meaning of Headings in a `book`}
+| atx Syntax | Setext Syntax | HTML Mapping  | Meaning                 |
+|------------|---------------|---------------|-------------------------|
+| `#`        | `===========` | `h1`          | chapter                 |
+| `##`       | `-----------` | `h2`          | section                 |
+| `###`      | (none)        | `h3`          | sub-section             |
+| `####`     | (none)        | `h4`          | sub-sub-section         |
+| `#####`    | (none)        | `h5`          | sub-sub-sub-section     |
+| `######`   | (none)        | `h6`          | sub-sub-sub-sub-section |
+
+In a `book`, the HTML that gets produced is as follows:
 
 ```
 <h1 class="chapter">...</h1>
@@ -135,83 +126,168 @@ These affect the classes which are added as follows:
 <h6 class="sub-sub-sub-sub-section">...</h6>
 ```
 
-### HTML Mapping with `type` of `multi-part-book`
+### Headings with `type: multi-part-book`
+
+In a Markua document with the `type` of `multi-part-book`, these are what the headings mean:
+
+{caption: The Meaning of Headings in a `multi-part-book`}
+| atx Syntax | Setext Syntax | HTML Mapping  | Meaning                 |
+|------------|---------------|---------------|-------------------------|
+| `#`        | `===========` | `h1`          | part                    |
+| `##`       | `-----------` | `h2`          | chapter                 |
+| `###`      | (none)        | `h3`          | section                 |
+| `####`     | (none)        | `h4`          | sub-section             |
+| `#####`    | (none)        | `h5`          | sub-sub-section         |
+| `######`   | (none)        | `h6`          | sub-sub-sub-section     |
+
+The key here is that `h1` in a `multi-part-book` is for a part, whereas in a `book` it is for a chapter. Everything else that follows is a consequence of this decision.
+
+Note that it's not possible to create sub-sub-sub-sub-section headings in a `multi-part-book`.
+
+In a `multi-part-book`, the HTML that gets produced is as follows:
 
 ```
-<h1 class="part">...</h1>
-<h2 class="chapter">...</h2>
-<h3 class="section">...</h3>
-<h4 class="sub-section">...</h4>
-<h5 class="sub-sub-section">...</h5>
-<h6 class="sub-sub-sub-section">...</h6>
+<h1 class="chapter">...</h1>
+<h2 class="section">...</h2>
+<h3 class="sub-section">...</h3>
+<h4 class="sub-sub-section">...</h4>
+<h5 class="sub-sub-sub-section">...</h5>
+<h6 class="sub-sub-sub-sub-section">...</h6>
 ```
 
-### HTML Mapping with `type` of `document`
+### Headings with `type: document`
+
+In a Markua document with the `type` of `document`, these are what the headings mean:
+
+{caption: The Meaning of Headings in a `document`}
+| atx Syntax | Setext Syntax | HTML Mapping  | Meaning                     |
+|------------|---------------|---------------|-----------------------------|
+| `#`        | `===========` | `h1`          | section                     |
+| `##`       | `-----------` | `h2`          | sub-section                 |
+| `###`      | (none)        | `h3`          | sub-sub-section             |
+| `####`     | (none)        | `h4`          | sub-sub-sub-section         |
+| `#####`    | (none)        | `h5`          | sub-sub-sub-sub-section     |
+| `######`   | (none)        | `h6`          | sub-sub-sub-sub-sub-section |
+
+The key here is that `h1` in a `document` is for a section, whereas in a `multi-part-book` it is for a part and in a `book` it is for a chapter. Everything else that follows is a consequence of this decision.
+
+Note that a `document` has two lower semantic levels of heading than a `multi-part-book` and one lower semantic level of heading than a `book`.
+
+In a `document`, the HTML that gets produced is as follows:
 
 ```
-<h1 class="section">...</h1>
-<h2 class="sub-section">...</h2>
-<h3 class="sub-sub-section">...</h3>
-<h4 class="sub-sub-sub-section">...</h4>
-<h5 class="sub-sub-sub-sub-section">...</h5>
-<h6 class="sub-sub-sub-sub-sub-section">...</h6>
+<h1 class="chapter">...</h1>
+<h2 class="section">...</h2>
+<h3 class="sub-section">...</h3>
+<h4 class="sub-sub-section">...</h4>
+<h5 class="sub-sub-sub-section">...</h5>
+<h6 class="sub-sub-sub-sub-section">...</h6>
 ```
 
-## Conceptual Mapping of Headings in Different Document Types
+## Examples
 
-What headings *mean*, however, is determined by what type of Markua document is being written.
+#### Example 1: Headings in a `book`
 
-There are **three** types of Markua documents:
+##### Markua Syntax
 
-1. A Book (`book`).
-2. A Multi-Part Book (`multi-part-book`).
-3. A Document (`document`).
+Note that the default type is book, so the settings hash here is optional.
 
-The default type of a Markua document is `book`. If no document type is specified, this is the type.
+{#input_headings_1}
+```
+{
+type: book
+}
 
-From the perspective of the author, the only difference between these types of Markua documents are what the headings mean--what the conceptual mapping is from the Markua heading levels to book or document structures.
+# This is a chapter, which produces an h1
 
-Markua is a plain-text format designed for the writing of books and documents.
+Here's a paragraph.
 
-Since Markua is a format in which all semantic and syntax formatting is typed by the author, we want Markua to be as readable as possible and as economical of keystrokes as possible.
+# This is also a chapter, which produces an h1 ########
 
-Almost all formatting in Markua means the same thing regardless of whether the Markua document is being used to generate a book or document. The one huge exception to this, however, is in headings.
+Here's a paragraph.
 
-### Headings in Books (`type: book`, the default)
+This is also a chapter, which produces an h1
+============================================
 
-In a normal book, the topmost unit of organization is the chapter. Thus, the topmost heading maps to a chapter.
+Here's a paragraph.
 
-This is the mapping from Markua headings in a normal book:
+This is also a chapter, which produces an h1
+=
 
-1. `#` means Chapter
-2. `##` means Section
-3. `###` means Sub-Section
-4. `####` means Sub-Sub-Section
-5. `#####` means Sub-Sub-Sub-Section
-6. `######` means Sub-Sub-Sub-Sub-Section
+Here's a paragraph.
 
-### Headings in Books with Parts (`type: multi-part-book`)
+## This is a section, which produces an h2
 
-In a book with parts, the topmost unit of organization is the part. Thus, the topmost heading maps to a part.
+Here's a paragraph.
 
-This is the mapping from Markua headings in a book with parts:
+## This is also a section, which produces an h2 ########
 
-1. `#` means Part
-2. `##` means Chapter
-3. `###` means Section
-4. `####` means Sub-Section
-5. `#####` means Sub-Sub-Section
-6. `######` means Sub-Sub-Sub-Section
+Here's a paragraph.
 
-### Headings in Documents (`type: document`)
+This is also a section, which produces an h2
+--------------------------------------------
 
-In a document, there are just differing levels of section. Thus, the topmost heading is just the topmost section.
+Here's a paragraph.
 
-This is the mapping from Markua headings in a document:
+This is also a section, which produces an h2
+-
 
-1. `#` means Section
-2. `##` means Sub-Section
-3. `###` means Sub-Sub-Section
-4. `####` means Sub-Sub-Sub-Section
-5. `#####` means Sub-Sub-Sub-Sub-Section
-6. `######` means Sub-Sub-Sub-Sub-Sub-Section
+Here's a paragraph.
+
+### This is a sub-section, which produces an h3
+
+Here's a paragraph.
+
+#### This is a sub-sub-section, which produces an h4
+
+Here's a paragraph.
+
+##### This is a sub-sub-sub-section, which produces an h5
+
+Here's a paragraph.
+
+###### This is a sub-sub-sub-sub-section, which produces an h6
+
+Here's a paragraph.
+```
+
+##### HTML Output
+
+{#output_headings_1}
+```
+<h1 class="chapter">This is a chapter, which produces an h1</h1>
+<p>Here's a paragraph.</p>
+<h1 class="chapter">This is also a chapter, which produces an h1</h1>
+<p>Here's a paragraph.</p>
+<h1 class="chapter">This is also a chapter, which produces an h1</h1>
+<p>Here's a paragraph.</p>
+<h1 class="chapter">This is also a chapter, which produces an h1</h1>
+<p>Here's a paragraph.</p>
+<h2 class="section">This is a section, which produces an h2</h2>
+<p>Here's a paragraph.</p>
+<h2 class="section">This is also a section, which produces an h2</h2>
+<p>Here's a paragraph.</p>
+<h2 class="section">This is also a section, which produces an h2</h2>
+<p>Here's a paragraph.</p>
+<h2 class="section">This is also a section, which produces an h2</h2>
+<p>Here's a paragraph.</p>
+<h3 class="sub-section">This is a sub-section, which produces an h3</h3>
+<p>Here's a paragraph.</p>
+<h4 class="sub-sub-section">This is a sub-sub-section, which produces an h4</h4>
+<p>Here's a paragraph.</p>
+<h5 class="sub-sub-sub-section">This is a sub-sub-sub-section, which produces an h5</h5>
+<p>Here's a paragraph.</p>
+<h6 class="sub-sub-sub-sub-section">This is a sub-sub-sub-sub-section, which produces an h6</h6>
+<p>Here's a paragraph.</p>
+```
+
+#### Example 2: Headings in a `multi-part-book`
+
+##### Markua Syntax
+
+{#input_headings_1}
+```
+{
+type: multi-part-book
+}
+```

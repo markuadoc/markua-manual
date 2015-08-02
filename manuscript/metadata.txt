@@ -476,7 +476,7 @@ Where this metadata lives depends on which approach is used by the manuscript.
 
 Markua manuscripts can be written all in one file called `manuscript.txt`. Since the goal of the one file approach is to have everything contained in one file for simplicity, this includes the metadata.
 
-With this approach, all the metadata lives in one newline-separated hash at the top of the file. Furthermore, there must be a blank line between this hash
+With this approach, all the metadata lives in one newline-separated hash at the top of the file. In the metadata hash, the keys must be added one per line: the hash is newline-separated, not comma separated. (The reason for this is to make it not look like an attribute list on an element.) Furthermore, there must be a blank line between this hash and the beginning of the file, to disambiguate between a settings hash and an attribute list.
 
 Here's an example of what this file looks like including metadata:
 
