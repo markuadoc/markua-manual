@@ -1,7 +1,123 @@
 {#headings}
 # Headings
 
-W> TODO - having written this, I hate it. Time to flip the tea table?
+Normal cases:
+
+```
+# Part #
+
+This produces `<h1 class="part">Part</h1>`.
+
+# Chapter
+
+This produces `<h1>Chapter</h1>`.
+
+## Section
+
+This produces `<h2>Section</h2>`.
+
+### Sub-Section (h3)
+
+This produces `<h3>Sub-Section</h3>`.
+
+#### Sub-Sub-Section (h4)
+
+This produces `<h4>Sub-Sub-Section</h4>`.
+
+##### Sub-Sub-Sub-Section (h5)
+
+This produces `<h5>Sub-Sub-Sub-Section</h5>`.
+
+###### Sub-Sub-Sub-Sub-Section (h6)
+
+This produces `<h6>Sub-Sub-Sub-Sub-Section</h6>`.
+```
+
+Edge cases:
+
+```
+# Why I like C#
+
+This produces `<h1>Why I like C#</h1>`
+
+# Why I like C# #
+
+This produces `<h1 class="part">Why I like C#</h1>`
+
+# Part ####
+
+This produces `<h1 class="part">Part</h1>`.
+
+# Chapter \#
+
+This produces `<h1>Chapter #</h1>
+
+# Chapter \##
+
+This produces `<h1>Chapter ##</h1>
+
+# Part \# #
+
+This produces `<h1 class="part">Part #</h1>
+
+# Chapter 5#
+
+This produces `<h1>Chapter 5#</h1>
+
+# Part 5# #############
+
+This produces `<h1 class="part">Part 5#</h1>
+
+# Part \# #
+
+This produces `<h1>Part #</h1>
+
+# Part \#\# #
+
+This produces `<h1 class="part">Part ##</h1>
+
+## Section #
+
+This produces `<h2>Section</h2>`.
+
+## Section ####
+
+This produces `<h2>Section</h2>`.
+
+### Sub-Section (h3) #
+
+This produces `<h3>Sub-Section</h3>`.
+
+### Sub-Section (h3) ###
+
+This produces `<h3>Sub-Section</h3>`.
+
+#### Sub-Sub-Section (h4) #
+
+This produces `<h4>Sub-Sub-Section</h4>`.
+
+#### Sub-Sub-Section (h4) ####
+
+This produces `<h4>Sub-Sub-Section</h4>`.
+
+##### Sub-Sub-Sub-Section (h5) #
+
+This produces `<h5>Sub-Sub-Sub-Section</h5>`.
+
+##### Sub-Sub-Sub-Section (h5) #####
+
+This produces `<h5>Sub-Sub-Sub-Section</h5>`.
+
+###### Sub-Sub-Sub-Sub-Section (h6) #
+
+This produces `<h6>Sub-Sub-Sub-Sub-Section</h6>`.
+
+###### Sub-Sub-Sub-Sub-Section (h6) ######
+
+This produces `<h6>Sub-Sub-Sub-Sub-Section</h6>`.
+```
+
+W> TODO - rewrite
 
 A Markua document is typically organized by adding one or more levels of headings. Adding headings is how you divide a book into chapters and sections (and even parts, for a multi-part book), and how you divide a document into sections.
 
