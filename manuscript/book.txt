@@ -29,6 +29,5 @@ soft_hyphen.txt
 metadata.txt
 implementation.txt
 definitions.txt
-lfm_changes.txt
 todo.txt
 acknowledgments.txt

@@ -10,7 +10,9 @@ Markua is also a lot more strict about heading syntax than Markdown. Before defi
 {#markdown_headings}
 ## Markdown Headings
 
-As you will see in the [Markua Headings section](#markua_headings), Markua defines exactly one way of making every type of heading. Markdown, on the other hand, defines two syntaxes for making headings: "atx" and "Setext".
+As you will see in the [Markua Headings section](#markua_headings), Markua defines exactly one way of making every type of heading. Markdown, on the other hand, defines two syntaxes for making headings: "Setext" and "atx".
+
+### Setext Headings in Markdown
 
 In the Setext-style of headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading:
 
@@ -43,7 +45,7 @@ There are two main issues with this style of heading in Markdown:
 1. It is inconsistent: It only supports defining `h1` and `h2`; to define h3 and below, the atx style of heading must be used.
 2. It is confusing: Authors are confused about how many equals signs you need to use. (The answer is 1, by the way, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
 
-So, even though I like using them in plain text emails, the "Setext" style of headings is **not** supported in Markua.
+### atx Headings in Markdown
 
 In Markdown, the other heading syntax is "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown. To create an atx heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text, followed optionally by whitespace and any number of `#` characters. The number of `#` characters determines the level of heading.
 
@@ -80,7 +82,7 @@ Again, note that all the trailing `#` characters are ignored and are not part of
 {#markua_headings}
 ## Markua Headings
 
-In Markdown, there are two syntaxes for making headings, and both of them can take many forms. However, **in Markua there is exactly one way of making every type of heading**.
+In Markdown, there are two syntaxes for making headings, and both of them can take many forms. However, **in Markua there is exactly one way of making every type of heading**. It is similar to the atx headings in Markdown, but not identical.
 
 Here's the only way that headings are made in Markua:
 
@@ -115,7 +117,12 @@ This is a paragraph.
 This is a paragraph.
 ```
 
-Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by exactly one space, followed by text, followed (only for parts) by exactly one space and exactly one pound sign.
+Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
+
+* between one and six pound signs (`#`)
+* followed by exactly one space
+* followed by text
+* followed (only for parts) by exactly one space and exactly one pound sign
 
 Making these headings divides your book or document into these divisions. If you add part headings, your book will have parts; if you don't, it won't. If you add chapter headings, your book will have chapters; if you don't, it won't.
 
@@ -143,19 +150,19 @@ I thought long and hard about Markua headings, and changed my mind a number of t
 
 I settled on this design when I realized that the design requirements were as follows:
 
-1. From looking at a heading, an author must be able to know exactly what it is without relying on metadata.
+1. From looking at a heading, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
 2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged.
 3. The number of leading pound signs must match the level of heading in HTML.
 4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
 5. The syntax to create parts must be as economical as possible.
-6. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
-7. There must be only one way to do anything.
+6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
+7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
 8. Books with parts and chapters must be able to have the same number of levels of sub-sections.
 9. Documents can have parts, chapters and sections just like books, and it's up to the document designer to create the appropriate CSS.
 
-The design of Markua headings meets these requirements, and in what I feel is an optimal way.
+The design of Markua headings meets these requirements, in what I feel is an optimal way.
 
-A> In Leanpub Flavoured Markdown, parts are created with `-# Title` (instead of `# Title #` in Markua), which violates #2. Previous versions of Markua proposed solutions which violated other of these requirements.
+A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
 
 Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
