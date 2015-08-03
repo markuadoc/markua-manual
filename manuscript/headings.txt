@@ -146,9 +146,7 @@ This is the HTML which is produced by the above example:
 <p>This is a paragraph.</p>
 ```
 
-I thought long and hard about Markua headings, and changed my mind a number of times.
-
-I settled on this design when I realized that the design requirements were as follows:
+I thought long and hard about Markua headings, and changed my mind a number of times. I settled on this design when I realized that the design requirements were as follows:
 
 1. From looking at a heading, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
 2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged.
