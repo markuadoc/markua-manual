@@ -1,6 +1,8 @@
 {#headings}
 # Headings
 
+W> TODO - having written this, I hate it. Time to flip the tea table?
+
 A Markua document is typically organized by adding one or more levels of headings. Adding headings is how you divide a book into chapters and sections (and even parts, for a multi-part book), and how you divide a document into sections.
 
 Markdown is a way of writing HTML, and HTML has 6 heading heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
@@ -147,12 +149,12 @@ Note that it's not possible to create sub-sub-sub-sub-section headings in a `mul
 In a `multi-part-book`, the HTML that gets produced is as follows:
 
 ```
-<h1 class="chapter">...</h1>
-<h2 class="section">...</h2>
-<h3 class="sub-section">...</h3>
-<h4 class="sub-sub-section">...</h4>
-<h5 class="sub-sub-sub-section">...</h5>
-<h6 class="sub-sub-sub-sub-section">...</h6>
+<h1 class="part">...</h1>
+<h2 class="chapter">...</h2>
+<h3 class="section">...</h3>
+<h4 class="sub-section">...</h4>
+<h5 class="sub-sub-section">...</h5>
+<h6 class="sub-sub-sub-section">...</h6>
 ```
 
 ### Headings with `type: document`
@@ -176,28 +178,26 @@ Note that a `document` has two lower semantic levels of heading than a `multi-pa
 In a `document`, the HTML that gets produced is as follows:
 
 ```
-<h1 class="chapter">...</h1>
-<h2 class="section">...</h2>
-<h3 class="sub-section">...</h3>
-<h4 class="sub-sub-section">...</h4>
-<h5 class="sub-sub-sub-section">...</h5>
-<h6 class="sub-sub-sub-sub-section">...</h6>
+<h1 class="section">...</h1>
+<h2 class="sub-section">...</h2>
+<h3 class="sub-sub-section">...</h3>
+<h4 class="sub-sub-sub-section">...</h4>
+<h5 class="sub-sub-sub-sub-section">...</h5>
+<h6 class="sub-sub-sub-sub-sub-section">...</h6>
 ```
 
 ## Examples
 
-#### Example 1: Headings in a `book`
+### Headings in a `book`
+
+#### Example 1
 
 ##### Markua Syntax
 
-Note that the default type is book, so the settings hash here is optional.
+Note that the default type is book, so the settings hash here is optional and not provided.
 
 {#input_headings_1}
 ```
-{
-type: book
-}
-
 # This is a chapter, which produces an h1
 
 Here's a paragraph.
@@ -208,12 +208,11 @@ Here's a paragraph.
 
 This is also a chapter, which produces an h1
 ============================================
-
 Here's a paragraph.
+
 
 This is also a chapter, which produces an h1
 =
-
 Here's a paragraph.
 
 ## This is a section, which produces an h2
@@ -231,7 +230,6 @@ Here's a paragraph.
 
 This is also a section, which produces an h2
 -
-
 Here's a paragraph.
 
 ### This is a sub-section, which produces an h3
@@ -291,3 +289,15 @@ Here's a paragraph.
 type: multi-part-book
 }
 ```
+
+### Headings in a `multi-part-book`
+
+#### Example 1
+
+##### Markua Syntax
+
+### Headings in a `document`
+
+#### Example 1
+
+##### Markua Syntax

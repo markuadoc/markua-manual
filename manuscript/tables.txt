@@ -3,9 +3,6 @@
 
 W> TODO (with titles)
 
-
-
-
 https://help.github.com/articles/github-flavored-markdown/
 
 https://michelf.ca/projects/php-markdown/extra/#table
