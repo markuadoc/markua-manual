@@ -1,8 +1,44 @@
 {#tables}
 # Tables
 
-W> TODO (with titles)
+Markdown:
+Give up and use HTML.
 
+GFM:
 https://help.github.com/articles/github-flavored-markdown/
 
+PHP Markdown Extra:
 https://michelf.ca/projects/php-markdown/extra/#table
+
+Markua:
+
+Easier to read. More features (rowspan, colspan, alignment of individual cells instead of just columns, etc). Harder to write, but who cares since (a) it's not that much worse and (b) there will be tooling.
+
+```
+|=====================|=================|=======================|=========================|========================|
+| Column Header 1     | Column Header 2 | Column Header 3       | Column Header 4         | Column Header 5        |
+|:====================|:===============:|======================:|=========================|========================|
+| this is a rowspan   | this is a colspan of 2 columns          | sit                     | amet                   |
+| of 2 rows since it  |-----------------|-----------------------|-------------------------|------------------------|
+| spans two rows      | ipsum           | dolor                 | sit                     | amet                   |
+|---------------------|-----------------|-----------------------|-------------------------|------------------------|
+| lorem               | ipsum           | dolor                 | sit                     | amet                   |
+| lorem               | ipsum           | dolor                 | sit                     | amet                   |
+|---------------------|-----------------|-----------------------|-------------------------|------------------------|
+| lorem ipsum dolor   | lorem ipsum     | dolor                 | lorem ipsum dolor sit   | amet                   |
+| sit amet lorem      | dolor sit amet  |-----------------------| amet lorem ipsum dolor  |                        |
+| ipsum dolor sit     | lorem ipsum     | dolor                 | sit amet                |                        |
+|--------------------:|:----------------|-----------------------|-------------------------|------------------------|
+| lorem               | ipsum           | dolor                 | sit                     | amet                   |
+|                     |                 |                       |-------------------------|------------------------|
+|                     |                 |                       | sit                     | amet                   |
+|                     |                 |                       |-------------------------|------------------------|
+|                     |                 |                       | sit                     | amet                   |
+|:--------------------|----------------:|-----------------------|-------------------------|------------------------|
+| lorem               | ipsum           | lorem ipsum dolor sit amet this is a colspan of | amet                   |
+|---------------------|-----------------| 2 columns and a rowspan of 2 rows since it      |------------------------|
+| lorem               | ipsum           | spans 2 columns and 2 rows                      | amet                   |
+|=====================|:===============:|=======================|=========================|========================|
+| lorem               | ipsum           | dolor                 | sit                     | amet                   |
+|=====================|=================|=======================|=========================|========================|
+```
