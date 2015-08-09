@@ -126,7 +126,7 @@ W> TODO - do we add the br tags or not for inline figures?
 <p>This is paragraph 1.</p>
 <div class="para">Markua has a fancy logo:
   <div class="figure">
-    <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+    <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
     <p class="caption">The Markua Logo</p>
   </div>
   Thanks Justin, it was fun making the logo with you!

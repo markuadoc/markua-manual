@@ -54,7 +54,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a fancy logo:</p>
 <div class="figure">
-  <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Markua also has a fancy Twitter avatar:</p>
@@ -86,7 +86,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a fancy logo:</p>
 <div class='figure'>
-  <img src="images/markua-logo.png"/>
+  <img src="media/markua-logo.png"/>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
@@ -112,7 +112,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a fancy logo:</p>
 <div class="figure">
-  <img src="images/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
@@ -138,7 +138,7 @@ Thanks Justin, it was fun making the logo with you!
 ```
 <p>Markua has a fancy logo:</p>
 <div class="figure">
-  <img src="images/markua-logo.png"/>
+  <img src="media/markua-logo.png"/>
   <p class="caption">The Markua Logo</p>
 </div>
 <p>Thanks Justin, it was fun making the logo with you!</p>

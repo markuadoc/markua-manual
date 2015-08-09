@@ -9,11 +9,11 @@ However, if a Markua manuscript is being written or exported to a computer in wh
 
 These requirements are specified here.
 
-Markua manuscripts can be assembled from one source file or from multiple source files. Also, they can have images and code samples included. So, there needs to be some way of defining how this all fits together. This could either be done by configuration (say a file which defined where everything lived), or by a strictly enforced set of conventions. This Ruby on Rails style approach of "convention over configuration" is what Markua chooses. The choice of convention over configuration ensures that Markua authors have a consistent experience when writing Markua manuscripts.
+Markua manuscripts can be assembled from one source file or from multiple source files. Also, they can have media and code samples included. So, there needs to be some way of defining how this all fits together. This could either be done by configuration (say a file which defined where everything lived), or by a strictly enforced set of conventions. This Ruby on Rails style approach of "convention over configuration" is what Markua chooses. The choice of convention over configuration ensures that Markua authors have a consistent experience when writing Markua manuscripts.
 
 Markua manuscripts are all contained in one directory. This directory can be named any legal name for the given filesystem.
 
-The manuscript directory contains two optional subdirectories: `images` and `code`. The `images` directory is for any images which are referenced in the manuscript; the `code` directory is for any computer programming code samples which are referenced in the manuscript. Both the `images` and `code` directories can contain an entire tree of subdirectories, to help authors organize their images or code. The `images` and `code` names are the required names for these directories. This is true regardless of the language being used.
+The manuscript directory contains two optional subdirectories: `media` and `code`. The `media` directory is for any image, video and audio files which are referenced by path in the manuscript; the `code` directory is for any computer programming code samples which are referenced in the manuscript. (Markua also supports referencing images, video and audio files by URL; these are obviously not in the media directory.) Both the `media` and `code` directories can contain an entire tree of subdirectories, to help authors organize their media or code. The `media` and `code` names are the required names for these directories. This is true regardless of the language being used.
 
 There are two ways that a manuscript can be structured:
 
@@ -28,11 +28,11 @@ If this approach is used, here's the initial directory structure of a Markua boo
 
 ```
 manuscript.txt
-images/
+media/
 code/
 ```
 
-The author writes the manuscript entirely in the file called `manuscript.txt`. It can reference images in the `images` directory (and any of its subdirectories) and code in the `code` directory (and any of its subdirectories). It can also contain inline metadata, as described in the [Metadata](#metadata) chapter.
+The author writes the manuscript entirely in the file called `manuscript.txt`. It can reference media in the `media` directory (and any of its subdirectories) and code in the `code` directory (and any of its subdirectories). It can also contain inline metadata, as described in the [Metadata](#metadata) chapter.
 
 {#multiple-files}
 ## Multiple Files Approach: `book.txt`, `sample.txt`, `settings.txt` and multiple files
@@ -45,7 +45,7 @@ If this approach is used, here's the initial directory structure that contains t
 book.txt
 sample.txt
 settings.txt
-images/
+media/
 code/
 ```
 
@@ -83,7 +83,7 @@ settings.txt
 foo.txt
 bar.md
 baz
-images/
+media/
 code/
 ```
 
