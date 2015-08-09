@@ -459,7 +459,6 @@ As the title of this section states, Metadata is just newline-separated key-valu
 Here's an example of metadata:
 
 ```
-type: book
 title: Markua Specification
 authors: Peter Armstrong
 contributors: Scott Patten, Braden Simpson and Jordan Ell
@@ -517,7 +516,6 @@ With the multiple-files approach, there is a separate file called `settings.txt`
 Here's an example of the content of this settings.txt file:
 
 ```
-type: book
 title: Markua Specification
 authors: Peter Armstrong
 contributors: Scott Patten, Braden Simpson and Jordan Ell
@@ -611,9 +609,6 @@ table-names
 
 title
 : The title of the Markua document. The default is "Untitled".
-
-type
-: The type of the Markua document. Legal values are `book` and `document`. The default value is `book`. The value of the `type` key is very important, as it changes the meaning of what the headings are, and thus affects the book or document generation. To see the effects of this, see the [HTML Mapping of Heading Types](#html-mapping-heading) section
 
 urls
 : The way that URLs should be displayed when used as links like `[Markua](http://markua.com)`. The choices are `none`, `inline` and `footnote`. The default is `footnote`, in which the URL is made as a footnote (positioned at the bottom of the page, chapter or book per the value of the `footnotes` attribute) which is a clickable link. Note that angle-bracket URLs like <http://markua.com> never create a footnote.
