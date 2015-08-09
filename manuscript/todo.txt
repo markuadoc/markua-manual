@@ -363,3 +363,5 @@ How chain ! and | in index entry?
 Let's see if the post-commit hook works...
 
 EPUB3 audio and video?
+
+- some of the stuff in philosophy.txt is outdated

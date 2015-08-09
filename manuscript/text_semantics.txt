@@ -13,10 +13,6 @@ If you think this, you are clearly not familiar with the work of the W3C.
 
 Use `_one underscore_` or `*one asterisk*` around a span of text to (essentially) make it italic. Use `__two underscores__` or `**two asterisks**` around a span of text to (essentially) make it bold.
 
-Here's what this looks like without the backticks:
-
-Use _one underscore_ or *one asterisk* around a span of text to (essentially) make it italic. Use __two underscores__ or **two asterisks** around a span of text to (essentially) make it bold.
-
 ## The W3C and Semantic Emphasis
 
 The above two sentences were (essentially) untrue.

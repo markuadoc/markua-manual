@@ -152,8 +152,6 @@ This specification defines:
 2. The HTML Mapping of each element of Markua syntax to exactly specified HTML output.
 3. The Conceptual Mapping from Markua syntax to book and/or documentation concepts.
 
-In almost all cases, the Conceptual Mapping is identical for books and documents. For example, surrounding text with `**two asterisks**` means bold, and bold means bold, regardless of whether the Markua manuscript is producing a book or document. However, in the case of headings, there is some slight difference in the meaning of headings based on whether the Markua document is producing a book or document. When such differences in meaning exist, they will be explained.
-
 Together, the HTML mappings and the Conceptual Mappings combine to mean that Markua-formatted text has both precisely-defined meaning and output.
 
 ## How Complete is the Markua Specification and Markua Implementations?

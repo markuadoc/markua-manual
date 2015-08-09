@@ -9,7 +9,7 @@ Markua is also a lot more strict about heading syntax than Markdown. In Markdown
 
 Here's the only way that headings are made in Markua:
 
-{#input_markua_headings_1}
+{#input_headings_1}
 ```
 # Part (h1) #
 
@@ -51,7 +51,7 @@ Making these headings divides your book or document into these divisions. If you
 
 This is the HTML which is produced by the above example:
 
-{#output_markua_headings_1}
+{#output_headings_1}
 ```
 <h1 class="part">Part (h1)</h1>
 <p>This is a paragraph.</p>

@@ -448,8 +448,6 @@ With both approaches to structuring a manuscript, there is a way to provide meta
 
 The metadata contains information about the document. This will include things like the title, subtitle, copyright, author names, etc.
 
-It can also specify the type of manuscript with the `type` attribute. The legal values of the `type` attribute are `book` and `document`. If the `type` is omitted, it is assumed to be `book`.
-
 The metadata is provided in different ways based on whether the manuscript uses the single file approach or the multiple file approach.
 
 ### Settings Are Just Newline-Separated Key-Value Pairs
