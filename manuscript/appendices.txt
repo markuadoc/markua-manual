@@ -4,7 +4,7 @@
 {#markdown_headings}
 ## Markdown Headings
 
-Whereas Markua [defines exactly one way](#markua_headings) of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
+Whereas Markua [defines exactly one way](#headings) of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
 
 {#setext_headings}
 ### Setext Headings in Markdown

@@ -1,5 +1,11 @@
 # TODO
 
+Do we really need the pound sign when linking to an anchor?
+
+[specified in an appendix](#markdown_headings)
+vs.
+[specified in an appendix](markdown_headings)
+
 float left and right only
 
 - nested list => 2 spaces, 4 spaces, 1 tab, combination? (leaning: 2 spaces)

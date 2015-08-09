@@ -5,7 +5,7 @@ Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h
 
 Markua, however, is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections. What Markua does is use the heading levels that Markdown uses to create HTML to create the structure of the book or document, as well as generating the `h1` through `h6` heading levels in the HTML version of the book.
 
-Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, [atx](#atx_headings) and [Setext](#setext_headings), and both of them can take many forms. For reference, both of these ways that Markdown defines headings are [specified in an appendix](markdown_headings). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown.
+Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, [atx](#atx_headings) and [Setext](#setext_headings), and both of them can take many forms. For reference, both of these ways that Markdown defines headings are [specified in an appendix](#markdown_headings). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown.
 
 Here's the only way that headings are made in Markua:
 
