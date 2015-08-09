@@ -60,19 +60,19 @@ The alt text should not be the same thing as the figure caption, if the figure c
 {#image_path_or_url}
 ## Image Path or URL
 
-The `path_to_or_url_of_image.png` part is the relative path to the image inside the `images` directory or the URL of the image on the internet. Both of these methods are described next.
+The `path_to_or_url_of_image.png` part is the relative path to the image inside the `media` directory or the URL of the image on the internet. Both of these methods are described next.
 
 ### Images Path Approach
 
-The `images/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
+The `media/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
 
-All images identified with a directory path must be inside the `images` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+All images identified with a directory path must be inside the `media` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
 
-A file called `foo.jpg` in the `images` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](images/foo.jpg)` or  `![](/images/foo.jpg)`.
+A file called `foo.jpg` in the `media` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](media/foo.jpg)` or  `![](/media/foo.jpg)`.
 
-A file called `bar.png` in a subdirectory `foo` of the images directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](images/foo/bar.png)` or  `![](/images/foo/bar.png)`.
+A file called `bar.png` in a subdirectory `foo` of the media directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](media/foo/bar.png)` or  `![](/media/foo/bar.png)`.
 
-W> In Leanpub Flavoured Markdown, we included the `images/` in the path of all images. This is not supported in Markua. Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is images/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the images directory.
+W> In Leanpub Flavoured Markdown, we included `images/` in the path of all images. This is not supported in Markua. Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is media/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the media directory.
 
 ### Images URL Approach
 
@@ -80,7 +80,7 @@ The URL approach with an image is simple: the URL is an absolute URL of an image
 
 ## Supported Image Types
 
-Markua supports GIF, PNG, JPEG and SVG images. All images must be located inside the `images` directory, regardless of type. The images must have the correct file extension for their type. Markua processors do not need to parse images to determine their type.
+Markua supports GIF, PNG, JPEG and SVG images. All images must be located inside the `media` directory, regardless of type. The images must have the correct file extension for their type. Markua processors do not need to parse images to determine their type.
 
 The supported file extensions are:
 
@@ -131,7 +131,7 @@ Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_i
 
 {#output_span_images_1}
 ```
-<p>Markua has a fancy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua has a fancy <img src="media/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 <p>Markua also has a fancy <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/> Twitter avatar!</p>
 ```
 
@@ -150,7 +150,7 @@ Markua has a fancy ![](markua-logo-small.png) logo!
 
 {#output_span_images_2}
 ```
-<p>Markua has a fancy <img src="images/markua-logo-small.png"/> logo!</p>
+<p>Markua has a fancy <img src="media/markua-logo-small.png"/> logo!</p>
 ```
 
 #### Example 3: Span Images Incorrectly Having a Caption
@@ -168,7 +168,7 @@ Markua has a fancy ![Markua two trees logo](markua-logo-small.png "This caption 
 
 {#output_span_images_3}
 ```
-<p>Markua has a fancy <img src="images/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua has a fancy <img src="media/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
 ## Image Figures
