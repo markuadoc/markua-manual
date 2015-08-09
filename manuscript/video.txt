@@ -38,31 +38,57 @@ This syntax can be briefly described as follows:
 
 `![Optional Alt Text](path_or_url_to_video "Optional Figure Caption")`
 
-With fallback media:
+With fallback media, this looks like this:
 
 `![Optional Alt Text](path_or_url_to_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption")`
 
 (The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
-The one major limitation of the inline video definition syntax is that only one figure caption can be provided. So, if there is a caption with this syntax, it needs to be the same caption regardless of
-
 ## Defining Video by Reference
 
+In this syntax, an `id` is first defined for an image, like this:
 
-[meow]: path/or/url/to/video.mp4 "Optional Figure Caption"
+[meow]: path_or_url_to_video "Optional Figure Caption"
 
+With fallback media, this looks like this:
 
+[meow]: path_or_url_to_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption"`
 
-[meow] "Optional Figure Caption"
-: path/or/url/to/video.mp4
+(The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
-[meow] "Optional Figure Caption"
-: path/or/url/to/video.mp4
-: path/or/url/to/replacment/video.webm
-: path/or/url/to/replacment/image.png
+A> I considered using a definition list syntax for defining video, and supporting different figure captions based on which video was used. However, I decided that this was objectionable: the text of a book should not change based on the capabilities of the ebook reader, and I consider figure captions to be book text. So, since the alternative caption use case was not legitimate, the need for the definition list syntax evaporated with it. (Yes, there will be line wrapping if there are a number of fallback media defined; that's preferable to having two syntaxes to do the same thing.)
 
+## Alt text
 
-[meow]
-: path/or/url/to/video.mp4 "Optional Figure Caption"
+In the Markua video syntax, just as with the Markua image syntax, the optional alt text is in square brackets before the video insertion.  This is true for both inline and reference style of video insertion:
 
-on Leanpub, if URL not path, then add link to video (as footnote?) on the caption of the fallback image as a footnote. spec that markua allows lots of markup around video...
+* Inline: `![Optional Alt Text](path/to/or/url/of/image "Optional Figure Caption")`
+* Reference: `![Optional Alt Text][image id]`
+
+Providing alt text is at least as important for video as it is for images.
+
+## Image Path or URL
+
+The `path_or_url_to_video` part (and the fallbacks) are the relative paths to the video inside the `media` directory or the URL of the image on the internet.
+
+Both the path and URL approaches function identically to [how they do for images](#image_path_or_url).
+
+## Supported Video Types
+
+Markua supports MP4 and WebM videos. All videos must be located inside the `media` directory, regardless of type. The videos must have the correct file extension for their type. Markua processors do not need to parse videos to determine their type.
+
+The supported file extensions are:
+
+.mp4
+: The file is treated as an MP4 video.
+
+.webm
+: The file is treated as a WebM image.
+
+## Span Videos
+
+This functions identically to how it does for images.
+
+## Video Figures
+
+This functions identically to how it does for images; see the Figures chapter to learn more.
