@@ -8,6 +8,7 @@ poetry.txt
 images.txt
 audio.txt
 video.txt
+figures.txt
 headings.txt
 lists.txt
 embedding.txt
