@@ -1,27 +1,66 @@
 # Video
 
-The Markua video syntax can be briefly described as follows:
-`![Optional Alt Text](path_or_url_to_video "Optional Figure Caption")`
+In Markua, video can be defined and inserted much like images.
 
-In Markua, video can be inserted using the Figure syntax, on a line by itself.
+A> Obviously, embedding video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where video would be useful, it would be really, really useful. To not support video would be to be a curmudgeon, and limit use cases that I didn't personally consider important for no good reason. Worse, it would be encouraging the dominance of proprietary ebook creation tools for those use cases.
 
-The optional figure caption is described in the [Figures](#figures) section below; the alt text and image path are described below.
+Like images, video can be defined in one of two ways:
+
+Inline
+: The video is defined right where it is inserted.
+
+Reference
+: The video is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement videos and/or images if a particular video is either missing or its format is not supported.
+
+Unlike with images which are supported in most circumstances, with video it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, neither of these formats will be supported, and as an ebook author you should be prepared to provide a fallback video format and/or a fallback image for situations (including print books) where a video will never work.
+
+As such, both the inline and reference methods for defining a video support defining an arbitrary number of fallback videos or images. The reason to provide a fallback video is to provide essentially the same content in a different format; the reason to provide a fallback image is to provide a suitable replacement in a situation where video is not supported at all.
+
+If a Markua Processor is outputting a print book or some format where it is known that video is not supported, it must choose the first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which video is not supported, a missing video image placeholder must be output. The look of this missing video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
+
+My assumption is that in most cases authors will only provide a fallback image, or not provide anything at all. My hope is that at least a fallback image is provided.
+
+Regardless of whether a video is defined inline or by reference, a video can also inserted into the flow of a Markua document in one of two ways:
+
+Span
+: The video is inserted as part of the flow of text of a paragraph.
+
+Figure
+: The video is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
+
+When inserting a video as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the video. Otherwise, the paragraph would quickly look ridiculous, as a typical video thumbnail is many times the height of a typical line of text.
 
 ## Defining Video Inline
 
-In the Markua video syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image:
-`![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+A video can be defined inline, right where it is inserted.
 
-`![Optional Alt Text](path/to/video.mp4 "Optional Figure Caption")`
+This syntax can be briefly described as follows:
+
+`![Optional Alt Text](path_or_url_to_video "Optional Figure Caption")`
+
+With fallback media:
+
+`![Optional Alt Text](path_or_url_to_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption")`
+
+(The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
+
+The one major limitation of the inline video definition syntax is that only one figure caption can be provided. So, if there is a caption with this syntax, it needs to be the same caption regardless of
 
 ## Defining Video by Reference
 
-[meow]
-: path/or/url/to/video.mp4 "Optional Figure Caption A"
-: path/or/url/to/replacment/video.webm "Optional Figure Caption B"
-: path/or/url/to/replacment/image.png "Optional Figure Caption C"
 
 [meow]: path/or/url/to/video.mp4 "Optional Figure Caption"
+
+
+
+[meow] "Optional Figure Caption"
+: path/or/url/to/video.mp4
+
+[meow] "Optional Figure Caption"
+: path/or/url/to/video.mp4
+: path/or/url/to/replacment/video.webm
+: path/or/url/to/replacment/image.png
+
 
 [meow]
 : path/or/url/to/video.mp4 "Optional Figure Caption"

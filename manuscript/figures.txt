@@ -1,11 +1,9 @@
 {#figures}
 # Figures
 
-W> TODO - finish rewriting this to handle other figure types (code listings, tables, audio, video, etc) in here.
+The most powerful way to insert an image, code sample, or other such element in Markua is as a Figure.
 
-The most powerful way to insert an image, code sample, or other element in Markua is as a Figure.
-
-A figure is always inserted on a line by itself. However, there is variation:
+A figure is always inserted on a line by itself. However, there is variation in whether there is space above or below the figure:
 
 Block
 : The figure has blank lines above and below it.
