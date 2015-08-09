@@ -43,7 +43,7 @@ This is a paragraph.
 There are two main issues with this style of heading in Markdown:
 
 1. It is inconsistent: It only supports defining `h1` and `h2`; to define h3 and below, the atx style of heading must be used.
-2. It is confusing: Authors are confused about how many equals signs you need to use. (The answer is 1, by the way, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
+2. It is confusing: Authors are confused about how many equals or minus signs you need to use. (As we saw above, the answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
 
 ### atx Headings in Markdown
 

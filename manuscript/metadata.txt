@@ -448,7 +448,7 @@ With both approaches to structuring a manuscript, there is a way to provide meta
 
 The metadata contains information about the document. This will include things like the title, subtitle, copyright, author names, etc.
 
-It can also specify the type of manuscript with the `type` attribute. The legal values of the `type` attribute are `book`, `multi-part-book` and `document`. If the `type` is omitted, it is assumed to be `book`.
+It can also specify the type of manuscript with the `type` attribute. The legal values of the `type` attribute are `book` and `document`. If the `type` is omitted, it is assumed to be `book`.
 
 The metadata is provided in different ways based on whether the manuscript uses the single file approach or the multiple file approach.
 
@@ -613,7 +613,7 @@ title
 : The title of the Markua document. The default is "Untitled".
 
 type
-: The type of the Markua document. Legal values are `book`, `multi-part-book` and `document`. The default value is `book`. The value of the `type` key is very important, as it changes the meaning of what the headings are, and thus affects the book or document generation. To see the effects of this, see the [HTML Mapping of Heading Types](#html-mapping-heading) section
+: The type of the Markua document. Legal values are `book` and `document`. The default value is `book`. The value of the `type` key is very important, as it changes the meaning of what the headings are, and thus affects the book or document generation. To see the effects of this, see the [HTML Mapping of Heading Types](#html-mapping-heading) section
 
 urls
 : The way that URLs should be displayed when used as links like `[Markua](http://markua.com)`. The choices are `none`, `inline` and `footnote`. The default is `footnote`, in which the URL is made as a footnote (positioned at the bottom of the page, chapter or book per the value of the `footnotes` attribute) which is a clickable link. Note that angle-bracket URLs like <http://markua.com> never create a footnote.
