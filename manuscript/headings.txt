@@ -69,7 +69,16 @@ This is the HTML which is produced by the above example:
 <p>This is a paragraph.</p>
 ```
 
-I thought long and hard about Markua headings, and changed my mind a number of times. I settled on this design when I realized that the design requirements were as follows:
+Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
+
+Markua is more strict about spaces and pound signs than Markdown:
+
+1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one a pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
+2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
+3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors.)
+4. Headings must be separated from other block elements by blank lines both before and after them. Because of the [way that Markua concatenates files](#multiple-file-concatenating), headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
+
+I thought long and hard about Markua headings, and changed my mind (as Scott and Braden will attest) a number of times. I settled on this design when I realized that the design requirements were as follows:
 
 1. From looking at a heading, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
 2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged.
@@ -84,12 +93,3 @@ I thought long and hard about Markua headings, and changed my mind a number of t
 The design of Markua headings meets these requirements, in what I feel is an optimal way.
 
 A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
-
-Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
-
-Markua is more strict about spaces and pound signs than Markdown:
-
-1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one a pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
-2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
-3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors.)
-4. Headings must be separated from other block elements by blank lines both before and after them. Because of the [way that Markua concatenates files](#multiple-file-concatenating), headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
