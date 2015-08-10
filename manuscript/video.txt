@@ -2,7 +2,7 @@
 
 In Markua, video can be defined and inserted much like images.
 
-A> Obviously, embedding video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where video would be useful, it would be really, really useful. To not support video would be to be a curmudgeon, and limit use cases that I didn't personally consider important for no good reason. Worse, it would be encouraging the dominance of proprietary ebook creation tools for those use cases.
+A> Obviously, embedding video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where video would be useful, it would be really, really useful. To not support video would be to be a curmudgeon, and limit use cases that I didn't personally consider important for no good reason. Worse, it would be encouraging the dominance of proprietary ebook creation tools for those use cases. The textbook market is a disgusting, exploitative scam that needs to be disrupted, and if adding video to Markua helps this in any way, then it's worth doing, even if there were no other legitimate reasons.
 
 Like images, video can be defined in one of two ways:
 
@@ -67,7 +67,7 @@ In the Markua video syntax, just as with the Markua image syntax, the optional a
 
 Providing alt text is at least as important for video as it is for images.
 
-## Image Path or URL
+## Video Path or URL
 
 The `path_or_url_to_video` part (and the fallbacks) are the relative paths to the video inside the `media` directory or the URL of the image on the internet.
 
