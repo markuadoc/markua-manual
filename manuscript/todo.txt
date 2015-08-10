@@ -170,23 +170,18 @@ B> TODO - Need to consider the following...
 * It would be really nice to support linking to individual definition list items specifically, and to span elements in general.
 * Support commenting out files in book.txt and sample.txt with #
 
-* Centering text? - no
-
 * Font sizes etc with CSS class?
 * Should we have a book.css?
 * lemma, theorem, etc -- typed figures?
 - extension attributes?
 - definition list linking yes
 - table just table for linking?
-
-- align on a heading? - no
 - align {left, center, right, justified} on any heading? - no
 - no more align on figures, just floating
 
 - multiple 1. lines may be blah or may be blah
 
 w, x, y, z, aa, ab
-
 
 
 "the caption" clobbers "clobbered" here
