@@ -14,9 +14,7 @@ Inline
 Reference
 : The audio is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement audio files and/or images if a particular audio file is either missing or its format is not supported.
 
-Unlike with images which are supported in most circumstances, with audio it's currently a bit of a crapshoot. The file formats currently supported in Markua are TODO.
-
-W> TODO - which audio formats?
+Unlike with images which are supported in most circumstances, with audio it's currently a bit of a crapshoot. The file formats currently supported in Markua are MP3, AAC, Ogg and WAV.
 
 The way that fallback formats work are the same as with video. Yes, you can have a fallback image for missing audio, just as with video.
 
@@ -73,14 +71,23 @@ Both the path and URL approaches function identically to [how they do for images
 
 ## Supported Audio Types
 
-Markua supports TODO audio files. All audio files must be located inside the `media` directory, regardless of type. The audio files must have the correct file extension for their type. Markua processors do not need to parse audio files to determine their type.
+Markua supports MP3, AAC, Ogg and WAV audio files. All audio files must be located inside the `media` directory, regardless of type. The audio files must have the correct file extension for their type.
 
-The supported file extensions are:
+A> Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
+
+The supported file extensions for audio files are:
 
 .mp3
 : The file is treated as MP3 audio.
 
-TODO - which others?
+.m4a, .aac
+: The file is treated as an MP4 AAC (Advanced Audio Coding) audio file. Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
+
+.wav, .wave
+: The file is treated as a WAV (Waveform Audio File Format) file.
+
+.ogg, .oga
+: The file is treated as an Ogg Vorbis file.
 
 ## Span Audio Files
 

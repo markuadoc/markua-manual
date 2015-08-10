@@ -75,9 +75,11 @@ Both the path and URL approaches function identically to [how they do for images
 
 ## Supported Video Types
 
-Markua supports MP4 and WebM videos. All videos must be located inside the `media` directory, regardless of type. The videos must have the correct file extension for their type. Markua processors do not need to parse videos to determine their type.
+Markua supports MP4 and WebM videos. All videos must be located inside the `media` directory, regardless of type. The videos must have the correct file extension for their type.
 
-The supported file extensions are:
+A> Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
+
+The supported file extensions for video files are:
 
 .mp4
 : The file is treated as an MP4 video.
