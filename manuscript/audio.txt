@@ -1,29 +1,91 @@
 # Audio
 
-The Markua audio syntax can be briefly described as follows:
+In Markua, audio can be defined and inserted much like video.
+
+* The reasons for supporting audio are the same as for video.
+* The inline and reference definition syntaxes are the same.
+* The audio files live in the `media` directory, or are referenced by URL.
+
+Like video, audio can be defined in one of two ways:
+
+Inline
+: The audio is defined right where it is inserted.
+
+Reference
+: The audio is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement audio files and/or images if a particular audio file is either missing or its format is not supported.
+
+Unlike with images which are supported in most circumstances, with audio it's currently a bit of a crapshoot. The file formats currently supported in Markua are TODO.
+
+W> TODO - which audio formats?
+
+The way that fallback formats work are the same as with video. Yes, you can have a fallback image for missing audio, just as with video.
+
+Regardless of whether a audio resource is defined inline or by reference, a audio resource can also inserted into the flow of a Markua document in one of two ways:
+
+Span
+: The audio is inserted as part of the flow of text of a paragraph.
+
+Figure
+: The audio is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
+
+When inserting an audio resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the audio. Otherwise, the paragraph would quickly look ridiculous.
+
+## Defining Audio Resources Inline
+
+An audio resource can be defined inline, right where it is inserted.
+
+This syntax can be briefly described as follows:
+
 `![Optional Alt Text](path_or_url_to_audio "Optional Figure Caption")`
 
-In Markua, audio can be inserted using the Figure syntax, on a line by itself.
+With fallback media, this looks like this:
 
-The optional figure caption is described in the [Figures](#figures) section below; the alt text and image path are described below.
+`![Optional Alt Text](path_or_url_to_audio path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption")`
 
-## Defining Audio Inline
+(The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
-In the Markua audio syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the image:
-`![Optional Alt Text](path/to/image.png "Optional Figure Caption")`
+## Defining Audio Resources by Reference
 
-`![Optional Alt Text](path/to/audio.mp4 "Optional Figure Caption")`
+In this syntax, an `id` is first defined for an image, like this:
 
-## Defining Audio by Reference
+[meow]: path_or_url_to_audio "Optional Figure Caption"
 
-[meow]
-: path/or/url/to/audio.mp4 "Optional Figure Caption A"
-: path/or/url/to/replacment/audio.webm "Optional Figure Caption B"
-: path/or/url/to/replacment/image.png "Optional Figure Caption C"
+With fallback media, this looks like this:
 
-[meow]: path/or/url/to/audio.mp4 "Optional Figure Caption"
+[meow]: path_or_url_to_audio path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption"`
 
-[meow]
-: path/or/url/to/audio.mp4 "Optional Figure Caption"
+(The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
-on Leanpub, if URL not path, then add link to audio (as footnote?) on the caption of the fallback image as a footnote. spec that markua allows lots of markup around audio...
+## Alt text
+
+In the Markua audio syntax, just as with the Markua video and image syntaxes, the optional alt text is in square brackets before the audio insertion.  This is true for both inline and reference style of audio insertion:
+
+* Inline: `![Optional Alt Text](path/to/or/url/of/image "Optional Figure Caption")`
+* Reference: `![Optional Alt Text][image id]`
+
+Providing alt text is at least as important for audio as it is for images.
+
+## Audio Path or URL
+
+The `path_or_url_to_audio` part (and the fallbacks) are the relative paths to the audio inside the `media` directory or the URL of the image on the internet.
+
+Both the path and URL approaches function identically to [how they do for images](#image_path_or_url).
+
+## Supported Audio Types
+
+Markua supports TODO audio files. All audio files must be located inside the `media` directory, regardless of type. The audio files must have the correct file extension for their type. Markua processors do not need to parse audio files to determine their type.
+
+The supported file extensions are:
+
+.mp3
+: The file is treated as MP3 audio.
+
+TODO - which others?
+
+## Span Audio Files
+
+This functions identically to how it does for images.
+
+## Audio Figures
+
+This functions identically to how it does for images; see the Figures chapter to learn more.
