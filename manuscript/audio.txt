@@ -1,7 +1,5 @@
 # Audio
 
-In Markua, audio can be defined and inserted much like video.
-
 * The reasons for supporting audio are the same as for video.
 * The inline and reference definition syntaxes are the same.
 * The audio files live in the `media` directory, or are referenced by URL.
