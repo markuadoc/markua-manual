@@ -18,7 +18,7 @@ As such, both the inline and reference methods for defining an audio or video re
 
 If a Markua Processor is outputting a print book or some format where it is known that audio or video resource is not supported, it must choose the first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
 
-My assumption is that in most cases authors will only provide a fallback image, or not provide anything at all. My hope is that at least a fallback image is provided.
+My assumption is that in most cases authors will only provide alt text and a fallback image, or not provide anything at all. My hope is that at least alt text is provided.
 
 Besides the fallback image, authors can also provide a thumbnail video TODO - figure this out
 
@@ -79,6 +79,8 @@ Both the path and URL approaches function identically to [how they do for images
 
 Markua supports MP4 and WebM videos. All videos must be located inside the `media` directory, regardless of type. The videos must have the correct file extension for their type.
 
+Markua supports MP3, AAC, Ogg and WAV audio files. All audio files must be located inside the `media` directory, regardless of type. The audio files must have the correct file extension for their type.
+
 A> Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
 
 The supported file extensions for video files are:
@@ -89,10 +91,25 @@ The supported file extensions for video files are:
 .webm
 : The file is treated as a WebM image.
 
-## Span Videos
+
+The supported file extensions for audio files are:
+
+.mp3
+: The file is treated as MP3 audio.
+
+.m4a, .aac
+: The file is treated as an MP4 AAC (Advanced Audio Coding) audio file. Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
+
+.wav, .wave
+: The file is treated as a WAV (Waveform Audio File Format) file.
+
+.ogg, .oga
+: The file is treated as an Ogg Vorbis file.
+
+## Span Video and Audio Files
 
 This functions identically to how it does for images.
 
-## Video Figures
+## Video and Audio Figures
 
 This functions identically to how it does for images; see the Figures chapter to learn more.
