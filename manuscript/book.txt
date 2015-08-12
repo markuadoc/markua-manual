@@ -6,8 +6,7 @@ element_types.txt
 paragraphs.txt
 poetry.txt
 images.txt
-video.txt
-audio.txt
+audio_and_video.txt
 figures.txt
 headings.txt
 lists.txt

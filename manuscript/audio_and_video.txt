@@ -38,11 +38,11 @@ An audio or video resource can be defined inline, right where it is inserted.
 
 This syntax can be briefly described as follows:
 
-`![Optional Alt Text](path_or_url_to_video "Optional Figure Caption")`
+`![Optional Alt Text](path_or_url_to_audio_or_video "Optional Figure Caption")`
 
 With fallback media, this looks like this:
 
-`![Optional Alt Text](path_or_url_to_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption")`
+`![Optional Alt Text](path_or_url_to_audio_or_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption")`
 
 (The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
@@ -50,11 +50,11 @@ With fallback media, this looks like this:
 
 In this syntax, an `id` is first defined for an image, like this:
 
-[meow]: path_or_url_to_video "Optional Figure Caption"
+[meow]: path_or_url_to_audio_or_video "Optional Figure Caption"
 
 With fallback media, this looks like this:
 
-[meow]: path_or_url_to_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption"`
+[meow]: path_or_url_to_audio_or_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption"`
 
 (The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
@@ -64,7 +64,7 @@ A> I considered using a definition list syntax for defining audio or video resou
 
 In the Markua audio or video resource syntax, just as with the Markua image syntax, the optional alt text is in square brackets before the audio or video resource insertion.  This is true for both inline and reference style of audio or video resource insertion:
 
-* Inline: `![Optional Alt Text](path/to/or/url/of/image "Optional Figure Caption")`
+* Inline: `![Optional Alt Text](path_or_url_to_audio_or_video "Optional Figure Caption")`
 * Reference: `![Optional Alt Text][image id]`
 
 Providing alt text is at least as important for audio or video resource as it is for images.
