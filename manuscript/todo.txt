@@ -1,5 +1,39 @@
 # TODO
 
+universal resource syntax
+![alt text](path "Caption")
+
+{type: image, format: svg}
+```
+oauetnh sosaht
+```
+
+{type: image}
+![alt text](path "Caption")
+
+this infers type from extension
+
+6 types of resource: image, video, audio, code, math, text
+
+{type: code, lang: ruby}
+```
+aoue
+aoue
+aoeu
+```
+
+for custom types:
+- maybe?
+- display names
+
+{type: pokemon_card}
+
+Table of Pokemon Cards
+
+Markua defines just custom, and adds class to figure
+
+![]()
+
 Do we really need the pound sign when linking to an anchor?
 
 [specified in an appendix](#markdown_headings)
