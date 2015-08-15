@@ -5,8 +5,7 @@ structure.txt
 element_types.txt
 paragraphs.txt
 poetry.txt
-images.txt
-audio_and_video.txt
+resources.txt
 figures.txt
 headings.txt
 lists.txt

@@ -13,7 +13,6 @@ oauetnh sosaht
 
 this infers type from extension
 
-6 types of resource: image, video, audio, code, math, text
 
 {type: code, lang: ruby}
 ```
