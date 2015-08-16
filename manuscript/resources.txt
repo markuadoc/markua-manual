@@ -2,15 +2,7 @@
 
 Markua documents are composed of a number of text files. Each of these text files can insert any number of resources in them, either inline or as figures.
 
-There are two types of resources:
-
-Local Resources
-: The resource is included with the manuscript files, in a `resources` folder inside the `manuscript` folder.
-
-Web Resources
-: The resource is defined somewhere on the web, and is available via the `http:` or `https:` protocols.
-
-A> All Markua Processors must support Local Resources. However, due to the nightmare that is current copyright law, Markua Processors do not need to support Web Resources. If a Markua Processor does not support Web Resources, it must consider all Web Resources to be missing resources at the time of book or document generation, and use fallback local resources or alt text if provided.
+## Six Types of Resource Content
 
 There are six types of resources that can be inserted into a Markua document:
 
@@ -21,18 +13,48 @@ There are six types of resources that can be inserted into a Markua document:
 5. Math
 6. Text
 
-A> For the programmers reading this: since text resources cannot include text resources, you cannot have cycles resulting in infinitely long Markua documents.
+Regardless of what type of resource it is, all resources have the same options regarding:
+
+* Resource Locations: Local and Web
+* Resource Definition: Inline and Reference
+* Resource Insertion: Span and Figure
+
+Examples of all of this will come later.
+
+### Why Support Audio and Video?
+
+Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful. To not support audio and video would be to be a curmudgeon, and limit use cases that I didn't personally consider important for no good reason. Worse, it would be encouraging the dominance of proprietary ebook creation tools for those use cases. The textbook market is a disgusting, exploitative scam that needs to be disrupted, and if adding audio and video to Markua helps this in any way, then it's worth doing, even if there were no other legitimate reasons.
+
+## Resource Locations: Local and Web
+
+In terms of where they are located, there are two types of resources: local and web.
+
+Local Resources
+: The resource is included with the manuscript files, in a `resources` folder inside the `manuscript` folder.
+
+Web Resources
+: The resource is defined somewhere on the web, and is available via the `http:` or `https:` protocols.
+
+All Markua Processors must support Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors. Furthermore, support for Web Resources is not all or nothing -- a Markua Processor can (like Leanpub) support Web Resources for images, code, math and text, but not for audio and video. If a Markua Processor does not support Web Resources, it must consider all Web Resources to be missing resources at the time of book or document generation, and use fallback local resources or alt text if provided.
+
+## Resource Definition: Inline and Reference
+
+## Resource Insertion: Span and Figure
 
 
-A> Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful. To not support audio and video would be to be a curmudgeon, and limit use cases that I didn't personally consider important for no good reason. Worse, it would be encouraging the dominance of proprietary ebook creation tools for those use cases. The textbook market is a disgusting, exploitative scam that needs to be disrupted, and if adding audio and video to Markua helps this in any way, then it's worth doing, even if there were no other legitimate reasons.
+### No Cycles
 
-Like images, audio or video resources can be defined in one of two ways:
+For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
+
+
+
+Resources can be defined in one of two ways:
 
 Inline
-: The audio or video resource is defined right where it is inserted.
+: The resource is defined right where it is inserted.
 
 Reference
-: The audio or video resource is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement audio or video resources and/or images if a particular audio or video resource is either missing or its format is not supported.
+: The resource is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement audio or video resources and/or images if a particular audio or video resource is either missing or its format is not supported.
 
 Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
 
