@@ -1,21 +1,4 @@
 {#images}
-# Images
-
-Just as in Markdown, in Markua images can be defined in one of two ways:
-
-Inline
-: The image is defined right where it is inserted.
-
-Reference
-: The image is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript.
-
-Regardless of whether an image is defined inline or by reference, an image can also inserted into the flow of a Markua document in one of two ways:
-
-Span
-: The image is inserted as part of the flow of text of a paragraph.
-
-Figure
-: The image is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
 
 ## Inline Images
 

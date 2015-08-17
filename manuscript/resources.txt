@@ -13,6 +13,8 @@ There are six types of resources that can be inserted into a Markua document:
 5. Math
 6. Text
 
+Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
+
 Regardless of what type of resource it is, all resources have the same options regarding:
 
 * Resource Locations: Local and Web
@@ -39,93 +41,88 @@ All Markua Processors must support Local Resources. However, due to the nightmar
 
 ## Resource Definition: Inline and Reference
 
-## Resource Insertion: Span and Figure
-
-
-### No Cycles
-
-For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
-
-
-
 Resources can be defined in one of two ways:
 
 Inline
 : The resource is defined right where it is inserted.
 
 Reference
-: The resource is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement audio or video resources and/or images if a particular audio or video resource is either missing or its format is not supported.
+: The resource is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement resources and/or images if a particular resource is either missing or its format is not supported.
 
-Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
+Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback resource format and/or a fallback image for situations (including print books) where a resource will never work.
 
-As such, both the inline and reference methods for defining an audio or video resource support defining an arbitrary number of fallback audio or video resources or images. The reason to provide a fallback audio or video resource is to provide essentially the same content in a different format; the reason to provide a fallback image is to provide a suitable replacement in a situation where audio or video resources are not supported at all.
+As such, both the inline and reference methods for defining an resource support defining an arbitrary number of fallback resources or images. The reason to provide a fallback resource is to provide essentially the same content in a different format; the reason to provide a fallback image is to provide a suitable replacement in a situation where resources are not supported at all.
 
-If a Markua Processor is outputting a print book or some format where it is known that audio or video resource is not supported, it must choose the first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
+If a Markua Processor is outputting a print book or some format where it is known that resource is not supported, it must choose the first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
 
 My assumption is that in most cases authors will only provide alt text and a fallback image, or not provide anything at all. My hope is that at least alt text is provided.
 
 Besides the fallback image, authors can also provide a thumbnail video TODO - figure this out
 
-Regardless of whether an audio or video resource is defined inline or by reference, an audio or video resource can also inserted into the flow of a Markua document in one of two ways:
+### Defining Resources Inline
 
-Span
-: The audio or video resource is inserted as part of the flow of text of a paragraph.
-
-Figure
-: The audio or video resource is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
-
-When inserting an audio or video resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the audio or video resource. Otherwise, the paragraph would quickly look ridiculous, as a typical audio or video resource thumbnail is many times the height of a typical line of text.
-
-## Defining Audio Or Video Resources Inline
-
-An audio or video resource can be defined inline, right where it is inserted.
+An resource can be defined inline, right where it is inserted.
 
 This syntax can be briefly described as follows:
 
-`![Optional Alt Text](path_or_url_to_audio_or_video "Optional Figure Caption")`
+`![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
 
 With fallback media, this looks like this:
 
-`![Optional Alt Text](path_or_url_to_audio_or_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption")`
+`![Optional Alt Text](resource_path_or_url fallback_path_or_url_1 fallback_path_or_url_2 ... fallback_path_or_url_n "Optional Figure Caption")`
 
 (The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
-## Defining Audio Or Video Resource by Reference
+### Defining Resources by Reference
 
 In this syntax, an `id` is first defined for an image, like this:
 
-[meow]: path_or_url_to_audio_or_video "Optional Figure Caption"
+[meow]: resource_path_or_url "Optional Figure Caption"
 
 With fallback media, this looks like this:
 
-[meow]: path_or_url_to_audio_or_video path_or_url_to_fallback_media_1 path_or_url_to_fallback_media_2 ... path_or_url_to_fallback_media_n "Optional Figure Caption"`
+[meow]: resource_path_or_url fallback_path_or_url_1 fallback_path_or_url_2 ... fallback_path_or_url_n "Optional Figure Caption"`
 
 (The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
-A> I considered using a definition list syntax for defining audio or video resources, and supporting different figure captions based on which audio or video resource was used. However, I decided that this was objectionable: the text of a book should not change based on the capabilities of the ebook reader, and I consider figure captions to be book text. So, since the alternative caption use case was not legitimate, the need for the definition list syntax evaporated with it. (Yes, there will be line wrapping if there are a number of fallback media defined; that's preferable to having two syntaxes to do the same thing.)
+A> I considered using a definition list syntax for defining resources, and supporting different figure captions based on which resource was used. However, I decided that this was objectionable: the text of a book should not change based on the capabilities of the ebook reader, and I consider figure captions to be book text. So, since the alternative caption use case was not legitimate, the need for the definition list syntax evaporated with it. (Yes, there will be line wrapping if there are a number of fallback media defined; that's preferable to having two syntaxes to do the same thing.)
+
+## Resource Insertion: Span and Figure
+
+Regardless of whether an resource is defined inline or by reference, an resource can also inserted into the flow of a Markua document in one of two ways:
+
+Span
+: The resource is inserted as part of the flow of text of a paragraph.
+
+Figure
+: The resource is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
+
+When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
+
+## No Cycles
+
+For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
 
 ## Alt text
 
-In the Markua audio or video resource syntax, just as with the Markua image syntax, the optional alt text is in square brackets before the audio or video resource insertion.  This is true for both inline and reference style of audio or video resource insertion:
+In the Markua resource syntax, just as with the Markua image syntax, the optional alt text is in square brackets before the resource insertion.  This is true for both inline and reference style of resource insertion:
 
-* Inline: `![Optional Alt Text](path_or_url_to_audio_or_video "Optional Figure Caption")`
+* Inline: `![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
 * Reference: `![Optional Alt Text][image id]`
 
-Providing alt text is at least as important for audio or video resource as it is for images.
+Providing alt text is at least as important for resource as it is for images.
 
-## Audio Or Video Resource Path or URL
+## Resource Path or URL
 
-The `path_or_url_to_video` part (and the fallbacks) are the relative paths to the audio or video resource inside the `media` directory or the URL of the image on the internet.
+The `path_or_url_to_video` part (and the fallbacks) are the relative paths to the resource inside the `media` directory or the URL of the image on the internet.
 
 Both the path and URL approaches function identically to [how they do for images](#image_path_or_url).
 
-## Supported Audio Or Video Resource Types
+### Supported Image Formats
+
+### Supported Video Formats
 
 Markua supports MP4 and WebM videos. All videos must be located inside the `media` directory, regardless of type. The videos must have the correct file extension for their type.
-
-Markua supports MP3, AAC, Ogg and WAV audio files. All audio files must be located inside the `media` directory, regardless of type. The audio files must have the correct file extension for their type.
-
-A> Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
 
 The supported file extensions for video files are:
 
@@ -135,6 +132,9 @@ The supported file extensions for video files are:
 .webm
 : The file is treated as a WebM image.
 
+### Supported Audio Formats
+
+Markua supports MP3, AAC, Ogg and WAV audio files. All audio files must be located inside the `media` directory, regardless of type. The audio files must have the correct file extension for their type.
 
 The supported file extensions for audio files are:
 
@@ -149,11 +149,3 @@ The supported file extensions for audio files are:
 
 .ogg, .oga
 : The file is treated as an Ogg Vorbis file.
-
-## Span Video and Audio Files
-
-This functions identically to how it does for images.
-
-## Video and Audio Figures
-
-This functions identically to how it does for images; see the Figures chapter to learn more.

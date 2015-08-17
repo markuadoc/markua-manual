@@ -1,8 +1,5 @@
 # TODO
 
-universal resource syntax
-![alt text](path "Caption")
-
 {type: image, format: svg}
 ```
 oauetnh sosaht
@@ -12,7 +9,6 @@ oauetnh sosaht
 ![alt text](path "Caption")
 
 this infers type from extension
-
 
 {type: code, lang: ruby}
 ```
