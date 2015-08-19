@@ -22,7 +22,9 @@ The following are the block elements in Markua:
 * [Code Blocks](#codeblocks)
 * [Tables](#tables)
 * [Math Blocks](#mathblocks)
-* [Images as Figures](#figures)
+* [Resources as Figures](#figures)
+
+TODO - combine stuff into figures
 
 ## Span Elements
 

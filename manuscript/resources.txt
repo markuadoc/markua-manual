@@ -2,58 +2,18 @@
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
-Markua documents can produce many output formats for print books and ebooks. For print books, Markua documents can produce PDF; for ebooks, Markua documents can produce PDF, EPUB and MOBI. These output formats vary wildly in terms of what resources they support -- and, obviously, print books cannot support audio and video resources. So, besides just supporting different types of resources, Markua also supports fallback resources, if a certain type of rich resource (such as a video) cannot be embedded in a certain output format (such as a PDF for a print book).
+Markua can be used to author books and documents, with all these print book and ebook formats supported as output formats. For print books, Markua documents can produce PDF files which can be used to produce a print book. For ebooks, Markua documents can produce PDF, EPUB and MOBI. These ebook output formats vary wildly in terms of what resources they support -- and, obviously, print books cannot support audio and video resources. So, besides just supporting different types of resources, Markua also supports fallback resources. With fallback resources, if a certain type of rich resource (such as a video) cannot be embedded in a certain output format (such as a PDF for a print book), a different "fallback" resource is used instead.
 
 Resources vary in four different ways:
 
-1. Resource Type: Image, Code, Math, Text, Audio and Video
-2. Resource Location: Local and Web
-3. Resource Definition: Inline and Reference
-4. Element Type: Span and Figure
+1. Definition: Inline and Reference
+2. Location: Local and Web
+3. Insertion: Span and Figure
+4. Type: Image, Code, Math, Text, Audio and Video
 
+Before diving into all this, I want to emphasize that the Markua resource syntax is just Markdown image syntax--but extended to support the resource types, fallback media and figure captions required by Markua.
 
-
-
-A> Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
-
-
-Examples of all of this will come later.
-
-### Why Support Audio and Video?
-
-Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful. To not support audio and video would be to be a curmudgeon, and limit use cases that I didn't personally consider important for no good reason. Worse, it would be encouraging the dominance of proprietary ebook creation tools for those use cases. The textbook market is a disgusting, exploitative scam that needs to be disrupted, and if adding audio and video to Markua helps this in any way, then it's worth doing, even if there were no other legitimate reasons.
-
-## Resource Locations: Local and Web
-
-In terms of where they are located, there are two types of resources: local and web.
-
-Local Resources
-: The resource is included with the manuscript files, in a `resources` folder inside the `manuscript` folder.
-
-Web Resources
-: The resource is defined somewhere on the web, and is available via the `http:` or `https:` protocols.
-
-All Markua Processors must support all types of Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors. Furthermore, support for Web Resources is not all or nothing -- a Markua Processor can support Web Resources for some resource types but not others. For example, a Markua Processor could support Web Resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of Web Resource, it must consider all Web Resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
-
-### Local Resources
-
-The `resources/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
-
-All images identified with a directory path must be inside the `resources` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
-
-The local resources approach can also be used by hosted services. If they provide a download they should create a resources directory... TODO
-
-A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
-
-A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
-
-W> In Leanpub Flavoured Markdown, we included `images/` in the path of all images. This is not supported in Markua. If  Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is resources/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the resources directory.
-
-### Web Resources
-
-The URL approach with an image is simple: the URL is an absolute URL of an image on the internet. The URL must start with with either `http:` or `https:`; no other protocols are supported.
-
-## Resource Definition: Inline and Reference
+## Definition: Inline and Reference
 
 Resources can be defined in one of two ways:
 
@@ -89,6 +49,21 @@ With fallback media, this looks like this:
 
 (The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
 
+A> The `resource_path_or_url` part (and the fallbacks) are the relative paths to the resource inside the `resources` directory or the URL of the image on the internet. Both of these methods are described next.
+
+#### Alt text
+
+In the Markua resource syntax, just as with the Markua image syntax, the optional alt text is in square brackets before the resource insertion.  This is true for both inline and reference style of resource insertion:
+
+* Inline: `![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
+* Reference: `![Optional Alt Text][image id]`
+
+The Optional Alt Text is text which is intended to take the place of the resource if the resource itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+
+While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
+
+The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+
 ### Defining Resources by Reference
 
 In this syntax, an `id` is first defined for a resource, like this:
@@ -114,7 +89,37 @@ The reference style of resource definition and insertion is supported for the fo
 1. If an author who is familiar with Markdown strongly prefers it, there's no reason not to provide it. (There's nothing else that Markua would do with the reference syntax.)
 2. For images which are used frequently (e.g. emoji), it is much better to define it once and use it multiple times.
 
-## Resource Insertion: Span and Figure
+## Location: Local and Web
+
+In terms of where they are located, there are two types of resources: local and web.
+
+Local Resources
+: The resource is included with the manuscript files, in a `resources` folder inside the `manuscript` folder.
+
+Web Resources
+: The resource is defined somewhere on the web, and is available via the `http:` or `https:` protocols.
+
+All Markua Processors must support all types of Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors. Furthermore, support for Web Resources is not all or nothing -- a Markua Processor can support Web Resources for some resource types but not others. For example, a Markua Processor could support Web Resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of Web Resource, it must consider all Web Resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+
+### Local Resources
+
+The `resources/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
+
+All images identified with a directory path must be inside the `resources` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+
+The local resources approach can also be used by hosted services. If they provide a download they should create a resources directory... TODO
+
+A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+
+A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
+
+W> In Leanpub Flavoured Markdown, we included `images/` in the path of all images. This is not supported in Markua. If  Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is resources/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the resources directory.
+
+### Web Resources
+
+The URL approach with an image is simple: the URL is an absolute URL of an image on the internet. The URL must start with with either `http:` or `https:`; no other protocols are supported.
+
+## Insertion: Span and Figure
 
 Regardless of whether an resource is defined inline or by reference, an resource can also inserted into the flow of a Markua document in one of two ways:
 
@@ -133,7 +138,7 @@ Images can be inserted as a span image in the flow of text in a paragraph. When 
 
 A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
-#### Examples of Span Images
+#### Examples
 
 ##### Example 1: Span Images with Alt Text
 
@@ -192,36 +197,215 @@ Markua has a fancy ![Markua two trees logo](markua-logo-small.png "This caption 
 <p>Markua has a fancy <img src="resources/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
 ```
 
-### Resources Inserted as Figures
+{#figures}
+### Figures
 
-The most powerful way to insert an image in Markua is as a Figure. To do this you add an image on a line by itself.
+The most powerful way to insert a resource in Markua is as a Figure.
 
-To learn more, see the [Figures](#figures) chapter.
+A figure is always inserted on a line by itself. However, there is variation in whether there is space above or below the figure:
 
-## No Cycles
+Block
+: The figure has blank lines above and below it.
 
-For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
+Span Block
+: The figure has no blank lines above or below it.
 
-## Alt text
+A Figure can have a caption. This caption shows up in two places:
 
-In the Markua resource syntax, just as with the Markua image syntax, the optional alt text is in square brackets before the resource insertion.  This is true for both inline and reference style of resource insertion:
+1. Near the image, typically above or below it, per the preference of the Markua Processor.
+2. As the name of the Figure in the List of Illustrations (a.k.a. Table of Figures), if one is generated for the book. The caption name serves as the text, and it is a crosslink to the image caption associated with the figure itself.
 
-* Inline: `![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
-* Reference: `![Optional Alt Text][image id]`
+A figure can also have attributes. There are three attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
 
-The Optional Alt Text is text which is intended to take the place of the resource if the resource itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+`float`
+: The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
 
-While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
+`width`
+: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
 
-The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+`type`
+: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting [audio](#audio) and [video](#video); see those chapters for details.
 
-## Resource Path or URL
+#### Examples
 
-The `resource_path_or_url` part (and the fallbacks) are the relative paths to the resource inside the `resources` directory or the URL of the image on the internet. Both of these methods are described next.
+##### Example 1: Figures with Alt Text and a Caption
 
-### Supported Image Formats
+Ideally, a figure should have both alt text and a caption. The alt text is intended for readers who can't see the image, and the caption is intended to complement the image.
 
-Markua supports GIF, PNG, JPEG and SVG images. All images must be located inside the `resources` directory, regardless of type. The images must have the correct file extension for their type. Markua processors do not need to parse images to determine their type.
+###### Markua Syntax
+
+{#input_figures_1}
+```
+Markua has a fancy logo:
+
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Markua also has a fancy Twitter avatar:
+
+![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png "The Markua Icon")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_1}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Markua also has a fancy Twitter avatar:</p>
+<div class="figure">
+  <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/>
+  <p class="caption">The Markua Icon</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 2: Figures with no Alt Text or Caption
+
+Images can be inserted as a figure even with no alt text or caption. If this is done, the image is still styled as a figure, but the image has no caption and does **not** show up in the List of Illustrations.
+
+###### Markua Syntax
+
+{#input_figures_2}
+```
+Markua has a fancy logo:
+
+![](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_2}
+```
+<p>Markua has a fancy logo:</p>
+<div class='figure'>
+  <img src="media/markua-logo.png"/>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 3: Figures with Alt Text but no Caption
+
+The alt text and caption are both optional. This example shows a figure with alt text but no caption.
+
+###### Markua Syntax
+
+{#input_figures_3}
+```
+Markua has a fancy logo:
+
+![the word Markua with the two asterisk trees beside it](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_3}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 4: Figures with a Caption but no Alt Text
+
+The alt text and caption are both optional. This example shows a figure with a caption but no alt text.
+
+###### Markua Syntax
+
+{#input_figures_4}
+```
+Markua has a fancy logo:
+
+![](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_4}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
+
+This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
+
+###### Markua Syntax
+
+{#input_figures_5}
+```
+Markua has a fancy logo:
+
+{float: "left", width: "50%"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_5}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 6: A Figure with a `width` Attribute of `fullbleed`
+
+This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
+
+###### Markua Syntax
+
+{#input_figures_6}
+```
+Markua has a fancy logo:
+
+{width: "fullbleed"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_6}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+## Type: Image, Code, Math, Text, Audio and Video
+
+Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
+
+### Image Formats
+
+Markua supports GIF, PNG, JPEG and SVG images. The images must have the correct file extension for their type. Markua processors do not need to parse images to determine their type.
 
 The supported file extensions are:
 
@@ -246,9 +430,9 @@ The supported file extensions are:
 .xml
 : The image is treated as an SVG image.
 
-### Supported Video Formats
+### Video Formats
 
-Markua supports MP4 and WebM videos. All videos must be located inside the `media` directory, regardless of type. The videos must have the correct file extension for their type.
+Markua supports MP4 and WebM videos. The videos must have the correct file extension for their type.
 
 The supported file extensions for video files are:
 
@@ -258,9 +442,9 @@ The supported file extensions for video files are:
 .webm
 : The file is treated as a WebM image.
 
-### Supported Audio Formats
+### Audio Formats
 
-Markua supports MP3, AAC, Ogg and WAV audio files. All audio files must be located inside the `media` directory, regardless of type. The audio files must have the correct file extension for their type.
+Markua supports MP3, AAC, Ogg and WAV audio files.
 
 The supported file extensions for audio files are:
 
@@ -275,3 +459,9 @@ The supported file extensions for audio files are:
 
 .ogg, .oga
 : The file is treated as an Ogg Vorbis file.
+
+### Text Resources
+
+TODO - explain this, and include custom types of text resources
+
+A> For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.

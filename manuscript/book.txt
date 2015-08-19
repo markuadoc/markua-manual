@@ -6,7 +6,6 @@ element_types.txt
 paragraphs.txt
 poetry.txt
 resources.txt
-figures.txt
 headings.txt
 lists.txt
 embedding.txt
