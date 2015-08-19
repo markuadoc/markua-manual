@@ -1,25 +1,21 @@
-# Resources
+# Resources: Images, Audio, Video, Code, Math and Text
 
-Markua documents are composed of a number of text files. Each of these text files can insert any number of resources in them, either inline or as figures.
+Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
-## Six Types of Resource Content
+Markua documents can produce many output formats for print books and ebooks. For print books, Markua documents can produce PDF; for ebooks, Markua documents can produce PDF, EPUB and MOBI. These output formats vary wildly in terms of what resources they support -- and, obviously, print books cannot support audio and video resources. So, besides just supporting different types of resources, Markua also supports fallback resources, if a certain type of rich resource (such as a video) cannot be embedded in a certain output format (such as a PDF for a print book).
 
-There are six types of resources that can be inserted into a Markua document:
+Resources vary in four different ways:
 
-1. Images
-2. Video
-3. Audio
-4. Code
-5. Math
-6. Text
+1. Resource Type: Image, Code, Math, Text, Audio and Video
+2. Resource Location: Local and Web
+3. Resource Definition: Inline and Reference
+4. Element Type: Span and Figure
 
-Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
 
-Regardless of what type of resource it is, all resources have the same options regarding:
 
-* Resource Locations: Local and Web
-* Resource Definition: Inline and Reference
-* Resource Insertion: Span and Figure
+
+A> Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
+
 
 Examples of all of this will come later.
 
