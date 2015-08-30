@@ -13,7 +13,7 @@ Resources vary in four different ways:
 
 Before diving into all this, I want to emphasize that the Markua resource syntax is just Markdown image syntax--but extended to support the resource types, fallback media and figure captions required by Markua.
 
-## Definition: Inline and Reference
+## Resource Definition: Inline and Reference
 
 Resources can be defined in one of two ways:
 
@@ -89,7 +89,7 @@ The reference style of resource definition and insertion is supported for the fo
 1. If an author who is familiar with Markdown strongly prefers it, there's no reason not to provide it. (There's nothing else that Markua would do with the reference syntax.)
 2. For images which are used frequently (e.g. emoji), it is much better to define it once and use it multiple times.
 
-## Location: Local and Web
+## Resource Location: Local and Web
 
 In terms of where they are located, there are two types of resources: local and web.
 
@@ -119,7 +119,7 @@ W> In Leanpub Flavoured Markdown, we included `images/` in the path of all image
 
 The URL approach with an image is simple: the URL is an absolute URL of an image on the internet. The URL must start with with either `http:` or `https:`; no other protocols are supported.
 
-## Insertion: Span and Figure
+## Resource Insertion: Span and Figure
 
 Regardless of whether an resource is defined inline or by reference, an resource can also inserted into the flow of a Markua document in one of two ways:
 
@@ -399,7 +399,7 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-## Type: Image, Code, Math, Text, Audio and Video
+## Resource Type: Image, Code, Math, Text, Audio and Video
 
 Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
 

@@ -1,5 +1,6 @@
 warning.txt
 introduction.txt
+syntax_quick.txt
 philosophy.txt
 structure.txt
 element_types.txt
