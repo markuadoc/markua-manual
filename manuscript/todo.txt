@@ -5,8 +5,10 @@
 oauetnh sosaht
 ```
 
+```
 {type: image}
 ![alt text](path "Caption")
+```
 
 this infers type from extension
 
@@ -27,7 +29,9 @@ Table of Pokemon Cards
 
 Markua defines just custom, and adds class to figure
 
+```
 ![]()
+```
 
 Do we really need the pound sign when linking to an anchor?
 
@@ -212,10 +216,11 @@ B> TODO - Need to consider the following...
 
 w, x, y, z, aa, ab
 
-
+```
 "the caption" clobbers "clobbered" here
 {caption: "the caption"}
 ![](media/foo.png "clobbered")
+```
 
 specify that magic {#id} syntax does not combine with other attrs
 
@@ -259,9 +264,11 @@ no (#foo) -- too much collision
 [human readable stuff]{id: foo, lang:he}
 
 
+```
 oaue
 ![alt](foo.png "The Foo")
 aoue
+```
 
 
 
