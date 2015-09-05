@@ -1,18 +1,22 @@
 {#lists}
 # Lists
 
-Markua defines substantially more list types than Markdown. In Markdown, the only types of lists supported are ordered lists with decimal numbers and unordered lists. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list. Specifically, the following types of lists are supported:
+Markua defines substantially more list types than Markdown. In Markdown, the only types of lists supported are ordered lists with decimal numbers and unordered lists. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list.
 
-1. Unordered lists
-2. Ordered lists, with the following numbering choices:
+Specifically, the following types of lists are supported:
+
+1. Unordered Lists
+2. Ordered Lists, with the following numbering choices:
   a. Decimal numbers
   b. Uppercase letters
   c. Lowercase letters
   d. Uppercase Roman numerals
   e. Lowercase Roman numerals
-3. Definition lists
+3. Definition Lists
 
 W> TODO - this list above renders wrong until we support nested lists in Markua
+
+A> Definition Lists are discussed in the next chapter -- although they are called lists, they're very different than unordered and ordered lists.
 
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
@@ -1389,83 +1393,4 @@ b\. two</p>
 <p>a. one<br/>
 c. three</p>
 <p>That's it!</p>
-```
-
-{#definitionlists}
-## Definition Lists
-
-Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, we strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, we see definition lists as having more of a future than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
-
-To define a definition list in Markua, use the following syntax:
-
-```
-term 1
-: definition 1
-
-term 2
-: definition 2
-```
-
-The term cannot start with a square bracket--this is reserved for the reference-style image syntax.
-
-A definition list can define multiple definitions for a term:
-
-```
-term 1
-: definition 1a
-: definition 1b
-
-term 2
-: definition 2
-```
-
-Note that a single term definition list is a definition list, regardless of how many definitions for the term exist.
-
-```
-term
-: definition
-```
-
-For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.
-
-#### Example 1
-
-##### Markua Syntax
-
-```
-foo
-
-term 1
-: definition 1
-
-term 2
-: definition 2a
-: definition 2b
-: definition 2c
-
-term 3
-: definition 3
-
-bar
-```
-
-##### HTML Output
-
-```
-<p>foo</p>
-<dl>
-  <dt>term 1</dt>
-  <dd>definition 1</dd>
-</dl>
-<dl>
-  <dt>term 2</dt>
-  <dd>definition 2a</dd>
-  <dd>definition 2b</dd>
-  <dd>definition 2c</dd>
-</dl>
-<dl>
-  <dt>term 3</dt>
-  <dd>definition 3</dd>
-</dl>
-<p>bar</p>
 ```

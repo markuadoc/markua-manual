@@ -10,19 +10,21 @@ Broadly speaking, Markua defines three things: block elements, span elements and
 
 The following are the block elements in Markua:
 
-* [Headings](#headings)
 * [Paragraphs](#paragraphs)
-* [Scene Breaks](#scenebreaks)
-* [Unordered Lists](#unorderedlists)
-* [Ordered Lists](#orderedlists)
+* [Resources Inserted as Figures](#figures)
+* [Headings](#headings)
+* [Ordered and Unordered Lists](#lists)
 * [Definition Lists](#definitionlists)
+
+* [Scene Breaks](#scenebreaks)
+
 * [Block Quotes](#blockquotes)
 * [Asides](#asides)
 * [Blurbs](#blurbs)
 * [Code Blocks](#codeblocks)
 * [Tables](#tables)
 * [Math Blocks](#mathblocks)
-* [Resources as Figures](#figures)
+*
 
 TODO - combine stuff into figures
 

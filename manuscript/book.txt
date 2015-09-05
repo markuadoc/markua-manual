@@ -9,6 +9,7 @@ poetry.txt
 resources.txt
 headings.txt
 lists.txt
+definition_lists.txt
 embedding.txt
 asides.txt
 blurbs.txt
