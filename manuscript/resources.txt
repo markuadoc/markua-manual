@@ -1,8 +1,8 @@
 # Resources: Images, Audio, Video, Code, Math and Text
 
-Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
+A> **THIS SECTION IS IN FLUX AND IS BEING REWRITTEN**
 
-Markua can be used to author books and documents, with all these print book and ebook formats supported as output formats. For print books, Markua documents can produce PDF files which can be used to produce a print book. For ebooks, Markua documents can produce PDF, EPUB and MOBI. These ebook output formats vary wildly in terms of what resources they support -- and, obviously, print books cannot support audio and video resources. So, besides just supporting different types of resources, Markua also supports fallback resources. With fallback resources, if a certain type of rich resource (such as a video) cannot be embedded in a certain output format (such as a PDF for a print book), a different "fallback" resource is used instead.
+Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
 Resources vary in four different ways:
 
@@ -11,7 +11,44 @@ Resources vary in four different ways:
 3. Insertion: Span and Figure
 4. Type: Image, Code, Math, Text, Audio and Video
 
-Before diving into all this, I want to emphasize that the Markua resource syntax is just Markdown image syntax--but extended to support the resource types, fallback media and figure captions required by Markua.
+While this seems complex, it's important to emphasize that Markua resource syntax is just Markdown image syntax, extended to support the resource types, figure captions and other attributes required by Markua. The details of all this will be described later, but it's useful to show how this fits together briefly first.
+
+A resource can be defined inline, right where it is inserted:
+
+```
+![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
+```
+
+A resource can also be first be defined and given an `id` in square brackets:
+
+```
+[resource_id]: resource_path_or_url "Optional Figure Caption"
+```
+
+This `id` can then be used to insert the resource, like this:
+
+```
+![Optional Alt Text][resource_id]
+```
+
+Regardless of whether the resource is defined inline or defined as a reference, it has a `resource_path_or_url`. This is the relative path to the resource inside the `resources` directory or the URL of the resource on the internet. In the case of images, audio and video, this becomes the `src` attribute of the resource in HTML.
+
+
+The default type of a resource is `image`. For other types of resources, the type must be specified as an attribute.
+
+```
+{type: audio}
+![Optional Alt Text](audio_resource_path_or_url "Optional Figure Caption")
+```
+
+Other attributes can also be added, for resources where they are appropriate. For example, video resources support a `poster` attribute, which is used as the image to show before the video is played.
+
+```
+{type: video, poster: poster_url}
+![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
+```
+
+Code is also just a resource in Markua.
 
 ## Resource Definition: Inline and Reference
 
@@ -23,33 +60,38 @@ Inline
 Reference
 : The resource is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement resources and/or images if a particular resource is either missing or its format is not supported.
 
-Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback resource format and/or a fallback image for situations (including print books) where a resource will never work.
+If a Markua Processor is outputting a print book or some format where it is known that resource is not supported, it must choose the poster to use as an image replacement.
 
-As such, both the inline and reference methods for defining an resource support defining an arbitrary number of fallback resources or images. The reason to provide a fallback resource is to provide essentially the same content in a different format; the reason to provide a fallback image is to provide a suitable replacement in a situation where resources are not supported at all.
-
-If a Markua Processor is outputting a print book or some format where it is known that resource is not supported, it must choose the first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
+ first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
 
 My assumption is that in most cases authors will only provide alt text and a fallback image, or not provide anything at all. My hope is that at least alt text is provided.
 
-Besides the fallback image, authors can also provide a thumbnail video TODO - figure this out
-
 ### Defining Resources Inline
 
-An resource can be defined inline, right where it is inserted.
+A resource can be defined inline, right where it is inserted.
 
 This syntax can be briefly described as follows:
 
 `![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
 
-This is the preferred way in Markua to insert normal images which are only used once. The optional alt text and the optional figure caption are discussed after the Reference Images syntax is explained, since they are relevant for both syntaxes.
+A> The `resource_path_or_url` part are the relative paths to the resource inside the `resources` directory or the URL of the image on the internet. This becomes the `src` attribute of the resource in the case of images, video  Both of these methods are described later.
 
-With fallback media, this looks like this:
+This is the preferred way in Markua to insert normal resources which are only used once. The optional alt text and the optional figure caption are discussed after the Reference resources syntax is explained, since they are relevant for both syntaxes.
 
-`![Optional Alt Text](resource_path_or_url fallback_path_or_url_1 fallback_path_or_url_2 ... fallback_path_or_url_n "Optional Figure Caption")`
+The default type of a resource is `image`. For other types of resources, the type must be specified as an attribute.
 
-(The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
+{type: audio}
+`![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
 
-A> The `resource_path_or_url` part (and the fallbacks) are the relative paths to the resource inside the `resources` directory or the URL of the image on the internet. Both of these methods are described next.
+Other attributes can also be added, for resources where they are appropriate. For example, video resources support a poster, which is used as the image to show before the video is played.
+
+{type: video, poster: poster_url}
+`![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
+
+A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not currently supported in Markua. A syntax for producing these may be added in future Markua versions.
+
+Code is also just a resource in Markua.
+
 
 #### Alt text
 
@@ -441,6 +483,8 @@ The supported file extensions for video files are:
 
 .webm
 : The file is treated as a WebM image.
+
+A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not currently supported in Markua. A syntax for producing these may be added in future Markua versions.
 
 ### Audio Formats
 
