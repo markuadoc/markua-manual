@@ -396,3 +396,12 @@ Let's see if the post-commit hook works...
 EPUB3 audio and video?
 
 - some of the stuff in philosophy.txt is outdated
+
+## Important Changes From Leanpub Flavoured Markdown
+
+Markua is the evolution of Leanpub Flavoured Markdown. However, the goal of Markua is to remove the tailbones and appendices that aren't necessary. This appendix highlights things which are changed from Leanpub Flavoured Markdown in a way which is not adequately discussed earlier.
+
+The following Leanpub Flavoured Markdown features are not supported in Markua:
+
+* Centering paragraphs of text or headings using `C>` has been removed.
+* Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. [some text]{lang:en}) on a span or block.

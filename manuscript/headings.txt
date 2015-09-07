@@ -5,7 +5,9 @@ Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h
 
 Markua, however, is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections. What Markua does is use the heading levels that Markdown uses to create HTML to create the structure of the book or document, as well as generating the `h1` through `h6` heading levels in the HTML version of the book.
 
-Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, [atx](#atx_headings) and [Setext](#setext_headings), and both of them can take many forms. For reference, both of these ways that Markdown defines headings are [specified in an appendix](#markdown_headings). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown.
+Markua is also a lot more strict about heading syntax than Markdown.
+
+In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown.
 
 Here's the only way that headings are made in Markua:
 
@@ -93,3 +95,5 @@ I thought long and hard about Markua headings, and changed my mind (as Scott and
 The design of Markua headings meets these requirements, in what I feel is an optimal way.
 
 A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
+
+A> There are two primary issues with Setext headings in Markdown. First, it is inconsistent: you can only define `h1` and `h2`; to define h3 and below, the atx style of heading must be used. Second, it is confusing: it's unclear about how many equals or minus signs you need to use. (The answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.

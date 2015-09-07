@@ -27,5 +27,4 @@ metadata.txt
 implementation.txt
 definitions.txt
 todo.txt
-appendices.txt
 acknowledgments.txt
