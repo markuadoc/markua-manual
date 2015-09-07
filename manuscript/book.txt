@@ -3,7 +3,6 @@ introduction.txt
 syntax_quick.txt
 philosophy.txt
 structure.txt
-element_types.txt
 paragraphs.txt
 poetry.txt
 resources.txt
@@ -14,14 +13,12 @@ embedding.txt
 asides.txt
 blurbs.txt
 block_quotes.txt
-code_blocks.txt
 tables.txt
 math_blocks.txt
 text_semantics.txt
 links.txt
 footnotes.txt
 crosslinks.txt
-code_spans.txt
 math_spans.txt
 whitespace.txt
 scene_breaks.txt

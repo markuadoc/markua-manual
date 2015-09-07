@@ -1,6 +1,12 @@
 {#whitespace}
 # Whitespace
 
+Broadly speaking, Markua defines three things: block elements, span elements and metadata.
+
+* Every block element in Markua is separated from every other block element in Markua by at least one blank line. (This is not just one newline: a blank line is formed by the addition of two newlines.)
+* Span elements are always contained inside a block element.
+* Metadata is typically attached to a block or span element, either above the block element or after the span element.
+
 Newlines, blank lines, leading spaces, trailing spaces and such in Markua are called whitespace.
 
 Whitespace is an essential tool in Markua. Whitespace is what makes the block elements and span elements what they are.
@@ -12,6 +18,10 @@ The goal for whitespace is for everything to just work as expected, with as few 
 Markdown is a tool for web writers. Markua is a tool for writers.
 
 Below are the rules which combine to accomplish this.
+
+## Blank Lines and File Concatenation
+
+There is an assumed blank line at the top and bottom of each Markua file, so at the top of a file you only need a blank line below the first block element, and at the bottom of a Markua file you only need a blank line above the last block element. You cannot make a block element span Markua source files--there is always a blank line added by the addition of two newlines during the concatenation.
 
 ### All Whitespace is Preserved in Code Blocks
 

@@ -1,6 +1,6 @@
-# Resources: Images, Audio, Video, Code, Math and Text
+# Resources
 
-A> THIS IS IN FLUX AND IS BEING REWRITTEN
+W> TODO - THIS IS IN FLUX AND IS BEING REWRITTEN
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
@@ -369,15 +369,19 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-## Resource Type: Image, Code, Math, Text, Audio and Video
+## Resource Type: `image`, `video`, `audio`, `code`, `math` and `text`
 
-Markua Processors rely on file extension to determine the type of media and must not attempt to parse files to determine their type. Because of this, the choice of acceptable file extensions for the various media types is a subset of the total available, so that audio and video files can be distinguished solely by their file extension instead of by examining the file or by requiring authors to type some special metadata syntax.
+Markua supports six types of resources, which are determined by the value of the `type` attribute.
 
-### Image Formats
+The legal values of the `type` attribute are: `image`, `video`, `audio`, `code`, `math` and `text`.
+
+For images, video and audio, Markua Processors rely on the file extension to determine the specific type of resource.
+
+### Image Resources
 
 Markua supports GIF, PNG, JPEG and SVG images. The images must have the correct file extension for their type. Markua processors do not need to parse images to determine their type.
 
-The supported file extensions are:
+The supported file extensions for images are:
 
 .gif
 : The file is treated as a GIF image.
@@ -400,7 +404,7 @@ The supported file extensions are:
 .xml
 : The image is treated as an SVG image.
 
-### Video Formats
+### Video Resources
 
 Markua supports MP4 and WebM videos. The videos must have the correct file extension for their type.
 
@@ -418,7 +422,7 @@ If a Markua Processor is outputting a format in which particular types of audio 
 
 If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported, it must choose the poster to use as an image replacement. (This includes situations where the video is identified by a URL and only local video resources are supported by the particular Markua Processor.)
 
-### Audio Formats
+### Audio Resources
 
 Markua supports MP3, AAC, Ogg and WAV audio files.
 
@@ -435,6 +439,202 @@ The supported file extensions for audio files are:
 
 .ogg, .oga
 : The file is treated as an Ogg Vorbis file.
+
+{#code_resources}
+### Code Resources
+
+{#codespans}
+#### Code Spans
+
+Code like `hello world` can be inserted using backticks inside a paragraph, heading, or any other block element.
+
+##### Example
+
+{#input_code_span_1}
+###### Markua Syntax
+
+```
+Here is some `hello world` span code.
+```
+
+{#output_code_span_1}
+###### HTML Output
+
+```
+<p>Here is some <code>hello world</code> span code.</p>
+```
+
+#### Two Backticks to Enclose One Backtick
+
+Just as with Markdown, to show a literal backtick, you use *two* backticks to start and end your code span. (The Markdown spec says multiple backticks; Markua says exactly two.)
+
+Note that like Markdon, any leading or trailing spaces in a code span are removed.
+
+##### Example
+
+{#input_code_span_2}
+###### Markua Syntax
+
+```
+Here is some ``code with a backtick (`) in it`` and other text.
+
+If you want to have a backtick by itself, just use you need to have spaces around it like this `` ` ``. The enclosed backtick cannot start or end the code block.
+```
+
+{#output_code_span_2}
+###### HTML Output
+
+```
+<p>Here is some <code>code with a backtick (`) in it</code> and other text.</p>
+<p>If you want to have a backtick by itself, just use you need to have spaces around it like this <code>`</code>. The enclosed backtick cannot start or end the code block.</p>
+```
+
+#### Code Blocks
+
+Code blocks can be defined inline or can import external code samples. Many attributes work the same way in both cases. The inline code block approach will be shown first.
+
+{class: warning}
+B> TODO - reference attribute list thing here, need to have a list of every element and attribute in appendix etc etc
+
+##### Inline Code Blocks in Markua Text
+
+You can create an inline code block by surrounding it using three backticks (`\``).
+
+(You can also create an inline code block by surrounding it with three tildes (`~~~`), but the only reason this alternative exists is to enable writing about Markua code blocks that are surrounded with backticks in Markua. The correct approach in normal cases is to use three backticks.)
+
+Here's an example of a code block:
+
+~~~
+```
+def foo
+  2
+end
+```
+~~~
+
+W> The "four space indent" method of creating code blocks in Markdown is not supported in Markua.
+
+Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
+
+Markua also supports defining the language that a code sample is written in using the GitHub Flavoured Markdown style language specification, in which the language name is added after the three opening backticks that start a code block:
+
+~~~
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+Markua Processors may guess at the language of a code block. To explicitly turn this off for a give code block, it can be forced to be plain text like this:
+
+~~~
+```text
+def foo
+  2
+end
+```
+~~~
+
+If a Markua Processor knows how to format the code using the specified language (if it has a "lexer" for it), it can do so. Otherwise, it must format the code using plain text as though `text` was specified as the language.
+
+Note that this language definition is just a shorthand for a more general metadata feature of markua called [attributes](#attributes). Briefly, attributes comma-separated key-value pairs enclosed in a pair of curly braces (`{` ... `}`) and separated by a newline but **not** by a blank line from the thing that they are an attribute of.
+
+You can define the language of a code block explicitly using the language attribute:
+
+~~~
+{language: ruby}
+```
+def foo
+  2
+end
+```
+~~~
+
+Markua also supports adding other information to attributes of code blocks. For example, you can explicitly turn line numbering on an off using the `line-numbers` attribute:
+
+~~~
+{language: ruby, line-numbers: off}
+```
+def foo
+  2
+end
+```
+~~~
+
+You can mix-and-match the attribute syntax and the GitHub-style syntax. The following is legal in Markua:
+
+~~~
+{line-numbers: on}
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+If the attribute and the GitHub-style syntax conflict, the attribute wins. The following will be formatted as plain text, not ruby:
+
+~~~
+{language: text, line-numbers: on, number-from: 3}
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+A> Line Wrapping
+A>
+A> Code blocks should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors must wrap lines to ensure that all code is visible, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
+
+##### ASCII art
+
+{class: warning}
+B> TODO: possibly support {language: `asciiart`} on a code block, which tightens line spacing and turns off page breaks so that ASCII art looks better.
+
+#### Importing Code Samples from External Files
+
+To import a code sample from an external file, you use a syntax very similar to the image insertion syntax:
+
+```
+<<(sample1.rb)
+```
+
+All external code samples must live inside the code subdirectory or one of its subdirectories.
+
+A> In Leanpub Flavoured Markdown, the paths included `code/`. This was redundant, since all code had to live in the code directory. So, Markua omits `code/` from the path.
+
+External code samples can also have attributes added to them on import. These can set a caption, determine what subset of the code example to show, as well as set the line number to start the numbering on.
+
+The following will show a code sample with the caption of "My Brilliant Algorithm". The code sample will contain 6 lines (lines 10-15 inclusive), and it will number them 10, 11, 12, 13, 14 and 15 since those are the line numbers of the given lines in the file:
+
+```
+{caption: "My Brilliant Algorithm", language: ruby, crop-start: 10, crop-end: 15, line-numbers: on}
+<<(sample1.rb)
+```
+
+If this is not desired, you can choose to start the numbering wherever you want with `number-from`. Choosing `1` is a good choice.
+
+The following will show 6 lines (lines 10-15 inclusive), and it will number them 1, 2, 3, 4, 5 and 6:
+
+```
+{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 1}
+<<(sample1.rb)
+```
+
+Or, if you wish to make things annoying, you can number from any non-negative integer you want. The following will show 6 lines (lines 10-15 inclusive), and it will number them 3, 4, 5, 6, 7 and 8:
+
+```
+{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 3}
+<<(sample1.rb)
+```
+
+A> The Leanpub Flavoured Markdown syntax of putting a code sample caption is not supported. This syntax looked like the alt text on images, but as discussed there, this was an incorrecct use of the image syntax.
+
+### Math Resources
+
+TODO
 
 ### Text Resources
 
