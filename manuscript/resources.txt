@@ -14,7 +14,7 @@ While this seems complex, it's important to emphasize that Markua resource synta
 
 A> The reference style image syntax of Markdown is **NOT** supported in Markua. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 
-The syntax to insert a resource is as follows:
+The syntax to define and insert a resource is as follows:
 
 ```
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
@@ -36,7 +36,7 @@ Other attributes can also be added, for resources where they are appropriate. Fo
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
-Code is also just a resource in Markua.
+Code blocks are also just a resource in Markua. (Code spans are not, since they cannot have attributes or captions.)
 
 ```
 {type: code, language: ruby}
@@ -45,86 +45,23 @@ Code is also just a resource in Markua.
 
 Some types of resources can be defined inline in the Markua text itself. This includes image resources of type SVG, as well as math, code and text resources. It emphatically does *not* include audio and video resources!
 
-## Resource Definition: Inline and Reference
+Before discussing resource location, type and insertion it's important to discuss the Optional Alt Text. (The Optional Figure Caption is discussed later.)
 
-Resources can be defined in one of two ways:
+## Optional Alt Text
 
-Inline
-: The resource is defined right where it is inserted.
+In the Markua resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion.
 
-Reference
-: The resource is defined separate from where it is inserted, and it is inserted in one or more places in the manuscript. The reference syntax also has the ability to define replacement resources and/or images if a particular resource is either missing or its format is not supported.
-
-If a Markua Processor is outputting a print book or some format where it is known that resource is not supported, it must choose the poster to use as an image replacement.
-
- first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
-
-My assumption is that in most cases authors will only provide alt text and a fallback image, or not provide anything at all. My hope is that at least alt text is provided.
-
-### Defining Resources Inline
-
-A resource can be defined inline, right where it is inserted.
-
-This syntax can be briefly described as follows:
-
-`![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
-
-A> The `resource_path_or_url` part are the relative paths to the resource inside the `resources` directory or the URL of the image on the internet. This becomes the `src` attribute of the resource in the case of images, video  Both of these methods are described later.
-
-This is the preferred way in Markua to insert normal resources which are only used once. The optional alt text and the optional figure caption are discussed after the Reference resources syntax is explained, since they are relevant for both syntaxes.
-
-The default type of a resource is `image`. For other types of resources, the type must be specified as an attribute.
-
-{type: audio}
-`![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
-
-Other attributes can also be added, for resources where they are appropriate. For example, video resources support a poster, which is used as the image to show before the video is played.
-
-{type: video, poster: poster_url}
-`![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
-
-A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not currently supported in Markua. A syntax for producing these may be added in future Markua versions.
-
-Code is also just a resource in Markua.
-
-
-#### Alt text
-
-In the Markua resource syntax, just as with the Markua image syntax, the optional alt text is in square brackets before the resource insertion.  This is true for both inline and reference style of resource insertion:
-
-* Inline: `![Optional Alt Text](resource_path_or_url "Optional Figure Caption")`
-* Reference: `![Optional Alt Text][image id]`
-
-The Optional Alt Text is text which is intended to take the place of the resource if the resource itself cannot be seen. The obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+This is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
 
 While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
 
 The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
-### Defining Resources by Reference
+A> Alt text does not make sense for code or text resources, and it does not make much sense for math resources. (It could make sense for math resources if the mathematical equations are turned into an image or are rendered using a math library not supported by a given ebook reader, however.) Regardless of this fact, it does make sense to use the same syntax for all resources. In a case where there is no appropriate alt text, it can be omitted by using empty square brackets, like `![](resource_path_or_url)`.
 
-In this syntax, an `id` is first defined for a resource, like this:
+## Optional Figure Caption
 
-[resource_id]: resource_path_or_url "Optional Figure Caption"
-
-With fallback media, this looks like this:
-
-[resource_id]: resource_path_or_url fallback_path_or_url_1 fallback_path_or_url_2 ... fallback_path_or_url_n "Optional Figure Caption"`
-
-(The ellipses above are obviously not in the syntax; I'm just using that to show that n fallback media elements can be defined here.)
-
-This `id` can then be used to insert the resource, like this:
-
-`![Optional Alt Text][resource_id]`
-
-You'll see more about resource insertion in the next section.
-
-Note that the Optional Figure Caption is defined with the definition of the resource, and this figure caption is used every single time the image is inserted via its `id`. I considered using a definition list syntax for defining resources, and supporting different figure captions based on which resource was used. However, I decided that this was objectionable: the text of a book should not change based on the capabilities of the ebook reader, and I consider figure captions to be book text. So, since the alternative caption use case was not legitimate, the need for the definition list syntax evaporated with it. (Yes, there will be line wrapping if there are a number of fallback media defined; that's preferable to having two syntaxes to do the same thing.)
-
-The reference style of resource definition and insertion is supported for the following two reasons:
-
-1. If an author who is familiar with Markdown strongly prefers it, there's no reason not to provide it. (There's nothing else that Markua would do with the reference syntax.)
-2. For images which are used frequently (e.g. emoji), it is much better to define it once and use it multiple times.
+TODO
 
 ## Resource Location: Local and Web
 
@@ -480,6 +417,10 @@ The supported file extensions for video files are:
 : The file is treated as a WebM image.
 
 A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not currently supported in Markua. A syntax for producing these may be added in future Markua versions.
+
+If a Markua Processor is outputting a format in which particular types of audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
+
+If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported, it must choose the poster to use as an image replacement. (This includes situations where the video is identified by a URL and only local video resources are supported by the particular Markua Processor.)
 
 ### Audio Formats
 
