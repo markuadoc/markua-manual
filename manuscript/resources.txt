@@ -59,10 +59,6 @@ The alt text should not be the same thing as the figure caption, if the figure c
 
 A> Alt text does not make sense for code or text resources, and it does not make much sense for math resources. (It could make sense for math resources if the mathematical equations are turned into an image or are rendered using a math library not supported by a given ebook reader, however.) Regardless of this fact, it does make sense to use the same syntax for all resources. In a case where there is no appropriate alt text, it can be omitted by using empty square brackets, like `![](resource_path_or_url)`.
 
-## Optional Figure Caption
-
-TODO
-
 ## Resource Location: Local and Web
 
 In terms of where they are located, there are two types of resources: local and web.

@@ -6,17 +6,18 @@ Markua defines substantially more list types than Markdown. In Markdown, the onl
 Specifically, the following types of lists are supported:
 
 1. Unordered Lists
-2. Ordered Lists, with the following numbering choices:
-  a. Decimal numbers
-  b. Uppercase letters
-  c. Lowercase letters
-  d. Uppercase Roman numerals
-  e. Lowercase Roman numerals
+2. Ordered Lists
 3. Definition Lists
 
-W> TODO - this list above renders wrong until we support nested lists in Markua
+For ordered lists, the following numbering choices are supported:
 
-A> Definition Lists are discussed in the next chapter -- although they are called lists, they're very different than unordered and ordered lists.
+a. Decimal numbers
+b. Uppercase letters
+c. Lowercase letters
+d. Uppercase Roman numerals
+e. Lowercase Roman numerals
+
+Definition Lists are discussed in the next chapter--although they are called lists, they're very different than unordered and ordered lists.
 
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
