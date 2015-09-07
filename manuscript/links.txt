@@ -1,30 +1,52 @@
 {#links}
 # Links
 
-W> TODO - convert to executable tests
+Markua's hyperlink support is a subset of that of Markdown. The **inline** link syntax is supported, as is the **automatic link** shortcut. The reference link syntax and the implicit link name shortcuts are **NOT** supported.
 
-W> TODO - ref style?
+A> Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 
-## Automatic Links
+## Inline Links
 
-You can make automatic links to URLs by putting the URL in angle brackets like `<http://markua.com>` this: <http://markua.com>
+The normal way to create a link is as follows:
 
-Automatic links do not create footnotes.
+```
+[link text](absolute_url)
+```
 
-## Links
+In Markdown, the URL can be either absolute or relative, since relative URLs can make sense on web servers. In Markua, however, all URLs must be absolute.
 
-You can create normal hyperlinks.
+### Example
 
-The way that links should be displayed is determined by the value of the `urls` [setting](#setting-keys-and-values).
-
-### Markua Syntax
+#### Markua Syntax
 
 ```
 This is [link text](http://markua.com) a link.
 ```
 
-### HTML Output
+#### HTML Output
 
 ```
 <p>This is <a href="http://markua.com">link text</a> a link.</p>
+```
+
+## Automatic Links
+
+To create a link where the text displayed for the link text is the URL itself, the automatic link syntax can be used. In this syntax, an absolute URL is enclosed in angle brackets.
+
+```
+Some text <absolute_url> some text.
+```
+
+### Example
+
+#### Markua Syntax
+
+```
+Markua's website is <http://markua.com>.
+```
+
+#### HTML Output
+
+```
+<p>Markua's website is <a href="http://markua.com">http://markua.com</a>.</p>
 ```

@@ -1,38 +1,26 @@
 # Resources: Images, Audio, Video, Code, Math and Text
 
-A> **THIS SECTION IS IN FLUX AND IS BEING REWRITTEN**
+A> THIS IS IN FLUX AND IS BEING REWRITTEN
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
-Resources vary in four different ways:
+Resources vary in three different ways:
 
-1. Definition: Inline and Reference
-2. Location: Local and Web
-3. Insertion: Span and Figure
-4. Type: Image, Code, Math, Text, Audio and Video
+1. Location: Local and Web
+2. Insertion: Span and Figure
+3. Type: Image, Code, Math, Text, Audio and Video
 
-While this seems complex, it's important to emphasize that Markua resource syntax is just Markdown image syntax, extended to support the resource types, figure captions and other attributes required by Markua. The details of all this will be described later, but it's useful to show how this fits together briefly first.
+While this seems complex, it's important to emphasize that Markua resource syntax is just Markdown's inline image syntax, extended to support the resource types, figure captions and other attributes required by Markua. The details of all this will be described later, but it's useful to show how this fits together briefly first.
 
-A resource can be defined inline, right where it is inserted:
+A> The reference style image syntax of Markdown is **NOT** supported in Markua. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
+
+The syntax to insert a resource is as follows:
 
 ```
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
-A resource can also be first be defined and given an `id` in square brackets:
-
-```
-[resource_id]: resource_path_or_url "Optional Figure Caption"
-```
-
-This `id` can then be used to insert the resource, like this:
-
-```
-![Optional Alt Text][resource_id]
-```
-
-Regardless of whether the resource is defined inline or defined as a reference, it has a `resource_path_or_url`. This is the relative path to the resource inside the `resources` directory or the URL of the resource on the internet. In the case of images, audio and video, this becomes the `src` attribute of the resource in HTML.
-
+The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of images, audio and video, this becomes the `src` attribute of the resource in HTML.
 
 The default type of a resource is `image`. For other types of resources, the type must be specified as an attribute.
 
@@ -49,6 +37,13 @@ Other attributes can also be added, for resources where they are appropriate. Fo
 ```
 
 Code is also just a resource in Markua.
+
+```
+{type: code, language: ruby}
+![Optional Alt Text](code_path_or_url "Optional Figure Caption")
+```
+
+Some types of resources can be defined inline in the Markua text itself. This includes image resources of type SVG, as well as math, code and text resources. It emphatically does *not* include audio and video resources!
 
 ## Resource Definition: Inline and Reference
 

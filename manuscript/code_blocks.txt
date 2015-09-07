@@ -1,6 +1,8 @@
 {#codeblocks}
 # Code Blocks
 
+A> THIS IS IN FLUX AND IS BEING MOVED INTO THE RESOURCES CHAPTER
+
 Code blocks can be defined inline or can import external code samples. Many attributes work the same way in both cases. The inline code block approach will be shown first.
 
 {class: warning}
