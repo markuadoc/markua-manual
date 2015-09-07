@@ -14,12 +14,10 @@ asides.txt
 blurbs.txt
 block_quotes.txt
 tables.txt
-math_blocks.txt
 text_semantics.txt
 links.txt
 footnotes.txt
 crosslinks.txt
-math_spans.txt
 whitespace.txt
 scene_breaks.txt
 soft_hyphen.txt
