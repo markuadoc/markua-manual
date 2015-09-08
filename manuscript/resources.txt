@@ -647,9 +647,9 @@ To do this, there's a verbose syntax and a syntactic sugar syntax.
 The verbose syntax:
 
 ```
-blah blah {math: mathml}here's your math{/math: mathml} blah blah
+blah blah {type: math, language: mathml}here's your math{/} blah blah
 
-blah blah {math: latex}math here too!{/math: latex} blah blah
+blah blah {type: math, language: latex}math here too!{/} blah blah
 ```
 
 Note that since these are span elements, LaTeX math will look a lot better than MathML.
