@@ -3,6 +3,8 @@ introduction.txt
 syntax_quick.txt
 philosophy.txt
 structure.txt
+text_formatting.txt
+
 paragraphs.txt
 poetry.txt
 resources.txt
@@ -25,4 +27,5 @@ metadata.txt
 implementation.txt
 definitions.txt
 todo.txt
+appendices.txt
 acknowledgments.txt

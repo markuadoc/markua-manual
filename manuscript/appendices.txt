@@ -1,0 +1,32 @@
+{#appendices}
+# Appendices
+
+## The W3C and Semantic Emphasis
+
+Books and documents have contained bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood. If you think this, you are clearly not familiar with the work of the W3C.
+
+The above two sentences were (essentially) untrue.
+
+There are four main ways of adding emphasis to text in HTML5: [`<strong>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-strong-element), [`<b>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-b-element), [`<em>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-em-element) and [`<i>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-i-element). The `<strong>` and `<b>` tags can wrap a span of text and add bold-esque emphasis to it, while the `<em>` and `<i>` tags can wrap a span of text and add italic-esque emphasis to it. I say "esque" since there is no guarantee that any of the four tags will actually make anything bold or italic. All four tags have actually become semantic tags in HTML5. Seriously.
+
+So, what to do in Markua? Clearly we need to be able to make text bold and italic, since authors have been doing this in books for centuries. But EPUB is one of the output targets of Markua, and since EPUB is essentially just zipped up HTML, we need to use some HTML tags for empahasis.
+
+Now, what Markdown does is to just always generate `<strong>` and `<em>` tags. Both `**two asterisks**` and `__two underscores__` make a `<strong>` tag, and `*one asterisk*` and `_one underscore_` make an `<em>` tag. This means that in 2004, John Gruber was clearly in the camp of "the `<b>` and `<i>` tags are unsemantic and bad". (At that time, many people were in this camp, as HTML had gone to a dark place full of presentational attributes in tags. The "move all presentation to CSS" backlash was very necessary, but there were a couple places--such as this, and such as the deprecating of the `start` element of an `<ol>`--where semantic information was lumped in with presentation-only information and was unfairly maligned.)
+
+Now, since you can inline HTML in Markdown, if you wanted filthy `<b>` and `<i>` tags, you could just add them yourself. In Markua, however, we don't support inlining HTML, so that's not an option.
+
+So, what to do?
+
+Let's think about the goal of Markua:
+
+> Markua is intended to be extremely simple and powerful. We want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
+
+Given this, we want to provide the power of picking what kind of emphasis that you want, while ensuring that Markua is simple to learn. We need to support all four ways of producing emphasis in Markdown (one and two asterisks and underscores), and we want to be able to produce all four of the (newly semantic!) emphasis tags in HTML5. That's exactly what we're going to do. Unlike Markdown which defines four input tags and only two outputs, we're going to map the four inputs to four outputs.
+
+There are actually a number of benefits to this:
+
+* Publishers can style `<b>` and `<strong>` differently. The `<strong>` tag can produce text which is using an even heavier-weight font than the `<b>` tag.
+* Authors can italicize things they are supposed to (e.g. the titles of books), without implying the kind of semantic emphasis of the `<em>` tag.
+* Since the four combinations of asterisks and underscores produces different output, which to choose will be determined by the desired output, not personal taste of "do you prefer underscores or asterisks". This means that multi-author Markua projects won't have to have pointless writing style debates about which type of Markua markup to use.
+* All Markdown text which has any of the four kinds of emphasis will still generate emphasis that looks like this in Markua.
+* Text editors (e.g. iA Writer) which know how to show emphasis for Markdown syntax will do so with Markua emphasis syntax.
