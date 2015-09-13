@@ -1,13 +1,22 @@
 {#appendices}
 # Appendices
 
+These appendices contain various facts and arguments which don't belong in the body of a specification.
+
+{#w3c_semantic_emphasis}
 ## The W3C and Semantic Emphasis
 
-Books and documents have contained bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood. If you think this, you are clearly not familiar with the work of the W3C.
+Markua is a plain text format designed for the writing of books and documents.
 
-The above two sentences were (essentially) untrue.
+Books and documents contain bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood.
 
-There are four main ways of adding emphasis to text in HTML5: [`<strong>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-strong-element), [`<b>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-b-element), [`<em>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-em-element) and [`<i>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-i-element). The `<strong>` and `<b>` tags can wrap a span of text and add bold-esque emphasis to it, while the `<em>` and `<i>` tags can wrap a span of text and add italic-esque emphasis to it. I say "esque" since there is no guarantee that any of the four tags will actually make anything bold or italic. All four tags have actually become semantic tags in HTML5. Seriously.
+If you think this, you are clearly not familiar with the work of the W3C. The notion of making something bold or italic is very controversial in HTML: first the `<b>` and `<i>` tags were used to do this, then they got kind of deprecated in favour of `<strong>` and `<em>`, and now there are four tags: `<b>`, `<strong>`, `<i>` and `<em>`, and *none* of these tags are guaranteed to produce something bold or italic!
+
+So, what to do?
+
+Markua outputs PDF, EPUB, MOBI and HTML ebooks. EPUB is essentially just zipped HTML. So, two of the for output formats of Markua are essentially HTML.
+
+There are now four main ways of adding emphasis to text in HTML5: [`<strong>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-strong-element), [`<b>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-b-element), [`<em>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-em-element) and [`<i>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-i-element). The `<strong>` and `<b>` tags can wrap a span of text and add bold-esque emphasis to it, while the `<em>` and `<i>` tags can wrap a span of text and add italic-esque emphasis to it. I say "esque" since there is no guarantee that any of the four tags will actually make anything bold or italic. All four tags have actually become semantic tags in HTML5. Seriously.
 
 So, what to do in Markua? Clearly we need to be able to make text bold and italic, since authors have been doing this in books for centuries. But EPUB is one of the output targets of Markua, and since EPUB is essentially just zipped up HTML, we need to use some HTML tags for empahasis.
 
@@ -30,3 +39,89 @@ There are actually a number of benefits to this:
 * Since the four combinations of asterisks and underscores produces different output, which to choose will be determined by the desired output, not personal taste of "do you prefer underscores or asterisks". This means that multi-author Markua projects won't have to have pointless writing style debates about which type of Markua markup to use.
 * All Markdown text which has any of the four kinds of emphasis will still generate emphasis that looks like this in Markua.
 * Text editors (e.g. iA Writer) which know how to show emphasis for Markdown syntax will do so with Markua emphasis syntax.
+
+{#markdown_headings}
+## Markdown Headings
+
+Whereas Markua [defines exactly one way](#headings) of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
+
+{#setext_headings}
+### Setext Headings in Markdown
+
+In the Setext-style of headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading:
+
+These are some Setext headers in Markdown:
+
+```
+This is an h1
+=============
+
+This is a paragraph.
+
+This is also an h1 (really)
+=
+
+This is a paragraph.
+
+This is an h2
+-------------
+
+This is a paragraph.
+
+This is also an h2 (really)
+-
+
+This is a paragraph.
+```
+
+There are two main issues with this style of heading in Markdown:
+
+1. It is inconsistent: It only supports defining `h1` and `h2`; to define h3 and below, the atx style of heading must be used.
+2. It is confusing: Authors are confused about how many equals or minus signs you need to use. (As we saw above, the answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
+
+{#atx_headings}
+### atx Headings in Markdown
+
+In Markdown, the other heading syntax is "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown. To create an atx heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text, followed optionally by whitespace and any number of `#` characters. The number of `#` characters determines the level of heading.
+
+These are some atx headers in Markdown:
+
+```
+# This is an h1
+
+This is a paragraph.
+
+# This is also an h1 ####################
+
+This is a paragraph.
+
+## This is an h2
+
+This is a paragraph.
+
+## This is also an h2 ###################
+
+This is a paragraph.
+
+### This is an h3
+
+This is a paragraph.
+
+### This is also an h3 ##################
+
+This is a paragraph.
+```
+
+Note that all the trailing `#` characters are ignored and are not part of the heading text.
+
+From reading this, you'll recogrize that [Markua headings](#headings) are a subset of atx headers.
+
+{lfm_changes}
+## Important Changes From Leanpub Flavoured Markdown
+
+Markua is the evolution of Leanpub Flavoured Markdown. However, the goal of Markua is to remove the tailbones and appendices that aren't necessary. This appendix highlights things which are changed from Leanpub Flavoured Markdown in a way which is not adequately discussed earlier.
+
+The following Leanpub Flavoured Markdown features are not supported in Markua:
+
+* Centering paragraphs of text or headings using `C>` has been removed.
+* Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. [some text]{lang:en}) on a span or block.
