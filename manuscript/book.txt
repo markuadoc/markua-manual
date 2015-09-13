@@ -15,7 +15,6 @@ asides.txt
 blurbs.txt
 block_quotes.txt
 tables.txt
-text_semantics.txt
 links.txt
 footnotes.txt
 crosslinks.txt

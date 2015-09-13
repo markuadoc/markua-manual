@@ -51,6 +51,8 @@ You can make a span of text bold and italic in Markua by surrounding it with eit
 
 A> Note that in cases of three asterisks or underscores consecutively, the `<b>` or `<strong>` tags are on the outside, and the `<i>` or `<em>` tags are on the inside.
 
+### Example 1
+
 {#input_bold_italic_1}
 #### Markua Syntax
 
@@ -66,6 +68,8 @@ This text ___is bold and italic___. This text ***is also bold and italic***.
 ```
 
 You can even combine underscores and asterisks. This is not recommended stylistically, but it works.
+
+### Example 2
 
 {#input_bold_italic_2}
 #### Markua Syntax
@@ -88,6 +92,8 @@ This text *__is italic and bold__*. This text _**is also italic and bold**_.
 ## Nesting Bold in Italic, and Italic in Bold
 
 Bold text can be nested inside italic text, and italic text can be nested in bold text. This is true for both the underscore and asterisk variants. You can even mix and match them together.
+
+### Example
 
 {#input_bold_1}
 #### Markua Syntax
@@ -131,31 +137,7 @@ This text **is bold _and this is nested italic_ and this is still bold** again.
 <p>This text <strong>is bold <i>and this is nested italic</i> and this is still bold</strong> again.</p>
 ```
 
-## Underlines with `____Four____` Underscores
-
-Believe it or not, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
-
-So, how to support this in Markua?
-
-The combination of one, two and three underscores have all been taken. So have the combination of one, two and three asterisks. So, we're left with `____four underscores____` for underlining. This is a bit gross, but thankfully, underlining is a lot less used than bold and italics in most languages.
-
-### Markua Syntax
-
-{#input_underline_1}
-```
-This is ____some underlined____ text.
-```
-
-### HTML Output
-
-The HTML which is output uses the `<u>` tag, which was added to HTML5.
-
-{#output_underline_1}
-```
-<p>This is some <u>bold and italic</u> text.</p>
-```
-
-## Invalid Nesting Is Illegal
+### Invalid Nesting Is Illegal
 
 If emphasis is nested in an invalid combination, Markua processors must simply output the formatting instead of exploding.
 
@@ -169,18 +151,46 @@ This is also *__not nested*__ properly.
 This __*must__* fail too.
 ```
 
+## Underlined Text
+
+Believe it or not, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
+
+So, how to support this in Markua?
+
+The combination of one, two and three underscores have all been taken. So have the combination of one, two and three asterisks. So, we're left with `____four underscores____` for underlining. This is a bit gross, but thankfully, underlining is a lot less used than bold and italics in most languages.
+
+### Example
+
+#### Markua Syntax
+
+{#input_underline_1}
+```
+This is ____some underlined____ text.
+```
+
+#### HTML Output
+
+The HTML which is output uses the `<u>` tag, which was added to HTML5.
+
+{#output_underline_1}
+```
+<p>This is some <u>bold and italic</u> text.</p>
+```
+
 ## Strikethrough
 
 Strikethrough is made with `~~two tildes~~` surrounding the text. (This is the same syntax as is used by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
 
-### Markua Syntax
+### Example
+
+#### Markua Syntax
 
 {#input_strikethrough_1}
 ```
 Strikethrough is made with ~~two tildes~~ surrounding the text.
 ```
 
-### HTML Output
+#### HTML Output
 
 {#output_strikethrough_1}
 ```
@@ -201,14 +211,16 @@ However, in this case, the following CSS rule is strongly recommended:
 
 To make a span be in superscript, you surround it with carets. (This is the same syntax as is used by pandoc.)
 
-### Markua Syntax
+### Example
+
+#### Markua Syntax
 
 {#input_superscript_1}
 ```
 5^3^ is 125.
 ```
 
-### HTML Output
+#### HTML Output
 
 {#output_superscript_1}
 ```
@@ -219,14 +231,16 @@ To make a span be in superscript, you surround it with carets. (This is the same
 
 To make a span be in subscript, you surround it with one tilde each. (This is the same syntax as is used by pandoc.)
 
-### Markua Syntax
+### Example
+
+#### Markua Syntax
 
 {#input_subscript_1}
 ```
 What he thought was H~2~O was H~2~SO~4~.
 ```
 
-### HTML Output
+#### HTML Output
 
 {#output_subscript_1}
 ```
