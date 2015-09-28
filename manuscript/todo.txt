@@ -326,14 +326,6 @@ foo bar
 
 index entry syntax is attr list syntax
 
-W>
-
-T>
-
-I>
-
-
-Q>
 
 is tasty sugar. keep these. maybe have fewer???
 
@@ -351,6 +343,13 @@ B> bar
 the post-book index madness can be converting (#myid) to {id: #myid, i: blah}
 
 {dir: rtl} on a block element
+
+or
+
+{rtl}
+{ltr}
+
+which better?
 
 no nesting
 
