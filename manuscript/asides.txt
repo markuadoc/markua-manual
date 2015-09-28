@@ -60,6 +60,7 @@ B> this is a question blurb
 
 Besides this, there is support for adding arbitrary icons. Markua Processors can ignore these. Leanpub, for example, understands the icon attribute to reference an icon from Font Awesome. This is optional so that Markua processors can do creative things here, without worrying about breaking. If a Markua processor does not understand a given icon it must be silently ignored -- it is not acceptable to add a missing image or equivalent in it.
 
+```
 {icon: car}
 A> you can't spell carbon without it
 
@@ -68,6 +69,7 @@ A> yes, we're in Font Awesome
 
 {icon: github}
 A> so is GitHub
+```
 
 ## Asides
 
