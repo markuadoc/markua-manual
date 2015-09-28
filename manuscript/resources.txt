@@ -634,7 +634,7 @@ A> The Leanpub Flavoured Markdown syntax of putting a code sample caption is not
 
 ## Math Resources
 
-You can put mathematical equations in your book, in either block elements (described below) or in [span elements](#math-span).
+You can put mathematical equations in your book, in either block elements (described below) or in span elements.
 
 W> TODO: RESOURCE INSERTION REWRITE
 
