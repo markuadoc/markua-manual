@@ -88,3 +88,53 @@ This text *__is italic and bold__*. This text _**is also italic and bold**_.
 
 <p>This text <em><b>is italic and bold</b></em>. This text <i><strong>is also italic and bold</strong></i>.</p>
 ```
+
+WORKS
+
+## Nesting Bold in Italic, and Italic in Bold
+
+Bold text can be nested inside italic text, and italic text can be nested in bold text. This is true for both the underscore and asterisk variants. You can even mix and match them together.
+
+### Example
+
+{#input_nesting_1}
+#### Markua Syntax
+
+```
+This text _is italic __and this is nested bold__ and this is still italic_ again.
+
+This text *is italic **and this is nested bold** and this is still italic* again.
+
+This text _is italic **and this is nested bold** and this is still italic_ again.
+
+This text *is italic __and this is nested bold__ and this is still italic* again.
+
+This text __is bold _and this is nested italic_ and this is still bold__ again.
+
+This text **is bold *and this is nested italic* and this is still bold** again.
+
+This text __is bold *and this is nested italic* and this is still bold__ again.
+
+This text **is bold _and this is nested italic_ and this is still bold** again.
+```
+
+{#output_nesting_1}
+#### HTML Output
+
+```
+<p>This text <i>is italic <b>and this is nested bold</b> and this is still italic</i> again.</p>
+
+<p>This text <em>is italic <strong>and this is nested bold</strong> and this is still italic</em> again.</p>
+
+<p>This text <i>is italic <strong>and this is nested bold</strong> and this is still italic</i> again.</p>
+
+<p>This text <em>is italic <b>and this is nested bold</b> and this is still italic</em> again.</p>
+
+<p>This text <b>is bold <i>and this is nested italic</i> and this is still bold</b> again.</p>
+
+<p>This text <strong>is bold <em>and this is nested italic</em> and this is still bold</strong> again.</p>
+
+<p>This text <b>is bold <em>and this is nested italic</em> and this is still bold</b> again.</p>
+
+<p>This text <strong>is bold <i>and this is nested italic</i> and this is still bold</strong> again.</p>
+```
