@@ -24,3 +24,67 @@ This text _is italic_. This text *is also italic*.
 ```
 <p>This text <i>is italic</i>. This text <em>is also italic</em>.</p>
 ```
+
+## Bold Text
+
+You can make a span of text bold in Markua by surrounding it with either `__two underscores__` or `**two asterisks**`. The HTML that is generated is different: double underscores produce the `<b>` tag, whereas double asterisks produce the `<strong>` tag. Both, however, will look bold.
+
+### Example
+
+{#input_bold_1}
+#### Markua Syntax
+
+```
+This text __is bold__. This text **is also bold**.
+```
+
+{#output_bold_1}
+#### HTML Output
+
+```
+<p>This text <b>is bold</b>. This text <strong>is also bold</strong>.</p>
+```
+
+## Bold + Italic Text
+
+You can make a span of text bold and italic in Markua by surrounding it with either `___three underscores___` or `***two asterisks***`. The HTML that is generated is different: triple underscores produce the `<b><i>` tag combination, whereas triple asterisks produce the `<strong><em>` tag combination. Both, however, will look bold and italic.
+
+A> Note that in cases of three asterisks or underscores consecutively, the `<b>` or `<strong>` tags are on the outside, and the `<i>` or `<em>` tags are on the inside.
+
+### Example 1
+
+{#input_bold_italic_1}
+#### Markua Syntax
+
+```
+This text ___is bold and italic___. This text ***is also bold and italic***.
+```
+
+{#output_bold_italic_1}
+#### HTML Output
+
+```
+<p>This text <b><i>is bold and italic</i></b>. This text <strong><em>is also bold and italic</em></strong>.</p>
+```
+
+You can even combine underscores and asterisks. This is not recommended stylistically, but it works.
+
+### Example 2
+
+{#input_bold_italic_2}
+#### Markua Syntax
+
+```
+This text __*is bold and italic*__. This text **_is also bold and italic_**.
+
+This text *__is italic and bold__*. This text _**is also italic and bold**_.
+```
+
+{#output_bold_italic_2}
+#### HTML Output
+
+```
+<p>This text <b><em>is bold and italic</em></b>. This text <strong><i>is also bold and italic</i></strong>.</p>
+
+<p>This text <em><b>is italic and bold</b></em>. This text <i><strong>is also italic and bold</strong></i>.</p>
+```
