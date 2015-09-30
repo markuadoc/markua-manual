@@ -95,7 +95,7 @@ Bold text can be nested inside italic text, and italic text can be nested in bol
 
 ### Example
 
-{#input_bold_1}
+{#input_nesting_1}
 #### Markua Syntax
 
 ```
@@ -116,7 +116,7 @@ This text __is bold *and this is nested italic* and this is still bold__ again.
 This text **is bold _and this is nested italic_ and this is still bold** again.
 ```
 
-{#output_bold_1}
+{#output_nesting_1}
 #### HTML Output
 
 ```
