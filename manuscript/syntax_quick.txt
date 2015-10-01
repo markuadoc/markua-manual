@@ -1,5 +1,3 @@
 # Markua Syntax Quick Reference
 
-Markua syntax is a copy-paste-modify of Markdown syntax, adapted for the needs of books and documents. This is a quick reference to all Markdown syntax. For a proper explanation of everything, read the rest of the spec.
-
-TODO
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all Markua syntax. For a proper explanation of Markua, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
