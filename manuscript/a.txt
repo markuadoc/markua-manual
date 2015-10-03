@@ -1,0 +1,778 @@
+# Resources: Images, Video, Audio, Code, Math and Text
+
+W> TODO - THIS IS IN FLUX AND IS BEING REWRITTEN
+
+Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
+
+Resources vary in three different ways:
+
+1. Location: Local and Web
+2. Insertion: Span and Figure
+3. Type: Image, Code, Math, Text, Audio and Video
+
+While this seems complex, it's important to emphasize that Markua resource syntax is just Markdown's inline image syntax, extended to support the resource types, figure captions and other attributes required by Markua. The details of all this will be described later, but it's useful to show how this fits together briefly first.
+
+A> The reference style image syntax of Markdown is **NOT** supported in Markua. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
+
+The syntax to define and insert a resource is as follows:
+
+```
+![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
+```
+
+The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of images, audio and video, this becomes the `src` attribute of the resource in HTML.
+
+The default type of a resource is `image`. For other types of resources, the type must be specified as an attribute.
+
+```
+{type: audio}
+![Optional Alt Text](audio_resource_path_or_url "Optional Figure Caption")
+```
+
+Other attributes can also be added, for resources where they are appropriate. For example, video resources support a `poster` attribute, which is used as the image to show before the video is played.
+
+```
+{type: video, poster: poster_url}
+![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
+```
+
+Code blocks are also just a resource in Markua. (Code spans are not, since they cannot have attributes or captions.)
+
+```
+{type: code, language: ruby}
+![Optional Alt Text](code_path_or_url "Optional Figure Caption")
+```
+
+Some types of resources can be defined inline in the Markua text itself. This includes image resources of type SVG, as well as math, code and text resources. It emphatically does *not* include audio and video resources!
+
+Before discussing resource location, type and insertion it's important to discuss the Optional Alt Text. (The Optional Figure Caption is discussed later.)
+
+## Optional Alt Text
+
+In the Markua resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion.
+
+This is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+
+While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
+
+The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+
+A> Alt text does not make sense for code or text resources, and it does not make much sense for math resources. (It could make sense for math resources if the mathematical equations are turned into an image or are rendered using a math library not supported by a given ebook reader, however.) Regardless of this fact, it does make sense to use the same syntax for all resources. In a case where there is no appropriate alt text, it can be omitted by using empty square brackets, like `![](resource_path_or_url)`.
+
+## Resource Location: Local and Web
+
+In terms of where they are located, there are two types of resources: local and web.
+
+Local Resources
+: The resource is included with the manuscript files, in a `resources` folder inside the `manuscript` folder.
+
+Web Resources
+: The resource is defined somewhere on the web, and is available via the `http:` or `https:` protocols.
+
+All Markua Processors must support all types of Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors. Furthermore, support for Web Resources is not all or nothing -- a Markua Processor can support Web Resources for some resource types but not others. For example, a Markua Processor could support Web Resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of Web Resource, it must consider all Web Resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+
+### Local Resources
+
+The `resources/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
+
+All images identified with a directory path must be inside the `resources` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+
+The local resources approach can also be used by hosted services. If they provide a download they should create a resources directory... TODO
+
+A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+
+A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
+
+W> In Leanpub Flavoured Markdown, we included `images/` in the path of all images. This is not supported in Markua. If  Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is resources/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the resources directory.
+
+### Web Resources
+
+The URL approach with an image is simple: the URL is an absolute URL of an image on the internet. The URL must start with with either `http:` or `https:`; no other protocols are supported.
+
+## Resource Insertion: Span and Figure
+
+Regardless of whether an resource is defined inline or by reference, an resource can also inserted into the flow of a Markua document in one of two ways:
+
+Span
+: The resource is inserted as part of the flow of text of a paragraph.
+
+Figure
+: The resource is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
+
+When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
+
+{#spanimages}
+### Span Resources
+
+Images can be inserted as a span image in the flow of text in a paragraph. When an image is inserted as a span image, it must be positioned where it is inserted -- it cannot be floated and repositioned by Markua processors.
+
+A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
+
+#### Examples
+
+##### Example 1: Span Images with Alt Text
+
+Images can be inserted as a span image with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
+
+###### Markua Syntax
+
+{#input_span_images_1}
+```
+Markua has a fancy ![Markua two trees logo](markua-logo-small.png) logo!
+
+Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
+```
+
+###### HTML Output
+
+{#output_span_images_1}
+```
+<p>Markua has a fancy <img src="resources/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua also has a fancy <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/> Twitter avatar!</p>
+```
+
+##### Example 2: Span Images with no Alt Text
+
+Images can be inserted as a span image with no alt text.
+
+###### Markua Syntax
+
+{#input_span_images_2}
+```
+Markua has a fancy ![](markua-logo-small.png) logo!
+```
+
+###### HTML Output
+
+{#output_span_images_2}
+```
+<p>Markua has a fancy <img src="resources/markua-logo-small.png"/> logo!</p>
+```
+
+##### Example 3: Span Images Incorrectly Having a Caption
+
+A span image cannot have a caption. If one is present, it is ignored.
+
+###### Markua Syntax
+
+{#input_span_images_3}
+```
+Markua has a fancy ![Markua two trees logo](markua-logo-small.png "This caption is ignored") logo!
+```
+
+###### HTML Output
+
+{#output_span_images_3}
+```
+<p>Markua has a fancy <img src="resources/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+```
+
+{#figures}
+### Figures
+
+The most powerful way to insert a resource in Markua is as a Figure.
+
+A figure is always inserted on a line by itself. However, there is variation in whether there is space above or below the figure:
+
+Block
+: The figure has blank lines above and below it.
+
+Span Block
+: The figure has no blank lines above or below it.
+
+A Figure can have a caption. This caption shows up in two places:
+
+1. Near the image, typically above or below it, per the preference of the Markua Processor.
+2. As the name of the Figure in the List of Illustrations (a.k.a. Table of Figures), if one is generated for the book. The caption name serves as the text, and it is a crosslink to the image caption associated with the figure itself.
+
+A figure can also have attributes. There are three attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
+
+`float`
+: The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
+
+`width`
+: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
+
+`type`
+: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting audio and video; see those chapters for details.
+
+#### Examples
+
+##### Example 1: Figures with Alt Text and a Caption
+
+Ideally, a figure should have both alt text and a caption. The alt text is intended for readers who can't see the image, and the caption is intended to complement the image.
+
+###### Markua Syntax
+
+{#input_figures_1}
+```
+Markua has a fancy logo:
+
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Markua also has a fancy Twitter avatar:
+
+![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png "The Markua Icon")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_1}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Markua also has a fancy Twitter avatar:</p>
+<div class="figure">
+  <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/>
+  <p class="caption">The Markua Icon</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 2: Figures with no Alt Text or Caption
+
+Images can be inserted as a figure even with no alt text or caption. If this is done, the image is still styled as a figure, but the image has no caption and does **not** show up in the List of Illustrations.
+
+###### Markua Syntax
+
+{#input_figures_2}
+```
+Markua has a fancy logo:
+
+![](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_2}
+```
+<p>Markua has a fancy logo:</p>
+<div class='figure'>
+  <img src="media/markua-logo.png"/>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 3: Figures with Alt Text but no Caption
+
+The alt text and caption are both optional. This example shows a figure with alt text but no caption.
+
+###### Markua Syntax
+
+{#input_figures_3}
+```
+Markua has a fancy logo:
+
+![the word Markua with the two asterisk trees beside it](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_3}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 4: Figures with a Caption but no Alt Text
+
+The alt text and caption are both optional. This example shows a figure with a caption but no alt text.
+
+###### Markua Syntax
+
+{#input_figures_4}
+```
+Markua has a fancy logo:
+
+![](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_4}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
+
+This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
+
+###### Markua Syntax
+
+{#input_figures_5}
+```
+Markua has a fancy logo:
+
+{float: "left", width: "50%"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_5}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+##### Example 6: A Figure with a `width` Attribute of `fullbleed`
+
+This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
+
+###### Markua Syntax
+
+{#input_figures_6}
+```
+Markua has a fancy logo:
+
+{width: "fullbleed"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+###### HTML Output
+
+{#output_figures_6}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+## Resource Type: `image`, `video`, `audio`, `code`, `math` and `text`
+
+Markua supports six types of resources, which are determined by the value of the `type` attribute.
+
+The legal values of the `type` attribute are: `image`, `video`, `audio`, `code`, `math` and `text`.
+
+For images, video and audio, Markua Processors rely on the file extension to determine the specific type of resource.
+
+## Image Resources
+
+Markua supports GIF, PNG, JPEG and SVG images. The images must have the correct file extension for their type. Markua processors do not need to parse images to determine their type.
+
+The supported file extensions for images are:
+
+.gif
+: The file is treated as a GIF image.
+
+.jpg
+: The file is treated as a JPEG image.
+
+.jpeg
+: The file is treated as a JPEG image.
+
+.png
+: The file is treated as a PNG image.
+
+.svg
+: The image is treated as an SVG image.
+
+.svgz
+: The image is treated as an SVG image which has been zipped.
+
+.xml
+: The image is treated as an SVG image.
+
+## Video Resources
+
+Markua supports MP4 and WebM videos. The videos must have the correct file extension for their type.
+
+The supported file extensions for video files are:
+
+.mp4
+: The file is treated as an MP4 video.
+
+.webm
+: The file is treated as a WebM image.
+
+A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not currently supported in Markua. A syntax for producing these may be added in future Markua versions.
+
+If a Markua Processor is outputting a format in which particular types of audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
+
+If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported, it must choose the poster to use as an image replacement. (This includes situations where the video is identified by a URL and only local video resources are supported by the particular Markua Processor.)
+
+## Audio Resources
+
+Markua supports MP3, AAC, Ogg and WAV audio files.
+
+The supported file extensions for audio files are:
+
+.mp3
+: The file is treated as MP3 audio.
+
+.m4a, .aac
+: The file is treated as an MP4 AAC (Advanced Audio Coding) audio file. Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
+
+.wav, .wave
+: The file is treated as a WAV (Waveform Audio File Format) file.
+
+.ogg, .oga
+: The file is treated as an Ogg Vorbis file.
+
+{#code_resources}
+## Code Resources
+
+{#codespans}
+### Code Spans
+
+Code like `hello world` can be inserted using backticks inside a paragraph, heading, or any other block element.
+
+#### Example
+
+{#input_code_span_1}
+##### Markua Syntax
+
+```
+Here is some `hello world` span code.
+```
+
+{#output_code_span_1}
+##### HTML Output
+
+```
+<p>Here is some <code>hello world</code> span code.</p>
+```
+
+### Two Backticks to Enclose One Backtick
+
+Just as with Markdown, to show a literal backtick, you use *two* backticks to start and end your code span. (The Markdown spec says multiple backticks; Markua says exactly two.)
+
+Note that like Markdon, any leading or trailing spaces in a code span are removed.
+
+#### Example
+
+{#input_code_span_2}
+##### Markua Syntax
+
+```
+Here is some ``code with a backtick (`) in it`` and other text.
+
+If you want to have a backtick by itself, just use you need to have spaces around it like this `` ` ``. The enclosed backtick cannot start or end the code block.
+```
+
+{#output_code_span_2}
+##### HTML Output
+
+```
+<p>Here is some <code>code with a backtick (`) in it</code> and other text.</p>
+<p>If you want to have a backtick by itself, just use you need to have spaces around it like this <code>`</code>. The enclosed backtick cannot start or end the code block.</p>
+```
+
+### Code Blocks
+
+Code blocks can be defined inline or can import external code samples. Many attributes work the same way in both cases. The inline code block approach will be shown first.
+
+{class: warning}
+B> TODO - reference attribute list thing here, need to have a list of every element and attribute in appendix etc etc
+
+#### Inline Code Blocks in Markua Text
+
+You can create an inline code block by surrounding it using three backticks (`\``).
+
+(You can also create an inline code block by surrounding it with three tildes (`~~~`), but the only reason this alternative exists is to enable writing about Markua code blocks that are surrounded with backticks in Markua. The correct approach in normal cases is to use three backticks.)
+
+Here's an example of a code block:
+
+~~~
+```
+def foo
+  2
+end
+```
+~~~
+
+W> The "four space indent" method of creating code blocks in Markdown is not supported in Markua.
+
+Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
+
+Markua also supports defining the language that a code sample is written in using the GitHub Flavoured Markdown style language specification, in which the language name is added after the three opening backticks that start a code block:
+
+~~~
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+Markua Processors may guess at the language of a code block. To explicitly turn this off for a give code block, it can be forced to be plain text like this:
+
+~~~
+```text
+def foo
+  2
+end
+```
+~~~
+
+If a Markua Processor knows how to format the code using the specified language (if it has a "lexer" for it), it can do so. Otherwise, it must format the code using plain text as though `text` was specified as the language.
+
+Note that this language definition is just a shorthand for a more general metadata feature of markua called attributes. Briefly, attributes comma-separated key-value pairs enclosed in a pair of curly braces (`{` ... `}`) and separated by a newline but **not** by a blank line from the thing that they are an attribute of.
+
+You can define the language of a code block explicitly using the language attribute:
+
+~~~
+{language: ruby}
+```
+def foo
+  2
+end
+```
+~~~
+
+Markua also supports adding other information to attributes of code blocks. For example, you can explicitly turn line numbering on an off using the `line-numbers` attribute:
+
+~~~
+{language: ruby, line-numbers: off}
+```
+def foo
+  2
+end
+```
+~~~
+
+You can mix-and-match the attribute syntax and the GitHub-style syntax. The following is legal in Markua:
+
+~~~
+{line-numbers: on}
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+If the attribute and the GitHub-style syntax conflict, the attribute wins. The following will be formatted as plain text, not ruby:
+
+~~~
+{language: text, line-numbers: on, number-from: 3}
+```ruby
+def foo
+  2
+end
+```
+~~~
+
+A> Line Wrapping
+A>
+A> Code blocks should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors must wrap lines to ensure that all code is visible, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
+
+#### ASCII art
+
+{class: warning}
+B> TODO: possibly support {language: `asciiart`} on a code block, which tightens line spacing and turns off page breaks so that ASCII art looks better.
+
+### Importing Code Samples from External Files
+
+To import a code sample from an external file, you use a syntax very similar to the image insertion syntax:
+
+```
+<<(sample1.rb)
+```
+
+All external code samples must live inside the code subdirectory or one of its subdirectories.
+
+A> In Leanpub Flavoured Markdown, the paths included `code/`. This was redundant, since all code had to live in the code directory. So, Markua omits `code/` from the path.
+
+External code samples can also have attributes added to them on import. These can set a caption, determine what subset of the code example to show, as well as set the line number to start the numbering on.
+
+The following will show a code sample with the caption of "My Brilliant Algorithm". The code sample will contain 6 lines (lines 10-15 inclusive), and it will number them 10, 11, 12, 13, 14 and 15 since those are the line numbers of the given lines in the file:
+
+```
+{caption: "My Brilliant Algorithm", language: ruby, crop-start: 10, crop-end: 15, line-numbers: on}
+<<(sample1.rb)
+```
+
+If this is not desired, you can choose to start the numbering wherever you want with `number-from`. Choosing `1` is a good choice.
+
+The following will show 6 lines (lines 10-15 inclusive), and it will number them 1, 2, 3, 4, 5 and 6:
+
+```
+{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 1}
+<<(sample1.rb)
+```
+
+Or, if you wish to make things annoying, you can number from any non-negative integer you want. The following will show 6 lines (lines 10-15 inclusive), and it will number them 3, 4, 5, 6, 7 and 8:
+
+```
+{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 3}
+<<(sample1.rb)
+```
+
+A> The Leanpub Flavoured Markdown syntax of putting a code sample caption is not supported. This syntax looked like the alt text on images, but as discussed there, this was an incorrecct use of the image syntax.
+
+## Math Resources
+
+You can put mathematical equations in your book, in either block elements (described below) or in span elements.
+
+W> TODO: RESOURCE INSERTION REWRITE
+
+### Math Spans: Verbose and \{$$}
+
+Math can be inserted as span elements as well as as a block element.
+
+To do this, there's a verbose syntax and a syntactic sugar syntax.
+
+The verbose syntax:
+
+```
+blah blah {type: math, language: mathml}here's your math{/} blah blah
+
+blah blah {type: math, language: latex}math here too!{/} blah blah
+```
+
+Note that since these are span elements, LaTeX math will look a lot better than MathML.
+
+Also, this is very verbose. So, this is also supported:
+
+```
+blah blah {$$}math here too!{/$$} blah blah
+```
+
+This uses the default math engine. Chances are if you're using this syntax, you're using LaTeX math.
+
+Here's a longer example:
+
+#### Markua Syntax
+
+```
+The four kinematics equations are {$$}d = v_i t + \frac{1}{2} a t^2{/$$}, {$$}v_f^2 = v_i^2 + 2 a d{/$$}, {$$}v_f = v_i + a t{/$$} and {$$}d = \frac{1}{2}(v_i + v_f) t{/$$}.
+```
+
+#### HTML Output
+
+Markua processors can do whatever they want here as well.
+
+### Math Blocks
+
+To create a math block, you insert it like a code block and you add a `math` attribute. The key is `math` and the value can either be `latex`, `mathml` or some other term.  This value specifies the markup language of the Math block.
+
+**Markua procesors do NOT need to support any given Math markup language.**
+
+However, if a Markua processor does not understand a given Math markup language specified by the value of a `math` attribute (say, if it supports LaTeX math but not MathML), it **MUST** output the content of the math block **as a code block formatted as text**.
+
+#### LaTeX Math with `{type: math, language: latex}`
+
+To add LaTeX math, use `{type: math, language: latex}`:
+
+##### Markua Syntax
+
+~~~
+Here is some paragraph text.
+
+{type: math, language: latex}
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here is some more paragraph text.
+~~~
+
+#### HTML Output
+
+Markua processors can do whatever they want here. They can even output the entire thing as an image and insert the image, since that works on the most legacy ebook readers. Accessibility for old devices and accessibility for people with visual disabilities are often in conflict, and it's up to the Markua Processor to decide what to do.
+
+### MathML Math with `{math: mathml}`
+
+To add MathML math, use `{math: mathml}`:
+
+A> MathML is not supported in Leanpub, so we have no idea if supporting it is a good idea or not.
+
+#### Markua Syntax
+
+~~~
+Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
+
+{type: math, language: mathml}
+```
+<apply>
+  <plus/>
+  <apply>
+    <times/>
+    <ci>a</ci>
+    <apply>
+      <power/>
+      <ci>x</ci>
+      <cn>2</cn>
+    </apply>
+  </apply>
+  <apply>
+    <times/>
+    <ci>b</ci>
+    <ci>x</ci>
+  </apply>
+  <ci>c</ci>
+</apply>
+```
+
+Here is some more paragraph text.
+~~~
+
+#### HTML Output
+
+Markua processors can do whatever they want here as well.
+
+### Math Blocks with Default `math`
+
+Note that there is a default markup language for math in a Markua document. It is determined by the value of the `math` attribute which is set in the metadata. The default value of the `math` attribute is `latex`.
+
+Because of this, you can also insert math like this:
+
+#### Markua Syntax
+
+~~~
+Here is some paragraph text.
+
+```math
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here is some more paragraph text.
+~~~
+
+#### HTML Output
+
+Markua processors can do whatever they want here as well.
+
+## Text Resources
+
+TODO - explain this, and include custom types of text resources
+
+A> For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
