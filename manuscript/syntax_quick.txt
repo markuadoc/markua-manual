@@ -1,49 +1,16 @@
 # Markua Syntax Quick Reference
 
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all Markua syntax. For a proper explanation of Markua, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax. In some cases, the HTML that is generated is mentioned. For a proper explanation of Markua and the complete specification of the HTML produced, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
 
 ## Text Formatting
 
-### Italic
+* To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
+* To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
+* To produce
 
-## Italic Text
+**Bold + Italic text** is made by surrounding it with either `__three underscores__` (producing `<b><i>`) or `**three asterisks**` (producing `<strong><em>`).
 
-You can make a span of text italic in Markua by surrounding it with either `_one underscore_` or `*one asterisk*`. The HTML that is generated is different: single underscores produce the `<i>` tag, whereas single asterisks produce the `<em>` tag. Both, however, will look italic.
 
-### Example
-
-{#input_italic_1}
-#### Markua Syntax
-
-```
-This text _is italic_. This text *is also italic*.
-```
-
-{#output_italic_1}
-#### HTML Output
-
-```
-<p>This text <i>is italic</i>. This text <em>is also italic</em>.</p>
-```
-
-## Bold Text
-
-You can make a span of text bold in Markua by surrounding it with either `__two underscores__` or `**two asterisks**`. The HTML that is generated is different: double underscores produce the `<b>` tag, whereas double asterisks produce the `<strong>` tag. Both, however, will look bold.
-
-### Example
-
-{#input_bold_1}
-#### Markua Syntax
-
-```
-This text __is bold__. This text **is also bold**.
-```
-
-{#output_bold_1}
-#### HTML Output
-
-```
-<p>This text <b>is bold</b>. This text <strong>is also bold</strong>.</p>
 ```
 
 ## Bold + Italic Text
