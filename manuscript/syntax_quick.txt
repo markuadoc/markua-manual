@@ -11,45 +11,10 @@ To learn why Markua is the way it is, and for the proper specification of Markua
 * To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `**three asterisks**` (producing `<strong><em>`).
 * To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). (Usually italic text is preferred to underlined text, but not always. The syntax for underlined text is gross, but this is a tradeoff.)
 * To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
+* To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
+* To produce subscript like the 2 in
 
-
-
-#### HTML Output
-
-{#output_strikethrough_1}
-```
-<p>Strikethrough is made with <span class="strikethrough">two tildes</span> surrounding the text.</p>
-```
-
-Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations.
-
-However, in this case, the following CSS rule is strongly recommended:
-
-```
-.strikethrough {
-  text-decoration: line-through;
-}
-```
-
-## Superscript
-
-To make a span be in superscript, you surround it with carets. (This is the same syntax as is used by pandoc.)
-
-### Example
-
-#### Markua Syntax
-
-{#input_superscript_1}
-```
-5^3^ is 125.
-```
-
-#### HTML Output
-
-{#output_superscript_1}
-```
-<p>5<sup>3</sup> is 125.</p>
-```
+ like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
 
 ## Subscript
 
