@@ -3,7 +3,7 @@
 
 Markua is a plain text format designed for the writing of books and documents. Books and documents have various types of text formatting in them: bold, italic, underline, strikethrough, superscript and subscript.
 
-A> To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](w3c_semantic_emphasis).
+A> To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
 ## Italic Text
 

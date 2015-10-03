@@ -640,7 +640,7 @@ W> TODO: RESOURCE INSERTION REWRITE
 
 ### Math Spans: Verbose and \{$$}
 
-Math can be inserted as span elements as well as as a [block element](math-blocks).
+Math can be inserted as span elements as well as as a block element.
 
 To do this, there's a verbose syntax and a syntactic sugar syntax.
 
