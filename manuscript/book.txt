@@ -6,8 +6,8 @@
 #text_formatting.txt
 #paragraphs.txt
 #poetry.txt
-#resources.txt
-#headings.txt
+resources.txt
+headings.txt
 lists.txt
 definition_lists.txt
 embedding.txt
