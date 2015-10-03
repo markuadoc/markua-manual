@@ -148,7 +148,7 @@ Finally, note that crosslinks will work even if the `id` has not been defined ye
 
 #### Attributes of Code Blocks
 
-As we saw in the [section on code blocks](#code-blocks), attributes can be used on code blocks. These include:
+As we saw earlier, attributes can be used on code blocks. These include:
 
 * `language`
 * `crop-start`

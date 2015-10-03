@@ -194,7 +194,7 @@ A figure can also have attributes. There are three attributes: `float`, `width` 
 : The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
 
 `type`
-: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting [audio](#audio) and [video](#video); see those chapters for details.
+: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting audio and video; see those chapters for details.
 
 #### Examples
 
@@ -640,7 +640,7 @@ W> TODO: RESOURCE INSERTION REWRITE
 
 ### Math Spans: Verbose and \{$$}
 
-Math can be inserted as span elements as well as as a [block element](#math-blocks).
+Math can be inserted as span elements as well as as a [block element](math-blocks).
 
 To do this, there's a verbose syntax and a syntactic sugar syntax.
 
