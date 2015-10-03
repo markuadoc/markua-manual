@@ -14,6 +14,34 @@ To learn why Markua is the way it is, and for the proper specification of Markua
 * To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
 * To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
-## Paragraphs
+## Paragraphs, Poetry and Whitespace
 
-A paragraph is text with a blank line both above and below it. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs. Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, you cannot make a paragraph (or any block element) span multiple Markua source files.
+A paragraph is text with a blank line both above and below it. This produces a `<p>` tag in HTML.
+
+The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs. Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, you cannot make a paragraph (or any block element) span multiple Markua source files.
+
+A single line break produces a forced line break, and a `<br/>` tag in HTML.
+
+Whitespace (either spaces or tabs) is preserved at the beginning of a line.
+
+You can write most poetry without any special formatting characters, such as the following:
+
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+If you want to write poetry like e e cummings, you need to use a code block:
+
+~~~
+{code: poetry}
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+~~~
+
+Whitespace is stripped from the ends of lines and files. (The "two space trick" to force a line break in Markdown is not needed in Markua, since a single line break produces that.)
