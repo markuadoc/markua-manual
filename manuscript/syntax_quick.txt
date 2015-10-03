@@ -9,22 +9,10 @@ To learn why Markua is the way it is, and for the proper specification of Markua
 * To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
 * To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
 * To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `**three asterisks**` (producing `<strong><em>`).
-* To produce ____underlined text____, surround it with `____four underscores____`. Usually italic text is preferred to underlined text, so the fact that underlined text has a gross syntax doesn't matter that much.
+* To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). (Usually italic text is preferred to underlined text, but not always. The syntax for underlined text is gross, but this is a tradeoff.)
+* To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
 
 
-
-## Strikethrough
-
-Strikethrough is made with `~~two tildes~~` surrounding the text. (This is the same syntax as is used by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
-
-### Example
-
-#### Markua Syntax
-
-{#input_strikethrough_1}
-```
-Strikethrough is made with ~~two tildes~~ surrounding the text.
-```
 
 #### HTML Output
 
