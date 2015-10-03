@@ -11,8 +11,8 @@ headings.txt
 lists.txt
 definition_lists.txt
 embedding.txt
-#asides.txt
-#blurbs.txt
+asides.txt
+blurbs.txt
 block_quotes.txt
 tables.txt
 links.txt
