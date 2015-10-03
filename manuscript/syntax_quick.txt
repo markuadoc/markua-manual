@@ -1,6 +1,8 @@
 # Markua Syntax Quick Reference
 
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax, focusing on the "happy path" instead of complex edge cases. In some cases, the HTML that is generated is mentioned. For a proper explanation of Markua and the complete specification of the HTML produced, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases. In some cases, the HTML that is generated is mentioned.
+
+To learn why Markua is the way it is, and for the proper specification of Markua and of the HTML produced, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
 
 ## Text Formatting
 
