@@ -1,8 +1,8 @@
-warning.txt
-introduction.txt
-syntax_quick.txt
-philosophy.txt
-structure.txt
+#warning.txt
+#introduction.txt
+#syntax_quick.txt
+#philosophy.txt
+#structure.txt
 #text_formatting.txt
 paragraphs.txt
 poetry.txt
