@@ -1,123 +1,13 @@
 # Markua Syntax Quick Reference
 
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax. In some cases, the HTML that is generated is mentioned. For a proper explanation of Markua and the complete specification of the HTML produced, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax, focusing on the "happy path" instead of complex edge cases. In some cases, the HTML that is generated is mentioned. For a proper explanation of Markua and the complete specification of the HTML produced, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
 
 ## Text Formatting
 
 * To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
 * To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
-* To produce
-
-**Bold + Italic text** is made by surrounding it with either `__three underscores__` (producing `<b><i>`) or `**three asterisks**` (producing `<strong><em>`).
-
-
-```
-
-## Bold + Italic Text
-
-You can make a span of text bold and italic in Markua by surrounding it with either `___three underscores___` or `***two asterisks***`. The HTML that is generated is different: triple underscores produce the `<b><i>` tag combination, whereas triple asterisks produce the `<strong><em>` tag combination. Both, however, will look bold and italic.
-
-A> Note that in cases of three asterisks or underscores consecutively, the `<b>` or `<strong>` tags are on the outside, and the `<i>` or `<em>` tags are on the inside.
-
-### Example 1
-
-{#input_bold_italic_1}
-#### Markua Syntax
-
-```
-This text ___is bold and italic___. This text ***is also bold and italic***.
-```
-
-{#output_bold_italic_1}
-#### HTML Output
-
-```
-<p>This text <b><i>is bold and italic</i></b>. This text <strong><em>is also bold and italic</em></strong>.</p>
-```
-
-You can even combine underscores and asterisks. This is not recommended stylistically, but it works.
-
-### Example 2
-
-{#input_bold_italic_2}
-#### Markua Syntax
-
-```
-This text __*is bold and italic*__. This text **_is also bold and italic_**.
-
-This text *__is italic and bold__*. This text _**is also italic and bold**_.
-```
-
-{#output_bold_italic_2}
-#### HTML Output
-
-```
-<p>This text <b><em>is bold and italic</em></b>. This text <strong><i>is also bold and italic</i></strong>.</p>
-
-<p>This text <em><b>is italic and bold</b></em>. This text <i><strong>is also italic and bold</strong></i>.</p>
-```
-
-## Nesting Bold in Italic, and Italic in Bold
-
-Bold text can be nested inside italic text, and italic text can be nested in bold text. This is true for both the underscore and asterisk variants. You can even mix and match them together.
-
-### Example
-
-{#input_nesting_1}
-#### Markua Syntax
-
-```
-This text _is italic __and this is nested bold__ and this is still italic_ again.
-
-This text *is italic **and this is nested bold** and this is still italic* again.
-
-This text _is italic **and this is nested bold** and this is still italic_ again.
-
-This text *is italic __and this is nested bold__ and this is still italic* again.
-
-This text __is bold _and this is nested italic_ and this is still bold__ again.
-
-This text **is bold *and this is nested italic* and this is still bold** again.
-
-This text __is bold *and this is nested italic* and this is still bold__ again.
-
-This text **is bold _and this is nested italic_ and this is still bold** again.
-```
-
-{#output_nesting_1}
-#### HTML Output
-
-```
-<p>This text <i>is italic <b>and this is nested bold</b> and this is still italic</i> again.</p>
-
-<p>This text <em>is italic <strong>and this is nested bold</strong> and this is still italic</em> again.</p>
-
-<p>This text <i>is italic <strong>and this is nested bold</strong> and this is still italic</i> again.</p>
-
-<p>This text <em>is italic <b>and this is nested bold</b> and this is still italic</em> again.</p>
-
-<p>This text <b>is bold <i>and this is nested italic</i> and this is still bold</b> again.</p>
-
-<p>This text <strong>is bold <em>and this is nested italic</em> and this is still bold</strong> again.</p>
-
-<p>This text <b>is bold <em>and this is nested italic</em> and this is still bold</b> again.</p>
-
-<p>This text <strong>is bold <i>and this is nested italic</i> and this is still bold</strong> again.</p>
-```
-
-### Invalid Nesting Is Illegal
-
-If emphasis is nested in an invalid combination, Markua processors must simply output the formatting instead of exploding.
-
-The following lines are all invalid in Markua:
-
-```
-This is **_not nested**_ properly.
-
-This is also *__not nested*__ properly.
-
-This __*must__* fail too.
-```
+* To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `**three asterisks**` (producing `<strong><em>`).
+*
 
 ## Underlined Text
 
