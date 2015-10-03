@@ -9,33 +9,9 @@ To learn why Markua is the way it is, and for the proper specification of Markua
 * To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
 * To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
 * To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `**three asterisks**` (producing `<strong><em>`).
-*
+* To produce ____underlined text____, surround it with `____four underscores____`. Usually italic text is preferred to underlined text, so the fact that underlined text has a gross syntax doesn't matter that much.
 
-## Underlined Text
 
-Believe it or not, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
-
-So, how to support this in Markua?
-
-The combination of one, two and three underscores have all been taken. So have the combination of one, two and three asterisks. So, we're left with `____four underscores____` for underlining. This is a bit gross, but thankfully, underlining is a lot less used than bold and italics in most languages.
-
-### Example
-
-#### Markua Syntax
-
-{#input_underline_1}
-```
-This is ____some underlined____ text.
-```
-
-#### HTML Output
-
-The HTML which is output uses the `<u>` tag, which was added to HTML5.
-
-{#output_underline_1}
-```
-<p>This is some <u>bold and italic</u> text.</p>
-```
 
 ## Strikethrough
 
