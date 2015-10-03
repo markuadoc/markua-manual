@@ -12,26 +12,8 @@ To learn why Markua is the way it is, and for the proper specification of Markua
 * To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). (Usually italic text is preferred to underlined text, but not always. The syntax for underlined text is gross, but this is a tradeoff.)
 * To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
 * To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
-* To produce subscript like the 2 in
+* To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
- like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
+## TODO
 
-## Subscript
-
-To make a span be in subscript, you surround it with one tilde each. (This is the same syntax as is used by pandoc.)
-
-### Example
-
-#### Markua Syntax
-
-{#input_subscript_1}
-```
-What he thought was H~2~O was H~2~SO~4~.
-```
-
-#### HTML Output
-
-{#output_subscript_1}
-```
-<p>What he thought was H<sub>2</sub>O was H<sub>2</sub>SO<sub>4</sub>.
-```
+TODO
