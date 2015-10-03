@@ -15,7 +15,7 @@ embedding.txt
 #blurbs.txt
 block_quotes.txt
 tables.txt
-#links.txt
+links.txt
 footnotes.txt
 crosslinks.txt
 whitespace.txt
