@@ -14,6 +14,6 @@ To learn why Markua is the way it is, and for the proper specification of Markua
 * To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
 * To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
-## TODO
+## Paragraphs
 
-TODO
+A paragraph is text with a blank line both above and below it. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs. Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, you cannot make a paragraph (or any block element) span multiple Markua source files.
