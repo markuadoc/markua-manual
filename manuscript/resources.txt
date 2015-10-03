@@ -538,7 +538,7 @@ end
 
 If a Markua Processor knows how to format the code using the specified language (if it has a "lexer" for it), it can do so. Otherwise, it must format the code using plain text as though `text` was specified as the language.
 
-Note that this language definition is just a shorthand for a more general metadata feature of markua called [attributes](#attributes). Briefly, attributes comma-separated key-value pairs enclosed in a pair of curly braces (`{` ... `}`) and separated by a newline but **not** by a blank line from the thing that they are an attribute of.
+Note that this language definition is just a shorthand for a more general metadata feature of markua called attributes. Briefly, attributes comma-separated key-value pairs enclosed in a pair of curly braces (`{` ... `}`) and separated by a newline but **not** by a blank line from the thing that they are an attribute of.
 
 You can define the language of a code block explicitly using the language attribute:
 

@@ -35,7 +35,7 @@ term
 : definition
 ```
 
-For an example of a longer, more useful definition list used in Markua, see the [definitions](#definitions) section of this specification.
+For an example of a longer, more useful definition list used in Markua, see the definitions section of this specification.
 
 ## Examples
 

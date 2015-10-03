@@ -73,7 +73,7 @@ Providing alt text is at least as important for audio or video resource as it is
 
 The `path_or_url_to_video` part (and the fallbacks) are the relative paths to the audio or video resource inside the `media` directory or the URL of the image on the internet.
 
-Both the path and URL approaches function identically to [how they do for images](#image_path_or_url).
+Both the path and URL approaches function identically to how they do for images.
 
 ## Supported Audio Or Video Resource Types
 

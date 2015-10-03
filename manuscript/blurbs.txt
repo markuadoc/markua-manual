@@ -128,7 +128,7 @@ which contains newlines.</p>
 
 ## Using Extension Attributes on Blurbs to add Icons
 
-As discussed later, Markua blocks can support any number of [extension attributes](#extension-attributes). An extension attribute is an attribute which is not part of the Markua specification.
+As discussed later, Markua blocks can support any number of extension attributes. An extension attribute is an attribute which is not part of the Markua specification.
 
 Blurbs provide an example of an extension attributes.
 

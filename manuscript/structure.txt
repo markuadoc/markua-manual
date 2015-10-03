@@ -32,7 +32,7 @@ media/
 code/
 ```
 
-The author writes the manuscript entirely in the file called `manuscript.txt`. It can reference media in the `media` directory (and any of its subdirectories) and code in the `code` directory (and any of its subdirectories). It can also contain inline metadata, as described in the [Metadata](#metadata) chapter.
+The author writes the manuscript entirely in the file called `manuscript.txt`. It can reference media in the `media` directory (and any of its subdirectories) and code in the `code` directory (and any of its subdirectories). It can also contain inline metadata, as described in the Metadata chapter.
 
 {#multiple-files}
 ## Multiple Files Approach: `book.txt`, `sample.txt`, `settings.txt` and multiple files
@@ -53,7 +53,7 @@ There are four parts to this approach:
 
 1. A file named `book.txt` lists the manuscript files to be included in the book or document, one per line.
 2. A file named `sample.txt` lists the manuscript files to be included in the sample book or document preview, one per line.
-3. A file named `settings.txt` contains metadata about the book manuscript. This file is described later, in the [Metadata](#metadata) chapter.
+3. A file named `settings.txt` contains metadata about the book manuscript. This file is described later, in the Metadata chapter.
 4. The actual manuscript files are created. These files MUST live in the same directory as the `book.txt`, `sample.txt` and `settings.txt` files.
 
 W> The manuscript files themselves MUST live in the same directory as the `book.txt`, `sample.txt` and `settings.txt` files. They MUST NOT live in subdirectories of that directory.

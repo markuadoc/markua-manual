@@ -62,7 +62,7 @@ This is still paragraph two.
 This is paragraph three.
 ```
 
-This is explained more [here](#embedding_inside_paragraph). In short, embedding a list in a paragraph works for all types of list, but you need to indent the list with some amount of whitespace.
+Embedding a list in a paragraph works for all types of list, but you need to indent the list with some amount of whitespace.
 
 Here's how unordered lists work:
 
@@ -403,7 +403,7 @@ before
 after
 ```
 
-Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. See the [Ordered List Numbering Rules](#ordered_list_numbering_rules) section for details.
+Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex.
 
 Note that there are one or more spaces after the period. Unlike with an unordered list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
 

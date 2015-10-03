@@ -43,7 +43,7 @@ There are actually a number of benefits to this:
 {#markdown_headings}
 ## Markdown Headings
 
-Whereas Markua [defines exactly one way](#headings) of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
+Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
 
 {#setext_headings}
 ### Setext Headings in Markdown
@@ -114,7 +114,7 @@ This is a paragraph.
 
 Note that all the trailing `#` characters are ignored and are not part of the heading text.
 
-From reading this, you'll recogrize that [Markua headings](#headings) are a subset of atx headers.
+From reading this, you'll recogrize that Markua headings are a subset of atx headers.
 
 {lfm_changes}
 ## Important Changes From Leanpub Flavoured Markdown

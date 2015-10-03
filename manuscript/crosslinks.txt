@@ -125,7 +125,7 @@ This syntax is intended to be reminiscent of HTML anchor tags, not of `h1` title
 Special rules:
 
 * If a Markua document contains duplicate `id` attribute values, the first one is used and the subsequent ones are ignored. A Markua Processor should output a warning about duplicate `id`s.
-* Crosslinks that reference an unused `id` may either be created as a (broken, non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also [output a warning](#implementor-rules) about this somewhere, but not in the actual document text itself.
+* Crosslinks that reference an unused `id` may either be created as a (broken, non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also output a warning about this somewhere, but not in the actual document text itself.
 
 ## Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
 
@@ -134,7 +134,7 @@ Chapters, sections and figures with captions often have two useful properties fo
 1. A name which is often short and useful to reference.
 2. A number, if numbering is turned on.
 
-Whether the numbers exist is determined by the `number-chapters`, `number-parts` and `number-figures` [attributes](#setting-keys-and-values).
+Whether the numbers exist is determined by the `number-chapters`, `number-parts` and `number-figures` attributes.
 
 Here's how these references to titles and numbers work:
 
@@ -156,7 +156,7 @@ Also, note that regardless of section level, sections referenced in `#d` or `#f`
 
 The expectation is that `#f` will be used by authors who don't mind verbosity, and #t and #n will be used by authors who prefer control and brevity. The #d is for very lazy authors who like saving keystrokes and/or who don't know whether their publisher will call the code samples "Listing", "Example" or some other word and want to protect themselves against extra work.
 
-The `code-sample-names`, 'figure-names` and `table-names` [settings](#setting-keys-and-values) control the words used to name things.
+The `code-sample-names`, 'figure-names` and `table-names` settings control the words used to name things.
 
 Examples:
 
