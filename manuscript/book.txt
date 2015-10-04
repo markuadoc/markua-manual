@@ -1,6 +1,6 @@
 warning.txt
 introduction.txt
-#syntax_quick.txt
+syntax_quick.txt
 philosophy.txt
 structure.txt
 #text_formatting.txt
