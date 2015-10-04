@@ -60,7 +60,7 @@ Because of this, a paragraph (or any other block element) cannot span multiple m
 
 Markua books can include various types of resources. Resources vary in three different ways:
 
-1. Insertion: Span and Figure
+1. Insertion: Inline and Figure
 2. Location: Local and Web
 3. Type: Image, Code, Math, Text, Audio and Video
 
@@ -70,23 +70,37 @@ The syntax to define and insert a resource is as follows:
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
+### Resource Insertion: Inline and Figure
+
 This syntax is similar to Markdown's inline image insertion syntax. Markdown's reference style image syntax is not supported in Markua.
 
+If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be an inline resource and the optional figure caption is ignored.
 
-Span
-: The resource is inserted as part of the flow of text of a paragraph.
+If a resource is inserted with at least one blank above and below it, it's a figure. A figure can also have four optional attributes, `align`, `float`, `width` and `type`. Attributes are expressed in an attribute list above the resource. Not all resource types support all atributes: most of them only make sense for images. Attributes which do not make sense for a given resource type are ignored.
 
-Figure
-: The resource is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
+An attribute list is specified like this:
 
-When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
+```
+{align: center, float: none, width: auto, type: image}
+![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
+```
 
+The `align` can be `centor` (the default), `left` or `right`. This affects how the resource is aligned on the page, regardless of the value of `float`.
 
+The `float` can be `none` (the default), `left`, `conter` or `right`. If `float` is anything except `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it. If `float` is `none`, the resource takes the entire page width and is aligned according to the value of `align`.
+
+The `width` can be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. The value of `fullbleed` means to resize the image to full width of the page, ignoring margins. The integer values between 1 and 100 are percentage widths of the content area of the page.
+
+The `type` attribute can be either `image` (the default), `code`, `math`, `text`, `audio` and `video`.
+
+You will notice that since all of the attributes in the above attribute list were the defaults, this attribute list is identical to their being no attribute list specified.
+
+### Resource Location: Local and Web
 
 The location of the resource can either be local or a URL.
 
-All local resources are stored inside a `resources` directory, whose name is not part of the path. A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+All local resources are stored inside a `resources` directory, whose name is not part of the path. A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
 
 Web resources are identified by URL. Both `http:` and `https:` resources must be supported.
 
-Resources
+### Resource Type: Image, Code, Math, Text, Audio and Video
