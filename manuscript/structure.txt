@@ -109,7 +109,7 @@ The `foo.txt`, `bar.md` and `baz` files would contain normal Markua-formatted UT
 
 As discussed previously, if the multiple file approach is used, the listed files are concatenated together to produce one temporary Markua manuscript file.
 
-Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they are concatenated together with two newlines added, in order to separate the content of the two files with one blank line between them.
+Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they are concatenated together with two newlines added between the end of each file and the beginning of the next file, in order to separate the content of the two files with one blank line between them.
 
 For example, the following two manuscripts are equivalent:
 

@@ -44,4 +44,16 @@ i am a cat
 ```
 ~~~
 
-Whitespace is stripped from the ends of lines and files. (The "two space trick" to force a line break in Markdown is not needed in Markua, since a single line break produces that.)
+Whitespace is stripped from the ends of lines and files. (Markdown's "two space trick" to force a line break is not needed in Markua, since a single line break produces that already.)
+
+## File Structure
+
+A Markua document can be written in one file or multiple manuscript files.
+
+If the multiple file approach is used, the listed files are first concatenated together by a Markua Processor to produce one temporary Markua manuscript file, and that one file is used as the input. The Markua Processor generates PDF, EPUB, MOBI and/or HTML output.
+
+Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they must be concatenated together with two newlines added between the end of each file and the beginning of the next file, in order to separate the content of the two files with one blank line between them.
+
+Because of this, a paragraph (or any other block element) cannot span multiple manuscript files.
+
+##
