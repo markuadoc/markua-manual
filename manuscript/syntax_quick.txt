@@ -1,15 +1,19 @@
 # Markua Syntax Quick Reference
 
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases. In some cases, the HTML that is generated is mentioned.
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases.
 
-To learn why Markua is the way it is, and for the proper specification of Markua and of the HTML produced, read the rest of the spec. If you just want to know how to type proper Markua and assume that everything else just works, read this.
+Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. The mapping to PDF, MOBI and other formats is implementation-dependent, as is the choice for the CSS to accompany the HTML produced by Markua.
+
+So, in this quick reference, the HTML that is generated is mentioned where appropriate.
+
+To learn the details of why Markua is the way it is, and for the full specification of Markua and of the HTML produced, read the rest of this specification. If you just want to know how to type proper Markua, just read this chapter.
 
 ## Text Formatting
 
 * To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
 * To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
-* To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `**three asterisks**` (producing `<strong><em>`).
-* To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). (Usually italic text is preferred to underlined text, but not always. The syntax for underlined text is gross, but this is a tradeoff.)
+* To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `***three asterisks***` (producing `<strong><em>`).
+* To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: one and two underscores were taken.
 * To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
 * To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
 * To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
@@ -104,3 +108,5 @@ All local resources are stored inside a `resources` directory, whose name is not
 Web resources are identified by URL. Both `http:` and `https:` resources must be supported.
 
 ### Resource Type: Image, Code, Math, Text, Audio and Video
+
+The resource type is determined by the `type` attribute. As discussed, it can be either `image` (the default), `code`, `math`, `text`, `audio` and `video`.
