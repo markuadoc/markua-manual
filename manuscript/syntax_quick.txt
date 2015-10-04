@@ -56,4 +56,37 @@ Importantly, in order to avoid a number of bugs, the files are not just concaten
 
 Because of this, a paragraph (or any other block element) cannot span multiple manuscript files.
 
-##
+## Resources
+
+Markua books can include various types of resources. Resources vary in three different ways:
+
+1. Insertion: Span and Figure
+2. Location: Local and Web
+3. Type: Image, Code, Math, Text, Audio and Video
+
+The syntax to define and insert a resource is as follows:
+
+```
+![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
+```
+
+This syntax is similar to Markdown's inline image insertion syntax. Markdown's reference style image syntax is not supported in Markua.
+
+
+Span
+: The resource is inserted as part of the flow of text of a paragraph.
+
+Figure
+: The resource is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
+
+When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
+
+
+
+The location of the resource can either be local or a URL.
+
+All local resources are stored inside a `resources` directory, whose name is not part of the path. A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+
+Web resources are identified by URL. Both `http:` and `https:` resources must be supported.
+
+Resources

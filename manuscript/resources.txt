@@ -91,7 +91,7 @@ The URL approach with an image is simple: the URL is an absolute URL of an image
 
 ## Resource Insertion: Span and Figure
 
-Regardless of whether an resource is defined inline or by reference, an resource can also inserted into the flow of a Markua document in one of two ways:
+A resource can also inserted into the flow of a Markua document in one of two ways:
 
 Span
 : The resource is inserted as part of the flow of text of a paragraph.
