@@ -1,4 +1,4 @@
-# Markua: The Short Version
+# Markua Syntax Guide
 
 Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases.
 
@@ -30,14 +30,14 @@ Whitespace (either spaces or tabs) is preserved at the beginning of a line.
 
 You can write most poetry without any special formatting characters, such as the following:
 
-```
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
     And yet, by heaven, I think my love as rare
     As any she belied with false compare.
-```
 
-If you want to write poetry like e e cummings, you need to use a code block:
+Whitespace in between words, however, is reduced to one space. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the look. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
+
+So, if you want to write poetry like e e cummings, you need to use a code block:
 
 ~~~
 {code: poetry}
@@ -48,7 +48,7 @@ i am a cat
 ```
 ~~~
 
-Whitespace is stripped from the ends of lines and files. (Markdown's "two space trick" to force a line break is not needed in Markua, since a single line break produces that already.)
+Whitespace is stripped from the ends of lines and files. Markdown's hack of adding two spaces at the end of a line to force a line break is not needed (or supported) in Markua, since a single line break already produces a line break, as it should.
 
 ## File Structure
 
@@ -62,13 +62,9 @@ Because of this, a paragraph (or any other block element) cannot span multiple m
 
 ## Resources
 
-Markua books can include various types of resources. Resources vary in three different ways:
+Markua books can include various types of resources.
 
-1. Insertion: Inline and Figure
-2. Location: Local and Web
-3. Type: Image, Code, Math, Text, Audio and Video
-
-### Resource Insertion: Inline and Figure
+The default type of a resource is an `image`, but Markua also supports resources of type `audio`, `video`, `code`, `math` and `text`. Resources can be inserted inline or as figures, and can be stored and referenced either locally or on the web.
 
 The syntax to define and insert a resource is as follows:
 
@@ -76,34 +72,28 @@ The syntax to define and insert a resource is as follows:
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
-This syntax is similar to Markdown's inline image insertion syntax. Markdown's reference style image syntax is not supported in Markua.
+If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be an inline resource and the optional figure caption (in quotes) is ignored.
 
-If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be an inline resource and the optional figure caption is ignored.
-
-If a resource is inserted with at least one blank above and below it, it's a figure. A figure can also have four optional attributes, `align`, `float`, `width` and `type`. Attributes are expressed in an attribute list above the resource. Not all resource types support all atributes: most of them only make sense for images. Attributes which do not make sense for a given resource type are ignored.
-
-An attribute list is specified like this:
+If a resource is inserted with at least one blank above and below it, it's a figure. Figures can have an attribute lists, e.g.:
 
 ```
-{align: center, float: none, width: auto, type: image}
+{type: image, align: center, float: none, width: auto}
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
-All of the attributes in the above attribute list are the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list is to their being no attribute list specified.
+Supported attributes vary based on the `type` of resource. For images, the above values are the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list is to their being no attribute list specified.
 
-The supported attributes vary based on the resource type; these are discussed shortly.
+Examples of resources include:
 
-### Resource Location: Local and Web
+```
+![Denzel Washington riding a jet ski in a river](delaware.jpg "Washington Crossing the Delaware")
 
-The location of the resource can either be local or a URL.
+Are you feeling ![](happy.png) or ![](sad.png) today?
 
-All local resources are stored inside a `resources` directory, whose name is not part of the path. A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
+![poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Peter Armstrong's First Talk About Markua")
 
-Web resources are identified by URL. Both `http:` and `https:` resources must be supported. Because of copyright concerns, support for web resources is optional in Markua Processors. A Markua Processor may or may not support web resources for any given type of resource.
 
-### Resource Type: Image, Code, Math, Text, Audio and Video
-
-The resource type is determined by the `type` attribute. As discussed, the type can be either `image` (the default), `code`, `math`, `text`, `audio` and `video`.
+```
 
 #### Image Resources
 
@@ -116,7 +106,7 @@ The file extension determine the specific type of image. The supported image typ
 
 The supported attributes for `image` resources are: `align`, `float` and `width`.
 
-The `align` can be `centor` (the default), `left` or `right`. This affects how the resource is aligned on the page, regardless of the value of `float`.
+The `align` can be `center` (the default), `left` or `right`. This affects how the resource is aligned on the page, regardless of the value of `float`.
 
 The `float` can be `none` (the default), `left`, `conter` or `right`. If `float` is anything except `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it. If `float` is `none`, the resource takes the entire page width and is aligned according to the value of `align`.
 
@@ -148,8 +138,12 @@ The `align`, `float` and `width` attributes work just as they do for resource of
 
 #### Code Resources
 
-
+TODO
 
 #### Math Resources
 
+TODO
+
 #### Text Resources
+
+TODO
