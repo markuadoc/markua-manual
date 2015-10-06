@@ -88,9 +88,15 @@ Examples of resources include:
 ```
 ![Denzel Washington riding a jet ski in a river](delaware.jpg "Washington Crossing the Delaware")
 
-Are you feeling ![](happy.png) or ![](sad.png) today?
+Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
 
+{type: video}
 ![poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Peter Armstrong's First Talk About Markua")
+
+The full talk audio is here:
+
+{type: audio}
+![](audio.mp3)
 
 
 ```
