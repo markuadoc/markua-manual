@@ -2,15 +2,15 @@
 
 Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a writer's guide to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases.
 
-Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. The mapping to PDF, MOBI and other formats is implementation-dependent, as is the choice for the CSS to accompany the HTML produced by Markua.
+Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. So, in this syntax guide, the HTML that is generated is mentioned where appropriate. The mapping to PDF, MOBI and other formats is implementation-dependent, as is the choice for the CSS to accompany the HTML produced by Markua.
 
-So, in this quick reference, the HTML that is generated is mentioned where appropriate.
+To learn the details of why Markua is the way it is, and for the full specification of Markua and of the HTML produced, read the rest of this specification. If you just want to know how to write proper Markua, just read this chapter.
 
-To learn the details of why Markua is the way it is, and for the full specification of Markua and of the HTML produced, read the rest of this specification. If you just want to know how to type proper Markua, just read this chapter.
+Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
 
 ## Text Formatting
 
-Everything you need to do semantically meaningful basic text formatting is included in Markua.
+Here's how to do basic, semantic text formatting.
 
 Italic
 : To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
