@@ -1,6 +1,6 @@
 # Markua Syntax Guide
 
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a quick reference to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases.
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a writer's guide to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases.
 
 Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. The mapping to PDF, MOBI and other formats is implementation-dependent, as is the choice for the CSS to accompany the HTML produced by Markua.
 
@@ -92,27 +92,30 @@ If a resource is inserted as part of the flow of text of a paragraph (even if th
 If a resource is inserted with at least one blank above and below it, it's a figure. Figures can have an attribute lists, e.g.:
 
 ```
-{type: image, align: center, float: none, width: auto}
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
-Supported attributes vary based on the `type` of resource. For images, the above values are the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list is to their being no attribute list specified.
+Supported attributes vary based on the `type` of resource. For images, the above values are the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
 
 ### Images
 
 Markua supports four types of images: GIF, JPEG, PNG and SVG. The image type is determined by file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG and either `.svg`, `.svgz`, `.xml` for SVG. (The .svgz extension is for a zipped SVG.)
 
-The supported attributes for `image` resources are: `align`, `float`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, width: auto, height: auto}`.
+The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
-The `align` can be `center` (the default), `left` or `right`. The `float` can be `none` (the default), `left`, `conter` or `right`. The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive.
+The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
 
-If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it. If `float` is `none`, the resource is sized according to its width and height within an area spanning the entire page width (i.e. text flows above and below it, but not beside it) and is aligned within this area according to the value of `align`.
+The `float` can be `none` (the default), `left`, `conter` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
 
-The `width` and `height` can be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. The integer values between 1 and 100 are percentage widths of the content area of the page. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly.
+The `position` refers to vertical positioning on a page. The position only has an effoct on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
+
+The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. It is legal for either one or both of `width` and `height` can be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page.
 
 Examples:
 
 ```
+{width: 80, position: top}
 ![Denzel Washington riding a jet ski in a river](delaware.jpg "Washington Crossing the Delaware")
 
 Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
@@ -120,9 +123,17 @@ Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
 
 ### Video
 
+Markua supports two types of videos: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4 and `.webm` for WebM.
+
+The supported attributes for `video` resources are: `poster`, `align`, `float`, `position`, `width` and `height`.
+
+The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported (including if the video is a web resource and web resources are not supported for video), it must choose the poster to use as a replacement for the video.
+
+The `align`, `float`, `position`, `width` and `height` attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute.
+
 ```
-{type: video}
-![poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Peter Armstrong's First Talk About Markua")
+{type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
+!["Peter Armstrong's first talk about Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Introducing Markua")
 ```
 
 ### Audio

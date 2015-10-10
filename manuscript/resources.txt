@@ -2,8 +2,6 @@
 
 ## NEW
 
-W> TODO - THIS IS IN FLUX AND IS BEING REWRITTEN
-
 Markua books can include various types of resources. Resources vary in three different ways:
 
 1. Insertion: Inline and Figure
