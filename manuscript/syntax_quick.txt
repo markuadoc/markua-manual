@@ -100,7 +100,7 @@ Supported attributes vary based on the `type` of resource. For images, the above
 
 ### Images
 
-Markua supports four types of images: GIF, JPEG, PNG and SVG. The image type is determined by file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG and either `.svg`, `.svgz`, `.xml` for SVG. (The .svgz extension is for a zipped SVG.)
+Markua supports four types of `image` resources: GIF, JPEG, PNG and SVG. The image type is determined by file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, and either `.svg`, `.svgz`, `.xml` for SVG. (The .svgz extension is for a zipped SVG.)
 
 The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
@@ -123,7 +123,7 @@ Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
 
 ### Video
 
-Markua supports two types of videos: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4 and `.webm` for WebM.
+Markua supports two types of `video` resourcess: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4, and `.webm` for WebM.
 
 The supported attributes for `video` resources are: `poster`, `align`, `float`, `position`, `width` and `height`.
 
@@ -131,16 +131,45 @@ The `poster` is the URL or path to an image which should be shown instead of the
 
 The `align`, `float`, `position`, `width` and `height` attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute.
 
+Examples:
+
 ```
+Here's a video:
+
 {type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
 !["Peter Armstrong's first talk about Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Introducing Markua")
+
+Ironically, I'm writing this sentence almost a year after that was recorded.
 ```
 
 ### Audio
 
+Markua supports four types of `audio` resources: MP3, AAC, WAV and Ogg Vorbis. The audio type is determined by file extension: `.mp3` for MP3, `.m4a` and `.aac` for AAC, `.wav` and `.wave` for WAV, and `.ogg` and `.oga` for Ogg Vorbis.
+
+There are no supported attributes for `audio` resources.
+
+Examples:
+
 ```
-The full talk audio is here:
+The talk highlights are here:
 
 {type: audio}
 ![](audio.mp3)
+
+A longer version is on the web here:
+
+{type: audio}
+![](http://markua.com/fulltalk.m4a)
 ```
+
+#### Code Resources
+
+TODO
+
+#### Math Resources
+
+TODO
+
+#### Text Resources
+
+TODO
