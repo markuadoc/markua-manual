@@ -10,13 +10,28 @@ To learn the details of why Markua is the way it is, and for the full specificat
 
 ## Text Formatting
 
-* To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
-* To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
-* To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `***three asterisks***` (producing `<strong><em>`).
-* To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: one and two underscores were taken.
-* To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
-* To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
-* To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
+Everything you need to do semantically meaningful basic text formatting is included in Markua.
+
+Italic
+: To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
+
+Bold
+: To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
+
+Bold + Italic
+: To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `***three asterisks***` (producing `<strong><em>`).
+
+Underline
+: To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: one and two underscores were taken.
+
+Strikethrough
+: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
+
+Superscript
+: To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
+
+Subscript
+: To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
 ## Paragraphs, Poetry and Whitespace
 
