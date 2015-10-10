@@ -49,12 +49,14 @@ The resource type is determined by the `type` attribute. As discussed, the type 
 
 #### Image Resources
 
+Markua supports four types of images: GIF, JPEG, PNG and SVG.
+
 The file extension determine the specific type of image. The supported image types are:
 
 * GIF images: `.gif`
 * JPEG images: `.jpg`, `.jpeg`
 * PNG images: `.png`
-* SVG images: `.svg`, `.svgz`, `.xml`
+* SVG images: `.svg`, `.svgz` (for zipped SVG), `.xml`
 
 The supported attributes for `image` resources are: `align`, `float` and `width`.
 

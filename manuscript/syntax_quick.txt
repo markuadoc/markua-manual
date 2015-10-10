@@ -98,16 +98,36 @@ If a resource is inserted with at least one blank above and below it, it's a fig
 
 Supported attributes vary based on the `type` of resource. For images, the above values are the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list is to their being no attribute list specified.
 
-Examples of resources include:
+### Images
+
+Markua supports four types of images: GIF, JPEG, PNG and SVG. The image type is determined by file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG and either `.svg`, `.svgz`, `.xml` for SVG. (The .svgz extension is for a zipped SVG.)
+
+The supported attributes for `image` resources are: `align`, `float`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, width: auto, height: auto}`.
+
+The `align` can be `center` (the default), `left` or `right`. The `float` can be `none` (the default), `left`, `conter` or `right`. The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive.
+
+If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it. If `float` is `none`, the resource is sized according to its width and height within an area spanning the entire page width (i.e. text flows above and below it, but not beside it) and is aligned within this area according to the value of `align`.
+
+The `width` and `height` can be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. The integer values between 1 and 100 are percentage widths of the content area of the page. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly.
+
+Examples:
 
 ```
 ![Denzel Washington riding a jet ski in a river](delaware.jpg "Washington Crossing the Delaware")
 
 Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
+```
 
+### Video
+
+```
 {type: video}
 ![poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Peter Armstrong's First Talk About Markua")
+```
 
+### Audio
+
+```
 The full talk audio is here:
 
 {type: audio}
