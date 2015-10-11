@@ -101,7 +101,13 @@ If a resource is inserted with at least one blank above and below it, it's a fig
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
-Supported attributes vary based on the `type` of resource. For images, the above values are the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
+All resources support two attributes: `type` and `format`.
+
+There are six types of resources: `image` (the default), `video`, `audio`, `code`, `math` and `text`.
+
+Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
+
+Note that the values in the above attribute list are actually the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
 
 ### Images
 
@@ -128,12 +134,14 @@ Examples:
 Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
 ```
 
-SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples. Doing the following will insert an SVG image of a red circle:
+SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math. Doing the following will insert an SVG image of a blue circle:
 
 ~~~
-{type: image}
+
 ```svg
-TODO
+<svg width="50" height="50">
+  <circle cx="25" cy="25" r="20" fill="blue"/>
+</svg>
 ```
 ~~~
 
@@ -189,6 +197,24 @@ Code resources can be inserted either from external files (on local or web) or i
 ```
 puts "hello"
 ```
+
+~~~
+{type: code}
+```svg
+<svg width="50" height="50">
+  <circle cx="25" cy="25" r="20" fill="blue"/>
+</svg>
+```
+~~~
+
+~~~
+{type: image}
+```svg
+<svg width="50" height="50">
+  <circle cx="25" cy="25" r="20" fill="blue"/>
+</svg>
+```
+~~~
 
 
 ```ruby
