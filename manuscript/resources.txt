@@ -4,8 +4,8 @@
 
 Markua books can include various types of resources. Resources vary in three different ways:
 
-1. Insertion: Inline and Figure
-2. Location: Local and Web
+1. Insertion: Span and Figure
+2. Location: Inline, Local and Web
 3. Type: Image, Code, Math, Text, Audio and Video
 
 ### Resource Insertion: Inline and Figure

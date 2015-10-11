@@ -77,9 +77,14 @@ Because of this, a paragraph (or any other block element) cannot span multiple m
 
 ## Resources
 
-Markua books can include various types of resources.
+Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
-The default type of a resource is an `image`, but Markua also supports resources of type `audio`, `video`, `code`, `math` and `text`. Resources can be inserted inline or as figures, and can be stored and referenced either locally or on the web.
+Resources vary in four different ways:
+
+1. Insertion: Span and Figure
+2. Location: Inline, Local and Web
+3. Type: `image`, `video`, `audio`, `code`, `math`, `text`
+4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `monospaced`, etc.
 
 The syntax to define and insert a resource is as follows:
 
@@ -100,7 +105,7 @@ Supported attributes vary based on the `type` of resource. For images, the above
 
 ### Images
 
-Markua supports four types of `image` resources: GIF, JPEG, PNG and SVG. The image type is determined by file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, and either `.svg`, `.svgz`, `.xml` for SVG. (The .svgz extension is for a zipped SVG.)
+Markua supports four types of `image` resources: GIF, JPEG, PNG and SVG. The image type is determined by file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, and either `.svg`, `.svgz`, `.xml` for SVG. (SVG images are special: The .svgz extension is for a zipped SVG. Also, SVG images can also be inserted inline using the code resource syntax, as we'll see later.)
 
 The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
@@ -115,11 +120,22 @@ The `width` and `height` can both be `auto`, `fullbleed` or an integer between `
 Examples:
 
 ```
+![](delaware.svg)
+
 {width: 80, position: top}
 ![Denzel Washington riding a jet ski in a river](delaware.jpg "Washington Crossing the Delaware")
 
 Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
 ```
+
+SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples. Doing the following will insert an SVG image of a red circle:
+
+~~~
+{type: image}
+```svg
+TODO
+```
+~~~
 
 ### Video
 
@@ -162,14 +178,54 @@ A longer version is on the web here:
 ![](http://markua.com/fulltalk.m4a)
 ```
 
-#### Code Resources
+### Code Resources
 
-TODO
+Code resources can be inserted either from external files (on local or web) or inline
 
-#### Math Resources
+{type: code, language: ruby}
+![](hello.rb)
 
-TODO
+{language: ruby}
+```
+puts "hello"
+```
 
-#### Text Resources
+
+```ruby
+puts "hello"
+```
+
+```text
+puts "hello"
+```
+
+{type: image}
+```svg
+```
+
+### Math Resources
+
+
+Blah blah `puts "hello"`ruby blah blah.
+
+Blah blah `puts "hello"`text blah blah.
+
+Blah blah `x = 2`math blah.
+
+LaTeX math is `math`, MathML is `mathml`.
+
+```math
+```
+
+```mathml
+```
+
+{language: math}
+```
+```
+
+{language: mathml}
+```
+```
 
 TODO
