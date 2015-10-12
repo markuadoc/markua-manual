@@ -83,16 +83,37 @@ Resources vary in four different ways:
 
 1. Insertion: Span and Figure
 2. Location: Inline, Local and Web
-3. Type: `image`, `video`, `audio`, `code`, `math`, `text`
-4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `monospaced`, etc.
+3. Type: `image`, `video`, `audio`, `code`, `math` or `text`
+4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-The syntax to define and insert a resource is as follows:
+The syntax to define and insert a local or web resource is as follows:
 
-```
+~~~
+{optional attribute list}
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
-```
+~~~
 
-If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be an inline resource and the optional figure caption (in quotes) is ignored.
+The syntax to define and insert an inline resource is as follows:
+
+~~~
+{optional attribute list}
+```
+```
+~~~
+
+
+
+
+
+
+For an image with no alt text or figure caption, this can be as simple as: `![](hello.png)`.
+
+
+
+
+
+
+If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be a span resource and the optional figure caption (in quotes) is ignored.
 
 If a resource is inserted with at least one blank above and below it, it's a figure. Figures can have an attribute lists, e.g.:
 
@@ -101,17 +122,57 @@ If a resource is inserted with at least one blank above and below it, it's a fig
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
-All resources support two attributes: `type` and `format`.
-
-There are six types of resources: `image` (the default), `video`, `audio`, `code`, `math` and `text`.
+There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
 
 Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-Note that the values in the above attribute list are actually the default values: by default a resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
+Note that the values in the above attribute list are actually the default values: by default a local or web resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
+
+Some types of resources can be defined in the Markua document right where they are inserted. These types of resources are called inline resources. Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format.
+
+The syntax to define and insert an inline resource is inside lines containing only three backticks, as follows:
+
+~~~
+```
+inline resource definition here
+```
+~~~
+
+Inline resources which are figures also support an attribute list. This attribute list can be used to specify the optional figure caption, and can also be used to specify the format as well as other attributes specific to the resource type, e.g.:
+
+~~~
+{caption: "Hello World", format: ruby, line-numbers: off}
+```
+puts "Hello, world!"
+```
+~~~
+
+As a shortcut, the format can also be defined after the three backticks, like so:
+
+~~~
+```ruby
+puts "Hello, world!"
+```
+~~~
+
+While the default `type` of a local or web resource is always `image`, the default `type` of an inline resource depends on the `format` specified.
+
+* If the format is `svg`, the inline resource is assumed to be of type `image`.
+* If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
+* If the format is omitted or is `plain`, the inline resource is assumed to be of type `text`.
+* For any other format, the inline resource is assumed to be of type `code`.
+
+These defaults mean that Markua can usually do the right thing based on the format, and the resource type can almost always be inferred for inline resources.
+
+All resource types support two attributes: `type` and `format`. As we'll see now, certain resource types support other attributes.
 
 ### Images
 
-Markua supports four types of `image` resources: GIF, JPEG, PNG and SVG. The image type is determined by file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, and either `.svg`, `.svgz`, `.xml` for SVG. (SVG images are special: The .svgz extension is for a zipped SVG. Also, SVG images can also be inserted inline using the code resource syntax, as we'll see later.)
+The default `type` of local and web resources is image. So, in most cases, the `image` type is not specified.
+
+Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images it can also be inferred by the file extension: `.gif` for `gif`, `.jpg` or `.jpeg` for `jpeg`, `.png` for `png`, `.svg` or `.xml` for `svg, and `.svgz` for `svgz` (zipped SVG).
+
+Markua also supports inserting `svg` format images as inline resources.
 
 The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
@@ -188,7 +249,7 @@ A longer version is on the web here:
 
 ### Code Resources
 
-Code resources can be inserted either from external files (on local or web) or inline
+Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
 
 {type: code, language: ruby}
 ![](hello.rb)
