@@ -79,22 +79,29 @@ Because of this, a paragraph (or any other block element) cannot span multiple m
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
-The goal here is to make inserting all types of resources simple and consistent.
+The goal here is to make inserting all types of resources simple and consistent, as shown by these brief examples:
 
-For example, inserting an image is as easy as `![pie](pie.png)`. It's also...
+Inserting an image is as easy as `![pie](pie.png)`. It's also...
 
 ```
 {caption: "A Piece of Cake"}
-`![a slice of chocolate cake](http://markua.com/cake.jpg)
+![a slice of chocolate cake](http://markua.com/cake.jpg)
 ```
 
-For an inline code sample, this is as easy as printing `hello world`, which in Ruby is:
+For a code samples, it's easy to insert inline code samples:
 
 ~~~
 ```ruby
 puts "hello world"
 ```
 ~~~
+
+It's also easy to insert external code samples, which are just a resource of type `code`:
+
+```
+{type: code, format: ruby}
+![](hello.rb)
+```
 
 Resources vary in four different ways:
 
@@ -139,83 +146,39 @@ The syntax for an inline resource inserted as a span element is as follows:
 It's just `inline resource content\`optional_format right in the text.
 ```
 
-
-Before considering the different types of formats, it's useful to consider the
-
-### Resource Insertion
-
-#### Span Resources
-
-#### Figures
-
-Figures can have an attribute lists, e.g.:
-
-```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
-![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
-```
-
-Note that the values in the above attribute list are actually the default values: by default a local or web resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
-
-### Resource Location
-
-#### Local Resources
-
-#### Web Resources
-
-#### Inline Resources
+These syntaxes were all shown in the examples above, and will be shown in more detail in the descriptions of the six resource types below.
 
 ### Resource Types and Formats
 
 There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
 
+Any of the six resource types can be inserted as a local or web resource. Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format.
+
 Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-#### Images
-
-
-
-Some types of resources can be defined in the Markua document right where they are inserted. These types of resources are called inline resources. Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format.
-
-The syntax to define and insert an inline resource is inside lines containing only three backticks, as follows:
-
-~~~
-```
-inline resource definition here
-```
-~~~
-
-Inline resources which are figures also support an attribute list. This attribute list can be used to specify the optional figure caption, and can also be used to specify the format as well as other attributes specific to the resource type, e.g.:
-
-~~~
-{caption: "Hello World", format: ruby, line-numbers: off}
-```
-puts "Hello, world!"
-```
-~~~
-
-As a shortcut, the format can also be defined after the three backticks, like so:
-
-~~~
-```ruby
-puts "Hello, world!"
-```
-~~~
-
-While the default `type` of a local or web resource is always `image`, the default `type` of an inline resource depends on the `format` specified.
+While the default `type` of a local resource or web resource is always `image`, the default `type` of an inline resource depends on the `format` specified.
 
 * If the format is `svg`, the inline resource is assumed to be of type `image`.
 * If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
 * If the format is omitted or is `plain`, the inline resource is assumed to be of type `text`.
 * For any other format, the inline resource is assumed to be of type `code`.
 
-These defaults mean that Markua can usually do the right thing based on the format, and the resource type can almost always be inferred for inline resources.
+These defaults mean that Markua can usually do the right thing based on the format, and that the resource type can almost always be inferred for inline resources.
 
-All resource types support two attributes: `type` and `format`. As we'll see now, certain resource types support other attributes.
+All figures support three attributes: `type`, `format` and `caption`.
+
+As we'll see now, certain resource types of figures support other attributes.
 
 ### Images
 
-The default `type` of local and web resources is image. So, in most cases, the `image` type is not specified.
+Like any figure, if an image is inserted as a figure, it can have an attribute list, e.g.
+
+```
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
+![](http://markua.com/cake.jpg)
+```
+
+Note that the values in the above attribute list are actually the default values for web and local resources inserted as figures. So, this attribute list above is identical to there being no attribute list specified.
 
 Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images it can also be inferred by the file extension: `.gif` for `gif`, `.jpg` or `.jpeg` for `jpeg`, `.png` for `png`, `.svg` or `.xml` for `svg, and `.svgz` for `svgz` (zipped SVG).
 
@@ -234,12 +197,12 @@ The `width` and `height` can both be `auto`, `fullbleed` or an integer between `
 Examples:
 
 ```
-![](delaware.svg)
+![map of Delaware](delaware.svg)
 
-{width: 80, position: top}
-![Denzel Washington riding a jet ski in a river](delaware.jpg "Washington Crossing the Delaware")
+{caption: "Washington Crossing the Delaware", width: 80, position: top}
+![Denzel Washington riding a jet ski in a river](delaware.jpg)
 
-Are you feeling ![happy](happy.png) or ![sad](sad.png) today?
+Many startups are ![happy](happy.png) to incorporate in Delaware.
 ```
 
 SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math. Doing the following will insert an SVG image of a blue circle:
