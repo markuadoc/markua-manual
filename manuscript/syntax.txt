@@ -90,8 +90,10 @@ The syntax to define and insert a local or web resource is as follows:
 
 ~~~
 {optional attribute list}
-![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
+![Optional Alt Text](resource_path_or_url)
 ~~~
+
+For a local image, this is as simple as: `![hello](hello.png)`.
 
 The syntax to define and insert an inline resource is as follows:
 
@@ -101,12 +103,18 @@ The syntax to define and insert an inline resource is as follows:
 ```
 ~~~
 
+For an inline code sample, this is as simple as:
+
+~~~
+```
+puts "hello world!"
+```
+~~~
+
+TODO
 
 
 
-
-
-For an image with no alt text or figure caption, this can be as simple as: `![](hello.png)`.
 
 
 
