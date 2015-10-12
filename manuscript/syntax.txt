@@ -139,18 +139,14 @@ The syntax for an inline resource inserted as a span element is as follows:
 It's just `inline resource content\`optional_format right in the text.
 ```
 
-Before considering
 
-### Span Resources
+Before considering the different types of formats, it's useful to consider the
 
+### Resource Insertion
 
-### Figures
+#### Span Resources
 
-### Local and Web Resources
-
-### Inline Resources
-
-
+#### Figures
 
 Figures can have an attribute lists, e.g.:
 
@@ -159,11 +155,25 @@ Figures can have an attribute lists, e.g.:
 ![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
 ```
 
+Note that the values in the above attribute list are actually the default values: by default a local or web resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
+
+### Resource Location
+
+#### Local Resources
+
+#### Web Resources
+
+#### Inline Resources
+
+### Resource Types and Formats
+
 There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
 
 Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-Note that the values in the above attribute list are actually the default values: by default a local or web resource is assumed to be an image which is centered on the page and allowed to be its actual size, without overflowing into page margins. So, this attribute list above is identical to there being no attribute list specified.
+#### Images
+
+
 
 Some types of resources can be defined in the Markua document right where they are inserted. These types of resources are called inline resources. Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format.
 
