@@ -82,34 +82,39 @@ Markua books and documents are written in plain text, either in one text file or
 Resources vary in four different ways:
 
 1. Insertion: Span and Figure
-2. Location: Inline, Local and Web
+2. Location: Local, Web and Inline
 3. Type: `image`, `video`, `audio`, `code`, `math` or `text`
 4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-The syntax to define and insert a local or web resource is as follows:
+The syntax to define and insert a resource varies based on its location (inline, local or web) and whether it is inserted as a span or a figure.
 
-~~~
+If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be a span resource. If a resource is inserted with at least one blank above and below it, it's a figure.
+
+For a local or web resource, the syntax is as follows:
+
+```
+For figures:
+
 {optional attribute list}
-![Optional Alt Text](resource_path_or_url)
+![Optional Alt Text](resource path or url)
+
+For span elements, it's just ![Optional Alt Text](resource path or url) right in the text.
+```
+
+For an inline resource, the syntax is as follows:
+
 ~~~
+For figures:
 
-For a local image, this is as simple as: `![hello](hello.png)`.
-
-The syntax to define and insert an inline resource is as follows:
-
-~~~
 {optional attribute list}
+```optional_format
+inline resource content
 ```
-```
+
+For span elements, it's just `\`inline resource content\`optional_format` right in the text.
 ~~~
 
-For an inline code sample, this is as simple as:
 
-~~~
-```
-puts "hello world!"
-```
-~~~
 
 TODO
 
@@ -121,9 +126,30 @@ TODO
 
 
 
-If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be a span resource and the optional figure caption (in quotes) is ignored.
+For an inline code sample, this is as easy as printing `hello world`, which in Ruby is:
 
-If a resource is inserted with at least one blank above and below it, it's a figure. Figures can have an attribute lists, e.g.:
+~~~
+```ruby
+puts "hello world"
+```
+~~~
+For example, inserting an image is as easy as `![pie](pie.png)`. It's also this:
+
+```
+{caption: "A Piece of Cake"}
+`![a slice of chocolate cake](http://markua.com/cake.jpg)
+```
+
+
+
+### Span Resources
+### Figures
+### Local and Web Resources
+### Inline Resources
+
+
+
+Figures can have an attribute lists, e.g.:
 
 ```
 {type: image, align: center, float: none, position: near, width: auto, height: auto}
