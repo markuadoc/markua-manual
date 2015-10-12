@@ -79,52 +79,14 @@ Because of this, a paragraph (or any other block element) cannot span multiple m
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
-Resources vary in four different ways:
+The goal here is to make inserting all types of resources simple and consistent.
 
-1. Insertion: Span and Figure
-2. Location: Local, Web and Inline
-3. Type: `image`, `video`, `audio`, `code`, `math` or `text`
-4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
-
-The syntax to define and insert a resource varies based on its location (inline, local or web) and whether it is inserted as a span or a figure.
-
-If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be a span resource. If a resource is inserted with at least one blank above and below it, it's a figure.
-
-For a local or web resource, the syntax is as follows:
+For example, inserting an image is as easy as `![pie](pie.png)`. It's also...
 
 ```
-For figures:
-
-{optional attribute list}
-![Optional Alt Text](resource path or url)
-
-For span elements, it's just ![Optional Alt Text](resource path or url) right in the text.
+{caption: "A Piece of Cake"}
+`![a slice of chocolate cake](http://markua.com/cake.jpg)
 ```
-
-For an inline resource, the syntax is as follows:
-
-~~~
-For figures:
-
-{optional attribute list}
-```optional_format
-inline resource content
-```
-
-For span elements, it's just `\`inline resource content\`optional_format` right in the text.
-~~~
-
-
-
-TODO
-
-
-
-
-
-
-
-
 
 For an inline code sample, this is as easy as printing `hello world`, which in Ruby is:
 
@@ -133,18 +95,59 @@ For an inline code sample, this is as easy as printing `hello world`, which in R
 puts "hello world"
 ```
 ~~~
-For example, inserting an image is as easy as `![pie](pie.png)`. It's also this:
+
+Resources vary in four different ways:
+
+1. Insertion: Span and Figure
+2. Location: Local, Web and Inline
+3. Type: `image`, `video`, `audio`, `code`, `math` or `text`
+4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
+
+The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span or a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
+
+**Insertion:**
+If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be a **span resource**. If a resource is inserted with at least one blank above and below it, it's a **figure**.
+
+**Location:**
+If a resource is stored along with the manuscript (in a `resources` directory on a local filesystem, or uploaded to the same web service that the manuscript is being written on), it's called a **local resource**. If a resource is referred to via a URL, it's a **web resource**. Finally, if a resource is defined right in the body of a Markua document, it's an **inline resource**.
+
+The syntax for a local resource or a web resource inserted as a figure is as follows:
 
 ```
-{caption: "A Piece of Cake"}
-`![a slice of chocolate cake](http://markua.com/cake.jpg)
+{key: value, comma: separated, optional: attribute_list}
+![Optional Alt Text](resource_path_or_url)
 ```
 
+The syntax for a local resource or a web resource inserted as a span resource is as follows:
 
+```
+It's just ![Optional Alt Text](resource_path_or_url) right in the text.
+```
+
+The syntax for an inline resource inserted as a figure is as follows:
+
+~~~
+{key: value, comma: separated, optional: attribute_list}
+```optional_format
+inline resource content
+```
+~~~
+
+The syntax for an inline resource inserted as a span element is as follows:
+
+```
+It's just `inline resource content\`optional_format right in the text.
+```
+
+Before considering
 
 ### Span Resources
+
+
 ### Figures
+
 ### Local and Web Resources
+
 ### Inline Resources
 
 
