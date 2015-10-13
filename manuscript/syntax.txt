@@ -88,18 +88,19 @@ Inserting an image is as easy as `![pie](pie.png)`. It's also...
 ![a slice of chocolate cake](http://markua.com/cake.jpg)
 ```
 
-For a code samples, it's easy to insert inline code samples:
+It's easy to insert inline code samples, which can also have an optional attribute list:
 
 ~~~
+{caption: "Hello, World"}
 ```ruby
 puts "hello world"
 ```
 ~~~
 
-It's also easy to insert external code samples, which are just a resource of type `code`:
+It's also easy to insert external code samples, which are just a local or web resource of type `code`. Here's a local code resource:
 
 ```
-{type: code, format: ruby}
+{type: code, format: ruby, caption: "Hello, World"}
 ![](hello.rb)
 ```
 
@@ -180,9 +181,7 @@ Like any figure, if an image is inserted as a figure, it can have an attribute l
 
 Note that the values in the above attribute list are actually the default values for web and local resources inserted as figures. So, this attribute list above is identical to there being no attribute list specified.
 
-Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images it can also be inferred by the file extension: `.gif` for `gif`, `.jpg` or `.jpeg` for `jpeg`, `.png` for `png`, `.svg` or `.xml` for `svg, and `.svgz` for `svgz` (zipped SVG).
-
-Markua also supports inserting `svg` format images as inline resources.
+Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images it can also be inferred by the file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, `.svg` or `.xml` for SVG, and `.svgz` for SVGZ (zipped SVG).
 
 The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
@@ -194,7 +193,7 @@ The `position` refers to vertical positioning on a page. The position only has a
 
 The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. It is legal for either one or both of `width` and `height` can be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page.
 
-Examples:
+These are some local and web image resources:
 
 ```
 ![map of Delaware](delaware.svg)
@@ -202,18 +201,23 @@ Examples:
 {caption: "Washington Crossing the Delaware", width: 80, position: top}
 ![Denzel Washington riding a jet ski in a river](delaware.jpg)
 
-Many startups are ![happy](happy.png) to incorporate in Delaware.
+Many startups are ![happy](http://markua.com/happy.png) to incorporate in Delaware.
 ```
 
-SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math. Doing the following will insert an SVG image of a blue circle:
+SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math.
+
+Doing the following will insert an SVG image of a blue circle:
 
 ~~~
+This is a paragraph.
 
 ```svg
 <svg width="50" height="50">
   <circle cx="25" cy="25" r="20" fill="blue"/>
 </svg>
 ```
+
+This is also a paragraph.
 ~~~
 
 ### Video
