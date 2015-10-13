@@ -24,6 +24,8 @@ Bold + Italic
 Underline
 : To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: one and two underscores were taken.
 
+W> TODO - FIX LEANPUB
+
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
 
@@ -43,12 +45,16 @@ A single line break produces a forced line break, and a `<br/>` tag in HTML.
 
 Whitespace (either spaces or tabs) is preserved at the beginning of a line.
 
-You can write most poetry without any special formatting characters, such as the following:
+Because of this, you can write most poetry without any special formatting characters. If you type the following in Markua, it's output verbatim:
 
+W> TODO - FIX LEANPUB
+
+```
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
     And yet, by heaven, I think my love as rare
     As any she belied with false compare.
+```
 
 Whitespace in between words, however, is reduced to one space. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the look. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
 
@@ -103,6 +109,8 @@ It's also easy to insert external code samples, which are just a local or web re
 {type: code, format: ruby, caption: "Hello, World"}
 ![](hello.rb)
 ```
+
+W> TODO - FIX LEANPUB - "missing.png"? WTF???
 
 Resources vary in four different ways:
 
