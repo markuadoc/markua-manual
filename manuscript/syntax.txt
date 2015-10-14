@@ -24,7 +24,7 @@ Bold + Italic
 Underline
 : To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: one and two underscores were taken.
 
-W> TODO - FIX LEANPUB
+W> TODO - FIX STRIKETHROUGH IN LEANPUB
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
@@ -47,21 +47,18 @@ Whitespace (either spaces or tabs) is preserved at the beginning of a line.
 
 Because of this, you can write most poetry without any special formatting characters. If you type the following in Markua, it's output verbatim:
 
-W> TODO - FIX LEANPUB
+W> TODO - FIX LEADING SPACES IN LEANPUB
 
-```
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
     And yet, by heaven, I think my love as rare
     As any she belied with false compare.
-```
 
 Whitespace in between words, however, is reduced to one space. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the look. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
 
-So, if you want to write poetry like e e cummings, you need to use a code block:
+So, if you want to write poetry like e e cummings, you need to use an inline text resource, enclosed in three backticks:
 
 ~~~
-{code: poetry}
 ```
 i am a cat
                         a        l a z y          cat
@@ -134,6 +131,14 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 ![Optional Alt Text](resource_path_or_url)
 ```
 
+The default attribute list for a local resource or a web resource inserted as a figure is as follows:
+
+```
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
+```
+
+So, by default, a local or web resource is a center aligned image which does not float and which tries to have its preferred height and width, respecting margins.
+
 The syntax for a local resource or a web resource inserted as a span resource is as follows:
 
 ```
@@ -149,13 +154,21 @@ inline resource content
 ```
 ~~~
 
+The default attribute list for an inline resource inserted as a figure is as follows:
+
+```
+{type: text, format: plain}
+```
+
+So, by default, an inline resource is a text resource, which is formatted in a monospace font with no syntax highlighting. These defaults work for both code samples and for the e e cummings style of poetry. If you want syntax highlighting, however, you need to override the defaults. This is shown below.
+
 The syntax for an inline resource inserted as a span element is as follows:
 
 ```
 It's just `inline resource content\`optional_format right in the text.
 ```
 
-These syntaxes were all shown in the examples above, and will be shown in more detail in the descriptions of the six resource types below.
+All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below.
 
 ### Resource Types and Formats
 
