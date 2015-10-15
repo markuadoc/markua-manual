@@ -2,15 +2,13 @@
 
 Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a writer's guide to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases.
 
-Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. So, in this syntax guide, the HTML that is generated is mentioned where appropriate. The mapping to PDF, MOBI and other formats is implementation-dependent, as is the choice for the CSS to accompany the HTML produced by Markua.
+Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The rest of the Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. In this syntax guide, however, the HTML that is generated is only mentioned where it's interesting. The mapping to PDF, MOBI and other formats is implementation-dependent, as is the choice for the CSS to accompany the HTML produced by Markua.
 
-To learn the details of why Markua is the way it is, and for the full specification of Markua and of the HTML produced, read the rest of this specification. If you just want to know how to write proper Markua, just read this chapter.
-
-Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
+To learn the details of why Markua is the way it is, and for the full specification both of Markua and of the HTML produced, read the rest of this specification. If you only want to know how to write proper Markua, just read this chapter.
 
 ## Text Formatting
 
-Here's how to do basic, semantic text formatting.
+Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua. Here's how to do basic, semantic text formatting.
 
 Italic
 : To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
@@ -119,7 +117,7 @@ Resources vary in four different ways:
 The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span or a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
 
 **Insertion:**
-If a resource is inserted as part of the flow of text of a paragraph (even if there are single line breaks above or below it), the resource is considered to be a **span resource**. If a resource is inserted with at least one blank above and below it, it's a **figure**.
+If a resource is inserted as part of the flow of text of a paragraph (even if there are single newlines before and after it), the resource is considered to be a **span resource**. If a resource is inserted with at least one blank line above and below it, it's a **figure**. Figures can have attribute lists; span resources cannot.
 
 **Location:**
 If a resource is stored along with the manuscript (in a `resources` directory on a local filesystem, or uploaded to the same web service that the manuscript is being written on), it's called a **local resource**. If a resource is referred to via a URL, it's a **web resource**. Finally, if a resource is defined right in the body of a Markua document, it's an **inline resource**.
@@ -256,10 +254,10 @@ Examples:
 ```
 Here's a video:
 
-{type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
-!["Peter Armstrong's first talk about Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Introducing Markua")
+{type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg, caption: "Introducing Markua"}
+!["Peter Armstrong's first talk about Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
 
-Ironically, I'm writing this sentence almost a year after that was recorded.
+Ironically, I'm writing this sentence almost a year after that was recorded, and I still haven't figured everything out about Markua.
 ```
 
 ### Audio
