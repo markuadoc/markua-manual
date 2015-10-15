@@ -17,7 +17,7 @@ Bold
 : To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
 
 Bold + Italic
-: To produce ***bold + italic text***, surround it with either `__three underscores__` (producing `<b><i>`), `***three asterisks***` (producing `<strong><em>`).
+: To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>`), `***three asterisks***` (producing `<strong><em>`).
 
 Underline
 : To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: one and two underscores were taken.
