@@ -108,11 +108,6 @@ It's also easy to insert external code samples, which are just a local or web re
 ![](hello.rb)
 ~~~
 
-```
-{type: code, format: ruby, caption: "Hello, World"}
-![](hello.rb)
-```
-
 Resources vary in four different ways:
 
 1. Insertion: Span and Figure
