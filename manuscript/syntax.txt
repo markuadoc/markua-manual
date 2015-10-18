@@ -126,6 +126,8 @@ Quoted Resource
 Figure
 : The resource is inserted with at least one blank line above and below it, it's a **figure**. A figure can have an attribute list.
 
+W> TODO - terminology of quoted resource? Just call it a figure?
+
 A quoted resource is basically a figure that is embedded like a block quote inside the content of a paragraph.
 
 ### Resource Locations
