@@ -1,10 +1,8 @@
-# Markua Syntax Guide
+# Markua Syntax
 
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a writer's guide to all of Markua's syntax, focusing on the happy path of how you are supposed to write Markua, and ignoring the complex edge cases.
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a high-level, informal guide to all of Markua's syntax. To learn the details of why Markua is the way it is, and for the full specification both of Markua and of the HTML produced, read the rest of this specification.
 
-Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The rest of the Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. In this syntax guide, however, the HTML that is generated is only mentioned where it's interesting. The mapping to PDF, MOBI and other formats is implementation-dependent, as is the choice for the CSS to accompany the HTML produced by Markua.
-
-To learn the details of why Markua is the way it is, and for the full specification both of Markua and of the HTML produced, read the rest of this specification. If you only want to know how to write proper Markua, just read this chapter.
+Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The rest of the Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. In this syntax guide, however, the HTML that is generated is only mentioned where it's interesting. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
 
 ## Text Formatting
 
@@ -108,7 +106,7 @@ It's also easy to insert external code samples, which are just a local or web re
 
 Resources vary in four different ways:
 
-1. Insertion Methods: Span and Figure
+1. Insertion Methods: Span, Quoted and Figure
 2. Locations: Local, Web and Inline
 3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
 4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
@@ -117,24 +115,33 @@ Resources vary in four different ways:
 
 The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span or a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
 
-Resources can be inserted either as span resources or as figures.
+Resources can be inserted either as span resources, quoted resources or as figures.
 
-1. If a resource is inserted as part of the flow of text of a paragraph (even if there are single newlines before and after it), the resource is considered to be a **span resource**.
-2. If a resource is inserted with at least one blank line above and below it, it's a **figure**.
+Span Resource
+: The resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource cannot have an attribute list.
 
-Figures can have attribute lists; span resources cannot.
+Quoted Resource
+: The resource is inserted as part of the flow of text of a paragraph with a single newline (but not a blank line) before it, and one or more newlines after it. A quoted resource can have an attribute list.
 
-W> TODO - SPAN FIGURE FOR BLOCKQUOTE???
+Figure
+: The resource is inserted with at least one blank line above and below it, it's a **figure**. A figure can have an attribute list.
+
+A quoted resource is basically a figure that is embedded like a block quote inside the content of a paragraph.
 
 ### Resource Locations
 
 A resource is either considered a local, web or inline resource based on its location:
 
-1. If a resource is stored along with the manuscript (in a `resources` directory on a local filesystem, or uploaded to the same web service that the manuscript is being written on), it's called a **local resource**.
-2. If a resource is referred to via a URL, it's a **web resource**.
-3. If a resource is defined right in the body of a Markua document, it's an **inline resource**.
+Local Resource
+: The resource is stored along with the manuscript, in a `resources` directory on a local filesystem, or uploaded to the same web service that the manuscript is being written on.
 
-The syntax for a local resource or a web resource inserted as a figure is as follows:
+Web Resource
+: The resource is referred to via a URL (either http: or https:).
+
+Inline Resource
+: The resource is defined right in the body of a Markua document.
+
+The syntax for a local resource or a web resource inserted as a quoted resource or as a figure is as follows:
 
 ```
 {key: value, comma: separated, optional: attribute_list}
