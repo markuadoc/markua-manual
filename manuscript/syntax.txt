@@ -8,7 +8,9 @@ To learn the details of why Markua is the way it is, and for the full specificat
 
 ## Text Formatting
 
-Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua. Here's how to do basic, semantic text formatting.
+Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
+
+Here's how to do basic, semantic text formatting.
 
 Italic
 : To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
@@ -20,12 +22,12 @@ Bold + Italic
 : To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>`), `***three asterisks***` (producing `<strong><em>`).
 
 Underline
-: To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: one and two underscores were taken.
-
-W> TODO - FIX STRIKETHROUGH IN LEANPUB
+: To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually (but not always!) preferable to use italic instead of underline.
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
+
+W> TODO - FIX STRIKETHROUGH IN LEANPUB
 
 Superscript
 : To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
@@ -45,49 +47,45 @@ Whitespace (either spaces or tabs) is preserved at the beginning of a line.
 
 Because of this, you can write most poetry without any special formatting characters. If you type the following in Markua, it's output verbatim:
 
-W> TODO - FIX LEADING SPACES IN LEANPUB
-
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
     And yet, by heaven, I think my love as rare
     As any she belied with false compare.
 
-Whitespace in between words, however, is reduced to one space. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the look. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
+W> TODO - FIX LEADING SPACES IN LEANPUB, SINCE THE LAST TWO LINES HERE SHOULD BE INDENTED
 
-So, if you want to write poetry like e e cummings, you need to use an inline text resource, enclosed in three backticks:
+Whitespace in between words, however, is reduced to one space. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the formatting. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
+
+So, if you want to write poetry like e e cummings, you need to use an inline text resource, enclosed in three tildes:
 
 ~~~
-```
 i am a cat
                         a        l a z y          cat
          me   ow
-```
 ~~~
 
-Whitespace is stripped from the ends of lines and files. Markdown's hack of adding two spaces at the end of a line to force a line break is not needed (or supported) in Markua, since a single line break already produces a line break, as it should.
+Whitespace is stripped from the ends of lines and files. Markdown's hack of adding two spaces at the end of a line to force a line break is not needed (or supported) in Markua, since a single line break already produces a line break--as it should.
 
 ## File Structure
 
 A Markua document can be written in one file or multiple manuscript files.
 
-If the multiple file approach is used, the listed files are first concatenated together by a Markua Processor to produce one temporary Markua manuscript file, and that one file is used as the input. The Markua Processor generates PDF, EPUB, MOBI and/or HTML output.
-
-Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they must be concatenated together with two newlines added between the end of each file and the beginning of the next file, in order to separate the content of the two files with one blank line between them.
-
-Because of this, a paragraph (or any other block element) cannot span multiple manuscript files.
+If the multiple file approach is used, the listed files are first concatenated together by a Markua Processor to produce one temporary Markua manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they must be concatenated together with two newlines added between the end of each file and the beginning of the next file, in order to separate the content of the two files with one blank line between them. Because of this, a paragraph (or any other block element) cannot span multiple manuscript files.
 
 ## Resources
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
 
-The goal here is to make inserting all types of resources simple and consistent, as shown by these brief examples:
+Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible--but no closer!
 
-Inserting an image is as easy as `![pie](pie.png)`. It's also...
+Before diving in to each type of resource, it's helpful to consider some brief examples.
 
-```
+Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also...
+
+~~~
 {caption: "A Piece of Cake"}
 ![a slice of chocolate cake](http://markua.com/cake.jpg)
-```
+~~~
 
 It's easy to insert inline code samples, which can also have an optional attribute list:
 
@@ -100,12 +98,12 @@ puts "hello world"
 
 It's also easy to insert external code samples, which are just a local or web resource of type `code`. Here's a local code resource:
 
-```
+~~~
 {type: code, format: ruby, caption: "Hello, World"}
 ![](hello.rb)
-```
+~~~
 
-W> TODO - FIX LEANPUB - "missing.png"? WTF???
+W> TODO - FIX LEANPUB - SOMEHOW THE hello.rb IS BEING REPLACED BY missing.png
 
 Resources vary in four different ways:
 
@@ -284,6 +282,7 @@ A longer version is on the web here:
 
 Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
 
+~~~
 {type: code, language: ruby}
 ![](hello.rb)
 
@@ -291,6 +290,31 @@ Code resources can be inserted either from external files (as local or web resou
 ```
 puts "hello"
 ```
+~~~
+
+~~~
+{type: code, language: guess}
+![](hello.rb)
+
+{language: ruby}
+```
+puts "hello"
+```
+
+```guess
+puts "hello"
+```
+
+```text
+puts "hello"
+```
+
+```
+puts "hello"
+```
+~~~
+
+In the settings, have a default format? choices: guess, plain, ruby, etc. Maybe default language too?
 
 ~~~
 {type: code}
