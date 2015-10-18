@@ -105,6 +105,8 @@ It's also easy to insert external code samples, which are just a local or web re
 
 W> TODO - FIX LEANPUB - SOMEHOW THE hello.rb IS BEING REPLACED BY missing.png
 
+### Resources Vary in Four Ways
+
 Resources vary in four different ways:
 
 1. Insertion: Span and Figure
@@ -112,10 +114,15 @@ Resources vary in four different ways:
 3. Type: `image`, `video`, `audio`, `code`, `math` or `text`
 4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
+#### Resource Insertion
+
 The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span or a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
 
 **Insertion:**
 If a resource is inserted as part of the flow of text of a paragraph (even if there are single newlines before and after it), the resource is considered to be a **span resource**. If a resource is inserted with at least one blank line above and below it, it's a **figure**. Figures can have attribute lists; span resources cannot.
+
+
+#### Resource Location
 
 **Location:**
 If a resource is stored along with the manuscript (in a `resources` directory on a local filesystem, or uploaded to the same web service that the manuscript is being written on), it's called a **local resource**. If a resource is referred to via a URL, it's a **web resource**. Finally, if a resource is defined right in the body of a Markua document, it's an **inline resource**.
