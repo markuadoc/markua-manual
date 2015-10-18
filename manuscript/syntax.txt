@@ -103,7 +103,10 @@ It's also easy to insert external code samples, which are just a local or web re
 ![](hello.rb)
 ~~~
 
-W> TODO - FIX LEANPUB - SOMEHOW THE hello.rb IS BEING REPLACED BY missing.png
+```
+{type: code, format: ruby, caption: "Hello, World"}
+![](hello.rb)
+```
 
 ### Resources Vary in Four Ways
 
