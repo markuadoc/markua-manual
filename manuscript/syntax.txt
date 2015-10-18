@@ -13,16 +13,16 @@ Markua's goal is to provide all the semantic formatting required by authors. For
 Here's how to do basic, semantic text formatting.
 
 Italic
-: To produce *italic text*, surround it with either `_one underscore_` (producing `<i>`) or `*one asterisk*` (producing `<em>`).
+: To produce *italic text*, surround it with either `_one underscore_` (producing `<i>` in HTML) or `*one asterisk*` (producing `<em>` in HTML).
 
 Bold
-: To produce **bold text**, surround it with either `__two underscores__` (producing `<b>`) or `**two asterisks**` (producing `<strong>`).
+: To produce **bold text**, surround it with either `__two underscores__` (producing `<b>` in HTML) or `**two asterisks**` (producing `<strong>` in HTML).
 
 Bold + Italic
-: To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>`), `***three asterisks***` (producing `<strong><em>`).
+: To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML), `***three asterisks***` (producing `<strong><em>` in HTML).
 
 Underline
-: To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>`). This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually (but not always!) preferable to use italic instead of underline.
+: To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>` in HTML). This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually (but not always!) preferable to use italic instead of underline.
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
@@ -37,18 +37,16 @@ Subscript
 
 ## Paragraphs, Whitespace and Poetry
 
-A paragraph is text with a blank line both above and below it. This produces a `<p>` tag in HTML.
-
-The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs. Note that since two newlines are added between all Markua files during the concatenation of multiple-file Markua documents, there is an assumed blank line at the top and bottom of each Markua file. So, you cannot make a paragraph (or any block element) span multiple Markua source files.
+A paragraph is text with a blank line both above and below it. This produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs.
 
 Whitespace handling in Markua is straightfoward:
 
 * Two or more newlines separate top level elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
-* A single newline inside a paragraph produces a forced line break, and a `<br/>` tag in HTML. The top level element is still the same paragraph.
-* Spaces or tabs are ignored at the beginning of a line and the end of a line. Markdown's hack of adding two spaces at the end of a line to force a line break is neither supported nor needed in Markua, since a single newline already produces a line break--as it should.
+* A single newline inside a paragraph produces a forced line break (producing `<br/>` in HTML). The top level element is still the same paragraph.
+* Spaces or tabs are ignored at the beginning of a line and the end of a line. Markdown's hack of adding two spaces at the end of a line to force a line break is neither supported nor needed in Markua, since a single newline already produces a line break--as it should. (Relying on invisible formatting characters like trailing spaces is a terrible idea, especially since some text editors like Emacs strip trailing spaces by default.)
 * Spaces or tabs are reduced to a single space in the middle of a line. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the formatting. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
 
-If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes (`~`) or three backticks (`\``). As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to {type: text, format: plain} and three backticks defaults to {type: text, format: monospaced}.
+If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `plain` format text, whereas three backticks defaults to `monospaced` format text.
 
 The three tildes syntax can be useful to indent sonnets where the indentation matters, but otherwise looks like normal text:
 
@@ -386,6 +384,9 @@ TODO
 ### Text Resources
 
 Poetry, either plain text poetry or monospaced "typewriter poetry" is just a text resource.
+
+If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `{type: text, format: plain}` and three backticks defaults to `{type: text, format: monospaced}`.
+
 
 If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes (`~`) or three backticks (`\``). As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to {type: text, format: plain} and three backticks defaults to {type: text, format: monospaced}.
 
