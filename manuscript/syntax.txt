@@ -108,20 +108,27 @@ It's also easy to insert external code samples, which are just a local or web re
 
 Resources vary in four different ways:
 
-1. Insertion: Span and Figure
-2. Location: Local, Web and Inline
-3. Type: `image`, `video`, `audio`, `code`, `math` or `text`
-4. Format: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
-
-The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span or a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
+1. Insertion Methods: Span and Figure
+2. Locations: Local, Web and Inline
+3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
+4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
 ### Resource Insertion Methods
 
-If a resource is inserted as part of the flow of text of a paragraph (even if there are single newlines before and after it), the resource is considered to be a **span resource**. If a resource is inserted with at least one blank line above and below it, it's a **figure**. Figures can have attribute lists; span resources cannot.
+The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span or a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
+
+Resources can be inserted either as span resources or as figures.
+
+1. If a resource is inserted as part of the flow of text of a paragraph (even if there are single newlines before and after it), the resource is considered to be a **span resource**.
+2. If a resource is inserted with at least one blank line above and below it, it's a **figure**.
+
+Figures can have attribute lists; span resources cannot.
+
+W> TODO - SPAN FIGURE FOR BLOCKQUOTE???
 
 ### Resource Locations
 
-There are three locations for a resource:
+A resource is either considered a local, web or inline resource based on its location:
 
 1. If a resource is stored along with the manuscript (in a `resources` directory on a local filesystem, or uploaded to the same web service that the manuscript is being written on), it's called a **local resource**.
 2. If a resource is referred to via a URL, it's a **web resource**.
