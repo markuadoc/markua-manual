@@ -113,32 +113,25 @@ Resources vary in four different ways:
 
 ### Resource Insertion Methods
 
-The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span or a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
+The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span resource or as a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
 
-Resources can be inserted either as span resources, quoted resources or as figures.
+Resources can be inserted either as span resources or as figures.
 
 Span Resource
 : The resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource cannot have an attribute list.
 
-Quoted Resource
-: The resource is inserted as part of the flow of text of a paragraph with a single newline (but not a blank line) before it, and one or more newlines after it. A quoted resource can have an attribute list.
-
 Figure
-: The resource is inserted with at least one blank line above and below it, it's a **figure**. A figure can have an attribute list.
-
-W> TODO - terminology of quoted resource? Just call it a figure?
-
-A quoted resource is basically a figure that is embedded like a block quote inside the content of a paragraph.
+: The resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
 
 ### Resource Locations
 
 A resource is either considered a local, web or inline resource based on its location:
 
 Local Resource
-: The resource is stored along with the manuscript, in a `resources` directory on a local filesystem, or uploaded to the same web service that the manuscript is being written on.
+: The resource is stored along with the manuscript, in a `resources` directory on a local filesystem, or uploaded to the same web service where the manuscript is being written.
 
 Web Resource
-: The resource is referred to via a URL (either http: or https:).
+: The resource is referred to via a URL (either `http:` or `https:`).
 
 Inline Resource
 : The resource is defined right in the body of a Markua document.
@@ -147,8 +140,10 @@ The syntax for a local resource or a web resource inserted as a quoted resource 
 
 ```
 {key: value, comma: separated, optional: attribute_list}
-![Optional Alt Text](resource_path_or_url)
+![optional alt text](resource_path_or_url)
 ```
+
+The optional alt text will be discussed later.
 
 The default attribute list for a local resource or a web resource inserted as a figure is as follows:
 
@@ -161,7 +156,7 @@ So, by default, a local or web resource is a center aligned image which does not
 The syntax for a local resource or a web resource inserted as a span resource is as follows:
 
 ```
-It's just ![Optional Alt Text](resource_path_or_url) right in the text.
+It's just ![optional alt text](resource_path_or_url) right in the text.
 ```
 
 The syntax for an inline resource inserted as a figure is as follows:
@@ -187,7 +182,21 @@ The syntax for an inline resource inserted as a span element is as follows:
 It's just `inline resource content\`optional_format right in the text.
 ```
 
-All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below.
+All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below. First, it's important to discuss the optional alt text.
+
+### Optional Alt Text
+
+In the Markua local and web resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion. Markua also supports specifying the optional alt text as ... TODO
+
+ For inline resources in Markua,
+
+This is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+
+While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
+
+The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+
+A> Alt text does not make sense for code or text resources, and it does not make much sense for math resources. (It could make sense for math resources if the mathematical equations are turned into an image or are rendered using a math library not supported by a given ebook reader, however.) Regardless of this fact, it does make sense to use the same syntax for all resources. In a case where there is no appropriate alt text, it can be omitted by using empty square brackets, like `![](resource_path_or_url)`.
 
 ### Resource Types and Formats
 
@@ -251,6 +260,7 @@ Doing the following will insert an SVG image of a blue circle:
 ~~~
 This is a paragraph.
 
+{alt: "A Blue Circle"}
 ```svg
 <svg width="50" height="50">
   <circle cx="25" cy="25" r="20" fill="blue"/>
