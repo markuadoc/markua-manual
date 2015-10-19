@@ -111,6 +111,12 @@ Resources vary in four different ways:
 3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
 4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
+code: language, plain, guess
+text: plain, monospace
+math: mathml, latex
+
+figure caption in square brackets for images
+
 ### Resource Insertion Methods
 
 The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span resource or as a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
