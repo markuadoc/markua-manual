@@ -41,10 +41,11 @@ Whitespace handling in Markua is straightfoward:
 
 * Two or more newlines separate top level elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
 * A single newline inside a paragraph produces a forced line break (producing `<br/>` in HTML). The top level element is still the same paragraph.
-* Spaces or tabs are ignored at the beginning of a line and the end of a line. Markdown's hack of adding two spaces at the end of a line to force a line break is neither supported nor needed in Markua, since a single newline already produces a line break--as it should. (Relying on invisible formatting characters like trailing spaces is a terrible idea, especially since some text editors like Emacs strip trailing spaces by default.)
+* Spaces or tabs are ignored at the beginning of a line.
+* Spaces or tabs are ignored and the end of a line. Markdown's hack of adding two spaces at the end of a line to force a line break is neither supported nor needed in Markua, since a single newline already produces a line break--as it should. (Relying on invisible formatting characters like trailing spaces is a terrible idea, especially since some text editors like Emacs strip trailing spaces by default.)
 * Spaces or tabs are reduced to a single space in the middle of a line. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the formatting. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
 
-If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `plain` format text, whereas three backticks defaults to `monospaced` format text.
+If you want to write poetry where the whitespace (including indentation) matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `plain` format text, whereas three backticks defaults to `monospaced` format text.
 
 The three tildes syntax can be useful to indent sonnets where the indentation matters, but otherwise looks like normal text:
 
@@ -84,38 +85,32 @@ Before diving in to each type of resource, it's helpful to consider some brief e
 Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also...
 
 ~~~
-{caption: "A Piece of Cake"}
-![a slice of chocolate cake](http://markua.com/cake.jpg)
+![A Piece of Cake](http://markua.com/cake.jpg)
 ~~~
 
-It's easy to insert inline code samples, which can also have an optional attribute list:
+It's easy to insert inline code samples:
 
 ~~~
-{caption: "Hello, World"}
 ```ruby
 puts "hello world"
 ```
 ~~~
 
-It's also easy to insert external code samples, which are just a local or web resource of type `code`. Here's a local code resource:
+It's also easy to insert external code samples, which are just a local or web resource of type `code`. Here's a figure which is a local code resource, and which has an attribute list:
 
 ~~~
 {type: code, format: ruby, caption: "Hello, World"}
 ![](hello.rb)
 ~~~
 
+Any figure can have an attribute list, regardless of resource location or type.
+
 Resources vary in four different ways:
 
-1. Insertion Methods: Span, Quoted and Figure
+1. Insertion Methods: Span and Figure
 2. Locations: Local, Web and Inline
 3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
 4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
-
-code: language, plain, guess
-text: plain, monospace
-math: mathml, latex
-
-figure caption in square brackets for images
 
 ### Resource Insertion Methods
 
@@ -146,10 +141,8 @@ The syntax for a local resource or a web resource inserted as a quoted resource 
 
 ```
 {key: value, comma: separated, optional: attribute_list}
-![optional alt text](resource_path_or_url)
+![Optional Figure Caption](resource_path_or_url)
 ```
-
-The optional alt text will be discussed later.
 
 The default attribute list for a local resource or a web resource inserted as a figure is as follows:
 
@@ -174,23 +167,37 @@ inline resource content
 ```
 ~~~
 
-The default attribute list for an inline resource inserted as a figure is as follows:
+The default attribute list for an inline resource inserted as a figure varies based on the delimiters (tildes or backticks) used.
+
+Three tildes produce a default attribute list of:
 
 ```
 {type: text, format: plain}
 ```
 
-So, by default, an inline resource is a text resource, which is formatted in a monospace font with no syntax highlighting. These defaults work for both code samples and for the e e cummings style of poetry. If you want syntax highlighting, however, you need to override the defaults. This is shown below.
+This is useful for normal poetry.
 
-The syntax for an inline resource inserted as a span element is as follows:
+Three backticks, on the other hand, produce a default attribute list of:
 
 ```
-It's just `inline resource content\`optional_format right in the text.
+{type: text, format: monospaced}
 ```
 
-All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below. First, it's important to discuss the optional alt text.
+This is useful for unformatted code samples and monospaced poetry.
 
-### Optional Alt Text
+Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of defaults. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
+
+Finally, the syntax for an inline resource inserted as a span element is as follows:
+
+```
+It's just a single backtick `followed by inline resource content\`optional_format and then a single backtick, right in the text.
+```
+
+All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below. First, it's important to discuss the optional figure caption and optional alt text.
+
+### Optional Figure Caption and Optional Alt Text
+
+W> TODO - rewrite - HERE
 
 In the Markua local and web resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion. Markua also supports specifying the optional alt text as ... TODO
 
@@ -442,3 +449,9 @@ i am a cat
          me   ow
 ```
 ~~~
+
+### Format Types
+
+code: language, plain, guess
+text: plain, monospace
+math: mathml, latex
