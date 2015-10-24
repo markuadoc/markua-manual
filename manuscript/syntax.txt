@@ -85,19 +85,17 @@ Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a 
 
 ![A Piece of Cake](http://markua.com/cake.jpg)
 
-It's easy to insert inline code resources as spans with single backticks like `hello world`, and you can even indicate the language after the closing backtick `puts "hello world"`ruby. It's also easy to insert code resources as figures:
+Inline code resources are added as spans like `hello world` or as figures:
 
 ```ruby
 puts "hello world"
 ```
 
-It's also easy to insert external code samples:
-
-{type: code, format: ruby, caption: "Hello, World"}
-![](hello.rb)
+{type: code, format: ruby}
+![Hello, World](hello.rb)
 ~~~
 
-The last example showed an attribute list, in curly braces. Any figure can have an attribute list, regardless of resource location or type.
+The last figure in the example above showed an attribute list, which is a list of key-value pairs in curly braces. Any figure can have an attribute list, regardless of resource location, type or format.
 
 Resources vary in four different ways:
 
@@ -106,48 +104,44 @@ Resources vary in four different ways:
 3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
 4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-### Resource Insertion Methods
+### Resource Locations and Insertion Methods
 
-Resources can be inserted either as span resources or as figures.
+A resource is either considered a local, web or inline resource based on its location:
 
-Span Resource
+Local Resource
+: The resource is stored along with the manuscript--either in a `resources` directory on a local filesystem, or uploaded to the same web service where the manuscript is being written.
+
+Web Resource
+: The resource is referred to via an `http` or `https` URL.
+
+Inline Resource
+: The resource is defined right in the body of a Markua document.
+
+Resources can be inserted either as spans or as figures.
+
+Span
 : The resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource cannot have an attribute list.
 
 Figure
 : The resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
 
-### Resource Locations
+The syntax for a local resource or a web resource inserted as a span is as follows:
 
-A resource is either considered a local, web or inline resource based on its location:
+```
+It's just ![optional alt text](resource_path_or_url) right in the text.
+```
 
-Local Resource
-: The resource is stored along with the manuscript, in a `resources` directory on a local filesystem, or uploaded to the same web service where the manuscript is being written.
-
-Web Resource
-: The resource is referred to via a URL (either `http:` or `https:`).
-
-Inline Resource
-: The resource is defined right in the body of a Markua document.
-
-The syntax for a local resource or a web resource inserted as a quoted resource or as a figure is as follows:
+The syntax for a local resource or a web resource inserted as a figure is as follows:
 
 ```
 {key: value, comma: separated, optional: attribute_list}
 ![Optional Figure Caption](resource_path_or_url)
 ```
 
-The default attribute list for a local resource or a web resource inserted as a figure is as follows:
+The syntax for an inline resource inserted as a span is as follows:
 
 ```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
-```
-
-So, by default, a local or web resource is a center aligned image which does not float and which tries to have its preferred height and width, respecting margins.
-
-The syntax for a local resource or a web resource inserted as a span resource is as follows:
-
-```
-It's just ![optional alt text](resource_path_or_url) right in the text.
+It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
 ```
 
 The syntax for an inline resource inserted as a figure is as follows:
@@ -158,6 +152,62 @@ The syntax for an inline resource inserted as a figure is as follows:
 inline resource content
 ```
 ~~~
+
+### Resource Types and Formats
+
+There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
+
+Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
+
+Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+
+Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format. While the default `type` of a local resource or web resource is always `image`, the default `type` of an inline resource depends on the `format` specified:
+
+* If the format is `svg`, the inline resource is assumed to be of type `image`.
+* If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
+* If the format is omitted or is `plain`, the inline resource is assumed to be of type `text`.
+* For any other format, the inline resource is assumed to be of type `code`.
+
+These defaults mean that Markua can usually do the right thing based on the format, and that the resource type can almost always be inferred for inline resources. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
+
+
+
+
+
+
+
+# TODO ###############################################
+
+[Below are spare parts that need to be revised and integrated into the above. If you want a nice reading experience, you might as well stop reading now.]
+
+
+While this seems complex, it's important to emphasize that Markua resource syntax is just Markdown's inline image syntax, extended to support the resource types, figure captions and other attributes required by Markua. The details of all this will be described later, but it's useful to show how this fits together briefly first.
+
+A> The reference style image syntax of Markdown is **NOT** supported in Markua. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
+
+
+All Markua Processors must support all types of Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors. Furthermore, support for Web Resources is not all or nothing -- a Markua Processor can support Web Resources for some resource types but not others. For example, a Markua Processor could support Web Resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of Web Resource, it must consider all Web Resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+
+
+This syntax is similar to Markdown's inline image insertion syntax. Markdown's reference style image syntax is not supported in Markua.
+
+All local resources are stored inside a `resources` directory, whose name is not part of the path. A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
+
+Web resources are identified by URL. Both `http:` and `https:` resources must be supported. Because of copyright concerns, support for web resources is optional in Markua Processors. A Markua Processor may or may not support web resources for any given type of resource.
+
+
+
+
+
+The default attribute list for a local resource or a web resource inserted as a figure is as follows:
+
+```
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
+```
+
+So, by default, a local or web resource is a center aligned image which does not float and which tries to have its preferred height and width, respecting margins.
+
+
 
 The default attribute list for an inline resource inserted as a figure varies based on the delimiters (tildes or backticks) used.
 
@@ -179,17 +229,10 @@ This is useful for unformatted code samples and monospaced poetry.
 
 Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of defaults. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
 
-Finally, the syntax for an inline resource inserted as a span element is as follows:
-
-```
-It's just a single backtick `followed by inline resource content\`optional_format and then a single backtick, right in the text.
-```
 
 All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below. First, it's important to discuss the optional figure caption and optional alt text.
 
 ### Optional Figure Caption and Optional Alt Text
-
-W> TODO - rewrite - HERE
 
 In the Markua local and web resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion. Markua also supports specifying the optional alt text as ... TODO
 
@@ -203,20 +246,11 @@ The alt text should not be the same thing as the figure caption, if the figure c
 
 A> Alt text does not make sense for code or text resources, and it does not make much sense for math resources. (It could make sense for math resources if the mathematical equations are turned into an image or are rendered using a math library not supported by a given ebook reader, however.) Regardless of this fact, it does make sense to use the same syntax for all resources. In a case where there is no appropriate alt text, it can be omitted by using empty square brackets, like `![](resource_path_or_url)`.
 
-### Resource Types and Formats
 
-There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
 
-Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-Any of the six resource types can be inserted as a local or web resource. Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format. While the default `type` of a local resource or web resource is always `image`, the default `type` of an inline resource depends on the `format` specified.
 
-* If the format is `svg`, the inline resource is assumed to be of type `image`.
-* If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
-* If the format is omitted or is `plain`, the inline resource is assumed to be of type `text`.
-* For any other format, the inline resource is assumed to be of type `code`.
 
-These defaults mean that Markua can usually do the right thing based on the format, and that the resource type can almost always be inferred for inline resources.
 
 All figures support three attributes: `type`, `format` and `caption`.
 
@@ -234,6 +268,17 @@ Like any figure, if an image is inserted as a figure, it can have an attribute l
 Note that the values in the above attribute list are actually the default values for web and local resources inserted as figures. So, this attribute list above is identical to there being no attribute list specified.
 
 Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images it can also be inferred by the file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, `.svg` or `.xml` for SVG, and `.svgz` for SVGZ (zipped SVG).
+
+
+Markua supports four types of images: GIF, JPEG, PNG and SVG.
+
+The file extension determine the specific type of image. The supported image types are:
+
+* GIF images: `.gif`
+* JPEG images: `.jpg`, `.jpeg`
+* PNG images: `.png`
+* SVG images: `.svg`, `.svgz` (for zipped SVG), `.xml`
+
 
 The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
