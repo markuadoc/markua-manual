@@ -1,83 +1,11 @@
-# Resources: Images, Video, Audio, Code, Math and Text
+# Resources
 
-
-The syntax to define and insert a resource is as follows:
-
-```
-![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
-```
-
-The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of images, audio and video, this becomes the `src` attribute of the resource in HTML.
-
-The default type of a resource is `image`. For other types of resources, the type must be specified as an attribute.
-
-```
-{type: audio}
-![Optional Alt Text](audio_resource_path_or_url "Optional Figure Caption")
-```
-
-Other attributes can also be added, for resources where they are appropriate. For example, video resources support a `poster` attribute, which is used as the image to show before the video is played.
-
-```
-{type: video, poster: poster_url}
-![Optional Alt Text](resource_path_or_url "Optional Figure Caption")
-```
-
-Code blocks are also just a resource in Markua. (Code spans are not, since they cannot have attributes or captions.)
-
-```
-{type: code, language: ruby}
-![Optional Alt Text](code_path_or_url "Optional Figure Caption")
-```
-
-Some types of resources can be defined inline in the Markua text itself. This includes image resources of type SVG, as well as math, code and text resources. It emphatically does *not* include audio and video resources!
-
-Before discussing resource location, type and insertion it's important to discuss the Optional Alt Text. (The Optional Figure Caption is discussed later.)
-
-
-
-### Local Resources
-
-The `resources/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
-
-All images identified with a directory path must be inside the `resources` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
-
-The local resources approach can also be used by hosted services. If they provide a download they should create a resources directory... TODO
-
-A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
-
-A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
-
-W> In Leanpub Flavoured Markdown, we included `images/` in the path of all images. This is not supported in Markua. If  Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is resources/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the resources directory.
-
-### Web Resources
-
-The URL approach with an image is simple: the URL is an absolute URL of an image on the internet. The URL must start with with either `http:` or `https:`; no other protocols are supported.
-
-## Resource Insertion: Span and Figure
-
-A resource can also inserted into the flow of a Markua document in one of two ways:
-
-Span
-: The resource is inserted as part of the flow of text of a paragraph.
-
-Figure
-: The resource is inserted as a figure, either nested in a paragraph like a block quote or as a top-level element.
-
-When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
-
-{#spanimages}
 ### Span Resources
 
-Images can be inserted as a span image in the flow of text in a paragraph. When an image is inserted as a span image, it must be positioned where it is inserted -- it cannot be floated and repositioned by Markua processors.
-
-A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
 #### Examples
 
 ##### Example 1: Span Images with Alt Text
-
-Images can be inserted as a span image with alt text. Again, the alt text is intended to be read or heard instead of the image by readers who can't see the image, so it's important.
 
 ###### Markua Syntax
 
@@ -134,32 +62,6 @@ Markua has a fancy ![Markua two trees logo](markua-logo-small.png "This caption 
 
 {#figures}
 ### Figures
-
-The most powerful way to insert a resource in Markua is as a Figure.
-
-A figure is always inserted on a line by itself. However, there is variation in whether there is space above or below the figure:
-
-Block
-: The figure has blank lines above and below it.
-
-Span Block
-: The figure has no blank lines above or below it.
-
-A Figure can have a caption. This caption shows up in two places:
-
-1. Near the image, typically above or below it, per the preference of the Markua Processor.
-2. As the name of the Figure in the List of Illustrations (a.k.a. Table of Figures), if one is generated for the book. The caption name serves as the text, and it is a crosslink to the image caption associated with the figure itself.
-
-A figure can also have attributes. There are three attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
-
-`float`
-: The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
-
-`width`
-: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
-
-`type`
-: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting audio and video; see those chapters for details.
 
 #### Examples
 
