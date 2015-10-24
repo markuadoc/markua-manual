@@ -76,34 +76,28 @@ If the multiple file approach is used, the listed files are first concatenated t
 
 ## Resources
 
-Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources.
+Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
-Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible--but no closer!
+Before considering each type of resource, it's helpful to consider some brief examples:
 
-Before diving in to each type of resource, it's helpful to consider some brief examples.
-
+~~~
 Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also...
 
-~~~
 ![A Piece of Cake](http://markua.com/cake.jpg)
-~~~
 
-It's easy to insert inline code samples:
+It's easy to insert inline code resources as spans with single backticks like `hello world`, and you can even indicate the language after the closing backtick `puts "hello world"`ruby. It's also easy to insert code resources as figures:
 
-~~~
 ```ruby
 puts "hello world"
 ```
-~~~
 
-It's also easy to insert external code samples, which are just a local or web resource of type `code`. Here's a figure which is a local code resource, and which has an attribute list:
+It's also easy to insert external code samples:
 
-~~~
 {type: code, format: ruby, caption: "Hello, World"}
 ![](hello.rb)
 ~~~
 
-Any figure can have an attribute list, regardless of resource location or type.
+The last example showed an attribute list, in curly braces. Any figure can have an attribute list, regardless of resource location or type.
 
 Resources vary in four different ways:
 
@@ -113,8 +107,6 @@ Resources vary in four different ways:
 4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
 ### Resource Insertion Methods
-
-The syntax to define and insert a resource varies based on its location (local, web or inline) and whether it is inserted as a span resource or as a figure. This will be shown clearly with specific examples below, but it's helpful to start in general terms.
 
 Resources can be inserted either as span resources or as figures.
 
@@ -215,11 +207,9 @@ A> Alt text does not make sense for code or text resources, and it does not make
 
 There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
 
-Any of the six resource types can be inserted as a local or web resource. Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format.
-
 Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-While the default `type` of a local resource or web resource is always `image`, the default `type` of an inline resource depends on the `format` specified.
+Any of the six resource types can be inserted as a local or web resource. Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format. While the default `type` of a local resource or web resource is always `image`, the default `type` of an inline resource depends on the `format` specified.
 
 * If the format is `svg`, the inline resource is assumed to be of type `image`.
 * If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
@@ -232,7 +222,7 @@ All figures support three attributes: `type`, `format` and `caption`.
 
 As we'll see now, certain resource types of figures support other attributes.
 
-#### Images
+### Images
 
 Like any figure, if an image is inserted as a figure, it can have an attribute list, e.g.
 
@@ -283,7 +273,7 @@ This is a paragraph.
 This is also a paragraph.
 ~~~
 
-#### Video
+### Video
 
 Markua supports two types of `video` resourcess: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4, and `.webm` for WebM.
 
@@ -304,7 +294,7 @@ Here's a video:
 Ironically, I'm writing this sentence almost a year after that was recorded, and I still haven't figured everything out about Markua.
 ```
 
-#### Audio
+### Audio
 
 Markua supports four types of `audio` resources: MP3, AAC, WAV and Ogg Vorbis. The audio type is determined by file extension: `.mp3` for MP3, `.m4a` and `.aac` for AAC, `.wav` and `.wave` for WAV, and `.ogg` and `.oga` for Ogg Vorbis.
 
@@ -324,7 +314,7 @@ A longer version is on the web here:
 ![](http://markua.com/fulltalk.m4a)
 ```
 
-#### Code
+### Code
 
 Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
 
@@ -393,7 +383,7 @@ puts "hello"
 ```svg
 ```
 
-#### Math
+### Math
 
 
 Blah blah `puts "hello"`ruby blah blah.
@@ -420,7 +410,7 @@ LaTeX math is `math`, MathML is `mathml`.
 
 TODO
 
-#### Text
+### Text
 
 Poetry, either plain text poetry or monospaced "typewriter poetry" is just a text resource.
 
