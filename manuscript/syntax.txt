@@ -232,7 +232,7 @@ All figures support three attributes: `type`, `format` and `caption`.
 
 As we'll see now, certain resource types of figures support other attributes.
 
-### Images
+#### Images
 
 Like any figure, if an image is inserted as a figure, it can have an attribute list, e.g.
 
@@ -283,7 +283,7 @@ This is a paragraph.
 This is also a paragraph.
 ~~~
 
-### Video
+#### Video
 
 Markua supports two types of `video` resourcess: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4, and `.webm` for WebM.
 
@@ -304,7 +304,7 @@ Here's a video:
 Ironically, I'm writing this sentence almost a year after that was recorded, and I still haven't figured everything out about Markua.
 ```
 
-### Audio
+#### Audio
 
 Markua supports four types of `audio` resources: MP3, AAC, WAV and Ogg Vorbis. The audio type is determined by file extension: `.mp3` for MP3, `.m4a` and `.aac` for AAC, `.wav` and `.wave` for WAV, and `.ogg` and `.oga` for Ogg Vorbis.
 
@@ -324,7 +324,7 @@ A longer version is on the web here:
 ![](http://markua.com/fulltalk.m4a)
 ```
 
-### Code Resources
+#### Code
 
 Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
 
@@ -393,7 +393,7 @@ puts "hello"
 ```svg
 ```
 
-### Math Resources
+#### Math
 
 
 Blah blah `puts "hello"`ruby blah blah.
@@ -420,7 +420,7 @@ LaTeX math is `math`, MathML is `mathml`.
 
 TODO
 
-### Text Resources
+#### Text
 
 Poetry, either plain text poetry or monospaced "typewriter poetry" is just a text resource.
 
