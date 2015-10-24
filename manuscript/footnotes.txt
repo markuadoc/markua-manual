@@ -1,5 +1,0 @@
-{#footnotes}
-# Footnotes
-
-{class: warning}
-B> TODO

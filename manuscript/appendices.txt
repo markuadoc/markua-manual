@@ -125,3 +125,15 @@ The following Leanpub Flavoured Markdown features are not supported in Markua:
 
 * Centering paragraphs of text or headings using `C>` has been removed.
 * Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. [some text]{lang:en}) on a span or block.
+
+{#implementor-rules}
+## Rules and Guidelines for Implementors of Markua Processors
+
+This entire spec is a set of rules and guidelines, but there are a few specific things to call out here:
+
+* Markua Processors should have one comprehensive list of warnings to show Markua authors upon generating a Markua document with warnings in it.
+* Markua Processors must not output generation errors and warnings into the text itself.
+* Markua processors should provide warnings in situations where they can detect issues (e.g. "duplicate cross-reference", "not understood programming language", "unknown math processor", etc).
+* Markua processors must not explode when encountering unsupported features that have legal Markua syntax (e.g. an unknown Math dialect or human language).
+* Links to cross-references that don't correspond to an id that exists may either be created as a (broken, non-functional) link or be created as normal text (not a link).
+* Crosslinks that reference an unused id may either be created as a (non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also output a warning about this somewhere, but not in the actual document text itself.

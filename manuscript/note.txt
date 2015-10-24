@@ -1,5 +1,0 @@
-# DO NOT TRUST THE REST OF THIS SPECIFICATION
-
-The rest of this document is in flux, and is being rewritten. Don't trust anything after this chapter.
-
-(I'm only leaving it in the document in order to show what progress had been made.)
