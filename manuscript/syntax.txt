@@ -10,12 +10,10 @@ Markua's goal is to provide all the semantic formatting required by authors. For
 
 Markua is a plain text format designed for the writing of books and documents. Books and documents have various types of text formatting in them: bold, italic, underline, strikethrough, superscript and subscript.
 
-A> To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
-
 Here's how to do basic, semantic text formatting.
 
 Italic
-: To produce *italic text*, surround it with either `_one underscore_` (producing `<i>` in HTML) or `*one asterisk*` (producing `<em>` in HTML).
+: To produce *italic text*, surround it with either `_one underscore_` (producing `<i>` in HTML) or `*one asterisk*` (producing `<em>` in HTML[^w3c_em]).
 
 Bold
 : To produce **bold text**, surround it with either `__two underscores__` (producing `<b>` in HTML) or `**two asterisks**` (producing `<strong>` in HTML).
@@ -36,6 +34,8 @@ Superscript
 
 Subscript
 : To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
+
+[^w3c_em]: To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
 ### Invalid Nesting Is Illegal
 
@@ -89,27 +89,6 @@ i am a cat
 
 
 
-
-
-TODO: incorporate this:
-
-
-{#embedding_inside_paragraph}
-# Embedding Lists, Figures and Code Blocks Inside a Paragraph
-
-In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
-
-> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
-
-So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
-
-Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
-
-However, since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C [in the HTML5 spec](http://www.w3.org/TR/html5/grouping-content.html#the-p-element). Specifically, the HTML that is output for paragraphs that nest lists, figures or code blocks is `<div class="para">`. This way, book designers can style these `<div>` tags the same way as `<p>` tags.
-
-Note that in all cases you need to add some amount of whitespace before the list, figure or code block, so that it appears embedded inside the paragraph. If you do not do this, what you will get is a paragraph with a bunch of break tags, one for each newline.
-
-W> TODO - Should I really enforce whitespace before the list or figure? It looks better for lists, but it's a bit arbitrary and punitive. Also, figures are so ugly it doesn't matter for them, and then I'm inconsistent.
 
 
 Broadly speaking, Markua defines three things: block elements, span elements and metadata.
@@ -1097,6 +1076,25 @@ Definition Lists are discussed in the next chapter--although they are called lis
 A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since the ordered lists support numbering by decimal numbers, letters and Roman numerals, this term is superior to numbered lists in that regard.)
 
 If you are familiar with Markdown, as you read the sections below you will note a number of differences between Markua lists and Markdown lists.
+
+### Embedding Lists, Figures and Code Blocks Inside a Paragraph
+
+TODO: incorporate this somewhere.
+
+In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
+
+> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
+
+So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
+
+Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
+
+However, since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C [in the HTML5 spec](http://www.w3.org/TR/html5/grouping-content.html#the-p-element). Specifically, the HTML that is output for paragraphs that nest lists, figures or code blocks is `<div class="para">`. This way, book designers can style these `<div>` tags the same way as `<p>` tags.
+
+Note that in all cases you need to add some amount of whitespace before the list, figure or code block, so that it appears embedded inside the paragraph. If you do not do this, what you will get is a paragraph with a bunch of break tags, one for each newline.
+
+W> TODO - Should I really enforce whitespace before the list or figure? It looks better for lists, but it's a bit arbitrary and punitive. Also, figures are so ugly it doesn't matter for them, and then I'm inconsistent.
+
 
 {#unorderedlists}
 ### Unordered Lists (i.e. Bulleted Lists)

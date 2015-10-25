@@ -48,7 +48,7 @@ Whereas Markua defines exactly one way of making every type of heading, Markdown
 {#setext_headings}
 ### Setext Headings in Markdown
 
-In the Setext-style of headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading:
+In the Setext-style of headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
 
 These are some Setext headers in Markdown:
 
@@ -124,7 +124,7 @@ Markua is the evolution of Leanpub Flavoured Markdown. However, the goal of Mark
 The following Leanpub Flavoured Markdown features are not supported in Markua:
 
 * Centering paragraphs of text or headings using `C>` has been removed.
-* Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. [some text]{lang:en}) on a span or block.
+* Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. `[some text]{lang:en}`) on a span or block.
 
 {#implementor-rules}
 ## Rules and Guidelines for Implementors of Markua Processors
