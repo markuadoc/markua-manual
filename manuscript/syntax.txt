@@ -25,9 +25,7 @@ Underline
 : To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>` in HTML). This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually preferable to use italic instead of underline. However, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
 
 Strikethrough
-: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. (This is the same syntax as is used by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
-
-W> TODO - FIX STRIKETHROUGH IN LEANPUB
+: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. (This is the same syntax as is used by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).) **TODO: ADD STRIKETHROUGH TO LEANPUB!**
 
 Superscript
 : To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`. (This is the same syntax as is used by pandoc.)
@@ -35,77 +33,38 @@ Superscript
 Subscript
 : To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
+Note that if the asterisks and underscores needed to produce bold and italic are not nested correctly, they will be output as asterisks and underscores instead of producing formatting. This includes combinations like `**_this**_`, `*__this*__` or `__*this__*`.
+
 [^w3c_em]: To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
-### Invalid Nesting Is Illegal
+## Paragraphs and Whitespace
 
-If emphasis is nested in an invalid combination, Markua processors must simply output the formatting instead of exploding.
+Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata.
 
-The following lines are all invalid in Markua:
+Every block element in Markua is separated from every other block element in Markua by at least one blank line (two newlines). Paragraphs are the most common block elements; headings and figures are other common block elements. Span elements are always contained inside a block element. Metadata is typically attached to a block or span element, either above the block element or after the span element.
 
-```
-This is **_not nested**_ properly.
+Together, newlines, spaces and tabs are called whitespace. Whitespace is an essential tool in Markua. Whitespace is what makes the block elements and span elements what they are. The goal is for everything to just work as expected, with as few surprises or ugly formatting characters as possible. Prose and poetry should just work.
 
-This is also *__not nested*__ properly.
+The following rules define how normal Markua text handles whitespace:
 
-This __*must__* fail too.
-```
+Paragraphs are Separated by Blank Lines
+: A paragraph is text with a blank line both above and below it. This produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs.
 
-## Paragraphs, Whitespace and Poetry
 
-A paragraph is text with a blank line both above and below it. This produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs.
-
-Whitespace handling in Markua is straightfoward:
-
-* Two or more newlines separate top level elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
+* Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
 * A single newline inside a paragraph produces a forced line break (producing `<br/>` in HTML). The top level element is still the same paragraph.
 * Spaces or tabs are ignored at the beginning of a line.
 * Spaces or tabs are ignored and the end of a line. Markdown's hack of adding two spaces at the end of a line to force a line break is neither supported nor needed in Markua, since a single newline already produces a line break--as it should. (Relying on invisible formatting characters like trailing spaces is a terrible idea, especially since some text editors like Emacs strip trailing spaces by default.)
 * Spaces or tabs are reduced to a single space in the middle of a line. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the formatting. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
 
-If you want to write poetry where the whitespace (including indentation) matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `plain` format text, whereas three backticks defaults to `monospaced` format text.
-
-The three tildes syntax can be useful to indent sonnets where the indentation matters, but otherwise looks like normal text:
-
-```
-~~~
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-~~~
-```
-
-The three backticks syntax can be useful to write monospaced poetry like e e cummings:
-
-~~~
-```
-i am a cat
-                        a        l a z y          cat
-         me   ow
-```
-~~~
+These above rules do **not** apply to resources. As described later, there are many different types of resources, including math, code and text resources. These resources preserve all whitespace.
 
 
 
 
 
 
-Broadly speaking, Markua defines three things: block elements, span elements and metadata.
 
-* Every block element in Markua is separated from every other block element in Markua by at least one blank line. (This is not just one newline: a blank line is formed by the addition of two newlines.)
-* Span elements are always contained inside a block element.
-* Metadata is typically attached to a block or span element, either above the block element or after the span element.
-
-Newlines, blank lines, leading spaces, trailing spaces and such in Markua are called whitespace.
-
-Whitespace is an essential tool in Markua. Whitespace is what makes the block elements and span elements what they are.
-
-Talking about whitespace is kind of redundant since it's covered by the rest of the spec, but it's nice to collect all the rules here.
-
-The goal for whitespace is for everything to just work as expected, with as few surprises or gross formatting characters as possible. Prose should just work. Poetry should just work. Code should just work. In this regard, Markua has broader design goals than Markdown.
-
-Markdown is a tool for web writers. Markua is a tool for writers.
 
 Below are the rules which combine to accomplish this.
 
@@ -113,21 +72,12 @@ Below are the rules which combine to accomplish this.
 
 There is an assumed blank line at the top and bottom of each Markua file, so at the top of a file you only need a blank line below the first block element, and at the bottom of a Markua file you only need a blank line above the last block element. You cannot make a block element span Markua source files--there is always a blank line added by the addition of two newlines during the concatenation.
 
-### All Whitespace is Preserved in Code Blocks
-
-Inside a code block, all whitespace is preserved. This includes leading and trailing whitespace, whether those are newlines, tabs or space characters.
-
-This is a lot simpler that trying to construct rules which would be complex and potentially brittle.
-
 ### Trailing Whitespace is Ignored Except in Code Blocks
 
 Trailing whitespace at the end of a line has no meaning in Markua. It is ignored, except in code blocks.
 
 A> In Markdown, trailing whitespace sometimes has meaning. (You can add two spaces to the end of a line to force a line break.) However, since this is "invisible magic formatting", and since some text editors can be set to remove trailing spaces, this is ignored.
 
-### Leading Whitespace at the Beginning of a Paragraph is Ignored
-
-This way, you can write paragraphs and it does not matter whether you indent or your text editor does.
 
 ### Whitespace is Preserved Following a Single Newline
 
@@ -269,21 +219,6 @@ baz
 A single newline inside a list, aside or blurb creates a new paragraph within that list item, aside or blurb. This can be used to create multi-paragraph list items, asides, blurbs, etc.
 
 A> This alse means that there is no need for the 4 space indent feature of Markdown. Code blocks and other things can just be added to list items by adding a single newline.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1026,6 +961,35 @@ A> For the programmers reading this: since resources cannot themselves include r
 ### Text
 
 Poetry, either plain text poetry or monospaced "typewriter poetry" is just a text resource.
+
+
+There are many different types of resources, which are discussed at length shortly. However, it's helpful to discuss text resources now, since they are how poetry is supported in Markua.
+
+
+
+If you want to write poetry where the whitespace (including indentation) matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `plain` format text, whereas three backticks defaults to `monospaced` format text.
+
+The three tildes syntax can be useful to indent sonnets where the indentation matters, but otherwise looks like normal text:
+
+```
+~~~
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+~~~
+```
+
+The three backticks syntax can be useful to write monospaced poetry like e e cummings:
+
+~~~
+```
+i am a cat
+                        a        l a z y          cat
+         me   ow
+```
+~~~
+
 
 If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `{type: text, format: plain}` and three backticks defaults to `{type: text, format: monospaced}`.
 
