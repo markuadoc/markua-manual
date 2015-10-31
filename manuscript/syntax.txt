@@ -25,7 +25,7 @@ Underline
 : To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>` in HTML). This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually preferable to use italic instead of underline. However, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
 
 Strikethrough
-: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. (This is the same syntax as is used by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).) **TODO: ADD STRIKETHROUGH TO LEANPUB!**
+: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).) **TODO: ADD STRIKETHROUGH TO LEANPUB!**
 
 Superscript
 : To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`. (This is the same syntax as is used by pandoc.)
@@ -39,16 +39,94 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 ## Paragraphs and Whitespace
 
+Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
+
+Normal Markua text is in paragraphs. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line. Any extra number of newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
+
+These are three paragraphs:
+
+```
+I'm paragraph one. Yay!
+
+This is paragraph two. Two newlines separated it from the previous paragraph, producing one blank line.
+
+
+This is paragraph three. It is separated from paragraph two by two blank lines (produced by three newlines), but that's no different than if there had only been one blank line.
+```
+
+## Figures and Block Quotes can either be Contained in Paragraphs or Top Level
+
+Within a paragraph, it is sometimes desired to insert a figure or block quote, while continuing the same paragraph after the figure or block quote is done. This is trivial to do in Markua, and impossible to do in Markdown--in Markdown, any blockquote or figure is a top level element which is a sibling of the paragraphs which contain it:
+
+~~~
+This is paragraph one. It is followed by a figure which is a resource of Java code.
+
+{type: code, format: java}
+![Hello World in Java](hello.java)
+
+This is paragraph two. It contains a figure which is an inline code sample.
+```ruby
+puts "hello world"
+```
+This is still in paragraph two, since it follows the figure with a single newline, not a blank line. It's followed by a top-level figure which is an image resource.
+
+{alt: "Denzel Washington on a jet ski in a river"}
+![Washington Crossing the Delaware](delaware.jpg)
+
+This is paragraph three. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes. Here's the first blockquote:
+> There is a tide in the affairs of men.
+> Which, taken at the flood, leads on to fortune;
+Paragraph three then continues, and then addes another blockquote.
+> Omitted, all the voyage of their life
+> Is bound in shallows and in miseries.
+This is also still in the third paragraph.
+
+This is the fourth paragraph.
+~~~
+
+## TODO
+
+The following rules define how Markua handles whitespace.
+
+Resources Preserve All Whitespace
+: Markua defines many different types of resources, including math, code and text resources. Resources are discussed later in this chapter. The important thing to know now is that resources preserve all whitespace. So, if you need to preserve all whitespace in some piece of text, use a text resource.
+
+
+
+
+
+
+
+All block elements that are separated by at least one blank line from other block elements, and that are not some specialized type (like a heading, figure or list) are paragraphs. A paragraph produces a `<p>` tag in HTML.
+
+
+
+
+
+
+
+
+
+
+Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
+```ruby
+puts "foo"
+```
+Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
+
+Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
+
+
+Through the use of varying amounts of
+
+Whitespace is what makes the block elements and span elements what they are. The goal is for everything to just work as expected, with as few surprises or ugly formatting characters as possible. Prose and poetry should just work.
+
+
+
 Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata.
 
 Every block element in Markua is separated from every other block element in Markua by at least one blank line (two newlines). Paragraphs are the most common block elements; headings and figures are other common block elements. Span elements are always contained inside a block element. Metadata is typically attached to a block or span element, either above the block element or after the span element.
 
-Together, newlines, spaces and tabs are called whitespace. Whitespace is an essential tool in Markua. Whitespace is what makes the block elements and span elements what they are. The goal is for everything to just work as expected, with as few surprises or ugly formatting characters as possible. Prose and poetry should just work.
-
-The following rules define how normal Markua text handles whitespace:
-
-Paragraphs are Separated by Blank Lines
-: A paragraph is text with a blank line both above and below it. This produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it. All block elements that are not some specialized type (like a heading) are paragraphs.
 
 
 * Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
@@ -57,12 +135,18 @@ Paragraphs are Separated by Blank Lines
 * Spaces or tabs are ignored and the end of a line. Markdown's hack of adding two spaces at the end of a line to force a line break is neither supported nor needed in Markua, since a single newline already produces a line break--as it should. (Relying on invisible formatting characters like trailing spaces is a terrible idea, especially since some text editors like Emacs strip trailing spaces by default.)
 * Spaces or tabs are reduced to a single space in the middle of a line. The primary reason for this is that it lets authors write books using either one or two spaces after a period, with there being no difference in the formatting. A secondary reason is that this is how things work in HTML (without using `&nbsp;`).
 
-These above rules do **not** apply to resources. As described later, there are many different types of resources, including math, code and text resources. These resources preserve all whitespace.
+aoeu
 
+There is an assumed blank line at the top and bottom of each Markua file, so at the top of a file you only need a blank line below the first block element, and at the bottom of a Markua file you only need a blank line above the last block element. You cannot make a block element span Markua source files--there is always a blank line added by the addition of two newlines during the concatenation.
 
+     I grant I never saw a goddess go;
+      My mistress when she walks treads on the ground.
+      	 And yet, by heaven, I think my love as rare
+	 As any she belied with false compare.
 
+There is an assumed blank line at the top and bottom of each Markua file, so at the top of a file you only need a blank line below the first block element, and at the bottom of a Markua file you only need a blank line above the last block element. You cannot make a block element span Markua source files--there is always a blank line added by the addition of two newlines during the concatenation.
 
-
+aoeuaoue
 
 
 
@@ -642,20 +726,20 @@ The supported file extensions for audio files are:
 Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
 
 ~~~
-{type: code, language: ruby}
+{type: code, format: ruby}
 ![](hello.rb)
 
-{language: ruby}
+{format: ruby}
 ```
 puts "hello"
 ```
 ~~~
 
 ~~~
-{type: code, language: guess}
+{type: code, format: guess}
 ![](hello.rb)
 
-{language: ruby}
+{format: ruby}
 ```
 puts "hello"
 ```
@@ -756,7 +840,7 @@ Note that this language definition is just a shorthand for a more general metada
 You can define the language of a code block explicitly using the language attribute:
 
 ~~~
-{language: ruby}
+{format: ruby}
 ```
 def foo
   2
@@ -767,7 +851,7 @@ end
 Markua also supports adding other information to attributes of code blocks. For example, you can explicitly turn line numbering on an off using the `line-numbers` attribute:
 
 ~~~
-{language: ruby, line-numbers: off}
+{format: ruby, line-numbers: off}
 ```
 def foo
   2
@@ -789,7 +873,7 @@ end
 If the attribute and the GitHub-style syntax conflict, the attribute wins. The following will be formatted as plain text, not ruby:
 
 ~~~
-{language: text, line-numbers: on, number-from: 3}
+{format: text, line-numbers: on, number-from: 3}
 ```ruby
 def foo
   2
@@ -802,7 +886,7 @@ A>
 A> Code blocks should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors must wrap lines to ensure that all code is visible, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
 
 {class: warning}
-B> TODO: possibly support {language: `asciiart`} on a code block, which tightens line spacing and turns off page breaks so that ASCII art looks better.
+B> TODO: possibly support {format: `asciiart`} on a code block, which tightens line spacing and turns off page breaks so that ASCII art looks better.
 
 A> In Leanpub Flavoured Markdown, the paths included `code/`. This was redundant, since all code had to live in the code directory. So, Markua omits `code/` from the path.
 
@@ -812,7 +896,7 @@ External code samples can also have attributes added to them on import. These ca
 The following will show a code sample with the caption of "My Brilliant Algorithm". The code sample will contain 6 lines (lines 10-15 inclusive), and it will number them 10, 11, 12, 13, 14 and 15 since those are the line numbers of the given lines in the file:
 
 ```
-{caption: "My Brilliant Algorithm", language: ruby, crop-start: 10, crop-end: 15, line-numbers: on}
+{caption: "My Brilliant Algorithm", format: ruby, crop-start: 10, crop-end: 15, line-numbers: on}
 <<(sample1.rb)
 ```
 
@@ -821,14 +905,14 @@ If this is not desired, you can choose to start the numbering wherever you want 
 The following will show 6 lines (lines 10-15 inclusive), and it will number them 1, 2, 3, 4, 5 and 6:
 
 ```
-{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 1}
+{format: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 1}
 <<(sample1.rb)
 ```
 
 Or, if you wish to make things annoying, you can number from any non-negative integer you want. The following will show 6 lines (lines 10-15 inclusive), and it will number them 3, 4, 5, 6, 7 and 8:
 
 ```
-{language: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 3}
+{format: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 3}
 <<(sample1.rb)
 ```
 
@@ -852,11 +936,11 @@ LaTeX math is `math`, MathML is `mathml`.
 ```mathml
 ```
 
-{language: math}
+{format: math}
 ```
 ```
 
-{language: mathml}
+{format: mathml}
 ```
 ```
 
@@ -888,7 +972,7 @@ To add LaTeX math, use `{type: math, format: latex}`:
 ~~~
 Here is some paragraph text.
 
-{type: math, language: latex}
+{type: math, format: latex}
 ```
 \left|\sum_{i=1}^n a_ib_i\right|
 \le
@@ -910,7 +994,7 @@ A> MathML is not supported in Leanpub, so we have no idea if supporting it is a 
 ~~~
 Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
 
-{type: math, language: mathml}
+{type: math, format: mathml}
 ```
 <apply>
   <plus/>
@@ -1761,7 +1845,7 @@ Attributes are a set of comma-separated key-value pairs enclosed in a pair of cu
 This shows a code block, with the attribute `language` having the value `ruby`:
 
 ~~~
-{language: ruby}
+{format: ruby}
 ```
 def foo
   2
@@ -1772,7 +1856,7 @@ end
 You can have more than one attribute. This shows a code block, with the attribute `language` having the value `ruby` and the attribute `line-numbers` having the value `off`:
 
 ~~~
-{language: ruby, line-numbers: off}
+{format: ruby, line-numbers: off}
 ```
 def foo
   2
@@ -1785,7 +1869,7 @@ Attribute values can be enclosed in quotation marks. These are optional, and are
 Here's the previous example, with the addition of quotation marks. This is identical to the previous example in meaning.
 
 ~~~
-{language: "ruby", line-numbers: "off"}
+{format: "ruby", line-numbers: "off"}
 ```
 def foo
   2
@@ -1796,7 +1880,7 @@ end
 Attributes can also have numeric values. These are the same, with or without quotes:
 
 ```
-{language: ruby, crop-start: 10, crop-end: "15", line-numbers: on}
+{format: ruby, crop-start: 10, crop-end: "15", line-numbers: on}
 <<(code/sample1.rb)
 ```
 
