@@ -1,8 +1,12 @@
 # Markua Syntax
 
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents. This is a high-level, informal guide to all of Markua's syntax. To learn the details of why Markua is the way it is, and for the full specification both of Markua and of the HTML produced, read the rest of this specification.
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents.
 
-Markua is used to generate PDF, EPUB, MOBI and HTML. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. The rest of the Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. In this syntax guide, however, the HTML that is generated is only mentioned where it's interesting. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
+Markua manuscripts can be used to produce every current popular type of ebook format: PDF, EPUB, MOBI and HTML. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
+
+The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
+
+This chapter is an informal specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
 
 ## Text Formatting
 
@@ -41,9 +45,10 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
 
-Normal Markua text is in paragraphs. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line. Any extra number of newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
+Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line. Any extra number of newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
 
-These are three paragraphs:
+
+This is the third paragraph of this section. It is separated from the previous paragraph two by two blank lines, produced by three newlines. This is equivalent to if there had only been two newlines. Throughout this specification, examples of Markua syntax will be shown as a text resource, so that the exact Markua manuscript text can be shown unprocessed by a Markua. These are three paragraphs in Markua:
 
 ```
 I'm paragraph one. Yay!
@@ -51,10 +56,12 @@ I'm paragraph one. Yay!
 This is paragraph two. Two newlines separated it from the previous paragraph, producing one blank line.
 
 
-This is paragraph three. It is separated from paragraph two by two blank lines (produced by three newlines), but that's no different than if there had only been one blank line.
+This is paragraph three. It is separated from paragraph two by two blank lines, produced by three newlines.
 ```
 
-## Figures and Block Quotes can either be Contained in Paragraphs or Top Level
+## Figures and Block Quotes
+
+Figures and block quotes can either be contained in paragraphs or can be inserted top-level.
 
 Within a paragraph, it is sometimes desired to insert a figure or block quote, while continuing the same paragraph after the figure or block quote is done. This is trivial to do in Markua, and impossible to do in Markdown--in Markdown, any blockquote or figure is a top level element which is a sibling of the paragraphs which contain it:
 
@@ -84,6 +91,12 @@ This is also still in the third paragraph.
 This is the fourth paragraph.
 ~~~
 
+
+
+
+
+
+
 ## TODO
 
 The following rules define how Markua handles whitespace.
@@ -97,27 +110,8 @@ Resources Preserve All Whitespace
 
 
 
-All block elements that are separated by at least one blank line from other block elements, and that are not some specialized type (like a heading, figure or list) are paragraphs. A paragraph produces a `<p>` tag in HTML.
+All block elements that are separated by at least one blank line from other block elements, and that are not some specialized type (like a heading, figure or list) are paragraphs.
 
-
-
-
-
-
-
-
-
-
-Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
-```ruby
-puts "foo"
-```
-Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
-
-Two or more newlines separate block elements (like paragraphs and headings) from each other. The number of newlines does not matter: ten newlines in a row is equivalent to two newlines in a row.
-
-
-Through the use of varying amounts of
 
 Whitespace is what makes the block elements and span elements what they are. The goal is for everything to just work as expected, with as few surprises or ugly formatting characters as possible. Prose and poetry should just work.
 
