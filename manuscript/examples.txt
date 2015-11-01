@@ -1,3 +1,26 @@
+# Poetry
+
+## Single Newlines Inside a Paragraph is a Line Break
+
+##### Markua Syntax
+
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+     And yet, by heaven, I think my love as rare
+     As any she belied with false compare.
+```
+
+##### HTML Output
+
+<p>
+I grant I never saw a goddess go;<br/>
+My mistress when she walks treads on the ground.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
+</p>
+
+
 # Resources
 
 ## Span Resources
