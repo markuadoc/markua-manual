@@ -29,7 +29,9 @@ Underline
 : To produce ____underlined text____, surround it with `____four underscores____` (producing `<u>` in HTML). This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually preferable to use italic instead of underline. However, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
 
 Strikethrough
-: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).) **TODO: ADD STRIKETHROUGH TO LEANPUB!**
+: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
+
+W> TODO - ADD STRIKETHROUGH TO LEANPUB!
 
 Superscript
 : To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`. (This is the same syntax as is used by pandoc.)
@@ -184,6 +186,8 @@ The syntax for a local resource or a web resource inserted as a span is as follo
 It's just ![optional alt text](resource_path_or_url) right in the text.
 ```
 
+W> TODO - LEANPUB NEEDS TO FIX THIS missing.png BULLSHIT IN CODE EXAMPLES
+
 #### Figure + (Local or Web)
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
@@ -192,6 +196,8 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 {key: value, comma: separated, optional: attribute_list}
 ![Optional Figure Caption](resource_path_or_url)
 ```
+
+W> TODO - LEANPUB NEEDS TO FIX THIS missing.png BULLSHIT IN CODE EXAMPLES
 
 #### Span + Inline
 
