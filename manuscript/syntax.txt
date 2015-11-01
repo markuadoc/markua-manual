@@ -146,9 +146,14 @@ puts "hello world"
 ![Hello, World](hello.rb)
 ~~~
 
-A> If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown. Note that Markdown's reference style image syntax is not supported in Markua for any type of resource, including images. There are two main reasons for not supporting reference style resource syntax: (1) Resources in Markua are complex enough without adding two In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
-
 The last figure in the example above showed an attribute list, which is a list of key-value pairs in curly braces. Any figure can have an attribute list, regardless of resource location, type or format.
+
+A> If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown. Note that Markdown's reference style image syntax is not supported in Markua for any type of resource, including images.
+A>
+A> There are two main reasons for not supporting reference style resource syntax in Markua:
+A>
+A> 1. Resources in Markua are complex enough without having two syntaxes.
+A> 2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 
 ### Resource Locations and Insertion Methods
 
@@ -171,11 +176,15 @@ Span
 Figure
 : The resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
 
+#### Span + (Local or Web)
+
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
 ```
 It's just ![optional alt text](resource_path_or_url) right in the text.
 ```
+
+#### Figure + (Local or Web)
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
@@ -184,11 +193,15 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 ![Optional Figure Caption](resource_path_or_url)
 ```
 
+#### Span + Inline
+
 The syntax for an inline resource inserted as a span is as follows:
 
 ```
 It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
 ```
+
+#### Figure + Inline
 
 The syntax for an inline resource inserted as a figure is as follows:
 
@@ -248,29 +261,133 @@ If web resources are supported, both `http:` and `https:` resources should be su
 
 Web resources are identified by URL. The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of image, audio and video resources, this becomes the `src` attribute of the resource in HTML.
 
+### Resource File Extensions and Default Types and Formats
 
+Resource types and formats are often inferred from the resource file extension.
 
+Markua defines one set of file extensions for local or web resources which produces default values for the resource type and format. (Inline resources have no file extension, since they are inline.)
 
+When a local or web resource is inserted as a span, this is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by the attribute list.
 
+W> TOOD - Convert this to a Markua table when supported
 
+| Extension | `type`  | `format`   | `description` |
+|-----------|---------|------------|---------------|
+| `.gif`    | `image` | `gif`      | GIF image     |
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+| `.svg`    | `image` | `svg`      | SVG image     |
+| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
+| `.mp3`    | `audio` | `mp3`      | MP3 audio     |
+| `.m4a`    | `audio` | `aac`      | AAC audio     |
+| `.aac`    | `audio` | `aac`      | AAC audio     |
+| `.wav`    | `audio` | `wav`      | WAV audio     |
+| `.wave`   | `audio` | `wav`      | WAV audio     |
+| `.ogg`    | `audio` | `ogg`      | Ogg Vorbis    |
+| `.oga`    | `audio` | `ogg`      | Ogg Vorbis    |
+| `.mp4`    | `video` | `mp4`      | MP4 video     |
+| `.webm`   | `video` | `webm`     | WebM video    |
+| `.txt`    | `text`  | `plain`    | plain text    |
+| `.text`   | `text`  | `plain`    | plain text    |
+| `.md`     | `text`  | `markdown` | Markdown      |
+| `.markua` | `text`  | `markua`   | Markua        |
 
-
-
-
-
-
-
-
-
-
-
-
-
+If the file extension is not in the above table, the resource is interpreted differently based on whether it is a span or figure. If the resource is a span, it is assumed to be `type: text, format: plain`; if the resource is a figure, it is assumed to be `type: code, format: guess`. This way, Markua Processors can feel free to guess based on the file extension and current popular programming langages. A Markua Processor must interpret `type: code, format: guess` as `type: text, format: plain` if it does not recognize or support the given programming language based on the format.
 
 
 # DO NOT TRUST THE REST OF THIS SPECIFICATION ###############################################
 
 The rest of this document is in flux, and is being rewritten. Don't trust anything after this sentence. (I'm only leaving it in the document in order to show what progress has been made.)
+
+
+### Default Attribute Lists
+
+Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline).
+
+Resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, the defaults can only be overridden in a few ways.
+
+#### Span + (Local or Web)
+
+The default attributes for a local resource or a web resource inserted as a span are based on the file extension:
+
+
+
+as follows:
+
+```
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
+```
+
+
+
+
+It's just ![optional alt text](resource_path_or_url) right in the text.
+```
+
+#### Figure + (Local or Web)
+
+The default attributes  for a local resource or a web resource inserted as a figure is as follows:
+
+```
+{key: value, comma: separated, optional: attribute_list}
+![Optional Figure Caption](resource_path_or_url)
+```
+
+#### Span + Inline
+
+The default attributes  for an inline resource inserted as a span is as follows:
+
+```
+It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
+```
+
+#### Figure + Inline
+
+The default attributes  for an inline resource inserted as a figure is as follows:
+
+
+
+The default attribute list for a local resource or a web resource inserted as a figure is as follows:
+
+```
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
+```
+
+So, by default, a local or web resource is a center aligned image which does not float and which tries to have its preferred height and width, respecting margins.
+
+Three backticks or tildes produce a default attribute list of:
+
+```
+{type: text, format: guess}
+```
+
+Three backticks or tildes produce a default attribute list of:
+
+```
+{type: text, format: monospaced}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Resources (cont'd)
 
@@ -302,25 +419,6 @@ format:
   text: plain, monospace
   math: mathml, latex
 
-The default attribute list for a local resource or a web resource inserted as a figure is as follows:
-
-```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
-```
-
-So, by default, a local or web resource is a center aligned image which does not float and which tries to have its preferred height and width, respecting margins.
-
-Three backticks or tildes produce a default attribute list of:
-
-```
-{type: text, format: guess}
-```
-
-Three backticks or tildes produce a default attribute list of:
-
-```
-{type: text, format: monospaced}
-```
 
 
 
@@ -472,7 +570,7 @@ The supported file extensions for video files are:
 : The file is treated as an MP4 video.
 
 .webm
-: The file is treated as a WebM image.
+: The file is treated as a WebM video.
 
 If a Markua Processor is outputting a format in which particular types of audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
 
