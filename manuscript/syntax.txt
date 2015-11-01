@@ -47,120 +47,33 @@ Together, newlines, spaces and tabs are called whitespace. By a newline, I mean 
 
 Paragraphs and blank lines are handled the same way in Markua and Markdown. Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line. Any extra number of newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
 
-
-This is the third paragraph of this section. You can't tell (unless you are reading the Markua source of this specification), but it is separated from the previous paragraph two by two blank lines, produced by three newlines. This is equivalent to if there had only been two newlines (which was the case between the first and second paragraphs of this section).
-
-Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a text resource, so that the exact Markua manuscript text can be shown unprocessed by a Markua. These are three paragraphs in Markua:
+Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a text resource, so that the exact Markua manuscript text can be shown unprocessed by a Markua. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
 
 ```
 I'm paragraph one. Yay!
 
-This is paragraph two. Two newlines separated it from the previous paragraph, producing one blank line.
+This is paragraph two.
 
-
-This is paragraph three. It is separated from paragraph two by two blank lines, produced by three newlines.
+This is paragraph three.
 ```
 
 A paragraph is the least-specialized example of something called a block element. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. All block elements that are separated by at least one blank line from other block elements, and that are not some specialized type of block element (like a heading, figure or list) are paragraphs.
 
 ## Single Newlines, Indentation and Spaces
 
-The way that Markua handles single newlines and indentation is different from Markdown. The goal for newline and indentation handling in Markua is for everything to just work. Prose should just work. Poetry should just work. Code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
+The way that Markua handles single newlines, indentation and spaces is different from Markdown.
+
+The goal for newline and indentation handling in Markua is for everything to just work. Prose should just work. Poetry should just work. Code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
 
 In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books and documents, of which HTML is just one format. The concepts in Markdown are HTML concepts; the concepts in Markua are book and document concepts.
 
-Where this distinction is most evident is in Markua's whitespace changes around single newlines and indentation.
+### Single Newlines
 
 In Markdown, a single newline inside a paragraph is interpreted as a single space. To add a forced line break (a `<br/>` tag in HTML), Markdown uses a horrible hack: you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line! Worse, in some text editors (like Emacs, the editor I use), trailing spaces at the end of a line are automatically removed when a file is saved. So, it's possible for me to inadvertently modify a Markdown document by simply opening it and saving it! Also, in Markdown, it's impossible to type a sonnet without relying on the two space hack at the end of every line to force a newline. That isn't very poetic at all.
 
 In Markua, a single newline inside a paragraph forces a line break, which produces a `<br/>` tag in HTML. This is true without any invisible formatting nonsense. As you will see, there are many types of block elements in Markua, including paragraphs, asides, blurbs, callouts, blockquotes and headings. A single newline inside most of these block elements produces a forced line break, and what follows is either still part of the same block element or is contained in the block element. However, headings (discussed later) are block elements, but inside a heading, a single newline is interpreted as a single space by Markua. This is because a heading is intended to be all on one line.
 
-### Newlines and Inserting Things Inside Paragraphs
-
-
-W> TODO - HERE. STUCK.
-
-
-
-
-Within a paragraph, it is sometimes desired to insert a figure or block quote, while continuing the same paragraph after the figure or block quote is done. This is trivial to do in Markua, and impossible to do in Markdown--in Markdown, any blockquote or figure is a top level element which is a sibling of the paragraphs before and after it.
-
-In Markdown, it's impossible to insert a block quote or code block inside a paragraph. Block quotes and code blocks must be top-level. Since Markdown is a way of producing HTML, this is consistent: the W3C has a [very narrow](http://www.w3.org/TR/html5/dom.html#paragraphs) understanding of paragraphs.
-
-
-In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
-
-> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
-
-So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
-
-{indent: hanging}
-Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
-
-* foo
-* bar
-* baz
-
-{indent: continue}
-Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
-
-
-
-
-Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
-   * foo
-   * bar
-   * baz
-Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
-* foo
-* bar
-* baz
-However, since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C [in the HTML5 spec](http://www.w3.org/TR/html5/grouping-content.html#the-p-element). Specifically, the HTML that is output for paragraphs that nest lists, figures or code blocks is `<div class="para">`. This way, book designers can style these `<div>` tags the same way as `<p>` tags.
-1. Foo
-2. Bar
-3. Baz
-Note that in all cases you need to add some amount of whitespace before the list, figure or code block, so that it appears embedded inside the paragraph. If you do not do this, what you will get is a paragraph with a bunch of break tags, one for each newline.
-
-W> TODO - Should I really enforce whitespace before the list or figure? It looks better for lists, but it's a bit arbitrary and punitive. Also, figures are so ugly it doesn't matter for them, and then I'm inconsistent.
-
-
-
-
-
-
-
-Here are some examples of figures and block quotes inserted inside of, and outside of, paragraphs in Markua:
-
-~~~
-This is paragraph one. It is followed by a figure which is a resource of Java code.
-
-{type: code, format: java}
-![Hello World in Java](hello.java)
-
-This is paragraph two. It contains a figure which is an inline code resource.
-```ruby
-puts "hello world"
-```
-This is still in paragraph two, since it follows the figure with a single newline, not a blank line.
-
-This is paragraph three, followed by a top-level figure which is an image resource.
-
-{alt: "Denzel Washington on a jet ski in a river"}
-![Washington Crossing the Delaware](delaware.jpg)
-
-This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
-Here's the first blockquote:
-  > There is a tide in the affairs of men.
-  > Which, taken at the flood, leads on to fortune;
-The paragraph then continues, and then addes another blockquote:
-  > Omitted, all the voyage of their life
-  > Is bound in shallows and in miseries.
-This is also still in the same paragraph.
-
-This is the final paragraph.
-~~~
-
-## Leading Spaces: Double vs. Single Newlines, Prose vs. Poetry
+### Leading Spaces
 
 The way that leading spaces are handled is different based on what came before it.
 
@@ -173,11 +86,13 @@ At the start of a line following exactly one newline:
 
 Following **two or more** newlines (one or more blank lines), whitespace is **ignored**.
 
-The distinction is the distinction between prose and poetry.
+### Prose vs. Poetry
 
-Two (or more) newlines in Markua create a new paragraph. That's it. Paragraphs can either be indented or not indented, but this is a global setting at the book or document level--not something that is specific to a given paragraph. Authors may choose to indent their paragraphs in their manuscript based on personal preference or habit, but this should have no effect on whether the paragraphs are indented in the output.
+The distinction in how single versus multiple newlines affect whitespace line up with the distinction between prose and poetry.
 
-One newline, on the other hand, is used to add a forced line break, but to keep the existing paragraph (or stanza). Because of this, any leading space after a single newline is not paragraph indentation, but is instead indentation on the specific line.
+Two (or more) newlines in Markua create a new paragraph in prose, or a new stanza in poetry. That's it. Paragraphs can either be indented or not indented, but this is a global setting at the book or document level--not something that is specific to a given paragraph. Authors may choose to indent their paragraphs in their manuscript based on personal preference or habit, but this should have no effect on whether the paragraphs are indented in the output.
+
+One newline, on the other hand, is used to add a forced line break, but to keep the existing paragraph (or stanza). Because of this, any leading space after a single newline is not paragraph indentation, but is instead deliberate indentation on the specific line. As such, it should be respected.
 
 This means you can write a sonnet without typing any special formatting characters. In the following Markua text, every line break will be added correctly, and the last two lines will be indented:
 
@@ -188,7 +103,7 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ```
 
-In Markdown, without any trailing space hack used, this would all be collapsed to one line.
+In Markdown, without any trailing space hack used, this would all be collapsed to one line. (Note how this shows that the two space hack is unacceptable: you should be able to tell what output is produced by looking at the input.)
 
 More generally, the rules about single and double newlines mean that in Markua you can just write poetry without any formatting characters. Stanzas are separated with a blank line, and any indentation is preserved except on the first line of a stanza.
 
@@ -200,27 +115,63 @@ Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua.
 
 Like Markdown, in Markua, spaces or tabs that are in the middle of a line of text are collapsed to a single space. In Markdown, the main reason for this is presumably that this is how things work in HTML (without using `&nbsp;`). In Markdown, the reasons for this are that it's consistent with Markdown, and that it lets authors write books using either one or two spaces after a period, with there being no difference in the formatting.
 
-In the following Markua text, there will only be one space output after each word, regardless of the actual number of spaces in the manuscript:
-
-```
-This     sentence   outputs  five        internal spaces.
-```
-
 Because of this, if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you need to use a text resource. Resources are discussed later in this chapter.
 
-### Newlines and Inserting Lists in Paragraphs
-
-
-
-### Indentation and Poetry
 
 
 
 
 
+## TODO - RETHINK
+
+### Newlines and Inserting Things Inside Paragraphs
+
+In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
+
+> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
+
+So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
+
+Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
+
+Here are some examples of figures and block quotes inserted inside of, and outside of, paragraphs in Markua:
+
+~~~
+This is paragraph one. It is followed by a figure which is a resource of Java code.
+
+{type: code, format: java}
+![Hello World in Java](hello.java)
+
+This is paragraph two. It contains a figure which is an inline code resource.
+
+```ruby
+puts "hello world"
+```
+
+This is still in paragraph two, since it follows the figure with a single newline, not a blank line.
+
+This is paragraph three, followed by a top-level figure which is an image resource.
+
+{alt: "Denzel Washington on a jet ski in a river"}
+![Washington Crossing the Delaware](delaware.jpg)
+
+This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
+Here's the first blockquote:
+
+> There is a tide in the affairs of men.
+> Which, taken at the flood, leads on to fortune;
+
+The paragraph then continues, and then addes another blockquote:
+
+> Omitted, all the voyage of their life
+> Is bound in shallows and in miseries.
+
+This is also still in the same paragraph.
+
+This is the final paragraph.
+~~~
 
 
-## TODO
 
 The following rules define how Markua handles whitespace.
 
