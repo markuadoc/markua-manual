@@ -146,6 +146,8 @@ puts "hello world"
 ![Hello, World](hello.rb)
 ~~~
 
+A> If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown. Note that Markdown's reference style image syntax is not supported in Markua for any type of resource, including images. There are two main reasons for not supporting reference style resource syntax: (1) Resources in Markua are complex enough without adding two In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
+
 The last figure in the example above showed an attribute list, which is a list of key-value pairs in curly braces. Any figure can have an attribute list, regardless of resource location, type or format.
 
 ### Resource Locations and Insertion Methods
@@ -218,9 +220,39 @@ The default `type` of an inline resource depends on the `format` specified:
 
 These defaults mean that Markua can usually do the right thing based on the format, and that the resource type can almost always be inferred for inline resources. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
 
-Now, let's consider each of the types of resources in more detail, as well as the various formats that they support.
+We will consider each of the types of resources in more detail, as well as the various formats that they support. First, however, we need to examine some general considerations which affect all resources.
+
+### Local Resource Location
+
+All local resources are stored inside a `resources` directory, whose name is not part of the path. All images identified with a directory path must be inside the `resources` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+
+A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
+
+The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory.
+
+W> In Leanpub Flavoured Markdown, we included `images/` in the path of all images. This is not supported in Markua. If  Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is `resources/` in a path, a Markua processor **must** assume this is the name of a directory *inside* the `resources` directory.
+
+### Optional Locations and Types
+
+Current copyright law makes the use of resources problematic. As such:
+
+* Support for image, audio and video resources is optional in Markua processors, regardless of location.
+* Support for web resources is optional in Markua processors, regardless of resource type.
+* Support for Web Resources is not all or nothing--a Markua Processor can support Web Resources for some resource types but not others.
+
+For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of Web Resource, it must consider all Web Resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+
+### Web Resource Support
+
+If web resources are supported, both `http:` and `https:` resources should be supported.
+
+Web resources are identified by URL. The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of image, audio and video resources, this becomes the `src` attribute of the resource in HTML.
 
 
+
+
+
+Markua Processors should support all types of Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors.
 
 
 
@@ -250,20 +282,15 @@ The rest of this document is in flux, and is being rewritten. Don't trust anythi
 
 Below are spare parts that need to be revised and integrated into the above. If you want a nice reading experience, you might as well stop reading now.
 
-While this seems complex, it's important to emphasize that Markua resource syntax is just Markdown's inline image syntax, extended to support the resource types, figure captions and other attributes required by Markua. The details of all this will be described later, but it's useful to show how this fits together briefly first.
-
-A> The reference style image syntax of Markdown is **NOT** supported in Markua. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 
 
-All Markua Processors must support all types of Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors. Furthermore, support for Web Resources is not all or nothing -- a Markua Processor can support Web Resources for some resource types but not others. For example, a Markua Processor could support Web Resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of Web Resource, it must consider all Web Resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+
 
 A> Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful.
 
 Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
 
 As such, both the inline and reference methods for defining an audio or video resource support defining an arbitrary number of fallback audio or video resources or images. The reason to provide a fallback audio or video resource is to provide essentially the same content in a different format; the reason to provide a fallback image is to provide a suitable replacement in a situation where audio or video resources are not supported at all.
-
-If a Markua Processor is outputting a print book or some format where it is known that audio or video resource is not supported, it must choose the first fallback image. If no fallback image is provided and a Markua Processor is outputting a format in which audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
 
 My assumption is that in most cases authors will only provide alt text and a fallback image, or not provide anything at all. My hope is that at least alt text is provided.
 
@@ -288,30 +315,6 @@ This example shows a figure which is floated `left` and which has a `width` of h
 
 This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
 
-A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua.
-
-
-This syntax is similar to Markdown's inline image insertion syntax. Markdown's reference style image syntax is not supported in Markua.
-
-All local resources are stored inside a `resources` directory, whose name is not part of the path. A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
-
-Web resources are identified by URL. Both `http:` and `https:` resources must be supported. Because of copyright concerns, support for web resources is optional in Markua Processors. A Markua Processor may or may not support web resources for any given type of resource.
-
-The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of images, audio and video, this becomes the `src` attribute of the resource in HTML.
-
-The default type of a resource is `image`. For other types of resources, the type must be specified as an attribute.
-
-The `resources/` directory is not included in the path in the Markua manuscript; it is present in the generated HTML.
-
-All images identified with a directory path must be inside the `resources` directory or one of its subdirectories. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
-
-The local resources approach can also be used by hosted services. If they provide a download they should create a resources directory... TODO
-
-A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)` -- not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
-
-A file called `bar.png` in a subdirectory `foo` of the resources directory is referenced as `![](foo/bar.png)` -- not as `![](/foo/bar.png)`, `![](resources/foo/bar.png)` or  `![](/resources/foo/bar.png)`.
-
-W> In Leanpub Flavoured Markdown, we included `images/` in the path of all images. This is not supported in Markua. If  Not only is it redundant, it incorrectly implies that the directory could be named anything, which is not the case. So, if there is resources/ in a path, a Markua processor **must** assume this is the name of a directory *inside* the resources directory.
 
 When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
 
@@ -457,6 +460,7 @@ Images can be inserted as a span image in the flow of text in a paragraph. When 
 
 A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
 
+A> The reference style image syntax of Markdown is **NOT** supported in Markua.
 
 ### Video
 
@@ -489,12 +493,11 @@ The supported file extensions for video files are:
 .webm
 : The file is treated as a WebM image.
 
-
-
 If a Markua Processor is outputting a format in which particular types of audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
 
 If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported, it must choose the poster to use as an image replacement. (This includes situations where the video is identified by a URL and only local video resources are supported by the particular Markua Processor.)
 
+A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua.
 
 ### Audio
 
