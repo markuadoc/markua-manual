@@ -122,7 +122,14 @@ If the multiple file approach is used, the listed files are first concatenated t
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
-Before considering each type of resource, it's helpful to consider some brief examples:
+Resources vary in four different ways:
+
+1. Insertion Methods: Span and Figure
+2. Locations: Local, Web and Inline
+3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
+4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
+
+Before going into more detail, it's helpful to consider some brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
 ~~~
 Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also...
@@ -141,13 +148,6 @@ puts "hello world"
 
 The last figure in the example above showed an attribute list, which is a list of key-value pairs in curly braces. Any figure can have an attribute list, regardless of resource location, type or format.
 
-Resources vary in four different ways:
-
-1. Insertion Methods: Span and Figure
-2. Locations: Local, Web and Inline
-3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
-4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
-
 ### Resource Locations and Insertion Methods
 
 A resource is either considered a local, web or inline resource based on its location:
@@ -161,7 +161,7 @@ Web Resource
 Inline Resource
 : The resource is defined right in the body of a Markua document.
 
-Resources can be inserted either as spans or as figures.
+Resources can be inserted either as spans or as figures:
 
 Span
 : The resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource cannot have an attribute list.
@@ -217,6 +217,24 @@ The default `type` of an inline resource depends on the `format` specified:
 * For any other format, the inline resource is assumed to be of type `code`.
 
 These defaults mean that Markua can usually do the right thing based on the format, and that the resource type can almost always be inferred for inline resources. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
+
+Now, let's consider each of the types of resources in more detail, as well as the various formats that they support.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -371,6 +389,7 @@ A figure can also have attributes. There are three attributes: `float`, `width` 
 
 
 As we'll see now, certain resource types of figures support other attributes.
+
 
 ### Images
 
