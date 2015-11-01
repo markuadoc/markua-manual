@@ -32,11 +32,6 @@ puts "hello world"
 
 This is still in paragraph two, since it follows the figure with a single newline, not a blank line.
 
-This is paragraph three, followed by a top-level figure which is an image resource.
-
-{alt: "Denzel Washington on a jet ski in a river"}
-![Washington Crossing the Delaware](delaware.jpg)
-
 This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
 Here's the first blockquote:
 

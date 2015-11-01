@@ -252,12 +252,6 @@ Web resources are identified by URL. The `resource_path_or_url` is either the re
 
 
 
-Markua Processors should support all types of Local Resources. However, due to the nightmare that is current copyright law, support for Web Resources is optional in Markua Processors.
-
-
-
-
-
 
 
 
@@ -283,22 +277,6 @@ The rest of this document is in flux, and is being rewritten. Don't trust anythi
 Below are spare parts that need to be revised and integrated into the above. If you want a nice reading experience, you might as well stop reading now.
 
 
-
-
-
-A> Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful.
-
-Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
-
-As such, both the inline and reference methods for defining an audio or video resource support defining an arbitrary number of fallback audio or video resources or images. The reason to provide a fallback audio or video resource is to provide essentially the same content in a different format; the reason to provide a fallback image is to provide a suitable replacement in a situation where audio or video resources are not supported at all.
-
-My assumption is that in most cases authors will only provide alt text and a fallback image, or not provide anything at all. My hope is that at least alt text is provided.
-
-
-When inserting an audio or video resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the audio or video resource. Otherwise, the paragraph would quickly look ridiculous, as a typical audio or video resource thumbnail is many times the height of a typical line of text.
-
-A> I considered using a definition list syntax for defining audio or video resources, and supporting different figure captions based on which audio or video resource was used. However, I decided that this was objectionable: the text of a book should not change based on the capabilities of the ebook reader, and I consider figure captions to be book text. So, since the alternative caption use case was not legitimate, the need for the definition list syntax evaporated with it. (Yes, there will be line wrapping if there are a number of fallback media defined; that's preferable to having two syntaxes to do the same thing.)
-
 Just as with Markdown, to show a literal backtick, you use *two* backticks to start and end your code span. (The Markdown spec says multiple backticks; Markua says exactly two.)
 
 Note that like Markdown, any leading or trailing spaces in a code span are removed.
@@ -318,9 +296,11 @@ This example shows a figure which has a `width` attribute of `fullbleed`. Note t
 
 When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
 
-code: language, plain, guess
-text: plain, monospace
-math: mathml, latex
+type: code, math, text, ...
+format:
+  code: plain, guess, [some language]
+  text: plain, monospace
+  math: mathml, latex
 
 The default attribute list for a local resource or a web resource inserted as a figure is as follows:
 
@@ -330,23 +310,20 @@ The default attribute list for a local resource or a web resource inserted as a 
 
 So, by default, a local or web resource is a center aligned image which does not float and which tries to have its preferred height and width, respecting margins.
 
-
-
-The default attribute list for an inline resource inserted as a figure varies based on the delimiters (tildes or backticks) used.
-
-Three tildes produce a default attribute list of:
+Three backticks or tildes produce a default attribute list of:
 
 ```
-{type: text, format: plain}
+{type: text, format: guess}
 ```
 
-This is useful for normal poetry.
-
-Three backticks, on the other hand, produce a default attribute list of:
+Three backticks or tildes produce a default attribute list of:
 
 ```
 {type: text, format: monospaced}
 ```
+
+
+
 
 This is useful for unformatted code samples and monospaced poetry.
 
@@ -433,8 +410,8 @@ These are some local and web image resources:
 ```
 ![map of Delaware](delaware.svg)
 
-{caption: "Washington Crossing the Delaware", width: 80, position: top}
-![Denzel Washington riding a jet ski in a river](delaware.jpg)
+{width: 80, position: top, alt: "Denzel Washington on a jet ski in a river"}
+![Washington Crossing the Delaware](delaware.jpg)
 
 Many startups are ![happy](http://markua.com/happy.png) to incorporate in Delaware.
 ```
@@ -464,6 +441,10 @@ A> The reference style image syntax of Markdown is **NOT** supported in Markua.
 
 ### Video
 
+Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
+
+A> Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful.
+
 Markua supports two types of `video` resourcess: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4, and `.webm` for WebM.
 
 The supported attributes for `video` resources are: `poster`, `align`, `float`, `position`, `width` and `height`.
@@ -477,8 +458,8 @@ Examples:
 ```
 Here's a video:
 
-{type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg, caption: "Introducing Markua"}
-!["Peter Armstrong's first talk about Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
+{type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
+!["Introducing Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
 
 Ironically, I'm writing this sentence almost a year after that was recorded, and I still haven't figured everything out about Markua.
 ```
@@ -496,6 +477,8 @@ The supported file extensions for video files are:
 If a Markua Processor is outputting a format in which particular types of audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
 
 If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported, it must choose the poster to use as an image replacement. (This includes situations where the video is identified by a URL and only local video resources are supported by the particular Markua Processor.)
+
+When inserting an audio or video resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the audio or video resource. Otherwise, the paragraph would quickly look ridiculous, as a typical audio or video resource thumbnail is many times the height of a typical line of text.
 
 A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua.
 
