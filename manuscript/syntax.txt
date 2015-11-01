@@ -75,16 +75,17 @@ In Markdown, a single newline inside a paragraph is interpreted as a single spac
 
 In Markua, a single newline inside a paragraph forces a line break, which produces a `<br/>` tag in HTML. This is true without any invisible formatting nonsense. As you will see, there are many types of block elements in Markua, including paragraphs, asides, blurbs, callouts, blockquotes and headings. A single newline inside most of these block elements produces a forced line break, and what follows is either still part of the same block element or is contained in the block element. However, headings (discussed later) are block elements, but inside a heading, a single newline is interpreted as a single space by Markua. This is because a heading is intended to be all on one line.
 
-Because of the way that Markua handles single newlines, figures and block quotes can either be contained in paragraphs or can be inserted top-level. (Figures and block quotes are discussed at length later; right now, just pay attention to how they are inserted and how the newlines function.)
+### Newlines and Inserting Things Inside Paragraphs
 
 
+W> TODO - HERE. STUCK.
 
 
 
 
 Within a paragraph, it is sometimes desired to insert a figure or block quote, while continuing the same paragraph after the figure or block quote is done. This is trivial to do in Markua, and impossible to do in Markdown--in Markdown, any blockquote or figure is a top level element which is a sibling of the paragraphs before and after it.
 
-3. In Markdown, it's impossible to insert a block quote or code block inside a paragraph. Block quotes and code blocks must be top-level. Since Markdown is a way of producing HTML, this is consistent: the W3C has a [very narrow](http://www.w3.org/TR/html5/dom.html#paragraphs) understanding of paragraphs.
+In Markdown, it's impossible to insert a block quote or code block inside a paragraph. Block quotes and code blocks must be top-level. Since Markdown is a way of producing HTML, this is consistent: the W3C has a [very narrow](http://www.w3.org/TR/html5/dom.html#paragraphs) understanding of paragraphs.
 
 
 In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
@@ -93,10 +94,30 @@ In Markdown, lists and other block elements cannot be nested inside a paragraph.
 
 So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
 
+
 Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
 
-However, since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C [in the HTML5 spec](http://www.w3.org/TR/html5/grouping-content.html#the-p-element). Specifically, the HTML that is output for paragraphs that nest lists, figures or code blocks is `<div class="para">`. This way, book designers can style these `<div>` tags the same way as `<p>` tags.
+* foo
+* bar
+* baz
 
+Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
+
+
+
+
+Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
+   * foo
+   * bar
+   * baz
+Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
+* foo
+* bar
+* baz
+However, since the HTML which is output can't embed a list in the paragraph, the solution is to use a `<div>` tag, instead of a paragraph tag. Yes, this will cause some HTML purists to complain, but it's the actual HTML suggested by the W3C [in the HTML5 spec](http://www.w3.org/TR/html5/grouping-content.html#the-p-element). Specifically, the HTML that is output for paragraphs that nest lists, figures or code blocks is `<div class="para">`. This way, book designers can style these `<div>` tags the same way as `<p>` tags.
+1. Foo
+2. Bar
+3. Baz
 Note that in all cases you need to add some amount of whitespace before the list, figure or code block, so that it appears embedded inside the paragraph. If you do not do this, what you will get is a paragraph with a bunch of break tags, one for each newline.
 
 W> TODO - Should I really enforce whitespace before the list or figure? It looks better for lists, but it's a bit arbitrary and punitive. Also, figures are so ugly it doesn't matter for them, and then I'm inconsistent.
@@ -106,8 +127,6 @@ W> TODO - Should I really enforce whitespace before the list or figure? It looks
 
 
 
-
-### Newlines and Inserting Things Inside Paragraphs
 
 Here are some examples of figures and block quotes inserted inside of, and outside of, paragraphs in Markua:
 
@@ -130,11 +149,11 @@ This is paragraph three, followed by a top-level figure which is an image resour
 
 This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
 Here's the first blockquote:
-> There is a tide in the affairs of men.
-> Which, taken at the flood, leads on to fortune;
+  > There is a tide in the affairs of men.
+  > Which, taken at the flood, leads on to fortune;
 The paragraph then continues, and then addes another blockquote:
-> Omitted, all the voyage of their life
-> Is bound in shallows and in miseries.
+  > Omitted, all the voyage of their life
+  > Is bound in shallows and in miseries.
 This is also still in the same paragraph.
 
 This is the final paragraph.
