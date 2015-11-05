@@ -118,6 +118,7 @@ A Markua document can be written in one file or multiple manuscript files. If a 
 
 To see why this rule is important, consider the following single-file Markua manuscript:
 
+{caption: manuscript.txt}
 ```
 # Chapter One
 
@@ -130,16 +131,14 @@ Yada yada yada.
 
 Suppose instead a multiple-file approach was used, in which there were two files, ch1.txt and ch2.txt, with the following content:
 
-ch1.txt:
-
+{caption: ch1.txt}
 ```
 # Chapter One
 
 Lorem ipsum dolor.
 ```
 
-ch2.txt:
-
+{caption: ch2.txt}
 ```
 # Chapter Two
 
@@ -148,6 +147,7 @@ Yada yada yada.
 
 If Markua did not add any newlines between files, then these files would produce the following manuscript:
 
+{caption: Incorrect Temporary Auto-Created Manuscript #1}
 ```
 # Chapter One
 
@@ -158,6 +158,7 @@ Yada yada yada.
 
 If Markua only added one newline when concatenating, this would produce the following manuscript:
 
+{caption: Incorrect Temporary Auto-Created Manuscript #2}
 ```
 # Chapter One
 
@@ -171,6 +172,7 @@ However, since Markua requires that headings be separated by blank lines above a
 
 So, because of the blank line rule, concatenating the files produces the same manuscript as the single-file manuscript above:
 
+{caption: Correct Temporary Auto-Created Manuscript}
 ```
 # Chapter One
 
