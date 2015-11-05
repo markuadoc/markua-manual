@@ -191,10 +191,17 @@ Markua books and documents are written in plain text, either in one text file or
 
 Resources vary in four different ways:
 
-1. Insertion Methods: Span and Figure
-2. Locations: Local, Web and Inline
-3. Types: `image`, `video`, `audio`, `code`, `math` or `text`
-4. Formats: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
+Insertion Methods
+: Span and Figure
+
+Locations
+: Local, Web and Inline
+
+Types
+: `image`, `video`, `audio`, `code`, `math` or `text`
+
+Formats
+: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
 Before going into more detail, it's helpful to consider some brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
@@ -215,12 +222,14 @@ puts "hello world"
 
 The last figure in the example above showed an attribute list, which is a list of key-value pairs in curly braces. Any figure can have an attribute list, regardless of resource location, type or format.
 
-A> If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown. Note that Markdown's reference style image syntax is not supported in Markua for any type of resource, including images.
-A>
-A> There are two main reasons for not supporting reference style resource syntax in Markua:
-A>
-A> 1. Resources in Markua are complex enough without having two syntaxes.
-A> 2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
+If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown.
+
+Note, however, that Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images.
+
+There are two main reasons for not supporting reference style resource syntax in Markua:
+
+1. Resources in Markua are complex enough without having two syntaxes.
+2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 
 ### Resource Locations and Insertion Methods
 
@@ -264,12 +273,27 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 
 W> TODO - missing.png Leanpub bug above
 
+Note that if there is a figure caption specified in the attribute list and in the square brackets, the one in the attribute list wins. In the following figure, the caption would be "Foo" not "bar":
+
+```
+{caption: Foo}
+![bar](foo.png)
+```
+
 #### Span + Inline
 
 The syntax for an inline resource inserted as a span is as follows:
 
 ```
 It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
+```
+
+For example:
+
+```
+This is `puts "hello"`ruby a code resource with a format of `ruby`.
+
+This, however, is a `puts "hello"` text resource inserted as a span.
 ```
 
 #### Figure + Inline
@@ -280,6 +304,15 @@ The syntax for an inline resource inserted as a figure is as follows:
 {key: value, comma: separated, optional: attribute_list}
 ```optional_format
 inline resource content
+```
+~~~
+
+Note that if there is a format specified in the attribute list and after the backticks, the one in the attribute list wins. In the following figure, the format is `text` not `ruby`:
+
+~~~
+{format: text}
+```ruby
+puts "hello world"
 ```
 ~~~
 
