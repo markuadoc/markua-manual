@@ -61,9 +61,9 @@ This is paragraph three.
 
 A paragraph is the least-specialized example of something called a block element. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. All block elements that are separated by at least one blank line from other block elements, and that are not some specialized type of block element (like a heading, figure or list) are paragraphs.
 
-## Single Newlines, Indentation and Spaces
+## Newlines, Indentation and Spaces
 
-The goal for newline and indentation handling in Markua is for everything to just work. Prose should just work. Poetry should just work. Code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
+The goal for newline and indentation handling in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
 
 In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books and documents, of which HTML is just one format. The concepts in Markdown are HTML concepts; the concepts in Markua are book and document concepts.
 
@@ -112,13 +112,15 @@ Like Markdown, in Markua, spaces or tabs that are in the middle of a line of tex
 
 Because of this, if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you need to use a text resource. Markua defines many different types of resources, including math, code and text resources. Resources are discussed later in this chapter.
 
-## File Structure
+### One Blank Line is Added When Concatenating Manuscript Files
 
-A Markua document can be written in one file or multiple manuscript files.
+A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
 
-### Blank Lines and File Concatenation
+For example, with multiple files, Leanpub's normal Dropbox workflow uses a hybrid approach where there is a file called book.txt which lists the files in the manuscript in order and in which most of the book settings are specified via a web interface. However, that is just one approach of many possible ones: Markua can be used for entirely web-based (also supported by Leanpub), or it could be a command line tool in which the files to be processed are listed in order (similar to pandoc).
 
-If the multiple file approach is used, the listed files are first concatenated together by a Markua Processor to produce one temporary Markua manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they must be concatenated together by Markua Processors with two newlines added between the end of each file and the beginning of the next file, in order to separate the content of the two files with one blank line between them. Because of this, a paragraph (or any other block element) cannot span multiple manuscript files.
+### Blank Lines
+
+
 
 ## Resources
 
@@ -1718,6 +1720,25 @@ Markua uses metadata to provide a bunch of advanced functionality.
 There are three types of metadata: attributes, index entries and directives.
 
 Attributes are used to do everything from specify the language of code blocks, add ids for crosslinkng and even support extensions to Markua. Index entries let authors or indexers produce professional-looking indexes in Markua books. Finally, directives control
+
+
+## TODO
+
+A Markua document can be written in one file or multiple manuscript files.
+
+In order to encourage competition, Markua does not specify much about how the single file or multiple files approaches must work.
+
+If a manuscript is written in one file, any metadata (discussed later) is placed in a metadata block. This is typically at the top of the manuscript file, but it can be anywhere in the file or it can be located elsewhere, e.g. in the case of a web service.
+
+If a manuscript is written in multiple files, the metadata is typically stored in its own file. Also, as the first step of book or document generation, a
+
+The manuscript files are concatenated together by the Markua processor as the first step of book or document generation. If the multiple file approach is used, the listed files are first concatenated together by a Markua Processor to produce one temporary Markua manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together simply--they must be concatenated together by Markua Processors with two newlines added between the end of each file and the beginning of the next file, in order to separate the content of the two files with one blank line between them. Because of this, a paragraph (or any other block element) cannot span multiple manuscript files.
+
+
+
+For example, with multiple files, Leanpub's normal Dropbox workflow uses a hybrid approach where there is a file called book.txt which lists the files in the manuscript in order and in which most of the book settings are specified via a web interface. However, that is just one approach of many possible ones: Markua can be used for entirely web-based (also supported by Leanpub), or it could be a command line tool in which the files to be processed are listed in order (similar to pandoc).
+
+
 
 ## A Note About Curly Braces (`{` and `}`)
 
