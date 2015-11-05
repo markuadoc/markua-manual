@@ -116,12 +116,6 @@ Because of this, if you want to write poetry like e e cummings in which the exac
 
 A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
 
-For example, with multiple files, Leanpub's normal Dropbox workflow uses a hybrid approach where there is a file called book.txt which lists the files in the manuscript in order and in which most of the book settings are specified via a web interface. However, that is just one approach of many possible ones: Markua can be used for entirely web-based (also supported by Leanpub), or it could be a command line tool in which the files to be processed are listed in order (similar to pandoc).
-
-### Blank Lines
-
-
-
 ## Resources
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
