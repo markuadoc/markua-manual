@@ -116,6 +116,71 @@ Because of this, if you want to write poetry like e e cummings in which the exac
 
 A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
 
+To see why this rule is important, consider the following single-file Markua manuscript:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+```
+
+Suppose instead a multiple-file approach was used, in which there were two files, ch1.txt and ch2.txt, with the following content:
+
+ch1.txt:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+```
+
+ch2.txt:
+
+```
+# Chapter Two
+
+Yada yada yada.
+```
+
+If Markua did not add any newlines between files, then these files would produce the following manuscript:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.# Chapter Two
+
+Yada yada yada.
+```
+
+If Markua only added one newline when concatenating, this would produce the following manuscript:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+# Chapter Two
+
+Yada yada yada.
+```
+
+However, since Markua requires that headings be separated by blank lines above and below them, the `# Chapter Two` heading would not be a heading. It would be considered part of the previous paragraph! This would be very surprising and the source of a number of bugs. Worse, since a number of text editors such as Emacs have a "strip blank lines at the end of files" setting, it would be possible to introduce such a bug if Markua simply relied on blank lines being added to the end of a file by the author.
+
+So, because of the blank line rule, concatenating the files produces the same manuscript as the single-file manuscript above:
+
+```
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+```
+
 ## Resources
 
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
