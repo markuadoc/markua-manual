@@ -401,28 +401,28 @@ If the file extension is not in the above table, the resource is interpreted dif
 
 A Markua Processor must interpret `{type: code, format: guess}` as `{type: text, format: plain}` if it does not recognize or support the given programming language based on the format.
 
-
-# DO NOT TRUST THE REST OF THIS SPECIFICATION ###############################################
-
-The rest of this document is in flux, and is being rewritten. Don't trust anything after this sentence. (I'm only leaving it in the document in order to show what progress has been made.)
-
-
 ### Default Attribute Lists
 
-Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline).
+Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline). Also, local and web resources have different default attributes based on their file extension, since if there is no `type` specified the file extension is used to choose a type. Finally, resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, the defaults can only be overridden in a few ways.
 
-Resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, the defaults can only be overridden in a few ways.
+| `type`  | Inserted As | Default Attribute List
+|---------|-------------|--------------------------|
+| `image` | Span        | `
+| `image` | Figure      | `{align: center, float: none, position: near, width: auto, height: auto}`
+
 
 #### Span + (Local or Web)
 
-The default attributes for a local resource or a web resource inserted as a span are based on the file extension:
+The default attributes for a local resource or a web resource inserted as a span are based on the file extension.
+
+
 
 
 
 as follows:
 
 ```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
+
 ```
 
 
@@ -492,6 +492,12 @@ Three backticks or tildes produce a default attribute list of:
 
 
 
+
+# DO NOT TRUST THE REST OF THIS SPECIFICATION ###############################################
+
+The rest of this document is in flux, and is being rewritten. Don't trust anything after this sentence. (I'm only leaving it in the document in order to show what progress has been made.)
+
+## ##########################################################################################
 
 
 
