@@ -355,11 +355,11 @@ The local resources approach can also be used by hosted services. Internally, se
 
 Current copyright law makes the use of resources problematic. As such:
 
-* Support for image, audio and video resources is optional in Markua processors, regardless of location.
+* Support for `image`, `audio` and `video` resources is optional in Markua processors, regardless of location.
 * Support for web resources is optional in Markua processors, regardless of resource type.
-* Support for Web Resources is not all or nothing--a Markua Processor can support Web Resources for some resource types but not others.
+* Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
 
-For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of Web Resource, it must consider all Web Resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
 
 ### Web Resource Support
 
@@ -374,8 +374,6 @@ Resource types and formats are often inferred from the resource file extension.
 Markua defines one set of file extensions for local or web resources which produces default values for the resource type and format. (Inline resources have no file extension, since they are inline.)
 
 When a local or web resource is inserted as a span, this is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by the attribute list.
-
-W> TOOD - Convert this to a Markua table when supported
 
 | Extension | `type`  | `format`   | Description   |
 |-----------|---------|------------|---------------|
@@ -399,7 +397,9 @@ W> TOOD - Convert this to a Markua table when supported
 | `.md`     | `text`  | `markdown` | Markdown      |
 | `.markua` | `text`  | `markua`   | Markua        |
 
-If the file extension is not in the above table, the resource is interpreted differently based on whether it is a span or figure. If the resource is a span, it is assumed to be `type: text, format: plain`; if the resource is a figure, it is assumed to be `type: code, format: guess`. This way, Markua Processors can feel free to guess based on the file extension and current popular programming langages. A Markua Processor must interpret `type: code, format: guess` as `type: text, format: plain` if it does not recognize or support the given programming language based on the format.
+If the file extension is not in the above table, the resource is interpreted differently based on whether it is a span or figure. If the resource is a span, it is assumed to be `{type: text, format: plain}`; if the resource is a figure, it is assumed to be `{type: code, format: guess}`. This way, Markua Processors can feel free to guess based on the file extension and current popular programming langages.
+
+A Markua Processor must interpret `{type: code, format: guess}` as `{type: text, format: plain}` if it does not recognize or support the given programming language based on the format.
 
 
 # DO NOT TRUST THE REST OF THIS SPECIFICATION ###############################################
