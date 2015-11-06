@@ -224,9 +224,7 @@ The last figure in the example above showed an attribute list, which is a list o
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown.
 
-Note, however, that Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images.
-
-There are two main reasons for not supporting reference style resource syntax in Markua:
+Note, however, that Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images. There are two main reasons for not supporting reference style resource syntax in Markua:
 
 1. Resources in Markua are complex enough without having two syntaxes.
 2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
@@ -252,7 +250,7 @@ Span
 Figure
 : The resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
 
-#### Span + (Local or Web)
+### Span Resources
 
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
@@ -262,7 +260,21 @@ It's just ![optional alt text](resource_path_or_url) right in the text.
 
 W> TODO - missing.png Leanpub bug above
 
-#### Figure + (Local or Web)
+The syntax for an inline resource inserted as a span is as follows:
+
+```
+It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
+```
+
+For example:
+
+```
+This is `puts "hello"`ruby a code resource with a format of `ruby`.
+
+This, however, is a `puts "hello"` text resource inserted as a span.
+```
+
+### Figures
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
@@ -279,24 +291,6 @@ Note that if there is a figure caption specified in the attribute list and in th
 {caption: Foo}
 ![bar](foo.png)
 ```
-
-#### Span + Inline
-
-The syntax for an inline resource inserted as a span is as follows:
-
-```
-It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
-```
-
-For example:
-
-```
-This is `puts "hello"`ruby a code resource with a format of `ruby`.
-
-This, however, is a `puts "hello"` text resource inserted as a span.
-```
-
-#### Figure + Inline
 
 The syntax for an inline resource inserted as a figure is as follows:
 
@@ -316,6 +310,18 @@ puts "hello world"
 ```
 ~~~
 
+A figure can also have attributes. The supported attributes vary based on the `type` of resource, but all figures support the following three attributes: `type`, `format` and `caption`.
+
+`type`
+: This ...
+
+`format`
+: This ...
+
+`caption`
+: This ...
+
+
 ### Resource Types and Formats
 
 There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
@@ -324,7 +330,7 @@ Each `type` of resource has a number of supported formats, which can either be s
 
 Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
-Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format.
+Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format (since an SVG image is just XML text, it can be pasted in the text of a Markua document--something that is not true with binary images like PNG or JPEG, which can only be local or web resources).
 
 The default `type` of a local resource or web resource is always `image`. This means images in Markua are inserted in essentially the same way they are in Markdown.
 
@@ -401,185 +407,21 @@ If the file extension is not in the above table, the resource is interpreted dif
 
 A Markua Processor must interpret `{type: code, format: guess}` as `{type: text, format: plain}` if it does not recognize or support the given programming language based on the format.
 
-### Default Attribute Lists
+### Default Attributes
 
-Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline). Also, local and web resources have different default attributes based on their file extension, since if there is no `type` specified the file extension is used to choose a type. Finally, resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, the defaults can only be overridden in a few ways.
+Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline). Also, local and web resources have different default attributes based on their file extension, since if there is no `type` specified the file extension is used to choose a type. Finally, resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, for resources inserted as a span, the defaults can only be overridden in a few ways.
 
-| `type`  | Inserted As | Default Attribute List
-|---------|-------------|--------------------------|
-| `image` | Span        | `
-| `image` | Figure      | `{align: center, float: none, position: near, width: auto, height: auto}`
+The specific default attributes are discussed in the sections below about the different resource types.
 
 
-#### Span + (Local or Web)
-
-The default attributes for a local resource or a web resource inserted as a span are based on the file extension.
-
-
-
-
-
-as follows:
-
-```
-
-```
-
-
-
-
-It's just ![optional alt text](resource_path_or_url) right in the text.
-```
-
-#### Figure + (Local or Web)
-
-The default attributes  for a local resource or a web resource inserted as a figure is as follows:
-
-```
-{key: value, comma: separated, optional: attribute_list}
-![Optional Figure Caption](resource_path_or_url)
-```
-
-#### Span + Inline
-
-The default attributes  for an inline resource inserted as a span is as follows:
-
-```
-It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
-```
-
-#### Figure + Inline
-
-The default attributes  for an inline resource inserted as a figure is as follows:
-
-
-
-The default attribute list for a local resource or a web resource inserted as a figure is as follows:
-
-```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
-```
-
-So, by default, a local or web resource is a center aligned image which does not float and which tries to have its preferred height and width, respecting margins.
-
-Three backticks or tildes produce a default attribute list of:
-
-```
-{type: text, format: guess}
-```
-
-Three backticks or tildes produce a default attribute list of:
-
-```
-{type: text, format: monospaced}
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# DO NOT TRUST THE REST OF THIS SPECIFICATION ###############################################
-
-The rest of this document is in flux, and is being rewritten. Don't trust anything after this sentence. (I'm only leaving it in the document in order to show what progress has been made.)
-
-## ##########################################################################################
-
-
-
-## Resources (cont'd)
-
-Below are spare parts that need to be revised and integrated into the above. If you want a nice reading experience, you might as well stop reading now.
-
-
-Just as with Markdown, to show a literal backtick, you use *two* backticks to start and end your code span. (The Markdown spec says multiple backticks; Markua says exactly two.)
-
-Note that like Markdown, any leading or trailing spaces in a code span are removed.
-
-Three backticks???
-
-Ideally, a figure should have both alt text and a caption. The alt text is intended for readers who can't see the image, and the caption is intended to complement the image.
-
-Images can be inserted as a figure even with no alt text or caption. If this is done, the image is still styled as a figure, but the image has no caption and does **not** show up in the List of Illustrations.
-
-The alt text and caption are both optional. This example shows a figure with alt text but no caption.
-
-This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
-
-This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
-
-
-When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
-
-type: code, math, text, ...
-format:
-  code: plain, guess, [some language]
-  text: plain, monospace
-  math: mathml, latex
-
-
-
-
-
-This is useful for unformatted code samples and monospaced poetry.
-
-Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of defaults. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
-
+# TODO - EVERYTHING AFTER HERE IS IN FLUX AND SHOULD NOT BE TRUSTED #
 
 All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below. First, it's important to discuss the optional figure caption and optional alt text.
-
-### Optional Figure Caption and Optional Alt Text
-
-In the Markua local and web resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion. Markua also supports specifying the optional alt text as ... TODO
-
- For inline resources in Markua,
-
-This is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
-
-While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
-
-The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
-
-A> Alt text does not make sense for code or text resources, and it does not make much sense for math resources. (It could make sense for math resources if the mathematical equations are turned into an image or are rendered using a math library not supported by a given ebook reader, however.) Regardless of this fact, it does make sense to use the same syntax for all resources. In a case where there is no appropriate alt text, it can be omitted by using empty square brackets, like `![](resource_path_or_url)`.
 
 A Figure can have a caption. This caption shows up in two places:
 
 1. Near the image, typically above or below it, per the preference of the Markua Processor.
 2. As the name of the Figure in the List of Illustrations (a.k.a. Table of Figures), if one is generated for the book. The caption name serves as the text, and it is a crosslink to the image caption associated with the figure itself.
-
-
-All figures support three attributes: `type`, `format` and `caption`.
-
-
-
-A figure can also have attributes. There are three attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
-
-`float`
-: The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
-
-`width`
-: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
-
-`type`
-: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting audio and video; see those chapters for details.
-
-
-As we'll see now, certain resource types of figures support other attributes.
-
 
 ### Images
 

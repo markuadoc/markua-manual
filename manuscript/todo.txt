@@ -1,5 +1,71 @@
 # TODO
 
+## image attrs
+
+There are three attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
+
+`float`
+: The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
+
+`width`
+: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
+
+`type`
+: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting audio and video; see those chapters for details.
+
+## image span
+
+When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
+
+## resource types and formats
+
+type: code, math, text, ...
+format:
+  code: plain, guess, [some language]
+  text: plain, monospace
+  math: mathml, latex
+
+## backtick vs tilde defaults???
+
+This is useful for unformatted code samples and monospaced poetry.
+
+Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of defaults. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
+
+## Optional Figure Caption and Optional Alt Text
+
+In the Markua local and web resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion. Markua also supports specifying the optional alt text as ... TODO
+
+ For inline resources in Markua,
+
+This is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+
+While the alt text is optional, it is important to have alt text. This is one reason why the image syntax puts it in the square brackets before the image path: you need to type the square brackets whenever inserting an image, so you might as well type some alt text. Empty square brackets look ugly--like a mistake--and it's a mistake to ignore the needs of readers with visual disabilities.
+
+The alt text should not be the same thing as the figure caption, if the figure caption is present. (Imagine having your screen reader read identical alt text and figure captions to you.) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+
+A> Alt text does not make sense for code or text resources, and it does not make much sense for math resources. (It could make sense for math resources if the mathematical equations are turned into an image or are rendered using a math library not supported by a given ebook reader, however.) Regardless of this fact, it does make sense to use the same syntax for all resources. In a case where there is no appropriate alt text, it can be omitted by using empty square brackets, like `![](resource_path_or_url)`.
+
+
+Ideally, a figure should have both alt text and a caption. The alt text is intended for readers who can't see the image, and the caption is intended to complement the image.
+
+Images can be inserted as a figure even with no alt text or caption. If this is done, the image is still styled as a figure, but the image has no caption and does **not** show up in the List of Illustrations.
+
+The alt text and caption are both optional. This example shows a figure with alt text but no caption.
+
+This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
+
+This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
+
+
+## backticks in backticks
+
+Just as with Markdown, to show a literal backtick, you use *two* backticks to start and end your code span. (The Markdown spec says multiple backticks; Markua says exactly two.)
+
+Note that like Markdown, any leading or trailing spaces in a code span are removed.
+
+Three backticks???
+
+
 ### Single Newlines Inside a List, Aside or Blurb
 
 A single newline inside a list, aside or blurb creates a new paragraph within that list item, aside or blurb. This can be used to create multi-paragraph list items, asides, blurbs, etc.
