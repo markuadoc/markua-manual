@@ -1,6 +1,8 @@
-# Poetry
+# Examples
 
-## Single Newlines Inside a Paragraph is a Line Break
+## Poetry
+
+### Single Newlines Inside a Paragraph is a Line Break
 
 ##### Markua Syntax
 
@@ -21,7 +23,7 @@ My mistress when she walks treads on the ground.<br/>
 </p>
 
 
-# Resources
+## Resources
 
 ## Span Resources
 
@@ -221,13 +223,13 @@ Thanks Justin, it was fun making the logo with you!
 <p>Thanks Justin, it was fun making the logo with you!</p>
 ```
 
-# Video Resources
+## Video Resources
 
 
-# Audio Resources
+## Audio Resources
 
 
-# Code Resources
+## Code Resources
 
 ## Code Spans
 
@@ -266,7 +268,7 @@ If you want to have a backtick by itself, just use you need to have spaces aroun
 <p>If you want to have a backtick by itself, just use you need to have spaces around it like this <code>`</code>. The enclosed backtick cannot start or end the code block.</p>
 ```
 
-# Paragraphs
+## Paragraphs
 
 ##### Markua Syntax
 
@@ -288,7 +290,7 @@ This is a third paragraph.
 <p>This is a third paragraph.</p>
 ```
 
-# Lists
+## Lists
 
 ### Examples
 
@@ -1357,7 +1359,7 @@ amet
 </ol>
 ```
 
-# Ordered List Numbering Rules
+## Ordered List Numbering Rules
 
 #### Example
 
@@ -1484,15 +1486,15 @@ c. three</p>
 ```
 
 {#headings}
-# Headings
+## Headings
 
 {#input_headings_1}
 ```
-# Part (h1) #
+## Part (h1) #
 
 This is a paragraph.
 
-# Chapter (also h1)
+## Chapter (also h1)
 
 This is a paragraph.
 
@@ -1535,7 +1537,7 @@ This is a paragraph.
 <p>This is a paragraph.</p>
 ```
 
-# Text Formatting
+## Text Formatting
 
 ## Italic Text
 
@@ -1863,7 +1865,7 @@ which contains newlines.</p>
 ```
 
 
-# Block Quotes
+## Block Quotes
 
 ### Examples
 
@@ -1906,7 +1908,7 @@ which contains newlines.</p>
 ```
 
 {#links}
-# Links
+## Links
 
 ## Inline Links
 
@@ -1940,7 +1942,7 @@ Markua's website is <http://markua.com>.
 <p>Markua's website is <a href="http://markua.com">http://markua.com</a>.</p>
 ```
 
-# Crosslinks and `id`s
+## Crosslinks and `id`s
 
 ### Examples
 
@@ -2016,7 +2018,7 @@ This is *a **very very{#very} contrived** example{id: example}*{#contrived} show
 <p>This is <em id="contrived">a <strong>very <span id="very">very</span> contrived</strong> <span id="example">example</span></em> showing this.</p>
 ```
 
-# Scene Breaks
+## Scene Breaks
 
 #### Example
 
@@ -2070,7 +2072,7 @@ Yada yada yada.
 <p>Yada yada yada.</p>
 ```
 
-# Soft hyphen
+## Soft hyphen
 
 ## Markua Syntax
 
@@ -2082,7 +2084,7 @@ You can use soft hyphens to suggest where to break long words like Rumpel\-stilt
 
 <p>You can use soft hyphens to suggest where to break long words like Rumpel&shy;stiltskin if you wish.</p>
 
-# Definition Lists
+## Definition Lists
 
 ## Examples
 
@@ -2128,7 +2130,7 @@ bar
 <p>bar</p>
 ```
 
-# Embedding Lists, Figures and Code Blocks Inside a Paragraph
+## Embedding Lists, Figures and Code Blocks Inside a Paragraph
 
 ### Examples
 

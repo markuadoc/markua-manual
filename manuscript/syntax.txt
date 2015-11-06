@@ -1152,7 +1152,7 @@ If you want to prevent a list from being created with consecutive numbered items
 
 
 {#headings}
-# Headings
+## Headings
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
@@ -1275,7 +1275,7 @@ Easier to read. More features (rowspan, colspan, alignment of individual cells i
 |=====================|=================|=======================|=========================|
 ```
 
-# ABC: Asides, Blurbs and Callouts
+## ABC: Asides, Blurbs and Callouts
 
 W> TODO - make executable etc
 
@@ -1360,7 +1360,7 @@ Blurbs are like asides, but with two differences.
 3. They can have an optional `class`, which can be used by Markua processors to decorate the blurb (e.g. with icons).
 
 
-## Classes of Blurbs and Syntactic Sugar
+### Classes of Blurbs and Syntactic Sugar
 
 Like all Markua block elements, blurbs can have a `class` attribute attached to them. Here's an example:
 
@@ -1406,7 +1406,7 @@ There are no required CSS rules in Markua, and thus, there is no required specia
 
 For example, Leanpub produces a lot of computer programming books, so it understands the following values for the `class` attribute on a blurb:
 
-## Using Extension Attributes on Blurbs to add Icons
+### Using Extension Attributes on Blurbs to add Icons
 
 As discussed later, Markua blocks can support any number of extension attributes. An extension attribute is an attribute which is not part of the Markua specification.
 
@@ -1436,7 +1436,7 @@ B> Peter thinks that Len is right, but that (except in big cities) people will s
 
 If there was a car, it did; if there was no car, it did not.
 
-# Block Quotes
+## Block Quotes
 
 Block quotes can span multiple pages. They are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
 
@@ -1450,13 +1450,13 @@ A> The nesting of block quotes in Markdown is not supported in Markua.
 
 A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
 
-# Links
+## Links
 
 Markua's hyperlink support is a subset of that of Markdown. The **inline** link syntax is supported, as is the **automatic link** shortcut. The reference link syntax and the implicit link name shortcuts are **NOT** supported.
 
 A> Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 
-## Inline Links
+### Inline Links
 
 The normal way to create a link is as follows:
 
@@ -1466,7 +1466,7 @@ The normal way to create a link is as follows:
 
 In Markdown, the URL can be either absolute or relative, since relative URLs can make sense on web servers. In Markua, however, all URLs must be absolute.
 
-## Automatic Links
+### Automatic Links
 
 To create a link where the text displayed for the link text is the URL itself, the automatic link syntax can be used. In this syntax, an absolute URL is enclosed in angle brackets.
 
@@ -1474,19 +1474,19 @@ To create a link where the text displayed for the link text is the URL itself, t
 Some text <absolute_url> some text.
 ```
 
-# Footnotes
+## Footnotes
 
 {class: warning}
 B> TODO
 
-# Crosslinks and `id`s
+## Crosslinks and `id`s
 
 There are two parts to making a crosslink.
 
 1. Define an id.
 2. Link to that id with a crosslink.
 
-## Defining an `id` on Block and Span Elements, Using `{#some-id}` Syntax Only
+### Defining an `id` on Block and Span Elements, Using `{#some-id}` Syntax Only
 
 To define an `id`, you create an `id` attribute on a block or span element.
 
@@ -1496,7 +1496,7 @@ W> This syntax of `{#some-id}` is the **only** way to define an `id`.
 
 To define an id, just create an `id` attribute above a block element or attached to a span element.
 
-## Defining an `id` on a Block Element
+### Defining an `id` on a Block Element
 
 There are two ways to define an `id` on a block element.
 
@@ -1514,11 +1514,11 @@ Second, using a shorthand approach:
 This is a paragraph with the id of `some-id`.
 ```
 
-## Defining an `id` on a Span Element
+### Defining an `id` on a Span Element
 
 You can define an `id` on a span element. To do this, simply add an `id` attribute definition (either the explicit `{id: foo}` or the shorthand `{#foo}` version) in curly braces following any span element.
 
-## Referencing an `id` With a Crosslink
+### Referencing an `id` With a Crosslink
 
 Now, regardless of how you defined the id, you then link to it to create a crosslink. To do this, you use the `#` character and the id in a link:
 
@@ -1533,7 +1533,7 @@ Special rules:
 * If a Markua document contains duplicate `id` attribute values, the first one is used and the subsequent ones are ignored. A Markua Processor should output a warning about duplicate `id`s.
 * Crosslinks that reference an unused `id` may either be created as a (broken, non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also output a warning about this somewhere, but not in the actual document text itself.
 
-## Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
+### Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
 
 Chapters, sections and figures with captions often have two useful properties for writers:
 
@@ -1578,7 +1578,7 @@ Examples:
 
 A> Figures, chapters, code samples, etc all have implicit numbering.  So, #n always works even if numbering is off.  You'll just confuse readers.  If numbering is off, the `#f` will not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
 
-# Scene Breaks
+## Scene Breaks
 
 In fiction, scene breaks are sometimes added between paragraphs in a chapter to denote a break in context.
 
@@ -1588,7 +1588,7 @@ Markua Processors can take great liberties in how they display scene breaks in n
 
 Scene breaks map to the `hr` element in HTML.
 
-# Soft hyphen
+## Soft hyphen
 
 In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hypenation can be done.
 
@@ -1598,17 +1598,17 @@ Soft hyphens are not output in HTML.
 
 To insert a soft hyphen, used a backslash followed by a hyphen:
 
-## Markua Syntax
+### Markua Syntax
 
 ```
 You can use soft hyphens to suggest where to break long words like Rumpel\-stiltskin if you wish.
 ```
 
-## HTML Output
+### HTML Output
 
 <p>You can use soft hyphens to suggest where to break long words like Rumpel&shy;stiltskin if you wish.</p>
 
-# Definition Lists
+## Definition Lists
 
 A> While Definition Lists are called lists, they're a very different type of animal from unordered and ordered lists. So, they're treated separately.
 
@@ -1650,7 +1650,7 @@ For an example of a longer, more useful definition list used in Markua, see the 
 
 
 {#metadata}
-# Metadata
+## Metadata
 
 Markua uses metadata to provide a bunch of advanced functionality.
 
@@ -1659,7 +1659,7 @@ There are three types of metadata: attributes, index entries and directives.
 Attributes are used to do everything from specify the language of code blocks, add ids for crosslinkng and even support extensions to Markua. Index entries let authors or indexers produce professional-looking indexes in Markua books. Finally, directives control
 
 
-## TODO
+### TODO
 
 A Markua document can be written in one file or multiple manuscript files.
 
@@ -1677,12 +1677,12 @@ For example, with multiple files, Leanpub's normal Dropbox workflow uses a hybri
 
 
 
-## A Note About Curly Braces (`{` and `}`)
+### A Note About Curly Braces (`{` and `}`)
 
 Metadata is added with curly braces. Curly braces are special in Markua. At the beginning of a line, an opening curly brace (`{`) starts an attribute. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block. So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`.
 
 {#attributes}
-## Attributes
+### Attributes
 
 Attributes are a type of metadata which can be used by Markua Processors to format output.
 
@@ -1743,9 +1743,9 @@ Filet of salmon, on sale now!
 
 Markua defines a few built-in attributes which have special meaning.
 
-### Standard Attributes
+#### Standard Attributes
 
-#### Defining `id` On Any Block, Using `{#some-id}` Syntax Only
+##### Defining `id` On Any Block, Using `{#some-id}` Syntax Only
 
 As we saw in the section on crosslinks, attributes can be used to define ids on block elements.
 
@@ -1758,10 +1758,10 @@ There are two ways to do this:
 
 ```
 {#some-id}
-## Some Heading
+### Some Heading
 
 {id: some-id}
-## Some Heading
+### Some Heading
 ```
 
 These are identical. The `{#some-id}` syntax is just syntactic sugar, which is convenient since it's possible to create a lot of id-only attributes.
@@ -1816,7 +1816,7 @@ These restrictions ensure that your `id`s can then be linked to by a crosslink f
 
 Finally, note that crosslinks will work even if the `id` has not been defined yet.
 
-#### Attributes of Code Blocks
+##### Attributes of Code Blocks
 
 As we saw earlier, attributes can be used on code blocks. These include:
 
@@ -1827,7 +1827,7 @@ As we saw earlier, attributes can be used on code blocks. These include:
 * `number-from`
 
 {#extension-attributes}
-### Extension Attributes
+#### Extension Attributes
 
 An author can annotate any Markua block element with any attribute at all, not just those understood by all compliant Markua processors.
 
@@ -1849,7 +1849,7 @@ This encourages competition in the Markua ecosystem, while ensuring that Markua 
 
 This is an extension mechanism to allow for specialized uses of Markua: since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed.
 
-## Index Entries
+### Index Entries
 
 Markua supports adding index entries as metadata.
 
@@ -1944,13 +1944,13 @@ Multiple index entries can exist in a block, or even a sentence:
 Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Herman Melville{i: Melville, Herman}, the author of a book about a whale{i:Moby-Dick; or, The Whale}.
 ```
 
-## Directives
+### Directives
 
 W> TODO - Define how directives and attrs that are not understood are handled, and explain how this does not include syntax like CriticMarkup which just get output verbatim if not understood. Also say that encountering CriticMarkup tags and outputting CriticMarkup is optional. Doing stuff inside curly braces which is not understood by Markua is OK, etc.
 
 Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
 
-### Book Section Directives
+#### Book Section Directives
 
 Most published books have three types of material in them: the front matter, the text and the back matter.
 
@@ -1994,7 +1994,7 @@ Note, however, that there are **no** `{frontmatter}` and `{backmatter}` directiv
 
 The following is the entire list of book section directives, in the order they will typically be encountered. There is no requirement about any of their order; they are just hints. If you're familiar with the Chicago Manual of Style you'll recognize them.
 
-#### Front Matter Book Section Directives
+##### Front Matter Book Section Directives
 
 The following are the book section directives which can appear in the front matter.
 
@@ -2043,12 +2043,12 @@ The following are the book section directives which can appear in the front matt
 `{chronology}`
 : the chronology (note that this can also typically occur after the `{mainmatter}` book section directive)
 
-#### The `{mainmatter}` Book Section Directive
+##### The `{mainmatter}` Book Section Directive
 
 `{mainmatter}`
 : the first page of the text
 
-#### Back Matter Book Section Directives
+##### Back Matter Book Section Directives
 
 `{appendices}`
 : the appendix or appendices
@@ -2071,7 +2071,7 @@ The following are the book section directives which can appear in the front matt
 `{index}`
 : the index(es)
 
-#### Book Section Directive Rules
+##### Book Section Directive Rules
 
 While these book section directives are mere hints, there are strict rules about their use:
 
@@ -2084,7 +2084,7 @@ While these book section directives are mere hints, there are strict rules about
 
 The upshot of all this is that authors new to Markua can completely ignore directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about directives. And using directives is very simple, despite how formally specified this section makes them.
 
-### Directives That Are Not Understood Must Be Silently Ignored
+#### Directives That Are Not Understood Must Be Silently Ignored
 
 Directives that are not understood by Markua must be silently ignored.
 
@@ -2094,7 +2094,7 @@ This has three consequences:
 2. New versions of Markua can stop supporting directives in this version of Markua without needing to specify anything special.
 3. Any line which starts with an opening curly brace `{`, contains one word (with hypens), and ends with a closing curly brace `}` is assumed to be a directive, and will not be output by a Markua processor.
 
-#### Unsupported Leanpub Flavoured Markdown Directives
+##### Unsupported Leanpub Flavoured Markdown Directives
 
 Markua is not supporting various Leanpub Flavoured Markdown directives which were added willy-nilly over the years. These directives being dropped include:
 
@@ -2104,7 +2104,7 @@ Markua is not supporting various Leanpub Flavoured Markdown directives which wer
 * `{footnotes-off}`
 
 {#settings}
-## Settings
+### Settings
 
 As discussed earlier, there are two ways that a manuscript can be structured:
 
@@ -2117,7 +2117,7 @@ The metadata contains information about the document. This will include things l
 
 The metadata is provided in different ways based on whether the manuscript uses the single file approach or the multiple file approach.
 
-### Settings Are Just Newline-Separated Key-Value Pairs
+#### Settings Are Just Newline-Separated Key-Value Pairs
 
 As the title of this section states, Metadata is just newline-separated key-value pairs.
 
@@ -2136,7 +2136,7 @@ Any white-space at the beginning or end of the keys and values will be stripped.
 
 Where this metadata lives depends on which approach is used by the manuscript.
 
-### Settings in the Single File Approach: Inline in `manuscript.txt`
+#### Settings in the Single File Approach: Inline in `manuscript.txt`
 
 Markua manuscripts can be written all in one file called `manuscript.txt`. Since the goal of the one file approach is to have everything contained in one file for simplicity, this includes the metadata.
 
