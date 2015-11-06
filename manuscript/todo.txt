@@ -1,5 +1,13 @@
 # TODO
 
+## captions - generalize for resource not image
+
+A Figure can have a caption. This caption shows up in two places:
+
+1. Near the resource, typically above or below it, per the preference of the Markua Processor.
+2. As the name of the Figure in the List of Illustrations (a.k.a. Table of Figures), if one is generated for the book. The caption name serves as the text, and it is a crosslink to the image caption associated with the figure itself.
+
+
 ## image attrs
 
 There are three attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
@@ -32,6 +40,8 @@ This is useful for unformatted code samples and monospaced poetry.
 Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of defaults. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
 
 ## Optional Figure Caption and Optional Alt Text
+
+All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below. First, it's important to discuss the optional figure caption and optional alt text.
 
 In the Markua local and web resource syntax, just as with the Markdown image syntax, the optional alt text is in square brackets before the resource insertion. Markua also supports specifying the optional alt text as ... TODO
 

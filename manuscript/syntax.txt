@@ -413,15 +413,7 @@ Resources have different default attributes based on how they are inserted (span
 
 The specific default attributes are discussed in the sections below about the different resource types.
 
-
-# TODO - EVERYTHING AFTER HERE IS IN FLUX AND SHOULD NOT BE TRUSTED #
-
-All of the resource insertion syntaxes will be shown in more detail in the descriptions of the six resource types below. First, it's important to discuss the optional figure caption and optional alt text.
-
-A Figure can have a caption. This caption shows up in two places:
-
-1. Near the image, typically above or below it, per the preference of the Markua Processor.
-2. As the name of the Figure in the List of Illustrations (a.k.a. Table of Figures), if one is generated for the book. The caption name serves as the text, and it is a crosslink to the image caption associated with the figure itself.
+W> TODO - EVERYTHING AFTER HERE IS IN FLUX AND SHOULD NOT BE TRUSTED
 
 ### Images
 
@@ -445,7 +437,6 @@ The file extension determine the specific type of image. The supported image typ
 * JPEG images: `.jpg`, `.jpeg`
 * PNG images: `.png`
 * SVG images: `.svg`, `.svgz` (for zipped SVG), `.xml`
-
 
 The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
