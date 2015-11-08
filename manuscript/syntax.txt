@@ -413,30 +413,48 @@ Resources have different default attributes based on how they are inserted (span
 
 The specific default attributes are discussed in the sections below about the different resource types.
 
-W> TODO - EVERYTHING AFTER HERE IS IN FLUX AND SHOULD NOT BE TRUSTED
-
 ### Images
 
-Like any figure, if an image is inserted as a figure, it can have an attribute list, e.g.
+The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span resource or as a figure.
+
+As per the previous example, the syntax to insert an image the same compact and consistent syntax that is used for any resource:
+
+~~~
+Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also...
+
+![A Piece of Cake](http://markua.com/cake.jpg)
+~~~
+
+The default attributes for an image inserted as a span are:
+
+```
+{type: image, align: left, float: none, position: here, width: auto, height: auto}
+```
+
+The default attributes for an image inserted as a figure are:
 
 ```
 {type: image, align: center, float: none, position: near, width: auto, height: auto}
-![](http://markua.com/cake.jpg)
 ```
 
-Note that the values in the above attribute list are actually the default values for web and local resources inserted as figures. So, this attribute list above is identical to there being no attribute list specified.
+Image resources that are inserted as a span cannot have an attribute list--they must use the default attributes.
 
-Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images it can also be inferred by the file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, `.svg` or `.xml` for SVG, and `.svgz` for SVGZ (zipped SVG).
+Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images that are local or web resources it can also be inferred by the file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, `.svg` or `.xml` for SVG, and `.svgz` for SVGZ (zipped SVG).
 
 
-Markua supports four types of images: GIF, JPEG, PNG and SVG.
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.gif`    | `image` | `gif`      | GIF image     |
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+| `.svg`    | `image` | `svg`      | SVG image     |
+| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
 
-The file extension determine the specific type of image. The supported image types are:
+SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math.
 
-* GIF images: `.gif`
-* JPEG images: `.jpg`, `.jpeg`
-* PNG images: `.png`
-* SVG images: `.svg`, `.svgz` (for zipped SVG), `.xml`
+TODO
+
 
 The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
 
@@ -459,7 +477,6 @@ These are some local and web image resources:
 Many startups are ![happy](http://markua.com/happy.png) to incorporate in Delaware.
 ```
 
-SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math.
 
 Doing the following will insert an SVG image of a blue circle:
 

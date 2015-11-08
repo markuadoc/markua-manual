@@ -1,5 +1,7 @@
 # TODO
 
+# TODO - EVERYTHING AFTER HERE IS IN FLUX AND SHOULD NOT BE TRUSTED
+
 ## captions - generalize for resource not image
 
 A Figure can have a caption. This caption shows up in two places:
