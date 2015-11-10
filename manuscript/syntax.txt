@@ -381,6 +381,12 @@ Markua defines one set of file extensions for local or web resources which produ
 
 When a local or web resource is inserted as a span, this is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by the attribute list.
 
+The following are the default values of `type` and `format` based on the file extension of a local or web resource:
+
+W> TODO - convert to Markua table once supported
+
+{caption: "Default Resource Types And Formats Based On File Extension"}
+|-----------|---------|------------|---------------|
 | Extension | `type`  | `format`   | Description   |
 |-----------|---------|------------|---------------|
 | `.gif`    | `image` | `gif`      | GIF image     |
@@ -402,6 +408,9 @@ When a local or web resource is inserted as a span, this is the only way to prov
 | `.text`   | `text`  | `plain`    | plain text    |
 | `.md`     | `text`  | `markdown` | Markdown      |
 | `.markua` | `text`  | `markua`   | Markua        |
+|-----------|---------|------------|---------------|
+
+Again, if the `type` and/or `format` is specified in an attribute list (in the case of a figure), the specified value overrides the default value inferred from this table.
 
 If the file extension is not in the above table, the resource is interpreted differently based on whether it is a span or figure. If the resource is a span, it is assumed to be `{type: text, format: plain}`; if the resource is a figure, it is assumed to be `{type: code, format: guess}`. This way, Markua Processors can feel free to guess based on the file extension and current popular programming langages.
 
@@ -415,14 +424,100 @@ The specific default attributes are discussed in the sections below about the di
 
 ### Images
 
-The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span resource or as a figure.
+The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span or as a figure.
 
-As per the previous example, the syntax to insert an image the same compact and consistent syntax that is used for any resource:
+The following types of images are supported in Markua:
+
+|-----------|---------|------------|---------------|
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.gif`    | `image` | `gif`      | GIF image     |
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+| `.svg`    | `image` | `svg`      | SVG image     |
+| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
+|-----------|---------|------------|---------------|
+
+The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only. The following examples show images being inserted as spans and as figures.
+
+Local images (any type):
 
 ~~~
-Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also...
+Here's a local image inserted as a span. Easy as `![pie](pie.png)`.
+
+Here's a local image inserted as a figure:
+
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](cake.jpg)
+~~~
+
+Web images (any type):
+
+~~~
+Here's a web image inserted as a span. Easy as `![pie](http://markua.com/pie.png)`.
+
+Here's a web image inserted as a figure:
+
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](http://markua.com/cake.jpg)
+~~~
+
+Inline images (SVG only):
+
+~~~
+Here's an inline image `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg inserted as a span.
+
+Here's an inline image inserted as a figure:
+
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+The file extension will be used to determine the default type of a local or web image.
+
+However, in the case of figures, the type can also be specified via a `type` attribute in the attribute list. (If present, the `type` attribute overrides the default type inferred from the file extension.)
+
+
+, except for span images that are local or web images.
+
+
+In the above examples, note that the
+
+
+
+
+
+
+
+
+
+The format of an image can be specified in metadata when an imp
+
+
+
+Her's a web image inserted
+Inserting a span image is as easy as . Inserting an image as a figure is also...
 
 ![A Piece of Cake](http://markua.com/cake.jpg)
+~~~
+
+
+
+Markua
+
+
+
+
+
+
+This is also true for S
+
+
 ~~~
 
 The default attributes for an image inserted as a span are:
@@ -441,15 +536,6 @@ Image resources that are inserted as a span cannot have an attribute list--they 
 
 Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images that are local or web resources it can also be inferred by the file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, `.svg` or `.xml` for SVG, and `.svgz` for SVGZ (zipped SVG).
 
-
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.gif`    | `image` | `gif`      | GIF image     |
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-| `.svg`    | `image` | `svg`      | SVG image     |
-| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
 
 SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math.
 
@@ -482,14 +568,6 @@ Doing the following will insert an SVG image of a blue circle:
 
 ~~~
 This is a paragraph.
-
-{alt: "A Blue Circle"}
-```svg
-<svg width="50" height="50">
-  <circle cx="25" cy="25" r="20" fill="blue"/>
-</svg>
-```
-
 This is also a paragraph.
 ~~~
 
