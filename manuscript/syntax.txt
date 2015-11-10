@@ -441,34 +441,56 @@ The following types of images are supported in Markua:
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only. The following examples show images being inserted as spans and as figures.
 
-Local images (any type):
+#### Local Images
+
+Span:
 
 ~~~
-Here's a local image inserted as a span. Easy as `![pie](pie.png)`.
+Easy as `![pie](pie.png)`.
+~~~
 
-Here's a local image inserted as a figure:
+Figure:
+
+~~~
+Here's a paragraph before the figure.
 
 {alt: "a slice of chocolate cake"}
 ![A Piece of Cake](cake.jpg)
+
+Here's a paragraph after the figure.
 ~~~
 
-Web images (any type):
+#### Web Images
+
+Span:
 
 ~~~
-Here's a web image inserted as a span. Easy as `![pie](http://markua.com/pie.png)`.
+Easy as `![pie](http://markua.com/pie.png)`.
+~~~
 
-Here's a web image inserted as a figure:
+Figure:
+
+~~~
+Here's a paragraph before the figure.
 
 {alt: "a slice of chocolate cake"}
 ![A Piece of Cake](http://markua.com/cake.jpg)
+
+Here's a paragraph after the figure.
 ~~~
 
-Inline images (SVG only):
+#### Inline Images (SVG only)
+
+Span:
 
 ~~~
-Here's an inline image `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg inserted as a span.
+Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
+~~~
 
-Here's an inline image inserted as a figure:
+Figure:
+
+~~~
+Here's a paragraph before the figure.
 
 {caption: "Earth From Space (Simplified)", alt: "a blue circle"}
 ```svg
@@ -476,7 +498,13 @@ Here's an inline image inserted as a figure:
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
+
+Here's a paragraph after the figure.
 ~~~
+
+
+
+
 
 The file extension will be used to determine the default type of a local or web image.
 
@@ -485,38 +513,7 @@ However, in the case of figures, the type can also be specified via a `type` att
 
 , except for span images that are local or web images.
 
-
-In the above examples, note that the
-
-
-
-
-
-
-
-
-
 The format of an image can be specified in metadata when an imp
-
-
-
-Her's a web image inserted
-Inserting a span image is as easy as . Inserting an image as a figure is also...
-
-![A Piece of Cake](http://markua.com/cake.jpg)
-~~~
-
-
-
-Markua
-
-
-
-
-
-
-This is also true for S
-
 
 ~~~
 
