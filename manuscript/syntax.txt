@@ -31,7 +31,7 @@ Underline
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
 
-W> TODO - add strikethrough to Leanpub
+W> TODO_LEANPUB - add strikethrough to Leanpub
 
 Superscript
 : To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`. (This is the same syntax as is used by pandoc.)
@@ -118,7 +118,7 @@ A Markua document can be written in one file or multiple manuscript files. If a 
 
 To see why this rule is important, consider the following single-file Markua manuscript:
 
-W> TODO - add caption support to Leanpub
+W> TODO_LEANPUB - add caption support to Leanpub
 
 {caption: manuscript.txt}
 ```
@@ -191,17 +191,12 @@ Markua books and documents are written in plain text, either in one text file or
 
 Resources vary in four different ways:
 
-Insertion Methods
-: Span and Figure
+1. **Insertion Methods**: Span and Figure
+2. **Locations**: Local, Web and Inline
+3. **Types**: `image`, `video`, `audio`, `code`, `math` or `text`
+4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-Locations
-: Local, Web and Inline
-
-Types
-: `image`, `video`, `audio`, `code`, `math` or `text`
-
-Formats
-: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
+There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`. Each `type` of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
 Before going into more detail, it's helpful to consider some brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
@@ -224,23 +219,14 @@ The last figure in the example above showed an attribute list, which is a list o
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown.
 
-Note, however, that Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images. There are two main reasons for not supporting reference style resource syntax in Markua:
+A> Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images.
+A>
+A> There are two main reasons for not supporting reference style resource syntax in Markua:
+A>
+A> 1. Resources in Markua are complex enough without having two syntaxes.
+A> 2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 
-1. Resources in Markua are complex enough without having two syntaxes.
-2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
-
-### Resource Locations and Insertion Methods
-
-A resource is either considered a local, web or inline resource based on its location:
-
-Local Resource
-: The resource is stored along with the manuscript--either in a `resources` directory on a local filesystem, or uploaded to the same web service where the manuscript is being written.
-
-Web Resource
-: The resource is referred to via an `http` or `https` URL.
-
-Inline Resource
-: The resource is defined right in the body of a Markua document.
+### Resource Insertion Methods
 
 Resources can be inserted either as spans or as figures:
 
@@ -250,7 +236,7 @@ Span
 Figure
 : The resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
 
-### Span Resources
+#### Spans
 
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
@@ -258,7 +244,7 @@ The syntax for a local resource or a web resource inserted as a span is as follo
 It's just ![optional alt text](resource_path_or_url) right in the text.
 ```
 
-W> TODO - missing.png Leanpub bug above
+W> TODO_LEANPUB - missing.png Leanpub bug above
 
 The syntax for an inline resource inserted as a span is as follows:
 
@@ -274,7 +260,7 @@ This is `puts "hello"`ruby a code resource with a format of `ruby`.
 This, however, is a `puts "hello"` text resource inserted as a span.
 ```
 
-### Figures
+#### Figures
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
@@ -283,7 +269,7 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 ![Optional Figure Caption](resource_path_or_url)
 ```
 
-W> TODO - missing.png Leanpub bug above
+W> TODO_LEANPUB - missing.png Leanpub bug above
 
 Note that if there is a figure caption specified in the attribute list and in the square brackets, the one in the attribute list wins. In the following figure, the caption would be "Foo" not "bar":
 
@@ -321,6 +307,52 @@ A figure can also have attributes. The supported attributes vary based on the `t
 `caption`
 : This ...
 
+W> TODO
+
+### Resource Locations
+
+A resource is either considered a local, web or inline resource based on its location:
+
+Local Resource
+: The resource is stored along with the manuscript--either in a `resources` directory on a local filesystem, or uploaded to the same web service where the manuscript is being written.
+
+Web Resource
+: The resource is referred to via an `http` or `https` URL.
+
+Inline Resource
+: The resource is defined right in the body of a Markua document.
+
+#### Local Resources
+
+If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+
+A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+
+A file called `bar.png` in a subdirectory `images` of the resources directory is referenced as `![](images/bar.png)`--not as `![](/images/bar.png)`, `![](resources/images/bar.png)` or  `![](/resources/images/bar.png)`.
+
+Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub creates subdirectories of the `resources` directory for every type of resource (`images`, `audio`, `video`, `code`, `math` and `text`), but this is not a requirement.
+
+The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file centaining an export should contain a `resources` directory which contains an `images` subdirectory with the images.
+
+#### Web Resources
+
+If web resources are supported, both `http:` and `https:` resources should be supported.
+
+Web resources are identified by URL. The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of image, audio and video resources, this becomes the `src` attribute of the resource in HTML.
+
+#### Inline Resources
+
+Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format (since an SVG image is just XML text, it can be pasted in the text of a Markua document--something that is not true with binary images like PNG or JPEG, which can only be local or web resources).
+
+#### Optional Locations and Types
+
+Current copyright law makes the use of resources problematic. As such:
+
+* Support for `image`, `audio` and `video` resources is optional in Markua processors, regardless of location.
+* Support for web resources is optional in Markua processors, regardless of resource type.
+* Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
+
+For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
 
 ### Resource Types and Formats
 
@@ -329,8 +361,6 @@ There are six types of resources: `image`, `video`, `audio`, `code`, `math` and 
 Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
 Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
-
-Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format (since an SVG image is just XML text, it can be pasted in the text of a Markua document--something that is not true with binary images like PNG or JPEG, which can only be local or web resources).
 
 The default `type` of a local resource or web resource is always `image`. This means images in Markua are inserted in essentially the same way they are in Markdown.
 
@@ -345,35 +375,7 @@ These defaults mean that Markua can usually do the right thing based on the form
 
 We will consider each of the types of resources in more detail, as well as the various formats that they support. First, however, we need to examine some general considerations which affect all resources.
 
-### Local Resource Location
-
-If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
-
-A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
-
-A file called `bar.png` in a subdirectory `images` of the resources directory is referenced as `![](images/bar.png)`--not as `![](/images/bar.png)`, `![](resources/images/bar.png)` or  `![](/resources/images/bar.png)`.
-
-Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub creates subdirectories of the `resources` directory for every type of resource (`images`, `audio`, `video`, `code`, `math` and `text`), but this is not a requirement.
-
-The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file centaining an export should contain a `resources` directory which contains an `images` subdirectory with the images.
-
-### Optional Locations and Types
-
-Current copyright law makes the use of resources problematic. As such:
-
-* Support for `image`, `audio` and `video` resources is optional in Markua processors, regardless of location.
-* Support for web resources is optional in Markua processors, regardless of resource type.
-* Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
-
-For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
-
-### Web Resource Support
-
-If web resources are supported, both `http:` and `https:` resources should be supported.
-
-Web resources are identified by URL. The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of image, audio and video resources, this becomes the `src` attribute of the resource in HTML.
-
-### Resource File Extensions and Default Types and Formats
+### File Extensions, Default Types and Formats
 
 Resource types and formats are often inferred from the resource file extension.
 
@@ -383,7 +385,7 @@ When a local or web resource is inserted as a span, this is the only way to prov
 
 The following are the default values of `type` and `format` based on the file extension of a local or web resource:
 
-W> TODO - convert to Markua table once supported
+W> TODO_LEANPUB - Support table captions (there should be one in the table below)
 
 {caption: "Default Resource Types And Formats Based On File Extension"}
 |-----------|---------|------------|---------------|
@@ -1337,6 +1339,55 @@ https://michelf.ca/projects/php-markdown/extra/#table
 Markua:
 
 Easier to read. More features (rowspan, colspan, alignment of individual cells instead of just columns, etc). Harder to write, but who cares since (a) it's not that much worse and (b) there will be tooling.
+
+```
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+```
+
+```
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+```
+
+```
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.gif`    | `image` | `gif`      | GIF image     |
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+| `.svg`    | `image` | `svg`      | SVG image     |
+| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
+```
+
+```
+|-----------|---------|------------|---------------|
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.gif`    | `image` | `gif`      | GIF image     |
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+| `.svg`    | `image` | `svg`      | SVG image     |
+| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
+|-----------|---------|------------|---------------|
+```
+
+```
+|-----------|---------|------------|---------------|
+| Extension | `type`  | `format`   | Description   |
+|:----------|:-------:|-----------:|---------------|
+| `.gif`    | `image` | `gif`      | GIF image     |
+| `.png`    | `image` | `png`      | PNG image     |
+| `.jpg`    | `image` | `jpeg`     | JPEG image    |
+| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
+| `.svg`    | `image` | `svg`      | SVG image     |
+| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
+|-----------|---------|------------|---------------|
+```
 
 ```
 |=====================|=================|=======================|=========================|
