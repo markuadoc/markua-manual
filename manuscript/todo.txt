@@ -1,5 +1,8 @@
 # TODO
 
+
+
+
 ## captions - generalize for resource not image
 
 A Figure can have a caption. This caption shows up in two places:
