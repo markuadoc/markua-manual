@@ -1,4 +1,5 @@
 {frontmatter}
+
 # IMPORTANT NOTE FOR LEANPUB AUTHORS: MARKUA IS NOT YET LIVE IN LEANPUB!
 
 **Markua support is NOT live in Leanpub yet for anyone but admins. Heck, Markua is not even fully-specified yet. This spec is in-progress.**
