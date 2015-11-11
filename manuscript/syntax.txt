@@ -189,6 +189,8 @@ Yada yada yada.
 
 ## Resources
 
+W> WARNING: THIS IS BEING REWRITTEN.
+
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
 Resources vary in four different ways:
@@ -242,8 +244,6 @@ The syntax for a local resource or a web resource inserted as a span is as follo
 It's just ![optional alt text](resource_path_or_url) right in the text.
 ```
 
-W> TODO_LEANPUB - missing.png Leanpub bug above
-
 The syntax for an inline resource inserted as a span is as follows:
 
 ```
@@ -252,7 +252,7 @@ It's a single backtick `followed by inline resource content\`optional_format and
 
 For example:
 
-```
+~~~
 This is `puts "hello"`ruby a code resource with a format of `ruby`.
 
 This, however, is a `puts "hello"` text resource inserted as a span.
@@ -268,8 +268,6 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 {key: value, comma: separated, optional: attribute_list}
 ![Optional Figure Caption](resource_path_or_url)
 ```
-
-W> TODO_LEANPUB - missing.png Leanpub bug above
 
 Note that if there is a figure caption specified in the attribute list and in the square brackets, the one in the attribute list wins. In the following figure, the caption would be "Foo" not "bar":
 
