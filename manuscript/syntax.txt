@@ -1,4 +1,5 @@
 {mainmatter}
+
 # Markua Syntax
 
 Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents.
