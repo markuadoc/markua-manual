@@ -230,15 +230,11 @@ A> 2. In something as large as a book, the potential for id collisions in link d
 
 ### Resource Insertion Methods
 
-Resources can be inserted either as spans or as figures:
-
-Span
-: The resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource cannot have an attribute list.
-
-Figure
-: The resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
+Resources can be inserted either as spans or as figures.
 
 #### Spans
+
+When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource cannot have an attribute list.
 
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
@@ -263,6 +259,8 @@ This, however, is a `puts "hello"` text resource inserted as a span.
 ```
 
 #### Figures
+
+When a resource is inserted as a figure, the resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
