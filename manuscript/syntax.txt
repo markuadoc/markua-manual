@@ -485,7 +485,7 @@ The behaviour varies based on what is specified in the attribute list:
 
 ### Default Attributes
 
-W> REVISED TO HERE. DO NOT TRUST ANYTHING AFTER THIS POINT.
+W> This specification is being rewritten. Do not trust anything after this point.
 
 Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline). Also, local and web resources have different default attributes based on their file extension, since if there is no `type` specified the file extension is used to choose a type. Finally, resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, for resources inserted as a span, the defaults can only be overridden in a few ways.
 
