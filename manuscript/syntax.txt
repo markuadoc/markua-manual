@@ -362,23 +362,38 @@ The alt text for a resource inserted as a figure is provided in the attribute li
 </svg>
 ```
 
-Note that the caption for a figure can be provided either in the metadata or in the square brackets in front of a local or web resource.
+Note that as shown above, the caption for a figure can be provided either in the metadata or in the square brackets in front of a local or web resource.
 
 #### Context-Sensitive Meaning of Square Bracketed Text
 
-You may have been surprised reading this section. Markua does not have many inconsistencies, but this is one of them: the optional text inside the square brackets with a local or web resource varies based on whether it is a span resource or a figure!
+You may have been surprised reading this section. Markua does not have many inconsistencies, but this is one of them: the optional text inside the square brackets with a local or web resource varies based on whether the resource is inserted as a span resource or as a figure!
 
 {caption: Meaning of the Text Inside Square Brackets}
 |------------------|-----------------------------|
-| Insertion Method | Square Bracket Text Meaning |
+| Insertion Method | Square Bracket Text Is      |
 |------------------|-----------------------------|
-| Span             | Alt Text                    |
-| Figure           | Figure Caption              |
+| Span             | The Alt Text                |
+| Figure           | The Figure Caption          |
 |------------------|-----------------------------|
 
-The reason for this inconsistency is that it's better for writers this way.
+The reason for this inconsistency is that even though it's a bit harder to learn, it's much better for writers this way once they've learned it.
 
-The square brackets are for the most common use case for both span resources and for figures. For a span resource, that is alt text; for a figure, that is the figure caption. This is especially true since a span image cannot have a figure caption. Furthermore, all figures have figure captions, but not all figures have alt text. Having to add a metadata line for every figure just to add a figure caption would be painful.
+The square brackets are for the most common use case for both span resources and for figures.
+
+For a span resource, that is the alt text; for a figure, that is the figure caption.
+
+This is especially true since a span image cannot have a figure caption, and since not all figures are of resource types that can have alt text. (Code resources and text resources cannot have alt text.) Also, many image, audio and video resources are inserted without alt text.
+
+For example, given this rule, a figure which is an external code sample can be inserted as either:
+
+```
+![My Amazing Algorithm](algorithm.rb)
+
+{caption: "My Amazing Algorithm}
+![](algorithm.rb)
+```
+
+The first choice is clearly more pleasant to write and to read.
 
 ### Resource Locations
 
