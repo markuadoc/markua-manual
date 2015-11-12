@@ -461,9 +461,9 @@ These defaults mean that Markua can usually do the right thing based on the form
 
 We will consider each of the types of resources in more detail, as well as the various formats that they support. First, however, we need to examine some general considerations which affect all resources.
 
-### File Extensions, Default Types and Formats
+### File Extensions and Defaults
 
-Resource types and formats are often inferred from the resource file extension.
+Local and web resources often have a file extension. If a file extension is present, it is used to infer the default type and format for the resource.
 
 Certain file extensions **must** be associated with a specific type of resource. These are specified in the sections below for images, video, audio, math and text.
 
@@ -485,15 +485,14 @@ The behaviour varies based on what is specified in the attribute list:
 
 ### Default Attributes
 
-W> This specification is being rewritten. Do not trust anything after this point.
-
-Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline). Also, local and web resources have different default attributes based on their file extension, since if there is no `type` specified the file extension is used to choose a type. Finally, resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, for resources inserted as a span, the defaults can only be overridden in a few ways.
-
-The specific default attributes are discussed in the sections below about the different resource types.
+Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. The specific default attributes are discussed in the sections below about the different resource types.
 
 ### Images
 
 The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span or as a figure.
+
+W> This specification is being rewritten. Do not trust anything after this point.
+
 
 The following types of images are supported in Markua:
 
