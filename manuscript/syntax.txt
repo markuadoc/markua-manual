@@ -465,46 +465,27 @@ We will consider each of the types of resources in more detail, as well as the v
 
 Resource types and formats are often inferred from the resource file extension.
 
-Markua defines one set of file extensions for local or web resources which produces default values for the resource type and format. (Inline resources have no file extension, since they are inline.)
+Certain file extensions **must** be associated with a specific type of resource. These are specified in the sections below for images, video, audio, math and text.
 
-When a local or web resource is inserted as a span, this is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by the attribute list.
+Markua does not specify any file extensions associated with the `code` type. There are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical. If a Markua Processor recognizes a particular file extension as that of a particular programming language's source code, it can interpret it as a type of `code` with the appropriate format.
 
-The following are the default values of `type` and `format` based on the file extension of a local or web resource:
+Markua also does not specify how Markdown (which often has a file extension of `.md`) or Markua (which often has a file extension of `.markua`) text should be interpreted by default. It can be interpreted as a type of `text` and a format of either `plain` (for normal text) or `monospaced` (for monospaced text). Note that if Markdown or Markua text is in a file with an extension of `.txt` it is interpreted by default as plain (not monospaced) text.
 
-W> TODO_LEANPUB - Support table captions (there should be one in the table below)
+Markua Processors are free to interpret all unspecified file extensions however they want. New programming languages are invented constantly, and new image, audio and video formats are also created intermittently. For example, a Markua Processor could interpret all unspecified file extensions as type of `text` and a format of `monospaced`--this would ensure that all such files looked like source code which was not syntax-highlighted.
 
-{caption: "Default Resource Types And Formats Based On File Extension"}
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.gif`    | `image` | `gif`      | GIF image     |
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-| `.svg`    | `image` | `svg`      | SVG image     |
-| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
-| `.mp3`    | `audio` | `mp3`      | MP3 audio     |
-| `.m4a`    | `audio` | `aac`      | AAC audio     |
-| `.aac`    | `audio` | `aac`      | AAC audio     |
-| `.wav`    | `audio` | `wav`      | WAV audio     |
-| `.wave`   | `audio` | `wav`      | WAV audio     |
-| `.ogg`    | `audio` | `ogg`      | Ogg Vorbis    |
-| `.oga`    | `audio` | `ogg`      | Ogg Vorbis    |
-| `.mp4`    | `video` | `mp4`      | MP4 video     |
-| `.webm`   | `video` | `webm`     | WebM video    |
-| `.txt`    | `text`  | `plain`    | plain text    |
-| `.text`   | `text`  | `plain`    | plain text    |
-| `.md`     | `text`  | `markdown` | Markdown      |
-| `.markua` | `text`  | `markua`   | Markua        |
-|-----------|---------|------------|---------------|
+When a local or web resource is inserted as a span, the file extension is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
 
-Again, if the `type` and/or `format` is specified in an attribute list (in the case of a figure), the specified value overrides the default value inferred from this table.
+If the `type` and/or `format` is specified in an attribute list (in the case of a figure), the specified value(s) override the default value inferred from the file extension.
 
-If the file extension is not in the above table, the resource is interpreted differently based on whether it is a span or figure. If the resource is a span, it is assumed to be `{type: text, format: plain}`; if the resource is a figure, it is assumed to be `{type: code, format: guess}`. This way, Markua Processors can feel free to guess based on the file extension and current popular programming langages.
+The behaviour varies based on what is specified in the attribute list:
 
-A Markua Processor must interpret `{type: code, format: guess}` as `{type: text, format: plain}` if it does not recognize or support the given programming language based on the format.
+* If only the `type` is specified, and it matches the type inferred from the `format`, the Markua Processor must interpret the format as what was inferred.
+* If only the `format` is specified, the Markua Processor must infer the `type` from the specified format.
+* If both the `type` and `format` are specified, the Markua Processor use them. If they are not a legal combination of type and format (e.g. type = `video`, format=`latex`), the Markua processor must pick the type based on the `format`.
 
 ### Default Attributes
+
+W> REVISED TO HERE. DO NOT TRUST ANYTHING AFTER THIS POINT.
 
 Resources have different default attributes based on how they are inserted (span or figure) and their location (local, web or inline). Also, local and web resources have different default attributes based on their file extension, since if there is no `type` specified the file extension is used to choose a type. Finally, resources inserted as a span cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. So, for resources inserted as a span, the defaults can only be overridden in a few ways.
 
@@ -516,6 +497,7 @@ The most common type of resource in most Markua documents will probably be `imag
 
 The following types of images are supported in Markua:
 
+{caption: "Resource File Extensions Associated With Images"}
 |-----------|---------|------------|---------------|
 | Extension | `type`  | `format`   | Description   |
 |-----------|---------|------------|---------------|
@@ -526,6 +508,8 @@ The following types of images are supported in Markua:
 | `.svg`    | `image` | `svg`      | SVG image     |
 | `.svgz`   | `image` | `svgz`     | Zipped SVG    |
 |-----------|---------|------------|---------------|
+
+W> TODO_LEANPUB - Support table captions (there should be one in the table above)
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only. The following examples show images being inserted as spans and as figures.
 
@@ -664,6 +648,14 @@ A> The reference style image syntax of Markdown is **NOT** supported in Markua.
 
 ### Video
 
+{caption: "Resource File Extensions Associated With Video"}
+|-----------|---------|------------|---------------|
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.mp4`    | `video` | `mp4`      | MP4 video     |
+| `.webm`   | `video` | `webm`     | WebM video    |
+|-----------|---------|------------|---------------|
+
 Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
 
 A> Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful.
@@ -706,6 +698,19 @@ When inserting an audio or video resource as a span element in the flow of a par
 A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua.
 
 ### Audio
+
+{caption: "Resource File Extensions Associated With Audio"}
+|-----------|---------|------------|---------------|
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.mp3`    | `audio` | `mp3`      | MP3 audio     |
+| `.m4a`    | `audio` | `aac`      | AAC audio     |
+| `.aac`    | `audio` | `aac`      | AAC audio     |
+| `.wav`    | `audio` | `wav`      | WAV audio     |
+| `.wave`   | `audio` | `wav`      | WAV audio     |
+| `.ogg`    | `audio` | `ogg`      | Ogg Vorbis    |
+| `.oga`    | `audio` | `ogg`      | Ogg Vorbis    |
+|-----------|---------|------------|---------------|
 
 Markua supports four types of `audio` resources: MP3, AAC, WAV and Ogg Vorbis. The audio type is determined by file extension: `.mp3` for MP3, `.m4a` and `.aac` for AAC, `.wav` and `.wave` for WAV, and `.ogg` and `.oga` for Ogg Vorbis.
 
@@ -940,6 +945,14 @@ A> The Leanpub Flavoured Markdown syntax of putting a code sample caption is not
 
 ### Math
 
+{caption: "Resource File Extensions Associated With Math"}
+|-----------|---------|------------|---------------|
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.tex`    | `math`  | `latex`    | LaTeX math    |
+| `.mathml` | `math`  | `mathml`   | MathML math   |
+|-----------|---------|------------|---------------|
+
 You can put mathematical equations in your book, in either block elements (described below) or in span elements.
 
 Blah blah `puts "hello"`ruby blah blah.
@@ -1063,6 +1076,13 @@ Markua processors can do whatever they want here as well.
 A> For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
 
 ### Text
+
+{caption: "Resource File Extensions Associated With Text"}
+|-----------|---------|------------|---------------|
+| Extension | `type`  | `format`   | Description   |
+|-----------|---------|------------|---------------|
+| `.txt`    | `text`  | `plain`    | Plain text    |
+|-----------|---------|------------|---------------|
 
 Poetry, either plain text poetry or monospaced "typewriter poetry" is just a text resource.
 
