@@ -393,7 +393,7 @@ For example, given this rule, a figure which is an external code sample can be i
 ![](algorithm.rb)
 ```
 
-The first choice is clearly more pleasant to write and to read.
+The first choice is clearly shorter, as well as more pleasant to write and to read. With the square bracketed text being the figure caption for figures, both ways are supported. If the square-bracketed text was alt text in figures, then only the longer, unpleasant second choice would be supported.
 
 ### Resource Locations
 
