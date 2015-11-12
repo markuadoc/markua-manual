@@ -242,6 +242,8 @@ The syntax for a local resource or a web resource inserted as a span is as follo
 It's just ![optional alt text](resource_path_or_url) right in the text.
 ```
 
+The optional alt text is discussed shortly.
+
 The syntax for an inline resource inserted as a span is as follows:
 
 ```
@@ -295,15 +297,88 @@ puts "hello world"
 A figure can also have attributes. The supported attributes vary based on the `type` of resource, but all figures support the following three attributes: `type`, `format` and `caption`.
 
 `type`
-: This ...
+: This is the resource type. It can be one of `image`, `video`, `audio`, `code`, `math` or `text`.
 
 `format`
-: This ...
+: This is the resource format. Different resource types have different legal values for format.
 
 `caption`
-: This ...
+: This is text which is shown near the figure, typically above or below it.
 
-W> TODO
+Many resource types can also have alt text. Alt text is not the same thing as a figure caption.
+
+### Alt Text and Figure Captions
+
+Some resources support alt text. Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+
+The four types of resource which can have alt text are `image`, `video`, `audio` and `text`. Resources of type `code` or `text` are themselves just text, so it makes no sense for them to have alt text. If any alt text is provided for a `code` or `text` resource it is ignored.
+
+A> The alt text should **not** be the same thing as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+
+The syntax to provide alt text varies based on the resource location and insertion method.
+
+#### Span + (Local or Web)
+
+The alt text for a local or web resource inserted as a span is provided in square brackets before the resource path or URL:
+
+```
+It's just ![optional alt text](resource_path_or_url) right in the text.
+```
+
+Here's an example:
+
+```
+This needs to ![a stop sign](stop.png) now.
+```
+
+If you omit the optional alt text with a local or web resource, you still need to type the square brackets:
+
+```
+This needs to ![](stop.png) now.
+```
+
+#### Span + Inline
+
+Alt text is not supported for inline span resources.
+
+#### Figure
+
+The alt text for a resource inserted as a figure is provided in the attribute list above the figure. This is true regardless of whether the resource location is local, web or inline, as shown in the following examples:
+
+```
+{alt: "The Delaware state map"}
+![Where To Incorporate](delaware.svg)
+
+{alt: "Denzel Washington on a jet ski in a river"}
+![Washington Crossing the Delaware](delaware.jpg)
+
+{alt: "Denzel Washington on a jet ski in a river", caption: "Washington Crossing the Delaware"}
+![](delaware.jpg)
+
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+
+Note that the caption for a figure can be provided either in the metadata or in the square brackets in front of a local or web resource.
+
+#### Context-Sensitive Meaning of Square Bracketed Text
+
+You may have been surprised reading this section. Markua does not have many inconsistencies, but this is one of them: the optional text inside the square brackets with a local or web resource varies based on whether it is a span resource or a figure!
+
+{caption: Meaning of the Text Inside Square Brackets}
+|------------------|-----------------------------|
+| Insertion Method | Square Bracket Text Meaning |
+|------------------|-----------------------------|
+| Span             | Alt Text                    |
+| Figure           | Figure Caption              |
+|------------------|-----------------------------|
+
+The reason for this inconsistency is that it's better for writers this way.
+
+The square brackets are for the most common use case for both span resources and for figures. For a span resource, that is alt text; for a figure, that is the figure caption. This is especially true since a span image cannot have a figure caption. Furthermore, all figures have figure captions, but not all figures have alt text. Having to add a metadata line for every figure just to add a figure caption would be painful.
 
 ### Resource Locations
 
