@@ -189,8 +189,6 @@ Yada yada yada.
 
 ## Resources
 
-W> WARNING: THIS IS BEING REWRITTEN.
-
 Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
 Resources vary in four different ways:
@@ -252,7 +250,7 @@ It's a single backtick `followed by inline resource content\`optional_format and
 
 For example:
 
-~~~
+```
 This is `puts "hello"`ruby a code resource with a format of `ruby`.
 
 This, however, is a `puts "hello"` text resource inserted as a span.

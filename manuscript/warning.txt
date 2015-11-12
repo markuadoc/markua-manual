@@ -8,7 +8,7 @@ If you're reading this, you are a really, *really* early adopter of Markua.
 
 I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
 
-We should have Markua live in Leanpub the next 2-3 months.  In the meantime, what Leanpub books are written in is what they have been written in for about 5 years: [Leanpub Flavoured Markdown, which is documented at this link](https://leanpub.com/help/manual).
+Markua's specification should be finalized by January 15, 2016. Markua should be live in Leanpub and in the open source version by the end of March 2016. In the meantime, what Leanpub books are written in is what they have been written in for about 5 years: [Leanpub Flavoured Markdown, which is documented at this link](https://leanpub.com/help/manual).
 
 The good news is that Leanpub Flavoured Markdown is very similar to Markua. So, if you've been thinking that you were writing in Markua and then wondered why a couple things didn't work, it's because they work differently in Leanpub Flavoured Markdown.
 
