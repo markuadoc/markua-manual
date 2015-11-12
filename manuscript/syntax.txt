@@ -339,7 +339,7 @@ This needs to ![](stop.png) now.
 
 #### Span + Inline
 
-Alt text is not supported for inline span resources.
+Alt text is not supported for inline span resources. There's no good syntax, and almost no real use case (with the exception of an inline span SVG image). If you want alt text in a span resource, use a local or web resource instead.
 
 #### Figure
 
