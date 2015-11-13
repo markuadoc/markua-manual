@@ -1,5 +1,6 @@
 # TODO
 
+W> This specification is being rewritten. Do not trust anything after this point.
 
 
 
