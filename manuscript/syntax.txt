@@ -520,11 +520,13 @@ The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and z
 
 W> TODO_LEANPUB - Support table captions (there should be one in the table above)
 
+W> This specification is being rewritten. Do not trust anything after this point.
+
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
 The following examples show images being inserted as spans and as figures.
 
-#### Local Images
+##### Local Images
 
 Span:
 
@@ -543,7 +545,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-#### Web Images
+##### Web Images
 
 Span:
 
@@ -657,7 +659,7 @@ A span image cannot have a caption. If a caption is present, a Markua processor 
 
 A> The reference style image syntax of Markdown is **NOT** supported in Markua.
 
-### Video
+#### Video
 
 {caption: "Resource File Extensions Associated With Video"}
 |-----------|---------|------------|---------------|
@@ -708,7 +710,7 @@ When inserting an audio or video resource as a span element in the flow of a par
 
 A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua.
 
-### Audio
+#### Audio
 
 {caption: "Resource File Extensions Associated With Audio"}
 |-----------|---------|------------|---------------|
@@ -757,7 +759,7 @@ The supported file extensions for audio files are:
 .ogg, .oga
 : The file is treated as an Ogg Vorbis file.
 
-### Code
+#### Code
 
 Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
 
@@ -954,7 +956,7 @@ Or, if you wish to make things annoying, you can number from any non-negative in
 
 A> The Leanpub Flavoured Markdown syntax of putting a code sample caption is not supported. This syntax looked like the alt text on images, but as discussed there, this was an incorrecct use of the image syntax.
 
-### Math
+#### Math
 
 {caption: "Resource File Extensions Associated With Math"}
 |-----------|---------|------------|---------------|
@@ -1007,7 +1009,7 @@ To create a math block, you insert it like a code block and you add a `math` att
 
 **Markua procesors do NOT need to support any given Math markup language.**
 
-#### LaTeX Math
+##### LaTeX Math
 
 However, if a Markua processor does not understand a given Math markup language specified by the value of a `math` attribute (say, if it supports LaTeX math but not MathML), it **MUST** output the content of the math block **as a code block formatted as text**.
 
@@ -1029,7 +1031,7 @@ Here is some more paragraph text.
 
 Markua processors can do whatever they want here. They can even output the entire thing as an image and insert the image, since that works on the most legacy ebook readers. Accessibility for old devices and accessibility for people with visual disabilities are often in conflict, and it's up to the Markua Processor to decide what to do.
 
-#### MathML Math with `{math: mathml}`
+##### MathML Math with `{math: mathml}`
 
 To add MathML math, use `{math: mathml}`:
 
@@ -1086,7 +1088,7 @@ Markua processors can do whatever they want here as well.
 
 A> For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
 
-### Text
+#### Text
 
 {caption: "Resource File Extensions Associated With Text"}
 |-----------|---------|------------|---------------|
@@ -1363,6 +1365,47 @@ If you want to prevent a list from being created with consecutive numbered items
 
 
 {#headings}
+## Definition Lists
+
+A> While Definition Lists are called lists, they're a very different type of animal from unordered and ordered lists. So, they're treated separately.
+
+Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, we strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, we see definition lists as having more of a future than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
+
+To define a definition list in Markua, use the following syntax:
+
+```
+term 1
+: definition 1
+
+term 2
+: definition 2
+```
+
+The term cannot start with a square bracket--this is reserved for the reference-style image syntax.
+
+A definition list can define multiple definitions for a term:
+
+```
+term 1
+: definition 1a
+: definition 1b
+
+term 2
+: definition 2
+```
+
+Note that a single term definition list is a definition list, regardless of how many definitions for the term exist.
+
+```
+term
+: definition
+```
+
+For an example of a longer, more useful definition list used in Markua, see the definitions section of this specification.
+
+
+
+
 ## Headings
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
@@ -1734,7 +1777,7 @@ To create a link where the text displayed for the link text is the URL itself, t
 Some text <absolute_url> some text.
 ```
 
-## Footnotes
+## Footnotes and Endnotes
 
 {class: warning}
 B> TODO
@@ -1858,56 +1901,9 @@ Soft hyphens are not output in HTML.
 
 To insert a soft hyphen, used a backslash followed by a hyphen:
 
-### Markua Syntax
-
 ```
 You can use soft hyphens to suggest where to break long words like Rumpel\-stiltskin if you wish.
 ```
-
-### HTML Output
-
-<p>You can use soft hyphens to suggest where to break long words like Rumpel&shy;stiltskin if you wish.</p>
-
-## Definition Lists
-
-A> While Definition Lists are called lists, they're a very different type of animal from unordered and ordered lists. So, they're treated separately.
-
-Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, we strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, we see definition lists as having more of a future than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
-
-To define a definition list in Markua, use the following syntax:
-
-```
-term 1
-: definition 1
-
-term 2
-: definition 2
-```
-
-The term cannot start with a square bracket--this is reserved for the reference-style image syntax.
-
-A definition list can define multiple definitions for a term:
-
-```
-term 1
-: definition 1a
-: definition 1b
-
-term 2
-: definition 2
-```
-
-Note that a single term definition list is a definition list, regardless of how many definitions for the term exist.
-
-```
-term
-: definition
-```
-
-For an example of a longer, more useful definition list used in Markua, see the definitions section of this specification.
-
-
-
 
 {#metadata}
 ## Metadata
