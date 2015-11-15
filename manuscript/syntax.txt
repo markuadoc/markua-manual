@@ -562,7 +562,7 @@ These attributes can all be overridden via the attribute list on the figure.
 
 ##### Local Images
 
-Span:
+###### Span
 
 W> TODO_LEANPUB - We need to add newlines after h5s!
 
@@ -570,7 +570,7 @@ W> TODO_LEANPUB - We need to add newlines after h5s!
 Easy as `![pie](pie.png)`.
 ~~~
 
-Figure:
+###### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -583,13 +583,13 @@ Here's a paragraph after the figure.
 
 ##### Web Images
 
-Span:
+###### Span
 
 ~~~
 Easy as `![pie](http://markua.com/pie.png)`.
 ~~~
 
-Figure:
+###### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -602,13 +602,13 @@ Here's a paragraph after the figure.
 
 ##### Inline Images (SVG only)
 
-Span:
+###### Span
 
 ~~~
 Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
 ~~~
 
-Figure:
+###### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -675,13 +675,13 @@ These attributes can all be overridden via the attribute list on the figure.
 
 ##### Local Video
 
-Span:
+###### Span
 
 ~~~
 Easy as `![pie](pie_eating_contest.mp4)`.
 ~~~
 
-Figure:
+###### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -694,7 +694,7 @@ Here's a paragraph after the figure.
 
 ##### Web Video
 
-Span:
+###### Span
 
 ~~~
 Introducing Markua: `![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)`.
@@ -702,7 +702,7 @@ Introducing Markua: `![Peter's Markua talk](https://www.youtube.com/watch?t=105&
 
 A> Ironically, I'm writing this sentence almost a year after that talk was recorded, and I still haven't figured everything out about Markua.
 
-Figure:
+###### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -774,13 +774,13 @@ These attributes can all be overridden via the attribute list on the figure.
 
 ##### Local Audio
 
-Span:
+###### Span
 
 ~~~
 The talk audio highlights are here: `![](highlights.mp3)`.
 ~~~
 
-Figure:
+###### Figure
 
 ~~~
 The full version of the talk is here:
@@ -790,13 +790,13 @@ The full version of the talk is here:
 
 ##### Web Audio
 
-Span:
+###### Span
 
 ~~~
 The talk audio highlights are here: `![](http://markua.com/highlights.mp3)`.
 ~~~
 
-Figure:
+###### Figure
 
 ~~~
 The full version of the talk is here:
@@ -847,7 +847,7 @@ These attributes can all be overridden via the attribute list on the figure.
 
 ##### Local Code Resources
 
-Span:
+###### Span
 
 ~~~
 Hello in Ruby is a simple ![](hello.rb) statement.
@@ -855,7 +855,7 @@ Hello in Ruby is a simple ![](hello.rb) statement.
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
-Figure:
+###### Figure
 
 ~~~
 This will be a type of `code` and a format of `guess` since the file extension is not specified:
@@ -886,7 +886,7 @@ Note that in the above examples of figures, the text in the square brackets is t
 
 This is identical to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
 
-Span:
+###### Span
 
 ~~~
 Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
@@ -894,7 +894,7 @@ Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
-Figure:
+###### Figure
 
 ~~~
 This will be a type of `code` and a format of `guess` since the file extension is not specified:
@@ -923,7 +923,7 @@ Note that in the above examples of figures, the text in the square brackets is t
 
 ##### Inline Code Resources
 
-Span:
+###### Span
 
 ~~~
 Hello in Ruby is a `puts "hello"` statement.
@@ -938,7 +938,7 @@ Hello in Ruby is a `puts "hello"`text statement.
 The first and second statement above are functionally identical; the third forces the format to be `ruby`; the fourth one forces it to be plain monospaced code with no syntax highlighting.
 
 
-Figure:
+###### Figure
 
 ~~~
 Here's a paragraph before the figure.
