@@ -639,6 +639,10 @@ We will discuss the supported and the default attributes for videos, and then sh
 `alt`, `caption`, `align`, `float`, `position`, `width` and `height`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
 
+Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text.
+
+A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua. Markua only supports providing one video resource, with two fallbacks: the `poster` and the `alt` text.
+
 ##### Default Attributes for Videos
 
 The default attributes for an video inserted as a span are:
@@ -655,41 +659,58 @@ The default attributes for an video inserted as a figure are:
 
 These attributes can all be overridden via the attribute list on the figure.
 
-##### Local Video
+##### Local Images
 
-W> This specification is being rewritten. Do not trust anything after this point.
+Span:
 
-Examples:
+W> TODO_LEANPUB - We need to add newlines after h5s!
 
-```
-Here's a video:
+~~~
+Easy as `![pie](pie_eating_contest.mp4)`.
+~~~
+
+Figure:
+
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a man eating an entire chocolate cake"}
+![A Piece of Cake](cake_eating_contest.webm)
+
+Here's a paragraph after the figure.
+~~~
+
+##### Web Images
+
+Span:
+
+~~~
+Introducing Markua: `![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)`.
+~~~
+
+A> Ironically, I'm writing this sentence almost a year after that talk was recorded, and I still haven't figured everything out about Markua.
+
+Figure:
+
+~~~
+Here's a paragraph before the figure.
 
 {type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
 !["Introducing Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
 
-Ironically, I'm writing this sentence almost a year after that was recorded, and I still haven't figured everything out about Markua.
-```
-
-Markua supports MP4 and WebM videos. The videos must have the correct file extension for their type.
-
-The supported file extensions for video files are:
-
-.mp4
-: The file is treated as an MP4 video.
-
-.webm
-: The file is treated as a WebM video.
-
-If a Markua Processor is outputting a format in which particular types of audio or video resources are not supported, a missing audio or video image placeholder must be output. The look of this missing audio or video image is not specified in Markua; it can either be deliberately ugly (like the missing image icon in web browsers circa 1995) or it can be attractive.
-
-If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported, it must choose the poster to use as an image replacement. (This includes situations where the video is identified by a URL and only local video resources are supported by the particular Markua Processor.)
-
-When inserting an audio or video resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the audio or video resource. Otherwise, the paragraph would quickly look ridiculous, as a typical audio or video resource thumbnail is many times the height of a typical line of text.
-
-A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua.
+Here's a paragraph after the figure.
+~~~
 
 #### Audio
 
+
+
+
+
+
+
+
+W> This specification is being rewritten. Do not trust anything after this point.
 
 audio or  With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video,
 
