@@ -510,6 +510,8 @@ W> TODO_LEANPUB - Support table captions (there should be one in the table above
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
+A> Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
+
 The following examples show images being inserted as spans and as figures.
 
 ##### Local Images
@@ -575,45 +577,9 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
+##### Supported Attributes for Images
 
-
-W> This specification is being rewritten. Do not trust anything after this point.
-
-
-The file extension will be used to determine the default type of a local or web image.
-
-However, in the case of figures, the type can also be specified via a `type` attribute in the attribute list. (If present, the `type` attribute overrides the default type inferred from the file extension.)
-
-
-, except for span images that are local or web images.
-
-The format of an image can be specified in metadata when an imp
-
-~~~
-
-The default attributes for an image inserted as a span are:
-
-```
-{type: image, align: left, float: none, position: here, width: auto, height: auto}
-```
-
-The default attributes for an image inserted as a figure are:
-
-```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
-```
-
-Image resources that are inserted as a span cannot have an attribute list--they must use the default attributes.
-
-Markua supports five formats of local and web `image` resources: `gif`, `jpeg`, `png`, `svg` and `svgz`. While the format can be specified by a `format` attribute, for images that are local or web resources it can also be inferred by the file extension: `.gif` for GIF, `.jpg` or `.jpeg` for JPEG, `.png` for PNG, `.svg` or `.xml` for SVG, and `.svgz` for SVGZ (zipped SVG).
-
-
-SVG images can also be inserted using Markua's inline resource syntax, which is normally used for code samples or math.
-
-TODO
-
-
-The supported attributes for `image` resources are: `align`, `float`, `position`, `width` and `height`. These affect how an image is sized and positioned. The defaults are: `{align: center, float: none, position: near, width: auto, height: auto}`.
+The supported attributes for `image` resources are `align`, `float`, `position`, `width`, `height`, `alt` and `caption`. These affect how an image is sized and positioned.
 
 The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
 
@@ -623,32 +589,29 @@ The `position` refers to vertical positioning on a page. The position only has a
 
 The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. It is legal for either one or both of `width` and `height` can be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page.
 
-These are some local and web image resources:
+The `alt` is the alt text; the `caption` is the figure caption. Both of these can only be present when an image is inserted as a figure.
+
+##### Default Attributes for Images
+
+The default attributes for an image inserted as a span are:
 
 ```
-![map of Delaware](delaware.svg)
-
-{width: 80, position: top, alt: "Denzel Washington on a jet ski in a river"}
-![Washington Crossing the Delaware](delaware.jpg)
-
-Many startups are ![happy](http://markua.com/happy.png) to incorporate in Delaware.
+{type: image, align: left, float: none, position: here, width: auto, height: auto}
 ```
 
+Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
 
-Doing the following will insert an SVG image of a blue circle:
+The default attributes for an image inserted as a figure are:
 
-~~~
-This is a paragraph.
-This is also a paragraph.
-~~~
+```
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
+```
 
-Images can be inserted as a span image in the flow of text in a paragraph. When an image is inserted as a span image, it must be positioned where it is inserted -- it cannot be floated and repositioned by Markua processors.
-
-A span image cannot have a caption. If a caption is present, a Markua processor will ignore it. (A Markua processor may add a warning to the list of warnings which are reported in book generation, but no warning is added to the text itself.)
-
-A> The reference style image syntax of Markdown is **NOT** supported in Markua.
+These attributes can all be overridden via the attribute list on the figure.
 
 #### Video
+
+W> This specification is being rewritten. Do not trust anything after this point.
 
 {caption: "Resource File Extensions Associated With Video"}
 |-----------|---------|------------|---------------|
