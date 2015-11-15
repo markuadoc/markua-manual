@@ -443,17 +443,7 @@ Web resources are identified by URL. The `resource_path_or_url` is either the re
 
 Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format (since an SVG image is just XML text, it can be pasted in the text of a Markua document--something that is not true with binary images like PNG or JPEG, which can only be local or web resources).
 
-### Optional Locations and Types
-
-Current copyright law makes the use of resources problematic. As such:
-
-* Support for `image`, `audio` and `video` resources is optional in Markua processors, regardless of location.
-* Support for web resources is optional in Markua processors, regardless of resource type.
-* Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
-
-For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
-
-### File Extensions
+### Resource File Extensions
 
 Local and web resources often have a file extension. If a file extension is present, it is used to infer the default type and format for the resource.
 
@@ -475,10 +465,6 @@ The behaviour varies based on what is specified in the attribute list:
 * If only the `format` is specified, the Markua Processor must infer the `type` from the specified format.
 * If both the `type` and `format` are specified, the Markua Processor use them. If they are not a legal combination of type and format (e.g. type = `video`, format=`latex`), the Markua processor must pick the type based on the `format`.
 
-### Default Attributes
-
-Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. The specific default attributes are discussed in the sections below about the different resource types.
-
 ### Resource Types and Formats
 
 There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
@@ -498,7 +484,9 @@ The default `type` of an inline resource depends on the `format` specified:
 
 These defaults mean that Markua can usually do the right thing based on the format, and that the resource type can almost always be inferred for inline resources. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
 
-We will consider each of the types of resources in more detail, as well as the various formats that they support. First, however, we need to examine some general considerations which affect all resources.
+Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. The specific default attributes are discussed in the sections below about the different resource types.
+
+We will now consider each of the types of resources in more detail, as well as the various formats that they support.
 
 #### Images
 

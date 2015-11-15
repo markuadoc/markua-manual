@@ -139,3 +139,13 @@ This entire spec is a set of rules and guidelines, but there are a few specific 
 * Markua processors must not explode when encountering unsupported features that have legal Markua syntax (e.g. an unknown Math dialect or human language).
 * Links to cross-references that don't correspond to an id that exists may either be created as a (broken, non-functional) link or be created as normal text (not a link).
 * Crosslinks that reference an unused id may either be created as a (non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also output a warning about this somewhere, but not in the actual document text itself.
+
+### Required and Optional Resource Support
+
+Current copyright law makes the use of resources problematic. As such:
+
+* Support for `image`, `audio` and `video` resources is optional in Markua processors, regardless of location.
+* Support for web resources is optional in Markua processors, regardless of resource type.
+* Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
+
+For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
