@@ -451,7 +451,7 @@ Markua does not specify any file extensions associated with the `code` type. The
 
 Markua also does not specify how Markdown (which often has a file extension of `.md`) or Markua (which often has a file extension of `.markua`) text should be interpreted by default. It can be interpreted as a type of `text` and a format of either `plain` (for normal text) or `monospaced` (for monospaced text). Note that if Markdown or Markua text is in a file with an extension of `.txt` it is interpreted by default as plain (not monospaced) text.
 
-Markua Processors must interpret all unspecified file extensions as specifying a resource of type `code` with a format of `guess`. Then, if the file extension corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code. If the Markua Processor does not recognize the file extension or if the Markua Processor does not support syntax highlighting, it will format it as unformatted monospaced text, per the [rules for code resources](#supported_attributes_for_code).
+Markua Processors **MUST** interpret **ALL** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**. Then, if the file extension corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code. If the Markua Processor does not recognize the file extension or if the Markua Processor does not support syntax highlighting, it will format it as unformatted monospaced text, per the [rules for code resources](#supported_attributes_for_code).
 
 When a local or web resource is inserted as a span, the file extension is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
 
@@ -467,11 +467,15 @@ The behaviour varies based on what is specified in the attribute list:
 
 There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
 
-Each `type` of resource has a number of supported formats, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
+Each `type` of resource has a number of supported `format`s, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
 Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
-The default `type` of a local resource or web resource is always `image`. This means images in Markua are inserted in essentially the same way they are in Markdown.
+The default `type` of a local resource or web resource varies based on the file extension, and on whether a `format` is specified.
+
+* If a `format` is specified in an attribute list, it  the file extension corresponds to
+
+is always `image`. This means images in Markua are inserted in essentially the same way they are in Markdown.
 
 The default `type` of an inline resource depends on the `format` specified:
 
@@ -849,39 +853,73 @@ Span:
 Hello in Ruby is a simple ![](hello.rb) statement.
 ~~~
 
+Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
+
 Figure:
 
 ~~~
-Here's a paragraph before the first figure.
+This will be a type of `code` and a format of `guess` since the file extension is not specified:
+
+![Hello World in Ruby](hello.rb)
+
+That is equivalent to:
+
+{type: code, format: guess}
+![Hello World in Ruby](hello.rb)
+
+If you don't want to take chances you can do this:
+
+{format: ruby}
+![Hello World in Ruby](hello.rb)
+
+If you like being redundant you can do:
 
 {type: code, format: ruby}
-![](hello.rb)
-
-Here's a paragraph in the middle.
-
-![](hello.rb)
+![Hello World in Ruby](hello.rb)
 
 Here's a paragraph at the end.
 ~~~
 
+Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+
 ##### Web Code Resources
+
+This is identical to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
 
 Span:
 
 ~~~
-Easy as `![pie](http://markua.com/pie.png)`.
+Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
 ~~~
+
+Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
 Figure:
 
 ~~~
-Here's a paragraph before the figure.
+This will be a type of `code` and a format of `guess` since the file extension is not specified:
 
-{alt: "a slice of chocolate cake"}
-![A Piece of Cake](http://markua.com/cake.jpg)
+![Hello World in Ruby](http://markua.com/hello.rb)
 
-Here's a paragraph after the figure.
+That is equivalent to:
+
+{type: code, format: guess}
+![Hello World in Ruby](http://markua.com/hello.rb)
+
+If you don't want to take chances you can do this:
+
+{format: ruby}
+![Hello World in Ruby](http://markua.com/hello.rb)
+
+If you like being redundant you can do:
+
+{type: code, format: ruby}
+![Hello World in Ruby](http://markua.com/hello.rb)
+
+Here's a paragraph at the end.
 ~~~
+
+Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
 ##### Inline Code Resources
 
