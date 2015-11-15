@@ -822,27 +822,39 @@ Also, as discussed, Markua does not specify any file extensions associated with 
 `type`
 : All resources support the `type` attribute. For code, the type is `code`.
 
-`format`
-: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. All code must be formatted as monospaced text by Markua Processors. The `text` format means to not do any syntax highlighting as well. The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself and to do syntax highlighting accordingly if a matching programming language is detected. Note that syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`. Besides the `text` and `guess` values of the format attribue, you can also specify the programming language by setting the format attribute directly. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
-
 `caption`
 : All resources inserted as figures support the `caption` attribute.
 
 `align`, `float`, `position`
 : These attributes function how they do for images.
 
+`format`
+: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. All code must be formatted as monospaced text by Markua Processors. The `text` format means to not do any syntax highlighting as well. The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself and to do syntax highlighting accordingly if a matching programming language is detected. Note that syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`. Besides the `text` and `guess` values of the format attribue, you can also specify the programming language by setting the format attribute directly. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
+
+`line-numbers`
+: This determines whether the code sample shows line numbers. Values are `on` or `off`. The default value is `off`. Any value other than `on` is interpreted as `off`. Note that a code resource inserted as a span should be a single line of code, so this attribute does not make sense with spans.
+
+`number-from`
+: If line numbers are shown, this lets you override the starting number of the line numbers. The default value is `1`.
+
+`crop-start`
+: Sometimes it's desirable to only show part of a code resource defined in an external file as the code example. The `crop-start` and `crop-end` attributes let you accomplish this. The `crop-start` attribute defines the line which represents the first line included from the resource. For example, `{crop-start: 10, crop-end: 15, line-numbers: on, number-from: 10}` ensures that lines 10-15 are shown and are numbered as lines 10-15. The default value is 1, which is the first line of the file.
+
+`crop-end`
+: This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
+
 ##### Default Attributes for Code
 
 The default attributes for a code resource inserted as a span are:
 
 ```
-{type: code, format: guess, align: left, float: none, position: here}
+{type: code, format: guess, align: left, float: none, position: here, line-numbers: off}
 ```
 
 The default attributes for a code resource inserted as a figure are:
 
 ```
-{type: code, format: guess, align: center, float: none, position: near}
+{type: code, format: guess, align: center, float: none, position: near, line-numbers: off}
 ```
 
 These attributes can all be overridden via the attribute list on the figure.
@@ -949,9 +961,9 @@ Hello in Ruby is a `puts "hello"`text statement.
 
 The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
 
-###### Figure
+A> The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
 
-A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of Markdown. The syntax of adding inline code resources...
+###### Figure
 
 ~~~
 This will be a type of `code` and a format of `guess` since the format is not specified:
@@ -1000,83 +1012,17 @@ puts "hello"
 Some paragraph.
 ~~~
 
+A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+
 W> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
+##### Line Wrapping in Code Resources
 
-
-W> This specification is being rewritten. Do not trust anything after this point.
-
-Markua also supports adding other information to attributes of code blocks. For example, you can explicitly turn line numbering on an off using the `line-numbers` attribute:
-
-~~~
-{format: ruby, line-numbers: off}
-```
-def foo
-  2
-end
-```
-~~~
-
-You can mix-and-match the attribute syntax and the GitHub-style syntax. The following is legal in Markua:
-
-~~~
-{line-numbers: on}
-```ruby
-def foo
-  2
-end
-```
-~~~
-
-If the attribute and the GitHub-style syntax conflict, the attribute wins. The following will be formatted as plain text, not ruby:
-
-~~~
-{format: text, line-numbers: on, number-from: 3}
-```ruby
-def foo
-  2
-end
-```
-~~~
-
-A> Line Wrapping
-A>
-A> Code blocks should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors must wrap lines to ensure that all code is visible, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
-
-{class: warning}
-B> TODO: possibly support {format: `asciiart`} on a code block, which tightens line spacing and turns off page breaks so that ASCII art looks better.
-
-A> In Leanpub Flavoured Markdown, the paths included `code/`. This was redundant, since all code had to live in the code directory. So, Markua omits `code/` from the path.
-
-
-External code samples can also have attributes added to them on import. These can set a caption, determine what subset of the code example to show, as well as set the line number to start the numbering on.
-
-The following will show a code sample with the caption of "My Brilliant Algorithm". The code sample will contain 6 lines (lines 10-15 inclusive), and it will number them 10, 11, 12, 13, 14 and 15 since those are the line numbers of the given lines in the file:
-
-```
-{caption: "My Brilliant Algorithm", format: ruby, crop-start: 10, crop-end: 15, line-numbers: on}
-<<(sample1.rb)
-```
-
-If this is not desired, you can choose to start the numbering wherever you want with `number-from`. Choosing `1` is a good choice.
-
-The following will show 6 lines (lines 10-15 inclusive), and it will number them 1, 2, 3, 4, 5 and 6:
-
-```
-{format: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 1}
-<<(sample1.rb)
-```
-
-Or, if you wish to make things annoying, you can number from any non-negative integer you want. The following will show 6 lines (lines 10-15 inclusive), and it will number them 3, 4, 5, 6, 7 and 8:
-
-```
-{format: ruby, crop-start: 10, crop-end: 15, line-numbers: on, number-from: 3}
-<<(sample1.rb)
-```
-
-A> The Leanpub Flavoured Markdown syntax of putting a code sample caption is not supported. This syntax looked like the alt text on images, but as discussed there, this was an incorrecct use of the image syntax.
+Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
 
 #### Math
+
+W> This specification is being rewritten. Do not trust anything after this point.
 
 {caption: "Resource File Extensions Associated With Math"}
 |-----------|---------|------------|---------------|
