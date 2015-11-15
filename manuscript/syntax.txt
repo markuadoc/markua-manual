@@ -627,9 +627,9 @@ The following types of videos are supported in Markua: MP4 and WebM.
 | `.webm`   | `video` | `webm`     | WebM video    |
 |-----------|---------|------------|---------------|
 
-The syntax to insert a video is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both video formats; inline resource locations are obviously not supported.
+The syntax to insert a video is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both video formats; inline resource locations for video are obviously not supported.
 
-We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local, web and inline images.
+We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local and web videos.
 
 ##### Supported Attributes for Videos
 
@@ -639,9 +639,7 @@ We will discuss the supported and the default attributes for videos, and then sh
 `alt`, `caption`, `align`, `float`, `position`, `width` and `height`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
 
-Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text.
-
-A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua. Markua only supports providing one video resource, with two fallbacks: the `poster` and the `alt` text.
+Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text. (The use of video fallbacks, such as HTML5's `mediagroup` syntax or multiple `source` elements, is not supported in Markua.)
 
 ##### Default Attributes for Videos
 
@@ -659,7 +657,7 @@ The default attributes for an video inserted as a figure are:
 
 These attributes can all be overridden via the attribute list on the figure.
 
-##### Local Images
+##### Local Video
 
 Span:
 
@@ -680,7 +678,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-##### Web Images
+##### Web Video
 
 Span:
 
@@ -703,16 +701,9 @@ Here's a paragraph after the figure.
 
 #### Audio
 
+Just like with video, the audio support in ebooks and on the web is more varied than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. It's entirely likely that many ebook readers won't support any of them.
 
-
-
-
-
-
-
-W> This specification is being rewritten. Do not trust anything after this point.
-
-audio or  With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video,
+The following types of audio resources are supported in Markua: MP3, AAC, WAV and Ogg Vorbis.
 
 {caption: "Resource File Extensions Associated With Audio"}
 |-----------|---------|------------|---------------|
@@ -727,41 +718,75 @@ audio or  With audio, there are MP3, AAC, Ogg and WAV formats all in widespread 
 | `.oga`    | `audio` | `ogg`      | Ogg Vorbis    |
 |-----------|---------|------------|---------------|
 
-Markua supports four types of `audio` resources: MP3, AAC, WAV and Ogg Vorbis. The audio type is determined by file extension: `.mp3` for MP3, `.m4a` and `.aac` for AAC, `.wav` and `.wave` for WAV, and `.ogg` and `.oga` for Ogg Vorbis.
+A> Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
 
-There are no supported attributes for `audio` resources.
+The syntax to insert an audio file is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both audio formats; inline resource locations for audio are obviously not supported.
 
-Examples:
+We will discuss the supported and the default attributes for audio files, and then show examples of audio being inserted as spans and as figures for both local and web audio files.
+
+##### Supported Attributes for Audio
+
+`poster`
+: The `poster` is the URL or path to an image which should be shown instead of the audio. (Think of it like an "album" cover: many humans have never seen an LP; for them, an album cover is as much a metaphor as the floppy disk which represents a save button.) The poster can have a play button superimposed on it by the Markua Processor. A Markua Processor can also ignore the poster entirely and just show a generic player for the audio resource. If a Markua Processor is outputting some format where it is known that audio resources are not supported (e.g. "books"), it must choose the poster to use as a replacement for the audio.
+
+`alt`, `caption`, `align`, `float`, `position`, `width` and `height`
+: These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, not to the audio itself.
+
+Since the `alt` is a fallback for if the `poster` image cannot be displayed, the audio has two fallbacks: the `poster` image and then the `alt` text.
+
+##### Default Attributes for Audio
+
+The default attributes for audio are (with the exception of the type) the same as for video, and they all apply to the poster.
+
+The default attributes for an audio inserted as a span are:
 
 ```
-The talk highlights are here:
-
-{type: audio}
-![](audio.mp3)
-
-A longer version is on the web here:
-
-{type: audio}
-![](http://markua.com/fulltalk.m4a)
+{type: audio, align: left, float: none, position: here, width: auto, height: auto}
 ```
 
-Markua supports MP3, AAC, Ogg and WAV audio files.
+The default attributes for an audio inserted as a figure are:
 
-The supported file extensions for audio files are:
+```
+{type: audio, align: center, float: none, position: near, width: auto, height: auto}
+```
 
-.mp3
-: The file is treated as MP3 audio.
+These attributes can all be overridden via the attribute list on the figure.
 
-.m4a, .aac
-: The file is treated as an MP4 AAC (Advanced Audio Coding) audio file. Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
+##### Local Audio
 
-.wav, .wave
-: The file is treated as a WAV (Waveform Audio File Format) file.
+Span:
 
-.ogg, .oga
-: The file is treated as an Ogg Vorbis file.
+~~~
+The talk audio highlights are here: `![](highlights.mp3)`.
+~~~
+
+Figure:
+
+~~~
+The full version of the talk is here:
+
+![](talk.m4a)
+~~~
+
+##### Web Audio
+
+Span:
+
+~~~
+The talk audio highlights are here: `![](http://markua.com/highlights.mp3)`.
+~~~
+
+Figure:
+
+~~~
+The full version of the talk is here:
+
+![](http://markua.com/talk.m4a)
+~~~
 
 #### Code
+
+W> This specification is being rewritten. Do not trust anything after this point.
 
 Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
 
