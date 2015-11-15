@@ -951,143 +951,60 @@ The first and second statement above are functionally identical since the defaul
 
 ###### Figure
 
-W> This specification is being rewritten. Do not trust anything after this point.
-
 A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of Markdown. The syntax of adding inline code resources...
 
 ~~~
-Here's a paragraph before the figure.
+This will be a type of `code` and a format of `guess` since the format is not specified:
 
-{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
-```svg
-<svg width="20" height="20">
-  <circle cx="10" cy="10" r="9" fill="blue"/>
-</svg>
-```
-
-Here's a paragraph after the figure.
-~~~
-
-~~~
-
-{format: ruby}
 ```
 puts "hello"
 ```
-~~~
 
-~~~
-{type: code, format: guess}
-![](hello.rb)
-
-{format: ruby}
-```
-puts "hello"
-```
+That is equivalent to:
 
 ```guess
 puts "hello"
 ```
 
-```text
+If you don't want to take chances you can do this:
+
+```ruby
 puts "hello"
 ```
 
-```
-puts "hello"
-```
-~~~
+If you like being redundant you can do:
 
-In the settings, have a default format? choices: guess, plain, ruby, etc. Maybe default language too?
-
-~~~
 {type: code}
-```svg
-<svg width="50" height="50">
-  <circle cx="25" cy="25" r="20" fill="blue"/>
-</svg>
-```
-~~~
-
-~~~
-{type: image}
-```svg
-<svg width="50" height="50">
-  <circle cx="25" cy="25" r="20" fill="blue"/>
-</svg>
-```
-~~~
-
-
 ```ruby
 puts "hello"
 ```
 
-```text
+If you don't like syntactic sugar you can do:
+
+{type: code, format: ruby}
+```
+puts "hello"
+```
+~~~
+
+Finally, if you want a figure caption, you can add it to the attribute list with any of the above. For example:
+
+~~~
+Some paragraph.
+
+{caption: "Hello World in Ruby"}
+```ruby
 puts "hello"
 ```
 
-{type: image}
-```svg
-```
-
-Code blocks can be defined inline or can import external code samples. Many attributes work the same way in both cases. The inline code block approach will be shown first.
-
-{class: warning}
-B> TODO - reference attribute list thing here, need to have a list of every element and attribute in appendix etc etc
-
-You can create an inline code block by surrounding it using three backticks (`\``).
-
-(You can also create an inline code block by surrounding it with three tildes (`~~~`), but the only reason this alternative exists is to enable writing about Markua code blocks that are surrounded with backticks in Markua. The correct approach in normal cases is to use three backticks.)
-
-Here's an example of a code block:
-
-~~~
-```
-def foo
-  2
-end
-```
+Some paragraph.
 ~~~
 
-W> The "four space indent" method of creating code blocks in Markdown is not supported in Markua.
+W> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
-Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
 
-Markua also supports defining the language that a code sample is written in using the GitHub Flavoured Markdown style language specification, in which the language name is added after the three opening backticks that start a code block:
 
-~~~
-```ruby
-def foo
-  2
-end
-```
-~~~
-
-Markua Processors may guess at the language of a code block. To explicitly turn this off for a give code block, it can be forced to be plain text like this:
-
-~~~
-```text
-def foo
-  2
-end
-```
-~~~
-
-If a Markua Processor knows how to format the code using the specified language (if it has a "lexer" for it), it can do so. Otherwise, it must format the code using plain text as though `text` was specified as the language.
-
-Note that this language definition is just a shorthand for a more general metadata feature of markua called attributes. Briefly, attributes comma-separated key-value pairs enclosed in a pair of curly braces (`{` ... `}`) and separated by a newline but **not** by a blank line from the thing that they are an attribute of.
-
-You can define the language of a code block explicitly using the language attribute:
-
-~~~
-{format: ruby}
-```
-def foo
-  2
-end
-```
-~~~
+W> This specification is being rewritten. Do not trust anything after this point.
 
 Markua also supports adding other information to attributes of code blocks. For example, you can explicitly turn line numbering on an off using the `line-numbers` attribute:
 
