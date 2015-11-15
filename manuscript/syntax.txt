@@ -577,6 +577,7 @@ Here's a paragraph after the figure.
 
 
 
+W> This specification is being rewritten. Do not trust anything after this point.
 
 
 The file extension will be used to determine the default type of a local or web image.
