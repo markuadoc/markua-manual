@@ -508,13 +508,13 @@ The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and z
 
 W> TODO_LEANPUB - Support table captions (there should be one in the table above)
 
-W> This specification is being rewritten. Do not trust anything after this point.
-
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
 The following examples show images being inserted as spans and as figures.
 
 ##### Local Images
+
+W> TODO_LEANPUB - We need to add newlines after h5
 
 Span:
 
@@ -552,7 +552,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-#### Inline Images (SVG only)
+##### Inline Images (SVG only)
 
 Span:
 
