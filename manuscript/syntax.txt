@@ -634,7 +634,7 @@ The following examples show images being inserted as spans and as figures.
 ##### Local Video
 
 
-
+W> This specification is being rewritten. Do not trust anything after this point.
 
 Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
 
