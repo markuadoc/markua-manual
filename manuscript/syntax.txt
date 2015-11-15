@@ -661,8 +661,6 @@ These attributes can all be overridden via the attribute list on the figure.
 
 Span:
 
-W> TODO_LEANPUB - We need to add newlines after h5s!
-
 ~~~
 Easy as `![pie](pie_eating_contest.mp4)`.
 ~~~
