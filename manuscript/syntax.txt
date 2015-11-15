@@ -510,7 +510,45 @@ The syntax to insert an image is the same compact and consistent syntax that is 
 
 A> Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
 
-The following examples show images being inserted as spans and as figures.
+We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
+
+##### Supported Attributes for Images
+
+`align`
+: The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
+
+`float`
+: The `float` can be `none` (the default), `left`, `conter` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
+
+`position`
+: The `position` refers to vertical positioning on a page. The position only has an effoct on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
+
+`width` and `height`
+: The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. It is legal for either one or both of `width` and `height` can be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page.
+
+`alt`
+: The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in square brackets for images inserted as spans and only in the attribute list for figures.
+
+`caption`
+: The `caption` is the figure caption. It can only be present when the image is inserted as a figure.
+
+##### Default Attributes for Images
+
+The default attributes for an image inserted as a span are:
+
+```
+{type: image, align: left, float: none, position: here, width: auto, height: auto}
+```
+
+Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
+
+The default attributes for an image inserted as a figure are:
+
+```
+{type: image, align: center, float: none, position: near, width: auto, height: auto}
+```
+
+These attributes can all be overridden via the attribute list on the figure.
 
 ##### Local Images
 
@@ -575,45 +613,9 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-##### Supported Attributes for Images
-
-The supported attributes for `image` resources are `align`, `float`, `position`, `width`, `height`, `alt` and `caption`. These affect how an image is sized and positioned.
-
-The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
-
-The `float` can be `none` (the default), `left`, `conter` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
-
-The `position` refers to vertical positioning on a page. The position only has an effoct on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
-
-The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. It is legal for either one or both of `width` and `height` can be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page.
-
-The `alt` is the alt text; the `caption` is the figure caption. Both of these can only be present when an image is inserted as a figure.
-
-##### Default Attributes for Images
-
-The default attributes for an image inserted as a span are:
-
-```
-{type: image, align: left, float: none, position: here, width: auto, height: auto}
-```
-
-Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
-
-The default attributes for an image inserted as a figure are:
-
-```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
-```
-
-These attributes can all be overridden via the attribute list on the figure.
-
 #### Video
 
 Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
-
-More importantly, books are not just ebooks--books can also be printed on paper, producing something called a physical book. These physical books, whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books") have one thing in common: they do not support embedded video.
-
-So, it's important to provide an alternate image to replace the video in situations where a video can never be supported.
 
 The following types of videos are supported in Markua: MP4 and WebM.
 
@@ -627,6 +629,8 @@ The following types of videos are supported in Markua: MP4 and WebM.
 
 The syntax to insert a video is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both video formats; inline resource locations are obviously not supported.
 
+We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local, web and inline images.
+
 The following examples show videos being inserted as spans and as figures.
 
 ##### Local Video
@@ -639,6 +643,14 @@ W> This specification is being rewritten. Do not trust anything after this point
 The supported attributes for `video` resources are: `poster`, `align`, `float`, `position`, `width` and `height`.
 
 The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported (including if the video is a web resource and web resources are not supported for video), it must choose the poster to use as a replacement for the video.
+
+
+
+
+More importantly, books are not just ebooks--books can also be printed on paper, producing something called a "book". These physical books, whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
+
+So, it's important to provide a syntax which also supports an alternate image to replace the video in situations where a video can never be supported. Thankfully, there's another place this image is
+
 
 The `align`, `float`, `position`, `width` and `height` attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute.
 
