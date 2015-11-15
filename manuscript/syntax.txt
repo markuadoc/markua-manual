@@ -631,31 +631,33 @@ The syntax to insert a video is the same compact and consistent syntax that is u
 
 We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local, web and inline images.
 
-The following examples show videos being inserted as spans and as figures.
+##### Supported Attributes for Videos
+
+`poster`
+: The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. (Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
+
+`alt`, `caption`, `align`, `float`, `position`, `width` and `height`
+: These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
+
+##### Default Attributes for Videos
+
+The default attributes for an video inserted as a span are:
+
+```
+{type: video, align: left, float: none, position: here, width: auto, height: auto}
+```
+
+The default attributes for an video inserted as a figure are:
+
+```
+{type: video, align: center, float: none, position: near, width: auto, height: auto}
+```
+
+These attributes can all be overridden via the attribute list on the figure.
 
 ##### Local Video
 
 W> This specification is being rewritten. Do not trust anything after this point.
-
-
-
-
-The supported attributes for `video` resources are: `poster`, `align`, `float`, `position`, `width` and `height`.
-
-The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported (including if the video is a web resource and web resources are not supported for video), it must choose the poster to use as a replacement for the video.
-
-
-
-
-More importantly, books are not just ebooks--books can also be printed on paper, producing something called a "book". These physical books, whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
-
-So, it's important to provide a syntax which also supports an alternate image to replace the video in situations where a video can never be supported. Thankfully, there's another place this image is
-
-
-The `align`, `float`, `position`, `width` and `height` attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute.
-
-
-
 
 Examples:
 
