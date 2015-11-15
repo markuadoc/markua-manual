@@ -451,7 +451,7 @@ Markua does not specify any file extensions associated with the `code` type. The
 
 Markua also does not specify how Markdown (which often has a file extension of `.md`) or Markua (which often has a file extension of `.markua`) text should be interpreted by default. It can be interpreted as a type of `text` and a format of either `plain` (for normal text) or `monospaced` (for monospaced text). Note that if Markdown or Markua text is in a file with an extension of `.txt` it is interpreted by default as plain (not monospaced) text.
 
-Markua Processors are free to interpret all unspecified file extensions however they want. New programming languages are invented constantly, and new image, audio and video formats are also created intermittently. For example, a Markua Processor could interpret all unspecified file extensions as type of `text` and a format of `monospaced`--this would ensure that all such files looked like source code which was not syntax-highlighted.
+Markua Processors must interpret all unspecified file extensions as specifying a resource of type `code` with a format of `guess`. Then, if the file extension corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code. If the Markua Processor does not recognize the file extension or if the Markua Processor does not support syntax highlighting, it will format it as unformatted monospaced text, per the [rules for code resources](#supported_attributes_for_code).
 
 When a local or web resource is inserted as a span, the file extension is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
 
@@ -513,6 +513,12 @@ A> Again, the reference style image syntax of Markdown is **NOT** supported in M
 We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
 
 ##### Supported Attributes for Images
+
+`type`
+: All resources support the `type` attribute. For images, the type is `image`. This is the default type, so it is almost always omitted.
+
+`format`
+: All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
 
 `align`
 : The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
@@ -631,7 +637,13 @@ The syntax to insert a video is the same compact and consistent syntax that is u
 
 We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local and web videos.
 
-##### Supported Attributes for Videos
+##### Supported Attributes for Video
+
+`type`
+: All resources support the `type` attribute. For video, the type is `video`.
+
+`format`
+: All resources support the format attribute. For video, the `format` is the specific vidio format. The legal set of formats is given in the `format` column in the above table.
 
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. (Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
@@ -641,15 +653,15 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text. (The use of video fallbacks, such as HTML5's `mediagroup` syntax or multiple `source` elements, is not supported in Markua.)
 
-##### Default Attributes for Videos
+##### Default Attributes for Video
 
-The default attributes for an video inserted as a span are:
+The default attributes for a video inserted as a span are:
 
 ```
 {type: video, align: left, float: none, position: here, width: auto, height: auto}
 ```
 
-The default attributes for an video inserted as a figure are:
+The default attributes for a video inserted as a figure are:
 
 ```
 {type: video, align: center, float: none, position: near, width: auto, height: auto}
@@ -724,6 +736,12 @@ We will discuss the supported and the default attributes for audio files, and th
 
 ##### Supported Attributes for Audio
 
+`type`
+: All resources support the `type` attribute. For audio, the type is `audio`.
+
+`format`
+: All resources support the format attribute. For audio, the `format` is the specific audio format. The legal set of formats is given in the `format` column in the above table.
+
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the audio. (Think of it like an "album" cover: many humans have never seen an LP; for them, an album cover is as much a metaphor as the floppy disk which represents a save button.) The poster can have a play button superimposed on it by the Markua Processor. A Markua Processor can also ignore the poster entirely and just show a generic player for the audio resource. If a Markua Processor is outputting some format where it is known that audio resources are not supported (e.g. "books"), it must choose the poster to use as a replacement for the audio.
 
@@ -784,13 +802,120 @@ The full version of the talk is here:
 
 #### Code
 
-W> This specification is being rewritten. Do not trust anything after this point.
+Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua.
 
-Code resources can be inserted either from external files (as local or web resources) or in the text of the document inline resources.
+In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource. Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
+
+As discussed, code cannot have alt text. It's just text. If any alt text is provided for a `code` resource it is ignored.
+
+Also, as discussed, Markua does not specify any file extensions associated with the `code` type.
+
+{#supported_attributes_for_code}
+##### Supported Attributes for Code
+
+`type`
+: All resources support the `type` attribute. For code, the type is `code`.
+
+`format`
+: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. All code must be formatted as monospaced text by Markua Processors. The `text` format means to not do any syntax highlighting as well. The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself and to do syntax highlighting accordingly if a matching programming language is detected. Note that syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`. Besides the `text` and `guess` values of the format attribue, you can also specify the programming language by setting the format attribute directly. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
+
+`caption`
+: All resources inserted as figures support the `caption` attribute.
+
+`align`, `float`, `position`
+: These attributes function how they do for images.
+
+##### Default Attributes for Code
+
+The default attributes for a code resource inserted as a span are:
+
+```
+{type: code, format: guess, align: left, float: none, position: here}
+```
+
+The default attributes for a code resource inserted as a figure are:
+
+```
+{type: code, format: guess, align: center, float: none, position: near}
+```
+
+These attributes can all be overridden via the attribute list on the figure.
+
+##### Local Code Resources
+
+Span:
 
 ~~~
+Hello in Ruby is a simple ![](hello.rb) statement.
+~~~
+
+Figure:
+
+~~~
+Here's a paragraph before the first figure.
+
 {type: code, format: ruby}
 ![](hello.rb)
+
+Here's a paragraph in the middle.
+
+![](hello.rb)
+
+Here's a paragraph at the end.
+~~~
+
+##### Web Code Resources
+
+Span:
+
+~~~
+Easy as `![pie](http://markua.com/pie.png)`.
+~~~
+
+Figure:
+
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](http://markua.com/cake.jpg)
+
+Here's a paragraph after the figure.
+~~~
+
+##### Inline Code Resources
+
+Span:
+
+~~~
+Hello in Ruby is a `puts "hello"` statement.
+
+Hello in Ruby is a `puts "hello"`guess statement.
+
+Hello in Ruby is a `puts "hello"`ruby statement.
+
+Hello in Ruby is a `puts "hello"`text statement.
+~~~
+
+The first and second statement above are functionally identical; the third forces the format to be `ruby`; the fourth one forces it to be plain monospaced code with no syntax highlighting.
+
+
+Figure:
+
+~~~
+Here's a paragraph before the figure.
+
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+
+Here's a paragraph after the figure.
+~~~
+
+~~~
 
 {format: ruby}
 ```
