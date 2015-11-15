@@ -378,9 +378,7 @@ You may have been surprised reading this section. Markua does not have many inco
 
 The reason for this inconsistency is that even though it's a bit harder to learn, it's much better for writers this way once they've learned it.
 
-The square brackets contain the text which is the most common use case for both span resources and for figures.
-
-For a span resource, that is the alt text. For a figure, that is the figure caption.
+The square brackets contain the text which is the most common use case for both span resources and for figures. For a span resource, that is the alt text. For a figure, that is the figure caption.
 
 This is especially true since a span image cannot have a figure caption, and since not all figures are of resource types that can have alt text. (Code resources and text resources are themselves text, so they cannot have alt text.) Also, many image, audio and video resources are inserted without alt text.
 
@@ -516,9 +514,9 @@ The following examples show images being inserted as spans and as figures.
 
 ##### Local Images
 
-W> TODO_LEANPUB - We need to add newlines after h5
-
 Span:
+
+W> TODO_LEANPUB - We need to add newlines after h5s!
 
 ~~~
 Easy as `![pie](pie.png)`.
@@ -613,6 +611,10 @@ These attributes can all be overridden via the attribute list on the figure.
 
 W> This specification is being rewritten. Do not trust anything after this point.
 
+The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span or as a figure.
+
+The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
+
 {caption: "Resource File Extensions Associated With Video"}
 |-----------|---------|------------|---------------|
 | Extension | `type`  | `format`   | Description   |
@@ -620,6 +622,19 @@ W> This specification is being rewritten. Do not trust anything after this point
 | `.mp4`    | `video` | `mp4`      | MP4 video     |
 | `.webm`   | `video` | `webm`     | WebM video    |
 |-----------|---------|------------|---------------|
+
+W> TODO_LEANPUB - Support table captions (there should be one in the table above)
+
+The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
+
+A> Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
+
+The following examples show images being inserted as spans and as figures.
+
+##### Local Video
+
+
+
 
 Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
 
