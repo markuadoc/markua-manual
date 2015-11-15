@@ -615,11 +615,7 @@ More importantly, books are not just ebooks--books can also be printed on paper,
 
 So, it's important to provide an alternate image to replace the video in situations where a video can never be supported.
 
-
-
-The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span or as a figure.
-
-The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
+The following types of videos are supported in Markua: MP4 and WebM.
 
 {caption: "Resource File Extensions Associated With Video"}
 |-----------|---------|------------|---------------|
@@ -629,26 +625,16 @@ The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and z
 | `.webm`   | `video` | `webm`     | WebM video    |
 |-----------|---------|------------|---------------|
 
-W> TODO_LEANPUB - Support table captions (there should be one in the table above)
+The syntax to insert a video is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both video formats; inline resource locations are obviously not supported.
 
+The following examples show videos being inserted as spans and as figures.
 
-
+##### Local Video
 
 W> This specification is being rewritten. Do not trust anything after this point.
 
 
-The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
-A> Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
-
-The following examples show images being inserted as spans and as figures.
-
-##### Local Video
-
-
-
-
-Markua supports two types of `video` resourcess: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4, and `.webm` for WebM.
 
 The supported attributes for `video` resources are: `poster`, `align`, `float`, `position`, `width` and `height`.
 
