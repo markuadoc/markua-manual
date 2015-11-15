@@ -471,20 +471,22 @@ Each `type` of resource has a number of supported `format`s, which can either be
 
 Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
-The default `type` of a local resource or web resource varies based on the file extension, and on whether a `format` is specified.
-
-* If a `format` is specified in an attribute list, it  the file extension corresponds to
-
-is always `image`. This means images in Markua are inserted in essentially the same way they are in Markdown.
-
-The default `type` of an inline resource depends on the `format` specified:
+The default `type` of a resource depends on the `format` specified:
 
 * If the format is `svg`, the inline resource is assumed to be of type `image`.
 * If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
-* If the format is omitted or is `plain`, the inline resource is assumed to be of type `text`.
+* If the format is `plain`, the inline resource is assumed to be of type `text`.
 * For any other format, the inline resource is assumed to be of type `code`.
 
-These defaults mean that Markua can usually do the right thing based on the format, and that the resource type can almost always be inferred for inline resources. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
+The `type` can also be specified in the attribute list.
+
+If the attribute list specifies both `type` and `format`, and if the `format` is incompatible with the `type` (e.g. `{type: image, format: ruby}`), then the `format` wins and is used to determine the type.
+
+If no `format` is specified in the attribute list (or after the backticks in the case of an inline resource), the `format` is determined by the file extension.
+
+If there is no file extension, the default type is `code` and the default format is `guess`.
+
+These defaults mean that Markua Processors can usually do the right thing. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
 
 Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. The specific default attributes are discussed in the sections below about the different resource types.
 
@@ -512,7 +514,7 @@ W> TODO_LEANPUB - Support table captions (there should be one in the table above
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
-A> Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
+A> Images in Markua are inserted in essentially the same way they are in Markdown for inline images. Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
 
 We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
 
