@@ -609,7 +609,13 @@ These attributes can all be overridden via the attribute list on the figure.
 
 #### Video
 
-W> This specification is being rewritten. Do not trust anything after this point.
+Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
+
+More importantly, books are not just ebooks--books can also be printed on paper, producing something called a physical book. These physical books, whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books") have one thing in common: they do not support embedded video.
+
+So, it's important to provide an alternate image to replace the video in situations where a video can never be supported.
+
+
 
 The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span or as a figure.
 
@@ -625,6 +631,12 @@ The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and z
 
 W> TODO_LEANPUB - Support table captions (there should be one in the table above)
 
+
+
+
+W> This specification is being rewritten. Do not trust anything after this point.
+
+
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
 A> Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
@@ -634,11 +646,7 @@ The following examples show images being inserted as spans and as figures.
 ##### Local Video
 
 
-W> This specification is being rewritten. Do not trust anything after this point.
 
-Unlike with images which are supported in most circumstances, with audio or video files it's currently a bit of a crapshoot. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video, there's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that for a given ebook reader, any given audio or video format will not be supported, and as an ebook author you should be prepared to provide a fallback audio or video resource format and/or a fallback image for situations (including print books) where a audio or video resource will never work.
-
-A> Obviously, embedding audio and video does not work for printed books and documents. It also won't work in many ebook readers and some ebook formats. However, for the applications (e.g. high school and first year university textbooks) where audio and video would be useful, it would be really, really useful.
 
 Markua supports two types of `video` resourcess: MP4 and WebM. The video type is determined by file extension: `.mp4` for MP4, and `.webm` for WebM.
 
@@ -647,6 +655,9 @@ The supported attributes for `video` resources are: `poster`, `align`, `float`, 
 The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting a print book or some format where it is known that video resources are not supported (including if the video is a web resource and web resources are not supported for video), it must choose the poster to use as a replacement for the video.
 
 The `align`, `float`, `position`, `width` and `height` attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute.
+
+
+
 
 Examples:
 
@@ -678,6 +689,9 @@ When inserting an audio or video resource as a span element in the flow of a par
 A> For those familiar with HTML5 video: the `mediagroup` syntax and/or the use of `source` elements is not supported in Markua.
 
 #### Audio
+
+
+audio or  With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. With video,
 
 {caption: "Resource File Extensions Associated With Audio"}
 |-----------|---------|------------|---------------|
