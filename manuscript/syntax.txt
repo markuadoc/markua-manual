@@ -923,9 +923,19 @@ Note that in the above examples of figures, the text in the square brackets is t
 
 ##### Inline Code Resources
 
+Inline code resources are the most flexible and appropriate way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
+
 ###### Span
 
-~~~
+The format of an inline code resource inserted as a span is:
+
+```
+Yada yada `some code here`optional_format yada yada.
+```
+
+The optional format specifies the programming language used. If it is not provided, the format defaults to `guess`, as shown in the following examples:
+
+```
 Hello in Ruby is a `puts "hello"` statement.
 
 Hello in Ruby is a `puts "hello"`guess statement.
@@ -933,12 +943,15 @@ Hello in Ruby is a `puts "hello"`guess statement.
 Hello in Ruby is a `puts "hello"`ruby statement.
 
 Hello in Ruby is a `puts "hello"`text statement.
-~~~
+```
 
-The first and second statement above are functionally identical; the third forces the format to be `ruby`; the fourth one forces it to be plain monospaced code with no syntax highlighting.
-
+The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
 
 ###### Figure
+
+W> This specification is being rewritten. Do not trust anything after this point.
+
+A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of Markdown. The syntax of adding inline code resources...
 
 ~~~
 Here's a paragraph before the figure.
