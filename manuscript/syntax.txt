@@ -529,8 +529,10 @@ We will discuss the supported and the default attributes for images, and then sh
 
 The default attributes for an image inserted as a span are:
 
+W> TODO - default image format? guess?
+
 ```
-{type: image, align: left, float: none, position: here, width: auto, height: auto}
+{type: image, format: png, align: left, float: none, position: here, width: auto, height: auto}
 ```
 
 Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
@@ -1043,9 +1045,13 @@ Determining the artistic merit of this poem is left as an exercise for the reade
 
 Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
 
-#### Math - UPDATED TO HERE
+#### Math
 
-W> This specification is being rewritten. Do not trust anything after this point.
+Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
+
+A> Just as with code, in Leanpub Flavoured Markdown we had special syntaxes for inserting math. It looked like `{$$}...{/$$}`, which looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
+
+Math resources can be either LaTeX math or MathML.
 
 {caption: "Resource File Extensions Associated With Math"}
 |-----------|---------|------------|---------------|
@@ -1054,6 +1060,209 @@ W> This specification is being rewritten. Do not trust anything after this point
 | `.tex`    | `math`  | `latex`    | LaTeX math    |
 | `.mathml` | `math`  | `mathml`   | MathML math   |
 |-----------|---------|------------|---------------|
+
+##### Supported Attributes for Math
+
+`type`
+: All resources support the `type` attribute. For math, the type is `math`.
+
+`caption`
+: All resources inserted as figures support the `caption` attribute.
+
+`align`, `float`, `position`
+: These attributes function how they do for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
+
+`format`
+: For math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `tex` for LaTeX math and `mathml` for MathML math.
+
+`alt`
+: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This can only be provided in square brackets for mathematical equations inserted as spans and only in the attribute list for figures.
+
+##### Default Attributes for Math
+
+The default attributes for a math resource inserted as a span are:
+
+```
+{type: math, format: latex, align: left, float: none, position: here, width: auto, height: auto}
+```
+
+Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span math, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
+
+The default attributes for a math resource inserted as a figure are:
+
+```
+{type: math, align: center, float: none, position: near, width: auto, height: auto}
+```
+
+
+W> This specification is being rewritten. Do not trust anything after this point.
+
+
+```
+{type: code, format: guess, align: center, float: none, position: near, line-numbers: off}
+```
+
+These attributes can all be overridden via the attribute list on the figure.
+
+##### Local Code Resources
+
+###### Span
+
+```
+Hello in Ruby is a simple ![](hello.rb) statement.
+```
+
+Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
+
+###### Figure
+
+```
+This will be a type of `code` and a format of `guess` since the file extension is not specified:
+
+![Hello World in Ruby](hello.rb)
+
+That is equivalent to:
+
+{type: code, format: guess}
+![Hello World in Ruby](hello.rb)
+
+If you don't want to take chances you can do this:
+
+{format: ruby}
+![Hello World in Ruby](hello.rb)
+
+If you like being redundant you can do:
+
+{type: code, format: ruby}
+![Hello World in Ruby](hello.rb)
+
+Here's a paragraph at the end.
+```
+
+Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+
+##### Web Code Resources
+
+This is identical to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
+
+###### Span
+
+```
+Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
+```
+
+Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
+
+###### Figure
+
+```
+This will be a type of `code` and a format of `guess` since the file extension is not specified:
+
+![Hello World in Ruby](http://markua.com/hello.rb)
+
+That is equivalent to:
+
+{type: code, format: guess}
+![Hello World in Ruby](http://markua.com/hello.rb)
+
+If you don't want to take chances you can do this:
+
+{format: ruby}
+![Hello World in Ruby](http://markua.com/hello.rb)
+
+If you like being redundant you can do:
+
+{type: code, format: ruby}
+![Hello World in Ruby](http://markua.com/hello.rb)
+
+Here's a paragraph at the end.
+```
+
+Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+
+##### Inline Code Resources
+
+Inline code resources are the most flexible and appropriate way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
+
+###### Span
+
+The format of an inline code resource inserted as a span is:
+
+```
+Yada yada `some code here`optional_format yada yada.
+```
+
+The optional format specifies the programming language used. If it is not provided, the format defaults to `guess`, as shown in the following examples:
+
+```
+Hello in Ruby is a `puts "hello"` statement.
+
+Hello in Ruby is a `puts "hello"`guess statement.
+
+Hello in Ruby is a `puts "hello"`ruby statement.
+
+Hello in Ruby is a `puts "hello"`text statement.
+```
+
+The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
+
+A> The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
+
+###### Figure
+
+~~~
+This will be a type of `code` and a format of `guess` since the format is not specified:
+
+```
+puts "hello"
+```
+
+That is equivalent to:
+
+```guess
+puts "hello"
+```
+
+If you don't want to take chances you can do this:
+
+```ruby
+puts "hello"
+```
+
+If you like being redundant you can do:
+
+{type: code}
+```ruby
+puts "hello"
+```
+
+If you don't like syntactic sugar you can do:
+
+{type: code, format: ruby}
+```
+puts "hello"
+```
+~~~
+
+If you want a figure caption, you can add it to the attribute list with any of the above. For example:
+
+~~~
+Some paragraph.
+
+{caption: "Hello World in Ruby"}
+```ruby
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+
+A> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
+
+
+
 
 You can put mathematical equations in your book, in either block elements (described below) or in span elements.
 
