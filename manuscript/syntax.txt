@@ -1014,6 +1014,8 @@ Math resources can be either LaTeX math or MathML.
 | `.mathml` | `mathml`   | MathML math   |
 |-----------|------------|---------------|
 
+Note that Markua procesors do not need to support either Math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
+
 ##### Supported Attributes for Math
 
 `caption`
@@ -1072,7 +1074,7 @@ This is identical to how local math resources work, including the significance o
 ###### Span
 
 ```
-This is ![too large to fit in the alt text](http://markua.com/fermat_proof.tex) my proof.
+This is ![too large to fit in the alt text](http://markua.com/fermat_proof.webm) my proof.
 ```
 
 ###### Figure
@@ -1081,7 +1083,7 @@ This is ![too large to fit in the alt text](http://markua.com/fermat_proof.tex) 
 Here's a paragraph before the figure.
 
 {alt: "too large to fit in the alt text"}
-![Proof of Fermat's Last Theorem](http://markua.com/fermat_proof.webm)
+![Proof of Fermat's Last Theorem](http://markua.com/fermat_proof.tex)
 
 Here's a paragraph after the figure.
 ```
@@ -1090,13 +1092,9 @@ Note that in the above examples of figures, the text in the square brackets is t
 
 ##### Inline Math Resources
 
-Inline math resources are the most flexible and appropriate way to insert math as a span resource, and the most straightforward way to add short math examples as figures.
-
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+Inline math resources are the most flexible and appropriate way to insert math as a span resource, and the most straightforward way to add short math examples as figures. Both LaTeX and MathML can be inlined either as spans or figures, but only LaTeX is terse enough for it to be practical.
 
 ###### Span
-
-Since these are span elements, LaTeX math will look a lot better than MathML.
 
 The format of an inline math resource inserted as a span is:
 
@@ -1104,70 +1102,32 @@ The format of an inline math resource inserted as a span is:
 Yada yada `some math here`optional_format yada yada.
 ```
 
-The optional format specifies the math format used. If it is not provided, the format defaults to `guess` and the resource is interpreted as code, not math.
+The optional format specifies the math format used. While it's technically optional, it's not optional if you want math: you either need to say `latex` or `mathml`. Otherwise, if the format is not provided, the format defaults to `guess` and the resource is interpreted as code, not math.
 
 ```
+One of the kinematic equation is `d = v_i t + \frac{1}{2} a t^2`latex this one.
 ```
+
+Since these are span elements, LaTeX math will look a lot better than MathML, since it's a lot more terse. However, both are supported.
 
 ###### Figure
 
-~~~
-~~~
-
-If you want a figure caption, you can add it to the attribute list with any of the above. For example:
+LaTeX math:
 
 ~~~
-Some paragraph.
+Here's a paragraph before the figure.
 
-{caption: "Hello World in Ruby"}
 ```latex
-```
-
-Some paragraph.
-~~~
-
-W> TODO: RESOURCE INSERTION REWRITE
-
-
-This uses the default math engine. Chances are if you're using this syntax, you're using LaTeX math.
-
-```
-The four kinematics equations are `d = v_i t + \frac{1}{2} a t^2{/$$}, {$$}v_f^2 = v_i^2 + 2 a d`latex, `v_f = v_i + a t{/$$} and {$$}d = \frac{1}{2}(v_i + v_f) t`latex.
-```
-
-Markua processors can output do whatever they want here as well.
-
-To create a math block, you insert it like a math block and you add a `math` attribute. The key is `math` and the value can either be `latex`, `mathml` or some other term.  This value specifies the markup language of the Math block.
-
-**Markua procesors do NOT need to support any given Math markup language.**
-
-##### LaTeX Math
-
-However, if a Markua processor does not understand a given Math markup language specified by the value of a `math` attribute (say, if it supports LaTeX math but not MathML), it **MUST** output the content of the math block **as a math block formatted as text**.
-
-To add LaTeX math, use `{type: math, format: latex}`:
-
-~~~
-Here is some paragraph text.
-
-{type: math, format: latex}
-```
 \left|\sum_{i=1}^n a_ib_i\right|
 \le
 \left(\sum_{i=1}^n a_i^2\right)^{1/2}
 \left(\sum_{i=1}^n b_i^2\right)^{1/2}
 ```
 
-Here is some more paragraph text.
+Here's a paragraph after the figure.
 ~~~
 
-Markua processors can do whatever they want here. They can even output the entire thing as an image and insert the image, since that works on the most legacy ebook readers. Accessibility for old devices and accessibility for people with visual disabilities are often in conflict, and it's up to the Markua Processor to decide what to do.
-
-##### MathML Math with `{math: mathml}`
-
-To add MathML math, use `{math: mathml}`:
-
-A> MathML is not supported in Leanpub, so we have no idea if supporting it is a good idea or not.
+MathML math:
 
 ~~~
 Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
@@ -1194,31 +1154,8 @@ Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
 </apply>
 ```
 
-Here is some more paragraph text.
+Here's a paragraph after the figure.
 ~~~
-
-Markua processors can do whatever they want here as well.
-
-Note that there is a default markup language for math in a Markua document. It is determined by the value of the `math` attribute which is set in the metadata. The default value of the `math` attribute is `latex`.
-
-Because of this, you can also insert math like this:
-
-~~~
-Here is some paragraph text.
-
-```math
-\left|\sum_{i=1}^n a_ib_i\right|
-\le
-\left(\sum_{i=1}^n a_i^2\right)^{1/2}
-\left(\sum_{i=1}^n b_i^2\right)^{1/2}
-```
-
-Here is some more paragraph text.
-~~~
-
-Markua processors can do whatever they want here as well.
-
-A> For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
 
 ## Lists
 
