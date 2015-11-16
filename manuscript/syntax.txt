@@ -195,10 +195,10 @@ Resources vary in four different ways:
 
 1. **Insertion Methods**: Span and Figure
 2. **Locations**: Local, Web and Inline
-3. **Types**: `image`, `video`, `audio`, `code` or `math`
+3. **Types**: image, video, audio, code or math
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-There are five types of resources: `image`, `video`, `audio`, `code` and `math`. Each type of resource has a number of supported formats. Any of the five resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+There are five types of resources: image, video, audio, code and math. Each type of resource has a number of supported formats. Any of the five resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
 Before going into more detail, it's helpful to consider some brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
@@ -300,7 +300,7 @@ Many resource types can also have alt text. Alt text is not the same thing as a 
 
 Some resources support alt text. Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
 
-The four types of resource which can have alt text are `image`, `video`, `audio` and `math`. Resources of type `code` are themselves just text, so it makes no sense for them to have alt text. If any alt text is provided for a `code` resource it is ignored.
+The four types of resource which can have alt text are image, video, audio and math. Resources of type code are themselves just text, so it makes no sense for them to have alt text. If any alt text is provided for a code resource it is ignored.
 
 The alt text should **not** be the same thing as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
@@ -416,7 +416,7 @@ A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.j
 
 A file called `bar.png` in a subdirectory `images` of the resources directory is referenced as `![](images/bar.png)`--not as `![](/images/bar.png)`, `![](resources/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
-Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub will create subdirectories of the `resources` directory for every type of resource (`images`, `audio`, `video`, `code` and `math`), but this is not a requirement.
+Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub will create subdirectories of the `resources` directory for every type of resource (images, audio, video, code and math), but this is not a requirement.
 
 W> TODO_LEANPUB - implement this then change "will create" to "creates"
 
@@ -430,15 +430,15 @@ Web resources are identified by URL. The `resource_path_or_url` is either the re
 
 #### Inline Resources
 
-Inline resources can be of type `code` or `math` (regardless of format) and they can also be `image` resources of `svg` format. Since an SVG image is just XML text, it can be contained in the text of a Markua document. This is not something that is true for binary resources like PNG or JPEG images or any type of audio or video file--these can only be local or web resources.
+Inline resources can be of type code or math (regardless of format) and they can also be image resources of `svg` format. Since an SVG image is just XML text, it can be contained in the text of a Markua document. This is not something that is true for binary resources like PNG or JPEG images or any type of audio or video file--these can only be local or web resources.
 
 ### Resource Types and Formats
 
-There are five types of resources: `image`, `video`, `audio`, `code`, and `math`. Each type of resource has a number of supported formats. The format determines the type.
+There are five types of resources: image, video, audio, code, and math. Each type of resource has a number of supported formats. The format determines the type.
 
 The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-Certain file extensions must be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type `code` with a format of `guess`.
+Certain file extensions must be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
 
 When a local or web resource is inserted as a span, the file extension is the only way to provide the format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
 
@@ -446,20 +446,20 @@ When a local or web resource is inserted as a span, the file extension is the on
 |-------------------------------------|------------------------|
 | Format Detected                     | Resource Type Inferred |
 |-------------------------------------|------------------------|
-| `gif`, `png`, `jpeg`, `svg`, `svgz` | `image`                |
-| `mp4`, `webm`                       | `video`                |
-| `mp3`, `aac`, `wav`, `ogg`          | `audio`                |
-| `latex`, `mathml`                   | `math`                 |
-| `text`, `guess` (unrecognized)      | `code`                 |
+| `gif`, `png`, `jpeg`, `svg`, `svgz` | image                  |
+| `mp4`, `webm`                       | video                  |
+| `mp3`, `aac`, `wav`, `ogg`          | audio                  |
+| `latex`, `mathml`                   | math                   |
+| `text`, `guess` (unrecognized)      | code                   |
 |-------------------------------------|------------------------|
 
-As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to look up the type. (If the format is unrecognized, then the resource is a `code` resource with a format of `guess`.) Because of this, there is no way to specify a resource type in the attribute list: it is always inferred from the format. Also, there's no default value for the format of a given resource type: the format is determined first, and it determines the type.
+As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to look up the type. (If the format is unrecognized, then the resource is a code resource with a format of `guess`.) Because of this, there is no way to specify a resource type in the attribute list: it is always inferred from the format. Also, there's no default value for the format of a given resource type: the format is determined first, and it determines the type.
 
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
 #### Images
 
-The most common type of resource in most Markua documents will probably be `image`. Like any resource, an image can be inserted as a span or as a figure.
+The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
 
 The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
 
@@ -769,9 +769,9 @@ Code can be a local, web or inline resource, just like any other resource, and t
 
 A> Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua. In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported.
 
-As discussed, code cannot have alt text. It's just text. If any alt text is provided for a `code` resource it is ignored.
+As discussed, code cannot have alt text. It's just text. If any alt text is provided for a code resource it is ignored.
 
-Markua specifies only one specific file extension, `.txt`, to be associated with the `code` type. However, Markua Processors **must** interpret **all** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**.
+Markua specifies only one specific file extension, `.txt`, to be associated with the code type. However, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
 
 {caption: "Resource File Extensions Associated With Code"}
 |-----------|------------|--------------------------|
@@ -844,7 +844,7 @@ Note that in this example there can be no text inside the square brackets, since
 ###### Figure
 
 ```
-This will be a type of `code` and a format of `guess` since the file extension is not specified:
+This will be a type of code and a format of `guess` since the file extension is not specified:
 
 ![Hello World in Ruby](hello.rb)
 
@@ -878,7 +878,7 @@ Note that in this example there can be no text inside the square brackets, since
 ###### Figure
 
 ```
-This will be a type of `code` and a format of `guess` since the file extension is not specified:
+This will be a type of code and a format of `guess` since the file extension is not specified:
 
 ![Hello World in Ruby](http://markua.com/hello.rb)
 
@@ -928,7 +928,7 @@ A> The syntax of adding inline code resources as spans is identical to the code 
 ###### Figure
 
 ~~~
-This will be a type of `code` and a format of `guess` since the format is not specified:
+This will be a type of code and a format of `guess` since the format is not specified:
 
 ```
 puts "hello"
@@ -1036,7 +1036,7 @@ The default attributes for a math resource inserted as a span are:
 {align: left, float: none, position: here, width: auto, height: auto}
 ```
 
-Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span math, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
+Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
 
 The default attributes for a math resource inserted as a figure are:
 
@@ -1044,155 +1044,74 @@ The default attributes for a math resource inserted as a figure are:
 {align: center, float: none, position: near, width: auto, height: auto}
 ```
 
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
-
-
-
-
-```
-{type: code, format: guess, align: center, float: none, position: near, line-numbers: off}
-```
-
 These attributes can all be overridden via the attribute list on the figure.
 
-##### Local Code Resources
+##### Local Math Resources
 
 ###### Span
 
 ```
-Hello in Ruby is a simple ![](hello.rb) statement.
+This is ![too large to fit in the alt text](fermat_proof.tex) my proof.
 ```
-
-Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
 ###### Figure
 
 ```
-This will be a type of `code` and a format of `guess` since the file extension is not specified:
+Here's a paragraph before the figure.
 
-![Hello World in Ruby](hello.rb)
+{alt: "too large to fit in the alt text"}
+![Proof of Fermat's Last Theorem](fermat_proof.webm)
 
-That is equivalent to:
-
-{type: code, format: guess}
-![Hello World in Ruby](hello.rb)
-
-If you don't want to take chances you can do this:
-
-{format: ruby}
-![Hello World in Ruby](hello.rb)
-
-If you like being redundant you can do:
-
-{type: code, format: ruby}
-![Hello World in Ruby](hello.rb)
-
-Here's a paragraph at the end.
+Here's a paragraph after the figure.
 ```
 
-Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+##### Web Math Resources
 
-##### Web Code Resources
-
-This is identical to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
+This is identical to how local math resources work, including the significance of file extensions. The only differences is that the files are on the web.
 
 ###### Span
 
 ```
-Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
+This is ![too large to fit in the alt text](http://markua.com/fermat_proof.tex) my proof.
 ```
-
-Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
 ###### Figure
 
 ```
-This will be a type of `code` and a format of `guess` since the file extension is not specified:
+Here's a paragraph before the figure.
 
-![Hello World in Ruby](http://markua.com/hello.rb)
+{alt: "too large to fit in the alt text"}
+![Proof of Fermat's Last Theorem](http://markua.com/fermat_proof.webm)
 
-That is equivalent to:
-
-{type: code, format: guess}
-![Hello World in Ruby](http://markua.com/hello.rb)
-
-If you don't want to take chances you can do this:
-
-{format: ruby}
-![Hello World in Ruby](http://markua.com/hello.rb)
-
-If you like being redundant you can do:
-
-{type: code, format: ruby}
-![Hello World in Ruby](http://markua.com/hello.rb)
-
-Here's a paragraph at the end.
+Here's a paragraph after the figure.
 ```
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
-##### Inline Code Resources
+##### Inline Math Resources
 
-Inline code resources are the most flexible and appropriate way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
+Inline math resources are the most flexible and appropriate way to insert math as a span resource, and the most straightforward way to add short math examples as figures.
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
 ###### Span
 
-The format of an inline code resource inserted as a span is:
+Since these are span elements, LaTeX math will look a lot better than MathML.
+
+The format of an inline math resource inserted as a span is:
 
 ```
-Yada yada `some code here`optional_format yada yada.
+Yada yada `some math here`optional_format yada yada.
 ```
 
-The optional format specifies the programming language used. If it is not provided, the format defaults to `guess`, as shown in the following examples:
+The optional format specifies the math format used. If it is not provided, the format defaults to `guess` and the resource is interpreted as code, not math.
 
 ```
-Hello in Ruby is a `puts "hello"` statement.
-
-Hello in Ruby is a `puts "hello"`guess statement.
-
-Hello in Ruby is a `puts "hello"`ruby statement.
-
-Hello in Ruby is a `puts "hello"`text statement.
 ```
-
-The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
-
-A> The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
 
 ###### Figure
 
 ~~~
-This will be a type of `code` and a format of `guess` since the format is not specified:
-
-```
-puts "hello"
-```
-
-That is equivalent to:
-
-```guess
-puts "hello"
-```
-
-If you don't want to take chances you can do this:
-
-```ruby
-puts "hello"
-```
-
-If you like being redundant you can do:
-
-{type: code}
-```ruby
-puts "hello"
-```
-
-If you don't like syntactic sugar you can do:
-
-{type: code, format: ruby}
-```
-puts "hello"
-```
 ~~~
 
 If you want a figure caption, you can add it to the attribute list with any of the above. For example:
@@ -1201,50 +1120,14 @@ If you want a figure caption, you can add it to the attribute list with any of t
 Some paragraph.
 
 {caption: "Hello World in Ruby"}
-```ruby
-puts "hello"
+```latex
 ```
 
 Some paragraph.
 ~~~
 
-A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
-
-A> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
-
-
-
-
-You can put mathematical equations in your book, in either block elements (described below) or in span elements.
-
-Blah blah `puts "hello"`ruby blah blah.
-
-Blah blah `puts "hello"`text blah blah.
-
-Blah blah `x = 2`math blah.
-
-LaTeX math is `math`, MathML is `mathml`.
-
-```math
-```
-
-```mathml
-```
-
-{format: math}
-```
-```
-
-{format: mathml}
-```
-```
-
-TODO
-
-
 W> TODO: RESOURCE INSERTION REWRITE
 
-Note that since these are span elements, LaTeX math will look a lot better than MathML.
 
 This uses the default math engine. Chances are if you're using this syntax, you're using LaTeX math.
 
@@ -1254,13 +1137,13 @@ The four kinematics equations are `d = v_i t + \frac{1}{2} a t^2{/$$}, {$$}v_f^2
 
 Markua processors can output do whatever they want here as well.
 
-To create a math block, you insert it like a code block and you add a `math` attribute. The key is `math` and the value can either be `latex`, `mathml` or some other term.  This value specifies the markup language of the Math block.
+To create a math block, you insert it like a math block and you add a `math` attribute. The key is `math` and the value can either be `latex`, `mathml` or some other term.  This value specifies the markup language of the Math block.
 
 **Markua procesors do NOT need to support any given Math markup language.**
 
 ##### LaTeX Math
 
-However, if a Markua processor does not understand a given Math markup language specified by the value of a `math` attribute (say, if it supports LaTeX math but not MathML), it **MUST** output the content of the math block **as a code block formatted as text**.
+However, if a Markua processor does not understand a given Math markup language specified by the value of a `math` attribute (say, if it supports LaTeX math but not MathML), it **MUST** output the content of the math block **as a math block formatted as text**.
 
 To add LaTeX math, use `{type: math, format: latex}`:
 
