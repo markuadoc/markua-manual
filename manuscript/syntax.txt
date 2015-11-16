@@ -213,7 +213,7 @@ Inline code resources are added as spans like `hello world` or as figures:
 puts "hello world"
 ```
 
-{type: code, format: ruby}
+{format: ruby}
 ![Hello, World](hello.rb)
 ~~~
 
@@ -719,13 +719,13 @@ The default attributes for audio are (with the exception of the type) the same a
 The default attributes for an audio inserted as a span are:
 
 ```
-{type: audio, align: left, float: none, position: here, width: auto, height: auto}
+{align: left, float: none, position: here, width: auto, height: auto}
 ```
 
 The default attributes for an audio inserted as a figure are:
 
 ```
-{type: audio, align: center, float: none, position: near, width: auto, height: auto}
+{align: center, float: none, position: near, width: auto, height: auto}
 ```
 
 These attributes can all be overridden via the attribute list on the figure.
@@ -820,13 +820,13 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 The default attributes for a code resource inserted as a span are:
 
 ```
-{type: code, format: guess, align: left, float: none, position: here, line-numbers: off}
+{format: guess, align: left, float: none, position: here, line-numbers: off}
 ```
 
 The default attributes for a code resource inserted as a figure are:
 
 ```
-{type: code, format: guess, align: center, float: none, position: near, line-numbers: off}
+{format: guess, align: center, float: none, position: near, line-numbers: off}
 ```
 
 These attributes can all be overridden via the attribute list on the figure.
@@ -850,17 +850,12 @@ This will be a type of `code` and a format of `guess` since the file extension i
 
 That is equivalent to:
 
-{type: code, format: guess}
+{format: guess}
 ![Hello World in Ruby](hello.rb)
 
 If you don't want to take chances you can do this:
 
 {format: ruby}
-![Hello World in Ruby](hello.rb)
-
-If you like being redundant you can do:
-
-{type: code, format: ruby}
 ![Hello World in Ruby](hello.rb)
 
 Here's a paragraph at the end.
@@ -889,17 +884,12 @@ This will be a type of `code` and a format of `guess` since the file extension i
 
 That is equivalent to:
 
-{type: code, format: guess}
+{format: guess}
 ![Hello World in Ruby](http://markua.com/hello.rb)
 
 If you don't want to take chances you can do this:
 
 {format: ruby}
-![Hello World in Ruby](http://markua.com/hello.rb)
-
-If you like being redundant you can do:
-
-{type: code, format: ruby}
 ![Hello World in Ruby](http://markua.com/hello.rb)
 
 Here's a paragraph at the end.
@@ -956,16 +946,9 @@ If you don't want to take chances you can do this:
 puts "hello"
 ```
 
-If you like being redundant you can do:
-
-{type: code}
-```ruby
-puts "hello"
-```
-
 If you don't like syntactic sugar you can do:
 
-{type: code, format: ruby}
+{format: ruby}
 ```
 puts "hello"
 ```
@@ -1050,7 +1033,7 @@ Math resources can be either LaTeX math or MathML.
 The default attributes for a math resource inserted as a span are:
 
 ```
-{type: math, format: latex, align: left, float: none, position: here, width: auto, height: auto}
+{align: left, float: none, position: here, width: auto, height: auto}
 ```
 
 Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span math, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
@@ -1058,11 +1041,12 @@ Since a math resource inserted as a span cannot have its default attributes over
 The default attributes for a math resource inserted as a figure are:
 
 ```
-{type: math, align: center, float: none, position: near, width: auto, height: auto}
+{align: center, float: none, position: near, width: auto, height: auto}
 ```
 
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
-W> This specification is being rewritten. Do not trust anything after this point.
+
 
 
 ```

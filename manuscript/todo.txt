@@ -1,6 +1,6 @@
 # TODO
 
-W> This specification is being rewritten. Do not trust anything after this point.
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
 
 Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
