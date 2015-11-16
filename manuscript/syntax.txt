@@ -790,9 +790,9 @@ The full version of the talk is here:
 {#code}
 #### Code
 
-Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua.
+Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-A> In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported. Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
+A> Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua. In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported.
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a `code` resource it is ignored.
 
@@ -812,9 +812,9 @@ The `text` format means to not do any syntax highlighting as well.
 
 The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code.
 
-Note that syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
+Syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
 
-Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute directly. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
+Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
 {#supported_attributes_for_code}
 ##### Supported Attributes for Code
@@ -1037,13 +1037,13 @@ me   ow
 
 ```
 
-The artistic merit of this poem is left as an exercise for the reader.
+Determining the artistic merit of this poem is left as an exercise for the reader.
 
 ##### Line Wrapping in Code Resources
 
 Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
 
-#### Math
+#### Math - UPDATED TO HERE
 
 W> This specification is being rewritten. Do not trust anything after this point.
 
