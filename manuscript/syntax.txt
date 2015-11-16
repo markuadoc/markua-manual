@@ -449,6 +449,12 @@ If there are conflicts between the type and format specified in an attribute lis
 2. The format inferred from the file extension, and the `type` associated with it.
 3. The `type` in the attribute list.
 
+A> In the sections that follow, note that for images, video, audio and math resources which are inserted either as a span or a figure, there is **no** default value for the `format` of an image. This is because a format must have been specified by a file extension or (for a figure) in the attribute list--otherwise, the Markua Processor would not have interpreted the image as an image. (Local and web resources with no file extension and inline resources with no format provided are interpreted as a `code` resource with a format of `guess`.)
+
+
+W> TODO - just ban specifying the type at all, for any resource type. Always infer it. That will simplify this...
+
+
 Basically, format (even inferred from a file extension) always trumps type, and format specified in an attribute list trumps format inferred from a file extension.
 
 These defaults mean that Markua Processors can usually do the right thing. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
@@ -529,10 +535,8 @@ We will discuss the supported and the default attributes for images, and then sh
 
 The default attributes for an image inserted as a span are:
 
-W> TODO - default image format? guess?
-
 ```
-{type: image, format: png, align: left, float: none, position: here, width: auto, height: auto}
+{type: image, align: left, float: none, position: here, width: auto, height: auto}
 ```
 
 Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
