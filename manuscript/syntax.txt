@@ -810,11 +810,19 @@ The full version of the talk is here:
 
 Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua.
 
-In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource. Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
+A> In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource. Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a `code` resource it is ignored.
 
-Also, as discussed, Markua does not specify any file extensions associated with the `code` type.
+Also, Markua specifies only one specific file extension, `.txt`, to be associated with the `code` type. However, as is discussed shortly, any unrecognized file extension is interpreted as having a type of `code` and a format of `guess`.
+
+{caption: "Resource File Extensions Associated With Code"}
+|-----------|---------|------------|--------------------------|
+| Extension | `type`  | `format`   | Description              |
+|-----------|---------|------------|--------------------------|
+| `.txt`    | `code`  | `text`     | Monospaced plain text    |
+| (other)   | `code`  | `guess`    | Implementation-dependent |
+|-----------|---------|------------|--------------------------|
 
 {#supported_attributes_for_code}
 ##### Supported Attributes for Code
@@ -863,15 +871,15 @@ These attributes can all be overridden via the attribute list on the figure.
 
 ###### Span
 
-~~~
+```
 Hello in Ruby is a simple ![](hello.rb) statement.
-~~~
+```
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
 ###### Figure
 
-~~~
+```
 This will be a type of `code` and a format of `guess` since the file extension is not specified:
 
 ![Hello World in Ruby](hello.rb)
@@ -892,7 +900,7 @@ If you like being redundant you can do:
 ![Hello World in Ruby](hello.rb)
 
 Here's a paragraph at the end.
-~~~
+```
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
@@ -902,15 +910,15 @@ This is identical to how local code resources work, including the significance o
 
 ###### Span
 
-~~~
+```
 Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
-~~~
+```
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
 ###### Figure
 
-~~~
+```
 This will be a type of `code` and a format of `guess` since the file extension is not specified:
 
 ![Hello World in Ruby](http://markua.com/hello.rb)
@@ -931,7 +939,7 @@ If you like being redundant you can do:
 ![Hello World in Ruby](http://markua.com/hello.rb)
 
 Here's a paragraph at the end.
-~~~
+```
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
@@ -999,7 +1007,7 @@ puts "hello"
 ```
 ~~~
 
-Finally, if you want a figure caption, you can add it to the attribute list with any of the above. For example:
+If you want a figure caption, you can add it to the attribute list with any of the above. For example:
 
 ~~~
 Some paragraph.
@@ -1014,7 +1022,30 @@ Some paragraph.
 
 A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
 
-W> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
+A> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
+
+##### Typewriter Poetry with Code Resources
+
+If you want to write "typewriter poetry" in the style of e e cummings, in which all the indentation and other whitespace matters, you can accomplish this with a code resource whose format is `text`:
+
+```text
+
+
+i
+
+  am
+
+      a        cat
+
+            a        l a z y          cat
+
+
+me   ow
+
+
+```
+
+The artistic merit of this poem is left as an exercise for the reader.
 
 ##### Line Wrapping in Code Resources
 
@@ -1153,72 +1184,6 @@ Here is some more paragraph text.
 Markua processors can do whatever they want here as well.
 
 A> For the programmers reading this: since resources cannot themselves include resources, you cannot have cycles resulting in infinitely long Markua documents.
-
-#### Text
-
-{caption: "Resource File Extensions Associated With Text"}
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.txt`    | `text`  | `plain`    | Plain text    |
-|-----------|---------|------------|---------------|
-
-Poetry, either plain text poetry or monospaced "typewriter poetry" is just a text resource.
-
-
-There are many different types of resources, which are discussed at length shortly. However, it's helpful to discuss text resources now, since they are how poetry is supported in Markua.
-
-
-
-If you want to write poetry where the whitespace (including indentation) matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `plain` format text, whereas three backticks defaults to `monospaced` format text.
-
-The three tildes syntax can be useful to indent sonnets where the indentation matters, but otherwise looks like normal text:
-
-```
-~~~
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-~~~
-```
-
-The three backticks syntax can be useful to write monospaced poetry like e e cummings:
-
-~~~
-```
-i am a cat
-                        a        l a z y          cat
-         me   ow
-```
-~~~
-
-
-If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes or three backticks. As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to `{type: text, format: plain}` and three backticks defaults to `{type: text, format: monospaced}`.
-
-
-If you want to write poetry where the whitespace matters, you need to surround the poem in three tildes (`~`) or three backticks (`\``). As you'll see in the Resources section, three tildes and backticks have different defaults: three tildes defaults to {type: text, format: plain} and three backticks defaults to {type: text, format: monospaced}.
-
-The three tildes syntax can be useful to indent sonnets where the indentation matters, but otherwise looks like normal text:
-
-```
-~~~
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-~~~
-```
-
-The three backticks syntax can be useful to write monospaced poetry like e e cummings:
-
-~~~
-```
-i am a cat
-                        a        l a z y          cat
-         me   ow
-```
-~~~
 
 ## Lists
 
