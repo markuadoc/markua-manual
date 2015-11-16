@@ -435,47 +435,26 @@ Web resources are identified by URL. The `resource_path_or_url` is either the re
 
 Inline resources can be of type `code` or `math` (regardless of format) and they can also be `image` resources of `svg` format. Since an SVG image is just XML text, it can be contained in the text of a Markua document. This is not something that is true for binary resources like PNG or JPEG images or any type of audio or video file--these can only be local or web resources.
 
-### Resource File Extensions
-
-Local and web resources often have a file extension. If a file extension is present, it is used to infer the default type and format for the resource.
-
-Certain file extensions **must** be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors **must** interpret **all** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**.
-
-When a local or web resource is inserted as a span, the file extension is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
-
-If there are conflicts between the type and format specified in an attribute list or inferred from the file extension, this is the precedence (highest to lowest):
-
-1. The `format` in the attribute list, and the `type` associated with it.
-2. The format inferred from the file extension, and the `type` associated with it.
-3. The `type` in the attribute list.
-
-A> In the sections that follow, note that for images, video, audio and math resources which are inserted either as a span or a figure, there is **no** default value for the `format` of an image. This is because a format must have been specified by a file extension or (for a figure) in the attribute list--otherwise, the Markua Processor would not have interpreted the image as an image. (Local and web resources with no file extension and inline resources with no format provided are interpreted as a `code` resource with a format of `guess`.)
-
-
-W> TODO - just ban specifying the type at all, for any resource type. Always infer it. That will simplify this...
-
-
-Basically, format (even inferred from a file extension) always trumps type, and format specified in an attribute list trumps format inferred from a file extension.
-
-These defaults mean that Markua Processors can usually do the right thing. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
-
 ### Resource Types and Formats
 
 There are five types of resources: `image`, `video`, `audio`, `code`, and `math`.
 
-Each `type` of resource has a number of supported `format`s, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
+Each type of resource has a number of supported formats. The format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-Any of the five resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+Certain file extensions **must** be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors **must** interpret **all** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**.
 
-For inline resources, the default `type` of the resource depends on the `format` specified:
+When a local or web resource is inserted as a span, the file extension is the only way to provide the format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
 
-* If the format is `svg`, the inline resource is assumed to be of type `image`.
-* If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
-* For any other format, the inline resource is assumed to be of type `code`.
-
-For local and web resources, the `type` is inferred from the file extension, as previously discussed.
-
-For figures, the `type` can also be specified in the attribute list.
+{caption: "Formats Mapped to Resource Types"}
+|-------------------------------------|------------------------|
+| Format Detected                     | Resource Type Inferred |
+|-------------------------------------|------------------------|
+| `gif`, `png`, `jpeg`, `svg`, `svgz` | `image`                |
+| `mp4`, `webm`                       | `video`                |
+| `mp3`, `aac`, `wav`, `ogg`          | `audio`                |
+| `latex`, `mathml`                   | `math`                 |
+| `text`, `guess` (unrecognized)      | `code`                 |
+|-------------------------------------|------------------------|
 
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
@@ -548,6 +527,8 @@ The default attributes for an image inserted as a figure are:
 ```
 
 These attributes can all be overridden via the attribute list on the figure.
+
+A> Note that there is **no** default value for the `format` of an image. This is because a format must have been specified by a file extension or (for a figure) in the attribute list--otherwise, the Markua Processor would not have interpreted the image as an image. Local and web resources with no file extension and inline resources with no format provided are always interpreted as a `code` resource with a format of `guess`. For similar reasons, there is no default format for audio, video and math resources.
 
 ##### Local Images
 
@@ -1053,7 +1034,7 @@ Code resources should have newlines added by the author to ensure that automatic
 
 Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-A> Just as with code, in Leanpub Flavoured Markdown we had special syntaxes for inserting math. It looked like `{$$}...{/$$}`, which looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
+A> Just as with code, in Leanpub Flavoured Markdown we had a special syntax for inserting math. It looked like `{$$}...{/$$}`, which looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
 
 Math resources can be either LaTeX math or MathML.
 
