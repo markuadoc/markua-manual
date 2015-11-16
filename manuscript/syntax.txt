@@ -51,15 +51,15 @@ Together, newlines, spaces and tabs are called whitespace. By a newline, I mean 
 
 Paragraphs and blank lines are handled the same way in Markua and Markdown. Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line. Any extra number of newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
 
-Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a text resource, so that the exact Markua manuscript text can be shown unprocessed by a Markua. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
+Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a code resource, so that the exact Markua manuscript text can be shown unprocessed by a Markua. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
 
-```
+~~~
 I'm paragraph one. Yay!
 
 This is paragraph two.
 
 This is paragraph three.
-```
+~~~
 
 A paragraph is the least-specialized example of something called a block element. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. All block elements that are separated by at least one blank line from other block elements, and that are not some specialized type of block element (like a heading, figure or list) are paragraphs.
 
@@ -112,7 +112,7 @@ Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua.
 
 Like Markdown, in Markua, spaces or tabs that are in the middle of a line of text are collapsed to a single space. In Markdown, the main reason for this is presumably that this is how things work in HTML (without using `&nbsp;`). In Markdown, the reasons for this are that it's consistent with Markdown, and that it lets authors write books using either one or two spaces after a period, with there being no difference in the formatting.
 
-Because of this, if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you need to use a text resource. Markua defines many different types of resources, including math, code and text resources. Resources are discussed later in this chapter.
+Because of this, if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you need to use a code resource. Markua defines many different types of resources, including math and code resources. Resources are discussed later in this chapter.
 
 ### One Blank Line is Added When Concatenating Manuscript Files
 
@@ -195,10 +195,10 @@ Resources vary in four different ways:
 
 1. **Insertion Methods**: Span and Figure
 2. **Locations**: Local, Web and Inline
-3. **Types**: `image`, `video`, `audio`, `code`, `math` or `text`
+3. **Types**: `image`, `video`, `audio`, `code` or `math`
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`. Each `type` of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+There are five types of resources: `image`, `video`, `audio`, `code` and `math`. Each `type` of resource has a number of supported formats. Any of the five resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
 Before going into more detail, it's helpful to consider some brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
@@ -250,14 +250,6 @@ The syntax for an inline resource inserted as a span is as follows:
 It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
 ```
 
-For example:
-
-```
-This is `puts "hello"`ruby a code resource with a format of `ruby`.
-
-This, however, is a `puts "hello"` text resource inserted as a span.
-```
-
 #### Figures
 
 When a resource is inserted as a figure, the resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
@@ -297,7 +289,7 @@ puts "hello world"
 A figure can also have attributes. The supported attributes vary based on the `type` of resource, but all figures support the following three attributes: `type`, `format` and `caption`.
 
 `type`
-: This is the resource type. It can be one of `image`, `video`, `audio`, `code`, `math` or `text`.
+: This is the resource type. It can be one of `image`, `video`, `audio`, `code` or `math`.
 
 `format`
 : This is the resource format. Different resource types have different legal values for format.
@@ -311,9 +303,9 @@ Many resource types can also have alt text. Alt text is not the same thing as a 
 
 Some resources support alt text. Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
 
-The four types of resource which can have alt text are `image`, `video`, `audio` and `text`. Resources of type `code` or `text` are themselves just text, so it makes no sense for them to have alt text. If any alt text is provided for a `code` or `text` resource it is ignored.
+The four types of resource which can have alt text are `image`, `video`, `audio` and `math`. Resources of type `code` are themselves just text, so it makes no sense for them to have alt text. If any alt text is provided for a `code` resource it is ignored.
 
-A> The alt text should **not** be the same thing as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+The alt text should **not** be the same thing as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
 The syntax to provide alt text varies based on the resource location and insertion method.
 
@@ -380,7 +372,7 @@ The reason for this inconsistency is that even though it's a bit harder to learn
 
 The square brackets contain the text which is the most common use case for both span resources and for figures. For a span resource, that is the alt text. For a figure, that is the figure caption.
 
-This is especially true since a span image cannot have a figure caption, and since not all figures are of resource types that can have alt text. (Code resources and text resources are themselves text, so they cannot have alt text.) Also, many image, audio and video resources are inserted without alt text.
+This is especially true since a span image cannot have a figure caption, and since not all figures are of resource types that can have alt text. (Code resources are themselves text, so they cannot have alt text.) Also, many image, audio and video resources are inserted without alt text.
 
 So, given this rule, a figure which is an external code sample can be inserted as either:
 
@@ -427,7 +419,9 @@ A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.j
 
 A file called `bar.png` in a subdirectory `images` of the resources directory is referenced as `![](images/bar.png)`--not as `![](/images/bar.png)`, `![](resources/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
-Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub creates subdirectories of the `resources` directory for every type of resource (`images`, `audio`, `video`, `code`, `math` and `text`), but this is not a requirement.
+Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub will create subdirectories of the `resources` directory for every type of resource (`images`, `audio`, `video`, `code` and `math`), but this is not a requirement.
+
+W> TODO_LEANPUB - implement this then change "will create" to "creates"
 
 The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file centaining an export should contain a `resources` directory which contains an `images` subdirectory with the images.
 
@@ -439,58 +433,45 @@ Web resources are identified by URL. The `resource_path_or_url` is either the re
 
 #### Inline Resources
 
-Inline resources can be of type `code`, `math` or `text` (regardless of format), and they can also be `image` resources of `svg` format (since an SVG image is just XML text, it can be pasted in the text of a Markua document--something that is not true with binary images like PNG or JPEG, which can only be local or web resources).
+Inline resources can be of type `code` or `math` (regardless of format) and they can also be `image` resources of `svg` format. Since an SVG image is just XML text, it can be contained in the text of a Markua document. This is not something that is true for binary resources like PNG or JPEG images or any type of audio or video file--these can only be local or web resources.
 
 ### Resource File Extensions
 
 Local and web resources often have a file extension. If a file extension is present, it is used to infer the default type and format for the resource.
 
-Certain file extensions **must** be associated with a specific type of resource. These are specified in the sections below for images, video, audio, math and text.
-
-Markua does not specify any file extensions associated with the `code` type. There are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical. If a Markua Processor recognizes a particular file extension as that of a particular programming language's source code, it can interpret it as a type of `code` with the appropriate format.
-
-Markua also does not specify how Markdown (which often has a file extension of `.md`) or Markua (which often has a file extension of `.markua`) text should be interpreted by default. It can be interpreted as a type of `text` and a format of either `plain` (for normal text) or `monospaced` (for monospaced text). Note that if Markdown or Markua text is in a file with an extension of `.txt` it is interpreted by default as plain (not monospaced) text.
-
-Markua Processors **MUST** interpret **ALL** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**. Then, if the file extension corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code. If the Markua Processor does not recognize the file extension or if the Markua Processor does not support syntax highlighting, it will format it as unformatted monospaced text, per the [rules for code resources](#supported_attributes_for_code).
+Certain file extensions **must** be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors **must** interpret **all** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**.
 
 When a local or web resource is inserted as a span, the file extension is the only way to provide the type and format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
 
-If the `type` and/or `format` is specified in an attribute list (in the case of a figure), the specified value(s) override the default value inferred from the file extension.
+If there are conflicts between the type and format specified in an attribute list or inferred from the file extension, this is the precedence (highest to lowest):
 
-The behaviour varies based on what is specified in the attribute list:
+1. The `format` in the attribute list, and the `type` associated with it.
+2. The format inferred from the file extension, and the `type` associated with it.
+3. The `type` in the attribute list.
 
-* If only the `type` is specified, and it matches the type inferred from the `format`, the Markua Processor must interpret the format as what was inferred.
-* If only the `format` is specified, the Markua Processor must infer the `type` from the specified format.
-* If both the `type` and `format` are specified, the Markua Processor use them. If they are not a legal combination of type and format (e.g. type = `video`, format=`latex`), the Markua processor must pick the type based on the `format`.
-
-### Resource Types and Formats
-
-There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `text`.
-
-Each `type` of resource has a number of supported `format`s, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
-
-Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
-
-The default `type` of a resource depends on the `format` specified:
-
-* If the format is `svg`, the inline resource is assumed to be of type `image`.
-* If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
-* If the format is `plain`, the inline resource is assumed to be of type `text`.
-* For any other format, the inline resource is assumed to be of type `code`.
-
-The `type` can also be specified in the attribute list.
-
-If the attribute list specifies both `type` and `format`, and if the `format` is incompatible with the `type` (e.g. `{type: image, format: ruby}`), then the `format` wins and is used to determine the type.
-
-If no `format` is specified in the attribute list (or after the backticks in the case of an inline resource), the `format` is determined by the file extension.
-
-If there is no file extension, the default type is `code` and the default format is `guess`.
+Basically, format (even inferred from a file extension) always trumps type, and format specified in an attribute list trumps format inferred from a file extension.
 
 These defaults mean that Markua Processors can usually do the right thing. Markua is intended to be pleasant to write, so that means eliminating verboseness by using sensible defaults wherever possible.
 
-Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list. The specific default attributes are discussed in the sections below about the different resource types.
+### Resource Types and Formats
 
-We will now consider each of the types of resources in more detail, as well as the various formats that they support.
+There are five types of resources: `image`, `video`, `audio`, `code`, and `math`.
+
+Each `type` of resource has a number of supported `format`s, which can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
+
+Any of the five resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+
+For inline resources, the default `type` of the resource depends on the `format` specified:
+
+* If the format is `svg`, the inline resource is assumed to be of type `image`.
+* If the format is `latex` or `mathml`, the inline resource is assumed to be of type `math`.
+* For any other format, the inline resource is assumed to be of type `code`.
+
+For local and web resources, the `type` is inferred from the file extension, as previously discussed.
+
+For figures, the `type` can also be specified in the attribute list.
+
+We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
 #### Images
 
@@ -806,15 +787,16 @@ The full version of the talk is here:
 ![](http://markua.com/talk.m4a)
 ~~~
 
+{#code}
 #### Code
 
 Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua.
 
-A> In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource. Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
+A> In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported. Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a `code` resource it is ignored.
 
-Also, Markua specifies only one specific file extension, `.txt`, to be associated with the `code` type. However, as is discussed shortly, any unrecognized file extension is interpreted as having a type of `code` and a format of `guess`.
+Markua specifies only one specific file extension, `.txt`, to be associated with the `code` type. However, Markua Processors **must** interpret **all** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**.
 
 {caption: "Resource File Extensions Associated With Code"}
 |-----------|---------|------------|--------------------------|
@@ -823,6 +805,16 @@ Also, Markua specifies only one specific file extension, `.txt`, to be associate
 | `.txt`    | `code`  | `text`     | Monospaced plain text    |
 | (other)   | `code`  | `guess`    | Implementation-dependent |
 |-----------|---------|------------|--------------------------|
+
+All code must be formatted as monospaced text by Markua Processors.
+
+The `text` format means to not do any syntax highlighting as well.
+
+The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code.
+
+Note that syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
+
+Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute directly. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
 {#supported_attributes_for_code}
 ##### Supported Attributes for Code
@@ -837,7 +829,7 @@ Also, Markua specifies only one specific file extension, `.txt`, to be associate
 : These attributes function how they do for images.
 
 `format`
-: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. All code must be formatted as monospaced text by Markua Processors. The `text` format means to not do any syntax highlighting as well. The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself and to do syntax highlighting accordingly if a matching programming language is detected. Note that syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`. Besides the `text` and `guess` values of the format attribue, you can also specify the programming language by setting the format attribute directly. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
+: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`.
 
 `line-numbers`
 : This determines whether the code sample shows line numbers. Values are `on` or `off`. The default value is `off`. Any value other than `on` is interpreted as `off`. Note that a code resource inserted as a span should be a single line of code, so this attribute does not make sense with spans.
