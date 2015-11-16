@@ -198,7 +198,7 @@ Resources vary in four different ways:
 3. **Types**: `image`, `video`, `audio`, `code` or `math`
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-There are five types of resources: `image`, `video`, `audio`, `code` and `math`. Each `type` of resource has a number of supported formats. Any of the five resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+There are five types of resources: `image`, `video`, `audio`, `code` and `math`. Each type of resource has a number of supported formats. Any of the five resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
 Before going into more detail, it's helpful to consider some brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
@@ -286,10 +286,7 @@ puts "hello world"
 ```
 ~~~
 
-A figure can also have attributes. The supported attributes vary based on the `type` of resource, but all figures support the following three attributes: `type`, `format` and `caption`.
-
-`type`
-: This is the resource type. It can be one of `image`, `video`, `audio`, `code` or `math`.
+A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format` and `caption` attributes.
 
 `format`
 : This is the resource format. Different resource types have different legal values for format.
@@ -437,11 +434,11 @@ Inline resources can be of type `code` or `math` (regardless of format) and they
 
 ### Resource Types and Formats
 
-There are five types of resources: `image`, `video`, `audio`, `code`, and `math`.
+There are five types of resources: `image`, `video`, `audio`, `code`, and `math`. Each type of resource has a number of supported formats. The format determines the type.
 
-Each type of resource has a number of supported formats. The format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
+The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-Certain file extensions **must** be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors **must** interpret **all** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**.
+Certain file extensions must be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type `code` with a format of `guess`.
 
 When a local or web resource is inserted as a span, the file extension is the only way to provide the format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
 
@@ -456,6 +453,8 @@ When a local or web resource is inserted as a span, the file extension is the on
 | `text`, `guess` (unrecognized)      | `code`                 |
 |-------------------------------------|------------------------|
 
+As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to look up the type. (If the format is unrecognized, then the resource is a `code` resource with a format of `guess`.) Because of this, there is no way to specify a resource type in the attribute list: it is always inferred from the format. Also, there's no default value for the format of a given resource type: the format is determined first, and it determines the type.
+
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
 #### Images
@@ -465,16 +464,16 @@ The most common type of resource in most Markua documents will probably be `imag
 The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
 
 {caption: "Resource File Extensions Associated With Images"}
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.gif`    | `image` | `gif`      | GIF image     |
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-| `.svg`    | `image` | `svg`      | SVG image     |
-| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
-|-----------|---------|------------|---------------|
+|-----------|------------|---------------|
+| Extension | `format`   | Description   |
+|-----------|------------|---------------|
+| `.gif`    | `gif`      | GIF image     |
+| `.png`    | `png`      | PNG image     |
+| `.jpg`    | `jpeg`     | JPEG image    |
+| `.jpeg`   | `jpeg`     | JPEG image    |
+| `.svg`    | `svg`      | SVG image     |
+| `.svgz`   | `svgz`     | Zipped SVG    |
+|-----------|------------|---------------|
 
 W> TODO_LEANPUB - Support table captions (there should be one in the table above)
 
@@ -485,9 +484,6 @@ A> Images in Markua are inserted in essentially the same way they are in Markdow
 We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
 
 ##### Supported Attributes for Images
-
-`type`
-: All resources support the `type` attribute. For images, the type is `image`. This is the default type, so it is almost always omitted.
 
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
@@ -515,7 +511,7 @@ We will discuss the supported and the default attributes for images, and then sh
 The default attributes for an image inserted as a span are:
 
 ```
-{type: image, align: left, float: none, position: here, width: auto, height: auto}
+{align: left, float: none, position: here, width: auto, height: auto}
 ```
 
 Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
@@ -523,12 +519,10 @@ Since images inserted as a span cannot have their default attributes overridden,
 The default attributes for an image inserted as a figure are:
 
 ```
-{type: image, align: center, float: none, position: near, width: auto, height: auto}
+{align: center, float: none, position: near, width: auto, height: auto}
 ```
 
 These attributes can all be overridden via the attribute list on the figure.
-
-A> Note that there is **no** default value for the `format` of an image. This is because a format must have been specified by a file extension or (for a figure) in the attribute list--otherwise, the Markua Processor would not have interpreted the image as an image. Local and web resources with no file extension and inline resources with no format provided are always interpreted as a `code` resource with a format of `guess`. For similar reasons, there is no default format for audio, video and math resources.
 
 ##### Local Images
 
@@ -600,21 +594,18 @@ Unlike images, which are supported in most circumstances, with video files it's 
 The following types of videos are supported in Markua: MP4 and WebM.
 
 {caption: "Resource File Extensions Associated With Video"}
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.mp4`    | `video` | `mp4`      | MP4 video     |
-| `.webm`   | `video` | `webm`     | WebM video    |
-|-----------|---------|------------|---------------|
+|-----------|------------|---------------|
+| Extension | `format`   | Description   |
+|-----------|------------|---------------|
+| `.mp4`    | `mp4`      | MP4 video     |
+| `.webm`   | `webm`     | WebM video    |
+|-----------|------------|---------------|
 
 The syntax to insert a video is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both video formats; inline resource locations for video are obviously not supported.
 
 We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local and web videos.
 
 ##### Supported Attributes for Video
-
-`type`
-: All resources support the `type` attribute. For video, the type is `video`.
 
 `format`
 : All resources support the format attribute. For video, the `format` is the specific vidio format. The legal set of formats is given in the `format` column in the above table.
@@ -632,13 +623,13 @@ Since the `alt` is a fallback for if the `poster` image cannot be displayed, the
 The default attributes for a video inserted as a span are:
 
 ```
-{type: video, align: left, float: none, position: here, width: auto, height: auto}
+{align: left, float: none, position: here, width: auto, height: auto}
 ```
 
 The default attributes for a video inserted as a figure are:
 
 ```
-{type: video, align: center, float: none, position: near, width: auto, height: auto}
+{align: center, float: none, position: near, width: auto, height: auto}
 ```
 
 These attributes can all be overridden via the attribute list on the figure.
@@ -677,7 +668,7 @@ A> Ironically, I'm writing this sentence almost a year after that talk was recor
 ~~~
 Here's a paragraph before the figure.
 
-{type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
+{poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
 !["Introducing Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
 
 Here's a paragraph after the figure.
@@ -690,17 +681,17 @@ Just like with video, the audio support in ebooks and on the web is more varied 
 The following types of audio resources are supported in Markua: MP3, AAC, WAV and Ogg Vorbis.
 
 {caption: "Resource File Extensions Associated With Audio"}
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.mp3`    | `audio` | `mp3`      | MP3 audio     |
-| `.m4a`    | `audio` | `aac`      | AAC audio     |
-| `.aac`    | `audio` | `aac`      | AAC audio     |
-| `.wav`    | `audio` | `wav`      | WAV audio     |
-| `.wave`   | `audio` | `wav`      | WAV audio     |
-| `.ogg`    | `audio` | `ogg`      | Ogg Vorbis    |
-| `.oga`    | `audio` | `ogg`      | Ogg Vorbis    |
-|-----------|---------|------------|---------------|
+|-----------|------------|---------------|
+| Extension | `format`   | Description   |
+|-----------|------------|---------------|
+| `.mp3`    | `mp3`      | MP3 audio     |
+| `.m4a`    | `aac`      | AAC audio     |
+| `.aac`    | `aac`      | AAC audio     |
+| `.wav`    | `wav`      | WAV audio     |
+| `.wave`   | `wav`      | WAV audio     |
+| `.ogg`    | `ogg`      | Ogg Vorbis    |
+| `.oga`    | `ogg`      | Ogg Vorbis    |
+|-----------|------------|---------------|
 
 A> Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
 
@@ -709,9 +700,6 @@ The syntax to insert an audio file is the same compact and consistent syntax tha
 We will discuss the supported and the default attributes for audio files, and then show examples of audio being inserted as spans and as figures for both local and web audio files.
 
 ##### Supported Attributes for Audio
-
-`type`
-: All resources support the `type` attribute. For audio, the type is `audio`.
 
 `format`
 : All resources support the format attribute. For audio, the `format` is the specific audio format. The legal set of formats is given in the `format` column in the above table.
@@ -786,12 +774,12 @@ As discussed, code cannot have alt text. It's just text. If any alt text is prov
 Markua specifies only one specific file extension, `.txt`, to be associated with the `code` type. However, Markua Processors **must** interpret **all** unspecified file extensions as specifying a resource of type **`code`** with a format of **`guess`**.
 
 {caption: "Resource File Extensions Associated With Code"}
-|-----------|---------|------------|--------------------------|
-| Extension | `type`  | `format`   | Description              |
-|-----------|---------|------------|--------------------------|
-| `.txt`    | `code`  | `text`     | Monospaced plain text    |
-| (other)   | `code`  | `guess`    | Implementation-dependent |
-|-----------|---------|------------|--------------------------|
+|-----------|------------|--------------------------|
+| Extension | `format`   | Description              |
+|-----------|------------|--------------------------|
+| `.txt`    | `text`     | Monospaced plain text    |
+| (other)   | `guess`    | Implementation-dependent |
+|-----------|------------|--------------------------|
 
 All code must be formatted as monospaced text by Markua Processors.
 
@@ -805,9 +793,6 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 
 {#supported_attributes_for_code}
 ##### Supported Attributes for Code
-
-`type`
-: All resources support the `type` attribute. For code, the type is `code`.
 
 `caption`
 : All resources inserted as figures support the `caption` attribute.
@@ -1039,17 +1024,14 @@ A> Just as with code, in Leanpub Flavoured Markdown we had a special syntax for 
 Math resources can be either LaTeX math or MathML.
 
 {caption: "Resource File Extensions Associated With Math"}
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.tex`    | `math`  | `latex`    | LaTeX math    |
-| `.mathml` | `math`  | `mathml`   | MathML math   |
-|-----------|---------|------------|---------------|
+|-----------|------------|---------------|
+| Extension | `format`   | Description   |
+|-----------|------------|---------------|
+| `.tex`    | `latex`    | LaTeX math    |
+| `.mathml` | `mathml`   | MathML math   |
+|-----------|------------|---------------|
 
 ##### Supported Attributes for Math
-
-`type`
-: All resources support the `type` attribute. For math, the type is `math`.
 
 `caption`
 : All resources inserted as figures support the `caption` attribute.
