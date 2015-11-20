@@ -1,57 +1,14 @@
 # TODO
 
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+## class attr?
 
-
-Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
-
-
-## captions - generalize for resource not image
-
-A Figure can have a caption. This caption shows up in two places:
-
-1. Near the resource, typically above or below it, per the preference of the Markua Processor.
-2. As the name of the Figure in the List of Illustrations (a.k.a. Table of Figures), if one is generated for the book. The caption name serves as the text, and it is a crosslink to the image caption associated with the figure itself.
-
-
-## image attrs
-
-There are three attributes: `float`, `width` and `type`. These are optional, and are expressed in an attribute list above the image. The `float` and `width` turn into inline style tags in the HTML, so if you find that distasteful, then don't do it. (You can always add a `class` attribute to an image, and style that class yourself if you prefer.)
-
-`float`
-: The `float` refers to where on the page the image is floated, and can have value of `left`, `right` or `none`. The default is `none`. If the value is `left` the image is floated left; if the value is `right` the image is floated right. If the value is `none`, the image is not floated. Instead, the image is centered on the page, and text does not wrap around it. The `none` value is equivalent to not specifying a value of `float`. Regardless of the value of `float`, the figure caption (if present) is positioned near the image per the preference of the Markua processor.
-
-`width`
-: The `width` specifies the width of the image. It is either `auto`, `fullbleed` or an integer between between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image, with a default maximum width of 100% of the page, respecting margins. The value of `fullbleed` means to advise a Markua Processor generating a PDF to resize the image to the full width of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) The integer values between 1 and 100 mean to resize the image to that percentage width of the page, respecting margins--so `100` means to be 100% of the usable page width, but not spilling into the margins.
-
-`type`
-: For an image, the `type` attribute is redundant, as the default type of a Figure is `image`. However, if you feel like it, you can add the `type` attribute with the value `image` if you choose. The reason that the `type` attribute exists on a figure is to allow the figure variant of the image syntax to also support inserting audio and video; see those chapters for details.
-
-## image span
-
-When inserting an resource as a span element in the flow of a paragraph, Markua Processors will want to use a very small (possibly emoji-sized) thumbnail for the resource. Otherwise, the paragraph would quickly look ridiculous, as a typical resource thumbnail is many times the height of a typical line of text.
-
-## resource types and formats
-
-type: code, math, text, ...
-format:
-  code: plain, guess, [some language]
-  text: plain, monospace
-  math: mathml, latex
+support a class attr on everything?
 
 ## backtick vs tilde defaults???
 
 This is useful for unformatted code samples and monospaced poetry.
 
 Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of defaults. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
-
-## Optional Figure Caption and Optional Alt Text
-
-
-This example shows a figure which is floated `left` and which has a `width` of half the print area on the page.
-
-This example shows a figure which has a `width` attribute of `fullbleed`. Note that this sets a `class` of `fullbleed` and an inline style `width` of `100%`.
-
 
 ## backticks in backticks
 

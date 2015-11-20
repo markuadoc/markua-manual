@@ -296,6 +296,15 @@ A figure can also have attributes. The supported attributes vary based on the ty
 
 Many resource types can also have alt text. Alt text is not the same thing as a figure caption.
 
+### Figure Captions
+
+A resource which is inserted as a figure can have a caption.
+
+This caption shows up in two places:
+
+1. Near the resource, typically above or below it, per the preference of the Markua Processor.
+2. As the name of the Figure in the List of Illustrations or Table of Figures, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
+
 ### Alt Text and Figure Captions
 
 Some resources support alt text. Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
@@ -492,13 +501,13 @@ We will discuss the supported and the default attributes for images, and then sh
 : The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
 
 `float`
-: The `float` can be `none` (the default), `left`, `conter` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
+: The `float` can be `none` (the default), `left`, `center` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
 
 `position`
 : The `position` refers to vertical positioning on a page. The position only has an effoct on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
 
 `width` and `height`
-: The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. It is legal for either one or both of `width` and `height` can be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page.
+: The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) It is legal for either one or both of `width` and `height` to be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page, which respects the margins.
 
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in square brackets for images inserted as spans and only in the attribute list for figures.
@@ -1158,6 +1167,10 @@ Here's a paragraph after the figure.
 ~~~
 
 ## Lists
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
+
+Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
 
 Markua defines substantially more list types than Markdown. In Markdown, the only types of lists supported are ordered lists with decimal numbers and unordered lists. However, since Markua does not support inline HTML, and since Markua is used for producing books and documents, Markua must define more types of list.
 
