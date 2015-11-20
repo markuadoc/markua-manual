@@ -1172,7 +1172,9 @@ Like Markdown, Markua supports ordered (i.e. numbered) and unordered (i.e. bulle
 
 Unlike Markdown, Markua also supports definition lists. Definition lists are discussed in the next section--although they are called "lists", their formatting and function is very different than unordered and ordered lists.
 
-Markua defines many more types of ordered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering; if you need another type of numbering, you need to use inline HTML. However, since Markua does not support inline HTML, Markua must define more types of list. Specifically, the following types of numbering choices are supported:
+Markua defines many more types of ordered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering; if you need another type of numbering, you need to use inline HTML. However, since Markua does not support inline HTML, Markua must define more types of list.
+
+Specifically, the following types of numbering choices are supported:
 
 a. Decimal numbers
 b. Uppercase letters
@@ -1189,21 +1191,23 @@ If you are familiar with Markdown, as you read the sections below you will note 
 
 Markua lets you make an unordered list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by 1-4 spaces or 1 tab, followed by text content. You can't mix and match asterisks and hyphens in the same list. Here's how this looks:
 
-```
 You can build a list out of items starting with an asterisk and one space:
 
+```
 * foo
 * bar
 * baz
+```
 
 You can build a list out of items starting with a hyphen and one tab:
 
+```
 -    one
 -    two
 -    three
-
-My editor converts tabs to spaces, so that's actually 4 spaces, which also works.
 ```
+
+(My editor converts tabs to spaces, so that's actually 4 spaces, which also works.)
 
 A> Markdown also lets you use a plus sign (`+`) before each item, but Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`. Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
 
