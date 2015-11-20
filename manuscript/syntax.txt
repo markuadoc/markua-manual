@@ -1489,7 +1489,7 @@ This is paragraph three.
 
 This works for any block element (like figures), not just lists.
 
-### Nested Lists - EDITED_TO_HERE
+## Nested Lists - EDITED_TO_HERE
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
