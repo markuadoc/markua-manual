@@ -1172,18 +1172,6 @@ Like Markdown, Markua supports ordered (i.e. numbered) and unordered (i.e. bulle
 
 Unlike Markdown, Markua also supports definition lists. Definition lists are discussed in the next section--although they are called "lists", their formatting and function is very different than unordered and ordered lists.
 
-Markua defines many more types of ordered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering; if you need another type of numbering, you need to use inline HTML. However, since Markua does not support inline HTML, Markua must define more types of list.
-
-Specifically, the following types of numbering choices are supported:
-
-a. Decimal numbers
-b. Uppercase letters
-c. Lowercase letters
-d. Uppercase Roman numerals
-e. Lowercase Roman numerals
-
-A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since ordered lists support numbering by letters, the term "ordered" is superior to "numbered" in some senses.)
-
 If you are familiar with Markdown, as you read the sections below you will note a number of differences between Markua lists and Markdown lists.
 
 {#unorderedlists}
@@ -1226,36 +1214,29 @@ In terms of style guidance, the preferred bullet type is the asterisk, and the p
 {#ordered_lists}
 ### Ordered Lists (i.e. Numbered Lists)
 
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+Markua defines many more types of ordered list numbering than Markdown.
 
-Ordered lists are more fully featured in Markua than in Markdown.
+A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since ordered lists support numbering by letters, the term "ordered" is superior to "numbered" in some senses.)
 
-Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
+In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list features.
 
-Also, in Markua, an ordered list can vary the following:
+In Markua, an ordered list can vary the following:
 
 1. Numbering system
-  a. Decimal numbers
-  b. Uppercase letters
-  c. Lowercase letters
-  d. Uppercase Roman numerals
-  e. Lowercase Roman numerals
 2. Numbering direction (ascending or descending)
 3. Initial number (or letter, or Roman numeral)
 
-W> TODO - this list above renders wrong until we support nested lists in Markua
+The following choices of numbering system are supported:
 
-To make an ordered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by between 1 and 4 spaces or 1 tab, followed by text content:
+1. Decimal numbers
+2. Uppercase letters
+3. Lowercase letters
+4. Uppercase Roman numerals
+5. Lowercase Roman numerals
 
-```
-before
+Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
 
-1. foo
-2. bar
-3. baz
-
-after
-```
+To make an ordered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by between 1 and 4 spaces or 1 tab, followed by text content.
 
 Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex.
 
@@ -1263,7 +1244,63 @@ Note that there are one or more spaces after the period. Unlike with an unordere
 
 A> I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
 
-This set of examples shows the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections.
+This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections. For the mapping to HTML lists, see the next chapter.
+
+Ascending decimal numbers starting from 1:
+
+```
+1. foo
+2. bar
+3. baz
+```
+
+Ascending decimal numbers starting from a higher number:
+
+```
+9.  foo
+10. bar
+11. baz
+```
+
+Descending decimal numbers:
+
+```
+3. foo
+2. bar
+1. baz
+```
+
+Identical decimal numbers for the lazy (producing 1, 2, 3):
+
+```
+1. foo
+1. bar
+1. baz
+```
+
+Ascending lowercase letters:
+
+```
+a. foo
+b. bar
+c. baz
+```
+
+Ascending uppercase letters:
+
+```
+I. foo
+J. bar
+K. baz
+```
+
+Ascending uppercase Roman numerals:
+
+```
+I.   foo
+II.  bar
+III. baz
+```
 
 #### In Markua, A Single Element Ordered List is Not a List
 
@@ -1348,11 +1385,13 @@ Speaking of clock faces, I have bad news for fans of watches and antique clocks:
 
 It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
 
-In Markua, list numbers must **all** either be **consecutive**, given the type of numbering  that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
+In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
-### Nesting Lists in Paragraphs
+### Nesting Lists in Paragraphs - EDITED_TO_HERE
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
 Unlike in Markdown, in Markua a list can also be nested in a paragraph, like this:
 
@@ -1372,10 +1411,11 @@ This is paragraph three.
 
 Embedding a list in a paragraph works for all types of list, but you need to indent the list with some amount of whitespace.
 
-### Nesting Other
+### Nested Lists
 
 TODO
 
+W> TODO_LEANPUB - support nested lists
 
 ## Definition Lists
 
