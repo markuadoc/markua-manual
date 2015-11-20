@@ -249,7 +249,6 @@ yada
 
 (2-4 spaces or 1 tab) more than prev level of indent
 
-- give up on ) in lists, blame w3c. using ) in a list makes it br tags like a sonnet
 - add reversed support
 - add nested list support (any type any level) with indent of 4 spaces or 1 tab
 
