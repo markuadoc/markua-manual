@@ -1390,9 +1390,7 @@ In Markua, list numbers must **all** either be **consecutive**, given the type o
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
 {#inserting_into_paras}
-## Inserting Inside Paragraphs Nesting Lists in Paragraphs - EDITED_TO_HERE
-
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+## Inserting Block Elements Inside Paragraphs
 
 In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
 
@@ -1400,23 +1398,25 @@ In Markdown, lists and other block elements cannot be nested inside a paragraph.
 
 So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
 
-Markua, however, is a format for writing, not for just producing HTML. And...
-
-In Markdown, and normally in Markua, a list is a sibling of the paragraphs before or after it:
+In Markdown, a block element like a list or figure is a sibling of the paragraphs before or after it:
 
 ```
 This is paragraph one.
 
-* foo
-* bar
-* baz
+* this is a
+* sibling of
+* paragraphs one and two
 
 This is paragraph two.
 ```
 
-Unlike in Markdown, in Markua a list can also be nested in a paragraph.
+Markua supports this method of inserting block elements.
 
-The way this is done is to add single newlines instead of blank lines:
+However, Markua is more than just a way of producing HTML. Markua is a way of authoring books and documents. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this too.
+
+Any block element such as a list or figure can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
+
+This example shows a list nested in the middle of a paragraph:
 
 ```
 This is paragraph one.
@@ -1429,6 +1429,50 @@ This sentence is also in paragraph two.
 
 This is paragraph three.
 ```
+
+This example shows a figure which is an inline code resource nested in the middle of a paragraph:
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+```ruby
+puts "hello world"
+```
+This sentence is also in paragraph two.
+
+This is paragraph three.
+~~~
+
+This example shows a figure which is a local code resource nested in the middle of a paragraph:
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+{format: ruby}
+![Hello, World](hello.rb)
+This sentence is also in paragraph two.
+
+This is paragraph three.
+~~~
+
+This example shows figures which are local or web image resources nested in the middle of paragraphs. Note that like with all figures, the square bracket text in both cases is the figure caption (not alt text):
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+![A Piece of Cake](cake.jpg)
+This sentence is also in paragraph two.
+
+This sentence is in paragraph three.
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](http://markua.com/cake.jpg)
+This sentence is also in paragraph three.
+
+This is paragraph four.
+~~~
 
 It is possible to insert a block element as the last part of a paragraph by adding a single newline before it, but a blank line after it:
 
@@ -1443,52 +1487,11 @@ This sentence is in paragraph two.
 This is paragraph three.
 ```
 
+This works for any block element (like figures), not just lists.
 
-Embedding a list in a paragraph works for all types of list, but you need to indent the list with some amount of whitespace.
+### Nested Lists - EDITED_TO_HERE
 
-
-Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
-
-Here are some examples of figures and block quotes inserted inside of, and outside of, paragraphs in Markua:
-
-~~~
-This is paragraph one. It is followed by a figure which is a resource of Java code.
-
-{type: code, format: java}
-![Hello World in Java](hello.java)
-
-This is paragraph two. It contains a figure which is an inline code resource.
-
-```ruby
-puts "hello world"
-```
-
-This is still in paragraph two, since it follows the figure with a single newline, not a blank line.
-
-This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
-Here's the first blockquote:
-
-> There is a tide in the affairs of men.
-> Which, taken at the flood, leads on to fortune;
-
-The paragraph then continues, and then addes another blockquote:
-
-> Omitted, all the voyage of their life
-> Is bound in shallows and in miseries.
-
-This is also still in the same paragraph.
-
-This is the final paragraph.
-
-for custom types:
-- maybe?
-- display names
-
-### Nested Lists
-
-
-
-TODO
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
 W> TODO_LEANPUB - support nested lists
 
