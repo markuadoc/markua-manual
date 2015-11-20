@@ -1389,6 +1389,38 @@ In Markua, list numbers must **all** either be **consecutive**, given the type o
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
+## Definition Lists
+
+Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, I strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, I see definition lists as being more important than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
+
+To define a definition list in Markua, use the following syntax:
+
+```
+term 1
+: definition 1
+
+term 2
+: definition 2
+```
+
+A definition list can define multiple definitions for a term:
+
+```
+term 1
+: definition 1a
+: definition 1b
+
+term 2
+: definition 2
+```
+
+Note that a single term definition list is a definition list, regardless of how many definitions for the term exist.
+
+```
+term
+: definition
+```
+
 {#inserting_into_paras}
 ## Inserting Block Elements Inside Paragraphs
 
@@ -1414,7 +1446,7 @@ Markua supports this method of inserting block elements.
 
 However, Markua is more than just a way of producing HTML. Markua is a way of authoring books and documents. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this too.
 
-Any block element such as a list or figure can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
+So, many block elements such as lists and figures can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
 
 This example shows a list nested in the middle of a paragraph:
 
@@ -1487,52 +1519,17 @@ This sentence is in paragraph two.
 This is paragraph three.
 ```
 
-This works for any block element (like figures), not just lists.
+This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
 
 ## Nested Lists - EDITED_TO_HERE
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
+Lists can nest lists.
+
+TODO - write this, then reorder the above sections
+
 W> TODO_LEANPUB - support nested lists
-
-## Definition Lists
-
-Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, we strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, we see definition lists as having more of a future than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
-
-To define a definition list in Markua, use the following syntax:
-
-```
-term 1
-: definition 1
-
-term 2
-: definition 2
-```
-
-The term cannot start with a square bracket--this is reserved for the reference-style image syntax.
-
-A definition list can define multiple definitions for a term:
-
-```
-term 1
-: definition 1a
-: definition 1b
-
-term 2
-: definition 2
-```
-
-Note that a single term definition list is a definition list, regardless of how many definitions for the term exist.
-
-```
-term
-: definition
-```
-
-For an example of a longer, more useful definition list used in Markua, see the definitions section of this specification.
-
-
-
 
 ## Headings
 

@@ -2,21 +2,9 @@
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
-
-## nested lists?
-
-should we support?
-
 ## multiple paragraphs
 
-
-
 Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
-
-### Embedding Lists, Figures and Code Blocks Inside a Paragraph
-
-TODO: incorporate this somewhere.
-
 
 ## class attr?
 
@@ -42,17 +30,6 @@ Three backticks???
 A single newline inside a list, aside or blurb creates a new paragraph within that list item, aside or blurb. This can be used to create multi-paragraph list items, asides, blurbs, etc.
 
 A> This alse means that there is no need for the 4 space indent feature of Markdown. Code blocks and other things can just be added to list items by adding a single newline.
-
-### Newlines and Inserting Things Inside Paragraphs
-
-Foo
-
-* a
-* b
-
-{indent: continue}
-Bar
-
 
 ## Block Quotes
 
