@@ -2,6 +2,15 @@
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
+
+## nested lists?
+
+should we support?
+
+## multiple paragraphs
+
+
+
 Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
 
 ### Embedding Lists, Figures and Code Blocks Inside a Paragraph
@@ -35,6 +44,16 @@ A single newline inside a list, aside or blurb creates a new paragraph within th
 A> This alse means that there is no need for the 4 space indent feature of Markdown. Code blocks and other things can just be added to list items by adding a single newline.
 
 ### Newlines and Inserting Things Inside Paragraphs
+
+Foo
+
+* a
+* b
+
+{indent: continue}
+Bar
+
+
 
 In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
 
@@ -74,26 +93,6 @@ The paragraph then continues, and then addes another blockquote:
 This is also still in the same paragraph.
 
 This is the final paragraph.
-~~~
-
-{type: image, format: svg}
-```
-oauetnh sosaht
-```
-
-```
-{type: image}
-![alt text](path "Caption")
-```
-
-this infers type from extension
-
-{type: code, lang: ruby}
-```
-aoue
-aoue
-aoeu
-```
 
 for custom types:
 - maybe?
@@ -102,8 +101,6 @@ for custom types:
 {type: pokemon_card}
 
 Table of Pokemon Cards
-
-Markua defines just custom, and adds class to figure
 
 ```
 ![]()
@@ -252,9 +249,6 @@ yada
 
 (2-4 spaces or 1 tab) more than prev level of indent
 
-
-
-
 - give up on ) in lists, blame w3c. using ) in a list makes it br tags like a sonnet
 - add reversed support
 - add nested list support (any type any level) with indent of 4 spaces or 1 tab
@@ -263,12 +257,6 @@ yada
 
 - differentiate between (strict and not strict) output modes (don't name it strict mode?), and explain (in Leanpub we just have strict mode); non-strict mode would not strip out non-understood by Markua stuff, strict mode would only output attrs Markua understood
 - reconsider align attribute on images
-
-significant whitespace =>
- strip at the beginning of a paragraph
- strip at end of line
- collapse into one space in middle
- at the beginning of a non-paragraph newline we preserve them
 
 {class: warning}
 B> TODO - Need to consider the following...
@@ -466,17 +454,6 @@ Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Her
 
 How chain ! and | in index entry?
 
-Let's see if the post-commit hook works...
-
 EPUB3 audio and video?
 
 - some of the stuff in philosophy.txt is outdated
-
-## Important Changes From Leanpub Flavoured Markdown
-
-Markua is the evolution of Leanpub Flavoured Markdown. However, the goal of Markua is to remove the tailbones and appendices that aren't necessary. This appendix highlights things which are changed from Leanpub Flavoured Markdown in a way which is not adequately discussed earlier.
-
-The following Leanpub Flavoured Markdown features are not supported in Markua:
-
-* Centering paragraphs of text or headings using `C>` has been removed.
-* Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. [some text]{lang:en}) on a span or block.
