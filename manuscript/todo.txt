@@ -55,14 +55,15 @@ Bar
 
 
 
-In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
-
-> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
-
-So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
 
 Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
 
+{format: text}
+```ruby
+puts "hello world"
+```
+
+{indent: continue}
 Here are some examples of figures and block quotes inserted inside of, and outside of, paragraphs in Markua:
 
 ~~~
@@ -80,6 +81,15 @@ puts "hello world"
 This is still in paragraph two, since it follows the figure with a single newline, not a blank line.
 
 This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
+
+Here's the first blockquote:
+> There is a tide in the affairs of men.
+> Which, taken at the flood, leads on to fortune;
+The paragraph then continues, and then addes another blockquote:
+> Omitted, all the voyage of their life
+> Is bound in shallows and in miseries.
+This is also still in the same paragraph.
+
 Here's the first blockquote:
 
 > There is a tide in the affairs of men.

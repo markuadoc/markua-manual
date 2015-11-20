@@ -252,7 +252,7 @@ It's a single backtick `followed by inline resource content\`optional_format and
 
 #### Figures
 
-When a resource is inserted as a figure, the resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it).
+When a resource is inserted as a figure, the resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it). The ways that figures and other block elements can be inserted in paragraphs is [discussed in depth](#inserting_into_paras) later.
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
@@ -1389,29 +1389,104 @@ In Markua, list numbers must **all** either be **consecutive**, given the type o
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
-### Nesting Lists in Paragraphs - EDITED_TO_HERE
+{#inserting_into_paras}
+## Inserting Inside Paragraphs Nesting Lists in Paragraphs - EDITED_TO_HERE
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
-Unlike in Markdown, in Markua a list can also be nested in a paragraph, like this:
+In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
+
+> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
+
+So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
+
+Markua, however, is a format for writing, not for just producing HTML. And...
+
+In Markdown, and normally in Markua, a list is a sibling of the paragraphs before or after it:
 
 ```
 This is paragraph one.
 
+* foo
+* bar
+* baz
+
 This is paragraph two.
+```
 
-  * foo
-  * bar
-  * baz
+Unlike in Markdown, in Markua a list can also be nested in a paragraph.
 
-This is still paragraph two.
+The way this is done is to add single newlines instead of blank lines:
+
+```
+This is paragraph one.
+
+This sentence is in paragraph two.
+* this list is
+* part of
+* paragraph two
+This sentence is also in paragraph two.
 
 This is paragraph three.
 ```
 
+It is possible to insert a block element as the last part of a paragraph by adding a single newline before it, but a blank line after it:
+
+```
+This is paragraph one.
+
+This sentence is in paragraph two.
+* this list is
+* part of
+* paragraph two
+
+This is paragraph three.
+```
+
+
 Embedding a list in a paragraph works for all types of list, but you need to indent the list with some amount of whitespace.
 
+
+Markua, on the other hand, is a way of authoring books and documents, not just a way of producing HTML. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this.
+
+Here are some examples of figures and block quotes inserted inside of, and outside of, paragraphs in Markua:
+
+~~~
+This is paragraph one. It is followed by a figure which is a resource of Java code.
+
+{type: code, format: java}
+![Hello World in Java](hello.java)
+
+This is paragraph two. It contains a figure which is an inline code resource.
+
+```ruby
+puts "hello world"
+```
+
+This is still in paragraph two, since it follows the figure with a single newline, not a blank line.
+
+This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
+Here's the first blockquote:
+
+> There is a tide in the affairs of men.
+> Which, taken at the flood, leads on to fortune;
+
+The paragraph then continues, and then addes another blockquote:
+
+> Omitted, all the voyage of their life
+> Is bound in shallows and in miseries.
+
+This is also still in the same paragraph.
+
+This is the final paragraph.
+
+for custom types:
+- maybe?
+- display names
+
 ### Nested Lists
+
+
 
 TODO
 
