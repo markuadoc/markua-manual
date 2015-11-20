@@ -45,6 +45,84 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 [^w3c_em]: To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
+## Headings
+
+Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
+
+Markua, however, is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections.
+
+**What Markua does is to use the heading levels that Markdown uses to create HTML to create the structure of the book or document, as well as generating the `h1` through `h6` heading levels in the HTML version of the book.**
+
+Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown.
+
+Here's the only way that headings are made in Markua:
+
+```
+# Part (h1) #
+
+This is a paragraph.
+
+# Chapter (also h1)
+
+This is a paragraph.
+
+## Section (h2)
+
+This is a paragraph.
+
+### Sub-Section (h3)
+
+This is a paragraph.
+
+#### Sub-Sub-Section (h4)
+
+This is a paragraph.
+
+##### Sub-Sub-Sub-Section (h5)
+
+This is a paragraph.
+
+###### Sub-Sub-Sub-Sub-Section (h6)
+
+This is a paragraph.
+```
+
+Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
+
+* between one and six pound signs (`#`)
+* followed by exactly one space
+* followed by text
+* followed (only for parts) by exactly one space and exactly one pound sign
+
+Making these headings divides your book or document into these divisions. If you add part headings, your book will have parts; if you don't, it won't. If you add chapter headings, your book will have chapters; if you don't, it won't.
+
+Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
+
+Markua is more strict about spaces and pound signs than Markdown:
+
+1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one a pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
+2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
+3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors.)
+4. Headings must be separated from other block elements by blank lines both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
+
+I thought long and hard about Markua headings, and changed my mind (as Scott and Braden will attest) a number of times. I settled on this design when I realized that the design requirements were as follows:
+
+1. From looking at a heading, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
+2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged.
+3. The number of leading pound signs must match the level of heading in HTML.
+4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
+5. The syntax to create parts must be as economical as possible.
+6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
+7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
+8. Books with parts and chapters must be able to have the same number of levels of sub-sections.
+9. Documents can have parts, chapters and sections just like books, and it's up to the document designer to create the appropriate CSS.
+
+The design of Markua headings meets these requirements, in what I feel is an optimal way.
+
+A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
+
+A> There are two primary issues with Setext headings in Markdown. First, it is inconsistent: you can only define `h1` and `h2`; to define h3 and below, the atx style of heading must be used. Second, it is confusing: it's unclear about how many equals or minus signs you need to use. (The answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
+
 ## Whitespace, Paragraphs and Blank Lines
 
 Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
@@ -1530,85 +1608,6 @@ Lists can nest lists.
 TODO - write this, then reorder the above sections
 
 W> TODO_LEANPUB - support nested lists
-
-## Headings
-
-Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
-
-Markua, however, is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections. What Markua does is use the heading levels that Markdown uses to create HTML to create the structure of the book or document, as well as generating the `h1` through `h6` heading levels in the HTML version of the book.
-
-Markua is also a lot more strict about heading syntax than Markdown.
-
-In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown.
-
-Here's the only way that headings are made in Markua:
-
-{#input_headings_1}
-```
-# Part (h1) #
-
-This is a paragraph.
-
-# Chapter (also h1)
-
-This is a paragraph.
-
-## Section (h2)
-
-This is a paragraph.
-
-### Sub-Section (h3)
-
-This is a paragraph.
-
-#### Sub-Sub-Section (h4)
-
-This is a paragraph.
-
-##### Sub-Sub-Sub-Section (h5)
-
-This is a paragraph.
-
-###### Sub-Sub-Sub-Sub-Section (h6)
-
-This is a paragraph.
-```
-
-Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
-
-* between one and six pound signs (`#`)
-* followed by exactly one space
-* followed by text
-* followed (only for parts) by exactly one space and exactly one pound sign
-
-Making these headings divides your book or document into these divisions. If you add part headings, your book will have parts; if you don't, it won't. If you add chapter headings, your book will have chapters; if you don't, it won't.
-
-Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
-
-Markua is more strict about spaces and pound signs than Markdown:
-
-1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one a pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
-2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
-3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors.)
-4. Headings must be separated from other block elements by blank lines both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
-
-I thought long and hard about Markua headings, and changed my mind (as Scott and Braden will attest) a number of times. I settled on this design when I realized that the design requirements were as follows:
-
-1. From looking at a heading, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
-2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged.
-3. The number of leading pound signs must match the level of heading in HTML.
-4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
-5. The syntax to create parts must be as economical as possible.
-6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
-7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
-8. Books with parts and chapters must be able to have the same number of levels of sub-sections.
-9. Documents can have parts, chapters and sections just like books, and it's up to the document designer to create the appropriate CSS.
-
-The design of Markua headings meets these requirements, in what I feel is an optimal way.
-
-A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
-
-A> There are two primary issues with Setext headings in Markdown. First, it is inconsistent: you can only define `h1` and `h2`; to define h3 and below, the atx style of heading must be used. Second, it is confusing: it's unclear about how many equals or minus signs you need to use. (The answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
 
 ## Tables
 
