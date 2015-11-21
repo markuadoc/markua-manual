@@ -1891,48 +1891,90 @@ This complex table has a caption as well as align, width and top attributes:
 `caption`
 : The `caption` is the table caption.
 
-## Asides, Blockquotes, Blurbs and Callouts - TO_HERE
+## Block Quotes
 
-Markdown defines a syntax for block quotes. Since Markua is a way of writing books and documents, including technical books and documents, it also needs a syntax for asides, blurbs and callouts. The syntactic sugar version of this syntax is inspired by the Markdown syntax for block quotes.
+Block quotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
 
-### Block Quotes
+```
+This is a paragraph.
 
-Block quotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
+> This is a block quote
+> which is outside the paragraph.
+
+This is a paragraph.
+```
 
 Block quotes in Markua are created in one of two ways:
 
 1. By prefacing lines with `> `, i.e. a greater than character followed by a space.
 2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
 
+Option #1 is preferable for short quotes; option #2 is easier on authors for really long quotes.
 
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+Like figures and tables, block quotes can be inserted in the middle of a paragraph or as a sibling of it.
 
-
-Either way, the blockquote
-
-Examples:
+These Markua block quotes are siblings of the paragraphs:
 
 ```
 This is a paragraph.
 
-> This is a blockquote outside the .
+> This is a block quote
+> which is outside the paragraph.
 
+This is a paragraph.
 
+{blockquote}
+This is a block quote
+which is outside the paragraph.
+{/blockquote}
 
+This is a paragraph.
+```
 
-Thhis
+These Markua block quotes are nested in the paragraph:
 
-can span multiple pages. They are
+```
+This is a paragraph.
 
-A blockquote can contain other block-level elements, most commonly paragraphs. To start a new block level element within a blockquote, just put a line starting with a `>` followed by an optional space. It is equivalent to placing a `> ` in front of every line of the paragraphs.
+This is a second paragraph.
+> This is a block quote
+> which is inside the second paragraph.
+This is part of the second paragraph.
+{blockquote}
+This is a block quote
+which is inside the second paragraph.
+{/blockquote}
+This is part of the second paragraph.
+
+This is a paragraph.
+```
+
+A blockquote can contain other block-level elements, most commonly paragraphs.
+
+If you are using the `{blockquote}` ... `{/blockquote}` approach, this is trivial: just pretend you're in a normal paragraph, and the syntax is the same.
+
+If you are using the Markdown approach of `> `, then to start a new block level element within a blockquote, just put a line starting with a `>` followed by a optional space, followed by the block level element. It is equivalent to placing a `> ` in front of every line of the paragraphs.
 
 Block quotes can be multi-paragraph. To create a multi-paragraph block quote, you need to separate each paragraph with a line containing a `>` and whitespace only.
 
 Single newlines inside a block quote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
 
-A> The nesting of block quotes in Markdown is not supported in Markua.
-
 A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
+
+## `A>`, `B>`, `C>`: Asides, Blurbs and Callouts
+
+Markdown defines a syntax for block quotes. Since Markua is a way of writing books and documents, including technical books and documents, it also needs a syntax for asides, blurbs and callouts. These syntaxes are very similar to the Markua syntax for block quotes.
+
+### Asides (A>) - TO_HERE
+
+Asides are typically short or long notes in books which are tangential to the main idea--sort of like footnotes, but in the body text itself. In technical books, quite often they are formatted in a box. Asides can span multiple pages.
+
+The syntax
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
+
+can span multiple pages. They are
+
 
 Markdown
 
