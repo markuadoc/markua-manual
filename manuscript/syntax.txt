@@ -1877,7 +1877,7 @@ This complex table has a caption as well as align, width and top attributes:
 |=============|===============|=============|
 ```
 
-##### Supported Attributes for Tables
+### Supported Attributes for Tables
 
 `align`
 : The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
@@ -1891,57 +1891,57 @@ This complex table has a caption as well as align, width and top attributes:
 `caption`
 : The `caption` is the table caption.
 
-## Block Quotes
+## Blockquotes (>)
 
-Block quotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
+blockquotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
 
 ```
 This is a paragraph.
 
-> This is a block quote
+> This is a blockquote
 > which is outside the paragraph.
 
 This is a paragraph.
 ```
 
-Block quotes in Markua are created in one of two ways:
+blockquotes in Markua are created in one of two ways:
 
 1. By prefacing lines with `> `, i.e. a greater than character followed by a space.
 2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
 
 Option #1 is preferable for short quotes; option #2 is easier on authors for really long quotes.
 
-Like figures and tables, block quotes can be inserted in the middle of a paragraph or as a sibling of it.
+Like figures and tables, blockquotes can be inserted in the middle of a paragraph or as a sibling of it.
 
-These Markua block quotes are siblings of the paragraphs:
+These Markua blockquotes are siblings of the paragraphs:
 
 ```
 This is a paragraph.
 
-> This is a block quote
+> This is a blockquote
 > which is outside the paragraph.
 
 This is a paragraph.
 
 {blockquote}
-This is a block quote
+This is a blockquote
 which is outside the paragraph.
 {/blockquote}
 
 This is a paragraph.
 ```
 
-These Markua block quotes are nested in the paragraph:
+These Markua blockquotes are nested in the paragraph:
 
 ```
 This is a paragraph.
 
 This is a second paragraph.
-> This is a block quote
+> This is a blockquote
 > which is inside the second paragraph.
 This is part of the second paragraph.
 {blockquote}
-This is a block quote
+This is a blockquote
 which is inside the second paragraph.
 {/blockquote}
 This is part of the second paragraph.
@@ -1955,55 +1955,122 @@ If you are using the `{blockquote}` ... `{/blockquote}` approach, this is trivia
 
 If you are using the Markdown approach of `> `, then to start a new block level element within a blockquote, just put a line starting with a `>` followed by a optional space, followed by the block level element. It is equivalent to placing a `> ` in front of every line of the paragraphs.
 
-Block quotes can be multi-paragraph. To create a multi-paragraph block quote, you need to separate each paragraph with a line containing a `>` and whitespace only.
+blockquotes can be multi-paragraph. To create a multi-paragraph blockquote, you need to separate each paragraph with a line containing a `>` and whitespace only.
 
-Single newlines inside a block quote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
+Single newlines inside a blockquote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
 
-A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
+Note that any headings inside blockquotes do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
 
 ## `A>`, `B>`, `C>`: Asides, Blurbs and Callouts
 
-Markdown defines a syntax for block quotes. Since Markua is a way of writing books and documents, including technical books and documents, it also needs a syntax for asides, blurbs and callouts. These syntaxes are very similar to the Markua syntax for block quotes.
+Markdown defines a syntax for blockquotes. Since Markua is a way of writing books and documents, including technical books and documents, it also needs a syntax for asides, blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Also, like blockquotes, any headings inside asides, blurbs and callouts do not show up in the Table of Contents, and they can also be formatted differently by Markua Processors.
 
-### Asides (A>) - TO_HERE
+### Asides (A>)
 
 Asides are typically short or long notes in books which are tangential to the main idea--sort of like footnotes, but in the body text itself. In technical books, quite often they are formatted in a box. Asides can span multiple pages.
 
-The syntax
+The syntaxes for asides are very similar to blockquotes:
 
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+1. By prefacing lines with `A> `, i.e. an A, then a greater than character followed by a space.
+2. By wrapping the aside in `{aside}` ... `{/aside}`
 
-can span multiple pages. They are
+Option #1 is preferable for short asides; option #2 is easier on authors for really long asides.
+
+Like blockquotes, asides can be siblings of paragraphs or nested in them.
+
+Here's a short aside:
+
+```
+A> This is a short aside.
+```
+
+Here's a longer aside, which also contains a heading:
+
+```
+A> # A Longer Aside
+A>
+A> This is a longer aside.
+A>
+A> It can have multiple paragraphs.
+A>
+A> The `A> ` stuff can get tedious after a while.
+A>
+A> This is why the `{aside}` syntax exists.
+```
+
+Here's a longer aside using the `{aside}` syntax, which also contains a heading:
+
+```
+{aside}
+# A Note About Asides
+
+This is a longer aside.
+
+It can have multiple paragraphs.
+
+Asides can also have headings, like this one does.
+
+Multi-paragraph asides are more pleasant using this syntax.
+{/aside}
+```
+
+### Blurbs (B>)
+
+Blurbs are like asides, but shorter. A blurb cannot span multiple pages or have headings.
+
+The syntaxes for blurbs are very similar to asides:
+
+1. By prefacing lines with `B> `, i.e. an B, then a greater than character followed by a space.
+2. By wrapping the blurb in `{blurb}` ... `{/blurb}`
+
+Examples:
+
+```
+B> This is a short blurb.
+```
+
+```
+B> This is a longer blurb.
+B>
+B> It can have multiple paragraphs.
+```
+
+```
+{blurb}
+This is a longer blurb.
+
+It can have multiple paragraphs.
+{/blurb}
+```
+
+### Special Blurbs: Warnings (W>), Tips (T>), Info (I>) and Question (Q>)
+
+TODO
+
+### Attribute Lists and Icons in Asides, Blurbs and Callouts
+
+Asides, blurbs and callouts also have support for an attribute list. One use of this attribute list is to add arbitrary icons. Icon support is implementation-dependent and optional; Markua Processors can ignore these. The icon support is optional so that Markua processors can do creative things here, without worrying about manuscripts breaking in other Markua processors. If a Markua processor does not understand a given icon it must be silently ignored--it is not acceptable to add a missing image or equivalent in it.
+
+Leanpub, for example, understands the icon attribute to reference an icon from Font Awesome.
+
+```
+{icon: car}
+A> you can't spell carbon without it
+
+{icon: leanpub}
+A> yes, we're in Font Awesome
+
+{icon: github}
+A> so is GitHub
+```
 
 
-Markdown
-
+# TODO - EDITED_TO_HERE
 
 Need syntactic sugar for short asides and not to make life hell for long ones. An aside can have page breaks in it; a blurb cannot; a callout can but shouldn't if possible.
 
 Callouts are blurbs that can be freely and creatively positioned near the manuscript position.  Asides and blurbs must be positioned at the manuscript position.
 
-```
-Syntax:
-
-A> stuff
-
-{aside}
-stuff
-{/aside}
-
-B> stuff
-
-{blurb}
-stuff
-{/blurb}
-
-C> stuff
-
-{callout}
-stuff
-{/callout}
-```
 
 Asides, blurbs and callouts can have an icon property. Markua processors that don't understand a given icon can ignore it.
 
@@ -2035,22 +2102,9 @@ B> this is an info blurb
 B> this is a question blurb
 ```
 
-Besides this, there is support for adding arbitrary icons. Markua Processors can ignore these. Leanpub, for example, understands the icon attribute to reference an icon from Font Awesome. This is optional so that Markua processors can do creative things here, without worrying about breaking. If a Markua processor does not understand a given icon it must be silently ignored -- it is not acceptable to add a missing image or equivalent in it.
-
-```
-{icon: car}
-A> you can't spell carbon without it
-
-{icon: leanpub}
-A> yes, we're in Font Awesome
-
-{icon: github}
-A> so is GitHub
-```
-
 Asides are text which is formatted separately from the main text by a Markua processor. Asides can span multiple pages.
 
-Asides can be created like block quotes, but using `A>` line prefixes. The same rules for newlines apply.
+Asides can be created like blockquotes, but using `A>` line prefixes. The same rules for newlines apply.
 
 
 Blurbs are like asides, but with two differences.
