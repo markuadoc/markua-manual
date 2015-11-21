@@ -73,35 +73,6 @@ float left and right only
 >
 > baz
 
-
-* foo
-* bar
-
-* a
-* b
-
-  bar
-
-  baz
-* c
-
-* a
-* b
-c
-* d
-
-* a
-* b
-
-  c
-
-  d
-e
-* f
-
-* new list
-
-
 <ul>
 <li>a</li>
 <li>
@@ -113,42 +84,6 @@ e</p>
 <li>f</li>
 </ul>
 
-
-(2-4 spaces or a tab = continue)
-
-
-* a
-* b
-
-  ```
-aoue
-  ```
-
-* c
-
-* a
-* b
-
-  ...
-aoue
-  ...
-
-* c
-
-
-  x
-  ```
-  yada
-  yada
-  ```
-  y
-* c
-
-* a
-* b
-d
-e
-* c
 
 yada
 

@@ -1492,19 +1492,17 @@ Here's a paragraph before the list.
 
 2.  The second list item is simple.
 
-3.  This list item has three paragraphs.
+3.  The third list item has three paragraphs.
     This is still part of the first paragraph.
 
-    Here's the second paragraph.
+    Here's the second paragraph in the third list item.
 
-    Here's the third paragraph.
+    Here's the third paragraph in the third list item.
 
 Here's a paragraph after the list.
 ```
 
-Just like with normal non-list-item text, a single newline...
-
-TODO - how handle single br? Like Markdown or like Markua paras?
+Just like with normal non-list-item text, a single newline functions as a forced line break within the list item in question. However, to encourage the text to be lined up nicely in the list item, any leading whitespace after the linebreak is ignored. This is different from the whitespace being preserved after single newlines in paragraphs. That rule exists to support poetry, and if there's one thing that lists are not, it's poetry.
 
 ### Nesting Block Elements in List Items
 
@@ -1516,7 +1514,7 @@ Lists can nest lists.
 
 W> TODO_LEANPUB - support nested lists
 
-At its simplest, a list is something like...
+At its simplest, a list is something like... TODO
 
 ## Definition Lists
 
