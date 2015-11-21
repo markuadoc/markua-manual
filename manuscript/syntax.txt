@@ -1706,102 +1706,150 @@ This is paragraph three.
 
 This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
 
-## Tables - EDITED_TO_HERE
+## Tables
+
+Markdown does not specify a table syntax. Since Markdown supports inline HTML, it does not need to--if you want a table, you can simply use an inline HTML table.
+
+Markua does not support inline HTML, so it needs a table syntax. Actually, Markua has *two* table syntaxes: simple tables and complex tables.
+
+Both of them are somewhat annoying to type. However, it's not actually so bad--unless you make columns that are too narrow at first, and then you need to widen them. Also, there will probably be tooling that evolves to help with tables--especially in the more complex cases.
+
+### Simple Tables
+
+[PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) defines a pretty good table syntax, which is supported and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). So Markua supports this syntax since it is widely used. These tables are called "simple tables" in Markua.
+
+At its most basic, a simple table looks like this:
+
+```
+Header A   | Header B   | Header C
+-----------|------------|-----------
+Content A1 | Content B1 | Content C1
+Content A2 | Content B2 | Content C2
+Content A3 | Content B3 | Content C3
+```
+
+You can also start and end the columns with pipes:
+
+```
+| Header A   | Header B   | Header C   |
+|------------|------------|------------|
+| Content A1 | Content B1 | Content C1 |
+| Content A2 | Content B2 | Content C2 |
+| Content A3 | Content B3 | Content C3 |
+```
+
+Finally, you can specify left, center and right alignment of columns with colons in the header separator row. The following columns are left-, center-, and right-aligned respectively:
+
+```
+| Header A    | Header B     | Header C    |
+|:------------|:------------:|------------:|
+| Content A1  | Content B1   | Content C1  |
+| Content A2  | Content B2   | Content C2  |
+| Content A3  | Content B3   | Content C3  |
+```
+
+Simple tables work fine in most cases, and they are the simplest to type.
+
+### Complex Tables
+
+Complex tables are slightly more effort to type than simple tables. However, they're just as easy to read, and they have more features. These include being able to individually align cells and to specify a cell that spans multiple rows or multiple columns.
+
+At its most basic, a complex table looks like this:
+
+```
+|============|============|============|
+| Header A   | Header B   | Header C   |
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|------------|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|------------|------------|------------|
+| Content A3 | Content B3 | Content C3 |
+|============|============|============|
+```
+
+The header is separated from the body cells by a row of `=` signs and `|` characters. Every row of cells is separated by a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line.
+
+A> My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
+
+You can also specify left, center and right alignment of columns with colons in the header separator row, just as with simple tables. The following columns are left-, center-, and right-aligned respectively:
+
+```
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Content A1  | Content B1   | Content C1  |
+|-------------|--------------|-------------|
+| Content A2  | Content B2   | Content C2  |
+|-------------|--------------|-------------|
+| Content A3  | Content B3   | Content C3  |
+|=============|==============|=============|
+```
+
+You can have more than one row of content in cells, and there is no ambiguity since each row of cells is separated with a row of `-` signs and `|` characters:
+
+```
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Content A1  | Content B1   | Content C1  |
+| is really   | is longer    |             |
+| really      |              |             |
+| long        |              |             |
+|-------------|--------------|-------------|
+| Content A2  | Content B2   | Content C2  |
+|-------------|--------------|-------------|
+| Content A3  | Content B3   | Content C3  |
+|=============|==============|=============|
+```
+
+You can specify colspan just by skipping a `|` in the appropriate place:
+
+```
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Content A1 and B1 Merged   | Content C1  |
+|-------------|--------------|-------------|
+| Content A2  | Content B2   | Content C2  |
+|-------------|--------------|-------------|
+| Content A3  | Content B3   | Content C3  |
+|=============|==============|=============|
+```
+
+You can specify rowspan just by skipping a part-row of `-` signs in the appropriate place:
+
+```
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Content A1  | Content B1   | Content C1  |
+| and A2      |--------------|-------------|
+| merged      | Content B2   | Content C2  |
+|-------------|--------------|-------------|
+| Content A3  | Content B3   | Content C3  |
+|=============|==============|=============|
+```
+
+You can also individually align cells with colons in the `-` part-row **above** them. This alignment overrides any alignment already on the column, and it works for merged cells too:
+
+```
+|=============|===============|=============|
+| Header A    | Header B      | Header C    |
+|:============|:=============:|============:|
+| Content A1 and B1 Merged    | Content C1  |
+|------------:|:--------------|-------------|
+| Content A2  | Content B2    | Content C2  |
+|:-----------:| and B3 merged |-------------|
+| Content A3  |               | Content C3  |
+|=============|===============|=============|
+```
+
+In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
+
+## ABC: Asides, Blurbs and Callouts - TO_HERE
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
-
-Markdown:
-Give up and use HTML.
-
-GFM:
-https://help.github.com/articles/github-flavored-markdown/
-
-PHP Markdown Extra:
-https://michelf.ca/projects/php-markdown/extra/#table
-
-Markua:
-
-Easier to read. More features (rowspan, colspan, alignment of individual cells instead of just columns, etc). Harder to write, but who cares since (a) it's not that much worse and (b) there will be tooling.
-
-```
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-```
-
-```
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-```
-
-```
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.gif`    | `image` | `gif`      | GIF image     |
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-| `.svg`    | `image` | `svg`      | SVG image     |
-| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
-```
-
-```
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|-----------|---------|------------|---------------|
-| `.gif`    | `image` | `gif`      | GIF image     |
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-| `.svg`    | `image` | `svg`      | SVG image     |
-| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
-|-----------|---------|------------|---------------|
-```
-
-```
-|-----------|---------|------------|---------------|
-| Extension | `type`  | `format`   | Description   |
-|:----------|:-------:|-----------:|---------------|
-| `.gif`    | `image` | `gif`      | GIF image     |
-| `.png`    | `image` | `png`      | PNG image     |
-| `.jpg`    | `image` | `jpeg`     | JPEG image    |
-| `.jpeg`   | `image` | `jpeg`     | JPEG image    |
-| `.svg`    | `image` | `svg`      | SVG image     |
-| `.svgz`   | `image` | `svgz`     | Zipped SVG    |
-|-----------|---------|------------|---------------|
-```
-
-```
-|=====================|=================|=======================|=========================|
-| Column Header 1     | Column Header 2 | Column Header 3       | Column Header 4         |
-|:====================|:===============:|======================:|=========================|
-| this is a rowspan   | this is a colspan of 2 columns          | sit amet                |
-| of 2 rows since it  |-----------------|-----------------------|-------------------------|
-| spans two rows      | ipsum           | dolor                 | sit amet                |
-|---------------------|-----------------|-----------------------|-------------------------|
-| lorem ipsum dolor   | ipsum           | dolor                 | sit amet                |
-| sit amet            |                 |                       |                         |
-|---------------------|-----------------|-----------------------|-------------------------|
-| lorem ipsum dolor   | lorem ipsum     | dolor                 | lorem ipsum dolor sit   |
-| sit amet lorem      | dolor sit amet  |-----------------------| amet lorem ipsum dolor  |
-| ipsum dolor sit     | lorem ipsum     | dolor                 | sit amet                |
-|--------------------:|:----------------|-----------------------|-------------------------|
-| lorem               | ipsum           | dolor                 | sit amet                |
-|                     |                 |                       |-------------------------|
-|                     |                 |                       | sit amet                |
-|                     |                 |                       |-------------------------|
-|                     |                 |                       | sit amet                |
-|:-------------------:|----------------:|-----------------------|-------------------------|
-| lorem               | ipsum           | lorem ipsum dolor sit amet this is a colspan of |
-|---------------------|-----------------| 2 columns and a rowspan of 2 rows since it      |
-| lorem               | ipsum           | spans 2 columns and 2 rows                      |
-|====================:|:================|:=====================:|=========================|
-| lorem               | ipsum           | dolor                 | sit amet                |
-|=====================|=================|=======================|=========================|
-```
-
-## ABC: Asides, Blurbs and Callouts
 
 W> TODO - make executable etc
 
