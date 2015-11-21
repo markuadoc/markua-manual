@@ -1893,7 +1893,7 @@ This complex table has a caption as well as align, width and top attributes:
 
 ## Blockquotes (>)
 
-blockquotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
+Blockquotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
 
 ```
 This is a paragraph.
@@ -1904,7 +1904,7 @@ This is a paragraph.
 This is a paragraph.
 ```
 
-blockquotes in Markua are created in one of two ways:
+Blockquotes in Markua are created in one of two ways:
 
 1. By prefacing lines with `> `, i.e. a greater than character followed by a space.
 2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
@@ -1961,17 +1961,19 @@ Single newlines inside a blockquote do not start new paragraphs. Instead, they s
 
 Note that any headings inside blockquotes do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
 
-## `A>`, `B>`, `C>`: Asides, Blurbs and Callouts
+## Asides (A>)
+
+`A>`, `B>`, `C>`: Asides, Blurbs and Callouts
 
 Markdown defines a syntax for blockquotes. Since Markua is a way of writing books and documents, including technical books and documents, it also needs a syntax for asides, blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Also, like blockquotes, any headings inside asides, blurbs and callouts do not show up in the Table of Contents, and they can also be formatted differently by Markua Processors.
 
-### Asides (A>)
+###
 
 Asides are typically short or long notes in books which are tangential to the main idea--sort of like footnotes, but in the body text itself. In technical books, quite often they are formatted in a box. Asides can span multiple pages.
 
 The syntaxes for asides are very similar to blockquotes:
 
-1. By prefacing lines with `A> `, i.e. an A, then a greater than character followed by a space.
+1. By prefacing lines with `A> `, i.e. an A, then a greater than character, then a space.
 2. By wrapping the aside in `{aside}` ... `{/aside}`
 
 Option #1 is preferable for short asides; option #2 is easier on authors for really long asides.
@@ -2016,11 +2018,11 @@ Multi-paragraph asides are more pleasant using this syntax.
 
 ### Blurbs (B>)
 
-Blurbs are like asides, but shorter. A blurb cannot span multiple pages or have headings.
+Blurbs are like asides, but shorter. A blurb cannot span multiple pages. A blurb can contain headings.
 
 The syntaxes for blurbs are very similar to asides:
 
-1. By prefacing lines with `B> `, i.e. an B, then a greater than character followed by a space.
+1. By prefacing lines with `B> `, i.e. an B, then a greater than character, then a space.
 2. By wrapping the blurb in `{blurb}` ... `{/blurb}`
 
 Examples:
@@ -2030,6 +2032,8 @@ B> This is a short blurb.
 ```
 
 ```
+B> # A Longer Blurb
+B>
 B> This is a longer blurb.
 B>
 B> It can have multiple paragraphs.
@@ -2037,15 +2041,65 @@ B> It can have multiple paragraphs.
 
 ```
 {blurb}
+#A Longer Blurb
+
 This is a longer blurb.
 
 It can have multiple paragraphs.
 {/blurb}
 ```
 
-### Special Blurbs: Warnings (W>), Tips (T>), Info (I>) and Question (Q>)
+
+
+# TODO - EDITED_TO_HERE
+
+### Syntactic Sugar for Special Blurb Classes: D, E, I, Q, T, W, X
+
+Markua has its origin in Leanpub Flavoured Markdown, and Leanpub has its origin in authoring computer programming books.
+
+In computer programming books, there are a number of blurb types which are a defacto standard:
+
+* `discussion`
+* `error`
+* `exercise`
+* `information`
+* `question`
+* `tip`
+* `warning`
+
+
+
+
+There are a number
+
+
+
+Special Blurbs: Warnings (W>), Tips (T>), Info (I>) and Question (Q>)
 
 TODO
+
+
+Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
+
+So, Markua defines a standard shorthand syntax for these classes of blurbs. With this syntax, you use a different letter than `B` in the `B>`, to create a blurb with the appropriate class:
+
+```
+* `D>` for `discussion`
+* `E>` for `error`
+* `I>` for `information`
+* `Q>` for `question`
+* `T>` for `tip`
+* `W>` for `warning`
+* `X>` for `exercise`
+```
+
+W> TODO - sleep on this and decide if is this a good or bad idea to bring back ... With this and the `id` syntax question it's tempting to at least be consistent and either support both or just one, but it's odd to only do sugar for `id` and support both for blurb classes?!
+
+
+There are no required CSS rules in Markua, and thus, there is no required special support for any specific class attributes on a blurb or anywhere else.
+
+For example, Leanpub produces a lot of computer programming books, so it understands the following values for the `class` attribute on a blurb:
+
 
 ### Attribute Lists and Icons in Asides, Blurbs and Callouts
 
@@ -2064,12 +2118,15 @@ A> yes, we're in Font Awesome
 A> so is GitHub
 ```
 
+### Callouts (C>)
 
-# TODO - EDITED_TO_HERE
+Callouts are blurbs that can be freely and creatively positioned near the manuscript position.  Asides and blurbs must be positioned at the manuscript position. A callout can have page breaks in it, but shouldn't if possible.
 
-Need syntactic sugar for short asides and not to make life hell for long ones. An aside can have page breaks in it; a blurb cannot; a callout can but shouldn't if possible.
 
-Callouts are blurbs that can be freely and creatively positioned near the manuscript position.  Asides and blurbs must be positioned at the manuscript position.
+
+
+
+
 
 
 Asides, blurbs and callouts can have an icon property. Markua processors that don't understand a given icon can ignore it.
@@ -2125,40 +2182,7 @@ B>
 B> This is still part of the blurb. Note that the entire blurb gets the class element.
 ```
 
-### Syntactic Sugar for Standard Blurb Classes
-
-Markua has its origin in Leanpub, and Leanpub has its origin in authoring computer programming books.
-
-In computer programming books, there are a number of blurb types which are a defacto standard:
-
-* `discussion`
-* `error`
-* `exercise`
-* `information`
-* `question`
-* `tip`
-* `warning`
-
-Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
-
-So, Markua defines a standard shorthand syntax for these classes of blurbs. With this syntax, you use a different letter than `B` in the `B>`, to create a blurb with the appropriate class:
-
-```
-* `D>` for `discussion`
-* `E>` for `error`
-* `X>` for `exercise`
-* `I>` for `information`
-* `Q>` for `question`
-* `T>` for `tip`
-* `W>` for `warning`
-```
-
-W> TODO - sleep on this and decide if is this a good or bad idea to bring back ... With this and the `id` syntax question it's tempting to at least be consistent and either support both or just one, but it's odd to only do sugar for `id` and support both for blurb classes?!
-
-
-There are no required CSS rules in Markua, and thus, there is no required special support for any specific class attributes on a blurb or anywhere else.
-
-For example, Leanpub produces a lot of computer programming books, so it understands the following values for the `class` attribute on a blurb:
+###
 
 ### Using Extension Attributes on Blurbs to add Icons
 

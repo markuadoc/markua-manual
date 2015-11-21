@@ -24,25 +24,6 @@ Note that like Markdown, any leading or trailing spaces in a code span are remov
 
 Three backticks???
 
-
-### Single Newlines Inside a List, Aside or Blurb
-
-A single newline inside a list, aside or blurb creates a new paragraph within that list item, aside or blurb. This can be used to create multi-paragraph list items, asides, blurbs, etc.
-
-A> This alse means that there is no need for the 4 space indent feature of Markdown. Code blocks and other things can just be added to list items by adding a single newline.
-
-## Block Quotes
-
-This is paragraph four. It contains a quote from Shakespeare's *Julius Caesar*, broken into two blockquotes.
-
-Here's the first blockquote:
-> There is a tide in the affairs of men.
-> Which, taken at the flood, leads on to fortune;
-The paragraph then continues, and then addes another blockquote:
-> Omitted, all the voyage of their life
-> Is bound in shallows and in miseries.
-This is also still in the same paragraph.
-
 ## custom types:
 
 - maybe?
