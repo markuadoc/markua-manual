@@ -1467,6 +1467,57 @@ In Markua, list numbers must **all** either be **consecutive**, given the type o
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
+### Multi-Paragraph List Items
+
+If lists were simple, they would contain be a bunch of simple one-line list items like:
+
+```
+* This is simple.
+* So is this.
+* This too!
+```
+
+However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this.
+
+As with Markdown, every paragraph in a list item after the first one must be indented by four spaces or one tab. This lets the Markua Processor know that the list is not over, but is instead being continued.
+
+The following is legal Markdown and legal Markua:
+
+```
+Here's a paragraph before the list.
+
+1.  This is the first paragraph in the first list item. Yay!
+
+    This is a second paragraph in the first list item.
+
+2.  The second list item is simple.
+
+3.  This list item has three paragraphs.
+    This is still part of the first paragraph.
+
+    Here's the second paragraph.
+
+    Here's the third paragraph.
+
+Here's a paragraph after the list.
+```
+
+Just like with normal non-list-item text, a single newline...
+
+TODO - how handle single br? Like Markdown or like Markua paras?
+
+### Nesting Block Elements in List Items
+
+TODO
+
+### Nested Lists
+
+Lists can nest lists.
+
+W> TODO_LEANPUB - support nested lists
+
+At its simplest, a list is something like...
+
 ## Definition Lists
 
 Definition lists are supported in Markua. Although [some people](http://meta.stackexchange.com/questions/72395/is-it-possible-to-have-definition-lists-in-markdown) don't see the value in definition lists in HTML, I strongly believe in their value. Specifically, with the rise of mobile and the narrower screen reading experience becoming the new default, I see definition lists as being more important than tables. But instead of just being two columns, the idea of a definition list has actual meaning.
@@ -1599,17 +1650,9 @@ This is paragraph three.
 
 This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
 
-## Nested Lists - EDITED_TO_HERE
+## Tables - EDITED_TO_HERE
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
-
-Lists can nest lists.
-
-TODO - write this, then reorder the above sections
-
-W> TODO_LEANPUB - support nested lists
-
-## Tables
 
 Markdown:
 Give up and use HTML.
