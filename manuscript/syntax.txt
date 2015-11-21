@@ -1477,7 +1477,7 @@ If lists were simple, they would contain be a bunch of simple one-line list item
 * This too!
 ```
 
-However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this.
+However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this. If a list is going to contain list items with multiple paragraphs, then there should be blank lines between each list item.
 
 As with Markdown, every paragraph in a list item after the first one must be indented by four spaces or one tab. This lets the Markua Processor know that the list is not over, but is instead being continued.
 
@@ -1504,17 +1504,75 @@ Here's a paragraph after the list.
 
 Just like with normal non-list-item text, a single newline functions as a forced line break within the list item in question. However, to encourage the text to be lined up nicely in the list item, any leading whitespace after the linebreak is ignored. This is different from the whitespace being preserved after single newlines in paragraphs. That rule exists to support poetry, and if there's one thing that lists are not, it's poetry.
 
-### Nesting Block Elements in List Items
-
-TODO
-
 ### Nested Lists
 
 Lists can nest lists.
 
 W> TODO_LEANPUB - support nested lists
 
-At its simplest, a list is something like... TODO
+To do this, simply insert the list nested inside a list item by 2 spaces for each level of nesting.
+
+There is no limit to the levels of nesting, and you can nest any kind of list inside any kind of list.
+
+~~~
+* Foo
+  1. One
+  2. Two
+    a. This is 2a
+    b. This is 2b
+  3. Three
+* Bar
+  i.   Lorem
+  ii.  Ipsum
+  iii. Dolor
+* Baz
+~~~
+
+### Nesting Block Elements in List Items
+
+Nested lists are just an example of nesting block elements inside list items.
+
+Other block elements such as figures can also be inserted nested inside list items. This is true for both single paragraph list items (with no blank lines between them) and multiple-paragraph list items (with a single blank line between each list item).
+
+W> TODO_LEANPUB - support this
+
+#### Single paragraph list items
+
+~~~
+* Foo
+  ```ruby
+  puts "hello"
+  ```
+* Bar
+  {alt: "too large to fit in the alt text"}
+  ![Proof of Fermat's Last Theorem](fermat_proof.webm)
+* Baz
+~~~
+
+In the singlem paragraph list items case, indenting the block element is optional but recommended.
+
+#### Multiple paragraph list items
+
+~~~
+* This is paragraph 1 in the first list item.
+
+  ```ruby
+  puts "hello"
+  ```
+
+  This is paragraph 2 in the first list item.
+
+* This is paragraph 1 in the second list item.
+
+  {alt: "too large to fit in the alt text"}
+  ![Proof of Fermat's Last Theorem](fermat_proof.webm)
+
+  This is paragraph 2 in the second list item.
+
+* Baz
+~~~
+
+In the multiple paragraph list items case, you need to indent the block element by the same four spaces or one tab that you indent the subsequent paragraphs in the list item by, in order to indicate the continuation of the list.
 
 ## Definition Lists
 
