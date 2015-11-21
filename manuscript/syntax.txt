@@ -582,7 +582,7 @@ We will discuss the supported and the default attributes for images, and then sh
 : The `float` can be `none` (the default), `left`, `center` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
 
 `position`
-: The `position` refers to vertical positioning on a page. The position only has an effoct on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
+: The `position` refers to vertical positioning on a page. The position only has an effect on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
 
 `width` and `height`
 : The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) It is legal for either one or both of `width` and `height` to be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page, which respects the margins.
@@ -1847,11 +1847,95 @@ You can also individually align cells with colons in the `-` part-row **above** 
 
 In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
 
-## ABC: Asides, Blurbs and Callouts - TO_HERE
+### Tables can have Captions and Other Attributes
+
+Regardless of whether they are simple or complex, tables can have captions and other attributes which are specified in an attribute list. The syntax for the attribute list is identical to that used for figures--but tables are not figures, they are tables.
+
+This simple table has a caption:
+
+```
+{caption: "A Simple Table"}
+| Header A   | Header B   | Header C   |
+|------------|------------|------------|
+| Content A1 | Content B1 | Content C1 |
+| Content A2 | Content B2 | Content C2 |
+| Content A3 | Content B3 | Content C3 |
+```
+
+This complex table has a caption as well as align, width and top attributes:
+
+```
+{caption: "A Complex Table", align: left, width: full, position: top}
+|=============|===============|=============|
+| Header A    | Header B      | Header C    |
+|:============|:=============:|============:|
+| Content A1 and B1 Merged    | Content C1  |
+|------------:|:--------------|-------------|
+| Content A2  | Content B2    | Content C2  |
+|:-----------:| and B3 merged |-------------|
+| Content A3  |               | Content C3  |
+|=============|===============|=============|
+```
+
+##### Supported Attributes for Tables
+
+`align`
+: The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
+
+`position`
+: The `position` refers to vertical positioning on a page. The position only has an effect on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the table near here, while the `here` position means to position the table exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
+
+`width`
+: The `width` can be either `auto` (the default) or `full`. The `auto` width means to size the table based on its columns; the `full` width means to make it 100% of the content area of the page, respecting margins.
+
+`caption`
+: The `caption` is the table caption.
+
+## Asides, Blockquotes, Blurbs and Callouts - TO_HERE
+
+Markdown defines a syntax for block quotes. Since Markua is a way of writing books and documents, including technical books and documents, it also needs a syntax for asides, blurbs and callouts. The syntactic sugar version of this syntax is inspired by the Markdown syntax for block quotes.
+
+### Block Quotes
+
+Block quotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
+
+Block quotes in Markua are created in one of two ways:
+
+1. By prefacing lines with `> `, i.e. a greater than character followed by a space.
+2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
+
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
-W> TODO - make executable etc
+
+Either way, the blockquote
+
+Examples:
+
+```
+This is a paragraph.
+
+> This is a blockquote outside the .
+
+
+
+
+Thhis
+
+can span multiple pages. They are
+
+A blockquote can contain other block-level elements, most commonly paragraphs. To start a new block level element within a blockquote, just put a line starting with a `>` followed by an optional space. It is equivalent to placing a `> ` in front of every line of the paragraphs.
+
+Block quotes can be multi-paragraph. To create a multi-paragraph block quote, you need to separate each paragraph with a line containing a `>` and whitespace only.
+
+Single newlines inside a block quote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
+
+A> The nesting of block quotes in Markdown is not supported in Markua.
+
+A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
+
+Markdown
+
 
 Need syntactic sugar for short asides and not to make life hell for long ones. An aside can have page breaks in it; a blurb cannot; a callout can but shouldn't if possible.
 
@@ -2009,20 +2093,6 @@ B>
 B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
 
 If there was a car, it did; if there was no car, it did not.
-
-## Block Quotes
-
-Block quotes can span multiple pages. They are created by prefacing lines with `> `, i.e. a greater than character followed by a space.
-
-A blockquote can contain other block-level elements, most commonly paragraphs. To start a new block level element within a blockquote, just put a line starting with a `>` followed by an optional space. It is equivalent to placing a `> ` in front of every line of the paragraphs.
-
-Block quotes can be multi-paragraph. To create a multi-paragraph block quote, you need to separate each paragraph with a line containing a `>` and whitespace only.
-
-Single newlines inside a block quote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
-
-A> The nesting of block quotes in Markdown is not supported in Markua.
-
-A> Note that any headings inside block quotes, asides and blurbs do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
 
 ## Links
 

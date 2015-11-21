@@ -66,8 +66,6 @@ float left and right only
 
 - add reversed support
 
-- 2 / 4 / tab
-
 - differentiate between (strict and not strict) output modes (don't name it strict mode?), and explain (in Leanpub we just have strict mode); non-strict mode would not strip out non-understood by Markua stuff, strict mode would only output attrs Markua understood
 - reconsider align attribute on images
 
@@ -92,12 +90,6 @@ B> TODO - Need to consider the following...
 - multiple 1. lines may be blah or may be blah
 
 w, x, y, z, aa, ab
-
-```
-"the caption" clobbers "clobbered" here
-{caption: "the caption"}
-![](media/foo.png "clobbered")
-```
 
 specify that magic {#id} syntax does not combine with other attrs
 
