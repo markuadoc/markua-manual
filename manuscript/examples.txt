@@ -1,4 +1,6 @@
-# Markua HTML Mapping
+# Markua HTML Mapping - EDITED_TO_HERE
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
 ## Poetry
 

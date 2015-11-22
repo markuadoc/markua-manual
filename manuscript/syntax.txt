@@ -2802,7 +2802,7 @@ authors
 : The authors of the Markua document. The default is "Anonymous".
 
 code
-: The language that code is. The default is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. There are other options. The `guess` option means to guess at the code language based on the syntax encountered (or the file extension for external code samples). The `poetry` option means to format the code as monospaced poetry, such as would be produced on a typewriter. Besides these options, you can specify the programming language used, such as `ruby` or `java`. If a Markua processor does not recognize the programming language specified, it must format it as `text`.
+: The language that code is. The default is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua processor does not recognize the programming language specified, it must format it as `text`.
 
 code-sample-names
 : What to call code samples. The default is "Example".
@@ -2819,17 +2819,11 @@ figure-names
 filename
 : The filename (minus extension) of the generated output file(s). The default is "untitled".
 
-footnotes
-: The way that footnotes should be displayed. The choices are `page`, `chapter` and `book`. The default is `page`. The `page` value means the bottom of the page (a footnote); the `chapter` value means at the end of the chapter (an endnote), and the `book` value means at the end of the book or document (an endnote).
-
 language
 : The IS0 639-2 alpha-3 language code of the language that the Markua document is written in. The list of choices is here: <http://www.loc.gov/standards/iso639-2/php/code_list.php>. The default is `eng`.
 
 license
 : The copyright license used. The choices are `standard`, `public-domain`, `cc-by`, `cc-by-sa`, `cc-by-nd`, `cc-by-nc`, `cc-by-nc-sa` and `cc-by-nc-nd`. The `standard` choice means standard copyright. The `public-domain` means that the work is considered to be in the public domain. The other choices are Creative Commons licenses, specified here: <https://creativecommons.org/licenses/>. The default value is `standard`.
-
-math
-: The default markup language used for math blocks and spans. The default is `latex`, but any value can be present. For MathML, the value is `mathml`. If the value is unrecognized, the Markua processor must output the math block or span as plain text.
 
 number-chapters
 : This attribute sets how chapter numbering is done. The values are `off`, `chapter`, `section`, `sub-section`, `sub-sub-section` and `all`. The default is `chapter`, which means to number chapters but not sections or below.
@@ -2856,4 +2850,4 @@ title
 : The title of the Markua document. The default is "Untitled".
 
 urls
-: The way that URLs should be displayed when used as links like `[Markua](http://markua.com)`. The choices are `none`, `inline` and `footnote`. The default is `footnote`, in which the URL is made as a footnote (positioned at the bottom of the page, chapter or book per the value of the `footnotes` attribute) which is a clickable link. Note that angle-bracket URLs like <http://markua.com> never create a footnote.
+: The way that URLs should be displayed when used as links like `[Markua](http://markua.com)`. The choices are `none`, `inline` and `footnote`. The default is `footnote`, in which the URL is made as a footnote (positioned at the bottom of the page, chapter or book per the value of the `footnotes` attribute) which is a clickable link. Note that angle-bracketed inline URLs like <http://markua.com> never create a footnote.
