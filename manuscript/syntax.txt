@@ -2174,15 +2174,17 @@ In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon.
 Let's see whether the Markua processor that produced this document understands the `icon` attribute:
 
 {icon: car}
-B> You can't spell carbon without it!
+B> Car. You can't spell carbon without it!
 
 {icon: leanpub}
-B> Yes, we're in Font Awesome!
+B> Leanpub. Yes, we're in Font Awesome!
 
 {icon: github}
 B> So is GitHub, of course. Unicorns.
 
-### Callouts (C>)
+W> TODO_LEANPUB - upgrade Font Awesome version so this is true for Leanpub!
+
+## Callouts (C>)
 
 Callouts are essentially blurbs that float.
 
@@ -2219,13 +2221,11 @@ It can have multiple paragraphs.
 {/callout}
 ```
 
-## Links - TO_HERE
-
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+## Links
 
 Markua's hyperlink support is a subset of that of Markdown. The **inline** link syntax is supported, as is the **automatic link** shortcut. The reference link syntax and the implicit link name shortcuts are **NOT** supported.
 
-A> Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
+Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 
 ### Inline Links
 
@@ -2237,6 +2237,12 @@ The normal way to create a link is as follows:
 
 In Markdown, the URL can be either absolute or relative, since relative URLs can make sense on web servers. In Markua, however, all URLs must be absolute.
 
+Example:
+
+```
+Markua was developed at [Leanpub](http://leanpub.com).
+```
+
 ### Automatic Links
 
 To create a link where the text displayed for the link text is the URL itself, the automatic link syntax can be used. In this syntax, an absolute URL is enclosed in angle brackets.
@@ -2245,7 +2251,16 @@ To create a link where the text displayed for the link text is the URL itself, t
 Some text <absolute_url> some text.
 ```
 
-## Footnotes and Endnotes
+Example:
+
+```
+Markua was developed at <http://leanpub.com>.
+```
+
+## Footnotes and Endnotes - TO_HERE
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
+
 
 {class: warning}
 B> TODO
