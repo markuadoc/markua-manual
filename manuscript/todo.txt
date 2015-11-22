@@ -2,9 +2,26 @@
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
+### Settings
+
+A Markua document can be written in one file or multiple manuscript files.
+
+In order to encourage competition, Markua does not specify much about how the single file or multiple files approaches must work.
+
+If a manuscript is written in one file, any metadata (discussed later) is placed in a metadata block. This is typically at the top of the manuscript file, but it can be anywhere in the file or it can be located elsewhere, e.g. in the case of a web service.
+
+If a manuscript is written in multiple files, the metadata is typically stored in its own file. Also, as the first step of book or document generation, a
+
+For example, with multiple files, Leanpub's normal Dropbox workflow uses a hybrid approach where there is a file called book.txt which lists the files in the manuscript in order and in which most of the book settings are specified via a web interface. However, that is just one approach of many possible ones: Markua can be used for entirely web-based (also supported by Leanpub), or it could be a command line tool in which the files to be processed are listed in order (similar to pandoc).
+
 ## multiple paragraphs
 
 Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
+
+
+### A Note About Curly Braces (`{` and `}`)
+
+Metadata is added with curly braces. Curly braces are special in Markua. At the beginning of a line, an opening curly brace (`{`) starts an attribute. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block. So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`.
 
 ## class attr?
 
@@ -120,6 +137,8 @@ oaue
 aoue
 ```
 
+W> TODO - Define how directives and attrs that are not understood are handled, and explain how this does not include syntax like CriticMarkup which just get output verbatim if not understood. Also say that encountering CriticMarkup tags and outputting CriticMarkup is optional. Doing stuff inside curly braces which is not understood by Markua is OK, etc.
+
 
 
 aoeunsanoet usnatoh snthae nstaoeh sn
@@ -128,11 +147,6 @@ aoeunsanoet usnatoh snthae nstaoeh sn
 natoeh nstaoe stnaoestnao
 
 link ref syntax bad for book because volume
-
-aaoue aoue
-
-
-
 
 [some text]{i: blah}
 
