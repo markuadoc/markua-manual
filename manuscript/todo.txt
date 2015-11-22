@@ -1,7 +1,5 @@
 # TODO
 
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
-
 ### Settings
 
 A Markua document can be written in one file or multiple manuscript files.
