@@ -2020,7 +2020,7 @@ Blurbs are like asides, but shorter. A blurb cannot span multiple pages. A blurb
 
 The syntaxes for blurbs are very similar to asides:
 
-1. By prefacing lines with `B> `, i.e. an B, then a greater than character, then a space.
+1. By prefacing lines with `B> `, i.e. a B, then a greater than character, then a space.
 2. By wrapping the blurb in `{blurb}` ... `{/blurb}`
 
 Examples:
@@ -2049,7 +2049,7 @@ It can have multiple paragraphs.
 
 ### Supported Attributes for Blurbs
 
-Blurbs also have support for an attribute list. There are two attributes that a blurb supports: `class` and `icon`.
+Blurbs also have support for an attribute list, which can contain a `class` attribute as well as other implementation-specific "extension attributes".
 
 #### Blurb `class` Types
 
@@ -2146,11 +2146,17 @@ This is a warning blurb.
 This is an exercise blurb.
 ```
 
-#### Blurb `icon` Values
+Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from Font Awesome at the left of the blurb.
 
-Icon support is implementation-dependent and optional; Markua Processors can ignore these. The icon support is optional so that Markua processors can do creative things here, without worrying about manuscripts breaking in other Markua processors. If a Markua processor does not understand a given icon it must be silently ignored--it is not acceptable to add a missing image or equivalent in it.
+### Using Extension Attributes on Blurbs to add `icon` Support
 
-Leanpub, for example, understands the icon attribute to reference an icon from Font Awesome.
+Markua Processors must ignore any attributes which they do not understand.
+
+Because of this, Markua attribute lists can contain any number of extension attributes. An extension attribute is an attribute which is not defined in the Markua specification.
+
+The `icon` attribute on blurbs is an example of extension attributes.
+
+Markua does not specify that a blurb must support an `icon` attribute, or what it would mean if it did. However, Leanpub understands an `icon` attribute to reference an icon from Font Awesome. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
 
 ```
 {icon: car}
@@ -2163,75 +2169,59 @@ B> Yes, we're in Font Awesome!
 B> So is GitHub, of course. Unicorns.
 ```
 
-### Callouts (C>)
-
-Callouts are blurbs that can be freely and creatively positioned near the position in the manuscript it was defined.  Asides and blurbs must be positioned exactly at the manuscript position. A callout can have page breaks in it, but shouldn't if possible.
-
-
-
-
-
-# TODO - EDITED_TO_HERE
-
-Here's the sugar:
-
-
-Asides are text which is formatted separately from the main text by a Markua processor. Asides can span multiple pages.
-
-Asides can be created like blockquotes, but using `A>` line prefixes. The same rules for newlines apply.
-
-
-Blurbs are like asides, but with two differences.
-
-1. They are created with `B> ` not `A> ` prefixed lines.
-2. They are intended to be short, and thus do not need to support page breaks inside them.
-3. They can have an optional `class`, which can be used by Markua processors to decorate the blurb (e.g. with icons).
-
-
-### Classes of Blurbs and Syntactic Sugar
-
-Like all Markua block elements, blurbs can have a `class` attribute attached to them. Here's an example:
-
-```
-{class: warning}
-B> Warning text. Don't do this!
-B>
-B> This is still part of the blurb. Note that the entire blurb gets the class element.
-```
-
-###
-
-### Using Extension Attributes on Blurbs to add Icons
-
-As discussed later, Markua blocks can support any number of extension attributes. An extension attribute is an attribute which is not part of the Markua specification.
-
-Blurbs provide an example of an extension attributes.
-
-Leanpub's Markua implementation supports an `icon` attribute on blurbs. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
-
-```
-This is a paragraph before the blurb.
-
-{icon: automobile}
-B> Len thinks that cars will all be driverless soon.
-B>
-B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
-
-This is a paragraph after the blurb.
-```
-
 In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon. In a Markua implementation that does not understand the icon attribute, nothing will be generated for that attribute -- it will be functionally equivalent to the attribute not being present.
 
 Let's see whether the Markua processor that produced this document understands the `icon` attribute:
 
-{icon: automobile}
-B> Len thinks that cars will all be driverless soon.
-B>
-B> Peter thinks that Len is right, but that (except in big cities) people will still own their own driverless cars.
+{icon: car}
+B> You can't spell carbon without it!
 
-If there was a car, it did; if there was no car, it did not.
+{icon: leanpub}
+B> Yes, we're in Font Awesome!
 
-## Links
+{icon: github}
+B> So is GitHub, of course. Unicorns.
+
+### Callouts (C>)
+
+Callouts are essentially blurbs that float.
+
+The main difference between callouts and blubs or asides is that callouts can be freely and creatively positioned by the Markua Processor near the position in the manuscript it was defined. Asides and blurbs must be positioned exactly at the manuscript position. A callout can have page breaks in it, but shouldn't if possible.
+
+The other difference between callouts and blurbs is that like asides, callouts don't support `class` or `icon` (or any) attributes.
+
+The syntaxes for callouts are very similar to blurbs:
+
+1. By prefacing lines with `C> `, i.e. a C, then a greater than character, then a space.
+2. By wrapping the callout in `{callout}` ... `{/callout}`
+
+Examples:
+
+```
+C> This is a short callout.
+```
+
+```
+C> # A Longer Callout
+C>
+C> This is a longer callout.
+C>
+C> It can have multiple paragraphs.
+```
+
+```
+{callout}
+#A Longer Callout
+
+This is a longer callout.
+
+It can have multiple paragraphs.
+{/callout}
+```
+
+## Links - TO_HERE
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
 Markua's hyperlink support is a subset of that of Markdown. The **inline** link syntax is supported, as is the **automatic link** shortcut. The reference link syntax and the implicit link name shortcuts are **NOT** supported.
 
