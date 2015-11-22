@@ -1891,7 +1891,7 @@ This complex table has a caption as well as align, width and top attributes:
 `caption`
 : The `caption` is the table caption.
 
-## Blockquotes (>)
+## Blockquotes (`>`)
 
 Blockquotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
 
@@ -1961,7 +1961,7 @@ Single newlines inside a blockquote do not start new paragraphs. Instead, they s
 
 Note that any headings inside blockquotes do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
 
-## Asides (A>)
+## Asides (`A>`)
 
 Since Markua is for writing books and documents, including technical books and documents, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in the Table of Contents, and they can also be formatted differently by Markua Processors.
 
@@ -2014,7 +2014,7 @@ Multi-paragraph asides are more pleasant using this syntax.
 {/aside}
 ```
 
-## Blurbs (B>)
+## Blurbs (`B>`)
 
 Blurbs are like asides, but shorter. A blurb cannot span multiple pages. A blurb can contain headings.
 
@@ -2085,7 +2085,7 @@ This is a warning!
 
 The attribute list must precede the `{blurb}` with no blank line between it.
 
-#### Syntactic Sugar for Blurb Classes: D>, E>, I>, Q>, T>, W>, X>
+#### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `Q>`, `T>`, `W>`, `X>`
 
 Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
 
