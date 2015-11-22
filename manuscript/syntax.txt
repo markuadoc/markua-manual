@@ -916,7 +916,13 @@ The default attributes for a code resource inserted as a figure are:
 {format: guess, align: center, float: none, position: near, line-numbers: off}
 ```
 
-These attributes can all be overridden via the attribute list on the figure.
+The default attributes for a code resource inserted as a figure using tildes as the delimiter are:
+
+```
+{format: text, align: center, float: none, position: near, line-numbers: off}
+```
+
+Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of the default format (`guess` vs. `text`). The `guess` format works better for code; the `text` format works better for poetry and for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
 
 ##### Local Code Resources
 
@@ -1060,26 +1066,59 @@ A> The "four space indent" method of creating code blocks in Markdown is not sup
 
 ##### Typewriter Poetry with Code Resources
 
-If you want to write "typewriter poetry" in the style of e e cummings, in which all the indentation and other whitespace matters, you can accomplish this with a code resource whose format is `text`:
+If you want to write "typewriter poetry" in the style of e e cummings, in which all the indentation and other whitespace matters, you can accomplish this with a code resource whose format is `text`.
 
-```text
+There are three ways to insert such a code resource inline:
 
+1. by specifying the `text` format in metadata
+2. by specifying the `text` format after the three backticks or three tildes
+3. by using three tildes to insert the inline code resource
 
-i
+Examples:
 
-  am
-
-      a        cat
-
-            a        l a z y          cat
-
-
-me   ow
-
+Using three tildes:
 
 ```
+~~~
+i
+  am
+      a        cat
+            a        l a z y          cat
 
-Determining the artistic merit of this poem is left as an exercise for the reader.
+me   ow
+~~~
+```
+
+Using three backticks plus the `text` format via syntactic sugar:
+
+~~~
+```text
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+```
+~~~
+
+Using three backticks plus the `text` format specified in an attribute list:
+
+~~~
+{format: text}
+```
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+```
+~~~
+
+This use case is why the default format for three backticks is `guess` and the default format for three tildes is `text`: you wouldn't want your poem inadvertently being syntax highlighted like code, and the three backticks plus `text` version does not look very poetic!
+
+(Determining the artistic merit of this "poem" is left as an exercise for the reader.)
 
 ##### Line Wrapping in Code Resources
 
@@ -2334,6 +2373,8 @@ This is a paragraph with the id of `some-id`.
 
 The shorter approach is preferred. The main reason the `{id: some-id}` syntax is supported is that it allows it to be added in with other attributes in a larger attribute list.
 
+You **CANNOT** add the `{#some-id}` to an attribute list.
+
 In terms of the value of an `id`, it has some special restrictions:
 
 1. The first character in the `id` has to be a lowercase or uppercase letter, i.e. [a-zA-Z] if you think in regular expressions.
@@ -2487,7 +2528,9 @@ Extension attributes go far beyond adding icons to blurbs: they allow for specia
 
 Markua supports adding index entries as metadata. Index entries let authors or indexers produce professional-looking indexes in Markua books.
 
-Index entries can either be attached to block or span elements, using a curly brace syntax which is very similar to how `id`s are defined, using a syntax [inspired by LaTeX](https://en.wikibooks.org/wiki/LaTeX/Indexing).
+Index entries can either be attached to block or span elements using the same attribute list syntax. In fact, index entries can just be added as part of a larger attribute list.
+
+The actual syntax of what an index entry looks like is [inspired by LaTeX](https://en.wikibooks.org/wiki/LaTeX/Indexing).
 
 So as to not conflict with the names of directives, all index entries start with `i:` (i is for index).
 
@@ -2497,6 +2540,9 @@ These are the various formats of an index entry:
 
 ```
 {i:hello}
+{i:Armstrong, Peter}
+{i:"Armstrong, Peter"}
+{i:"Yahoo!"}
 {i:*hello*}
 {i:**hello**}
 {i:hello!Peter}
@@ -2510,6 +2556,15 @@ Here's what they do:
 
 `{i:hello}`
 : Adds an index entry for `hello`.
+
+`{i:Armstrong, Peter}`
+: Adds an index entry for `Armstrong, Peter`. Commas can be used in index entries; only exclamation marks (`!`) and curly braces (`{` and `}`) cause problems.
+
+`{i:"Armstrong, Peter"}`
+: Adds an index entry for `Armstrong, Peter`. The quotes are always omitted. Their function is to allow things like exclamation marks and other punctuation to be added without fear, in case you don't feel like learning which punctuation is safe.
+
+`{i:"Yahoo!"}
+: Adds an index entry for `Yahoo!`. Exclamation marks in index entries are delimiters, so to add a literal exclamation mark, the index entry needs to be in quotes. The other characters in index entries that must be in quotes are `|`, `{` and `}`.
 
 `{i:*hello*}`
 : Adds an index entry for `hello`, with `hello` in *emphasis*.
@@ -2573,8 +2628,10 @@ My wife read some book about a whale by Herman Melville{i: Melville, Herman}.
 
 Multiple index entries can exist in a block, or even a sentence:
 ```
-Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Herman Melville{i: Melville, Herman}, the author of a book about a whale{i:Moby-Dick; or, The Whale}.
+Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Herman Melville{i: Melville, Herman}, the author of a book about a whale{i:"Moby-Dick; or, The Whale"}.
 ```
+
+Note that adding index entries is best left until the end of a book. At that time, ids like {#myid} can be converted to {id: #myid, i: blah} if index entries are being added where ids already are.
 
 ## Directives
 
@@ -2742,10 +2799,10 @@ As discussed earlier, a Markua document can be written in one file or multiple m
 
 The settings for a Markua document can alse be provided in four ways:
 
-1. At the top of the first file, enclosed in curly braces.
-2. In a separate settings file.
-3. Separately via a web interface.
-4. Some combination of #1-#3.
+1. at the top of the first file, enclosed in curly braces
+2. in a separate settings file
+3. separately (e.g. via a web interface)
+4. some combination of #1-#3
 
 Typically approaches #2, #3 and #4 are used when a Markua document is being written in multiple manuscript files.
 
@@ -2851,3 +2908,17 @@ title
 
 urls
 : The way that URLs should be displayed when used as links like `[Markua](http://markua.com)`. The choices are `none`, `inline` and `footnote`. The default is `footnote`, in which the URL is made as a footnote (positioned at the bottom of the page, chapter or book per the value of the `footnotes` attribute) which is a clickable link. Note that angle-bracketed inline URLs like <http://markua.com> never create a footnote.
+
+## Escaping Special Characters
+
+### Curly Braces (`{` and `}`)
+
+Curly braces are special in Markua. At the beginning of a line, an opening curly brace (`{`) starts an attribute list. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block. So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`. (Note that this does not apply inside code or other resources: Markua does not process anything inside them.)
+
+### Backticks (`)
+
+A backtick in text content (such as this paragraph) starts an inline span resource such as a code resource.
+
+So, to show a literal backtick in a span, you start and end it with *two* backticks.
+
+This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!

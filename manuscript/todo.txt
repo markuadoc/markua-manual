@@ -1,100 +1,25 @@
 # TODO
-
-### Settings
-
-A Markua document can be written in one file or multiple manuscript files.
-
-In order to encourage competition, Markua does not specify much about how the single file or multiple files approaches must work.
-
-If a manuscript is written in one file, any metadata (discussed later) is placed in a metadata block. This is typically at the top of the manuscript file, but it can be anywhere in the file or it can be located elsewhere, e.g. in the case of a web service.
-
-If a manuscript is written in multiple files, the metadata is typically stored in its own file. Also, as the first step of book or document generation, a
-
-For example, with multiple files, Leanpub's normal Dropbox workflow uses a hybrid approach where there is a file called book.txt which lists the files in the manuscript in order and in which most of the book settings are specified via a web interface. However, that is just one approach of many possible ones: Markua can be used for entirely web-based (also supported by Leanpub), or it could be a command line tool in which the files to be processed are listed in order (similar to pandoc).
-
-## multiple paragraphs
-
-Since we force a blank line to end a list and since we force delimiters at the beginning of each list item, there's no reason to indent anything to make it part of the list item. It is part of the list item unless the list is over. Code blocks and multiple paragraphs can be added in single list item by newlines.
-
-
-### A Note About Curly Braces (`{` and `}`)
-
-Metadata is added with curly braces. Curly braces are special in Markua. At the beginning of a line, an opening curly brace (`{`) starts an attribute. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block. So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`.
-
-## class attr?
-
-support a class attr on everything?
-
-## backtick vs tilde defaults???
-
-This is useful for unformatted code samples and monospaced poetry.
-
-Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of defaults. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
-
-## backticks in backticks
-
-Just as with Markdown, to show a literal backtick, you use *two* backticks to start and end your code span. (The Markdown spec says multiple backticks; Markua says exactly two.)
-
-Note that like Markdown, any leading or trailing spaces in a code span are removed.
-
-Three backticks???
-
-## custom types:
-
-- maybe?
-- display names
-
-{type: pokemon_card}
-
-Table of Pokemon Cards
-
-```
-![]()
-```
-
-Do we really need the pound sign when linking to an anchor?
-
-[specified in an appendix](#markdown_headings)
-vs.
-[specified in an appendix](markdown_headings)
-
 float left and right only
 
 - add reversed support
-
-- differentiate between (strict and not strict) output modes (don't name it strict mode?), and explain (in Leanpub we just have strict mode); non-strict mode would not strip out non-understood by Markua stuff, strict mode would only output attrs Markua understood
-- reconsider align attribute on images
-
-{class: warning}
-B> TODO - Need to consider the following...
-
 * Typographic symbols: Smart quotes, n-dash, m-dash, ellipses, etc?
 * Images - Special attributes: width, float, etc?
 * CriticMarkup support?
-* It would be really nice to support linking to individual definition list items specifically, and to span elements in general.
 * Support commenting out files in book.txt and sample.txt with #
-
 * Font sizes etc with CSS class?
 * Should we have a book.css?
 * lemma, theorem, etc -- typed figures?
+
 - extension attributes?
 - definition list linking yes
 - table just table for linking?
 - align {left, center, right, justified} on any heading? - no
 - no more align on figures, just floating
-
 - multiple 1. lines may be blah or may be blah
 
 w, x, y, z, aa, ab
 
-specify that magic {#id} syntax does not combine with other attrs
-
-Title Pages: If a file called `title_page.png`, `title_page.jpg` or `title_page.jpeg` exists in the `media` directory, then it will be used as the title page of the book. If more than one of these files exists, then the first one found alphabetically will be used.
-
-(#foo) vs. {#foo} vs. {id: foo}
-
 [blah]{lang:en} to override fonts
-
 [blah]{lang:zh} to override to Chinese and activate LTR
 [blah]{lang:ja} to override to Japanese and activate LTR
 [blah]{lang:ko} to override to Korean and activate LTR
@@ -115,94 +40,13 @@ no need for dir attr
 
 lang:en
 
-{id: foo} yes
-{#foo} yes
-no mixing {a: b, #c, d: e}
-no (#foo) -- too much collision
-
-{#foo}
-
-
-[human readable stuff](http://foo.com)
-[human readable stuff](image.png "alt text")
-[human readable stuff]{#id}
-[human readable stuff]{id: foo, lang:he}
-
-
-```
-oaue
-![alt](foo.png "The Foo")
-aoue
-```
-
-W> TODO - Define how directives and attrs that are not understood are handled, and explain how this does not include syntax like CriticMarkup which just get output verbatim if not understood. Also say that encountering CriticMarkup tags and outputting CriticMarkup is optional. Doing stuff inside curly braces which is not understood by Markua is OK, etc.
-
-
-
-aoeunsanoet usnatoh snthae nstaoeh sn
-> aonste asnote
-> satnoe
-natoeh nstaoe stnaoestnao
-
-link ref syntax bad for book because volume
-
-[some text]{i: blah}
-
-{i:"Armstrong, Peter"}
-
-{i:hello}
-{i:*hello*}
-{i:**hello**}
-{i:hello!Peter}
-{i:hello!*Peter*}
-{i:hello!**Peter**}
-{i:Peter|see{i:hello}}
-{i:Jen|seealso{i:Jenny}}
-
-{i: Moby Dick}
-{i:    Moby Dick   }
-{i:Moby Dick}
-{i: "Moby Dick: or, The Whale"}
-commas for quotes only
-
-yada [Peter Armstrong]{i:Peter} yada
-
 foo bar [some hebrew]{lang:he} baz
-
-
-rule for id characters
-rule for index entry syntax
-
 
 [some text]{i: blah}
 foo bar [hebrew text]{lang:he} baz
 
-
 {lang:ar}
 aoetuhnsato stnaoheu tnsoahu nstaoh nstaoh
-
-
-foo bar
-[Peter Armstrong]{i:Armstrong, Peter}
-
-
-index entry syntax is attr list syntax
-
-
-is tasty sugar. keep these. maybe have fewer???
-
-W> foo
-W>
-W> bar
-
-is same as
-
-{class: warning}
-B> foo
-B>
-B> bar
-
-the post-book index madness can be converting (#myid) to {id: #myid, i: blah}
 
 {dir: rtl} on a block element
 
@@ -210,11 +54,6 @@ or
 
 {rtl}
 {ltr}
-
-which better?
-
-no nesting
-
 
 ### Syntax for index entries
 
@@ -243,15 +82,3 @@ The id will be `__i__<number>__<index>`. Where `index` is everything inside of t
 index = (The thing inside the curly braces after `i:`).split(/\|/).first.gsub(/\!/, '__').gsub(/\*/, '').lower
 
 `number` is the number of times `index` has been indexed in the document already, counting from 1.
-
-How handle punctuation in index entry?
-
-```
-Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Herman Melville{i: Melville, Herman}, the author of a book about a whale{i:Moby-Dick; or, The Whale}.
-```
-
-How chain ! and | in index entry?
-
-EPUB3 audio and video?
-
-- some of the stuff in philosophy.txt is outdated
