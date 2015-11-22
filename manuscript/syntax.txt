@@ -2257,15 +2257,57 @@ Example:
 Markua was developed at <http://leanpub.com>.
 ```
 
-## Footnotes and Endnotes - TO_HERE
+## Footnotes
+
+Books and documents often have footnotes.
+
+To add a footnote, you insert a footnote tag using square brackets, a caret and the tag, like this:
+
+```
+This has a footnote[^thenote].
+```
+
+Then, you define the footnote later in the document, using the same square brackets, caret and tag, followed by a colon, a space and the footnote definition:
+
+```
+[^thenote]: This is the footnote content.
+```
+
+If you wish to write multiple paragraphs in the footnote, you must indent the subsequent paragraphs by four spaces or one tab:
+
+```
+This has a footnote[^thenote].
+
+Here is some unrelated text.
+
+[^thenote]: This is the first paragraph of footnote content.
+
+    This is the second paragraph of footnote content.
+
+Here is some more unrelated text.
+```
+
+## Endnotes
+
+Books and documents often have endnotes as well. Sometimes these are instead of footnotes, but other times, these are in addition to footnotes. So, it makes sense for Markua to define separate syntaxes for both, rather than just defining one "footnote or endnote" syntax and letting the author pick whether the notes were footnotes or endnotes.
+
+To add an endnote, you insert an endnote tag using square brackets, two carets and the tag, like this:
+
+```
+This has an endnote[^^thenote].
+```
+
+Then, you define the endnote later in the document, using the same square brackets, two carets and tag, followed by a colon, a space and the endnote definition:
+
+```
+[^^thenote]: This is the endnote content.
+```
+
+Just as with a footnote, if you wish to write multiple paragraphs in the endnote, you must indent the subsequent paragraphs by four spaces or one tab.
+
+## Crosslinks and `id`s - TO_HERE
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
-
-
-{class: warning}
-B> TODO
-
-## Crosslinks and `id`s
 
 There are two parts to making a crosslink.
 
