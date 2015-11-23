@@ -19,6 +19,10 @@ So, in the meantime, please enjoy using Leanpub and Leanpub Flavoured Markdown.
 Thanks,
 Peter Armstrong
 
+{mainmatter}
+
+-# Markua Origins and Philosophy
+
 # The Magical Typewriter
 
 Imagine you owned a magical typewriter.
@@ -53,33 +57,45 @@ This simple format is called Markua.
 
 This is its specification.
 
-# Markua Origins and Philosophy
+# Overview
 
 ## What is Markua?
 
 Markua, pronounced "mar-coo-ah", is a plain text format designed for the writing of books and documents.
 
-Markua is intended to be extremely simple and powerful. We want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
+Markua is intended to be extremely simple and powerful. I want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
 
 The Markua specification specifies two things:
 
 1. Markua syntax and mappings
 2. Markua filename and directory structure conventions
 
-## Markua Syntax in 2 Minutes
+## All the Markua Syntax Needed to Write a Novel
 
-Before diving into the Markua specification, here's the 2 minute version.
+Here's all the Markua you need to know to write a novel:
 
-The following is essentially enough information to write a novel in Markua syntax:
-
-* Write in plain text. Separate paragraphs with one blank line by hitting the Enter key twice.
+* Write in plain text using any text editor you want.
+* Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
+* To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line.
+* To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line.
+* To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can if you want.
 * Surround text with one asterisk (`*`) on each side to make it italic, and with two asterisks (`**`) on each side to make it bold.
-* To make a heading, you start a line with some number of pound signs (`#`), followed by a space, followed by some words or numbers. Headings must be separated by blank lines.
-* The type of heading is determined by the number of `#`s. There are 6 levels of headings: `#`, `##`, `###`, `####`, `#####` and `######`. In a normal book, `#` is chapter and `##` is section, but there's support for books to have parts as well, in which case `#` is part, `##` is chapter and `###` is section.
+* To add a scene break, put three asterisks on a line by themselves `* * *`, with blank lines above and below them.
 
-All the above syntax is inherited from Markdown as specified by John Gruber, and mapped to book and documentation concepts by Markua. This is deliberate: it is possible to write a novel in Markua using only syntax inherited directly from Markdown.
+That's it!
+
+By the way, *all* the above syntax needed to write a novel in Markua is inherited from Markdown as specified by John Gruber. What Markua does is maps that syntax to book concepts, as well as adding new syntax and concepts of its own.
 
 ## Markua Syntax and Mappings
+
+Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents.
+
+Markua manuscripts can be used to produce every current popular type of ebook format: PDF, EPUB, MOBI and HTML. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
+
+The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
+
+This part is an informal specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
+
 
 Every element of Markua syntax has two types of mappings defined:
 
@@ -92,9 +108,9 @@ The HTML Mapping maps the Markua syntax element to exactly specified HTML output
 
 The combination of the Conceptual Mapping and the HTML Mapping mean that Markua documents can be used to produce not just HTML output, but also PDF, EPUB and MOBI output--in other words, to generate books and documents. The EPUB and MOBI output is intended to be suitable for ebooks; the PDF output is intended to be suitable for either reading on computers or tablets or for producing a print book. Furthermore, some Markua Processors can also generate InDesign and other formats.
 
-## Why There Is So Little Formatting Specified in Markua
+## Semantic Formatting Only
 
-Equally important to what is being specified in the Markua specification is what is **not** being specified. Markua does not specify things like the following:
+Equally important to what is being specified in the Markua specification is what is *not* being specified. Markua does not specify things like the following:
 
 * How large should a part, chapter or section heading be?
 * What font should anything be in?
@@ -220,9 +236,6 @@ In the next few months we're going to publish an open source reference implement
 In terms of Markua support in Leanpub, currently Leanpub only supports Leanpub Flavoured Markdown (LFM). We are adding support for this version of the Markua specification to Leanpub. It will live alongside Leanpub Flavoured Markdown (LFM). Leanpub Flavoured Markdown will be the default for new books until this specification is at least at beta quality. At that point, we'll make Markua the default for new books, and provide a 1-click migration from LFM to Markua.
 
 To stay current on Markua progress, follow [@markuadoc on Twitter](https://twitter.com/markuadoc).
-
-
-{mainmatter}
 
 -# Markua Syntax
 
@@ -3217,7 +3230,7 @@ So, to show a literal backtick in a span, you start and end it with *two* backti
 This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!
 
 
-# Markua HTML Mapping - EDITED_TO_HERE
+-# Markua HTML Mapping - EDITED_TO_HERE
 
 W> TODO - This specification is being rewritten. Do not trust anything after this point.
 
