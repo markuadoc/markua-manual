@@ -2539,7 +2539,7 @@ Filet of salmon, on sale now!
 ```
 
 {#extension-attributes}
-### Extension Attributes
+## Extension Attributes
 
 Markua Processors must ignore any attributes which they do not understand.
 
@@ -2547,7 +2547,7 @@ Because of this, Markua attribute lists can contain any number of extension attr
 
 This encourages competition in the Markua ecosystem, while ensuring that Markua implementations do not choke on Markua input which goes beyond their capabilities.
 
-Extension attributes go far beyond adding icons to blurbs: they allow for specialized uses of Markua. Since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed.
+Extension attributes go far beyond adding icons to blurbs: they allow for specialized uses of Markua. Since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed. Some obvious uses of extension attributes include adding CSS classes which can then be styled to set fonts, adding custom types to figures for things like lemmas and theorems, etc.
 
 ## Index Entries
 
@@ -2663,6 +2663,10 @@ Note that adding index entries is best left until the end of a book. At that tim
 Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
 
 A> Asides, blurbs and callouts are not directives since they have a closing tag.
+
+### Language Directives
+
+
 
 ### Book Section Directives
 

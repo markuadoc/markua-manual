@@ -2,12 +2,6 @@
 - add reversed support
 * Typographic symbols: Smart quotes, n-dash, m-dash, ellipses, etc?
 * CriticMarkup support?
-* Font sizes etc with CSS class?
-* lemma, theorem, etc -- typed figures?
-- definition list linking yes
-- table just table for linking?
-- align {left, center, right, justified} on any heading? - no
-- multiple 1. lines may be blah or may be blah
 [blah]{lang:en} to override fonts
 [blah]{lang:zh} to override to Chinese and activate LTR
 [blah]{lang:ja} to override to Japanese and activate LTR
