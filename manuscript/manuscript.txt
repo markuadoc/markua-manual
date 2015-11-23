@@ -21,7 +21,7 @@ Peter Armstrong
 
 {mainmatter}
 
--# Markua Origins and Philosophy
+# Markua Origins and Philosophy #
 
 # The Magical Typewriter
 
@@ -59,6 +59,8 @@ This is its specification.
 
 # Overview
 
+W> This specification is in-progress. The introductory sections are particularly incoherent, as they're being rewritten.
+
 ## What is Markua?
 
 Markua, pronounced "mar-coo-ah", is a plain text format designed for the writing of books and documents.
@@ -67,8 +69,8 @@ Markua is intended to be extremely simple and powerful. I want Markua to be the 
 
 The Markua specification specifies two things:
 
-1. Markua syntax and mappings
-2. Markua filename and directory structure conventions
+1. Markua syntax.
+2. Markua HTML mapping.
 
 ## All the Markua Syntax Needed to Write a Novel
 
@@ -84,13 +86,9 @@ Here's all the Markua you need to know to write a novel:
 
 That's it!
 
-By the way, *all* the above syntax needed to write a novel in Markua is inherited from Markdown as specified by John Gruber. What Markua does is maps that syntax to book concepts, as well as adding new syntax and concepts of its own.
+## Markua Processors and Mappings
 
-## Markua Syntax and Mappings
-
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents.
-
-Markua manuscripts can be used to produce every current popular type of ebook format: PDF, EPUB, MOBI and HTML. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
+Markua manuscripts can be used to automatically generate every current popular type of ebook format: PDF, EPUB, MOBI and HTML. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
 
 The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
 
@@ -112,17 +110,36 @@ Markua is not intended to be used to create the layout of a high quality print b
 
 The reason that basic formatting hints are added to Markua is to enable automated production of ebooks that look good enough, especially on mobile where there are no fixed page sizes.
 
-## Markua Origins in Markdown and Leanpub Flavoured Markdown
+## Markua Origins in Markdown
 
-Markua is heavily inspired by Markdown.
+Markua is based on [Markdown](http://daringfireball.net/projects/markdown/).
 
-Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was [described](http://daringfireball.net/projects/markdown/) by John Gruber as follows:
+Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was described by John Gruber as follows:
 
 > Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
 
 The primary reason that Markdown is a great way to write is that it was designed to be this way. The design goal of Markdown is described by Gruber as follows:
 
 > The overriding design goal for Markdown's formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions. While Markdown's syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown's syntax is the format of plain text email.
+
+
+
+Markua is heavily inspired by Markdown.
+
+
+By the way, *all* the Markua syntax needed to write a novel is inherited verbatim from Markdown as specified by John Gruber. Markua has its own syntax, and
+
+What Markua does is maps most Markdown syntax to book concepts, as well as adding new syntax and concepts of its own.
+
+
+
+
+syntax, and is adapted for the needs of books and documents.
+
+All the syntax needed to write a novel in Markua is inherited from [Markdown]
+
+
+
 
 Markua is being created by [Peter Armstrong](https://twitter.com/peterarmstrong), with help from [Scott Patten](https://twitter.com/scott_patten) and other contributors listed in the Acknowledgments. Peter and Scott are the co-founders of Leanpub. At Leanpub, Peter and Scott created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
 
@@ -3207,10 +3224,7 @@ So, to show a literal backtick in a span, you start and end it with *two* backti
 
 This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!
 
-
--# Markua HTML Mapping - EDITED_TO_HERE
-
-W> TODO - This specification is being rewritten. Do not trust anything after this point.
+# Markua HTML Mapping #
 
 ## Poetry
 
