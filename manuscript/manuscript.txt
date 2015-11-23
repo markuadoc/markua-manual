@@ -76,11 +76,11 @@ Here's all the Markua you need to know to write a novel:
 
 * Write in plain text using any text editor you want.
 * Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
-* To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line.
-* To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line.
+* To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line: `# The Chapter Name`
+* To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line: `## The Section Name`
 * To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can if you want.
-* Surround text with one asterisk (`*`) on each side to make it italic, and with two asterisks (`**`) on each side to make it bold.
-* To add a scene break, put three asterisks on a line by themselves `* * *`, with blank lines above and below them.
+* Surround text with one asterisk (`*`) on each side to make it `*italic*`, and with two asterisks (`**`) on each side to make it `**bold**`.
+* To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want: `* * *`
 
 That's it!
 
@@ -94,27 +94,15 @@ Markua manuscripts can be used to produce every current popular type of ebook fo
 
 The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
 
-This part is an informal specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
-
-
-Every element of Markua syntax has two types of mappings defined:
-
-1. a Conceptual Mapping
-2. an HTML Mapping
-
-The Conceptual Mapping maps the Markua syntax element to a book or document concept. These include concepts like part, chapter, section, footnote, etc.
-
-The HTML Mapping maps the Markua syntax element to exactly specified HTML output. Together, the Conceptual Mappings and HTML mappings combine to mean that Markua-formatted text has both precisely-defined meaning and output.
-
-The combination of the Conceptual Mapping and the HTML Mapping mean that Markua documents can be used to produce not just HTML output, but also PDF, EPUB and MOBI output--in other words, to generate books and documents. The EPUB and MOBI output is intended to be suitable for ebooks; the PDF output is intended to be suitable for either reading on computers or tablets or for producing a print book. Furthermore, some Markua Processors can also generate InDesign and other formats.
-
 ## Semantic Formatting Only
 
-Equally important to what is being specified in the Markua specification is what is *not* being specified. Markua does not specify things like the following:
+Just as important as what is being specified is what is *not* being specified.
+
+Markua does not specify things like the following:
 
 * How large should a part, chapter or section heading be?
 * What font should anything be in?
-* What should be done about hyphenation, widows and orphans?
+* What should be done about widows and orphans?
 * Should there be page breaks between parts, sections, etc?
 
 Markua ignores these concerns since they are not about meaning, but about formatting. Formatting is almost entirely omitted from Markua for the following reasons:
@@ -237,13 +225,7 @@ In terms of Markua support in Leanpub, currently Leanpub only supports Leanpub F
 
 To stay current on Markua progress, follow [@markuadoc on Twitter](https://twitter.com/markuadoc).
 
--# Markua Syntax
-
-Markua syntax is heavily based on Markdown syntax, and is adapted for the needs of books and documents.
-
-Markua manuscripts can be used to produce every current popular type of ebook format: PDF, EPUB, MOBI and HTML. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
-
-The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
+# Markua Syntax
 
 This part is an informal specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
 
