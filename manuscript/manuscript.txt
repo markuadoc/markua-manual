@@ -94,33 +94,23 @@ Markua manuscripts can be used to produce every current popular type of ebook fo
 
 The Markua specification defines a precise mapping from Markua to HTML and to book and document concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
 
-## Semantic Formatting Only
+## Minimal Formatting
 
-Just as important as what is being specified is what is *not* being specified.
+Markua provides fairly minimal formatting options. When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting.
 
-Markua does not specify things like the following:
+There are two types of formatting provided in Markua:
 
-* How large should a part, chapter or section heading be?
-* What font should anything be in?
-* What should be done about widows and orphans?
-* Should there be page breaks between parts, sections, etc?
+Semantic Formatting
+: This is formatting which has meaning in the text, and which should not be changed by a book designer.
 
-Markua ignores these concerns since they are not about meaning, but about formatting.
+Basic Formatting Hints
+: These are formatting hints which help a Markua Processor achieve a professional looking result algorithmically. These typically involve things like figures, etc.
 
-Formatting is almost entirely omitted from Markua for the following reasons:
+To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins!
 
-1. When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting.
-2. For a high-quality print book, almost everything that a writer does to format a manuscript will need to be redone by a book designer, who will typically start by undoing all the non-semantic formatting work that the writer did.
-3. On mobile where there are typically no fixed page sizes, most formatting can be done to a sufficient level by an algorithm.
-4. Separation of concerns: formatting should be specified as a series of rules, not intermixed with the text. This is what CSS got right.
+Markua is not intended to be used to create the layout of a high quality print book--but it can certainly create the manuscript of that print book, and a Markua Processor can automatically generate an ebook from that manuscript. Some Markua Processors like Leanpub can even generate InDesign from a Markua document as a starting point for the print book design process. This is preferable to current workflows, in which a book designer typically needs to start by undoing all the non-semantic formatting that a writer did, and then redoing it properly using different tools.
 
-Because of these reasons, the only formatting which is included in Markua is semantic formatting: formatting which is important to the meaning of the writing. This includes things like bold, italics, etc.
-
-Formatting which can be altered by a book designer without needing to consult the author should be omitted from Markua.
-
-None of the formatting examples above have anything to do with the source text written by the author. (A book designer could make different decisions about all of the above, and it would not be considered changing the meaning of the text. However, this would not be true with, say, adding bold and italics in random places.)
-
-There is another advantage to not specifying formatting in Markua: it encourages innovation on the behalf of designers of Markua books, whether those designers are individuals who are producing high-quality print books or whether those designers are creating templates for the automated generation of both ebooks and print books based on Markua documents. Markua is intended to contain enough degrees of freedom to allow for creativity and competition in these areas.
+The reason that basic formatting hints are added to Markua is to enable automated production of ebooks that look good enough, especially on mobile where there are no fixed page sizes.
 
 ## Markua Origins in Markdown and Leanpub Flavoured Markdown
 
