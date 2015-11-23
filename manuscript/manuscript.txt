@@ -1,3 +1,227 @@
+{frontmatter}
+
+# IMPORTANT NOTE FOR LEANPUB AUTHORS: MARKUA IS NOT YET LIVE IN LEANPUB!
+
+**Markua support is NOT live in Leanpub yet for anyone but admins. Heck, Markua is not even fully-specified yet. This spec is in-progress.**
+
+If you're reading this, you are a really, *really* early adopter of Markua.
+
+I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
+
+Markua's specification should be finalized by January 15, 2016. Markua should be live in Leanpub and in the open source version by the end of March 2016. In the meantime, what Leanpub books are written in is what they have been written in for about 5 years: [Leanpub Flavoured Markdown, which is documented at this link](https://leanpub.com/help/manual).
+
+The good news is that Leanpub Flavoured Markdown is very similar to Markua. So, if you've been thinking that you were writing in Markua and then wondered why a couple things didn't work, it's because they work differently in Leanpub Flavoured Markdown.
+
+When Markua support is live on Leanpub we will provide the option of writing either in Markua or in Leanpub Flavoured Markdown. We'll also have a 1-click "Convert my Manuscript to Markua" button. So, as you read this spec, don't worry about having to do a bunch of work converting your books: Leanpub will do this for you. We're also going to keep support for Leanpub Flavoured Markdown for the foreseeable future.
+
+So, in the meantime, please enjoy using Leanpub and Leanpub Flavoured Markdown.
+
+Thanks,
+Peter Armstrong
+
+# The Magical Typewriter
+
+Imagine you owned a magical typewriter.
+
+When you used this magical typewriter, you wrote with fewer distractions. You didn't just write faster, you wrote better.
+
+With your magical typewriter, you never worried about layout. The book formatted itself.
+
+You could hit a key on your magical typewriter to create an ebook from your manuscript with one click.
+
+All ebook formats would be created, and they'd all look good. You'd have PDF for computers, MOBI for Kindle, and EPUB for everywhere else. The book would look great on phones.
+
+With your magical typewriter, you could publish your book before it was even done, and get feedback from readers all over the world. You could automatically share book updates with them. You would press one key on your magical typewriter to publish a new version, and all your readers would have it instantly.
+
+With your magical typewriter, you could easily compare your current manuscript to any other version of your manuscript that had ever existed.
+
+When the book was done, if you decided to make a print book, you could press a key on your magical typewriter to generate InDesign with one click. Your designer or publisher could use this as a starting point for producing a great looking print book.
+
+With your magical typewriter, you'd only have to do one thing: Write.
+
+Wouldn't it be great if such a magical typewriter existed?
+
+It does. At Leanpub, we're building it.
+
+But there's one requirement for this magical typewriter to exist: a simple, coherent, open source, free, plain text format for a book manuscript.
+
+This simple format is what authors will write their books in, instead of Word. It will enable an ecosystem of tools to emerge around it.
+
+This simple format will be the basis for the magical typewriter.
+
+This simple format is called Markua.
+
+This is its specification.
+
+# Markua Origins and Philosophy
+
+## What is Markua?
+
+Markua, pronounced "mar-coo-ah", is a plain text format designed for the writing of books and documents.
+
+Markua is intended to be extremely simple and powerful. We want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
+
+The Markua specification specifies two things:
+
+1. Markua syntax and mappings
+2. Markua filename and directory structure conventions
+
+## Markua Syntax in 2 Minutes
+
+Before diving into the Markua specification, here's the 2 minute version.
+
+The following is essentially enough information to write a novel in Markua syntax:
+
+* Write in plain text. Separate paragraphs with one blank line by hitting the Enter key twice.
+* Surround text with one asterisk (`*`) on each side to make it italic, and with two asterisks (`**`) on each side to make it bold.
+* To make a heading, you start a line with some number of pound signs (`#`), followed by a space, followed by some words or numbers. Headings must be separated by blank lines.
+* The type of heading is determined by the number of `#`s. There are 6 levels of headings: `#`, `##`, `###`, `####`, `#####` and `######`. In a normal book, `#` is chapter and `##` is section, but there's support for books to have parts as well, in which case `#` is part, `##` is chapter and `###` is section.
+
+All the above syntax is inherited from Markdown as specified by John Gruber, and mapped to book and documentation concepts by Markua. This is deliberate: it is possible to write a novel in Markua using only syntax inherited directly from Markdown.
+
+## Markua Syntax and Mappings
+
+Every element of Markua syntax has two types of mappings defined:
+
+1. a Conceptual Mapping
+2. an HTML Mapping
+
+The Conceptual Mapping maps the Markua syntax element to a book or document concept. These include concepts like part, chapter, section, footnote, etc.
+
+The HTML Mapping maps the Markua syntax element to exactly specified HTML output. Together, the Conceptual Mappings and HTML mappings combine to mean that Markua-formatted text has both precisely-defined meaning and output.
+
+The combination of the Conceptual Mapping and the HTML Mapping mean that Markua documents can be used to produce not just HTML output, but also PDF, EPUB and MOBI output--in other words, to generate books and documents. The EPUB and MOBI output is intended to be suitable for ebooks; the PDF output is intended to be suitable for either reading on computers or tablets or for producing a print book. Furthermore, some Markua Processors can also generate InDesign and other formats.
+
+## Why There Is So Little Formatting Specified in Markua
+
+Equally important to what is being specified in the Markua specification is what is **not** being specified. Markua does not specify things like the following:
+
+* How large should a part, chapter or section heading be?
+* What font should anything be in?
+* What should be done about hyphenation, widows and orphans?
+* Should there be page breaks between parts, sections, etc?
+
+Markua ignores these concerns since they are not about meaning, but about formatting. Formatting is almost entirely omitted from Markua for the following reasons:
+
+1. When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting.
+2. For a high-quality print book, almost everything that a writer does to format a manuscript will need to be redone by a book designer, who typically will have to start by undoing all the formatting work that the writer did.
+3. On mobile where there are typically no fixed page sizes, most formatting can be done to a sufficient level by an algorithm.
+4. Separation of concerns: formatting should be specified as a series of rules, not intermixed with the text. This is what CSS got right.
+
+Because of these reasons, the only formatting which is included in Markua is formatting which is important to the meaning of the writing. This includes things like bold, italics, etc. None of the formatting examples above have anything to do with the source text written by the author. (A book designer could make different decisions about all of the above, and it would not be considered changing the meaning of the text. However, this would not be true with, say, adding bold and italics in random places.)
+
+There is another advantage to not specifying formatting in Markua: it encourages innovation on the behalf of designers of Markua books, whether those designers are individuals who are producing high-quality print books or whether those designers are creating templates for the automated generation of both ebooks and print books based on Markua documents. Markua is intended to contain enough degrees of freedom to allow for creativity and competition in these areas.
+
+## Markua Origins in Markdown and Leanpub Flavoured Markdown
+
+Markua is heavily inspired by Markdown.
+
+Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was [described](http://daringfireball.net/projects/markdown/) by John Gruber as follows:
+
+> Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
+
+The primary reason that Markdown is a great way to write is that it was designed to be this way. The design goal of Markdown is described by Gruber as follows:
+
+> The overriding design goal for Markdown's formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions. While Markdown's syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown's syntax is the format of plain text email.
+
+Markua is being created by [Peter Armstrong](https://twitter.com/peterarmstrong), with help from [Scott Patten](https://twitter.com/scott_patten) and other contributors listed in the Acknowledgments. Peter and Scott are the co-founders of Leanpub. At Leanpub, Peter and Scott created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
+
+After years of building and supporting Leanpub Flavoured Markdown, we set out to specify it properly. We originally thought that this is what Markua would be: just a formalization of Leanpub Flavoured Markdown.
+
+However, Leanpub Flavoured Markdown is still complex. This is because Markdown as defined by John Gruber, while very simple to write in, contains a number of ambiguities. Also, in Markdown there are many ways to do some common things. There are two ways to create a top-level heading, and one of these ways has optional parts in it. (Heck, if you count inline HTML there are three ways.) Also, there are two ways to make bold text, two ways to make italic text, etc. This abundance of flexibility is in line with the TIMTOWTDI ("There Is More Than One Way To Do It") philosophy of Perl. This is not surprising, since Markdown was originally implemented by John Gruber as a Perl script.
+
+So, if we were to specify Leanpub Flavoured Markdown, we would either need to formally specify all of Markdown or else reference other specification efforts such as vfmd or the more recent and somewhat controversial CommonMark effort. Furthermore, we'd have to formally specify all of our extensions, and do so in a way which was coherent with the specification of the core Markdown concepts. And we would need to do all of this in an entirely unambiguous way, in all cases. So, at the end of the day, we'd have created a specification which would be unpleasant to read and even worse to fully implement.
+
+Even worse, by formally specifying Leanpub Flavoured Markdown this way, we'd have made things worse for our authors. We would have had to document and support the many different ways of doing common things, making getting started as an author more difficult. Also, the more complex the specification, the less likely it would be for there to be alternative feature-complete implementations.
+
+So, we started over.
+
+To create Markua, we started with Markdown.
+
+We then removed everything which was not needed for books and documents.
+
+We also removed or changed everything which was overly complex, either for authors using Markua to write books or documents or for software developers implementing Markua Processors.
+
+We also made Markua strongly opinionated. In Markua, there is almost always only **one** correct way to do things. For example, there is exactly *one* way to define a top-level heading in Markua, exactly one way to make text bold and exactly one way to make text italic. This represents a philosophical difference with Markdown, and is more in line with the "opinionated software" approach of Ruby on Rails. (While John Gruber was a Perl developer, Peter Armstrong and Scott Patten built Leanpub in Rails.)
+
+## Interoperability Between Markua and Markdown
+
+Given the above, you may be tempted to think that Markua is as different from Markdown as, say, AsciiDoc.
+
+This is not the case.
+
+At its core, the simplest Markua documents are also legal Markdown documents.
+
+If you write a novel in Markua, it's highly likely that your novel will only use Markua syntax which is also legal Markdown syntax. Furthermore, it's not just the syntax that would be the same: the meaning of the syntax would be the same, and mapping to HTML would be essentially the same.
+
+You could caricature the subset of Markdown that is supported in Markua as the subset that Peter Armstrong could remember, and you wouldn't be far from the truth.
+
+## Design Goals of Markua
+
+The following are the design goals of Markua:
+
+1. Markua should be **extremely simple**. If you want to write a novel in Markua, you should be able to learn the Markua syntax that you need to know in 2 minutes. If you want to write a computer programming book or doctoral thesis in Markua, you should be able to learn the additional syntax you need in 5 minutes.
+2. Markua should be **terse**. When you are writing using Markua, you should *feel like you are writing*, not programming. Once you understand Markua syntax it should fade into the background. Markua syntax should not clutter up text documents. Markua documents should look like plain text emails, not like programming language source code or like XML syntax. If you want to write a novel in Markua, all the formatting you need to know should fit (with explanations) on one 3x5 inch index card.
+3. Markua should be **powerful**. Markua should be a suitable format to write a computer programming book or doctoral thesis in.
+4. Markua should be **opinionated**. Wherever possible, there should be only one way to do something.
+5. Markua must support **every human language supported in Unicode**.
+6. Markua should have **almost no layout concepts**. Markua is a format for writers, not book designers. Our opinion is that when you are writing, *formatting is just procrastination*. Markua is not a format for producing books which have complex page layouts.
+7. Markua should stay as close to **Markdown** as possible--*but no closer*. Specifically, the syntax that Markua uses should by default be Markdown syntax. However, not all Markdown syntax needs to be supported, and Markdown syntax can be changed to simplify or disambiguate where needed. By following this approach, text editors such as Emacs and iA Writer will support much of Markua in their existing Markdown modes.
+8. Markua must not rely on formatting such as trailing whitespace which is automatically removed by some text editors.
+9. Markua must specify an exact mapping to HTML. The Markua Specification should be accompanied by a test suite which can be used to test the mapping of Markua text to HTML. Compliant Markua Processors must generate identical HTML to what is in the test suite.
+10. Markua should specify a coherent conceptual mapping from Markua-formatted text to book and documentation concepts.
+
+## Markua Character Encoding
+
+Markua documents MUST be saved in the **UTF-8** character encoding.
+
+Note that ASCII text is a valid form of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 compliant text.
+
+## Why the Name "Markua"?
+
+When we set out to specify Leanpub Flavoured Markdown (which evolved into Markua), we realized we needed a name. We wanted a name that conveyed the warmth and love that we have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way.
+
+We did not want to claim that we were in any way a standard, canonical or official definition of Markdown. Recently, some well-intentioned implementers and users of Markdown parsers have produced a specification called [CommonMark](http://spec.commonmark.org/) which is more formally specified than Markdown as originally defined by John Gruber. This specification effort was initially overshadowed by the name choice: CommonMark was originally named Standard Markdown, then Standard Flavored Markdown, then Common Markdown, then CommonMark. We did not want a similar issue.
+
+Furthermore, we wanted a name which did not reference Leanpub. We are creating Markua as a standalone specification with its own identity. We want this to be an open specification that anyone can implement, and not be perceived as something which is only specific to Leanpub. If we had called Markua "Leanpub Flavoured Markdown", this would not be apparent.  Furthermore, as discussed earlier, as we have evolved Markua it has diverged from the Leanpub Flavoured Markdown starting point.
+
+Finally, Peter Armstrong was on vacation in Hawaii when he named Markua, and he wanted something that sounded happy, friendly and almost Hawaiian. (Yes, we are aware that there is no r in Hawaiian. Please accept r apologies.) He also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and we feel it is a really good brand for what we're trying to accomplish.
+
+## Why is Inline HTML Not Supported in Markua?
+
+Inline HTML is not supported for both implementation and philosophical reasons.
+
+Supporting inline HTML would be very hard to implement, as Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write books and documentation. Since Markdown's only output format target is HTML, there is a strong temptation to support inline HTML--generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free. On the other hand, for Markua, there is a large amount of HTML that makes no sense in books and documentation. Supporting inline HTML would put an undue burden on Markua Processors, the book and document production systems which produce PDF, EPUB, MOBI and HTML from Markua documents. Mapping all of HTML to PDF or MOBI formats in a meaningful way would be difficult and arbitrary.
+
+Philosophically, Markua is intended to be a better way to write books and documentation. By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua is just not possible. And since it's not possible, the temptation to procrastinate by doing complex layout is not there.
+
+Supporting inline HTML would make Markua a worse format, both to write in and to implement support for. So, it's not supported.
+
+One design consequence of the support for inline HTML in Markdown is that the syntax can stay very small--authors can always fall back to using HTML. Since Markua does not support inline HTML, any required output must be produceable by a Markua syntax input. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books and documentation often require tables, Markua needs to add a table syntax.
+
+## How this Specification is Structured
+
+This specification defines:
+
+1. Every element of Markua syntax.
+2. The HTML Mapping of each element of Markua syntax to exactly specified HTML output.
+3. The Conceptual Mapping from Markua syntax to book and/or documentation concepts.
+
+Together, the HTML mappings and the Conceptual Mappings combine to mean that Markua-formatted text has both precisely-defined meaning and output.
+
+## How Complete is the Markua Specification and Markua Implementations?
+
+This is an in-progress, alpha quality specification. It is being constantly updated at <https://leanpub.com/markua>. To read the specification in PDF, EPUB, MOBI or HTML format, go there.
+
+To read the specification manuscript in Markua, see <https://github.com/markuadoc/markua>. (Until Markua is fully supported in Leanpub, the Markua spec is a strange hybrid of Markua and Leanpub Flavoured Markdown.)
+
+In the next few months we're going to publish an open source reference implementation of a Markua parser + HTML generation, along with an open source, minimalist, in-browser editor.
+
+In terms of Markua support in Leanpub, currently Leanpub only supports Leanpub Flavoured Markdown (LFM). We are adding support for this version of the Markua specification to Leanpub. It will live alongside Leanpub Flavoured Markdown (LFM). Leanpub Flavoured Markdown will be the default for new books until this specification is at least at beta quality. At that point, we'll make Markua the default for new books, and provide a 1-click migration from LFM to Markua.
+
+To stay current on Markua progress, follow [@markuadoc on Twitter](https://twitter.com/markuadoc).
+
+
 {mainmatter}
 
 -# Markua Syntax
@@ -2991,3 +3215,2501 @@ A backtick in text content (such as this paragraph) starts an inline span resour
 So, to show a literal backtick in a span, you start and end it with *two* backticks.
 
 This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!
+
+
+# Markua HTML Mapping - EDITED_TO_HERE
+
+W> TODO - This specification is being rewritten. Do not trust anything after this point.
+
+## Poetry
+
+### Single Newlines Inside a Paragraph is a Line Break
+
+##### Markua Syntax
+
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+     And yet, by heaven, I think my love as rare
+     As any she belied with false compare.
+```
+
+##### HTML Output
+
+<p>
+I grant I never saw a goddess go;<br/>
+My mistress when she walks treads on the ground.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
+</p>
+
+
+## Resources
+
+## Span Resources
+
+### Example 1: Span Images with Alt Text
+
+#### Markua Syntax
+
+{#input_span_images_1}
+```
+Markua has a fancy ![Markua two trees logo](markua-logo-small.png) logo!
+
+Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
+```
+
+#### HTML Output
+
+{#output_span_images_1}
+```
+<p>Markua has a fancy <img src="resources/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
+<p>Markua also has a fancy <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/> Twitter avatar!</p>
+```
+
+### Example 2: Span Images with no Alt Text
+
+#### Markua Syntax
+
+{#input_span_images_2}
+```
+Markua has a fancy ![](markua-logo-small.png) logo!
+```
+
+#### HTML Output
+
+{#output_span_images_2}
+```
+<p>Markua has a fancy <img src="resources/markua-logo-small.png"/> logo!</p>
+```
+
+## Figures
+
+### Example 1: Figures with Alt Text and a Caption
+
+#### Markua Syntax
+
+{#input_figures_1}
+```
+Markua has a fancy logo:
+
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Markua also has a fancy Twitter avatar:
+
+![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png "The Markua Icon")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+#### HTML Output
+
+{#output_figures_1}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Markua also has a fancy Twitter avatar:</p>
+<div class="figure">
+  <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/>
+  <p class="caption">The Markua Icon</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+### Example 2: Figures with no Alt Text or Caption
+
+#### Markua Syntax
+
+{#input_figures_2}
+```
+Markua has a fancy logo:
+
+![](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+#### HTML Output
+
+{#output_figures_2}
+```
+<p>Markua has a fancy logo:</p>
+<div class='figure'>
+  <img src="media/markua-logo.png"/>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+### Example 3: Figures with Alt Text but no Caption
+
+#### Markua Syntax
+
+{#input_figures_3}
+```
+Markua has a fancy logo:
+
+![the word Markua with the two asterisk trees beside it](markua-logo.png)
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+#### HTML Output
+
+{#output_figures_3}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+### Example 4: Figures with a Caption but no Alt Text
+
+#### Markua Syntax
+
+{#input_figures_4}
+```
+Markua has a fancy logo:
+
+![](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+#### HTML Output
+
+{#output_figures_4}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="media/markua-logo.png"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
+
+#### Markua Syntax
+
+{#input_figures_5}
+```
+Markua has a fancy logo:
+
+{float: "left", width: "50%"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+#### HTML Output
+
+{#output_figures_5}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+### Example 6: A Figure with a `width` Attribute of `fullbleed`
+
+#### Markua Syntax
+
+{#input_figures_6}
+```
+Markua has a fancy logo:
+
+{width: "fullbleed"}
+![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+
+Thanks Justin, it was fun making the logo with you!
+```
+
+#### HTML Output
+
+{#output_figures_6}
+```
+<p>Markua has a fancy logo:</p>
+<div class="figure">
+  <img src="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
+  <p class="caption">The Markua Logo</p>
+</div>
+<p>Thanks Justin, it was fun making the logo with you!</p>
+```
+
+## Video Resources
+
+
+## Audio Resources
+
+
+## Code Resources
+
+## Code Spans
+
+### Example
+
+{#input_code_span_1}
+### Markua Syntax
+
+```
+Here is some `hello world` span code.
+```
+
+{#output_code_span_1}
+### HTML Output
+
+```
+<p>Here is some <code>hello world</code> span code.</p>
+```
+
+### Example
+
+{#input_code_span_2}
+### Markua Syntax
+
+```
+Here is some ``code with a backtick (`) in it`` and other text.
+
+If you want to have a backtick by itself, just use you need to have spaces around it like this `` ` ``. The enclosed backtick cannot start or end the code block.
+```
+
+{#output_code_span_2}
+### HTML Output
+
+```
+<p>Here is some <code>code with a backtick (`) in it</code> and other text.</p>
+<p>If you want to have a backtick by itself, just use you need to have spaces around it like this <code>`</code>. The enclosed backtick cannot start or end the code block.</p>
+```
+
+## Paragraphs
+
+##### Markua Syntax
+
+{#input_paragraphs_1}
+```
+This is a paragraph. The number of sentences does not matter.
+
+This is another paragraph.
+
+This is a third paragraph.
+```
+
+##### HTML Output
+
+{#output_paragraphs_1}
+```
+<p>This is a paragraph. The number of sentences does not matter.</p>
+<p>This is another paragraph.</p>
+<p>This is a third paragraph.</p>
+```
+
+## Lists
+
+### Examples
+
+#### Example 1: A list (asterisks, one space after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_1}
+```
+lorem
+
+* foo
+* bar
+* baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_1}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 2: A list (asterisks, two spaces after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_2}
+```
+lorem
+
+*  foo
+*  bar
+*  baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_2}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 3: A list (asterisks, three spaces after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_3}
+```
+lorem
+
+*   foo
+*   bar
+*   baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_3}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 4: A list (asterisks, four spaces after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_4}
+```
+lorem
+
+*    foo
+*    bar
+*    baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_4}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 5: A list (asterisks, one tab after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_5}
+```
+lorem
+
+* foo
+* bar
+* baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_5}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 6: A list (hyphens, one space after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_6}
+```
+lorem
+
+- foo
+- bar
+- baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_6}
+```
+<p>lorem</p>
+<ul class="hyphen">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 7: A list (pluses, one space after each)
+
+##### Markua Syntax
+
+{#input_unordered_list_7}
+```
+lorem
+
++ foo
++ bar
++ baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_7}
+```
+<p>lorem</p>
+<ul class="plus">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 8: A list (one element list with asterisk)
+
+##### Markua Syntax
+
+{#input_unordered_list_8}
+```
+lorem
+
+* foo
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_8}
+```
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 9: A list (one element list with hyphen)
+
+##### Markua Syntax
+
+{#input_unordered_list_9}
+```
+lorem
+
+- foo
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_9}
+```
+<p>lorem</p>
+<ul class="hyphen">
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 10: A list (one element list with plus)
+
+##### Markua Syntax
+
+{#input_unordered_list_10}
+```
+lorem
+
++ foo
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_10}
+```
+<p>lorem</p>
+<ul class="plus">
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+```
+
+#### Example 11: Not a list (variable number of spaces after bullets)
+
+##### Markua Syntax
+
+{#input_unordered_list_11}
+```
+lorem
+
+*    foo
+*   bar
+*  baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_unordered_list_11}
+```
+<p>lorem</p>
+<p>*    foo<br/>
+*   bar<br/>
+*  baz</p>
+<p>ipsum</p>
+```
+
+## Ordered Lists (i.e. Numbered Lists)
+
+### Examples: Decimal Numbers
+
+#### Example 1
+
+##### Markua Syntax
+
+{#input_ordered_list_1}
+```
+lorem
+
+1. foo
+2. bar
+3. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_1}
+```
+<p>lorem</p>
+<ol>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 2
+
+##### Markua Syntax
+
+{#input_ordered_list_2}
+```
+lorem
+
+9. foo
+10. bar
+11. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_2}
+```
+<p>lorem</p>
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 3
+
+##### Markua Syntax
+
+{#input_ordered_list_3}
+```
+lorem
+
+3. foo
+2. bar
+1. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_3}
+```
+<p>lorem</p>
+<ol start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 4
+
+##### Markua Syntax
+
+{#input_ordered_list_4}
+```
+lorem
+
+11. foo
+10. bar
+9. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_4}
+```
+<p>lorem</p>
+<ol start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 5
+
+{#input_ordered_list_5}
+```
+lorem
+
+1. foo
+1. bar
+1. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_5}
+```
+<p>lorem</p>
+<ol>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+### Examples: Uppercase Letters
+
+#### Example 1
+
+##### Markua Syntax
+
+{#input_ordered_list_uc_1}
+```
+lorem
+
+A. foo
+B. bar
+C. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_uc_1}
+```
+<p>lorem</p>
+<ol type="A">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 2
+
+##### Markua Syntax
+
+{#input_ordered_list_uc_2}
+```
+lorem
+
+I. foo
+J. bar
+K. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_uc_2}
+```
+<p>lorem</p>
+<ol type="A" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 3
+
+##### Markua Syntax
+
+{#input_ordered_list_uc_3}
+```
+lorem
+
+C. foo
+B. bar
+A. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_uc_3}
+```
+<p>lorem</p>
+<ol type="A" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 4
+
+##### Markua Syntax
+
+{#input_ordered_list_uc_4}
+```
+lorem
+
+K. foo
+J. bar
+I. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_uc_4}
+```
+<p>lorem</p>
+<ol type="A" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 5
+
+{#input_ordered_list_uc_5}
+```
+lorem
+
+A. foo
+A. bar
+A. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_uc_5}
+```
+<p>lorem</p>
+<ol type="A">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+### Examples: Lowercase Letters
+
+#### Example 1
+
+##### Markua Syntax
+
+{#input_ordered_list_lc_1}
+```
+lorem
+
+a. foo
+b. bar
+c. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lc_1}
+```
+<p>lorem</p>
+<ol type="a">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 2
+
+##### Markua Syntax
+
+{#input_ordered_list_lc_2}
+```
+lorem
+
+i. foo
+j. bar
+k. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lc_2}
+```
+<p>lorem</p>
+<ol type="a" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 3
+
+##### Markua Syntax
+
+{#input_ordered_list_lc_3}
+```
+lorem
+
+c. foo
+b. bar
+a. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lc_3}
+```
+<p>lorem</p>
+<ol type="a" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 4
+
+##### Markua Syntax
+
+{#input_ordered_list_lc_4}
+```
+lorem
+
+k. foo
+j. bar
+i. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lc_4}
+```
+<p>lorem</p>
+<ol type="a" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 5
+
+{#input_ordered_list_lc_5}
+```
+lorem
+
+a. foo
+a. bar
+a. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lc_5}
+```
+<p>lorem</p>
+<ol type="a">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+### Examples: Uppercase Roman Numerals
+
+#### Example 1
+
+##### Markua Syntax
+
+{#input_ordered_list_ucr_1}
+```
+lorem
+
+I. foo
+II. bar
+III. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_ucr_1}
+```
+<p>lorem</p>
+<ol type="I">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 2
+
+##### Markua Syntax
+
+{#input_ordered_list_ucr_2}
+```
+lorem
+
+IX. foo
+X. bar
+XI. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_ucr_2}
+```
+<p>lorem</p>
+<ol type="I" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 3
+
+##### Markua Syntax
+
+{#input_ordered_list_ucr_3}
+```
+lorem
+
+III. foo
+II. bar
+I. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_ucr_3}
+```
+<p>lorem</p>
+<ol type="I" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 4
+
+##### Markua Syntax
+
+{#input_ordered_list_ucr_4}
+```
+lorem
+
+XI. foo
+X. bar
+IX. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_ucr_4}
+```
+<p>lorem</p>
+<ol type="I" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 5
+
+{#input_ordered_list_ucr_5}
+```
+lorem
+
+I. foo
+I. bar
+I. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_ucr_5}
+```
+<p>lorem</p>
+<ol type="I">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+### Examples: Lowercase Roman Numerals
+
+#### Example 1
+
+##### Markua Syntax
+
+{#input_ordered_list_lcr_1}
+```
+lorem
+
+i. foo
+ii. bar
+iii. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lcr_1}
+```
+<p>lorem</p>
+<ol type="i">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 2
+
+##### Markua Syntax
+
+{#input_ordered_list_lcr_2}
+```
+lorem
+
+ix. foo
+x. bar
+xi. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lcr_2}
+```
+<p>lorem</p>
+<ol type="i" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 3
+
+##### Markua Syntax
+
+{#input_ordered_list_lcr_3}
+```
+lorem
+
+iii. foo
+ii. bar
+i. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lcr_3}
+```
+<p>lorem</p>
+<ol type="i" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 4
+
+##### Markua Syntax
+
+{#input_ordered_list_lcr_4}
+```
+lorem
+
+xi. foo
+x. bar
+ix. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lcr_4}
+```
+<p>lorem</p>
+<ol type="i" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+#### Example 5
+
+{#input_ordered_list_lcr_5}
+```
+lorem
+
+i. foo
+i. bar
+i. baz
+
+ipsum
+```
+
+##### HTML Output
+
+{#output_ordered_list_lcr_5}
+```
+<p>lorem</p>
+<ol type="I">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+```
+
+### In Markua, A Single Element Ordered List is Not a List
+
+#### Example
+
+##### Markua Syntax
+
+{#input_ordered_list_1}
+```
+foo
+
+1. This isn't a list.
+
+bar
+
+1975. Also, not a list.
+
+lorem
+
+a. This isn't a list either.
+
+ipsum
+
+A. This isn't a list either.
+
+dolor
+
+i. This isn't a list either.
+
+sit
+
+I. This isn't a list either.
+
+amet
+```
+
+##### HTML Output
+
+{#output_ordered_list_1}
+```
+<p>foo</p>
+<p>1. This isn't a list.</p>
+<p>bar</p>
+<p>1975. Also, not a list.</p>
+<p>lorem</p>
+<p>a. This isn't a list either.</p>
+<p>ipsum</p>
+<p>A. This isn't a list either.</p>
+<p>dolor
+<p>i. This isn't a list either.</p>
+<p>sit</p>
+<p>I. This isn't a list either.</p>
+<p>amet</p>
+```
+
+##### HTML Output
+
+
+{#output_uppercase_alphabetical_lists_4}
+```
+<ol type="A" start="4">
+<li>foo</li>
+<li>bar</li>
+</ol>
+```
+
+## Ordered List Numbering Rules
+
+#### Example
+
+##### Markua Syntax
+
+{#input_list_consecutive_or_same_1}
+```
+This makes an ordered list with decimal numbers (1, 2, 3):
+
+1. one
+1. two
+1. three
+
+This does not make a list, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+This makes a list (1975, 1976):
+
+1975. An amazing year.
+1976. The year after 1975.
+
+This does not make a list:
+
+1975\. An amazing year.
+1976\. The year after 1975.
+
+This does not make a list:
+
+1975. An amazing year.
+2010. The year Leanpub was launched.
+
+This makes a lowercase alphabetical ordered list (a, b):
+
+a. one
+b. two
+
+This makes a lowercase alphabetical ordered list (e, f):
+
+e. five
+f. six
+
+This makes a lowercase alphabetical ordered list (i, ii, iii, iv):
+
+i. one
+ii. two
+iii. three
+iv. four
+
+Not a list:
+
+i. one
+ii. two
+iv. four
+
+Not a list:
+
+a\. one
+b\. two
+
+Not a list:
+
+a. one
+c. three
+
+That's it!
+```
+
+##### HTML Output
+
+{#output_list_consecutive_or_same_1}
+```
+<p>This makes an ordered list with decimal numbers:</p>
+<ol>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+</ol>
+<p>This does not make a list, since the numbers are not all consecutive:</p>
+<p>1. foo<br/>
+2. bar<br/>
+4. baz</p>
+<p>This makes a list (1975, 1976):</p>
+<ol start="1975">
+  <li>An amazing year.</li>
+  <li>The year after 1975.</li>
+</ol>
+<p>This does not make a list:</p>
+<p>1975. An amazing year.<br/>
+1976. The year after 1975.</p>
+<p>This does not make a list:</p>
+<p>1975. An amazing year.<br/>
+2010. The year Leanpub was launched.</p>
+<p>This makes a lowercase alphabetical ordered list (a, b):</p>
+<ol type="a">
+  <li>one</li>
+  <li>two</li>
+</ol>
+<p>This makes a lowercase alphabetical ordered list (e, f):</p>
+<ol type="a" start="5">
+  <li>five</li>
+  <li>six</li>
+</ol>
+<p>This makes a lowercase alphabetical ordered list (i, ii, iii, iv):</p>
+<ol type="i">
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ol>
+<p>Not a list:</p>
+<p>i. one<br/>
+ii. two<br/>
+iv. four</p>
+<p>Not a list:</p>
+<p>a\. one<br/>
+b\. two</p>
+<p>Not a list:</p>
+<p>a. one<br/>
+c. three</p>
+<p>That's it!</p>
+```
+
+{#headings}
+## Headings
+
+{#input_headings_1}
+```
+## Part (h1) #
+
+This is a paragraph.
+
+## Chapter (also h1)
+
+This is a paragraph.
+
+## Section (h2)
+
+This is a paragraph.
+
+### Sub-Section (h3)
+
+This is a paragraph.
+
+#### Sub-Sub-Section (h4)
+
+This is a paragraph.
+
+##### Sub-Sub-Sub-Section (h5)
+
+This is a paragraph.
+
+###### Sub-Sub-Sub-Sub-Section (h6)
+
+This is a paragraph.
+```
+
+{#output_headings_1}
+```
+<h1 class="part">Part (h1)</h1>
+<p>This is a paragraph.</p>
+<h1>Chapter (also h1)</h1>
+<p>This is a paragraph.</p>
+<h2>Section (h2)</h2>
+<p>This is a paragraph.</p>
+<h3>Sub-Section (h3)</h3>
+<p>This is a paragraph.</p>
+<h4>Sub-Sub-Section (h4)</h4>
+<p>This is a paragraph.</p>
+<h5>Sub-Sub-Sub-Section (h5)</h5>
+<p>This is a paragraph.</p>
+<h6>Sub-Sub-Sub-Sub-Section (h6)</h6>
+<p>This is a paragraph.</p>
+```
+
+## Text Formatting
+
+## Italic Text
+
+### Example
+
+{#input_italic_1}
+#### Markua Syntax
+
+```
+This text _is italic_. This text *is also italic*.
+```
+
+{#output_italic_1}
+#### HTML Output
+
+```
+<p>This text <i>is italic</i>. This text <em>is also italic</em>.</p>
+```
+
+## Bold Text
+
+### Example
+
+{#input_bold_1}
+#### Markua Syntax
+
+```
+This text __is bold__. This text **is also bold**.
+```
+
+{#output_bold_1}
+#### HTML Output
+
+```
+<p>This text <b>is bold</b>. This text <strong>is also bold</strong>.</p>
+```
+
+## Bold + Italic Text
+
+### Example 1
+
+{#input_bold_italic_1}
+#### Markua Syntax
+
+```
+This text ___is bold and italic___. This text ***is also bold and italic***.
+```
+
+{#output_bold_italic_1}
+#### HTML Output
+
+```
+<p>This text <b><i>is bold and italic</i></b>. This text <strong><em>is also bold and italic</em></strong>.</p>
+```
+
+You can even combine underscores and asterisks. This is not recommended stylistically, but it works.
+
+### Example 2
+
+{#input_bold_italic_2}
+#### Markua Syntax
+
+```
+This text __*is bold and italic*__. This text **_is also bold and italic_**.
+
+This text *__is italic and bold__*. This text _**is also italic and bold**_.
+```
+
+{#output_bold_italic_2}
+#### HTML Output
+
+```
+<p>This text <b><em>is bold and italic</em></b>. This text <strong><i>is also bold and italic</i></strong>.</p>
+
+<p>This text <em><b>is italic and bold</b></em>. This text <i><strong>is also italic and bold</strong></i>.</p>
+```
+
+## Nesting Bold in Italic, and Italic in Bold
+
+### Example
+
+{#input_nesting_1}
+#### Markua Syntax
+
+```
+This text _is italic __and this is nested bold__ and this is still italic_ again.
+
+This text *is italic **and this is nested bold** and this is still italic* again.
+
+This text _is italic **and this is nested bold** and this is still italic_ again.
+
+This text *is italic __and this is nested bold__ and this is still italic* again.
+
+This text __is bold _and this is nested italic_ and this is still bold__ again.
+
+This text **is bold *and this is nested italic* and this is still bold** again.
+
+This text __is bold *and this is nested italic* and this is still bold__ again.
+
+This text **is bold _and this is nested italic_ and this is still bold** again.
+```
+
+{#output_nesting_1}
+#### HTML Output
+
+```
+<p>This text <i>is italic <b>and this is nested bold</b> and this is still italic</i> again.</p>
+
+<p>This text <em>is italic <strong>and this is nested bold</strong> and this is still italic</em> again.</p>
+
+<p>This text <i>is italic <strong>and this is nested bold</strong> and this is still italic</i> again.</p>
+
+<p>This text <em>is italic <b>and this is nested bold</b> and this is still italic</em> again.</p>
+
+<p>This text <b>is bold <i>and this is nested italic</i> and this is still bold</b> again.</p>
+
+<p>This text <strong>is bold <em>and this is nested italic</em> and this is still bold</strong> again.</p>
+
+<p>This text <b>is bold <em>and this is nested italic</em> and this is still bold</b> again.</p>
+
+<p>This text <strong>is bold <i>and this is nested italic</i> and this is still bold</strong> again.</p>
+```
+
+## Underlined Text
+
+### Example
+
+#### Markua Syntax
+
+{#input_underline_1}
+```
+This is ____some underlined____ text.
+```
+
+#### HTML Output
+
+The HTML which is output uses the `<u>` tag, which was added to HTML5.
+
+{#output_underline_1}
+```
+<p>This is some <u>bold and italic</u> text.</p>
+```
+
+## Strikethrough
+
+Strikethrough is made with `~~two tildes~~` surrounding the text.
+
+### Example
+
+#### Markua Syntax
+
+{#input_strikethrough_1}
+```
+Strikethrough is made with ~~two tildes~~ surrounding the text.
+```
+
+#### HTML Output
+
+{#output_strikethrough_1}
+```
+<p>Strikethrough is made with <span class="strikethrough">two tildes</span> surrounding the text.</p>
+```
+
+Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations.
+
+However, in this case, the following CSS rule is strongly recommended:
+
+```
+.strikethrough {
+  text-decoration: line-through;
+}
+```
+
+## Superscript
+
+To make a span be in superscript, you surround it with carets.
+
+### Example
+
+#### Markua Syntax
+
+{#input_superscript_1}
+```
+5^3^ is 125.
+```
+
+#### HTML Output
+
+{#output_superscript_1}
+```
+<p>5<sup>3</sup> is 125.</p>
+```
+
+## Subscript
+
+To make a span be in subscript, you surround it with one tilde each. (This is the same syntax as is used by pandoc.)
+
+### Example
+
+#### Markua Syntax
+
+{#input_subscript_1}
+```
+What he thought was H~2~O was H~2~SO~4~.
+```
+
+#### HTML Output
+
+{#output_subscript_1}
+```
+<p>What he thought was H<sub>2</sub>O was H<sub>2</sub>SO<sub>4</sub>.
+```
+
+## ABC: Asides, Blurbs and Callouts
+
+#### Example
+
+##### Markua Syntax
+
+{#input_aside_1}
+```
+This is a paragraph before the aside.
+
+A> This is a paragraph in the aside.
+A>
+A> This is a
+A> second paragraph in the aside
+A> which contains newlines.
+A>
+A> This is a third paragraph in the aside.
+
+This is a paragraph after the aside.
+```
+
+##### HTML Output
+
+The HTML output for an Aside is simply a `div`, not a `section` or an `aside`, since an arbitrary aside is not something which is a top-level element of a book. (Also, some legacy EPUB readers would choke on `section` or `aside`.)
+
+TODO - is this correct approach?
+
+{#output_aside_1}
+```
+<p>This is a paragraph before the aside.</p>
+<div class="aside">
+<p>This is a paragraph in the aside.</p>
+<p>This is a<br/>
+second paragraph in the aside<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the aside.</p>
+</div>
+<p>This is a paragraph after the aside.</p>
+```
+
+#### Example
+
+##### Markua Syntax
+
+{#input_blurb_1}
+```
+This is a paragraph before the blurb.
+
+B> This is a paragraph in the blurb.
+B>
+B> This is a
+B> second paragraph in the blurb
+B> which contains newlines.
+B>
+B> This is a third paragraph in the blurb.
+
+This is a paragraph after the blurb.
+```
+
+##### HTML Output
+
+The HTML output for an Blurb is simply a `div` with a class of "blurb".
+
+{#output_blurb_1}
+```
+<p>This is a paragraph before the blurb.</p>
+<div class="blurb">
+<p>This is a paragraph in the blurb.</p>
+<p>This is a<br/>
+second paragraph in the blurb<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the blurb.</p>
+</div>
+<p>This is a paragraph after the blurb.</p>
+```
+
+#### Example
+
+##### Markua Syntax
+
+{#input_blurb_1}
+```
+This is a paragraph before the blurb.
+
+{class: warning}
+B> This is a paragraph in the blurb.
+B>
+B> This is a
+B> second paragraph in the blurb
+B> which contains newlines.
+B>
+B> This is a third paragraph in the blurb.
+
+This is a paragraph after the blurb.
+```
+
+##### HTML Output
+
+The HTML output for an Blurb is simply a `div` with a class of "blurb".
+
+{#output_blurb_1}
+```
+<p>This is a paragraph before the blurb.</p>
+<div class="blurb warning">
+<p>This is a paragraph in the blurb.</p>
+<p>This is a<br/>
+second paragraph in the blurb<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the blurb.</p>
+</div>
+<p>This is a paragraph after the blurb.</p>
+```
+
+
+## Block Quotes
+
+### Examples
+
+#### Example 1: A Block Quote Containing Three Paragaphs
+
+##### Markua Syntax
+
+{#input_block_quote_1}
+```
+This is a paragraph before the block quote.
+
+> This is a paragraph in the block quote.
+>
+> This is a
+> second paragraph in the block quote
+> which contains newlines.
+>
+> This is a third paragraph in the block quote.
+
+This is a paragraph after the block quote.
+```
+
+##### HTML Output
+
+The HTML output for a block quote is simply a `div`, not a `section` or an `aside`, since an arbitrary block quote is not something which is a top-level element of a book.
+
+TODO - does `<blockquote>` cause problems for EPUB readers?
+
+{#output_block_quote_1}
+```
+<p>This is a paragraph before the block quote.</p>
+<blockquote>
+<p>This is a paragraph in the block quote.</p>
+<p>This is a<br/>
+second paragraph in the block quote<br/>
+which contains newlines.</p>
+<p>This is a third paragraph in the block quote.</p>
+</blockquote>
+<p>This is a paragraph after the block quote.</p>
+```
+
+{#links}
+## Links
+
+## Inline Links
+
+### Example
+
+#### Markua Syntax
+
+```
+This is [link text](http://markua.com) a link.
+```
+
+#### HTML Output
+
+```
+<p>This is <a href="http://markua.com">link text</a> a link.</p>
+```
+
+## Automatic Links
+
+### Example
+
+#### Markua Syntax
+
+```
+Markua's website is <http://markua.com>.
+```
+
+#### HTML Output
+
+```
+<p>Markua's website is <a href="http://markua.com">http://markua.com</a>.</p>
+```
+
+## Crosslinks and `id`s
+
+### Examples
+
+TODO - single or double quotes on id attrs in HTML?
+
+#### Example 1: Defining an `id` on a single word
+
+##### Markua Syntax
+
+{#input_span_id_1}
+```
+The words foo{#foo} and bar{id: bar} both have ids.
+```
+
+##### HTML Output
+
+{#output_span_id_1}
+```
+<p>The words <span id="foo">foo</span> and <span id="bar">bar</span> both have ids.</p>
+```
+
+#### Example 2: Defining an `id` on a code span
+
+Code spans, like any span, can have `id`s.
+
+##### Markua Syntax
+
+{#input_span_id_2}
+```
+Java code is verbose, e.g. `public static void main(String[] args)`{#java}.
+```
+
+##### HTML Output
+
+{#output_span_id_2}
+```
+<p>Java code is verbose, e.g. <code id="java">public static void main(String[] args)`</code>.</p>
+```
+
+#### Example 3: Defining an `id` on a span of emphasized text
+
+Any span can have `id`s -- even spans which are produced by formatting characters. (Note that in this contrived example, these would be better served by index entries than ids.)
+
+##### Markua Syntax
+
+{#input_span_id_3}
+```
+The ideas behind *Leanpub*{id: leanpub} are explained in Peter's book _Lean Publishing_{#lean}.
+```
+
+##### HTML Output
+
+{#output_span_id_3}
+```
+<p>The ideas behind <em id="leanpub">Leanpub</em> are explained in Peter's book <i id="lean">Lean Publishing</i>.</p>
+```
+
+#### Example 4: Nesting `id` definitions inside spans
+
+An `id` attribute can be defined on a span or word regardless of whether it is contained in a span.
+
+##### Markua Syntax
+
+{#input_span_id_4}
+```
+This is *a **very very{#very} contrived** example{id: example}*{#contrived} showing this.
+```
+
+##### HTML Output
+
+{#output_span_id_4}
+```
+<p>This is <em id="contrived">a <strong>very <span id="very">very</span> contrived</strong> <span id="example">example</span></em> showing this.</p>
+```
+
+## Scene Breaks
+
+#### Example
+
+{input_scene_breaks}
+##### Markua Syntax
+
+```
+Yada yada yada.
+
+* * *
+
+Yada yada yada.
+
+- - -
+
+Yada yada yada.
+
+___
+
+Yada yada yada.
+
+**********
+
+Yada yada yada.
+
+----------
+
+Yada yada yada.
+
+____________________
+
+Yada yada yada.
+```
+
+{output_scene_breaks}
+##### HTML Output
+
+```
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+<hr/>
+<p>Yada yada yada.</p>
+```
+
+## Soft hyphen
+
+## Markua Syntax
+
+```
+You can use soft hyphens to suggest where to break long words like Rumpel\-stiltskin if you wish.
+```
+
+## HTML Output
+
+<p>You can use soft hyphens to suggest where to break long words like Rumpel&shy;stiltskin if you wish.</p>
+
+## Definition Lists
+
+## Examples
+
+### Example 1
+
+#### Markua Syntax
+
+```
+foo
+
+term 1
+: definition 1
+
+term 2
+: definition 2a
+: definition 2b
+: definition 2c
+
+term 3
+: definition 3
+
+bar
+```
+
+#### HTML Output
+
+```
+<p>foo</p>
+<dl>
+  <dt>term 1</dt>
+  <dd>definition 1</dd>
+</dl>
+<dl>
+  <dt>term 2</dt>
+  <dd>definition 2a</dd>
+  <dd>definition 2b</dd>
+  <dd>definition 2c</dd>
+</dl>
+<dl>
+  <dt>term 3</dt>
+  <dd>definition 3</dd>
+</dl>
+<p>bar</p>
+```
+
+## Embedding Lists, Figures and Code Blocks Inside a Paragraph
+
+### Examples
+
+{#embedding_inside_paragraphs_1}
+#### Example 1: Correct List Embedding
+
+##### Markua Syntax
+
+{#input_paragraphs_1}
+```
+This is a paragraph.
+
+The opinion of the W3C about lists inside paragraphs is:
+  * myopic
+  * rude
+  * amusing
+It also:
+   1. is not universally accepted
+   2. ignores historical precedent
+   3. encourages short paragraphs, which is admittedly a plus
+This is still part of the second paragraph.
+
+This is a third paragraph.
+```
+
+##### HTML Output
+
+{#output_paragraphs_1}
+```
+<p>This is a paragraph.</p>
+<div class="para">The opinion of the W3C about lists inside paragraphs is:
+  <ul>
+    <li>myopic</li>
+    <li>rude</li>
+    <li>amusing</li>
+  </ul>
+  It also:
+  <ol>
+    <li>is not universally accepted</li>
+    <li>ignores historical precedent</li>
+    <li>encourages short paragraphs, which is admittedly a plus</li>
+  </ol>
+  This is still part of the second paragraph.
+</div>
+<p>This is a third paragraph.</p>
+```
+
+{#embedding_inside_paragraphs_2}
+#### Example 2: Incorrect List Embedding
+
+##### Markua Syntax
+
+{#input_paragraphs_1}
+```
+This is a paragraph.
+
+The opinion of the W3C about lists inside paragraphs is:
+* myopic
+* rude
+* amusing
+It also:
+1. is not universally accepted
+2. ignores historical precedent
+3. encourages short paragraphs
+This is still part of the second paragraph, but the above lists were not embedded correctly.
+
+This is a third paragraph.
+```
+
+##### HTML Output
+
+{#output_paragraphs_1}
+```
+<p>This is a paragraph.</p>
+<p>The opinion of the W3C about lists inside paragraphs is:<br/>
+* myopic<br/>
+* rude<br/>
+* amusing<br/>
+It also:<br/>
+1. is not universally accepted<br/>
+2. ignores historical precedent<br/>
+3. encourages short paragraphs<br/>
+This is still part of the second paragraph, but the above lists were not embedded correctly.</p>
+<p>This is a third paragraph.</p>
+```
+
+#### Example 3: Correct Figure Embedding
+
+If a figure is inserted on its own line, with single newlines above and below it, it is inserted as an inline figure inside the paragraph, at that position exactly if not floated, or near that position if floated.
+
+##### Markua Syntax
+
+{#input_figures_7}
+```
+This is paragraph 1.
+
+Markua has a fancy logo:
+  ![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
+Thanks Justin, it was fun making the logo with you!
+
+This is paragraph 3.
+```
+
+##### HTML Output
+
+W> TODO - do we add the br tags or not for inline figures?
+
+{#output_figures_7}
+```
+<p>This is paragraph 1.</p>
+<div class="para">Markua has a fancy logo:
+  <div class="figure">
+    <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
+    <p class="caption">The Markua Logo</p>
+  </div>
+  Thanks Justin, it was fun making the logo with you!
+</div>
+<p>This is paragraph 3.</p>
+```
+
+### Syntax for index entries
+
+~~~
+a b c {i:C} d e
+
+...
+
+a b c{i:C} d e
+~~~
+
+results in:
+
+~~~
+a b <span id="__i__1__C">c</span> d e
+
+...
+
+a b <span id="__i__2_C">c</span> d e
+~~~
+
+
+```
+The id will be `__i__<number>__<index>`. Where `index` is everything inside of the curly braces after `i:` and before the `|`, with `*` replaced with nothing and `!` replaced with `__`.
+index = (The thing inside the curly braces after `i:`).split(/\|/).first.gsub(/\!/, '__').gsub(/\*/, '').lower
+`number` is the number of times `index` has been indexed in the document already, counting from 1.
+```
+
+{backmatter}
+
+{#appendices}
+# Appendices
+
+{#definitions}
+## Definitions
+
+There are a number of key terms and phrases which are used throughout the Markua specification.
+
+book or document
+: If this phrase is used to refer to the files that the author is writing in, it is used to refer to a Markua manuscript. If this phrase is used to refer to a finished product, then it is referring to the output files produced by a Markua Processor from a Markua manuscript.
+
+ebook
+: Ebooks, or electronic books, are typically available in PDF, EPUB and/or MOBI formats. A Markua manuscript can be turned into an ebook by Markua Processors that are capable of generating these formats.
+
+Leanpub
+: Leanpub is the startup that created Leanpub Flavoured Markdown and Markua. The company that created, owns and operates Leanpub is Ruboss Technology Corporation, a British Columbia, Canada company.
+
+Leanpub Flavoured Markdown
+: The format which was the predecessor to Markua. It was focused primarily on the generation of books from a superset of Markdown, minus inline HTML support.
+
+Markua
+: Markua is a plain text format designed for the writing of books and documents.
+
+Markua manuscript
+: Also called "manuscript" or "manuscript files", a Markua manuscript is the Markua-formatted UTF-8 text file or files that the author actually writes in. The Markua manuscript is used as input by Markua Processors to generate Markua output files.
+
+Markua output files
+: The formatted output files generated from Markua manuscripts by Markua Processors. The formats generated can include ebook formats (PDF, EPUB and MOBI) as well as HTML and InDesign formats, among others. Only the mapping to HTML is precisely specified.
+
+Markua Processor
+: A Markua Processor can turn a Markua manuscript into Markua output files.
+
+must
+: This is a requirement of Markua. Markua Processors must behave this way to be compliant with this specification.
+
+newline
+: This is a carriage return, line feed, or a carriage return followed by a line feed. Pressing the enter or return key on your keyboard will produce one of these combinations on most modern operating systems.
+
+should
+: This is recommended by Markua. Markua Processors should behave this way, but do not have to.
+
+text content
+: These are letters, numbers, punctuation, etc.
+
+whitespace
+: Whitespace is one or more consecutive spaces or tabs. It does not include not newlines.
+
+{#w3c_semantic_emphasis}
+## The W3C and Semantic Emphasis
+
+Markua is a plain text format designed for the writing of books and documents.
+
+Books and documents contain bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood.
+
+If you think this, you are clearly not familiar with the work of the W3C. The notion of making something bold or italic is very controversial in HTML: first the `<b>` and `<i>` tags were used to do this, then they got kind of deprecated in favour of `<strong>` and `<em>`, and now there are four tags: `<b>`, `<strong>`, `<i>` and `<em>`, and *none* of these tags are guaranteed to produce something bold or italic!
+
+So, what to do?
+
+Markua outputs PDF, EPUB, MOBI and HTML ebooks. EPUB is essentially just zipped HTML. So, two of the for output formats of Markua are essentially HTML.
+
+There are now four main ways of adding emphasis to text in HTML5: [`<strong>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-strong-element), [`<b>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-b-element), [`<em>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-em-element) and [`<i>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-i-element). The `<strong>` and `<b>` tags can wrap a span of text and add bold-esque emphasis to it, while the `<em>` and `<i>` tags can wrap a span of text and add italic-esque emphasis to it. I say "esque" since there is no guarantee that any of the four tags will actually make anything bold or italic. All four tags have actually become semantic tags in HTML5. Seriously.
+
+So, what to do in Markua? Clearly we need to be able to make text bold and italic, since authors have been doing this in books for centuries. But EPUB is one of the output targets of Markua, and since EPUB is essentially just zipped up HTML, we need to use some HTML tags for empahasis.
+
+Now, what Markdown does is to just always generate `<strong>` and `<em>` tags. Both `**two asterisks**` and `__two underscores__` make a `<strong>` tag, and `*one asterisk*` and `_one underscore_` make an `<em>` tag. This means that in 2004, John Gruber was clearly in the camp of "the `<b>` and `<i>` tags are unsemantic and bad". (At that time, many people were in this camp, as HTML had gone to a dark place full of presentational attributes in tags. The "move all presentation to CSS" backlash was very necessary, but there were a couple places--such as this, and such as the deprecating of the `start` element of an `<ol>`--where semantic information was lumped in with presentation-only information and was unfairly maligned.)
+
+Now, since you can inline HTML in Markdown, if you wanted filthy `<b>` and `<i>` tags, you could just add them yourself. In Markua, however, we don't support inlining HTML, so that's not an option.
+
+So, what to do?
+
+Let's think about the goal of Markua:
+
+> Markua is intended to be extremely simple and powerful. We want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
+
+Given this, we want to provide the power of picking what kind of emphasis that you want, while ensuring that Markua is simple to learn. We need to support all four ways of producing emphasis in Markdown (one and two asterisks and underscores), and we want to be able to produce all four of the (newly semantic!) emphasis tags in HTML5. That's exactly what we're going to do. Unlike Markdown which defines four input tags and only two outputs, we're going to map the four inputs to four outputs.
+
+There are actually a number of benefits to this:
+
+* Publishers can style `<b>` and `<strong>` differently. The `<strong>` tag can produce text which is using an even heavier-weight font than the `<b>` tag.
+* Authors can italicize things they are supposed to (e.g. the titles of books), without implying the kind of semantic emphasis of the `<em>` tag.
+* Since the four combinations of asterisks and underscores produces different output, which to choose will be determined by the desired output, not personal taste of "do you prefer underscores or asterisks". This means that multi-author Markua projects won't have to have pointless writing style debates about which type of Markua markup to use.
+* All Markdown text which has any of the four kinds of emphasis will still generate emphasis that looks like this in Markua.
+* Text editors (e.g. iA Writer) which know how to show emphasis for Markdown syntax will do so with Markua emphasis syntax.
+
+{#markdown_headings}
+## Markdown Headings
+
+Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
+
+{#setext_headings}
+### Setext Headings in Markdown
+
+In the Setext-style of headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
+
+These are some Setext headers in Markdown:
+
+```
+This is an h1
+=============
+
+This is a paragraph.
+
+This is also an h1 (really)
+=
+
+This is a paragraph.
+
+This is an h2
+-------------
+
+This is a paragraph.
+
+This is also an h2 (really)
+-
+
+This is a paragraph.
+```
+
+There are two main issues with this style of heading in Markdown:
+
+1. It is inconsistent: It only supports defining `h1` and `h2`; to define h3 and below, the atx style of heading must be used.
+2. It is confusing: Authors are confused about how many equals or minus signs you need to use. (As we saw above, the answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
+
+{#atx_headings}
+### atx Headings in Markdown
+
+In Markdown, the other heading syntax is "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown. To create an atx heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text, followed optionally by whitespace and any number of `#` characters. The number of `#` characters determines the level of heading.
+
+These are some atx headers in Markdown:
+
+```
+# This is an h1
+
+This is a paragraph.
+
+# This is also an h1 ####################
+
+This is a paragraph.
+
+## This is an h2
+
+This is a paragraph.
+
+## This is also an h2 ###################
+
+This is a paragraph.
+
+### This is an h3
+
+This is a paragraph.
+
+### This is also an h3 ##################
+
+This is a paragraph.
+```
+
+Note that all the trailing `#` characters are ignored and are not part of the heading text.
+
+From reading this, you'll recogrize that Markua headings are a subset of atx headers.
+
+{lfm_changes}
+## Important Changes From Leanpub Flavoured Markdown
+
+Markua is the evolution of Leanpub Flavoured Markdown. However, the goal of Markua is to remove the tailbones and appendices that aren't necessary. This appendix highlights things which are changed from Leanpub Flavoured Markdown in a way which is not adequately discussed earlier.
+
+The following Leanpub Flavoured Markdown features are not supported in Markua:
+
+* Centering paragraphs of text or headings using `C>` has been removed.
+* Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. `[some text]{lang:en}`) on a span or block.
+
+{#implementor-rules}
+## Rules and Guidelines for Implementors of Markua Processors
+
+This entire spec is a set of rules and guidelines, but there are a few specific things to call out here:
+
+* Markua Processors should have one comprehensive list of warnings to show Markua authors upon generating a Markua document with warnings in it.
+* Markua Processors must not output generation errors and warnings into the text itself.
+* Markua processors should provide warnings in situations where they can detect issues (e.g. "duplicate cross-reference", "not understood programming language", "unknown math processor", etc).
+* Markua processors must not explode when encountering unsupported features that have legal Markua syntax (e.g. an unknown Math dialect or human language).
+* Links to cross-references that don't correspond to an id that exists may either be created as a (broken, non-functional) link or be created as normal text (not a link).
+* Crosslinks that reference an unused id may either be created as a (non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also output a warning about this somewhere, but not in the actual document text itself.
+
+### Required and Optional Resource Support
+
+Current copyright law makes the use of resources problematic. As such:
+
+* Support for `image`, `audio` and `video` resources is optional in Markua processors, regardless of location.
+* Support for web resources is optional in Markua processors, regardless of resource type.
+* Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
+
+For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+
+{#acknowledgments}
+# Acknowledgments
+
+I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help.
+
+First, a huge thanks to [Scott Patten](https://twitter.com/scott_patten), my co-founder at Ruboss and Leanpub. Scott is the lead developer of Leanpub's book generation engine. Leanpub Flavoured Markdown would not have existed without Scott's code. Furthermore, Scott is providing valuable feedback in the development of the Markua specification, as well as adding Markua support to Leanpub's book generation engine. Scott is giving me opinionated feedback on the Markua syntax, just as Aaron Swartz gave John Gruber feedback on the Markdown syntax. In many instances, e.g. the poetry syntax, what happens is that I come up with an idea which is good but flawed, Scott points the flaws out and suggests an alternative which often feels like giving into the status quo or feels too much like programming, I get really mad, and then I come up with something better than I would have otherwise. So, Markua probably also wouldn't exist if I couldn't--repeatedly and productively--get mad at Scott.
+
+Second, I'd like to thank [Braden Simpson](https://twitter.com/bradensimpson). Braden has been instrumental in the development of the open source ES6 Markua parser, as well as the open source MarkuaPad editor and its usage in Leanpub. Braden has also been key in developing the test suite for Markua, and along with Scott has given me great feedback on crucial design decisions such as the image syntax.
+
+Third, an ongoing thanks to [Len Epp](https://twitter.com/lenepp) and [Jordan Ell](https://twitter.com/jordanelltweets), who have been instrumental in the development of Leanpub. Len has been with us since the very early days, and has greatly helped our customer development process, helping (as he likes to tease me) grow Leanpub over 100x since joining us. Jordan is proving key in helping Scott, Braden, Len and me to bring Leanpub--and Markua--to the next order of magnitude of success.
+
+I'm getting great feedback on Twitter as well. Of particular note are the contributions of [Iva Cheung](https://twitter.com/IvaCheung), [Assaf Arkin](https://twitter.com/assaf), [Axel Rauschmayer](https://twitter.com/rauschma) and [Michael Müller](https://twitter.com/muellermi). Iva helped us figure out how to think about front matter, main matter and back matter properly, and she also organizes a Vancouver publishing unconference that I've had the pleasure of both speaking at and of sponsoring. I know Assaf from my Silicon Valley days: Assaf was the CTO of Intalio for the four years that I was a developer there. Assaf is probably the smartest technologist that I have ever worked with (sorry Ken!), and his interest in Markua and his feedback during its development were both motivating and helpful. Axel was really helpful to me in an email thread that we had, which was the catalyst for me to rethink my goals with Markua and to start throwing out more than I had planned to from Leanpub Flavoured Markdown. Michael was key in convincing me to add index entry support to Markua.
+
+Perhaps most important, Markua is benefiting from years of feedback about Leanpub Flavoured Markdown from Leanpub authors. If it wasn't for Leanpub authors, there would be no Markua. Some Leanpub authors are providing helpful feedback over email. Thanks especially to Dave Warnock.
+
+I'd also like to thank [Justin Damer](https://twitter.com/damerdamer). Justin and I designed the logo for Markua together, just as we designed the Leanpub logo together. I've never enjoyed working with a designer more than I enjoy working with Justin.
+
+Next, a huge thanks to [Ken Pratt](https://twitter.com/ken_pratt), who made a number of key contributions to the development of Leanpub Flavoured Markdown and to Ruboss over his years working with us.
+
+Finally, I would like to thank my wife Caroline and my son Evan: while this is not as long as some of my books, there's still a lot of thought and effort going into it, and a lot of sacrifice. Arguably, this is harder than any book I've ever written. As always, their support is very much appreciated.

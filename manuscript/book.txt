@@ -1,8 +1,1 @@
-warning.txt
-introduction.txt
-syntax.txt
-examples.txt
-philosophy.txt
-definitions.txt
-appendices.txt
-acknowledgments.txt
+manuscript.txt
