@@ -2272,3 +2272,10 @@ a b <span id="__i__1__C">c</span> d e
 
 a b <span id="__i__2_C">c</span> d e
 ~~~
+
+
+```
+The id will be `__i__<number>__<index>`. Where `index` is everything inside of the curly braces after `i:` and before the `|`, with `*` replaced with nothing and `!` replaced with `__`.
+index = (The thing inside the curly braces after `i:`).split(/\|/).first.gsub(/\!/, '__').gsub(/\*/, '').lower
+`number` is the number of times `index` has been indexed in the document already, counting from 1.
+```

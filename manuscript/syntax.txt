@@ -2549,6 +2549,8 @@ This encourages competition in the Markua ecosystem, while ensuring that Markua 
 
 Extension attributes go far beyond adding icons to blurbs: they allow for specialized uses of Markua. Since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed. Some obvious uses of extension attributes include adding CSS classes which can then be styled to set fonts, adding custom types to figures for things like lemmas and theorems, etc.
 
+W> TODO - put all book section directives in here? Make directives just about whether there are line breaks?
+
 ## Index Entries
 
 Markua supports adding index entries as metadata. Index entries let authors or indexers produce professional-looking indexes in Markua books.
@@ -2658,15 +2660,47 @@ Supposedly the great-great-great-granduncle of the musician Moby{i:Moby} was Her
 
 Note that adding index entries is best left until the end of a book. At that time, ids like {#myid} can be converted to {id: #myid, i: blah} if index entries are being added where ids already are.
 
+## CriticMarkup
+
+W> TODO - ?
+
 ## Directives
 
 Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
 
 A> Asides, blurbs and callouts are not directives since they have a closing tag.
 
+W> TODO - rewrite directives. Directives are just a free-floating attribute list with blank lines above and below.
+
+W> TODO - Should all book section directives just be optional attributes except {mainmatter}
+
 ### Language Directives
 
+W> TODO
 
+```
+figure this out:
+
+[blah]{lang:en} to override fonts
+[blah]{lang:zh} to override to Chinese and activate LTR
+[blah]{lang:ja} to override to Japanese and activate LTR
+[blah]{lang:ko} to override to Korean and activate LTR
+[blah]{lang:th} to override to Thai and activate LTR
+[blah]{lang:he} to override to Hebrew and activate RTL
+[blah]{lang:ar} to override to Arabic and activate RTL
+<span dir="ltr" lang="ko">
+<span dir="rtl" lang="ar">
+no need for dir attr
+foo bar [some Hebrew text]{lang:he} baz
+[some text]{i: blah}
+foo bar [Hebrew text]{lang:he} baz
+{lang:ar}
+aoetuhnsato stnaoheu tnsoahu nstaoh nstaoh
+{dir: rtl} on a block element
+or
+{rtl}
+{ltr}
+```
 
 ### Book Section Directives
 
