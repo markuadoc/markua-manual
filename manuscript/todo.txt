@@ -1,24 +1,13 @@
 # TODO
-float left and right only
-
 - add reversed support
 * Typographic symbols: Smart quotes, n-dash, m-dash, ellipses, etc?
-* Images - Special attributes: width, float, etc?
 * CriticMarkup support?
-* Support commenting out files in book.txt and sample.txt with #
 * Font sizes etc with CSS class?
-* Should we have a book.css?
 * lemma, theorem, etc -- typed figures?
-
-- extension attributes?
 - definition list linking yes
 - table just table for linking?
 - align {left, center, right, justified} on any heading? - no
-- no more align on figures, just floating
 - multiple 1. lines may be blah or may be blah
-
-w, x, y, z, aa, ab
-
 [blah]{lang:en} to override fonts
 [blah]{lang:zh} to override to Chinese and activate LTR
 [blah]{lang:ja} to override to Japanese and activate LTR
@@ -26,59 +15,19 @@ w, x, y, z, aa, ab
 [blah]{lang:th} to override to Thai and activate LTR
 [blah]{lang:he} to override to Hebrew and activate RTL
 [blah]{lang:ar} to override to Arabic and activate RTL
-
-need blank line before list
-
-if you don't tack anything on to the [] then they are output
-
 <span dir="ltr" lang="ko">
 <span dir="rtl" lang="ar">
-
-TODO - get list of RTL languages
-
 no need for dir attr
-
-lang:en
-
 foo bar [some hebrew]{lang:he} baz
-
 [some text]{i: blah}
 foo bar [hebrew text]{lang:he} baz
-
 {lang:ar}
 aoetuhnsato stnaoheu tnsoahu nstaoh nstaoh
-
 {dir: rtl} on a block element
-
 or
-
 {rtl}
 {ltr}
-
-### Syntax for index entries
-
-~~~
-a b c {i:C} d e
-
-...
-
-a b c{i:C} d e
-~~~
-
-results in:
-
-~~~
-a b <span id="__i__1__C">c</span> d e
-
-...
-
-a b <span id="__i__2_C">c</span> d e
-~~~
-
 spec: defining an index entry attaches it to prev word or to the next block.
-
 The id will be `__i__<number>__<index>`. Where `index` is everything inside of the curly braces after `i:` and before the `|`, with `*` replaced with nothing and `!` replaced with `__`.
-
 index = (The thing inside the curly braces after `i:`).split(/\|/).first.gsub(/\!/, '__').gsub(/\*/, '').lower
-
 `number` is the number of times `index` has been indexed in the document already, counting from 1.

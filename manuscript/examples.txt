@@ -2252,3 +2252,23 @@ W> TODO - do we add the br tags or not for inline figures?
 </div>
 <p>This is paragraph 3.</p>
 ```
+
+### Syntax for index entries
+
+~~~
+a b c {i:C} d e
+
+...
+
+a b c{i:C} d e
+~~~
+
+results in:
+
+~~~
+a b <span id="__i__1__C">c</span> d e
+
+...
+
+a b <span id="__i__2_C">c</span> d e
+~~~
