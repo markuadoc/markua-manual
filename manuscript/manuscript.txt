@@ -133,15 +133,7 @@ Books and documents have different abstractions than HTML. All abstractions [lea
 
 So, I started over.
 
-I started with Markdown. I then removed the few things which were not needed for books and documents. I also removed or changed everything the few things were overly complex, either for authors using Markua to write books or documents or for software developers implementing Markua Processors. I then found new, more appropriate abstractions for books and documents--most importantly, resources, figures and attribute lists.
-
-I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
-
-## Markua Character Encoding
-
-Markua documents MUST be saved in the **UTF-8** character encoding.
-
-Note that ASCII text is a valid form of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 compliant text.
+I started with Markdown. I then removed or changed the few things which were either not needed for books and documents, or which were overly complex. I then found new, more appropriate abstractions for books and documents--most importantly, resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
 
 ## Why the Name "Markua"?
 
@@ -169,7 +161,13 @@ To stay current on Markua progress, follow [@markuadoc](https://twitter.com/mark
 
 # Markua Syntax
 
-This part is an informal specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
+This chapter is an informal, easy to read specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
+
+## Markua Character Encoding
+
+Markua documents are written in plain text.
+
+Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
 ## Text Formatting
 
