@@ -744,7 +744,7 @@ We will discuss the supported and the default attributes for images, and then sh
 : The `position` refers to vertical positioning on a page. The position only has an effect on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
 
 `width` and `height`
-: The `width` and `height` can both be `auto`, `fullbleed` or an integer between `1` and `100` inclusive. The default is `auto`, which means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) It is legal for either one or both of `width` and `height` to be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page, which respects the margins.
+: The `width` and `height` can both be `auto` (the default), `fullbleed` or an integer between `1` and `100` inclusive. The default of `auto` means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) It is legal for either one or both of `width` and `height` to be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page, which respects the margins.
 
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in square brackets for images inserted as spans and only in the attribute list for figures.
@@ -1048,13 +1048,13 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 : For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`.
 
 `line-numbers`
-: This determines whether the code sample shows line numbers. Values are `on` or `off`. The default value is `off`. Any value other than `on` is interpreted as `off`. Note that a code resource inserted as a span should be a single line of code, so this attribute does not make sense with spans.
+: This determines whether the code sample shows line numbers. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`. Note that a code resource inserted as a span should be a single line of code, so this attribute does not make sense with spans.
 
 `number-from`
 : If line numbers are shown, this lets you override the starting number of the line numbers. The default value is `1`.
 
 `crop-start`
-: Sometimes it's desirable to only show part of a code resource defined in an external file as the code example. The `crop-start` and `crop-end` attributes let you accomplish this. The `crop-start` attribute defines the line which represents the first line included from the resource. For example, `{crop-start: 10, crop-end: 15, line-numbers: on, number-from: 10}` ensures that lines 10-15 are shown and are numbered as lines 10-15. The default value is 1, which is the first line of the file.
+: Sometimes it's desirable to only show part of a code resource defined in an external file as the code example. The `crop-start` and `crop-end` attributes let you accomplish this. The `crop-start` attribute defines the line which represents the first line included from the resource. For example, `{crop-start: 10, crop-end: 15, line-numbers: true, number-from: 10}` ensures that lines 10-15 are shown and are numbered as lines 10-15. The default value is 1, which is the first line of the file.
 
 `crop-end`
 : This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
@@ -2293,13 +2293,13 @@ These are the syntactic sugar values you can use:
 
 | Sugar | Equivalent To a B> With |
 |-------|-------------------------|
-| `D>`  | {class: `discussion`}   |
-| `E>`  | {class: `error`}        |
-| `I>`  | {class: `information`}  |
-| `Q>`  | {class: `question`}     |
-| `T>`  | {class: `tip`}          |
-| `W>`  | {class: `warning`}      |
-| `X>`  | {class: `exercise`}     |
+| `D>`  | `{class: discussion}`   |
+| `E>`  | `{class: error}`        |
+| `I>`  | `{class: information}`  |
+| `Q>`  | `{class: question}`     |
+| `T>`  | `{class: tip}`          |
+| `W>`  | `{class: warning}`      |
+| `X>`  | `{class: exercise}`     |
 
 Examples:
 
@@ -2677,34 +2677,52 @@ My name is Rumpel\-stiltskin.
 ## Metadata
 
 {#attributes}
-### Standard Attributes
+### Attributes
 
 Attributes are used to do everything from specify the language of code blocks, add ids for crosslinkng and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
 
-Attribute values can be enclosed in quotation marks. These are optional, and are only needed if the attribute value contains a comma. However, for clarity, it is recommended to use quotation marks for any attribute values which are not single words or numbers.
+#### Attribute List Format
 
-Attributes can also have numeric values. These are the same, with or without quotes:
+An attribute list is one or more key-value, comma-separated pairs:
 
-```
-{crop-start: 10, crop-end: "15", line-numbers: on}
-![Hello World in Ruby](hello.rb)
-```
+`{key_one: value1, key_two: value_two, key_three: "value three!", key_four: true, key_five: 0, key_six: 3.14}`
 
-In this example, the numbers 10 and 15 are both treated as numbers.
+Note that you can skip the space between the colon and the value: the following `{format: ruby}` and `{format:ruby}` both work. However, for consistency I recommend always adding a space.
 
-If you wish an attribute to have a value that contains a quotation mark, you need to escape it.
+#### Attribute Keys
 
-Here's some fish that may not be very fresh:
+The keys of attributes must consist exclusively of lowercase letters and underscores (`_`). (For you programmers, this is [`a-z_`].)
 
-```
-{caption: "\"Fresh\" Fish", alt: "a smelly looking fish"}
-![](fish.jpg)
-```
+#### Attribute Value Types
 
-Finally, you can skip the space between the colon and the value: the following `{format: ruby}` and `{format:ruby}` both work. However, for consistency I recommend just always adding a space.
+Attributes are typed as `boolean`, `integer`, `float` or `text`. Most attributes are `text`.
+
+Every attribute in Markua has a default.
+
+Here's how attribute values are interpreted:
+
+`boolean`
+: The values are `true` or `false` are boolean values. Unless otherwise specified by the attribute itself, the default value of a boolean attribute is `false`. Any value other than `true` is interpreted as `false`.
+
+`integer`
+: Any number which does not contain a decimal point is interpreted as an integer. Unless otherwise specified by the attribute itself, the default value of an integer is 0.
+
+`float`
+: Any number which contains a decimal point is interpreted as a float. If an attribute is a float, it can accept attribute values that are integers as well. (You're not required to type 0.0 for 0.) Unless otherwise specified by the attribute itself, the default value of a float is 0.
+
+`text`
+: Any value other than `true`, `false` or a number is text. A text attribute value must be enclosed in quotes unless every character in it is a lowercase letter, uppercase letter, number, hyphen (`-`) or underscore (`_`). (For you programmers, this is [`a-zA-Z0-9_-`].)
+
+Only text attribute values can be enclosed in quotation marks.
+
+If a text attribute value contains a quote, it must be escaped: e.g. `{caption: "\"Fresh\" Fish"}`
+
+#### `id` Attributes
+
+As previously discussed, there is special syntactic sugar for ids: `{#foo}` is equivalent to `{id: foo}`. However, ids are just attributes.
 
 {#extension-attributes}
-### Extension Attributes
+#### Extension Attributes
 
 Markua Processors must ignore any attributes which they do not understand.
 
@@ -3102,7 +3120,7 @@ number-chapters
 : This attribute sets how chapter numbering is done. The values are `off`, `chapter`, `section`, `sub-section`, `sub-sub-section` and `all`. The default is `chapter`, which means to number chapters but not sections or below.
 
 number-parts
-: This attribute sets whether parts are numbered, if present. The values are `on` and `off`. The default is `on`, which means to number parts.
+: This attribute sets whether parts are numbered, if present. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`.
 
 number-figures
 : This attribute sets whether figures are numbered, if present. The values are `off`, `single` and `double`. The default is `double`. The choice `single` means to number figures in one large list (Figure 1, Figure 2, etc.). The choice `double` means to number by chapter, e.g. `Figure 8.1` for the first figure in chapter 8. Per Chicago, figures in an Appendix would be listed as `Figure A.1` for Appendix A, etc.
