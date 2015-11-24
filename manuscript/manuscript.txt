@@ -59,11 +59,9 @@ This is its specification.
 
 Markua, pronounced "mar-coo-ah", is a plain text format designed for the writing of books and documents.
 
-Markua is intended to be extremely simple and powerful. If you want to write a novel in Markua, you should be able to learn the Markua syntax that you need to know in 30 seconds. If you want to write a computer programming book or doctoral thesis in Markua, you should be able to learn the additional syntax you need in 5 minutes.
+Markua is the best way in the world to write. Markua is extremely simple and powerful. If you want to write a novel in Markua, you can learn the Markua syntax that you need to know in 30 seconds (see below). If you want to write a computer programming book or doctoral thesis in Markua, order a pizza: you can learn the additional syntax you need in less than 30 minutes.
 
-Markua is the best way in the world to write.
-
-Markua is terse. When you are writing using Markua, you feel like you are writing, not programming. Once you understand Markua's syntax, it fades into the background.
+Markua is terse. When you are writing using Markua, you are writing, not programming. Once you understand Markua's syntax, it fades into the background.
 
 Markua is opinionated. There is only one way to do most things. (Sometime there are two ways, however, for improved Markdown compatibility. Markua breaks its own rules.)
 
@@ -113,9 +111,7 @@ The reason that basic formatting hints are added to Markua is to enable automate
 
 ## Markua Origins in Markdown and Leanpub
 
-Markua is based on [Markdown](http://daringfireball.net/projects/markdown/).
-
-Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was described by John Gruber as follows:
+Markua is based on [Markdown](http://daringfireball.net/projects/markdown/). Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was described by John Gruber as follows:
 
 > Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
 
