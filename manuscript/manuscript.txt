@@ -2677,7 +2677,7 @@ My name is Rumpel\-stiltskin.
 ## Metadata
 
 {#attributes}
-### Attributes
+### Standard Attributes
 
 Attributes are used to do everything from specify the language of code blocks, add ids for crosslinkng and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
 
@@ -2686,8 +2686,8 @@ Attribute values can be enclosed in quotation marks. These are optional, and are
 Attributes can also have numeric values. These are the same, with or without quotes:
 
 ```
-{format: ruby, crop-start: 10, crop-end: "15", line-numbers: on}
-<<(code/sample1.rb)
+{crop-start: 10, crop-end: "15", line-numbers: on}
+![Hello World in Ruby](hello.rb)
 ```
 
 In this example, the numbers 10 and 15 are both treated as numbers.
@@ -2697,11 +2697,11 @@ If you wish an attribute to have a value that contains a quotation mark, you nee
 Here's some fish that may not be very fresh:
 
 ```
-{title: "\"Fresh\" Fish"}
-Filet of salmon, on sale now!
+{caption: "\"Fresh\" Fish", alt: "a smelly looking fish"}
+![](fish.jpg)
 ```
 
-Finally, you can skip the space between the colon and the value: the following `{format:ruby}` and `{format:"ruby"}` both work. However, for consistency I recommend just always adding a space.
+Finally, you can skip the space between the colon and the value: the following `{format: ruby}` and `{format:ruby}` both work. However, for consistency I recommend just always adding a space.
 
 {#extension-attributes}
 ### Extension Attributes
@@ -2731,6 +2731,7 @@ In its simplest form, an index entry is simply `{i: "hello"}`. Like any attribut
 These are the various formats of an index entry:
 
 ```
+{i: hello}
 {i: "hello"}
 {i: "Armstrong, Peter"}
 {i: "Yahoo!"}
@@ -2745,8 +2746,11 @@ These are the various formats of an index entry:
 
 Here's what they do:
 
+`{i: hello}`
+: Adds an index entry for `hello`. If an index entry has no punctuation or formatting then it does not need quotes.
+
 `{i: "hello"}`
-: Adds an index entry for `hello`.
+: Adds an index entry for `hello`. Quotes are always fine to use, even when not required.
 
 `{i: "Armstrong, Peter"}`
 : Adds an index entry for `Armstrong, Peter`. The quotes are always omitted. Their function is to allow things like exclamation marks and other punctuation to be added without fear, in case you don't feel like learning which punctuation is safe.
