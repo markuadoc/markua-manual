@@ -109,7 +109,7 @@ Markua is not intended to be used to create the layout of a high quality print b
 
 The reason that basic formatting hints are added to Markua is to enable automated production of ebooks that look good enough, especially on mobile where there are no fixed page sizes.
 
-## Markua Origins in Markdown and Leanpub
+## From Markdown to Markua
 
 Markua is based on [Markdown](http://daringfireball.net/projects/markdown/). Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was described by John Gruber as follows:
 
@@ -122,6 +122,8 @@ The primary reason that Markdown is a great way to write is that it was designed
 Markua is heavily inspired by Markdown. What Markua does is maps most Markdown syntax to book concepts, as well as adding new syntax and concepts of its own.
 
 The most popular subset of Markdown exists virtually unchanged in Markua. For example, *all* the Markua syntax described [earlier](#novel_syntax) as necessary to write a novel is inherited verbatim from Markdown.
+
+One of the design goals of Markua is for it to be the most straightforward way for a Markdown document to become a book. So, if you already write your blog posts or lecture notes in Markdown, there is a straightforward path to making a book. The process of converting a Markdown document into Markua is mostly a process of decorating (not interior decorating; the decorator pattern), enhancing and reinterpreting the Markdown document appropriately.
 
 Markua is being created by [Peter Armstrong](https://twitter.com/peterarmstrong). I'm the co-founder of Leanpub. (Unlike most specifications, this specification is being written by one person, so throughout it I will say "I", not "we".) At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and I created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
 
