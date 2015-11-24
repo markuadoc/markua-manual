@@ -59,18 +59,13 @@ This is its specification.
 
 # Overview
 
-W> This specification is in-progress. The introductory sections are particularly incoherent, as they're being rewritten.
-
 ## What is Markua?
 
 Markua, pronounced "mar-coo-ah", is a plain text format designed for the writing of books and documents.
 
 Markua is intended to be extremely simple and powerful. I want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
 
-The Markua specification specifies two things:
-
-1. Markua syntax.
-2. Markua HTML mapping.
+The Markua specification specifies both the Markua syntax and the mapping from Markua to HTML.
 
 ## All the Markua Syntax Needed to Write a Novel
 
@@ -78,8 +73,10 @@ Here's all the Markua you need to know to write a novel:
 
 * Write in plain text using any text editor you want.
 * Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
-* To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line: `# The Chapter Name`
-* To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line: `## The Section Name`
+* To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
+  `# The Chapter Name`
+* To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
+  `## The Section Name`
 * To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can if you want.
 * Surround text with one asterisk (`*`) on each side to make it `*italic*`, and with two asterisks (`**`) on each side to make it `**bold**`.
 * To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want: `* * *`
