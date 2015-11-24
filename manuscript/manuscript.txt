@@ -74,15 +74,16 @@ The Markua specification specifies both the Markua syntax and the mapping from M
 
 Here's all the Markua you need to know to write a novel:
 
-* Write in plain text using any text editor you want.
-* Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
-* To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
-  `# The Chapter Name`
-* To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
-  `## The Section Name`
-* To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can if you want.
-* Surround text with one asterisk (`*`) on each side to make it `*italic*`, and with two asterisks (`**`) on each side to make it `**bold**`.
-* To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want: `* * *`
+1. Write in plain text using any text editor--or even Notepad or TextEdit.
+2. Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
+3. To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
+   `# The Chapter Name`
+4. To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
+   `## The Section Name`
+5. To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can if you want.
+6. Surround text with one asterisk (`*`) on each side to make it `*italic*`, and with two asterisks (`**`) on each side to make it `**bold**`.
+7. To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want:
+   `* * *`
 
 That's it!
 
