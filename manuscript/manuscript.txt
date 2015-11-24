@@ -664,7 +664,7 @@ A file called `bar.png` in a subdirectory `images` of the resources directory is
 
 Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub will create subdirectories of the `resources` directory for every type of resource (images, audio, video, code and math), but this is not a requirement.
 
-W> TODO_LEANPUB - implement the resources directory then change "will create" to "creates"
+W> TODO_LEANPUB - implement the resources directory support
 
 The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file centaining an export should contain a `resources` directory which contains an `images` subdirectory with the images.
 
@@ -773,8 +773,6 @@ These attributes can all be overridden via the attribute list on the figure.
 #### Local Images
 
 ##### Span
-
-W> TODO_LEANPUB - h6 needs proper newlines afterward, and needs to be numbered if numbering on
 
 ~~~
 Easy as `![pie](pie.png)`.
@@ -2811,10 +2809,6 @@ Supposedly the great-great-great-granduncle of the musician Moby{i: "Moby"} was 
 
 Note that adding index entries is best left until the end of a book. At that time, ids like {#myid} can be converted to {id: #myid, i: "blah"} if index entries are being added where ids already are.
 
-### CriticMarkup
-
-W> TODO - support it?
-
 ### Directives
 
 Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
@@ -3005,6 +2999,10 @@ Markua is not supporting various Leanpub Flavoured Markdown directives which wer
 * `{end-hanging-paragraphs}`
 * `{footnotes-on}`
 * `{footnotes-off}`
+
+### CriticMarkup
+
+W> TODO - support it?
 
 {#settings}
 ### Settings
@@ -5580,6 +5578,8 @@ This is a paragraph.
 Note that all the trailing `#` characters are ignored and are not part of the heading text.
 
 From reading this, you'll recogrize that Markua headings are a subset of atx headers.
+
+W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numbered if numbering on
 
 {lfm_changes}
 ## Important Changes From Leanpub Flavoured Markdown
