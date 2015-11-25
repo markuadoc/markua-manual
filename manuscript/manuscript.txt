@@ -2087,7 +2087,9 @@ This complex table has a caption as well as align, width and top attributes:
 `caption`
 : The `caption` is the table caption.
 
-## Other Block Elements
+## Block Elements
+
+We've already seen many examples of block elements in this specification, including paragraphs, headings and figures. These are the rest of them...
 
 ### Blockquotes (`>`)
 
@@ -2423,9 +2425,7 @@ It can have multiple paragraphs.
 
 ## Span Elements
 
-### Explicitly Creating Spans
-
-W> TODO - use [blah] syntax to explicitly create a span to have an attr list?
+We've already seen many examples of span elements in this specification, especially in the resources section showing resources inserted as spans. These are the rest of them...
 
 ### Links
 
@@ -2462,6 +2462,24 @@ Example:
 ```
 Markua was developed at <http://leanpub.com>.
 ```
+
+### Explicitly Creating Spans with `[`...`]`
+
+Surrounding text in square brackets can be useful not just for giving it a URL to link to. If you wish to add attributes to an arbitrary span of text, you can create an arbitrary span of text using square brackets and then add an attribute list immediately afterward:
+
+```
+My friend said [bonjour]{lang: fr} to me.
+```
+
+With the attribute I have indicated that the bonjour is a French word. So, if the Markua processor uses a different font for French, it can do so.
+
+(This is a contrived example, but it makes a lot more sense with intermixing right-to-left languages like Hebrew and Arabic with left-to-right languages.
+
+#### Sometimes a Square Bracket is Just a Square Bracket
+
+If there are no round brackets or curly braces immediately after some text in square brackets, the text in square brackets is just that: text in square brackets. In this case, the square brackets are output as normal text.
+
+This is useful when you want to [sic.] something, etc.
 
 ### Footnotes
 
