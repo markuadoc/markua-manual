@@ -125,7 +125,7 @@ The most popular subset of Markdown exists virtually unchanged in Markua. For ex
 
 One of the design goals of Markua is for it to be the most straightforward way for a Markdown document to become a book. So, if you already write your blog posts or lecture notes in Markdown, they are probably already valid Markua. You can use any Markua Processor, such as Leanpub, to turn them into an ebook with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books, this process will feel like adding, not converting. The process of going from a Markdown document into a Markua ebook is mostly a process of decorating--enhancing and reinterpreting the Markdown document appropriately. In fact, one of goals is for writers who are familiar with Markdown to feel as though they are still writing in Markdown, but that Markdown somehow *grew an understanding of book concepts*. Markua is really "Markdown for books".
 
-I, [Peter Armstrong](https://twitter.com/peterarmstrong), am creating Markua. I'm the co-founder of Leanpub. (Unlike most specifications, this specification is being written by one person, so throughout it I will say "I", not "we". I'm not the Queen--I shouldn't use the royal "we".) At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and I created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
+I, [Peter Armstrong](https://twitter.com/peterarmstrong), am creating Markua. I'm the co-founder of Leanpub. (Unlike most specifications, this specification is being written by one person, so throughout it I will say "I", not "we". I'm not the Queen, so I shouldn't use the royal "we"!) At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and I created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
 
 Markua is the evolution of how Markdown is used at Leanpub. After years of experience with Leanpub Flavoured Markdown, I set out to specify it properly. I originally thought that this is what Markua would be: just a formalization of Leanpub Flavoured Markdown. But as the specification work evolved, I realized that Markua was really a descendant of Markdown, not just a flavour of it.
 
@@ -2473,7 +2473,7 @@ My friend said [bonjour]{lang: fr} to me.
 
 With the attribute I have indicated that the bonjour is a French word. So, if the Markua processor uses a different font for French, it can do so.
 
-(This is a contrived example, but it makes a lot more sense with intermixing right-to-left languages like Hebrew and Arabic with left-to-right languages.
+This is a contrived example, but it makes a lot more sense with intermixing right-to-left languages like Hebrew and Arabic with left-to-right languages--in those cases, bad output can result if a Markua Processor does not realize it needs to reverse directions and switch fonts.
 
 #### Sometimes a Square Bracket is Just a Square Bracket
 
@@ -2916,7 +2916,7 @@ goodbye
 
 Note that I didn't actually say hello or goodbye in Hebrew, Chinese or Arabic because the code font used for this specification does not support them all.
 
-A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua: languages only have one direction, so there's no need to have separated `dir` and `lang` attributes.
+A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `dir` attribute in general: languages only have one direction, so there's no need to have separate `dir` and `lang` attributes.
 
 #### Book Section Directives
 
