@@ -2212,6 +2212,8 @@ Multi-paragraph asides are more pleasant using this syntax.
 {/aside}
 ```
 
+A> Do not confuse the syntax for asides, blurbs and callouts with an attribute list. They are not attribute lists.
+
 ### Blurbs (`B>`)
 
 Blurbs are like asides, but shorter. A blurb cannot span multiple pages. A blurb can contain headings.
@@ -2689,6 +2691,12 @@ An attribute list is one or more key-value, comma-separated pairs:
 
 Note that you can skip the space between the colon and the value: the following `{format: ruby}` and `{format:ruby}` both work. However, for consistency I recommend always adding a space.
 
+An attribute list can be inserted into a Markua document in one of three ways:
+
+1. Immediately above a block element (e.g. heading, figure, etc), with one newline separating it from the block element.
+2. Immediately after a span element (e.g. a word, italicized phrase, etc), with no spaces separating it from the span element.
+3. On a line by itself, with one blank line above and below it. In this format, the attribute list contains [directives](#directives).
+
 #### Attribute Keys
 
 The keys of attributes must consist exclusively of lowercase letters and underscores (`_`). (For you programmers, this is [`a-z_`].)
@@ -2731,8 +2739,6 @@ Because of this, Markua attribute lists can contain any number of extension attr
 This encourages competition in the Markua ecosystem, while ensuring that Markua implementations do not choke on Markua input which goes beyond their capabilities.
 
 Extension attributes go far beyond adding icons to blurbs: they allow for specialized uses of Markua. Since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed. Some obvious uses of extension attributes include adding CSS classes which can then be styled to set fonts, adding custom types to figures for things like lemmas and theorems, etc.
-
-W> TODO - put all book section directives in here? Make directives just about whether there are line breaks?
 
 ### Index Entries
 
@@ -2831,45 +2837,58 @@ Supposedly the great-great-great-granduncle of the musician Moby{i: "Moby"} was 
 
 Note that adding index entries is best left until the end of a book. At that time, ids like {#myid} can be converted to {id: #myid, i: "blah"} if index entries are being added where ids already are.
 
+{#directives}
 ### Directives
 
-Directives function like switches which affect the future behaviour of a Markua Processor. Like attributes, they are contained in curly braces `{` ... `}`. Unlike attributes, instead of having a `key: value` pair, they just contain a keyword.
+Directives are switches which affect the future behaviour of a Markua Processor.
 
-A> Asides, blurbs and callouts are not directives since they have a closing tag.
-
-W> TODO - rewrite directives. Directives are just a free-floating attribute list with blank lines above and below.
-
-W> TODO - Should all book section directives just be optional attributes except {mainmatter}
+The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it.
 
 #### Language Directives
 
-W> TODO
+A Markua document has a language. By default, the language is `en` for English. The default language can be set in the settings, discussed later.
+
+Every human language has a direction, either left-to-right or right-to-left. Also, some fonts only handle certain languages correctly.
+
+So, it's important to be able to indicate in Markua which language the text is in, so that a Markua Processor can use the correct fonts and apply the correct direction.
+
+To do this, you use the `lang` attribute.
+
+If you use `lang` in an attribute list of a block or span, the `lang` change just applies to that block or span. However, if you use it as a directive, it applies as the new default until a different `lang` directive is encountered.
+
+The following example says hello in English, then hello and goodbye in Hebrew, Chinese (Simplified) and Arabic, and then switches back to English to say goodbye:
 
 ```
-figure this out:
+hello
 
-[blah]{lang:en} to override fonts
-[blah]{lang:zh} to override to Chinese and activate LTR
-[blah]{lang:ja} to override to Japanese and activate LTR
-[blah]{lang:ko} to override to Korean and activate LTR
-[blah]{lang:th} to override to Thai and activate LTR
-[blah]{lang:he} to override to Hebrew and activate RTL
-[blah]{lang:ar} to override to Arabic and activate RTL
-<span dir="ltr" lang="ko">
-<span dir="rtl" lang="ar">
-no need for dir attr
-foo bar [some Hebrew text]{lang:he} baz
-[some text]{i: blah}
-foo bar [Hebrew text]{lang:he} baz
-{lang:ar}
-aoetuhnsato stnaoheu tnsoahu nstaoh nstaoh
-{dir: rtl} on a block element
-or
-{rtl}
-{ltr}
+{lang: he}
+
+שלום
+
+הֱיה שלום
+
+{lang: zh}
+
+您好
+
+再见
+
+{lang: ar}
+
+مرحبا
+
+وداعا
+
+{lang: en}
+
+goodbye
 ```
+
+A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua: languages only have one direction, so there's no need to have separated `dir` and `lang` attributes.
 
 #### Book Section Directives
+
+W> TODO - Should all book section directives just be optional attributes except {mainmatter}
 
 Most published books have three types of material in them: the front matter, the text and the back matter.
 
@@ -3022,10 +3041,6 @@ Markua is not supporting various Leanpub Flavoured Markdown directives which wer
 * `{footnotes-on}`
 * `{footnotes-off}`
 
-### CriticMarkup
-
-W> TODO - support it?
-
 {#settings}
 ### Settings
 
@@ -3156,6 +3171,10 @@ A backtick in text content (such as this paragraph) starts an inline span resour
 So, to show a literal backtick in a span, you start and end it with *two* backticks.
 
 This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!
+
+## Critic Markup
+
+W> TODO - support it?
 
 # Markua HTML Mapping
 
