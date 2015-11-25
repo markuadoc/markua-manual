@@ -2848,7 +2848,7 @@ Directives are switches which affect the future behaviour of a Markua Processor.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it.
 
-#### Language Directives
+#### Language Attributes and Directives
 
 A Markua document has a language. By default, the language is `en` for English. The default language can be set in the settings, discussed later.
 
@@ -2858,37 +2858,45 @@ So, it's important to be able to indicate in Markua which language the text is i
 
 To do this, you use the `lang` attribute.
 
-If you use `lang` in an attribute list of a block or span, the `lang` change just applies to that block or span. For example `[您好]{lang: zh}` to say hello in Chinese (Simplified) and ensure that the font was corectly set.
+If you use the `lang` attribute in an attribute list of a block or span, the `lang` change just applies to that block or span, which can help ensure that the font was corectly set.
 
-However, if you use it as a directive, it applies as the new default until a different `lang` directive is encountered.
+However, if you use the `lang` attribute as a directive, it applies as the new default until a different `lang` directive is encountered.
 
-The following example says hello in English, then hello and goodbye in Hebrew, Chinese (Simplified) and Arabic, and then switches back to English to say goodbye:
+The following example shows how you would say hello in English, then switch the language to Hebrew, then Chinese (Simplified), then Arabic, and then switch back to English to say goodbye:
 
 ```
 hello
 
 {lang: he}
 
-שלום
+Hebrew
 
-הֱיה שלום
+text
+
+here
 
 {lang: zh}
 
-您好
+Chinese
 
-再见
+text
+
+here
 
 {lang: ar}
 
-مرحبا
+Arabic
 
-وداعا
+text
+
+here
 
 {lang: en}
 
 goodbye
 ```
+
+Note that I didn't actually say hello or goodbye in Hebrew, Chinese or Arabic because the code font used for this specification does not support them all.
 
 A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua: languages only have one direction, so there's no need to have separated `dir` and `lang` attributes.
 
