@@ -2783,7 +2783,7 @@ Here's what they do:
 `{i: "Armstrong, Peter"}`
 : Adds an index entry for `Armstrong, Peter`. The quotes are always omitted. Their function is to allow things like exclamation marks and other punctuation to be added without fear, in case you don't feel like learning which punctuation is safe.
 
-`{i: "Yahoo!"}
+`{i: "Yahoo!"}`
 : Adds an index entry for `Yahoo!`. Exclamation marks in index entries are delimiters, so to add a literal exclamation mark, the index entry needs to be in quotes. The other characters in index entries that must be in quotes are `|`, `{` and `}`.
 
 `{i: "*hello*"}`
