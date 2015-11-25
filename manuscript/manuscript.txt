@@ -3132,13 +3132,15 @@ If you enjoy using track changes in Word, then you'll enjoy using CriticMarkup. 
 
 There are five types of changes supported by the markup in CriticMarkup:
 
-Change       | Markup
--------------|----------------------------
-Addition     | `{++` ... `++}`
-Deletion     | `{--` ... `--}`
-Substitution | `{~~` ... `~>` ... `~~}`
-Comment      | `{>>` ... `<<}`
-Highlight    | `{==` ... `==}{>>` ... `<<}`
+|--------------|------------------------------|
+| Change       | Markup                       |
+|--------------|------------------------------|
+| Addition     | `{++` ... `++}`              |
+| Deletion     | `{--` ... `--}`              |
+| Substitution | `{~~` ... `~>` ... `~~}`     |
+| Comment      | `{>>` ... `<<}`              |
+| Highlight    | `{==` ... `==}{>>` ... `<<}` |
+|--------------|------------------------------|
 
 These types of markup do not conflict with any Markua markup for attribute lists, since the opening curly brace is always followed by special characters.
 
