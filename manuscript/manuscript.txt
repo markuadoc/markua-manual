@@ -2719,6 +2719,8 @@ An attribute list can be inserted into a Markua document in one of three ways:
 2. Immediately after a span element (e.g. a word, italicized phrase, etc), with no spaces separating it from the span element.
 3. On a line by itself, with one blank line above and below it. In this format, the attribute list contains [directives](#directives).
 
+Regarding #2 and #3: Any line outside of a code resource which starts with an opening curly brace `{` and ends with a closing curly brace `}` is assumed to be an attribute list, and will not be output by a Markua processor. If you want to start a line with a literal opening curly brace `{` you need to preface it with a backslash (`\`).
+
 #### Attribute Keys
 
 The keys of attributes must consist exclusively of lowercase letters and underscores (`_`). (For you programmers, this is [`a-z_`].)
@@ -2754,13 +2756,15 @@ As previously discussed, there is special syntactic sugar for ids: `{#foo}` is e
 {#extension-attributes}
 #### Extension Attributes
 
-Markua Processors must ignore any attributes which they do not understand.
+Markua Processors must silently ignore any attributes which they do not understand. This is true whether the attributes are inserted in an attribute list attached to a span, block or even in free-floating directives.
 
 Because of this, Markua attribute lists can contain any number of extension attributes. An extension attribute is an attribute which is not defined in the Markua specification.
 
 This encourages competition in the Markua ecosystem, while ensuring that Markua implementations do not choke on Markua input which goes beyond their capabilities.
 
 Extension attributes go far beyond adding icons to blurbs: they allow for specialized uses of Markua. Since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed. Some obvious uses of extension attributes include adding CSS classes which can then be styled to set fonts, adding custom types to figures for things like lemmas and theorems, etc.
+
+This ensures that new attributes can be added to future versions of Markua without a negative effect on older Markua implementations. It also ensures that new versions of Markua can simply stop supporting attributes defined in this version of Markua without needing to specify anything special.
 
 ### Index Entries
 
@@ -2916,162 +2920,72 @@ goodbye
 
 Note that I didn't actually say hello or goodbye in Hebrew, Chinese or Arabic because the code font used for this specification does not support them all.
 
-A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `dir` attribute in general: languages only have one direction, so there's no need to have separate `dir` and `lang` attributes.
+A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: languages only have one direction, so there's no need to have separate `dir` and `lang` attributes.
 
-#### Book Section Directives
-
-W> TODO - Should all book section directives just be optional attributes except {mainmatter}
+#### Book `section` Directives
 
 Most published books have three types of material in them: the front matter, the text and the back matter.
 
 What authors write, the manuscript, is typically what goes into the text, or main matter, of the book. In style guidelines such as the Chicago Manual of Style this is called the text; in formats such as TeX and LaTeX it is called main matter.) It's what is numbered with Arabic numerals starting from 1.
 
-There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents (or ToC), Foreword, Preface, etc.) which comes before the text of the book. This is called "front matter". Some of the front matter comes before the ToC and is not numbered; the rest of the front matter that comes after the ToC gets numbered with Roman numerals.
+There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents (or ToC), Foreword, Preface, etc.) which can come before the main text of the book. This is called "front matter". Some of the front matter comes before the ToC and is not numbered; the rest of the front matter that comes after the ToC gets numbered with Roman numerals.
 
-There's also a bunch of other stuff (acknowledgments, appendices, the index, etc) which comes after the main matter. This is called the "back matter".
+There's also a bunch of other stuff (acknowledgments, appendices, the index, etc) which can come after the main matter. This is called the "back matter".
 
 If Markua just relied on its headings support there would be no good way to accomplish the division of a manuscript into front matter, main matter and back matter. (We could try some convention about heading names, but that would be a highly objectionable, English-centric hack.) Furthermore, there would be no good way to determine which parts of the front matter got numbered and which did not.  Also, there would be no good way to give explicit hints to Markua processors about how to style the various parts of a book.
 
-Book section directives are the solution to this.
+The book `section` directive is the solution to this.
 
-Book section directives inform Markua Processors what section of a book they are in, in order to affect numbering, formatting and other concerns like the placement of the Table of Contents.
+Adding multiple instances of the `section` directive throughout the book lets you indicate to Markua Processors what section of a book they are in, in order to affect numbering, formatting and other concerns like the placement of the Table of Contents.
 
-Markua is a fairly minimalist format, so we want to accomplish all of the above with as few directives as possible. Furthermore, for authors who do not know about these directives, we do not want anything bad to happen.
+Markua is a fairly minimalist format, so this is all accomplished with one directive. Furthermore, for authors who do not know about this directive, nothing bad or unexpected will happen.
 
-There are three types of book section directives:
+There are three types of values of the book `section` directive: front matter values, the `mainmatter` value and back matter values. These values are named for the different book sections identified in the Chicago Manual of Style.
 
-1. Front Matter Book Section Directives: these directives delineate various sections in the front matter
-2. The `{mainmatter}` directive: this indicates that the front matter is over
-3. Back Matter Book Section Directives: these delineate various sections in the back matter
+The following values of the `section` directive can occur in front matter:
 
-**You can write a book or document in Markua without using any directives at all, including book section directives.**
+* `half-title`
+* `series-title`
+* `title-page`
+* `copyright`
+* `dedication`
+* `epigraph`
+* `toc`
+* `figures`
+* `tables`
+* `foreword`
+* `preface`
+* `acknowledgments` (note that this value can also typically occur after the `{section: mainmatter}` book section directive)
+* `introduction`
+* `abbr` (yes, it's called `abbr` and not `abbreviations`, and note that this can also typically occur after the `{section: mainmatter}` book section directive)
+* `chronology` (note that this can also typically occur after the `{section: mainmatter}` book section directive)
 
-However, if you add any of the Front Matter Book Section Directives, the `{mainmatter}` directive is required.
+The `{section: mainmatter}` value indicates that the front matter is over. It is the start of the first page of the text.
 
-Almost all of the directives will be added either:
+The following values of the `section` directive can occur in back matter:
 
-a) by someone working for a publisher
-b) automatically by book generation software
+* `appendices`
+* `notes`
+* `glossary`
+* `bibliography` (note that a Markua processor may wish to format the text inside this section appropriately)
+* `contributors`
+* `illustration-credits`
+* `index`
 
-The only directives that a typical author will use are `{dedication}` and `{mainmatter}`.
+You can write a book or document in Markua without using any directives at all, including book `section` directives. However, if you add a `section` directive with a value of any of the front matter values, the `{section: mainmatter}` directive is required.
 
-A> For implementors of Markua Processors:
-A> It is perfectly legal to ignore all of the book section directives. Book section directives are only hints that are there for your benefit if you want to use them to add page breaks, switch to hanging indents, change the font size, use a custom layout or to do anything fancy with them. There is no requirement to do any of these things.
+If you're an author and this seems confusing, don't fear. Almost all of the directives will be added either by someone working for a publisher or automatically by book generation software. The only directives that a typical author will use are `{section: dedication}` and `{section: mainmatter}`.
 
-Besides the `{mainmatter}` directive, there are named directives for each book section in the Chicago Manual of Style.
+Also, note that Markua Processors may ignore all of the book `section` directives. Book `section` directives are only hints that indicate that the Markua Processor may wish to do things like switch to hanging indents, change the font size, use a custom layout etc based on what section of the book they are in.
 
-Note, however, that there are **no** `{frontmatter}` and `{backmatter}` directives. These are redundant, since there is a `{mainmatter}` directive. All book section directives before the `{mainmatter}` are in the front matter, and the first book section directive after the `{mainmatter}` directive starts the back matter.
+While these book `section` directives are mere hints, there are strict rules about their use:
 
-The following is the entire list of book section directives, in the order they will typically be encountered. There is no requirement about any of their order; they are just hints. If you're familiar with the Chicago Manual of Style you'll recognize them.
+1. Like any directive, each book `section` directive must be on a line by itself with blank lines above and below it.
+2. Each value of a book `section` directive can only appear once.
+3. The book `section` directives are all optional; it is legal to have a Markua document with no book `section` directives.
+4. If any book section directives with values which occur in front matter are present, a `{section: mainmatter}` directive is required.
 
-##### Front Matter Book Section Directives
-
-The following are the book section directives which can appear in the front matter.
-
-`{half-title}`
-: the book half title
-
-`{series-title}`
-: the series title (or frontispiece)
-
-`{title-page}`
-: the title page (note that if an image called `title_page.png`, `title_page.jpg` or `title_page.jpeg` exists it will be inserted as the first page of the book, but that any content in this section will also exist)
-
-`{copyright}`
-: the copyright page
-
-`{dedication}`
-: the dedication
-
-`{epigraph}`
-: the epigraph
-
-`{toc}`
-: the table of contents
-
-`{figures}`
-: the table of figures, or list of illustrations
-
-`{tables}`
-: the list of tables, or table of tables
-
-`{foreword}`
-: the foreword
-
-`{preface}`
-: the preface
-
-`{acknowledgments}`
-: the acknowledgments (note that this can also typically occur after the `{mainmatter}` book section directive)
-
-`{introduction}`
-: the introduction
-
-`{abbr}`
-: the abbreviations -- and yes, it's called `abbr` and not `abbreviations` (note that this can also typically occur after the `{mainmatter}` book section directive)
-
-`{chronology}`
-: the chronology (note that this can also typically occur after the `{mainmatter}` book section directive)
-
-##### The `{mainmatter}` Book Section Directive
-
-`{mainmatter}`
-: the first page of the text
-
-##### Back Matter Book Section Directives
-
-`{appendices}`
-: the appendix or appendices
-
-`{notes}`
-: the notes
-
-`{glossary}`
-: the glossary
-
-`{bibliography}`
-: the bibliography or references (note that a Markua processor may wish to format the text inside this section appropriately)
-
-`{contributors}`
-: the list of contributors
-
-`{illustration-credits}`
-: the credits for the illustrations
-
-`{index}`
-: the index(es)
-
-##### Book Section Directive Rules
-
-While these book section directives are mere hints, there are strict rules about their use:
-
-1. Each book section directive must be on a line by itself.
-2. Each book section directive must have a blank line above it, except at the beginning of a file.
-3. Each book section directive must have a blank line below it, except at the end of a file.
-4. Each book section directive can only appear once.
-5. The book section directives are all optional; it is legal to have a Markua document with no Book Section Directives.
-6. If any of the Front Matter Book Section Directives are present, the `{mainmatter}` directive is required.
-
-The upshot of all this is that authors new to Markua can completely ignore directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about directives. And using directives is very simple, despite how formally specified this section makes them.
-
-#### Directives That Are Not Understood Must Be Silently Ignored
-
-Directives that are not understood by Markua must be silently ignored.
-
-This has three consequences:
-
-1. New directives can be added to future versions of Markua without a negative effect on older Markua implementations.
-2. New versions of Markua can stop supporting directives in this version of Markua without needing to specify anything special.
-3. Any line which starts with an opening curly brace `{`, contains one word (with hypens), and ends with a closing curly brace `}` is assumed to be a directive, and will not be output by a Markua processor.
-
-#### Unsupported Leanpub Flavoured Markdown Directives
-
-Markua is not supporting various Leanpub Flavoured Markdown directives which were added willy-nilly over the years. These directives being dropped include:
-
-* `{begin-hanging-paragraphs}`
-* `{end-hanging-paragraphs}`
-* `{footnotes-on}`
-* `{footnotes-off}`
+Authors new to Markua can completely ignore all directives, including book `section` directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about book `section` directives. And using directives is very simple, despite how formally specified this section makes them.
 
 {#settings}
 ### Settings
@@ -5654,7 +5568,7 @@ From reading this, you'll recogrize that Markua headings are a subset of atx hea
 
 W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numbered if numbering on
 
-{lfm_changes}
+{#lfm_changes}
 ## Important Changes From Leanpub Flavoured Markdown
 
 Markua is the evolution of Leanpub Flavoured Markdown. However, the goal of Markua is to remove the tailbones and appendices that aren't necessary. This appendix highlights things which are changed from Leanpub Flavoured Markdown in a way which is not adequately discussed earlier.
@@ -5663,6 +5577,7 @@ The following Leanpub Flavoured Markdown features are not supported in Markua:
 
 * Centering paragraphs of text or headings using `C>` has been removed.
 * Explicit font switching via `{chinesefont}`, `{latinfont}`, `{japanesefont}`, `{koreanfont}` and `{thaifont}` is replaced with attaching a `{lang}` attribute (e.g. `[some text]{lang:en}`) on a span or block.
+* Various Leanpub Flavoured Markdown directives which were added willy-nilly over the years are being dropped, including `{ltr}`, `{rtl}`, `{begin-hanging-paragraphs}`, `{end-hanging-paragraphs}`, `{footnotes-on}`, `{footnotes-off}`
 
 {#implementor-rules}
 ## Rules and Guidelines for Implementors of Markua Processors
