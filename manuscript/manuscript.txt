@@ -3118,13 +3118,35 @@ So, to show a literal backtick in a span, you start and end it with *two* backti
 
 This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!
 
-## Critic Markup
+## CriticMarkup is Supported in Markua
 
-W> TODO - support it?
+[CriticMarkup](http://criticmarkup.com/) describes itself as follows:
+
+> a way for authors and editors to track changes to documents in plain text. As with Markdown, small groups of distinctive characters allow you to highlight insertions, deletions, substitutions and comments, all without the overhead of heavy, proprietary office suites.
+
+Basically, supporting CriticMarkup gives Markua authors the benefit of track changes in Word, but with all the benefits of using Markua. An editor can use CriticMarkup to make suggestions about text to add, delete or replace, as well as leaving comments and highlights on selected text.
+
+The largest benefit to using the CriticMarkup syntax in Markua is that since Markua documents are in plain text, you can use proper version control (like Git or Mercurial) with them, and this includes having the comments versioned right along with the rest of the Markua manuscript. Finding a comment that you deleted six months ago is as easy as checking out the revision that contained the comment.
+
+If you enjoy using track changes in Word, then you'll enjoy using CriticMarkup. If you don't enjoy working with editors or getting feedback about your writing in the text itself, then CriticMarkup isn't for you! If this is the case, don't worry about it: the support for CriticMarkup has no impact on the rest of Markua. If you don't want to use it, you don't need to learn about it.
+
+There are five types of changes supported by the markup in CriticMarkup:
+
+Change       | Markup
+-------------|----------------------------
+Addition     | `{++` ... `++}`
+Deletion     | `{--` ... `--}`
+Substitution | `{~~` ... `~>` ... `~~}`
+Comment      | `{>>` ... `<<}`
+Highlight    | `{==` ... `==}{>>` ... `<<}`
+
+These types of markup do not conflict with any Markua markup for attribute lists, since the opening curly brace is always followed by special characters.
+
+Markua Processors **must** support CriticMarkup by outputting the additions, deletions, substitutions, comments and highlights appropriately. The HTML Mapping chapter contains some examples of this. To learn more about how to use CriticMarkup, read the very well-written [CriticMarkup spec](http://criticmarkup.com/spec.php).
 
 # Markua HTML Mapping
 
-W> TODO - The rest of this document needs to be rewritten. Please ignore.
+W> TODO - The rest of this document needs to be rewritten. Please ignore everything after this point.
 
 ### Poetry
 
