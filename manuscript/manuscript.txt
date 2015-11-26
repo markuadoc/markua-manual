@@ -212,7 +212,7 @@ Markua, however, is a way of writing books and documents. Books have things like
 
 **What Markua does is to use the heading levels that Markdown uses to create HTML to create the structure of the book or document, as well as generating the `h1` through `h6` heading levels in the HTML version of the book.**
 
-Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown.
+Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings[^setext] are not supported. To learn more about Markdown headings, see the [Markdown Headings](#markdown_headings) appendix.
 
 Here's the only way that headings are made in Markua:
 
@@ -279,8 +279,6 @@ I thought long and hard about Markua headings, and changed my mind (as Scott and
 The design of Markua headings meets these requirements, in what I feel is an optimal way.
 
 A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
-
-A> There are two primary issues with Setext headings in Markdown. First, it is inconsistent: you can only define `h1` and `h2`; to define h3 and below, the atx style of heading must be used. Second, it is confusing: it's unclear about how many equals or minus signs you need to use. (The answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
 
 ## Whitespace, Paragraphs and Blank Lines
 
@@ -905,7 +903,7 @@ Here's a paragraph after the figure.
 Introducing Markua: `![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)`.
 ~~~
 
-A> Ironically, I'm writing this sentence almost a year after that talk was recorded, and I still haven't figured everything out about Markua.
+A> Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
 
 ##### Figure
 
