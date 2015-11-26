@@ -580,7 +580,11 @@ This needs to ![](stop.png) now.
 
 #### Span + Inline
 
-Alt text is not supported for inline span resources. There's no good syntax, and almost no real use case (with the exception of an inline span SVG image). If you want alt text in a span resource, use a local or web resource instead.
+Alt text is supported for inline span resources, but the syntax is ugly. To add this, you simply tack on an attribute list after the span. The following shows alt text on an inline span SVG image:
+
+```
+Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg{alt: a red square} square.
+```
 
 #### Figure
 
@@ -1233,9 +1237,9 @@ If you want to write "typewriter poetry" in the style of e e cummings, in which 
 
 There are three ways to insert such a code resource inline:
 
-1. by specifying the `text` format in metadata
+1. by using three tildes to insert the inline code resource
 2. by specifying the `text` format after the three backticks or three tildes
-3. by using three tildes to insert the inline code resource
+3. by specifying the `text` format in an attribute list
 
 Examples:
 
@@ -1646,6 +1650,8 @@ For uppercase and lowercase alphabetical numbering, Markua actually supports cre
 
 1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase or `Z.` for uppercase. (This way, implementors of Markua processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
 2. Every item in the list begins with the same single letter, followed by a period.
+
+A> These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single element list beginning with "AA" instead!
 
 The term "single letter" means that consecutive `c.`s start an ordered list which starts with `c, d, e, ...`, but that consecutive `aa.`s or `aba.`s do not start an ordered list. Again, this greatly simplifies life (you're welcome!) for implementors of Markua processors, who otherwise would need to figure out what number in the sequence `aba` is, in order to generate the correct HTML.
 
