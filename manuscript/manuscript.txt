@@ -1796,6 +1796,8 @@ term 2
 : definition 2
 ```
 
+There can be one to three spaces after the colon, or one tab.
+
 A definition list can define multiple definitions for a term:
 
 ```
@@ -1807,12 +1809,38 @@ term 2
 : definition 2
 ```
 
-Note that a single term definition list is a definition list, regardless of how many definitions for the term exist.
+A single term definition list is a definition list, regardless of how many definitions for the term exist:
 
 ```
 term
 : definition
 ```
+
+Finally, like list items, a definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definiton list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
+
+```
+Here's a paragraph before the list.
+
+one
+: This is the first paragraph in the first list item. Yay!
+
+  This is a second paragraph in the first list item.
+
+two
+: The second list item is simple.
+
+three
+: The third list item has three paragraphs.
+  This is still part of the first paragraph.
+
+  Here's the second paragraph in the third list item.
+
+  Here's the third paragraph in the third list item.
+
+Here's a paragraph after the list.
+```
+
+Just like with list items, any leading whitespace after the linebreak is used to continue the definiton list item, and is thus ignored. Like list items, definition list items are not poetry.
 
 {#inserting_into_paras}
 ## Inserting Block Elements Inside Paragraphs
