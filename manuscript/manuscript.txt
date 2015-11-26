@@ -103,7 +103,7 @@ Semantic Formatting
 Basic Formatting Hints
 : These are formatting hints which help a Markua Processor achieve a professional looking result algorithmically. These basic formatting hints typically involve things like the positioning of figures, etc.
 
-To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins!
+To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins! Also, Markua really, really, *really* does **not** care about "widows and orphans"--unless they're people!
 
 Markua is not intended to be used to create the layout of a high quality print book--but it can certainly create the manuscript of that print book, and a Markua Processor can automatically generate a good looking ebook from that manuscript. Some Markua Processors like Leanpub can even generate InDesign from a Markua document as a starting point for the print book design process. This is preferable to current workflows, in which a book designer typically needs to start by undoing all the non-semantic formatting that a writer did, and then redoing it properly using different tools.
 
@@ -2196,11 +2196,11 @@ Blockquotes can be multi-paragraph. To create a multi-paragraph blockquote, you 
 
 Single newlines inside a blockquote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
 
-Note that any headings inside blockquotes do not show up in the Table of Contents. They can also be formatted differently by Markua Processors.
+If a blockquote contains headings, these headings may be formatted by a Markua Processor differently than normal headings. Finally, if a Markua Processor is automatically generating a [Table of Contents](#toc) from chapter and section headings, any headings inside blockquotes should be ignored.
 
 ### Asides (`A>`)
 
-Since Markua is for writing books and documents, including technical books and documents, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in the Table of Contents, and they can also be formatted differently by Markua Processors.
+Since Markua is for writing books and documents, including technical books and documents, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua Processors.
 
 We will consider asides first.
 
@@ -2548,6 +2548,8 @@ Here is some unrelated text.
 Here is some more unrelated text.
 ```
 
+Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#restart-footnote-numbering) setting.
+
 ### Endnotes
 
 Books and documents often have endnotes as well. Sometimes these are instead of footnotes, but other times, these are in addition to footnotes. So, it makes sense for Markua to define separate syntaxes for both, rather than just defining one "footnote or endnote" syntax and letting the author pick whether the notes were footnotes or endnotes.
@@ -2565,6 +2567,8 @@ Then, you define the endnote later in the document, using the same square bracke
 ```
 
 Just as with a footnote, if you wish to write multiple paragraphs in the endnote, you must indent the subsequent paragraphs by four spaces or one tab.
+
+Whether the numbering of endnotes restarts every chapter is something that can be specified by the [`restart-endnote-numbering`](#restart-endnote-numbering) setting.
 
 ### Crosslinks and ids
 
@@ -3024,6 +3028,19 @@ While these book `section` directives are mere hints, there are strict rules abo
 
 Authors new to Markua can completely ignore all directives, including book `section` directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about book `section` directives. And using directives is very simple, despite how formally specified this section makes them.
 
+{#toc}
+### Table of Contents
+
+Books often have a Table of Contents.
+
+Markua does not specify any hard requirements about a Table of Contents. However, the following are recommendations:
+
+* A Markua Processor should provide the option of automatically generating a Table of Contents from the names of the parts (if any), chapters, sections and sub-sections of the book.
+* A Markua Processor should allow the author to specify how many levels of section are included in the Table of Contents.
+* A Markua Processor should allow the author to specify whether parts, chapters, sections and sub-sections are numbered.
+
+Also, a Markua Processor may allow precise positioning of the Table of Contents in the front matter with a `{section: toc}` directive.
+
 {#settings}
 ### Settings
 
@@ -3129,6 +3146,14 @@ number-code-samples
 number-tables
 : This attribute sets whether tables are numbered, if present. The values are `off`, `single` and `double`. The default is `double`. The choice `single` means to number tables in one large list (Table 1, Table 2, etc.). The choice `double` means to number by chapter, e.g. `Table 8.1` for the first table in chapter 8. Per Chicago, tables in an Appendix would be listed as `Table A.1` for Appendix A, etc.
 
+{#restart-endnote-numbering}
+restart-endnote-numbering
+: This attribute sets whether numbering of endnotes restarts at the beginning of every chapter. The values are `true` and `false` (the default).
+
+{#restart-footnote-numbering}
+restart-footnote-numbering
+: This attribute sets whether numbering of footnotes restarts at the beginning of every chapter. The values are `true` and `false` (the default).
+
 subtitle
 : The subtitle of the Markua document. The default is blank (an empty string, in programming terms).
 
@@ -3140,6 +3165,8 @@ title
 
 urls
 : The way that URLs should be displayed when used as links like `[Markua](http://markua.com)`. The choices are `none`, `inline` and `footnote`. The default is `footnote`, in which the URL is made as a footnote (positioned at the bottom of the page, chapter or book per the value of the `footnotes` attribute) which is a clickable link. Note that angle-bracketed inline URLs like <http://markua.com> never create a footnote.
+
+W> TODO_LEANPUB - confirm ids work on definition list items
 
 ### Escaping Special Characters
 
