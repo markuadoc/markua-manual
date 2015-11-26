@@ -284,7 +284,7 @@ A> Leanpub Flavoured Markdown violated a number of these requirements, especiall
 
 Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
 
-Paragraphs and blank lines are handled the same way in Markua and Markdown. Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line. Any extra number of newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
+Paragraphs and blank lines are handled in almost the same way in Markua and Markdown. Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line.
 
 Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a code resource, so that the exact Markua manuscript text can be shown unprocessed. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
 
@@ -304,13 +304,21 @@ The goal for newline and indentation handling in Markua is for everything to jus
 
 In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books and documents, of which HTML is just one format. The concepts in Markdown are HTML concepts; the concepts in Markua are book and document concepts.
 
-Because of this, the way that single newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown.
+Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown.
 
 ### Single Newlines
 
 In Markdown, a single newline inside a paragraph is interpreted as a single space. To add a forced line break (a `<br/>` tag in HTML), Markdown uses a horrible hack: you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line! Worse, in some text editors (like Emacs, the editor I use), trailing spaces at the end of a line are automatically removed when a file is saved. So, it's possible for me to inadvertently modify the meaning of a Markdown document by simply opening it and saving it! Also, in Markdown, it's impossible to type a sonnet without relying on the two space hack at the end of every line to force a newline--which isn't very poetic at all.
 
 In Markua, a single newline inside a paragraph forces a line break, which produces a `<br/>` tag in HTML. This is true without any invisible formatting nonsense. As you will see, there are many types of block elements in Markua, including paragraphs, asides, blurbs, callouts, blockquotes and headings. A single newline inside most of these block elements produces a forced line break, and what follows is either still part of the same block element or is contained in the block element. However, headings (discussed later) are block elements, but inside a heading, a single newline is interpreted as a single space by Markua. This is because a heading is intended to be all on one line.
+
+### Three or More Newlines
+
+In Markdown, if you add more than two newlines in a row, the extra newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row. This makes sense because Markdown is a format for producing HTML.
+
+In Markua, however, the extra newlines after the second newline are respected. The author typed them; presumably they were intended to produce, well, extra newlines. So, every extra newline after the second newline becomes an extra newline (with a `<br/> tag in HTML) in between the close of the paragraph (or whatever Markua element was ending) and the start of the next paragraph (or whatever Markua element is beginning). In HTML terms, five newlines between paragraphs produces `...end of paragraph.</p><br/><br/><br/><p>Start of next paragraph...`.
+
+A> Markua authors should **strongly** resist the temptation to try to do things like pagination by adding extra newlines. That's just a bad idea.
 
 ### Leading Spaces (Prose vs. Poetry)
 
