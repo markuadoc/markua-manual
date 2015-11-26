@@ -78,7 +78,7 @@ Here's all the Markua you need to know to write a novel:
    `# The Chapter Name`
 4. To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
    `## The Section Name`
-5. To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can if you want.
+5. To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can add a tab if you want.
 6. Surround text with one asterisk (`*`) on each side to make it `*italic*`, and with two asterisks (`**`) on each side to make it `**bold**`.
 7. To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want:
    `* * *`
@@ -137,7 +137,7 @@ I started with Markdown. I then removed or changed the few things which were eit
 
 ## Why the Name "Markua"?
 
-When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
+When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
 
 ## Why is Inline HTML Not Supported in Markua?
 
@@ -259,7 +259,7 @@ Note that in Markua, both parts and chapters produce an `h1`. This is mildly sur
 
 Markua is more strict about spaces and pound signs than Markdown:
 
-1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one a pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
+1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
 2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
 3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors.)
 4. Headings must be separated from other block elements by blank lines both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
@@ -288,7 +288,7 @@ Together, newlines, spaces and tabs are called whitespace. By a newline, I mean 
 
 Paragraphs and blank lines are handled the same way in Markua and Markdown. Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line. Any extra number of newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
 
-Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a code resource, so that the exact Markua manuscript text can be shown unprocessed by a Markua. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
+Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a code resource, so that the exact Markua manuscript text can be shown unprocessed. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
 
 ~~~
 I'm paragraph one. Yay!
@@ -440,11 +440,11 @@ There are five types of resources: image, video, audio, code and math. Each type
 Before going into more detail, it's helpful to consider some brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
 ~~~
-Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also...
+Inserting a span image is as easy as `![pie](pie.png)`. Inserting an image as a figure is also:
 
 ![A Piece of Cake](http://markua.com/cake.jpg)
 
-Inline code resources are added as spans like `hello world` or as figures:
+Inline code resources are added as spans like this `hello world` or as figures:
 
 ```ruby
 puts "hello world"
@@ -484,7 +484,7 @@ The optional alt text is discussed shortly.
 The syntax for an inline resource inserted as a span is as follows:
 
 ```
-It's a single backtick `followed by inline resource content\`optional_format and then a single backtick.
+It's a single backtick `followed by inline resource content`optional_format and then a single backtick.
 ```
 
 #### Figures
@@ -741,7 +741,7 @@ We will discuss the supported and the default attributes for images, and then sh
 : The `float` can be `none` (the default), `left`, `center` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
 
 `position`
-: The `position` refers to vertical positioning on a page. The position only has an effect on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
+: The `position` refers to suggested vertical positioning on a page, if this is supported both by a particular ouptut format and a particular Markua Processor. For example, this is useful for Markua processors which generate PDF via an intermediate step of transforming Markua into LaTeX. A Markua processor is free to ignore this attribute. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify any requirements about PDF output, to maximize implementation flexibility and encourage competition.)
 
 `width` and `height`
 : The `width` and `height` can both be `auto` (the default), `fullbleed` or an integer between `1` and `100` inclusive. The default of `auto` means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) It is legal for either one or both of `width` and `height` to be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page, which respects the margins.
@@ -855,7 +855,7 @@ We will discuss the supported and the default attributes for videos, and then sh
 : All resources support the format attribute. For video, the `format` is the specific vidio format. The legal set of formats is given in the `format` column in the above table.
 
 `poster`
-: The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. (Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
+: The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
 
 `alt`, `caption`, `align`, `float`, `position`, `width` and `height`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
@@ -1297,7 +1297,7 @@ Math resources can be either LaTeX math or MathML.
 | `.mathml` | `mathml`   | MathML math   |
 |-----------|------------|---------------|
 
-Note that Markua procesors do not need to support either Math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
+Note that Markua procesors do not need to support either math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
 
 #### Supported Attributes for Math
 
@@ -1352,7 +1352,7 @@ Here's a paragraph after the figure.
 
 #### Web Math Resources
 
-This is identical to how local math resources work, including the significance of file extensions. The only differences is that the files are on the web.
+This is identical to how local math resources work, including the significance of file extensions. The only difference is that the files are on the web.
 
 ##### Span
 
@@ -1584,9 +1584,9 @@ Markdown has the interesting combination of supporting one element lists and ign
 
 This would produce a single element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
 
-Now, in Markua, if we supported single element ordered lists, this would produce a single element numbered list starting with `1968.` -- which would be almost as bad as in Markdown.
+Now, in Markua, if we supported single element ordered lists, this would produce a single element numbered list starting with `1986.` -- which would be almost as bad as in Markdown.
 
-(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1968\. What a great season.` to avoid this.)
+(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1986\. What a great season.` to avoid this.)
 
 But what to do?
 
@@ -1745,7 +1745,7 @@ W> TODO_LEANPUB - support this
 * Baz
 ~~~
 
-In the singlem paragraph list items case, indenting the block element is optional but recommended.
+In the single paragraph list items case, indenting the block element is optional but recommended.
 
 #### Multiple paragraph list items
 
@@ -1827,7 +1827,7 @@ Markua supports this method of inserting block elements.
 
 However, Markua is more than just a way of producing HTML. Markua is a way of authoring books and documents. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this too.
 
-So, many block elements such as lists and figures can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
+Many block elements such as lists and figures can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
 
 This example shows a list nested in the middle of a paragraph:
 
@@ -2043,7 +2043,7 @@ You can also individually align cells with colons in the `-` part-row **above** 
 
 In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
 
-### Tables can have Captions and Other Attributes
+### Tables Can Have Captions and Other Attributes
 
 Regardless of whether they are simple or complex, tables can have captions and other attributes which are specified in an attribute list. The syntax for the attribute list is identical to that used for figures--but tables are not figures, they are tables.
 
@@ -2075,11 +2075,8 @@ This complex table has a caption as well as align, width and top attributes:
 
 ### Supported Attributes for Tables
 
-`align`
-: The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
-
-`position`
-: The `position` refers to vertical positioning on a page. The position only has an effect on PDF generation -- it is ignored in EPUB and MOBI. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the table near here, while the `here` position means to position the table exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify anything about PDF output, to maximize implementation flexibility and encourage competition.)
+`align`, `float`, `position`
+: These attributes function how they do for images. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
 
 `width`
 : The `width` can be either `auto` (the default) or `full`. The `auto` width means to size the table based on its columns; the `full` width means to make it 100% of the content area of the page, respecting margins.
@@ -2153,9 +2150,9 @@ A blockquote can contain other block-level elements, most commonly paragraphs.
 
 If you are using the `{blockquote}` ... `{/blockquote}` approach, this is trivial: just pretend you're in a normal paragraph, and the syntax is the same.
 
-If you are using the Markdown approach of `> `, then to start a new block level element within a blockquote, just put a line starting with a `>` followed by a optional space, followed by the block level element. It is equivalent to placing a `> ` in front of every line of the paragraphs.
+If you are using the Markdown approach of `>`, then to start a new block level element within a blockquote, just put a line starting with a `>` followed by a space, followed by the block level element. It is equivalent to placing a `>` and a space in front of every line of the paragraphs.
 
-blockquotes can be multi-paragraph. To create a multi-paragraph blockquote, you need to separate each paragraph with a line containing a `>` and whitespace only.
+Blockquotes can be multi-paragraph. To create a multi-paragraph blockquote, you need to separate each paragraph with a line containing a `>` and whitespace only.
 
 Single newlines inside a blockquote do not start new paragraphs. Instead, they simply add a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function.
 
@@ -2348,7 +2345,7 @@ This is a warning blurb.
 This is an exercise blurb.
 ```
 
-Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from Font Awesome at the left of the blurb.
+Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
 
 #### Using Extension Attributes on Blurbs to add `icon` Support
 
@@ -2415,7 +2412,7 @@ C> It can have multiple paragraphs.
 
 ```
 {callout}
-#A Longer Callout
+# A Longer Callout
 
 This is a longer callout.
 
@@ -2582,7 +2579,7 @@ Here's how to use the attribute list syntax to define an id attribute on a span 
 ```
 The word Markua{id: markua} has an id.
 
-Leanpub is based in **Victoria, BC, Canada**{#victoria}.
+Leanpub is based in **Victoria, BC, Canada**{id: victoria}.
 ```
 
 Here's how to use the shorter "syntactic sugar" approach to define an id attribute:
@@ -2590,7 +2587,7 @@ Here's how to use the shorter "syntactic sugar" approach to define an id attribu
 ```
 The word Markua{#markua} has an id.
 
-Leanpub is based in **Victoria, BC, Canada**{id: victoria}.
+Leanpub is based in **Victoria, BC, Canada**{#victoria}.
 ```
 
 #### Referencing an `id` With a Crosslink
@@ -2639,7 +2636,7 @@ Also, note that regardless of section level, sections referenced in `#d` or `#f`
 
 The expectation is that `#f` will be used by authors who don't mind verbosity, and #t and #n will be used by authors who prefer control and brevity. The #d is for very lazy authors who like saving keystrokes and/or who don't know whether their publisher will call the code samples "Listing", "Example" or some other word and want to protect themselves against extra work.
 
-The `code-sample-names`, 'figure-names` and `table-names` settings control the words used to name things.
+The `code-sample-names`, `figure-names` and `table-names` settings control the words used to name things.
 
 Examples:
 
@@ -2734,7 +2731,7 @@ Every attribute in Markua has a default.
 Here's how attribute values are interpreted:
 
 `boolean`
-: The values are `true` or `false` are boolean values. Unless otherwise specified by the attribute itself, the default value of a boolean attribute is `false`. Any value other than `true` is interpreted as `false`.
+: The values `true` or `false` are boolean values. Unless otherwise specified by the attribute itself, the default value of a boolean attribute is `false`. Any value other than `true` is interpreted as `false`.
 
 `integer`
 : Any number which does not contain a decimal point is interpreted as an integer. Unless otherwise specified by the attribute itself, the default value of an integer is 0.
@@ -2880,7 +2877,7 @@ So, it's important to be able to indicate in Markua which language the text is i
 
 To do this, you use the `lang` attribute.
 
-If you use the `lang` attribute in an attribute list of a block or span, the `lang` change just applies to that block or span, which can help ensure that the font was corectly set.
+If you use the `lang` attribute in an attribute list of a block or span, the `lang` change just applies to that block or span, which can help ensure that the font was correctly set.
 
 However, if you use the `lang` attribute as a directive, it applies as the new default until a different `lang` directive is encountered.
 
@@ -2926,7 +2923,7 @@ A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These a
 
 Most published books have three types of material in them: the front matter, the text and the back matter.
 
-What authors write, the manuscript, is typically what goes into the text, or main matter, of the book. In style guidelines such as the Chicago Manual of Style this is called the text; in formats such as TeX and LaTeX it is called main matter.) It's what is numbered with Arabic numerals starting from 1.
+What authors write, the manuscript, is typically what goes into the text, or main matter, of the book. In style guidelines such as the Chicago Manual of Style this is called the text; in formats such as TeX and LaTeX it is called main matter. It's what is numbered with Arabic numerals starting from 1.
 
 There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents (or ToC), Foreword, Preface, etc.) which can come before the main text of the book. This is called "front matter". Some of the front matter comes before the ToC and is not numbered; the rest of the front matter that comes after the ToC gets numbered with Roman numerals.
 
@@ -2976,7 +2973,7 @@ You can write a book or document in Markua without using any directives at all, 
 
 If you're an author and this seems confusing, don't fear. Almost all of the directives will be added either by someone working for a publisher or automatically by book generation software. The only directives that a typical author will use are `{section: dedication}` and `{section: mainmatter}`.
 
-Also, note that Markua Processors may ignore all of the book `section` directives. Book `section` directives are only hints that indicate that the Markua Processor may wish to do things like switch to hanging indents, change the font size, use a custom layout etc based on what section of the book they are in.
+Also, note that Markua Processors may ignore all of the book `section` directives. Book `section` directives are only hints that indicate that the Markua Processor may wish to do things like switch to hanging indents, change the font size, use a custom layout, etc. based on what section of the book they are in.
 
 While these book `section` directives are mere hints, there are strict rules about their use:
 
