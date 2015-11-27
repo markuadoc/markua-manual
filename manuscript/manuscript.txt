@@ -2324,7 +2324,7 @@ This is a warning!
 
 The attribute list must precede the `{blurb}` with no blank line between it.
 
-##### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `Q>`, `T>`, `W>`, `X>`
+#### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `Q>`, `T>`, `W>`, `X>`
 
 Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
 
@@ -3214,32 +3214,1762 @@ Markua Processors **must** support CriticMarkup by outputting the additions, del
 
 W> TODO - The rest of this document needs to be rewritten. Please ignore everything after this point.
 
-### Poetry
+## Text Formatting
 
-### Single Newlines Inside a Paragraph is a Line Break
+### Italic
 
+##### Example
+
+###### Markua Syntax
+
+{#input_italic_1}
+```
+This is _an i tag_ and this is *an em tag*.
+```
+
+###### HTML Output
+
+{#output_italic_1}
+```
+<p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
+```
+
+### Bold
+
+##### Example
+
+###### Markua Syntax
+
+{#input_bold_1}
+```
+This is __a b tag__ and this is **a strong tag**.
+```
+
+###### HTML Output
+
+{#output_bold_1}
+```
+<p>This is <b>a b tag</b> and this is <strong>a strong tag</strong>.</p>
+```
+
+### Bold + Italic
+
+##### Example
+
+###### Markua Syntax
+
+{#input_bold_italic_1}
+```
+This is ___a b i tag combo___ and this is ***a strong em tag combo***.
+```
+
+###### HTML Output
+
+{#output_bold_italic_1}
+```
+<p>This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag combo</em></strong>.
+```
+
+### Underline
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Strikethrough
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Superscript
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Subscript
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Headings
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Whitespace, Paragraphs and Blank Lines
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Newlines, Indentation and Spaces
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Single Newlines
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Three or More Newlines
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Leading Spaces (Prose vs. Poetry)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+
+#### Example 1
+
+{#input_leading_spaces_1}
 ##### Markua Syntax
 
 ```
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
-     And yet, by heaven, I think my love as rare
-     As any she belied with false compare.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
 ```
 
+{#output_leading_spaces_1}
 ##### HTML Output
 
 <p>
 I grant I never saw a goddess go;<br/>
 My mistress when she walks treads on the ground.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
 </p>
 
+### Trailing Spaces are Stripped
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Internal Spaces are Collapsed to One Space
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
 
 ## Resources
 
-## Span Resources
+### Resource Insertion Methods
+
+#### Spans
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Figures
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Figure Captions
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Alt Text and Figure Captions
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Span + (Local or Web)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Span + Inline
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Figure
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Context-Sensitive Meaning of Square Bracketed Text
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Resource Locations
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Local Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Web Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Inline Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Resource Types and Formats
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Images
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Supported Attributes for Images
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Default Attributes for Images
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Local Images
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Figure
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Web Images
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Figure
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Inline Images (SVG only)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+### Video
+
+#### Local Video
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+#### Web Video
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+### Audio
+
+#### Local Audio
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+#### Web Audio
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+### Code
+
+#### Local Code Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+#### Web Code Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+#### Inline Code Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+#### Typewriter Poetry with Code Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Line Wrapping in Code Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Math
+
+#### Supported Attributes for Math
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Default Attributes for Math
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Local Math Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+#### Web Math Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+#### Inline Math Resources
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Span
+
+##### Figure
+
+## Lists
+
+### Unordered Lists (i.e. Bulleted Lists)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Ordered Lists (i.e. Numbered Lists)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### In Markua, A Single Element Ordered List is Not a List
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Ordered List Numbering Rules
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Multi-Paragraph List Items
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Nested Lists
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Nesting Block Elements in List Items
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Single paragraph list items
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Multiple paragraph list items
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Definition Lists
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Inserting Block Elements Inside Paragraphs
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Tables
+
+### Simple Tables
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Complex Tables
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Tables Can Have Captions and Other Attributes
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Supported Attributes for Tables
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Block Elements
+
+### Blockquotes (`>`)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Asides (`A>`)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Blurbs (`B>`)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `Q>`, `T>`, `W>`, `X>`
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Callouts (C>)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Span Elements
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Links
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Inline Links
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Automatic Links
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Explicitly Creating Spans with `[`...`]`
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Sometimes a Square Bracket is Just a Square Bracket
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Footnotes
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Endnotes
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Crosslinks and ids
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Defining an id
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Defining an id on a Block Element
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+##### Defining an id on a Span Element
+
+#### Referencing an `id` With a Crosslink
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Rules for `id`s and Crosslinks
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Scene Breaks
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Soft hyphen
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## Metadata
+
+### Attributes
+
+#### Attribute List Format
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Attribute Keys
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Attribute Value Types
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### `id` Attributes
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Extension Attributes
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Index Entries
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Directives
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Language Attributes and Directives
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Book `section` Directives
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Table of Contents
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Settings
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+### Escaping Special Characters
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Curly Braces (`{` and `}`)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+#### Backticks (`)
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+## CriticMarkup is Supported in Markua
+
+##### Example
+
+###### Markua Syntax
+
+{#input_}
+```
+```
+
+###### HTML Output
+
+{#output_}
+```
+```
+
+
+
+
+
+
+
+# #####################################################
+# Spare Parts
+# #####################################################
 
 ### Example 1: Span Images with Alt Text
 
