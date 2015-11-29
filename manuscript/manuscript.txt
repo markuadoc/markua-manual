@@ -342,6 +342,8 @@ In Markdown, if you add more than two newlines in a row, the extra newlines are 
 
 In Markua, however, the extra newlines after the second newline are respected. The author typed them; presumably they were intended to produce, well, extra newlines. So, every extra newline after the second newline becomes an extra newline (with a `<br/> tag in HTML) in between the close of the paragraph (or whatever Markua element was ending) and the start of the next paragraph (or whatever Markua element is beginning). In HTML terms, five newlines between paragraphs produces `...end of paragraph.</p><br/><br/><br/><p>Start of next paragraph...`.
 
+For the programmers: if there are n newlines after a paragraph, there are n-2 break tags in the HTML output, for all n > 2.
+
 Markua authors should **strongly** resist the temptation to try to do things like pagination by adding extra newlines. That's just a bad idea.
 
 ### Leading Spaces (Prose vs. Poetry)
@@ -3465,44 +3467,34 @@ This is a paragraph.
 
 ###### Markua Syntax
 
-{#input_}
+{#input_whitespace_1}
 ```
+I'm paragraph one. Yay!
+
+This is paragraph two.
+
+This is paragraph three.
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_whitespace_1}
 ```
+<p>I'm paragraph one. Yay!</p>
+<p>This is paragraph two.</p>
+<p>This is paragraph three.</p>
 ```
 
 ## Newlines, Indentation and Spaces
 
-##### Example
-
-###### Markua Syntax
-
-{#input_}
-```
-```
-
-###### HTML Output
-
-{#output_}
-```
-```
-
 ### Single Newlines
 
-##### Example
+##### Example 1
 
 ###### Markua Syntax
 
 {#input_single_newlines_1}
 ```
-# This.
-Is.
-Heading Text!!!
-
 I'm paragraph one. Yay!
 
 This is paragraph two.
@@ -3516,14 +3508,34 @@ This is paragraph three.
 
 {#output_single_newlines_1}
 ```
-<h1>This.<br/>
-Is.<br/>
-Heading Text!!!</h1>
 <p>I'm paragraph one. Yay!</p>
 <p>This is paragraph two.<br/>
 This is *still* in paragraph two, preceded by a forced line break.<br/>
 This is also in paragraph two, also preceded by a forced line break.</p>
 <p>This is paragraph three.</p>
+```
+
+##### Example 2 - A Presumably Incorrect Heading
+
+###### Markua Syntax
+
+{#input_single_newlines_2}
+```
+# This.
+Is.
+Heading Text!!!
+
+I'm paragraph one. Yay!
+```
+
+###### HTML Output
+
+{#output_single_newlines_2}
+```
+<h1>This.<br/>
+Is.<br/>
+Heading Text!!!</h1>
+<p>I'm paragraph one. Yay!</p>
 ```
 
 ### Three or More Newlines
@@ -3532,14 +3544,33 @@ This is also in paragraph two, also preceded by a forced line break.</p>
 
 ###### Markua Syntax
 
-{#input_}
+{#input_three_or_more_newlines_1}
 ```
+This paragraph is followed by two newlines.
+
+This paragraph is followed by three newlines.
+
+
+This paragraph is followed by five newlines.
+
+
+
+
+The End
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_three_or_more_newlines_1}
 ```
+<p>This paragraph is followed by two newlines.</p>
+<p>This paragraph is followed by three newlines.</p>
+<br/>
+<p>This paragraph is followed by five newlines.</p>
+<br/>
+<br/>
+<br/>
+<p>The End</p>
 ```
 
 ### Leading Spaces (Prose vs. Poetry)
