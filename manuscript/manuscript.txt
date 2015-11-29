@@ -159,11 +159,11 @@ To read the specification manuscript in Markua, see <https://github.com/markuado
 
 To stay current on Markua progress, follow [@markuadoc](https://twitter.com/markuadoc) or [@peterarmstrong](https://twitter.com/peterarmstrong) on Twitter.
 
-# Markua Syntax
+# Syntax
 
 This chapter is an informal, easy to read specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
 
-## Markua Character Encoding
+## Character Encoding
 
 Markua documents are written in plain text.
 
@@ -3202,9 +3202,9 @@ So, to show a literal backtick in a span, you start and end it with *two* backti
 
 This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!
 
-## CriticMarkup is Supported in Markua
+## CriticMarkup
 
-[CriticMarkup](http://criticmarkup.com/) describes itself as follows:
+[CriticMarkup](http://criticmarkup.com/) is supported in Markua. CriticMarkup describes itself as follows:
 
 > a way for authors and editors to track changes to documents in plain text. As with Markdown, small groups of distinctive characters allow you to highlight insertions, deletions, substitutions and comments, all without the overhead of heavy, proprietary office suites.
 
@@ -3234,9 +3234,17 @@ A Markua Processor can optionally decide to output the original text (removing a
 
 W> TODO_LEANPUB - do this in Leanpub
 
-# Markua HTML Mapping
+# HTML Mapping
 
-W> TODO - The rest of this document needs to be rewritten. Please ignore everything after this point.
+Markua specifies an exact mapping from Markua input to HTML output. A Markua Processor must follow this mapping when generating HTML from Markua. Also, a Markua Processor must follow this mapping when generating the HTML used in an EPUB book.
+
+This chapter defines this HTML mapping.
+
+This chapter is structured in an almost identical way to the Markua Syntax chapter. Unlike the Markua syntax chapter which did a bunch of explaining and showed almost no HTML, in this chapter there is essentially no explaining--just a bunch of examples.
+
+These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input. See <https://github.com/markuadoc/markua-test> for more information.
+
+In the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
 ## Text Formatting
 
@@ -3300,30 +3308,43 @@ This is ___a b i tag combo___ and this is ***a strong em tag combo***.
 
 ###### Markua Syntax
 
-{#input_}
+{#input_underline_1}
 ```
+This is ____a u tag____. Yeah, it's ugly.
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_underline_1}
 ```
+<p>This is <u>a u tag</u>. Yeah, it's ugly.</p>
 ```
 
 ### Strikethrough
 
+#### CSS Recommendation
+
+The following CSS rule is recommended:
+
+```
+.strikethrough {
+  text-decoration: line-through;
+}
+```
 ##### Example
 
 ###### Markua Syntax
 
-{#input_}
+{#input_strikethrough_1}
 ```
+This is ~~a strikethrough tag~~.
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_strikethrough_1}
 ```
+<p>This is <span class="strikethrough">a strikethrough tag</span>.</p>
 ```
 
 ### Superscript
@@ -4985,15 +5006,9 @@ My mistress when she walks treads on the ground.<br/>
 ```
 ```
 
-
-
-
-
-
-
-# #####################################################
 # Spare Parts
-# #####################################################
+
+W> TODO - The rest of this document needs to be rewritten. Please ignore everything after this point.
 
 ### Example 1: Span Images with Alt Text
 
@@ -6669,15 +6684,6 @@ Strikethrough is made with ~~two tildes~~ surrounding the text.
 <p>Strikethrough is made with <span class="strikethrough">two tildes</span> surrounding the text.</p>
 ```
 
-Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations.
-
-However, in this case, the following CSS rule is strongly recommended:
-
-```
-.strikethrough {
-  text-decoration: line-through;
-}
-```
 
 ## Superscript
 
