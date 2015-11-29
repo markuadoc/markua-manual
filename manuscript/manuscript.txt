@@ -315,7 +315,19 @@ One related decision to this is that to add a forced line break (a `<br/>` tag i
 
 Unlike Markdown, in Markua, a single newline inside a paragraph forces a line break, which produces a `<br/>` tag in HTML. This is true without any invisible formatting nonsense. As you will see, there are many types of block elements in Markua, including paragraphs, asides, blurbs, callouts, blockquotes and headings. A single newline inside most of these block elements produces a forced line break, and what follows is either still part of the same block element or is contained in the block element. However, headings (discussed later) are block elements, but inside a heading, a single newline is interpreted as a single space by Markua. This is because a heading is intended to be all on one line.
 
-A> This is the single largest difference between Markdown and Markua for most normal usage.
+Example:
+
+~~~
+I'm paragraph one. Yay!
+
+This is paragraph two.
+This is *still* in paragraph two.
+So is this.
+
+This is paragraph three.
+~~~
+
+This is the single largest difference between Markdown and Markua for most normal usage.
 
 ### Three or More Newlines
 
@@ -323,7 +335,7 @@ In Markdown, if you add more than two newlines in a row, the extra newlines are 
 
 In Markua, however, the extra newlines after the second newline are respected. The author typed them; presumably they were intended to produce, well, extra newlines. So, every extra newline after the second newline becomes an extra newline (with a `<br/> tag in HTML) in between the close of the paragraph (or whatever Markua element was ending) and the start of the next paragraph (or whatever Markua element is beginning). In HTML terms, five newlines between paragraphs produces `...end of paragraph.</p><br/><br/><br/><p>Start of next paragraph...`.
 
-A> Markua authors should **strongly** resist the temptation to try to do things like pagination by adding extra newlines. That's just a bad idea.
+Markua authors should **strongly** resist the temptation to try to do things like pagination by adding extra newlines. That's just a bad idea.
 
 ### Leading Spaces (Prose vs. Poetry)
 
