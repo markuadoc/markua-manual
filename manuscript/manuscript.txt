@@ -57,13 +57,15 @@ This is its specification.
 
 ## What is Markua?
 
-Markua, pronounced "mar-coo-ah", is a plain text format designed for the writing of books and documents.
+Markua, pronounced "mar-coo-ah", is the best way in the world to write books.
 
-Markua is the best way in the world to write. Markua is extremely simple and powerful. If you want to write a novel in Markua, you can learn the Markua syntax that you need to know in 30 seconds (see below). If you want to write a computer programming book or doctoral thesis in Markua, order a pizza: you can learn the additional syntax you need in less than 30 minutes.
+Markua is extremely simple and powerful. If you want to write a novel in Markua, you can learn the Markua syntax that you need to know in 30 seconds (see below). If you want to write a computer programming book or doctoral thesis in Markua, order a pizza: you can learn the additional syntax you need in less than 30 minutes.
 
 Markua is terse. When you are writing using Markua, you are writing, not programming. Once you understand Markua's syntax, it fades into the background.
 
 Markua is opinionated. There is only one way to do most things. (Sometime there are two ways, however, for improved Markdown compatibility. Markua breaks its own rules.)
+
+Markua is designed for the writing of books, but it can also be used to write documents such as journal articles: these documents share many of the same constructs as books. In this specification, however, I will talk exclusively about books--saying "books and documents" throughout is annoying to write and even more annoying to read!
 
 The Markua specification specifies both the Markua syntax and the mapping from Markua syntax to book and document concepts and to HTML.
 
@@ -109,7 +111,7 @@ Markua is not intended to be used to create the layout of a high quality print b
 
 The reason that basic formatting hints are added to Markua is to enable automated production of ebooks that look good enough, especially on mobile where there are no fixed page sizes.
 
-## From Markdown to Markua
+## Markua: Markdown for Books
 
 Markua is based on [Markdown](http://daringfireball.net/projects/markdown/). Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was described by John Gruber as follows:
 
@@ -129,11 +131,11 @@ I, [Peter Armstrong](https://twitter.com/peterarmstrong), am creating Markua. I'
 
 Markua is the evolution of how Markdown is used at Leanpub. After years of experience with Leanpub Flavoured Markdown, I set out to specify it properly. I originally thought that this is what Markua would be: just a formalization of Leanpub Flavoured Markdown. But as the specification work evolved, I realized that Markua was really a descendant of Markdown, not just a flavour of it.
 
-Books and documents have different abstractions than HTML. All abstractions [leak](http://www.joelonsoftware.com/articles/LeakyAbstractions.html), so HTML's abstractions leak into Markdown and the abstractions of books and documents leak into Markua.
+Books have different abstractions than HTML. All abstractions [leak](http://www.joelonsoftware.com/articles/LeakyAbstractions.html), so HTML's abstractions leak into Markdown and the abstractions of books leak into Markua.
 
 So, I started over.
 
-I started with Markdown. I then removed or changed the few things which were either not needed for books and documents, or which were overly complex. I then found new, more appropriate abstractions for books and documents--most importantly, resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
+I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly, resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
 
 ## Why the Name "Markua"?
 
@@ -173,7 +175,7 @@ Specifically, Markua documents must be saved in the **UTF-8** character encoding
 
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
 
-Markua is a plain text format designed for the writing of books and documents. Books and documents have various types of text formatting in them: bold, italic, underline, strikethrough, superscript and subscript.
+Markua is a plain text format designed for the writing of books. Books have various types of text formatting in them: bold, italic, underline, strikethrough, superscript and subscript.
 
 Here's how to do basic, semantic text formatting.
 
@@ -208,7 +210,7 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
-Markua, however, is a way of writing books and documents. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections.
+Markua, however, is a way of writing books. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections.
 
 **What Markua does is to use the heading levels that Markdown uses to create HTML to create the structure of the book or document, as well as generating the `h1` through `h6` heading levels in the HTML version of the book.**
 
@@ -303,7 +305,7 @@ A paragraph is the least-specialized example of something called a block element
 
 The goal for newline and indentation handling in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
 
-In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books and documents, of which HTML is just one format. The concepts in Markdown are HTML concepts; the concepts in Markua are book and document concepts.
+In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books. Books can be in many formats, including HTML. The concepts in Markdown are HTML concepts; the concepts in Markua are book concepts.
 
 Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown.
 
@@ -449,7 +451,7 @@ Yada yada yada.
 
 ## Resources
 
-Markua books and documents are written in plain text, either in one text file or multiple text files. However, modern books and documents are not just text. Books and documents embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
+Markua documents are written in plain text, either in one text file or multiple text files. However, modern books are not just text. Books embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
 Resources vary in four different ways:
 
@@ -1635,7 +1637,7 @@ So, in Markua, the automatic creation of an ordered list only happens if you hav
 
 This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
-A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markdown is a way of writing books and documents, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
+A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markua is a way of writing books, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
 
 #### Ordered List Numbering Rules
 
@@ -1898,7 +1900,7 @@ This is paragraph two.
 
 Markua supports this method of inserting block elements.
 
-However, Markua is more than just a way of producing HTML. Markua is a way of authoring books and documents. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this too.
+However, Markua is more than just a way of producing HTML. Markua is a way of authoring books. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this too.
 
 Many block elements such as lists and figures can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
 
@@ -2274,7 +2276,7 @@ If a blockquote contains headings, these headings may be formatted by a Markua P
 
 ### Asides (`A>`)
 
-Since Markua is for writing books and documents, including technical books and documents, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua Processors.
+Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua Processors.
 
 We will consider asides first.
 
@@ -2598,7 +2600,7 @@ This is useful when you want to [sic.] something, etc.
 
 ### Footnotes
 
-Books and documents often have footnotes.
+Books often have footnotes.
 
 To add a footnote, you insert a footnote tag using square brackets, a caret and the tag, like this:
 
@@ -2630,7 +2632,7 @@ Whether the numbering of footnotes restarts every chapter is something that can 
 
 ### Endnotes
 
-Books and documents often have endnotes as well. Sometimes these are instead of footnotes, but other times, these are in addition to footnotes. So, it makes sense for Markua to define separate syntaxes for both, rather than just defining one "footnote or endnote" syntax and letting the author pick whether the notes were footnotes or endnotes.
+Books often have endnotes as well. Sometimes these are instead of footnotes, but other times, these are in addition to footnotes. So, it makes sense for Markua to define separate syntaxes for both, rather than just defining one "footnote or endnote" syntax and letting the author pick whether the notes were footnotes or endnotes.
 
 To add an endnote, you insert an endnote tag using square brackets, two carets and the tag, like this:
 
@@ -7317,7 +7319,7 @@ Leanpub Flavoured Markdown
 : The format which was the predecessor to Markua. It was focused primarily on the generation of books from a superset of Markdown, minus inline HTML support.
 
 Markua
-: Markua is a plain text format designed for the writing of books and documents.
+: Markua is a plain text format designed for the writing of books.
 
 Markua manuscript
 : Also called "manuscript" or "manuscript files", a Markua manuscript is the Markua-formatted UTF-8 text file or files that the author actually writes in. The Markua manuscript is used as input by Markua Processors to generate Markua output files.
@@ -7346,9 +7348,7 @@ whitespace
 {#w3c_semantic_emphasis}
 ## The W3C and Semantic Emphasis
 
-Markua is a plain text format designed for the writing of books and documents.
-
-Books and documents contain bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood.
+Markua is a plain text format designed for the writing of books. Books contain bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood.
 
 If you think this, you are clearly not familiar with the work of the W3C. The notion of making something bold or italic is very controversial in HTML: first the `<b>` and `<i>` tags were used to do this, then they got kind of deprecated in favour of `<strong>` and `<em>`, and now there are four tags: `<b>`, `<strong>`, `<i>` and `<em>`, and *none* of these tags are guaranteed to produce something bold or italic!
 
