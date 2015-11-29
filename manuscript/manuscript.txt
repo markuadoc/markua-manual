@@ -67,31 +67,33 @@ Markua is opinionated. There is only one way to do most things. (Sometime there 
 
 Markua is designed for the writing of books, but it can also be used to write documents such as journal articles: these documents share many of the same constructs as books. In this specification, however, I will talk exclusively about books--saying "books and documents" throughout is annoying to write and even more annoying to read!
 
+Markua is a plain text format. Markua book manuscripts, called Markua documents, can be written however you want. On a computer, you can use any text editor you want. Beginning authors can use things like Notepad or TextEdit; novelists can use Scrivener; programmers can use Emacs, vi, Sublime or Atom; writers who like elegant, minimalist programs can use programs like iA Writer. You can also write Markua on a tablet, phone or even using an online editor like [MarkuaPad](http://markuapad.com). Since Markua syntax is so similar to Markdown syntax, many programs will already format Markua documents nicely.
+
+Markua documents can be automatically transformed into every current popular type of ebook format. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
+
+At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can generate PDF, EPUB, MOBI and HTML ebooks with one click. We are releasing an open source Markua-to-HTML converter at <https://github.com/markuadoc/markua-js>. We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc
+
+The Markua specification defines a precise mapping from Markua to HTML and to book concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
+
 The Markua specification specifies both the Markua syntax and the mapping from Markua syntax to book and document concepts and to HTML.
 
 {#novel_syntax}
-## All the Markua Syntax Needed to Write a Novel
+## The 7 Things to Know to Write a Novel in Markua
 
-Here's all the Markua you need to know to write a novel:
+You only need to know 7 things to write a novel in Markua:
 
-1. Write in plain text using any text editor--or even Notepad or TextEdit.
-2. Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
-3. To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
+1. Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
+2. To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
    `# The Chapter Name`
-4. To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
+3. To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
    `## The Section Name`
-5. To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can add a tab if you want.
-6. Surround text with one asterisk (`*`) on each side to make it `*italic*`, and with two asterisks (`**`) on each side to make it `**bold**`.
+4. To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can add a tab if you want.
+5. Surround text with one asterisk (`*`) on each side to make it `*italic*`.
+6. Surround text with two asterisks (`**`) on each side to make it `**bold**`.
 7. To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want:
    `* * *`
 
 That's it!
-
-## Markua Processors and Mappings
-
-Markua manuscripts can be used to automatically generate every current popular type of ebook format: PDF, EPUB, MOBI and HTML. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
-
-The Markua specification defines a precise mapping from Markua to HTML and to book concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
 
 ## Minimal Formatting
 
