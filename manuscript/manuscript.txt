@@ -3244,7 +3244,7 @@ This chapter is structured in an almost identical way to the Markua Syntax chapt
 
 These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input. See <https://github.com/markuadoc/markua-test> for more information.
 
-In the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
+In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
 ## Text Formatting
 
@@ -3353,14 +3353,16 @@ This is ~~a strikethrough tag~~.
 
 ###### Markua Syntax
 
-{#input_}
+{#input_superscript_1}
 ```
+5^3^ = 125
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_superscript_1}
 ```
+<p>5<sup>3</sup> = 125</p>
 ```
 
 ### Subscript
@@ -3369,14 +3371,16 @@ This is ~~a strikethrough tag~~.
 
 ###### Markua Syntax
 
-{#input_}
+{#input_subscript_1}
 ```
+Water is H~2~O.
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_subscript_1}
 ```
+<p>Water is H<sub>2</sub>O.</p>
 ```
 
 ## Headings
@@ -3385,14 +3389,55 @@ This is ~~a strikethrough tag~~.
 
 ###### Markua Syntax
 
-{#input_}
+{#input_headings_1}
 ```
+# Part (h1) #
+
+This is a paragraph.
+
+# Chapter (also h1)
+
+This is a paragraph.
+
+## Section (h2)
+
+This is a paragraph.
+
+### Sub-Section (h3)
+
+This is a paragraph.
+
+#### Sub-Sub-Section (h4)
+
+This is a paragraph.
+
+##### Sub-Sub-Sub-Section (h5)
+
+This is a paragraph.
+
+###### Sub-Sub-Sub-Sub-Section (h6)
+
+This is a paragraph.
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_headings_1}
 ```
+<h1 class="part">Part (h1)</h1>
+<p>This is a paragraph.</p>
+<h1 class="chapter">Chapter (also h1)</h1>
+<p>This is a paragraph.</p>
+<h2 class="section">Section (h2)</h2>
+<p>This is a paragraph.</p>
+<h3 class="sub-section">Sub-Section (h3)</h3>
+<p>This is a paragraph.</p>
+<h4 class="sub-sub-section">Sub-Sub-Section (h4)</h4>
+<p>This is a paragraph.</p>
+<h5 class="sub-sub-sub-section">Sub-Sub-Sub-Section (h5)</h5>
+<p>This is a paragraph.</p>
+<h6 class="sub-sub-sub-sub-section">Sub-Sub-Sub-Sub-Section (h6)</h6>
+<p>This is a paragraph.</p>
 ```
 
 ## Whitespace, Paragraphs and Blank Lines
@@ -6467,9 +6512,6 @@ b\. two</p>
 c. three</p>
 <p>That's it!</p>
 ```
-
-{#headings}
-## Headings
 
 {#input_headings_1}
 ```
