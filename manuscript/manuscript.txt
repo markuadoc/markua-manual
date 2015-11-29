@@ -301,7 +301,7 @@ This is paragraph two.
 This is paragraph three.
 ~~~
 
-A paragraph is the least-specialized example of something called a block element. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. All block elements that are separated by at least one blank line from other block elements, and that are not some specialized type of block element (like a heading, figure or list) are paragraphs.
+A paragraph is the least-specialized example of something called a block element. Block elements are separated from each other by at least one blank line. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. Examples of other block elements include headings, figures and lists.
 
 ## Newlines, Indentation and Spaces
 
