@@ -3230,7 +3230,9 @@ These types of markup do not conflict with any Markua markup for attribute lists
 
 Markua Processors **must** support CriticMarkup by outputting the additions, deletions, substitutions, comments and highlights appropriately. The HTML Mapping chapter contains some examples of this. To learn more about how to use CriticMarkup, read the very well-written [CriticMarkup spec](http://criticmarkup.com/spec.php).
 
-A Markua Processor can optionally decide to output the original text (removing all suggestions made in CriticMarkup), based on some setting. This can be a useful behaviour on publish, so that CriticMarkup is only ever seen in previews, for example.
+A Markua Processor can optionally decide to output the original text (removing all suggestions made in CriticMarkup), based on some setting. For example, a Markua Processor could output CriticMarkup when previewing, but use the original text when publishing.
+
+W> TODO_LEANPUB - do this in Leanpub
 
 # Markua HTML Mapping
 
