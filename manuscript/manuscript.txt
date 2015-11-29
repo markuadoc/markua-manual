@@ -220,7 +220,7 @@ Markua is also a lot more strict about heading syntax than Markdown. In Markdown
 
 Here's the only way that headings are made in Markua:
 
-```
+~~~
 # Part (h1) #
 
 This is a paragraph.
@@ -248,7 +248,7 @@ This is a paragraph.
 ###### Sub-Sub-Sub-Sub-Section (h6)
 
 This is a paragraph.
-```
+~~~
 
 Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
 
@@ -325,7 +325,7 @@ The decision in Markua to treat single newlines as forced line breaks (i.e. as s
 
 Example:
 
-```
+~~~
 I'm paragraph one. Yay!
 
 This is paragraph two.
@@ -333,7 +333,7 @@ This is *still* in paragraph two, preceded by a forced line break.
 This is also in paragraph two, also preceded by a forced line break.
 
 This is paragraph three.
-```
+~~~
 
 ### Three or More Newlines
 
@@ -359,12 +359,12 @@ One newline, on the other hand, is used to add a forced line break, but to keep 
 
 This means you can write a sonnet without typing any special formatting characters. In the following Markua text, every line break will be added correctly, and the last two lines will be indented:
 
-```
+~~~
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
     And yet, by heaven, I think my love as rare
     As any she belied with false compare.
-```
+~~~
 
 In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used this would all be collapsed to one line! (Note how this shows that the two space hack is unacceptable: you should be able to tell what output is produced by looking at the input.)
 
@@ -389,7 +389,7 @@ To see why this rule is important, consider the following single-file Markua man
 W> TODO_LEANPUB - add caption support to Leanpub
 
 {caption: manuscript.txt}
-```
+~~~
 # Chapter One
 
 Lorem ipsum dolor.
@@ -397,53 +397,53 @@ Lorem ipsum dolor.
 # Chapter Two
 
 Yada yada yada.
-```
+~~~
 
 Suppose instead a multiple-file approach was used, in which there were two files, ch1.txt and ch2.txt, with the following content:
 
 {caption: ch1.txt}
-```
+~~~
 # Chapter One
 
 Lorem ipsum dolor.
-```
+~~~
 
 {caption: ch2.txt}
-```
+~~~
 # Chapter Two
 
 Yada yada yada.
-```
+~~~
 
 If Markua did not add any newlines between files, then these files would produce the following manuscript:
 
 {caption: Incorrect Temporary Auto-Created Manuscript #1}
-```
+~~~
 # Chapter One
 
 Lorem ipsum dolor.# Chapter Two
 
 Yada yada yada.
-```
+~~~
 
 If Markua only added one newline when concatenating, this would produce the following manuscript:
 
 {caption: Incorrect Temporary Auto-Created Manuscript #2}
-```
+~~~
 # Chapter One
 
 Lorem ipsum dolor.
 # Chapter Two
 
 Yada yada yada.
-```
+~~~
 
 However, since Markua requires that headings be separated by blank lines above and below them, the `# Chapter Two` heading would not be a heading. It would be considered part of the previous paragraph! This would be very surprising and the source of a number of bugs. Worse, since a number of text editors such as Emacs have a "strip blank lines at the end of files" setting, it would be possible to introduce such a bug if Markua simply relied on blank lines being added to the end of a file by the author.
 
 So, because of the blank line rule, concatenating the files produces the same manuscript as the single-file manuscript above:
 
 {caption: Correct Temporary Auto-Created Manuscript}
-```
+~~~
 # Chapter One
 
 Lorem ipsum dolor.
@@ -451,7 +451,7 @@ Lorem ipsum dolor.
 # Chapter Two
 
 Yada yada yada.
-```
+~~~
 
 ## Resources
 
@@ -504,17 +504,17 @@ When a resource is inserted as a span, the resource is inserted as part of the f
 
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
-```
+~~~
 It's just ![optional alt text](resource_path_or_url) right in the text.
-```
+~~~
 
 The optional alt text is discussed shortly.
 
 The syntax for an inline resource inserted as a span is as follows:
 
-```
+~~~
 It's a single backtick `followed by inline resource content`optional_format and then a single backtick.
-```
+~~~
 
 #### Figures
 
@@ -522,17 +522,17 @@ When a resource is inserted as a figure, the resource is inserted with at least 
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
-```
+~~~
 {key: value, comma: separated, optional: attribute_list}
 ![Optional Figure Caption](resource_path_or_url)
-```
+~~~
 
 Note that if there is a figure caption specified in the attribute list and in the square brackets, the one in the attribute list wins. In the following figure, the caption would be "Foo" not "bar":
 
-```
+~~~
 {caption: Foo}
 ![bar](foo.png)
-```
+~~~
 
 The syntax for an inline resource inserted as a figure is as follows:
 
@@ -542,6 +542,17 @@ The syntax for an inline resource inserted as a figure is as follows:
 inline resource content
 ```
 ~~~
+
+Note that you can also insert an inline resource as a figure using tildes as the delimiter. Otherwise, it would be really difficult to write about Markua in Markua. This syntax is as follows:
+
+```
+{key: value, comma: separated, optional: attribute_list}
+~~~optional_format
+inline resource content
+~~~
+```
+
+The optional_format looks uglier after tildes than backticks, so the recommended style is to use backticks if there is an optional format being specified that way.
 
 Note that if there is a format specified in the attribute list and after the backticks, the one in the attribute list wins. In the following figure, the format is `text` not `ruby`:
 
@@ -585,35 +596,35 @@ The syntax to provide alt text varies based on the resource location and inserti
 
 The alt text for a local or web resource inserted as a span is provided in square brackets before the resource path or URL:
 
-```
+~~~
 It's just ![optional alt text](resource_path_or_url) right in the text.
-```
+~~~
 
 Here's an example:
 
-```
+~~~
 This needs to ![a stop sign](stop.png) now.
-```
+~~~
 
 If you omit the optional alt text with a local or web resource, you still need to type the square brackets:
 
-```
+~~~
 This needs to ![](stop.png) now.
-```
+~~~
 
 #### Span + Inline
 
 Alt text is supported for inline span resources, but the syntax is ugly. To add this, you simply tack on an attribute list after the span. The following shows alt text on an inline span SVG image:
 
-```
+~~~
 Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg{alt: a red square} square.
-```
+~~~
 
 #### Figure
 
 The alt text for a resource inserted as a figure is provided in the attribute list above the figure. This is true regardless of whether the resource location is local, web or inline, as shown in the following examples:
 
-```
+~~~
 {alt: "The Delaware state map"}
 ![Where To Incorporate](delaware.svg)
 
@@ -629,6 +640,7 @@ The alt text for a resource inserted as a figure is provided in the attribute li
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
+~~~
 
 Note that as shown above, the caption for a figure can be provided either in the metadata or in the square brackets in front of a local or web resource.
 
@@ -652,12 +664,12 @@ This is especially true since a span image cannot have a figure caption, and sin
 
 So, given this rule, a figure which is an external code sample can be inserted as either:
 
-```
+~~~
 ![My Amazing Algorithm](algorithm.rb)
 
 {caption: "My Amazing Algorithm}
 ![](algorithm.rb)
-```
+~~~
 
 The first choice is clearly shorter, as well as more pleasant to write and to read. With the square bracketed text being the figure caption for figures, both ways are supported. If the square-bracketed text was alt text in figures, then only the longer, unpleasant second choice would be supported.
 
@@ -789,17 +801,17 @@ We will discuss the supported and the default attributes for images, and then sh
 
 The default attributes for an image inserted as a span are:
 
-```
+~~~
 {align: left, float: none, position: here, width: auto, height: auto}
-```
+~~~
 
 Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
 
 The default attributes for an image inserted as a figure are:
 
-```
+~~~
 {align: center, float: none, position: near, width: auto, height: auto}
-```
+~~~
 
 These attributes can all be overridden via the attribute list on the figure.
 
@@ -899,15 +911,15 @@ Since the `alt` is a fallback for if the `poster` image cannot be displayed, the
 
 The default attributes for a video inserted as a span are:
 
-```
+~~~
 {align: left, float: none, position: here, width: auto, height: auto}
-```
+~~~
 
 The default attributes for a video inserted as a figure are:
 
-```
+~~~
 {align: center, float: none, position: near, width: auto, height: auto}
-```
+~~~
 
 These attributes can all be overridden via the attribute list on the figure.
 
@@ -995,15 +1007,15 @@ The default attributes for audio are (with the exception of the type) the same a
 
 The default attributes for an audio inserted as a span are:
 
-```
+~~~
 {align: left, float: none, position: here, width: auto, height: auto}
-```
+~~~
 
 The default attributes for an audio inserted as a figure are:
 
-```
+~~~
 {align: center, float: none, position: near, width: auto, height: auto}
-```
+~~~
 
 These attributes can all be overridden via the attribute list on the figure.
 
@@ -1096,37 +1108,31 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 
 The default attributes for a code resource inserted as a span are:
 
-```
+~~~
 {format: guess, align: left, float: none, position: here, line-numbers: off}
-```
+~~~
 
 The default attributes for a code resource inserted as a figure are:
 
-```
-{format: guess, align: center, float: none, position: near, line-numbers: off}
-```
+~~~
+{align: center, float: none, position: near, line-numbers: off}
+~~~
 
-The default attributes for a code resource inserted as a figure using tildes as the delimiter are:
-
-```
-{format: text, align: center, float: none, position: near, line-numbers: off}
-```
-
-Note that the difference between the default attribute lists with the backtick-delimited and tilde-delimited inline resources is just a difference of the default format (`guess` vs. `text`). The `guess` format works better for code; the `text` format works better for poetry and for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
+The default value of the format attribute for a code resource inserted as a figure varies based on whether the delimiter is three backticks or three tildes. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. The `guess` format works better for code; the `text` format works better for poetry and for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
 
 #### Local Code Resources
 
 ##### Span
 
-```
+~~~
 Hello in Ruby is a simple ![](hello.rb) statement.
-```
+~~~
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
 ##### Figure
 
-```
+~~~
 This will be a type of code and a format of `guess` since the file extension is not specified:
 
 ![Hello World in Ruby](hello.rb)
@@ -1142,7 +1148,7 @@ If you don't want to take chances you can do this:
 ![Hello World in Ruby](hello.rb)
 
 Here's a paragraph at the end.
-```
+~~~
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
@@ -1152,15 +1158,15 @@ This is identical to how local code resources work, including the significance o
 
 ##### Span
 
-```
+~~~
 Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
-```
+~~~
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
 ##### Figure
 
-```
+~~~
 This will be a type of code and a format of `guess` since the file extension is not specified:
 
 ![Hello World in Ruby](http://markua.com/hello.rb)
@@ -1176,7 +1182,7 @@ If you don't want to take chances you can do this:
 ![Hello World in Ruby](http://markua.com/hello.rb)
 
 Here's a paragraph at the end.
-```
+~~~
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
@@ -1188,13 +1194,13 @@ Inline code resources are the most flexible and appropriate way to insert code a
 
 The format of an inline code resource inserted as a span is:
 
-```
+~~~
 Yada yada `some code here`optional_format yada yada.
-```
+~~~
 
 The optional format specifies the programming language used. If it is not provided, the format defaults to `guess`, as shown in the following examples:
 
-```
+~~~
 Hello in Ruby is a `puts "hello"` statement.
 
 Hello in Ruby is a `puts "hello"`guess statement.
@@ -1202,7 +1208,7 @@ Hello in Ruby is a `puts "hello"`guess statement.
 Hello in Ruby is a `puts "hello"`ruby statement.
 
 Hello in Ruby is a `puts "hello"`text statement.
-```
+~~~
 
 The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
 
@@ -1210,27 +1216,33 @@ A> The syntax of adding inline code resources as spans is identical to the code 
 
 ##### Figure
 
-~~~
 This will be a type of code and a format of `guess` since the format is not specified:
 
+~~~
 ```
 puts "hello"
 ```
+~~~
 
 That is equivalent to:
 
+~~~
 ```guess
 puts "hello"
 ```
+~~~
 
 If you don't want to take chances you can do this:
 
+~~~
 ```ruby
 puts "hello"
 ```
+~~~
 
 If you don't like syntactic sugar you can do:
 
+~~~
 {format: ruby}
 ```
 puts "hello"
@@ -1350,17 +1362,17 @@ Note that Markua procesors do not need to support either math markup language fu
 
 The default attributes for a math resource inserted as a span are:
 
-```
+~~~
 {align: left, float: none, position: here, width: auto, height: auto}
-```
+~~~
 
 Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
 
 The default attributes for a math resource inserted as a figure are:
 
-```
+~~~
 {align: center, float: none, position: near, width: auto, height: auto}
-```
+~~~
 
 These attributes can all be overridden via the attribute list on the figure.
 
@@ -1368,20 +1380,20 @@ These attributes can all be overridden via the attribute list on the figure.
 
 ##### Span
 
-```
+~~~
 This is ![too large to fit in the alt text](fermat_proof.tex) my proof.
-```
+~~~
 
 ##### Figure
 
-```
+~~~
 Here's a paragraph before the figure.
 
 {alt: "too large to fit in the alt text"}
 ![Proof of Fermat's Last Theorem](fermat_proof.mathml)
 
 Here's a paragraph after the figure.
-```
+~~~
 
 #### Web Math Resources
 
@@ -1389,20 +1401,20 @@ This is identical to how local math resources work, including the significance o
 
 ##### Span
 
-```
+~~~
 This is ![too large to fit in the alt text](http://markua.com/fermat_proof.mathml) my proof.
-```
+~~~
 
 ##### Figure
 
-```
+~~~
 Here's a paragraph before the figure.
 
 {alt: "too large to fit in the alt text"}
 ![Proof of Fermat's Last Theorem](http://markua.com/fermat_proof.tex)
 
 Here's a paragraph after the figure.
-```
+~~~
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
@@ -1414,15 +1426,15 @@ Inline math resources are the most flexible and appropriate way to insert math a
 
 The format of an inline math resource inserted as a span is:
 
-```
+~~~
 Yada yada `some math here`optional_format yada yada.
-```
+~~~
 
 The optional format specifies the math format used. While it's technically optional, it's not optional if you want math: you either need to say `latex` or `mathml`. Otherwise, if the format is not provided, the format defaults to `guess` and the resource is interpreted as code, not math.
 
-```
+~~~
 One of the kinematic equations is `d = v_i t + \frac{1}{2} a t^2`latex this one.
-```
+~~~
 
 Since these are span elements, LaTeX math will look a lot better than MathML, since it's a lot more terse. However, both are supported.
 
@@ -1498,19 +1510,19 @@ Markua lets you make an unordered list by starting each list item with either an
 
 You can build a list out of items starting with an asterisk and one space:
 
-```
+~~~
 * foo
 * bar
 * baz
-```
+~~~
 
 You can build a list out of items starting with a hyphen and one tab:
 
-```
+~~~
 -    one
 -    two
 -    three
-```
+~~~
 
 (My editor converts tabs to spaces, so that's actually 4 spaces, which also works.)
 
@@ -1565,59 +1577,59 @@ This set of examples shows many of the normal use cases of lists with the variou
 
 Ascending decimal numbers starting from 1:
 
-```
+~~~
 1. foo
 2. bar
 3. baz
-```
+~~~
 
 Ascending decimal numbers starting from a higher number:
 
-```
+~~~
 9.  foo
 10. bar
 11. baz
-```
+~~~
 
 Descending decimal numbers:
 
-```
+~~~
 3. foo
 2. bar
 1. baz
-```
+~~~
 
 Identical decimal numbers for the lazy (producing 1, 2, 3):
 
-```
+~~~
 1. foo
 1. bar
 1. baz
-```
+~~~
 
 Ascending lowercase letters:
 
-```
+~~~
 a. foo
 b. bar
 c. baz
-```
+~~~
 
 Ascending uppercase letters:
 
-```
+~~~
 I. foo
 J. bar
 K. baz
-```
+~~~
 
 Ascending uppercase Roman numerals:
 
-```
+~~~
 I.   foo
 II.  bar
 III. baz
-```
+~~~
 
 #### In Markua, A Single Element Ordered List is Not a List
 
@@ -1712,11 +1724,11 @@ If you want to prevent a list from being created with consecutive numbered items
 
 If lists were simple, they would contain be a bunch of simple one-line list items like:
 
-```
+~~~
 * This is simple.
 * So is this.
 * This too!
-```
+~~~
 
 However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this. If a list is going to contain list items with multiple paragraphs, then there should be blank lines between each list item.
 
@@ -1724,7 +1736,7 @@ As with Markdown, every paragraph in a list item after the first one must be ind
 
 The following is legal Markdown and legal Markua:
 
-```
+~~~
 Here's a paragraph before the list.
 
 1.  This is the first paragraph in the first list item. Yay!
@@ -1741,7 +1753,7 @@ Here's a paragraph before the list.
     Here's the third paragraph in the third list item.
 
 Here's a paragraph after the list.
-```
+~~~
 
 Just like with normal non-list-item text, a single newline functions as a forced line break within the list item in question. However, to encourage the text to be lined up nicely in the list item, any leading whitespace after the linebreak is ignored. This is different from the whitespace being preserved after single newlines in paragraphs. That rule exists to support poetry, and if there's one thing that lists are not, it's poetry.
 
@@ -1825,37 +1837,37 @@ Definition lists are supported in Markua. Although [some people](http://meta.sta
 
 To define a definition list in Markua, use the following syntax:
 
-```
+~~~
 term 1
 : definition 1
 
 term 2
 : definition 2
-```
+~~~
 
 There can be one to three spaces after the colon, or one tab.
 
 A definition list can define multiple definitions for a term:
 
-```
+~~~
 term 1
 : definition 1a
 : definition 1b
 
 term 2
 : definition 2
-```
+~~~
 
 A single term definition list is a definition list, regardless of how many definitions for the term exist:
 
-```
+~~~
 term
 : definition
-```
+~~~
 
 Finally, like list items, a definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definiton list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
 
-```
+~~~
 Here's a paragraph before the list.
 
 one
@@ -1875,7 +1887,7 @@ three
   Here's the third paragraph in the third list item.
 
 Here's a paragraph after the list.
-```
+~~~
 
 Just like with list items, any leading whitespace after the linebreak is used to continue the definiton list item, and is thus ignored. Like list items, definition list items are not poetry.
 
@@ -1892,7 +1904,7 @@ So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. S
 
 In Markdown, a block element like a list or figure is a sibling of the paragraphs before or after it:
 
-```
+~~~
 This is paragraph one.
 
 * this is a
@@ -1900,7 +1912,7 @@ This is paragraph one.
 * paragraphs one and two
 
 This is paragraph two.
-```
+~~~
 
 Markua supports this method of inserting block elements.
 
@@ -1910,7 +1922,7 @@ Many block elements such as lists and figures can also be inserted nested in a p
 
 This example shows a list nested in the middle of a paragraph:
 
-```
+~~~
 This is paragraph one.
 
 This sentence is in paragraph two.
@@ -1920,7 +1932,7 @@ This sentence is in paragraph two.
 This sentence is also in paragraph two.
 
 This is paragraph three.
-```
+~~~
 
 This example shows a figure which is an inline code resource nested in the middle of a paragraph:
 
@@ -1968,7 +1980,7 @@ This is paragraph four.
 
 It is possible to insert a block element as the last part of a paragraph by adding a single newline before it, but a blank line after it:
 
-```
+~~~
 This is paragraph one.
 
 This sentence is in paragraph two.
@@ -1977,7 +1989,7 @@ This sentence is in paragraph two.
 * paragraph two
 
 This is paragraph three.
-```
+~~~
 
 This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
 
@@ -1995,33 +2007,33 @@ Both of them are somewhat annoying to type. However, it's not actually so bad--u
 
 At its most basic, a simple table looks like this:
 
-```
+~~~
 Header A   | Header B   | Header C
 -----------|------------|-----------
 Content A1 | Content B1 | Content C1
 Content A2 | Content B2 | Content C2
 Content A3 | Content B3 | Content C3
-```
+~~~
 
 You can also start and end the columns with pipes:
 
-```
+~~~
 | Header A   | Header B   | Header C   |
 |------------|------------|------------|
 | Content A1 | Content B1 | Content C1 |
 | Content A2 | Content B2 | Content C2 |
 | Content A3 | Content B3 | Content C3 |
-```
+~~~
 
 Finally, you can specify left, center and right alignment of columns with colons in the header separator row. The following columns are left-, center-, and right-aligned respectively:
 
-```
+~~~
 | Header A    | Header B     | Header C    |
 |:------------|:------------:|------------:|
 | Content A1  | Content B1   | Content C1  |
 | Content A2  | Content B2   | Content C2  |
 | Content A3  | Content B3   | Content C3  |
-```
+~~~
 
 Simple tables work fine in most cases, and they are the simplest to type.
 
@@ -2031,7 +2043,7 @@ Complex tables are slightly more effort to type than simple tables. However, the
 
 At its most basic, a complex table looks like this:
 
-```
+~~~
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
@@ -2043,7 +2055,7 @@ At its most basic, a complex table looks like this:
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
-```
+~~~
 
 The header is separated from the body cells by a row of `=` signs and `|` characters. Every row of cells is separated by a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line.
 
@@ -2051,7 +2063,7 @@ A> My recommended approach is to write the table first, and then copy and paste 
 
 You can also specify left, center and right alignment of columns with colons in the header separator row, just as with simple tables. The following columns are left-, center-, and right-aligned respectively:
 
-```
+~~~
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
@@ -2063,11 +2075,11 @@ You can also specify left, center and right alignment of columns with colons in 
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
-```
+~~~
 
 You can have more than one row of content in cells, and there is no ambiguity since each row of cells is separated with a row of `-` signs and `|` characters:
 
-```
+~~~
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
@@ -2082,11 +2094,11 @@ You can have more than one row of content in cells, and there is no ambiguity si
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
-```
+~~~
 
 You can specify colspan just by skipping a `|` in the appropriate place:
 
-```
+~~~
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
@@ -2098,11 +2110,11 @@ You can specify colspan just by skipping a `|` in the appropriate place:
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
-```
+~~~
 
 You can specify rowspan just by skipping a part-row of `-` signs in the appropriate place:
 
-```
+~~~
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
@@ -2114,11 +2126,11 @@ You can specify rowspan just by skipping a part-row of `-` signs in the appropri
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
-```
+~~~
 
 You can also individually align cells with colons in the `-` part-row **above** them. This alignment overrides any alignment already on the column, and it works for merged cells too:
 
-```
+~~~
 |=============|===============|=============|
 | Header A    | Header B      | Header C    |
 |:============|:=============:|============:|
@@ -2130,7 +2142,7 @@ You can also individually align cells with colons in the `-` part-row **above** 
 |=============|===============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
-```
+~~~
 
 In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
 
@@ -2140,18 +2152,18 @@ Regardless of whether they are simple or complex, tables can have captions and o
 
 This simple table has a caption:
 
-```
+~~~
 {caption: "A Simple Table"}
 | Header A   | Header B   | Header C   |
 |------------|------------|------------|
 | Content A1 | Content B1 | Content C1 |
 | Content A2 | Content B2 | Content C2 |
 | Content A3 | Content B3 | Content C3 |
-```
+~~~
 
 This complex table has a caption as well as align, width and top attributes:
 
-```
+~~~
 {caption: "A Complex Table", align: left, width: full, position: top}
 |=============|===============|=============|
 | Header A    | Header B      | Header C    |
@@ -2164,7 +2176,7 @@ This complex table has a caption as well as align, width and top attributes:
 |=============|===============|=============|
 | Footer A    | Footer B      | Footer C    |
 |=============|===============|=============|
-```
+~~~
 
 ### Supported Attributes for Tables
 
@@ -2189,7 +2201,7 @@ To make a scene break, create a line which has only hyphens, asterisks or unders
 
 Example:
 
-```
+~~~
 This is before the first scene break.
 
 * * *
@@ -2199,7 +2211,7 @@ This is after the first scene break and before the second.
 ---
 
 This is after the second scene break.
-```
+~~~
 
 Markua Processors can take great liberties in how they output scene breaks. For example, scene breaks can be displayed as a few centered asterisks, an image, or just a blank line, depending on whether the book is fiction or another type of book. Scene breaks can also be displayed as the `hr` element in HTML, but that is not a requirement.
 
@@ -2207,7 +2219,7 @@ Markua Processors can take great liberties in how they output scene breaks. For 
 
 Blockquotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
 
-```
+~~~
 This is the first paragraph.
 
 > This is a blockquote.
@@ -2215,7 +2227,7 @@ This is the first paragraph.
 > It is outside the paragraphs.
 
 This is the second paragraph.
-```
+~~~
 
 Blockquotes in Markua are created in one of two ways:
 
@@ -2228,7 +2240,7 @@ Like figures and tables, blockquotes can be inserted in the middle of a paragrap
 
 These Markua blockquotes are siblings of the paragraphs:
 
-```
+~~~
 This is the first paragraph.
 
 > This is a blockquote.
@@ -2244,11 +2256,11 @@ It is outside the paragraphs.
 {/blockquote}
 
 This is the third paragraph.
-```
+~~~
 
 These Markua blockquotes are nested in the paragraph:
 
-```
+~~~
 This is the first paragraph.
 
 This is the second paragraph.
@@ -2264,7 +2276,7 @@ It is inside the second paragraph.
 This is part of the second paragraph.
 
 This is the third paragraph.
-```
+~~~
 
 A blockquote can contain other block-level elements, most commonly paragraphs.
 
@@ -2297,13 +2309,13 @@ Like blockquotes, asides can be siblings of paragraphs or nested in them.
 
 Here's a short aside:
 
-```
+~~~
 A> This is a short aside.
-```
+~~~
 
 Here's a longer aside, which also contains a heading:
 
-```
+~~~
 A> # A Longer Aside
 A>
 A> This is a longer aside.
@@ -2313,11 +2325,11 @@ A>
 A> The `A> ` stuff can get tedious after a while.
 A>
 A> This is why the `{aside}` syntax exists.
-```
+~~~
 
 Here's a longer aside using the `{aside}` syntax, which also contains a heading:
 
-```
+~~~
 {aside}
 ## A Note About Asides
 
@@ -2329,7 +2341,7 @@ Asides can also have headings, like this one does.
 
 Multi-paragraph asides are more pleasant using this syntax.
 {/aside}
-```
+~~~
 
 A> Do not confuse the syntax for asides, blurbs and callouts with an attribute list. They are not attribute lists.
 
@@ -2344,19 +2356,19 @@ The syntaxes for blurbs are very similar to asides:
 
 Examples:
 
-```
+~~~
 B> This is a short blurb.
-```
+~~~
 
-```
+~~~
 B> # A Longer Blurb
 B>
 B> This is a longer blurb.
 B>
 B> It can have multiple paragraphs.
-```
+~~~
 
-```
+~~~
 {blurb}
 #A Longer Blurb
 
@@ -2364,7 +2376,7 @@ This is a longer blurb.
 
 It can have multiple paragraphs.
 {/blurb}
-```
+~~~
 
 #### Supported Attributes for Blurbs
 
@@ -2388,19 +2400,19 @@ These blurb types can be set on a blurb as its `class` attribute. A Markua Proce
 
 Here's how this looks with the `B> ` syntax:
 
-```
+~~~
 {class: warning}
 B> This is a warning!
-```
+~~~
 
 Here's how this looks with the `{blurb}` syntax:
 
-```
+~~~
 {class: warning}
 {blurb}
 This is a warning!
 {/blurb}
-```
+~~~
 
 The attribute list must precede the `{blurb}` with no blank line between it.
 
@@ -2424,7 +2436,7 @@ These are the syntactic sugar values you can use:
 
 Examples:
 
-```
+~~~
 D> This is a discussion blurb.
 
 E> This is an error blurb.
@@ -2438,11 +2450,11 @@ T> This is a tip blurb.
 W> This is a warning blurb.
 
 X> This is an exercise blurb.
-```
+~~~
 
 These are equivalent to:
 
-```
+~~~
 {class: discussion}
 This is a discussion blurb.
 
@@ -2463,7 +2475,7 @@ This is a warning blurb.
 
 {class: exercise}
 This is an exercise blurb.
-```
+~~~
 
 Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
 
@@ -2477,7 +2489,7 @@ The `icon` attribute on blurbs is an example of extension attributes.
 
 Markua does not specify that a blurb must support an `icon` attribute, or what it would mean if it did. However, Leanpub understands an `icon` attribute to reference an icon from Font Awesome. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
 
-```
+~~~
 {icon: car}
 B> You can't spell carbon without it!
 
@@ -2486,7 +2498,7 @@ B> Yes, we're in Font Awesome!
 
 {icon: github}
 B> So is GitHub, of course. Unicorns.
-```
+~~~
 
 In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon. In a Markua implementation that does not understand the icon attribute, nothing will be generated for that attribute -- it will be functionally equivalent to the attribute not being present.
 
@@ -2518,19 +2530,19 @@ The syntaxes for callouts are very similar to blurbs:
 
 Examples:
 
-```
+~~~
 C> This is a short callout.
-```
+~~~
 
-```
+~~~
 C> # A Longer Callout
 C>
 C> This is a longer callout.
 C>
 C> It can have multiple paragraphs.
-```
+~~~
 
-```
+~~~
 {callout}
 # A Longer Callout
 
@@ -2538,7 +2550,7 @@ This is a longer callout.
 
 It can have multiple paragraphs.
 {/callout}
-```
+~~~
 
 C> I hate callouts, and so do Scott and Len. They ruin the flow of the text and they take the best line and make it a stupid infographic. "Here, I just did the thinking for you." But, that said, they're a thing, and Markua supports them.
 
@@ -2556,39 +2568,39 @@ Markdown is a way of writing HTML designed by bloggers, and links are so plentif
 
 The normal way to create a link is as follows:
 
-```
+~~~
 [link text](absolute_url)
-```
+~~~
 
 In Markdown, the URL can be either absolute or relative, since relative URLs can make sense on web servers. In Markua, however, all URLs must be absolute.
 
 Example:
 
-```
+~~~
 Markua was developed at [Leanpub](http://leanpub.com).
-```
+~~~
 
 #### Automatic Links
 
 To create a link where the text displayed for the link text is the URL itself, the automatic link syntax can be used. In this syntax, an absolute URL is enclosed in angle brackets.
 
-```
+~~~
 Some text <absolute_url> some text.
-```
+~~~
 
 Example:
 
-```
+~~~
 Markua was developed at <http://leanpub.com>.
-```
+~~~
 
 ### Explicitly Creating Spans with `[`...`]`
 
 Surrounding text in square brackets can be useful not just for giving it a URL to link to. If you wish to add attributes to an arbitrary span of text, you can create an arbitrary span of text using square brackets and then add an attribute list immediately afterward:
 
-```
+~~~
 My friend said [bonjour mon ami]{lang: fr} to me.
-```
+~~~
 
 With the attribute I have indicated that the bonjour is a French word. So, if the Markua processor uses a different font for French, it can do so.
 
@@ -2608,19 +2620,19 @@ Books often have footnotes.
 
 To add a footnote, you insert a footnote tag using square brackets, a caret and the tag, like this:
 
-```
+~~~
 This has a footnote[^thenote].
-```
+~~~
 
 Then, you define the footnote later in the document, using the same square brackets, caret and tag, followed by a colon, a space and the footnote definition:
 
-```
+~~~
 [^thenote]: This is the footnote content.
-```
+~~~
 
 If you wish to write multiple paragraphs in the footnote, you must indent the subsequent paragraphs by four spaces or one tab:
 
-```
+~~~
 This has a footnote[^thenote].
 
 Here is some unrelated text.
@@ -2630,7 +2642,7 @@ Here is some unrelated text.
     This is the second paragraph of footnote content.
 
 Here is some more unrelated text.
-```
+~~~
 
 Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#restart-footnote-numbering) setting.
 
@@ -2640,15 +2652,15 @@ Books often have endnotes as well. Sometimes these are instead of footnotes, but
 
 To add an endnote, you insert an endnote tag using square brackets, two carets and the tag, like this:
 
-```
+~~~
 This has an endnote[^^thenote].
-```
+~~~
 
 Then, you define the endnote later in the document, using the same square brackets, two carets and tag, followed by a colon, a space and the endnote definition:
 
-```
+~~~
 [^^thenote]: This is the endnote content.
-```
+~~~
 
 Just as with a footnote, if you wish to write multiple paragraphs in the endnote, you must indent the subsequent paragraphs by four spaces or one tab.
 
@@ -2688,17 +2700,17 @@ To define an id on a block element like a paragraph, figure, heading or even a d
 
 Here's how to use the attribute list syntax to define an id attribute:
 
-```
+~~~
 {id: some-id}
 This is a paragraph with the id of `some-id`.
-```
+~~~
 
 Here's how to use the shorter "syntactic sugar" approach to define an id attribute:
 
-```
+~~~
 {#some-id}
 This is a paragraph with the id of `some-id`.
-```
+~~~
 
 ##### Defining an id on a Span Element
 
@@ -2706,39 +2718,39 @@ To define an id on a span element you simply add the id definition immediately a
 
 Here's how to use the attribute list syntax to define an id attribute on a span elemnet:
 
-```
+~~~
 The word Markua{id: markua} has an id.
 
 Leanpub is based in **Victoria, BC, Canada**{id: victoria}.
-```
+~~~
 
 Here's how to use the shorter "syntactic sugar" approach to define an id attribute:
 
-```
+~~~
 The word Markua{#markua} has an id.
 
 Leanpub is based in **Victoria, BC, Canada**{#victoria}.
-```
+~~~
 
 Here's how to define an id on a custom span:
 
-```
+~~~
 The [quick sly fox]{#quick_sly} jumped over the lazy dogs.
-```
+~~~
 
 If you want to define an id on a span while also defining other attributes like index entries, the `id:` syntax must be used in a full attribute list:
 
-```
+~~~
 The [quick sly fox]{id: quick_sly, i: "Fox, Sly and Quick"} jumped over the lazy dogs.
-```
+~~~
 
 #### Referencing an `id` With a Crosslink
 
 Regardless of how you defined the id, you then link to it to create a crosslink. To do this, you use the `#` character and the id in a link:
 
-```
+~~~
 [link text](#some-id)
-```
+~~~
 
 This syntax is intended to be reminiscent of HTML anchor tags, not of `h1` titles in Markua.
 
@@ -2782,7 +2794,7 @@ The `code-sample-names`, `figure-names` and `table-names` settings control the w
 
 Examples:
 
-```
+~~~
 This is discussed in [section #n, #t](#crosslinks).
 
 This is discussed in [#f](#crosslinks).
@@ -2792,7 +2804,7 @@ This is discussed in a [#d](#crosslinks) above.
 See [chapter #n](#span-elements), which is the best chapter in this book.
 
 This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this document.
-```
+~~~
 
 A> The only way to reference the title and numbers is in crosslinks. There's no syntax to do so without creating a crosslink--a crosslink is more helpful, since it is clickable, and adding another syntax simply to be less helpful to the reader is a bad idea. Markua has enough syntax as it is.
 
@@ -2811,9 +2823,9 @@ To insert a soft hyphen, used a backslash followed by a hyphen:
 
 Example:
 
-```
+~~~
 My name is Rumpel\-stiltskin.
-```
+~~~
 
 Soft hyphens are not displayed in HTML but a `&shy;` entity is output.
 
@@ -2903,7 +2915,7 @@ In its simplest form, an index entry is simply `{i: "hello"}`. Like any attribut
 
 These are the various formats of an index entry:
 
-```
+~~~
 {i: hello}
 {i: "hello"}
 {i: "Armstrong, Peter"}
@@ -2915,7 +2927,7 @@ These are the various formats of an index entry:
 {i: "hello!**Peter**"}
 {i: "Peter|see{i:'hello'}"}
 {i: "Jen|seealso{i:'Jenny'}"}
-```
+~~~
 
 Here's what they do:
 
@@ -2956,33 +2968,33 @@ Index entries are case sensitive. For example, `{i: "mark"}` and `{i: "Mark"}` a
 
 To attach an index entry to the start of a block, put it on its own line above a block:
 
-```
+~~~
 {i: "hello"}
 I just came to say hello, hello, hello, hello
-```
+~~~
 
 To attach an index entry to a word, just add the index entry after the word:
 
-```
+~~~
 I just came to say hello{i: "hello"}, hello, hello, hello
-```
+~~~
 
 To attach an index entry to a span element, just add the index entry after the span element:
 
-```
+~~~
 The first program that a programmer writes in a language is usually *Hello World*{i: "Hello World"}
-```
+~~~
 
 Index entries can have commas and other punctuation (except colons) in their definition:
 
-```
+~~~
 My wife read some book about a whale by Herman Melville{i: "Melville, Herman"}.
-```
+~~~
 
 Multiple index entries can exist in a block, or even a sentence:
-```
+~~~
 Supposedly the great-great-great-granduncle of the musician Moby{i: "Moby"} was Herman Melville{i: "Melville, Herman"}, the author of a book about a whale{i: "Moby-Dick; or, The Whale"}.
-```
+~~~
 
 Note that adding index entries is best left until the end of a book. At that time, ids like {#myid} can be converted to {id: #myid, i: "blah"} if index entries are being added where ids already are.
 
@@ -3009,7 +3021,7 @@ However, if you use the `lang` attribute as a directive, it applies as the new d
 
 The following example shows how you would say hello in English, then switch the language to Hebrew, then Chinese (Simplified), then Arabic, and then switch back to English to say goodbye:
 
-```
+~~~
 hello
 
 {lang: he}
@@ -3039,7 +3051,7 @@ here
 {lang: en}
 
 goodbye
-```
+~~~
 
 Note that I didn't actually say hello or goodbye in Hebrew, Chinese or Arabic because the code font used for this specification does not support them all.
 
@@ -3141,7 +3153,7 @@ Typically approaches #2, #3 and #4 are used when a Markua document is being writ
 
 With approach #1, the settings are added at the top of the file:
 
-```
+~~~
 {
 title: Markua Specification
 authors: Peter Armstrong
@@ -3150,11 +3162,11 @@ authors: Peter Armstrong
 ## The Magical Typewriter
 
 Imagine...
-```
+~~~
 
 With approaches #2, #3 and #4, the Markua Processor must act as though there is one file as follows:
 
-```
+~~~
 {
 (the contents of the actual or synthesized settings file)
 }
@@ -3162,7 +3174,7 @@ With approaches #2, #3 and #4, the Markua Processor must act as though there is 
 
 (the contents of the second manuscript file)
 ...
-```
+~~~
 
 The settings contain information about the document. This will include things like the title, subtitle, copyright, author names, etc.
 
@@ -3172,12 +3184,12 @@ As the title of this section states, settings are just newline-separated key-val
 
 Here's an example of the settings metadata:
 
-```
+~~~
 title: Markua Specification
 authors: Peter Armstrong
 contributors: Scott Patten, Braden Simpson and Jordan Ell
 copyright: Peter Armstrong
-```
+~~~
 
 The format of the metadata is one entry per line, with the keys and values separated by a colon and a space.
 
@@ -3484,12 +3496,11 @@ This is a paragraph.
 
 ###### Markua Syntax
 
-{#input_}
+{#input_single_newlines_1}
 ```
 # This.
 Is.
-Sparta!!!
-(It's also still heading text.)
+Heading Text!!!
 
 I'm paragraph one. Yay!
 
@@ -3502,8 +3513,16 @@ This is paragraph three.
 
 ###### HTML Output
 
-{#output_}
+{#output_single_newlines_1}
 ```
+<h1>This.<br/>
+Is.<br/>
+Heading Text!!!</h1>
+<p>I'm paragraph one. Yay!</p>
+<p>This is paragraph two.<br/>
+This is *still* in paragraph two, preceded by a forced line break.<br/>
+This is also in paragraph two, also preceded by a forced line break.</p>
+<p>This is paragraph three.</p>
 ```
 
 ### Three or More Newlines
