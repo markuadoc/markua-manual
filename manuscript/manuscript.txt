@@ -78,9 +78,9 @@ The Markua specification defines a precise mapping from Markua to HTML and to bo
 The Markua specification specifies both the Markua syntax and the mapping from Markua syntax to book and document concepts and to HTML.
 
 {#novel_syntax}
-## The 7 Things to Know to Write a Novel in Markua
+## How to Write a Novel in Markua
 
-You only need to know 7 things to write a novel in Markua:
+You only need to know seven things to write a novel in Markua:
 
 1. Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
 2. To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
@@ -360,7 +360,7 @@ Two (or more) newlines in Markua create a new paragraph in prose, or a new stanz
 
 One newline, on the other hand, is used to add a forced line break, but to keep the existing paragraph (or stanza). Because of this, any leading space after a single newline is not paragraph indentation, but is instead deliberate indentation on the specific line. As such, it should be respected.
 
-This means you can write a sonnet without typing any special formatting characters. In the following Markua text, every line break will be added correctly, and the last two lines will be indented:
+This means you can write a sonnet without typing any special formatting characters. In the following Markua text (courtesy of Shakespeare), every line break will be added correctly, and the last two lines will be indented:
 
 ~~~
 I grant I never saw a goddess go;
@@ -3577,21 +3577,6 @@ The End
 
 ##### Example
 
-###### Markua Syntax
-
-{#input_}
-```
-```
-
-###### HTML Output
-
-{#output_}
-```
-```
-
-
-#### Example 1
-
 {#input_leading_spaces_1}
 ##### Markua Syntax
 
@@ -3612,36 +3597,22 @@ My mistress when she walks treads on the ground.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
 </p>
 
-### Trailing Spaces are Stripped
-
-##### Example
-
-###### Markua Syntax
-
-{#input_}
-```
-```
-
-###### HTML Output
-
-{#output_}
-```
-```
-
 ### Internal Spaces are Collapsed to One Space
 
 ##### Example
 
 ###### Markua Syntax
 
-{#input_}
+{#input_internal_spaces_1}
 ```
+foo   bar
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_internal_spaces_1}
 ```
+<p>foo bar</p>
 ```
 
 ## Resources
