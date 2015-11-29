@@ -267,7 +267,6 @@ Markua is more strict about spaces and pound signs than Markdown:
 2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
 3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem in traditional writing, but which would violate the principle of least surprise.)
 4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
-5. Single newlines in headings transform into single spaces, since headings can't have single newlines in them.
 
 I thought long and hard about Markua headings, and changed my mind (as Scott and Braden will attest) a number of times. I settled on this design when I realized that the design requirements were as follows:
 
@@ -311,17 +310,22 @@ In this regard, Markua has broader design goals than Markdown: Markdown is for w
 
 Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown.
 
+{#single_newlines}
 ### Single Newlines
 
-In Markdown, a single newline inside a paragraph is interpreted as a single space. This means that if you feel like manually wrapping lines (or if your text editor is garbage), you can make your text look nice.
+The way that single newlines are handled is the *single largest breaking difference* between Markdown and Markua. Usually, Markua tries hard to not break Markdown syntax. This is the main exception.
 
-One related decision to this is that to add a forced line break (a `<br/>` tag in HTML), Markdown uses a horrible hack: you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line! Worse, in some text editors (like Emacs, the editor I use), trailing spaces at the end of a line are automatically removed when a file is saved. So, it's possible for me to inadvertently modify the meaning of a Markdown document by simply opening it and saving it! Also, in Markdown, it's impossible to type a sonnet without relying on the two space hack at the end of every line to force a newline--which isn't very poetic at all.
+In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
-Unlike Markdown, in Markua, a single newline inside a paragraph forces a line break, which produces a `<br/>` tag in HTML. This is true without any invisible formatting nonsense. As you will see, there are many types of block elements in Markua, including paragraphs, asides, blurbs, callouts, blockquotes and headings. A single newline inside most of these block elements produces a forced line break, and what follows is either still part of the same block element or is contained in the block element. However, headings (discussed later) are block elements, but inside a heading, a single newline is interpreted as a single space by Markua. This is because a heading is intended to be all on one line.
+In Markua, however, a forced line break in the input is a forced line break in the output: single newlines produce `<br/>` tags in the HTML output, and must produce forced line breaks in all other output formats like PDF. This is true for headings, paragraphs, lists, blockquotes, asides, blurbs and callouts.
+
+In ancient history, some text editors did not automatically wrap lines of text, so manual wrapping of plain text files was a good thing to do. Also, for computer programmers, we still do not wrap our text when programming. However, for *writing*, automatic wrapping of paragraphs is essential for staying in the flow while writing, and for being able to edit your text without needing to re-wrap every line in a paragraph. This is one decision that even Microsoft Word gets right.
+
+The decision in Markua to treat single newlines as forced line breaks (i.e. as single newlines, and as a `<br/>` tag in HTML) is that Markua does *not* need to use the **horrible hack** that Markdown uses to output forced line breaks. In Markdown, to output a `<br/>` tag in HTML, you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line! Worse, some text editors (like Emacs, the editor I use) can be configured to remove trailing spaces at the ends of lines automatically when a file is saved. So, it's possible for me to inadvertently modify the meaning of a Markdown document by simply opening it and saving it! Also, in Markdown, it's impossible to type a sonnet without relying on the two space hack at the end of every line to force a newline--which isn't very poetic at all.
 
 Example:
 
-~~~
+```
 I'm paragraph one. Yay!
 
 This is paragraph two.
@@ -329,9 +333,7 @@ This is *still* in paragraph two, preceded by a forced line break.
 This is also in paragraph two, also preceded by a forced line break.
 
 This is paragraph three.
-~~~
-
-This is the single largest difference between Markdown and Markua for most normal usage.
+```
 
 ### Three or More Newlines
 
@@ -2272,7 +2274,7 @@ If you are using the Markdown approach of `>`, then to start a new block level e
 
 Blockquotes can be multi-paragraph. To create a multi-paragraph blockquote, you need to separate each paragraph with a line containing a `>` and (optionally) whitespace.
 
-Unlike Markdown, in Markua a single newline inside a blockquote does **not** start a new paragraph. Instead, it simply adds a line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a top-level Markua paragraph function. Note that it means you **cannot** manually wrap blockquotes to make them look nicer. Manually wrapping blockquotes is tedious and discourages editing of your own work. If you have really long blockquotes which span multiple paragraphs, the `{blockquote}` syntax is more pleasant to write in.
+In Markdown, a single newline inside a blockquote (where both lines are preceded by a `>` and a space) adds a single space. In Markua, however, a single newline inside a blockquote adds a forced line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a normal Markua paragraph function. This is discussed at length in the [Single Newlines](#single_newlines) section earlier. Note that it means you **cannot** manually wrap blockquotes to make them look nicer. Manually wrapping blockquotes is tedious and discourages editing of your own work. If you have really long blockquotes which span multiple paragraphs, the `{blockquote}` syntax is more pleasant to write in.
 
 If a blockquote contains headings, these headings may be formatted by a Markua Processor differently than normal headings. Finally, if a Markua Processor is automatically generating a [Table of Contents](#toc) from chapter and section headings, any headings inside blockquotes should be ignored.
 
@@ -3484,6 +3486,18 @@ This is a paragraph.
 
 {#input_}
 ```
+# This.
+Is.
+Sparta!!!
+(It's also still heading text.)
+
+I'm paragraph one. Yay!
+
+This is paragraph two.
+This is *still* in paragraph two, preceded by a forced line break.
+This is also in paragraph two, also preceded by a forced line break.
+
+This is paragraph three.
 ```
 
 ###### HTML Output
