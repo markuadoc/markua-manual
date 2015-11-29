@@ -71,7 +71,7 @@ Markua is a plain text format. Markua book manuscripts, called Markua documents,
 
 Markua documents can be automatically transformed into every current popular type of ebook format. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
 
-At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can generate PDF, EPUB, MOBI and HTML ebooks with one click. We are releasing an open source Markua-to-HTML converter at <https://github.com/markuadoc/markua-js>. We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc
+At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can generate PDF, EPUB, MOBI and HTML ebooks with one click. We are also working on an open source, ES6-based [Markua-to-HTML converter](https://github.com/markuadoc/markua-js). We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc.
 
 The Markua specification defines a precise mapping from Markua to HTML and to book concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
 
