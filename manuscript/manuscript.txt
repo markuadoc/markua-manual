@@ -321,8 +321,8 @@ Example:
 I'm paragraph one. Yay!
 
 This is paragraph two.
-This is *still* in paragraph two.
-So is this.
+This is *still* in paragraph two, preceded by a forced line break.
+This is also in paragraph two, also preceded by a forced line break.
 
 This is paragraph three.
 ~~~
