@@ -915,6 +915,8 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text. (The use of video fallbacks, such as HTML5's `mediagroup` syntax or multiple `source` elements, is not supported in Markua.)
 
+A> When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
+
 #### Default Attributes for Video
 
 The default attributes for a video inserted as a span are:
@@ -1009,6 +1011,8 @@ We will discuss the supported and the default attributes for audio files, and th
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the audio has two fallbacks: the `poster` image and then the `alt` text.
 
+A> When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
+
 #### Default Attributes for Audio
 
 The default attributes for audio are (with the exception of the type) the same as for video, and they all apply to the poster.
@@ -1040,7 +1044,7 @@ The talk audio highlights are here: ![](highlights.mp3).
 ~~~
 The full version of the talk is here:
 
-![](talk.m4a)
+![Full Talk](talk.m4a)
 ~~~
 
 #### Web Audio
@@ -1056,7 +1060,7 @@ The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
 ~~~
 The full version of the talk is here:
 
-![](http://markua.com/talk.m4a)
+![Full Talk](http://markua.com/talk.m4a)
 ~~~
 
 {#code}
@@ -3857,47 +3861,87 @@ Here's a paragraph after the figure.
 <p>Here's a paragraph after the figure.</p>
 ```
 
-### Audio - TO_HERE
+### Audio
 
 #### Local Audio
 
-##### Example
+##### Span Example
 
 ###### Markua Syntax
 
-{#input_}
+{#input_local_audio_span_1}
 ```
+The talk audio highlights are here: ![](highlights.mp3).
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_local_audio_span_1}
 ```
+<p>The talk audio highlights are here: <audio src="resources/highlights.mp3"/>.</p>
 ```
 
-##### Span
+##### Figure Example
 
-##### Figure
+###### Markua Syntax
+
+{#input_local_audio_span_1}
+~~~
+The full version of the talk is here:
+
+![Full Talk](talk.m4a)
+~~~
+
+###### HTML Output
+
+{#output_local_audio_span_1}
+```
+<p>The full version of the talk is here:</p>
+<div class="figure">
+  <audio src="resources/talk.m4a"/>
+  <p class="caption">Full Talk</p>
+</div>
+```
 
 #### Web Audio
 
-##### Example
+##### Span Example
 
 ###### Markua Syntax
 
-{#input_}
+{#input_local_audio_span_1}
 ```
+The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_local_audio_span_1}
 ```
+<p>The talk audio highlights are here: <audio src="http://markua.com/highlights.mp3"/>.</p>
 ```
 
-##### Span
+##### Figure Example
 
-##### Figure
+###### Markua Syntax
+
+{#input_local_audio_span_1}
+~~~
+The full version of the talk is here:
+
+![Full Talk](http://markua.com/talk.m4a)
+~~~
+
+###### HTML Output
+
+{#output_local_audio_span_1}
+```
+<p>The full version of the talk is here:</p>
+<div class="figure">
+  <audio src="http://markua.com/talk.m4a"/>
+  <p class="caption">Full Talk</p>
+</div>
+```
 
 ### Code
 
