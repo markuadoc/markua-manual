@@ -3621,107 +3621,22 @@ foo   bar
 
 #### Local Images
 
-##### Span Example 1: Span Images with Alt Text
-
-###### Markua Syntax
-
-{#input_span_images_1}
-```
-Markua has a fancy ![Markua two trees logo](markua-logo-small.png) logo!
-
-Markua also has a fancy ![Markua two trees icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png) Twitter avatar!
-```
-
-###### HTML Output
-
-{#output_span_images_1}
-```
-<p>Markua has a fancy <img src="resources/markua-logo-small.png" alt="Markua two trees logo"/> logo!</p>
-<p>Markua also has a fancy <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="Markua two trees icon"/> Twitter avatar!</p>
-```
-
-##### Span Example 2: Span Images with No Alt Text
-
-###### Markua Syntax
-
-{#input_span_images_2}
-```
-Markua has a fancy ![](markua-logo-small.png) logo!
-```
-
-###### HTML Output
-
-{#output_span_images_2}
-```
-<p>Markua has a fancy <img src="resources/markua-logo-small.png"/> logo!</p>
-```
-
-##### Figure Example 1: Figures with Alt Text and a Caption
-
-###### Markua Syntax
-
-{#input_figure_images_1}
-```
-Markua has a fancy logo:
-
-{alt: "the word Markua with the two asterisk trees beside it"}
-![The Markua Logo](markua-logo.png)
-
-Markua also has a fancy Twitter avatar:
-
-{alt: "the Markua two asterisk trees icon"}
-![The Markua Icon](https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png)
-
-Thanks Justin, it was fun making the logo with you!
-```
-
-###### HTML Output
-
-{#output_figure_images_1}
-```
-<p>Markua has a fancy logo:</p>
-<div class="figure">
-  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
-  <p class="caption">The Markua Logo</p>
-</div>
-<p>Markua also has a fancy Twitter avatar:</p>
-<div class="figure">
-  <img src="https://pbs.twimg.com/profile_images/525513829455650817/mIba4bYL_400x400.png" alt="the Markua two asterisk trees icon"/>
-  <p class="caption">The Markua Icon</p>
-</div>
-<p>Thanks Justin, it was fun making the logo with you!</p>
-```
-
-#### Web Images
-
-##### Example
-
-###### Markua Syntax
-
-{#input_}
-```
-```
-
-###### HTML Output
-
-{#output_}
-```
-```
-
 ##### Span
 
 ##### Example
 
 ###### Markua Syntax
 
-{#input_}
+{#input_local_image_span_1}
 ```
+Easy as ![pie](pie.png).
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_local_image_span_1}
 ```
+<p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
 ```
 
 ##### Figure
@@ -3730,35 +3645,64 @@ Thanks Justin, it was fun making the logo with you!
 
 ###### Markua Syntax
 
-{#input_}
+{#input_local_image_figure_1}
 ```
+Easy as ![pie](pie.png).
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_local_image_figure_1}
 ```
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <img src="cake.jpg" alt="a slice of chocolate cake"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
 ```
+
+#### Web Images -- TO_HERE
+
+##### Span
+
+~~~
+Easy as ![pie](http://markua.com/pie.png).
+~~~
+
+##### Figure
+
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](http://markua.com/cake.jpg)
+
+Here's a paragraph after the figure.
+~~~
 
 #### Inline Images (SVG only)
 
-##### Example
-
-###### Markua Syntax
-
-{#input_}
-```
-```
-
-###### HTML Output
-
-{#output_}
-```
-```
-
 ##### Span
 
+~~~
+Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
+~~~
+
 ##### Figure
+
+~~~
+Here's a paragraph before the figure.
+
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+
+Here's a paragraph after the figure.
+~~~
 
 ### Video
 
@@ -4863,87 +4807,6 @@ Thanks Justin, it was fun making the logo with you!
 # Spare Parts
 
 W> TODO - The rest of this document needs to be rewritten. Please ignore everything after this point.
-
-### Example 2: Figures with no Alt Text or Caption
-
-#### Markua Syntax
-
-{#input_figures_2}
-```
-Markua has a fancy logo:
-
-![](markua-logo.png)
-
-Thanks Justin, it was fun making the logo with you!
-```
-
-#### HTML Output
-
-{#output_figures_2}
-```
-<p>Markua has a fancy logo:</p>
-<div class='figure'>
-  <img src="media/markua-logo.png"/>
-</div>
-<p>Thanks Justin, it was fun making the logo with you!</p>
-```
-
-### Example 3: Figures with Alt Text but no Caption
-
-#### Markua Syntax
-
-{#input_figures_3}
-```
-Markua has a fancy logo:
-
-![the word Markua with the two asterisk trees beside it](markua-logo.png)
-
-Thanks Justin, it was fun making the logo with you!
-```
-
-#### HTML Output
-
-{#output_figures_3}
-```
-<p>Markua has a fancy logo:</p>
-<div class="figure">
-  <img src="media/markua-logo.png" alt="the word Markua with the two asterisk trees beside it"/>
-</div>
-<p>Thanks Justin, it was fun making the logo with you!</p>
-```
-
-### Example 4: Figures with a Caption but no Alt Text
-
-#### Markua Syntax
-
-{#input_figures_4}
-```
-Markua has a fancy logo:
-
-![](markua-logo.png "The Markua Logo")
-
-Thanks Justin, it was fun making the logo with you!
-```
-
-#### HTML Output
-
-{#output_figures_4}
-```
-<p>Markua has a fancy logo:</p>
-<div class="figure">
-  <img src="media/markua-logo.png"/>
-  <p class="caption">The Markua Logo</p>
-</div>
-<p>Thanks Justin, it was fun making the logo with you!</p>
-```
-
-### Example 5: A Figure with `float` Attribute and a Percentage `width` Attribute
-
-#### Markua Syntax
-
-{#input_figures_5}
-```
-Markua has a fancy logo:
 
 {float: "left", width: "50%"}
 ![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
