@@ -966,7 +966,7 @@ A> Ironically, it took me about a year after that talk was recorded to finally f
 Here's a paragraph before the figure.
 
 {poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
-!["Introducing Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
+![Introducing Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
 
 Here's a paragraph after the figure.
 ~~~
@@ -3649,9 +3649,14 @@ Easy as ![pie](pie.png).
 ###### Markua Syntax
 
 {#input_local_images_figure_1}
-```
-Easy as ![pie](pie.png).
-```
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph after the figure.
+~~~
 
 ###### HTML Output
 
@@ -3715,14 +3720,14 @@ Here's a paragraph after the figure.
 
 ###### Markua Syntax
 
-{#input_web_images_span_1}
+{#input_inline_images_span_1}
 ```
 Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
 ```
 
 ###### HTML Output
 
-{#output_web_images_span_1}
+{#output_inline_images_span_1}
 ```
 <p>Red <svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg> square.</p>
 ```
@@ -3731,7 +3736,7 @@ Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" widt
 
 ###### Markua Syntax
 
-{#input_web_images_figure_1}
+{#input_inline_images_figure_1}
 ~~~
 Here's a paragraph before the figure.
 
@@ -3748,7 +3753,7 @@ Here's a paragraph after the figure.
 
 ###### HTML Output
 
-{#output_web_images_figure_1}
+{#output_inline_images_figure_1}
 ~~~
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
@@ -3761,49 +3766,98 @@ Here's a paragraph after the figure.
 <p>Here's a paragraph after the figure.</p>
 ~~~
 
-### Video - TO_HERE
+### Video
 
 #### Local Video
 
-##### Example
+##### Span Example
 
 ###### Markua Syntax
 
-{#input_}
+{#input_local_video_span_1}
 ```
+Easy as ![pie](pie_eating_contest.mp4).
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_local_video_span_1}
 ```
+<p>Easy as <video src="resources/pie_eating_contest.mp4" alt="pie"/>.</p>
 ```
 
-##### Span
+##### Figure Example
 
-##### Figure
+###### Markua Syntax
+
+{#input_local_video_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a man eating an entire chocolate cake"}
+![A Piece of Cake](cake_eating_contest.webm)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_local_video_figure_1}
+```
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <video src="cake_eating_contest.webm" alt="a man eating an entire chocolate cake"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+```
 
 #### Web Video
 
-##### Example
+##### Span Example
 
 ###### Markua Syntax
 
-{#input_}
+{#input_web_video_span_1}
 ```
+Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
 ```
 
 ###### HTML Output
 
-{#output_}
+{#output_web_video_span_1}
 ```
+<p>Easy as <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0" alt="Peter's Markua talk"/>.</p>
 ```
 
-##### Span
+##### Figure Example
 
-##### Figure
+###### Markua Syntax
 
-### Audio
+{#input_web_video_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
+![Introducing Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_web_video_figure_1}
+```
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0"
+    poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
+  <p class="caption">Introducing Markua</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+```
+
+### Audio - TO_HERE
 
 #### Local Audio
 
