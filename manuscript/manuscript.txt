@@ -858,10 +858,14 @@ Here's a paragraph after the figure.
 
 #### Inline Images (SVG only)
 
+SVG images are just XML text, so they can be inserted inline in Markua.
+
+Note that there is no support for `alt` text in SVG, so there is no support for `alt` attributes with inline images in Markua. The recommendation is to use the `<desc>` attribute of the SVG as alt text.
+
 ##### Span
 
 ~~~
-Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
+Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
 ~~~
 
 ##### Figure
@@ -869,9 +873,10 @@ Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="
 ~~~
 Here's a paragraph before the figure.
 
-{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+{caption: "Earth From Space (Simplified)"}
 ```svg
 <svg width="20" height="20">
+  <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
@@ -3261,6 +3266,8 @@ Markua specifies an exact mapping from Markua input to HTML output. A Markua Pro
 
 This chapter defines this HTML mapping.
 
+Chances are you will find this chapter very boring unless you're either implementing a Markua Processor or you love reading W3C specifications. The only things left in this specification are the [Appendices](#appendices), so feel free to skip this and just read those. Or, close your computer and go outside.
+
 This chapter is structured in an almost identical way to the Markua Syntax chapter. Unlike the Markua syntax chapter which did a bunch of explaining and showed almost no HTML, in this chapter there is essentially no explaining--just a bunch of examples.
 
 These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input. See <https://github.com/markuadoc/markua-test> for more information.
@@ -3621,38 +3628,34 @@ foo   bar
 
 #### Local Images
 
-##### Span
-
-##### Example
+##### Span Example
 
 ###### Markua Syntax
 
-{#input_local_image_span_1}
+{#input_local_images_span_1}
 ```
 Easy as ![pie](pie.png).
 ```
 
 ###### HTML Output
 
-{#output_local_image_span_1}
+{#output_local_images_span_1}
 ```
 <p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
 ```
 
-##### Figure
-
-##### Example
+##### Figure Example
 
 ###### Markua Syntax
 
-{#input_local_image_figure_1}
+{#input_local_images_figure_1}
 ```
 Easy as ![pie](pie.png).
 ```
 
 ###### HTML Output
 
-{#output_local_image_figure_1}
+{#output_local_images_figure_1}
 ```
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
@@ -3662,41 +3665,80 @@ Easy as ![pie](pie.png).
 <p>Here's a paragraph after the figure.</p>
 ```
 
-#### Web Images -- TO_HERE
+#### Web Images
 
-##### Span
+##### Span Example
 
-~~~
+###### Markua Syntax
+
+{#input_web_images_span_1}
+```
 Easy as ![pie](http://markua.com/pie.png).
-~~~
+```
 
-##### Figure
+###### HTML Output
 
-~~~
+{#output_web_images_span_1}
+```
+<p>Easy as <img src="http://markua.com/pie.png" alt="pie"/>.</p>
+```
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_web_images_figure_1}
+```
 Here's a paragraph before the figure.
 
 {alt: "a slice of chocolate cake"}
 ![A Piece of Cake](http://markua.com/cake.jpg)
 
 Here's a paragraph after the figure.
-~~~
+```
+
+###### HTML Output
+
+{#output_web_images_figure_1}
+```
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <img src="http://markua.com/cake.jpg" alt="a slice of chocolate cake"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+```
 
 #### Inline Images (SVG only)
 
-##### Span
+##### Span Example
 
-~~~
-Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
-~~~
+###### Markua Syntax
 
-##### Figure
+{#input_web_images_span_1}
+```
+Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
+```
 
+###### HTML Output
+
+{#output_web_images_span_1}
+```
+<p>Red <svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg> square.</p>
+```
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_web_images_figure_1}
 ~~~
 Here's a paragraph before the figure.
 
-{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+{caption: "Earth From Space (Simplified)"}
 ```svg
 <svg width="20" height="20">
+  <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
@@ -3704,7 +3746,22 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Video
+###### HTML Output
+
+{#output_web_images_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <svg width="20" height="20">
+    <desc>a blue circle</desc>
+    <circle cx="10" cy="10" r="9" fill="blue"/>
+  </svg>
+  <p class="caption">Earth From Space (Simplified)</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
+### Video - TO_HERE
 
 #### Local Video
 
