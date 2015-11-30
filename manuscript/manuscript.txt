@@ -3648,7 +3648,7 @@ Easy as ![pie](pie.png).
 <p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
 ```
 
-##### Figure Example
+##### Figure Example 1: Basic
 
 ###### Markua Syntax
 
@@ -3669,6 +3669,58 @@ Here's a paragraph after the figure.
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <img src="cake.jpg" alt="a slice of chocolate cake"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+```
+
+##### Figure Example 2: Float and Width
+
+###### Markua Syntax
+
+{#input_local_images_figure_2}
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a slice of chocolate cake", float: "left", width: "50%"}
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_local_images_figure_2}
+```
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <img src="cake.jpg" alt="a slice of chocolate cake" style="float: left; width: 50%;"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+```
+
+##### Figure Example 3: Fullbleed
+
+###### Markua Syntax
+
+{#input_local_images_figure_3}
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a slice of chocolate cake", width: "fullbleed"}
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_local_images_figure_3}
+```
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <img src="cake.jpg" alt="a slice of chocolate cake" class="fullbleed"/>
   <p class="caption">A Piece of Cake</p>
 </div>
 <p>Here's a paragraph after the figure.</p>
@@ -4962,50 +5014,6 @@ The full version of the talk is here:
 # Spare Parts
 
 W> TODO - The rest of this document needs to be rewritten. Please ignore everything after this point.
-
-{float: "left", width: "50%"}
-![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
-
-Thanks Justin, it was fun making the logo with you!
-```
-
-#### HTML Output
-
-{#output_figures_5}
-```
-<p>Markua has a fancy logo:</p>
-<div class="figure">
-  <img src="markua-logo.png" style="float: left; width: 50%;" alt="the word Markua with the two asterisk trees beside it"/>
-  <p class="caption">The Markua Logo</p>
-</div>
-<p>Thanks Justin, it was fun making the logo with you!</p>
-```
-
-### Example 6: A Figure with a `width` Attribute of `fullbleed`
-
-#### Markua Syntax
-
-{#input_figures_6}
-```
-Markua has a fancy logo:
-
-{width: "fullbleed"}
-![the word Markua with the two asterisk trees beside it](markua-logo.png "The Markua Logo")
-
-Thanks Justin, it was fun making the logo with you!
-```
-
-#### HTML Output
-
-{#output_figures_6}
-```
-<p>Markua has a fancy logo:</p>
-<div class="figure">
-  <img src="markua-logo.png" class="fullbleed" style="width: 100%;" alt="the word Markua with the two asterisk trees beside it"/>
-  <p class="caption">The Markua Logo</p>
-</div>
-<p>Thanks Justin, it was fun making the logo with you!</p>
-```
 
 ## Code Spans
 
