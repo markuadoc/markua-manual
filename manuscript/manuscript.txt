@@ -3363,6 +3363,7 @@ The following CSS rule is recommended:
   text-decoration: line-through;
 }
 ```
+
 ##### Example
 
 ###### Markua Syntax
@@ -4001,16 +4002,20 @@ The full version of the talk is here:
 
 ##### Example
 
+TODO
+
 ###### Markua Syntax
 
 {#input_}
 ```
+Hello in Ruby is a simple ![](hello.rb) statement.
 ```
 
 ###### HTML Output
 
 {#output_}
 ```
+<p>Hello in Ruby is a simple ![](hello.rb) statement.</p>
 ```
 
 ##### Span
