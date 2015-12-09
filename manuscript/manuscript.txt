@@ -173,9 +173,9 @@ Markua documents are written in plain text.
 
 Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
-{#text_formatting}
 ## Text Formatting
 
+{#text_formatting}
 [View HTML Mapping](#text_formatting_html)
 
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
@@ -766,7 +766,10 @@ As an author, all you do is provide the correct file extension or set the format
 
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
+{#images}
 ### Images
+
+[View HTML Mapping](#images_html)
 
 The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
 
@@ -2540,8 +2543,6 @@ B> Leanpub. Yes, we're in Font Awesome!
 {icon: github}
 B> So is GitHub, of course. Unicorns.
 
-W> TODO_LEANPUB - upgrade Font Awesome version so this is true for Leanpub!
-
 ### Callouts (C>)
 
 Callouts are essentially blurbs that float.
@@ -3293,9 +3294,9 @@ These examples are not just examples--they are also the basis of a compatibility
 
 In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
-{#text_formatting_html}
 ## Text Formatting
 
+{#text_formatting_html}
 [Back To Section](#text_formatting)
 
 ### Italic
@@ -3661,7 +3662,10 @@ foo   bar
 
 [Back To Section](#resources)
 
+{#images_html}
 ### Images
+
+[Back To Section](#images)
 
 #### Local Images
 
