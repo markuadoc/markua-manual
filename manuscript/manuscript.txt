@@ -168,8 +168,6 @@ Specifically, Markua documents must be saved in the **UTF-8** character encoding
 {#text_formatting}
 ## Text Formatting
 
-[View HTML Mapping](#text_formatting_html)
-
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
 
 Markua is a plain text format designed for the writing of books. Books have various types of text formatting in them: bold, italic, underline, strikethrough, superscript and subscript.
@@ -203,10 +201,10 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 [^w3c_em]: To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
+The HTML mapping for text formatting is specified [here](#text_formatting_html).
+
 {#headings}
 ## Headings
-
-[View HTML Mapping](#headings_html)
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
@@ -283,10 +281,10 @@ The design of Markua headings meets these requirements, in what I feel is an opt
 
 A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
 
+The HTML mapping is specified [here](#headings_html).
+
 {#whitespace}
 ## Whitespace, Paragraphs and Blank Lines
-
-[View HTML Mapping](#whitespace_html)
 
 Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
 
@@ -304,10 +302,10 @@ This is paragraph three.
 
 A paragraph is the least-specialized example of something called a block element. Block elements are separated from each other by at least one blank line. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. Examples of other block elements include headings, figures and lists.
 
+The HTML mapping for headings is specified [here](#whitespace_html).
+
 {#newlines}
 ## Newlines, Indentation and Spaces
-
-[View HTML Mapping](#newlines_html)
 
 The goal for newline and indentation handling in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
 
@@ -460,10 +458,10 @@ Lorem ipsum dolor.
 Yada yada yada.
 ~~~
 
+The HTML mapping for newlines is specified [here](#newlines_html).
+
 {#resources}
 ## Resources
-
-[View HTML Mapping](#resources_html)
 
 Markua documents are written in plain text, either in one text file or multiple text files. However, modern books are not just text. Books embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
@@ -768,8 +766,6 @@ We will now consider each of the types of resources in more detail, as well as t
 {#images}
 ### Images
 
-[View HTML Mapping](#images_html)
-
 The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
 
 The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
@@ -878,6 +874,8 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
+The HTML mapping for images is specified [here](#images_html).
+
 ### Video
 
 Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
@@ -950,6 +948,8 @@ Here's a paragraph before the figure.
 
 Here's a paragraph after the figure.
 ~~~
+
+The HTML mapping for video is specified [here](#video_html).
 
 ### Audio
 
@@ -3562,10 +3562,7 @@ foo   bar
 <p>foo bar</p>
 ```
 
-{#resources_html}
 ## Resources
-
-[View Syntax](#resources)
 
 {#images_html}
 ### Images
@@ -3776,6 +3773,7 @@ Here's a paragraph after the figure.
 <p>Here's a paragraph after the figure.</p>
 ~~~
 
+{#video_html}
 ### Video
 
 #### Local Video
@@ -3867,6 +3865,7 @@ Here's a paragraph after the figure.
 <p>Here's a paragraph after the figure.</p>
 ```
 
+{#audio_html}
 ### Audio
 
 #### Local Audio
