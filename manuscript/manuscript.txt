@@ -99,7 +99,7 @@ That's it!
 
 Markua provides fairly minimal formatting options. When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting.
 
-The only type of formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which should not be changed by a book designer. It also includes `class` attributes on figures, which can be used by an author to identify a particular type of figure, so that these can be formatted in a consistent way. These `class` attributes are added as class elements in the generated HTML, so an author or book designer can provide a CSS stylesheet to a Markua Processor to format the elements accordingly in any HTML and (since EPUB is based on HTML) EPUB versions. A Markua Processor can also use the class attributes when producing non-HTML-based formats, such as PDF. Note that Markua deliberately does not specify any requirements about CSS styles or about PDF output, to maximize implementation flexibility and encourage competition among implementers of Markua Processors and among book designers.
+The only type of formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which should not be changed by a book designer. It also includes `class` attributes on figures, which can be used by an author to identify a particular type of figure, so that these can be formatted in a consistent way. These `class` attributes are added as class elements in the generated HTML, so an author or book designer can provide a CSS stylesheet to a Markua Processor to format the elements accordingly in any HTML and, since EPUB is based on HTML, in EPUB versions. A Markua Processor can also use the class attributes as formatting hints when producing non-HTML-based formats, such as PDF. Note that Markua deliberately does not specify any requirements about CSS styles or about PDF output, to maximize implementation flexibility and encourage competition among implementers of Markua Processors and among book designers.
 
 To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins! Also, Markua really, really, *really* does **not** care about "widows and orphans"--unless they're people!
 
@@ -911,22 +911,6 @@ Since the `alt` is a fallback for if the `poster` image cannot be displayed, the
 
 A> When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
 
-#### Default Attributes for Video
-
-The default attributes for a video inserted as a span are:
-
-~~~
-{align: left, float: none, position: here, width: auto, height: auto}
-~~~
-
-The default attributes for a video inserted as a figure are:
-
-~~~
-{align: center, float: none, position: near, width: auto, height: auto}
-~~~
-
-These attributes can all be overridden via the attribute list on the figure.
-
 #### Local Video
 
 ##### Span
@@ -1007,24 +991,6 @@ Since the `alt` is a fallback for if the `poster` image cannot be displayed, the
 
 A> When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
 
-#### Default Attributes for Audio
-
-The default attributes for audio are (with the exception of the type) the same as for video, and they all apply to the poster.
-
-The default attributes for an audio inserted as a span are:
-
-~~~
-{align: left, float: none, position: here, width: auto, height: auto}
-~~~
-
-The default attributes for an audio inserted as a figure are:
-
-~~~
-{align: center, float: none, position: near, width: auto, height: auto}
-~~~
-
-These attributes can all be overridden via the attribute list on the figure.
-
 #### Local Audio
 
 ##### Span
@@ -1093,7 +1059,7 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 : These attributes function how they do for images.
 
 `format`
-: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`.
+: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. The default value of the format attribute for a code resource inserted as a figure varies based on whether the delimiter is three backticks or three tildes. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. The `guess` format works better for code; the `text` format works better for poetry and for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
 
 `line-numbers`
 : This determines whether the code sample shows line numbers. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`. Note that a code resource inserted as a span should be a single line of code, so this attribute does not make sense with spans.
@@ -1106,22 +1072,6 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 
 `crop-end`
 : This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
-
-#### Default Attributes for Code
-
-The default attributes for a code resource inserted as a span are:
-
-~~~
-{format: guess, align: left, float: none, position: here, line-numbers: off}
-~~~
-
-The default attributes for a code resource inserted as a figure are:
-
-~~~
-{align: center, float: none, position: near, line-numbers: off}
-~~~
-
-The default value of the format attribute for a code resource inserted as a figure varies based on whether the delimiter is three backticks or three tildes. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. The `guess` format works better for code; the `text` format works better for poetry and for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are as syntactic sugar.
 
 #### Local Code Resources
 
@@ -1358,23 +1308,7 @@ Note that Markua procesors do not need to support either math markup language fu
 `format`
 : For math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `tex` for LaTeX math and `mathml` for MathML math.
 
-#### Default Attributes for Math
-
-The default attributes for a math resource inserted as a span are:
-
-~~~
-{align: left, float: none, position: here, width: auto, height: auto}
-~~~
-
 Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
-
-The default attributes for a math resource inserted as a figure are:
-
-~~~
-{align: center, float: none, position: near, width: auto, height: auto}
-~~~
-
-These attributes can all be overridden via the attribute list on the figure.
 
 #### Local Math Resources
 
@@ -2164,7 +2098,7 @@ This simple table has a caption:
 This complex table has a caption as well as align, width and top attributes:
 
 ~~~
-{caption: "A Complex Table", align: left, width: full, position: top}
+{caption: "A Complex Table"}
 |=============|===============|=============|
 | Header A    | Header B      | Header C    |
 |:============|:=============:|============:|
@@ -2180,14 +2114,11 @@ This complex table has a caption as well as align, width and top attributes:
 
 ### Supported Attributes for Tables
 
-`class`, `align`, `float`, `position`
-: These attributes function how they do for images. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
-
-`width`
-: The `width` can be either `auto` (the default) or `full`. The `auto` width means to size the table based on its columns; the `full` width means to make it 100% of the content area of the page, respecting margins.
-
 `caption`
 : The `caption` is the table caption.
+
+`class`
+: Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
 
 ## Block Elements
 
