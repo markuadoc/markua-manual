@@ -99,19 +99,13 @@ That's it!
 
 Markua provides fairly minimal formatting options. When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting.
 
-There are two types of formatting provided in Markua:
+The only type of formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which should not be changed by a book designer. It also includes `class` attributes on figures, which can identify a particular type of figure, so that these can be formatted in a consistent way by a book designer or by a Markua Processor which understands them.
 
-Semantic Formatting
-: This is formatting which has meaning in the text, and which should not be changed by a book designer.
-
-Basic Formatting Hints
-: These are formatting hints which help a Markua Processor achieve a professional looking result algorithmically. These basic formatting hints typically involve things like the positioning of figures, etc.
+These `class` attributes are added as class elements in the generated HTML, so an author or book designer can provide a CSS stylesheet to a Markua Processor to format the elements accordingly in any HTML and (since EPUB is based on HTML) EPUB versions. A Markua Processor can also use the class attributes when producing non-HTML-based formats, such as PDF. Note that Markua deliberately does not specify any requirements about CSS styles or about PDF output, to maximize implementation flexibility and encourage competition.
 
 To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins! Also, Markua really, really, *really* does **not** care about "widows and orphans"--unless they're people!
 
 Markua is not intended to be used to create the layout of a high quality print book--but it can certainly create the manuscript of that print book, and a Markua Processor can automatically generate a good looking ebook from that manuscript. Some Markua Processors like Leanpub can even generate InDesign from a Markua document as a starting point for the print book design process. This is preferable to current workflows, in which a book designer typically needs to start by undoing all the non-semantic formatting that a writer did, and then redoing it properly using different tools.
-
-The reason that basic formatting hints are added to Markua is to enable automated production of ebooks that look good enough, especially on mobile where there are no fixed page sizes.
 
 ## Markua: Markdown for Books
 
@@ -552,6 +546,8 @@ Note that if there is a figure caption specified in the attribute list and in th
 ![bar](foo.png)
 ~~~
 
+Note that this is a deliberate example of a mistake. Authors should never write Markua text like this; the caption should only be specified once.
+
 The syntax for an inline resource inserted as a figure is as follows:
 
 ~~~
@@ -580,6 +576,8 @@ Note that if there is a format specified in the attribute list and after the bac
 puts "hello world"
 ```
 ~~~
+
+(Again, authors should never write Markua like this; the format should only be specified once.)
 
 A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format`, `caption` and `class` attributes.
 
@@ -800,47 +798,17 @@ We will discuss the supported and the default attributes for images, and then sh
 
 #### Supported Attributes for Images
 
-`format`
-: All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
-
-`class`
-: The `class` can be used by Markua Processors to style images. It allows a more clean separtion of concerns than is accomplished using the `align`, `float`, `position`, `width` and `height` attributes. However those attributes, if present, should override the styles associated with a given class if there is a conflict between them and if the Markua processor understands both.
-
-`align`
-: The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
-
-`float`
-: The `float` can be `none` (the default), `left`, `center` or `right`. The `float` trumps `align`. If `float` is anything except its default of `none`, the value of `align` is ignored and the resource is positioned according to the value of the `float`, with the text flowing freely around it.
-
-`position`
-: The `position` refers to suggested vertical positioning on a page, if this is supported both by a particular ouptut format and a particular Markua Processor. For example, this is useful for Markua processors which generate PDF via an intermediate step of transforming Markua into LaTeX. A Markua processor is free to ignore this attribute. It can be `near` (the default), `here`, `top` or `bottom`. The `near` position means to position the image near here, while the `here` position means to position the image exactly here. The `top` position means the top of the page; the `bottom` position means the bottom of the page. (If you're familiar with LaTeX, `near` is similar to `h` and `here` is similar to `H` or `h!`. Note that Markua deliberately does not specify any requirements about PDF output, to maximize implementation flexibility and encourage competition.)
-
-`width` and `height`
-: The `width` and `height` can both be `auto` (the default), `fullbleed` or an integer between `1` and `100` inclusive. The default of `auto` means to respect the actual size of the image without overflowing into page margins. If only one of `width` and `height` are `auto`, the image aspect ratio is respected; if both `width` and `height` are specified, the image is resized accordingly. The value of `fullbleed` means to resize the image to full width or height of the page, ignoring margins. (In the HTML output this just adds a class of `fullbleed` and sets the width to `100%`, and CSS can be used to do whatever the author or book designer chooses to accomplish the fullbleed effect.) It is legal for either one or both of `width` and `height` to be `fullbleed`. The integer values between 1 and 100 are percentage widths of the content area of the page, which respects the margins.
-
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in square brackets for images inserted as spans and only in the attribute list for figures.
 
 `caption`
 : The `caption` is the figure caption. It can only be present when the image is inserted as a figure.
 
-#### Default Attributes for Images
+`class`
+: The `class` can be used by Markua Processors to provide the approrpiate styling. With HTML and EPUB output this should be done via CSS. The class attribute can also be creatively used when generating non-HTML formats such as PDF.
 
-The default attributes for an image inserted as a span are:
-
-~~~
-{align: left, float: none, position: here, width: auto, height: auto}
-~~~
-
-Since images inserted as a span cannot have their default attributes overridden, when an image is inserted as a span image, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
-
-The default attributes for an image inserted as a figure are:
-
-~~~
-{align: center, float: none, position: near, width: auto, height: auto}
-~~~
-
-These attributes can all be overridden via the attribute list on the figure.
+`format`
+: All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
 
 #### Local Images
 
@@ -862,12 +830,7 @@ Here's a paragraph between the first and second figures.
 {alt: "a slice of chocolate cake", class: "food-closeup"}
 ![A Piece of Cake](cake.jpg)
 
-Here's a paragraph between the second and third figures.
-
-{alt: "a slice of chocolate cake", float: "left", width: "50%"}
-![A Piece of Cake](cake.jpg)
-
-Here's a paragraph after the third figure.
+Here's a paragraph after the second figure.
 ~~~
 
 #### Web Images
@@ -943,7 +906,7 @@ We will discuss the supported and the default attributes for videos, and then sh
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
 
-`class`, `alt`, `caption`, `align`, `float`, `position`, `width` and `height`
+`alt`, `caption` and `class`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text. (The use of video fallbacks, such as HTML5's `mediagroup` syntax or multiple `source` elements, is not supported in Markua.)
@@ -1039,7 +1002,7 @@ We will discuss the supported and the default attributes for audio files, and th
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the audio. (Think of it like an "album" cover: many humans have never seen an LP; for them, an album cover is as much a metaphor as the floppy disk which represents a save button.) The poster can have a play button superimposed on it by the Markua Processor. A Markua Processor can also ignore the poster entirely and just show a generic player for the audio resource. If a Markua Processor is outputting some format where it is known that audio resources are not supported (e.g. "books"), it must choose the poster to use as a replacement for the audio.
 
-`class`, `alt`, `caption`, `align`, `float`, `position`, `width` and `height`
+`alt`, `caption` and `class`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, not to the audio itself.
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the audio has two fallbacks: the `poster` image and then the `alt` text.
@@ -1128,10 +1091,7 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 {#supported_attributes_for_code}
 #### Supported Attributes for Code
 
-`caption`
-: All resources inserted as figures support the `caption` attribute.
-
-`class`, `align`, `float`, `position`
+`alt`, `caption` and `class`
 : These attributes function how they do for images.
 
 `format`
@@ -1391,17 +1351,14 @@ Note that Markua procesors do not need to support either math markup language fu
 
 #### Supported Attributes for Math
 
-`caption`
-: All resources inserted as figures support the `caption` attribute.
+`alt`
+: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This can only be provided in square brackets for mathematical equations inserted as spans and only in the attribute list for figures.
 
-`class`, `align`, `float`, `position`
+`caption` and `class`
 : These attributes function how they do for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
 
 `format`
 : For math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `tex` for LaTeX math and `mathml` for MathML math.
-
-`alt`
-: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This can only be provided in square brackets for mathematical equations inserted as spans and only in the attribute list for figures.
 
 #### Default Attributes for Math
 
@@ -3733,7 +3690,7 @@ Here's a paragraph after the second figure.
 </div>
 <p>Here's a paragraph between the figures.</p>
 <div class="figure">
-  <img src="cake.jpg" alt="a slice of chocolate cake" style="float:left;width:50"/>
+  <img src="cake.jpg" alt="a slice of chocolate cake" style="float:left;width:50;"/>
   <p class="caption">A Piece of Cake</p>
 </div>
 <p>Here's a paragraph after the second figure.</p>
