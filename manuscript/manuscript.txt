@@ -581,13 +581,16 @@ puts "hello world"
 ```
 ~~~
 
-A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format` and `caption` attributes.
+A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format`, `caption` and `class` attributes.
 
 `format`
 : This is the resource format. Different resource types have different legal values for format.
 
 `caption`
 : This is text which is shown near the figure, typically above or below it.
+
+`class`
+: Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
 
 Many resource types can also have alt text. Alt text is not the same thing as a figure caption.
 
@@ -800,6 +803,9 @@ We will discuss the supported and the default attributes for images, and then sh
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
 
+`class`
+: The `class` can be used by Markua Processors to style images. It allows a more clean separtion of concerns than is accomplished using the `align`, `float`, `position`, `width` and `height` attributes. However those attributes, if present, should override the styles associated with a given class if there is a conflict between them and if the Markua processor understands both.
+
 `align`
 : The `align` is the horizontal alignment. It can be `center` (the default), `left` or `right`.
 
@@ -847,12 +853,21 @@ Easy as ![pie](pie.png).
 ##### Figure
 
 ~~~
-Here's a paragraph before the figure.
+Here's a paragraph before the first figure.
 
-{alt: "a slice of chocolate cake"}
 ![A Piece of Cake](cake.jpg)
 
-Here's a paragraph after the figure.
+Here's a paragraph between the first and second figures.
+
+{alt: "a slice of chocolate cake", class: "food-closeup"}
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph between the second and third figures.
+
+{alt: "a slice of chocolate cake", float: "left", width: "50%"}
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph after the third figure.
 ~~~
 
 #### Web Images
@@ -928,7 +943,7 @@ We will discuss the supported and the default attributes for videos, and then sh
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
 
-`alt`, `caption`, `align`, `float`, `position`, `width` and `height`
+`class`, `alt`, `caption`, `align`, `float`, `position`, `width` and `height`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text. (The use of video fallbacks, such as HTML5's `mediagroup` syntax or multiple `source` elements, is not supported in Markua.)
@@ -1024,7 +1039,7 @@ We will discuss the supported and the default attributes for audio files, and th
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the audio. (Think of it like an "album" cover: many humans have never seen an LP; for them, an album cover is as much a metaphor as the floppy disk which represents a save button.) The poster can have a play button superimposed on it by the Markua Processor. A Markua Processor can also ignore the poster entirely and just show a generic player for the audio resource. If a Markua Processor is outputting some format where it is known that audio resources are not supported (e.g. "books"), it must choose the poster to use as a replacement for the audio.
 
-`alt`, `caption`, `align`, `float`, `position`, `width` and `height`
+`class`, `alt`, `caption`, `align`, `float`, `position`, `width` and `height`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, not to the audio itself.
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the audio has two fallbacks: the `poster` image and then the `alt` text.
@@ -1116,7 +1131,7 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 `caption`
 : All resources inserted as figures support the `caption` attribute.
 
-`align`, `float`, `position`
+`class`, `align`, `float`, `position`
 : These attributes function how they do for images.
 
 `format`
@@ -1379,7 +1394,7 @@ Note that Markua procesors do not need to support either math markup language fu
 `caption`
 : All resources inserted as figures support the `caption` attribute.
 
-`align`, `float`, `position`
+`class`, `align`, `float`, `position`
 : These attributes function how they do for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
 
 `format`
@@ -2210,7 +2225,7 @@ This complex table has a caption as well as align, width and top attributes:
 
 ### Supported Attributes for Tables
 
-`align`, `float`, `position`
+`class`, `align`, `float`, `position`
 : These attributes function how they do for images. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
 
 `width`
@@ -2407,6 +2422,10 @@ This is a longer blurb.
 It can have multiple paragraphs.
 {/blurb}
 ~~~
+
+A> Blurbs are the better-named equivalent of the `G>` "generic boxes" of Leanpub Flavoured Markdown.
+
+W> TODO - Add B> to Leanpub
 
 #### Supported Attributes for Blurbs
 
@@ -3297,7 +3316,7 @@ In the HTML Ouptut, note the use of `class` attributes where appropriate. This i
 {#text_formatting_html}
 ## Text Formatting
 
-[Back To Section](#text_formatting)
+[View Syntax](#text_formatting)
 
 ### Italic
 
@@ -3438,7 +3457,7 @@ Water is H~2~O.
 {#headings_html}
 ## Headings
 
-[Back To Section](#headings)
+[View Syntax](#headings)
 
 ##### Example
 
@@ -3498,7 +3517,7 @@ This is a paragraph.
 {#whitespace_html}
 ## Whitespace, Paragraphs and Blank Lines
 
-[Back To Section](#whitespace)
+[View Syntax](#whitespace)
 
 ##### Example
 
@@ -3525,7 +3544,7 @@ This is paragraph three.
 {#newlines_html}
 ## Newlines, Indentation and Spaces
 
-[Back To Section](#newlines)
+[View Syntax](#newlines)
 
 ### Single Newlines
 
@@ -3660,12 +3679,12 @@ foo   bar
 {#resources_html}
 ## Resources
 
-[Back To Section](#resources)
+[View Syntax](#resources)
 
 {#images_html}
 ### Images
 
-[Back To Section](#images)
+[View Syntax](#images)
 
 #### Local Images
 
@@ -3685,7 +3704,7 @@ Easy as ![pie](pie.png).
 <p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
 ```
 
-##### Figure Example 1: Basic
+##### Figure Example
 
 ###### Markua Syntax
 
@@ -3693,10 +3712,14 @@ Easy as ![pie](pie.png).
 ~~~
 Here's a paragraph before the figure.
 
-{alt: "a slice of chocolate cake"}
 ![A Piece of Cake](cake.jpg)
 
-Here's a paragraph after the figure.
+Here's a paragraph between the figures.
+
+{alt: "a slice of chocolate cake", float: "left", width: "50%"}
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph after the second figure.
 ~~~
 
 ###### HTML Output
@@ -3705,10 +3728,18 @@ Here's a paragraph after the figure.
 ```
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
-  <img src="cake.jpg" alt="a slice of chocolate cake"/>
+  <img src="cake.jpg"/>
   <p class="caption">A Piece of Cake</p>
 </div>
-<p>Here's a paragraph after the figure.</p>
+<p>Here's a paragraph between the figures.</p>
+<div class="figure">
+  <img src="cake.jpg" alt="a slice of chocolate cake" style="float:left;width:50"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph after the second figure.</p>
+
+{alt: "a slice of chocolate cake", float: "left", width: "50%"}
+![A Piece of Cake](cake.jpg)
 ```
 
 ##### Figure Example 2: Float and Width
