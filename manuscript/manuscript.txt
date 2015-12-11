@@ -172,8 +172,6 @@ Specifically, Markua documents must be saved in the **UTF-8** character encoding
 {#text_formatting}
 ## Text Formatting
 
-A> The HTML mapping for text formatting is specified [here](#text_formatting_html).
-
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
 
 Markua is a plain text format designed for the writing of books. Books have various types of text formatting in them: bold, italic, underline, strikethrough, superscript and subscript.
@@ -207,10 +205,54 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 [^w3c_em]: To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
+### HTML Mapping
+
+This is the HTML mapping for text formatting.
+
+###### Markua Syntax
+
+{#input_text_formatting_1}
+```
+This is _an i tag_ and this is *an em tag*.
+
+This is __a b tag__ and this is **a strong tag**.
+
+This is ___a b i tag combo___ and this is ***a strong em tag combo***.
+
+This is ____a u tag____. Yeah, it's ugly.
+
+This is ~~a strikethrough tag~~.
+
+5^3^ = 125
+
+Water is H~2~O.
+```
+
+###### HTML Output
+
+{#output_text_formatting_1}
+```
+<p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
+<p>This is <b>a b tag</b> and this is <strong>a strong tag</strong>.</p>
+<p>This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag combo</em></strong>.
+<p>This is <u>a u tag</u>. Yeah, it's ugly.</p>
+<p>This is <span class="strikethrough">a strikethrough tag</span>.</p>
+<p>5<sup>3</sup> = 125</p>
+<p>Water is H<sub>2</sub>O.</p>
+```
+
+### CSS Recommendation
+
+Markua does not specify anything about CSS. However, for Markua Processors which use CSS, the following CSS rule is recommended:
+
+```
+.strikethrough {
+  text-decoration: line-through;
+}
+```
+
 {#headings}
 ## Headings
-
-A> The HTML mapping for headings is specified [here](#headings_html).
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
@@ -286,6 +328,63 @@ I thought long and hard about Markua headings, and changed my mind (as Scott and
 The design of Markua headings meets these requirements, in what I feel is an optimal way.
 
 A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
+
+### HTML Mapping
+
+This is the HTML mapping for text formatting.
+
+###### Markua Syntax
+
+{#input_headings_1}
+```
+# Part (h1) #
+
+This is a paragraph.
+
+# Chapter (also h1)
+
+This is a paragraph.
+
+## Section (h2)
+
+This is a paragraph.
+
+### Sub-Section (h3)
+
+This is a paragraph.
+
+#### Sub-Sub-Section (h4)
+
+This is a paragraph.
+
+##### Sub-Sub-Sub-Section (h5)
+
+This is a paragraph.
+
+###### Sub-Sub-Sub-Sub-Section (h6)
+
+This is a paragraph.
+```
+
+###### HTML Output
+
+{#output_headings_1}
+```
+<h1 class="part">Part (h1)</h1>
+<p>This is a paragraph.</p>
+<h1 class="chapter">Chapter (also h1)</h1>
+<p>This is a paragraph.</p>
+<h2 class="section">Section (h2)</h2>
+<p>This is a paragraph.</p>
+<h3 class="sub-section">Sub-Section (h3)</h3>
+<p>This is a paragraph.</p>
+<h4 class="sub-sub-section">Sub-Sub-Section (h4)</h4>
+<p>This is a paragraph.</p>
+<h5 class="sub-sub-sub-section">Sub-Sub-Sub-Section (h5)</h5>
+<p>This is a paragraph.</p>
+<h6 class="sub-sub-sub-sub-section">Sub-Sub-Sub-Sub-Section (h6)</h6>
+<p>This is a paragraph.</p>
+```
 
 {#whitespace}
 ## Whitespace, Paragraphs and Blank Lines
@@ -3223,147 +3322,6 @@ These examples are not just examples--they are also the basis of a compatibility
 
 In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
-{#text_formatting_html}
-## Text Formatting
-
-A> The syntax for text formatting is described [here](#text_formatting).
-
-### Italic
-
-##### Example
-
-###### Markua Syntax
-
-{#input_italic_1}
-```
-This is _an i tag_ and this is *an em tag*.
-```
-
-###### HTML Output
-
-{#output_italic_1}
-```
-<p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
-```
-
-### Bold
-
-##### Example
-
-###### Markua Syntax
-
-{#input_bold_1}
-```
-This is __a b tag__ and this is **a strong tag**.
-```
-
-###### HTML Output
-
-{#output_bold_1}
-```
-<p>This is <b>a b tag</b> and this is <strong>a strong tag</strong>.</p>
-```
-
-### Bold + Italic
-
-##### Example
-
-###### Markua Syntax
-
-{#input_bold_italic_1}
-```
-This is ___a b i tag combo___ and this is ***a strong em tag combo***.
-```
-
-###### HTML Output
-
-{#output_bold_italic_1}
-```
-<p>This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag combo</em></strong>.
-```
-
-### Underline
-
-##### Example
-
-###### Markua Syntax
-
-{#input_underline_1}
-```
-This is ____a u tag____. Yeah, it's ugly.
-```
-
-###### HTML Output
-
-{#output_underline_1}
-```
-<p>This is <u>a u tag</u>. Yeah, it's ugly.</p>
-```
-
-### Strikethrough
-
-#### CSS Recommendation
-
-The following CSS rule is recommended:
-
-```
-.strikethrough {
-  text-decoration: line-through;
-}
-```
-
-##### Example
-
-###### Markua Syntax
-
-{#input_strikethrough_1}
-```
-This is ~~a strikethrough tag~~.
-```
-
-###### HTML Output
-
-{#output_strikethrough_1}
-```
-<p>This is <span class="strikethrough">a strikethrough tag</span>.</p>
-```
-
-### Superscript
-
-##### Example
-
-###### Markua Syntax
-
-{#input_superscript_1}
-```
-5^3^ = 125
-```
-
-###### HTML Output
-
-{#output_superscript_1}
-```
-<p>5<sup>3</sup> = 125</p>
-```
-
-### Subscript
-
-##### Example
-
-###### Markua Syntax
-
-{#input_subscript_1}
-```
-Water is H~2~O.
-```
-
-###### HTML Output
-
-{#output_subscript_1}
-```
-<p>Water is H<sub>2</sub>O.</p>
-```
-
 {#headings_html}
 ## Headings
 
@@ -3373,56 +3331,9 @@ A> The syntax for headings is described [here](#headings).
 
 ###### Markua Syntax
 
-{#input_headings_1}
-```
-# Part (h1) #
-
-This is a paragraph.
-
-# Chapter (also h1)
-
-This is a paragraph.
-
-## Section (h2)
-
-This is a paragraph.
-
-### Sub-Section (h3)
-
-This is a paragraph.
-
-#### Sub-Sub-Section (h4)
-
-This is a paragraph.
-
-##### Sub-Sub-Sub-Section (h5)
-
-This is a paragraph.
-
-###### Sub-Sub-Sub-Sub-Section (h6)
-
-This is a paragraph.
-```
 
 ###### HTML Output
 
-{#output_headings_1}
-```
-<h1 class="part">Part (h1)</h1>
-<p>This is a paragraph.</p>
-<h1 class="chapter">Chapter (also h1)</h1>
-<p>This is a paragraph.</p>
-<h2 class="section">Section (h2)</h2>
-<p>This is a paragraph.</p>
-<h3 class="sub-section">Sub-Section (h3)</h3>
-<p>This is a paragraph.</p>
-<h4 class="sub-sub-section">Sub-Sub-Section (h4)</h4>
-<p>This is a paragraph.</p>
-<h5 class="sub-sub-sub-section">Sub-Sub-Sub-Section (h5)</h5>
-<p>This is a paragraph.</p>
-<h6 class="sub-sub-sub-sub-section">Sub-Sub-Sub-Sub-Section (h6)</h6>
-<p>This is a paragraph.</p>
-```
 
 {#whitespace_html}
 ## Whitespace, Paragraphs and Blank Lines
