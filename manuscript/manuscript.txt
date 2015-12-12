@@ -788,7 +788,7 @@ W> TODO_LEANPUB - Support table captions (there should be one in the table above
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
-A> Images in Markua are inserted in essentially the same way they are in Markdown for inline images. Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
+Images in Markua are inserted in essentially the same way they are in Markdown for inline images. Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
 
 We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
 
@@ -924,7 +924,7 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text. (The use of video fallbacks, such as HTML5's `mediagroup` syntax or multiple `source` elements, is not supported in Markua.)
 
-A> When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
+When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
 
 #### Local Video
 
@@ -953,7 +953,7 @@ Here's a paragraph after the figure.
 Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
 ~~~
 
-A> Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
+Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
 
 ##### Figure
 
@@ -988,7 +988,7 @@ The following types of audio resources are supported in Markua: MP3, AAC, WAV an
 | `.oga`    | `ogg`      | Ogg Vorbis    |
 |-----------|------------|---------------|
 
-A> Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
+Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
 
 The syntax to insert an audio file is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both audio formats; inline resource locations for audio are obviously not supported.
 
@@ -1007,7 +1007,7 @@ We will discuss the supported and the default attributes for audio files, and th
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the audio has two fallbacks: the `poster` image and then the `alt` text.
 
-A> When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
+When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
 
 #### Local Audio
 
@@ -1209,7 +1209,7 @@ Hello in Ruby is a `puts "hello"`text statement.
 
 The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
 
-A> The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
+The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
 
 ##### Figure
 
@@ -1259,9 +1259,9 @@ puts "hello"
 Some paragraph.
 ~~~
 
-A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+Note that the syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
 
-A> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
+A> The "four space indent" method of creating code blocks in Markdown is **NOT** supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
 #### Typewriter Poetry with Code Resources
 
@@ -1507,7 +1507,7 @@ You can build a list out of items starting with a hyphen and one tab:
 
 (My editor converts tabs to spaces, so that's actually 4 spaces, which also works.)
 
-A> Markdown also lets you use a plus sign (`+`) before each item, but Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`. Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
+Markdown also lets you use a plus sign (`+`) before each item, but Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`. Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
 
 These are the specific rules for unordered lists:
 
@@ -1526,7 +1526,7 @@ In terms of style guidance, the preferred bullet type is the asterisk, and the p
 
 Markua defines many more types of ordered list numbering than Markdown.
 
-A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since ordered lists support numbering by letters, the term "ordered" is superior to "numbered" in some senses.)
+Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since ordered lists support numbering by letters, the term "ordered" is superior to "numbered" in some senses.)
 
 In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list features.
 
@@ -1552,7 +1552,7 @@ Since Markua supports letters and Roman numerals as well as decimal numbers to s
 
 Note that there are one or more spaces after the period. Unlike with an unordered list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
 
-A> I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
+I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
 
 This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections. For the mapping to HTML lists, see the next chapter.
 
@@ -1634,11 +1634,11 @@ So, in Markua, the automatic creation of an ordered list only happens if you hav
 
 This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
-A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markua is a way of writing books, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
+This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markua is a way of writing books, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
 
 #### Ordered List Numbering Rules
 
-A> If you are an author who is just trying to write straightforward Markua, you can probably skip this section.
+A> If you are an author who is just trying to write straightforward Markua, you can just [skip this section](#multi_paragraph_list_items).
 
 There are a number of rules about what does and does not trigger the creation of an ordered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
 
@@ -1677,7 +1677,7 @@ For uppercase and lowercase alphabetical numbering, Markua actually supports cre
 1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase or `Z.` for uppercase. (This way, implementors of Markua processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
 2. Every item in the list begins with the same single letter, followed by a period.
 
-A> These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single element list beginning with "AA" instead!
+These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single element list beginning with "AA" instead!
 
 The term "single letter" means that consecutive `c.`s start an ordered list which starts with `c, d, e, ...`, but that consecutive `aa.`s or `aba.`s do not start an ordered list. Again, this greatly simplifies life (you're welcome!) for implementors of Markua processors, who otherwise would need to figure out what number in the sequence `aba` is, in order to generate the correct HTML.
 
@@ -1701,6 +1701,7 @@ In Markua, list numbers must **all** either be **consecutive**, given the type o
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
+{#multi_paragraph_list_items}
 ### Multi-Paragraph List Items
 
 If lists were simple, they would contain be a bunch of simple one-line list items like:
@@ -2040,7 +2041,7 @@ At its most basic, a complex table looks like this:
 
 The header is separated from the body cells by a row of `=` signs and `|` characters. Every row of cells is separated by a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line.
 
-A> My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
+My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
 
 You can also specify left, center and right alignment of columns with colons in the header separator row, just as with simple tables. The following columns are left-, center-, and right-aligned respectively:
 
