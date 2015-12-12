@@ -169,10 +169,8 @@ Markua documents are written in plain text.
 
 Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
-## Text Formatting
-
 {#text_formatting}
-A> The HTML mapping for text formatting is specified [here](#text_formatting_html).
+## Text Formatting
 
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
 
@@ -207,10 +205,10 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 [^w3c_em]: To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
-## Headings
+A> The HTML mapping for text formatting is specified [here](#text_formatting_html).
 
 {#headings}
-A> The HTML mapping for headings is specified [here](#headings_html).
+## Headings
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
@@ -283,14 +281,12 @@ I thought long and hard about Markua headings, and changed my mind (as Scott and
 8. Books with parts and chapters must be able to have the same number of levels of sub-sections.
 9. Documents can have parts, chapters and sections just like books, and it's up to the document designer to create the appropriate CSS.
 
-The design of Markua headings meets these requirements, in what I feel is an optimal way.
+The design of Markua headings meets these requirements, in what I feel is an optimal way. This is in stark contrast to Leanpub Flavoured Markdown, which violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
 
-A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
-
-## Whitespace, Paragraphs and Blank Lines
+A> The HTML mapping for headings is specified [here](#headings_html).
 
 {#whitespace}
-A> The HTML mapping for whitespace is specified [here](#whitespace_html).
+## Whitespace, Paragraphs and Blank Lines
 
 Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
 
@@ -308,10 +304,10 @@ This is paragraph three.
 
 A paragraph is the least-specialized example of something called a block element. Block elements are separated from each other by at least one blank line. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. Examples of other block elements include headings, figures and lists.
 
-## Newlines, Indentation and Spaces
+A> The HTML mapping for whitespace is specified [here](#whitespace_html).
 
 {#newlines}
-A> The HTML mapping for newlines is specified [here](#newlines_html).
+## Newlines, Indentation and Spaces
 
 The goal for newline and indentation handling in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
 
@@ -463,6 +459,8 @@ Lorem ipsum dolor.
 
 Yada yada yada.
 ~~~
+
+A> The HTML mapping for newlines is specified [here](#newlines_html).
 
 {#resources}
 ## Resources
@@ -767,10 +765,8 @@ As an author, all you do is provide the correct file extension or set the format
 
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
-### Images
-
 {#images}
-A> The HTML mapping for images is specified [here](#images_html).
+### Images
 
 The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
 
@@ -894,10 +890,10 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Video
+A> The HTML mapping for images is specified [here](#images_html).
 
 {#video}
-A> The HTML mapping for video is specified [here](#video_html).
+### Video
 
 Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
 
@@ -970,10 +966,10 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Audio
+A> The HTML mapping for video is specified [here](#video_html).
 
 {#audio}
-A> The HTML mapping for audio is specified [here](#audio_html).
+### Audio
 
 Just like with video, the audio support in ebooks and on the web is more varied than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. It's entirely likely that many ebook readers won't support any of them.
 
@@ -1045,10 +1041,10 @@ The full version of the talk is here:
 ![Full Talk](http://markua.com/talk.m4a)
 ~~~
 
-### Code
+A> The HTML mapping for audio is specified [here](#audio_html).
 
 {#code}
-A> The HTML mapping for code is specified [here](#code_html).
+### Code
 
 Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
@@ -1303,6 +1299,9 @@ This use case is why the default format for three backticks is `guess` and the d
 
 Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
 
+A> The HTML mapping for code is specified [here](#code_html).
+
+{#math}
 ### Math
 
 Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
@@ -3960,7 +3959,7 @@ A> The syntax for code is described [here](#code).
 
 ###### Markua Syntax
 
-{#input_local_audio_span_1}
+{#input_local_code_span_1}
 ```
 Hello in Ruby is a simple ![](hello.rb) statement.
 ```
@@ -3969,7 +3968,7 @@ Hello in Ruby is a simple ![](hello.rb) statement.
 
 This defines the hello.rb file used in this example.
 
-{#dependencies_local_audio_span_1}
+{#dependencies_local_code_span_1}
 ~~~
 hello.rb:
 ```
@@ -3979,12 +3978,38 @@ puts "hello world"
 
 ###### HTML Output
 
-{#output_local_audio_span_1}
+{#output_local_code_span_1}
 ```
 <p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
 ```
 
 ##### Figure Example
+
+###### Markua Syntax
+
+{#input_local_code_figure_1}
+```
+Hello in Ruby is a simple ![](hello.rb) statement.
+```
+
+###### Test Dependencies
+
+This defines the hello.rb file used in this example.
+
+{#dependencies_local_code_figure_1}
+~~~
+hello.rb:
+```
+puts "hello world"
+```
+~~~
+
+###### HTML Output
+
+{#output_local_code_figure_1}
+```
+<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
+```
 
 
 
