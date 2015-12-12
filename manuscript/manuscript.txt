@@ -3257,16 +3257,16 @@ A> The syntax for text formatting is described [here](#text_formatting).
 ###### Markua Syntax
 
 {#input_italic_1}
-```
+~~~
 This is _an i tag_ and this is *an em tag*.
-```
+~~~
 
 ###### HTML Output
 
 {#output_italic_1}
-```
+~~~
 <p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
-```
+~~~
 
 ### Bold
 
@@ -3275,16 +3275,16 @@ This is _an i tag_ and this is *an em tag*.
 ###### Markua Syntax
 
 {#input_bold_1}
-```
+~~~
 This is __a b tag__ and this is **a strong tag**.
-```
+~~~
 
 ###### HTML Output
 
 {#output_bold_1}
-```
+~~~
 <p>This is <b>a b tag</b> and this is <strong>a strong tag</strong>.</p>
-```
+~~~
 
 ### Bold + Italic
 
@@ -3293,16 +3293,16 @@ This is __a b tag__ and this is **a strong tag**.
 ###### Markua Syntax
 
 {#input_bold_italic_1}
-```
+~~~
 This is ___a b i tag combo___ and this is ***a strong em tag combo***.
-```
+~~~
 
 ###### HTML Output
 
 {#output_bold_italic_1}
-```
+~~~
 <p>This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag combo</em></strong>.
-```
+~~~
 
 ### Underline
 
@@ -3311,16 +3311,16 @@ This is ___a b i tag combo___ and this is ***a strong em tag combo***.
 ###### Markua Syntax
 
 {#input_underline_1}
-```
+~~~
 This is ____a u tag____. Yeah, it's ugly.
-```
+~~~
 
 ###### HTML Output
 
 {#output_underline_1}
-```
+~~~
 <p>This is <u>a u tag</u>. Yeah, it's ugly.</p>
-```
+~~~
 
 ### Strikethrough
 
@@ -3328,27 +3328,27 @@ This is ____a u tag____. Yeah, it's ugly.
 
 The following CSS rule is recommended:
 
-```
+~~~
 .strikethrough {
   text-decoration: line-through;
 }
-```
+~~~
 
 ##### Example
 
 ###### Markua Syntax
 
 {#input_strikethrough_1}
-```
+~~~
 This is ~~a strikethrough tag~~.
-```
+~~~
 
 ###### HTML Output
 
 {#output_strikethrough_1}
-```
+~~~
 <p>This is <span class="strikethrough">a strikethrough tag</span>.</p>
-```
+~~~
 
 ### Superscript
 
@@ -3357,16 +3357,16 @@ This is ~~a strikethrough tag~~.
 ###### Markua Syntax
 
 {#input_superscript_1}
-```
+~~~
 5^3^ = 125
-```
+~~~
 
 ###### HTML Output
 
 {#output_superscript_1}
-```
+~~~
 <p>5<sup>3</sup> = 125</p>
-```
+~~~
 
 ### Subscript
 
@@ -3375,16 +3375,16 @@ This is ~~a strikethrough tag~~.
 ###### Markua Syntax
 
 {#input_subscript_1}
-```
+~~~
 Water is H~2~O.
-```
+~~~
 
 ###### HTML Output
 
 {#output_subscript_1}
-```
+~~~
 <p>Water is H<sub>2</sub>O.</p>
-```
+~~~
 
 ## Headings
 
@@ -3396,7 +3396,7 @@ A> The syntax for headings is described [here](#headings).
 ###### Markua Syntax
 
 {#input_headings_1}
-```
+~~~
 # Part (h1) #
 
 This is a paragraph.
@@ -3424,12 +3424,12 @@ This is a paragraph.
 ###### Sub-Sub-Sub-Sub-Section (h6)
 
 This is a paragraph.
-```
+~~~
 
 ###### HTML Output
 
 {#output_headings_1}
-```
+~~~
 <h1 class="part">Part (h1)</h1>
 <p>This is a paragraph.</p>
 <h1 class="chapter">Chapter (also h1)</h1>
@@ -3444,7 +3444,7 @@ This is a paragraph.
 <p>This is a paragraph.</p>
 <h6 class="sub-sub-sub-sub-section">Sub-Sub-Sub-Sub-Section (h6)</h6>
 <p>This is a paragraph.</p>
-```
+~~~
 
 ## Whitespace, Paragraphs and Blank Lines
 
@@ -3456,22 +3456,22 @@ A> The syntax for whitespace is described [here](#whitespace).
 ###### Markua Syntax
 
 {#input_whitespace_1}
-```
+~~~
 I'm paragraph one. Yay!
 
 This is paragraph two.
 
 This is paragraph three.
-```
+~~~
 
 ###### HTML Output
 
 {#output_whitespace_1}
-```
+~~~
 <p>I'm paragraph one. Yay!</p>
 <p>This is paragraph two.</p>
 <p>This is paragraph three.</p>
-```
+~~~
 
 ## Newlines, Indentation and Spaces
 
@@ -3485,7 +3485,7 @@ A> The syntax for newlines is described [here](#newlines).
 ###### Markua Syntax
 
 {#input_single_newlines_1}
-```
+~~~
 I'm paragraph one. Yay!
 
 This is paragraph two.
@@ -3493,41 +3493,41 @@ This is *still* in paragraph two, preceded by a forced line break.
 This is also in paragraph two, also preceded by a forced line break.
 
 This is paragraph three.
-```
+~~~
 
 ###### HTML Output
 
 {#output_single_newlines_1}
-```
+~~~
 <p>I'm paragraph one. Yay!</p>
 <p>This is paragraph two.<br/>
 This is *still* in paragraph two, preceded by a forced line break.<br/>
 This is also in paragraph two, also preceded by a forced line break.</p>
 <p>This is paragraph three.</p>
-```
+~~~
 
 ##### Example 2 - A Presumably Incorrect Heading
 
 ###### Markua Syntax
 
 {#input_single_newlines_2}
-```
+~~~
 # This.
 Is.
 Heading Text!!!
 
 I'm paragraph one. Yay!
-```
+~~~
 
 ###### HTML Output
 
 {#output_single_newlines_2}
-```
+~~~
 <h1>This.<br/>
 Is.<br/>
 Heading Text!!!</h1>
 <p>I'm paragraph one. Yay!</p>
-```
+~~~
 
 ### Three or More Newlines
 
@@ -3536,7 +3536,7 @@ Heading Text!!!</h1>
 ###### Markua Syntax
 
 {#input_three_or_more_newlines_1}
-```
+~~~
 This paragraph is followed by two newlines.
 
 This paragraph is followed by three newlines.
@@ -3548,12 +3548,12 @@ This paragraph is followed by five newlines.
 
 
 The End
-```
+~~~
 
 ###### HTML Output
 
 {#output_three_or_more_newlines_1}
-```
+~~~
 <p>This paragraph is followed by two newlines.</p>
 <p>This paragraph is followed by three newlines.</p>
 <br/>
@@ -3562,7 +3562,7 @@ The End
 <br/>
 <br/>
 <p>The End</p>
-```
+~~~
 
 ### Leading Spaces (Prose vs. Poetry)
 
@@ -3571,24 +3571,24 @@ The End
 ##### Markua Syntax
 
 {#input_leading_spaces_1}
-```
+~~~
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
     And yet, by heaven, I think my love as rare
     As any she belied with false compare.
-```
+~~~
 
 ##### HTML Output
 
 {#output_leading_spaces_1}
-```
+~~~
 <p>
 I grant I never saw a goddess go;<br/>
 My mistress when she walks treads on the ground.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
 </p>
-```
+~~~
 
 ### Internal Spaces are Collapsed to One Space
 
@@ -3597,16 +3597,16 @@ My mistress when she walks treads on the ground.<br/>
 ###### Markua Syntax
 
 {#input_internal_spaces_1}
-```
+~~~
 foo   bar
-```
+~~~
 
 ###### HTML Output
 
 {#output_internal_spaces_1}
-```
+~~~
 <p>foo bar</p>
-```
+~~~
 
 ## Resources
 
@@ -3622,16 +3622,16 @@ A> The syntax for images is described [here](#images).
 ###### Markua Syntax
 
 {#input_local_images_span_1}
-```
+~~~
 Easy as ![pie](pie.png).
-```
+~~~
 
 ###### HTML Output
 
 {#output_local_images_span_1}
-```
+~~~
 <p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
-```
+~~~
 
 ##### Figure Example
 
@@ -3659,7 +3659,7 @@ Here's a paragraph after the third figure.
 ###### HTML Output
 
 {#output_local_images_figure_1}
-```
+~~~
 <p>Here's a paragraph before the first figure.</p>
 <div class="figure">
   <img src="cake.jpg"/>
@@ -3676,7 +3676,7 @@ Here's a paragraph after the third figure.
   <p class="caption">A Piece of Pie</p>
 </div>
 <p>Here's a paragraph after the third figure.</p>
-```
+~~~
 
 #### Web Images
 
@@ -3685,23 +3685,23 @@ Here's a paragraph after the third figure.
 ###### Markua Syntax
 
 {#input_web_images_span_1}
-```
+~~~
 Easy as ![pie](http://markua.com/pie.png).
-```
+~~~
 
 ###### HTML Output
 
 {#output_web_images_span_1}
-```
+~~~
 <p>Easy as <img src="http://markua.com/pie.png" alt="pie"/>.</p>
-```
+~~~
 
 ##### Figure Example
 
 ###### Markua Syntax
 
 {#input_web_images_figure_1}
-```
+~~~
 Here's a paragraph before the first figure.
 
 ![A Piece of Cake](http://markua.com/cake.jpg)
@@ -3717,12 +3717,12 @@ Here's a paragraph between the second and third figures.
 ![A Piece of Pie](http://markua.com/pie.jpg)
 
 Here's a paragraph after the third figure.
-```
+~~~
 
 ###### HTML Output
 
 {#output_web_images_figure_1}
-```
+~~~
 <p>Here's a paragraph before the first figure.</p>
 <div class="figure">
   <img src="http://markua.com/cake.jpg"/>
@@ -3739,7 +3739,7 @@ Here's a paragraph after the third figure.
   <p class="caption">A Piece of Pie</p>
 </div>
 <p>Here's a paragraph after the third figure.</p>
-```
+~~~
 
 #### Inline Images (SVG only)
 
@@ -3748,16 +3748,16 @@ Here's a paragraph after the third figure.
 ###### Markua Syntax
 
 {#input_inline_images_span_1}
-```
+~~~
 Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
-```
+~~~
 
 ###### HTML Output
 
 {#output_inline_images_span_1}
-```
+~~~
 <p>Red <svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg> square.</p>
-```
+~~~
 
 ##### Figure Example
 
@@ -3768,12 +3768,12 @@ Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" widt
 Here's a paragraph before the figure.
 
 {caption: "Earth From Space (Simplified)"}
-```svg
+~~~svg
 <svg width="20" height="20">
   <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
-```
+~~~
 
 Here's a paragraph after the figure.
 ~~~
@@ -3805,16 +3805,16 @@ A> The syntax for video is described [here](#video).
 ###### Markua Syntax
 
 {#input_local_video_span_1}
-```
+~~~
 Easy as ![pie](pie_eating_contest.mp4).
-```
+~~~
 
 ###### HTML Output
 
 {#output_local_video_span_1}
-```
+~~~
 <p>Easy as <video src="resources/pie_eating_contest.mp4" alt="pie"/>.</p>
-```
+~~~
 
 ##### Figure Example
 
@@ -3833,14 +3833,14 @@ Here's a paragraph after the figure.
 ###### HTML Output
 
 {#output_local_video_figure_1}
-```
+~~~
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <video src="cake_eating_contest.webm" alt="a man eating an entire chocolate cake"/>
   <p class="caption">A Piece of Cake</p>
 </div>
 <p>Here's a paragraph after the figure.</p>
-```
+~~~
 
 #### Web Video
 
@@ -3849,16 +3849,16 @@ Here's a paragraph after the figure.
 ###### Markua Syntax
 
 {#input_web_video_span_1}
-```
+~~~
 Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
-```
+~~~
 
 ###### HTML Output
 
 {#output_web_video_span_1}
-```
+~~~
 <p>Easy as <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0" alt="Peter's Markua talk"/>.</p>
-```
+~~~
 
 ##### Figure Example
 
@@ -3877,7 +3877,7 @@ Here's a paragraph after the figure.
 ###### HTML Output
 
 {#output_web_video_figure_1}
-```
+~~~
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0"
@@ -3885,7 +3885,7 @@ Here's a paragraph after the figure.
   <p class="caption">Introducing Markua</p>
 </div>
 <p>Here's a paragraph after the figure.</p>
-```
+~~~
 
 ### Audio
 
@@ -3899,16 +3899,16 @@ A> The syntax for audio is described [here](#audio).
 ###### Markua Syntax
 
 {#input_local_audio_span_1}
-```
+~~~
 The talk audio highlights are here: ![](highlights.mp3).
-```
+~~~
 
 ###### HTML Output
 
 {#output_local_audio_span_1}
-```
+~~~
 <p>The talk audio highlights are here: <audio src="resources/highlights.mp3"/>.</p>
-```
+~~~
 
 ##### Figure Example
 
@@ -3924,13 +3924,13 @@ The full version of the talk is here:
 ###### HTML Output
 
 {#output_local_audio_span_1}
-```
+~~~
 <p>The full version of the talk is here:</p>
 <div class="figure">
   <audio src="resources/talk.m4a"/>
   <p class="caption">Full Talk</p>
 </div>
-```
+~~~
 
 #### Web Audio
 
@@ -3939,16 +3939,16 @@ The full version of the talk is here:
 ###### Markua Syntax
 
 {#input_local_audio_span_1}
-```
+~~~
 The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
-```
+~~~
 
 ###### HTML Output
 
 {#output_local_audio_span_1}
-```
+~~~
 <p>The talk audio highlights are here: <audio src="http://markua.com/highlights.mp3"/>.</p>
-```
+~~~
 
 ##### Figure Example
 
@@ -3964,13 +3964,13 @@ The full version of the talk is here:
 ###### HTML Output
 
 {#output_local_audio_span_1}
-```
+~~~
 <p>The full version of the talk is here:</p>
 <div class="figure">
   <audio src="http://markua.com/talk.m4a"/>
   <p class="caption">Full Talk</p>
 </div>
-```
+~~~
 
 ### Code
 
@@ -3984,9 +3984,9 @@ A> The syntax for code is described [here](#code).
 ###### Markua Syntax
 
 {#input_local_code_span_1}
-```
+~~~
 Hello in Ruby is a simple ![](hello.rb) statement.
-```
+~~~
 
 ###### Test Dependencies
 
@@ -3995,26 +3995,51 @@ This defines the hello.rb file used in this example.
 {#dependencies_local_code_span_1}
 ~~~
 hello.rb:
-```
 puts "hello world"
-```
 ~~~
 
 ###### HTML Output
 
 {#output_local_code_span_1}
-```
+~~~
 <p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
-```
+~~~
 
 ##### Figure Example
 
 ###### Markua Syntax
 
 {#input_local_code_figure_1}
-```
-Hello in Ruby is a simple ![](hello.rb) statement.
-```
+~~~
+Here's a paragraph before the figure.
+
+![Hello World in Ruby](hello.rb)
+
+That is equivalent to:
+
+{format: guess}
+![Hello World in Ruby](hello.rb)
+
+If you don't want to take chances you can do this:
+
+{format: ruby}
+![Hello World in Ruby](hello.rb)
+
+Finally, note that the caption is optional in all figures:
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+
+
+
+
+
+
+
+~~~
 
 ###### Test Dependencies
 
@@ -4031,9 +4056,9 @@ puts "hello world"
 ###### HTML Output
 
 {#output_local_code_figure_1}
-```
+~~~
 <p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
-```
+~~~
 
 #### Web Code Resources
 
@@ -4042,14 +4067,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ##### Span
 
@@ -4062,14 +4087,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ##### Span
 
@@ -4082,14 +4107,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Line Wrapping in Code Resources
 
@@ -4098,14 +4123,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Math
 
@@ -4116,14 +4141,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Default Attributes for Math
 
@@ -4132,14 +4157,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Local Math Resources
 
@@ -4148,14 +4173,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ##### Span
 
@@ -4168,14 +4193,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ##### Span
 
@@ -4188,14 +4213,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ##### Span
 
@@ -4210,14 +4235,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Ordered Lists (i.e. Numbered Lists)
 
@@ -4226,14 +4251,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### In Markua, A Single Element Ordered List is Not a List
 
@@ -4242,14 +4267,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Ordered List Numbering Rules
 
@@ -4258,14 +4283,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Multi-Paragraph List Items
 
@@ -4274,14 +4299,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Nested Lists
 
@@ -4290,14 +4315,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Nesting Block Elements in List Items
 
@@ -4306,14 +4331,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Single paragraph list items
 
@@ -4322,14 +4347,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Multiple paragraph list items
 
@@ -4338,14 +4363,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ## Definition Lists
 
@@ -4354,14 +4379,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ## Inserting Block Elements Inside Paragraphs
 
@@ -4370,14 +4395,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ## Tables
 
@@ -4388,14 +4413,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Complex Tables
 
@@ -4404,14 +4429,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Tables Can Have Captions and Other Attributes
 
@@ -4420,14 +4445,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Supported Attributes for Tables
 
@@ -4436,14 +4461,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ## Block Elements
 
@@ -4454,14 +4479,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Asides (`A>`)
 
@@ -4470,14 +4495,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Blurbs (`B>`)
 
@@ -4486,14 +4511,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `Q>`, `T>`, `W>`, `X>`
 
@@ -4502,14 +4527,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Callouts (C>)
 
@@ -4518,14 +4543,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ## Span Elements
 
@@ -4534,14 +4559,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Links
 
@@ -4550,14 +4575,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Inline Links
 
@@ -4566,14 +4591,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Automatic Links
 
@@ -4582,14 +4607,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Explicitly Creating Spans with `[`...`]`
 
@@ -4598,14 +4623,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Sometimes a Square Bracket is Just a Square Bracket
 
@@ -4614,14 +4639,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Footnotes
 
@@ -4630,14 +4655,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Endnotes
 
@@ -4646,14 +4671,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Crosslinks and ids
 
@@ -4662,14 +4687,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Defining an id
 
@@ -4678,14 +4703,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ##### Defining an id on a Block Element
 
@@ -4694,14 +4719,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ##### Defining an id on a Span Element
 
@@ -4712,14 +4737,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Rules for `id`s and Crosslinks
 
@@ -4728,14 +4753,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
 
@@ -4744,14 +4769,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Scene Breaks
 
@@ -4760,14 +4785,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Soft hyphen
 
@@ -4776,14 +4801,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ## Metadata
 
@@ -4796,14 +4821,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Attribute Keys
 
@@ -4812,14 +4837,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Attribute Value Types
 
@@ -4828,14 +4853,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### `id` Attributes
 
@@ -4844,14 +4869,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Extension Attributes
 
@@ -4860,14 +4885,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Index Entries
 
@@ -4876,14 +4901,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Directives
 
@@ -4892,14 +4917,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Language Attributes and Directives
 
@@ -4908,14 +4933,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Book `section` Directives
 
@@ -4924,14 +4949,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Table of Contents
 
@@ -4940,14 +4965,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Settings
 
@@ -4956,14 +4981,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ### Escaping Special Characters
 
@@ -4972,14 +4997,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Curly Braces (`{` and `}`)
 
@@ -4988,14 +5013,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 #### Backticks (`)
 
@@ -5004,14 +5029,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 ## CriticMarkup is Supported in Markua
 
@@ -5020,14 +5045,14 @@ puts "hello world"
 ###### Markua Syntax
 
 {#input_}
-```
-```
+~~~
+~~~
 
 ###### HTML Output
 
 {#output_}
-```
-```
+~~~
+~~~
 
 # Spare Parts
 
@@ -5040,57 +5065,57 @@ W> TODO - The rest of this document needs to be rewritten. Please ignore everyth
 {#input_code_span_1}
 ### Markua Syntax
 
-```
+~~~
 Here is some `hello world` span code.
-```
+~~~
 
 {#output_code_span_1}
 ### HTML Output
 
-```
+~~~
 <p>Here is some <code>hello world</code> span code.</p>
-```
+~~~
 
 ### Example
 
 {#input_code_span_2}
 ### Markua Syntax
 
-```
+~~~
 Here is some ``code with a backtick (`) in it`` and other text.
 
 If you want to have a backtick by itself, just use you need to have spaces around it like this `` ` ``. The enclosed backtick cannot start or end the code block.
-```
+~~~
 
 {#output_code_span_2}
 ### HTML Output
 
-```
+~~~
 <p>Here is some <code>code with a backtick (`) in it</code> and other text.</p>
 <p>If you want to have a backtick by itself, just use you need to have spaces around it like this <code>`</code>. The enclosed backtick cannot start or end the code block.</p>
-```
+~~~
 
 ## Paragraphs
 
 ##### Markua Syntax
 
 {#input_paragraphs_1}
-```
+~~~
 This is a paragraph. The number of sentences does not matter.
 
 This is another paragraph.
 
 This is a third paragraph.
-```
+~~~
 
 ##### HTML Output
 
 {#output_paragraphs_1}
-```
+~~~
 <p>This is a paragraph. The number of sentences does not matter.</p>
 <p>This is another paragraph.</p>
 <p>This is a third paragraph.</p>
-```
+~~~
 
 ## Lists
 
@@ -5101,7 +5126,7 @@ This is a third paragraph.
 ##### Markua Syntax
 
 {#input_unordered_list_1}
-```
+~~~
 lorem
 
 * foo
@@ -5109,12 +5134,12 @@ lorem
 * baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_1}
-```
+~~~
 <p>lorem</p>
 <ul>
   <li>foo</li>
@@ -5122,14 +5147,14 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 2: A list (asterisks, two spaces after each)
 
 ##### Markua Syntax
 
 {#input_unordered_list_2}
-```
+~~~
 lorem
 
 *  foo
@@ -5137,12 +5162,12 @@ lorem
 *  baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_2}
-```
+~~~
 <p>lorem</p>
 <ul>
   <li>foo</li>
@@ -5150,14 +5175,14 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 3: A list (asterisks, three spaces after each)
 
 ##### Markua Syntax
 
 {#input_unordered_list_3}
-```
+~~~
 lorem
 
 *   foo
@@ -5165,12 +5190,12 @@ lorem
 *   baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_3}
-```
+~~~
 <p>lorem</p>
 <ul>
   <li>foo</li>
@@ -5178,14 +5203,14 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 4: A list (asterisks, four spaces after each)
 
 ##### Markua Syntax
 
 {#input_unordered_list_4}
-```
+~~~
 lorem
 
 *    foo
@@ -5193,12 +5218,12 @@ lorem
 *    baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_4}
-```
+~~~
 <p>lorem</p>
 <ul>
   <li>foo</li>
@@ -5206,14 +5231,14 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 5: A list (asterisks, one tab after each)
 
 ##### Markua Syntax
 
 {#input_unordered_list_5}
-```
+~~~
 lorem
 
 * foo
@@ -5221,12 +5246,12 @@ lorem
 * baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_5}
-```
+~~~
 <p>lorem</p>
 <ul>
   <li>foo</li>
@@ -5234,14 +5259,14 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 6: A list (hyphens, one space after each)
 
 ##### Markua Syntax
 
 {#input_unordered_list_6}
-```
+~~~
 lorem
 
 - foo
@@ -5249,12 +5274,12 @@ lorem
 - baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_6}
-```
+~~~
 <p>lorem</p>
 <ul class="hyphen">
   <li>foo</li>
@@ -5262,14 +5287,14 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 7: A list (pluses, one space after each)
 
 ##### Markua Syntax
 
 {#input_unordered_list_7}
-```
+~~~
 lorem
 
 + foo
@@ -5277,12 +5302,12 @@ lorem
 + baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_7}
-```
+~~~
 <p>lorem</p>
 <ul class="plus">
   <li>foo</li>
@@ -5290,86 +5315,86 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 8: A list (one element list with asterisk)
 
 ##### Markua Syntax
 
 {#input_unordered_list_8}
-```
+~~~
 lorem
 
 * foo
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_8}
-```
+~~~
 <p>lorem</p>
 <ul>
   <li>foo</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 9: A list (one element list with hyphen)
 
 ##### Markua Syntax
 
 {#input_unordered_list_9}
-```
+~~~
 lorem
 
 - foo
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_9}
-```
+~~~
 <p>lorem</p>
 <ul class="hyphen">
   <li>foo</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 10: A list (one element list with plus)
 
 ##### Markua Syntax
 
 {#input_unordered_list_10}
-```
+~~~
 lorem
 
 + foo
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_10}
-```
+~~~
 <p>lorem</p>
 <ul class="plus">
   <li>foo</li>
 </ul>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 11: Not a list (variable number of spaces after bullets)
 
 ##### Markua Syntax
 
 {#input_unordered_list_11}
-```
+~~~
 lorem
 
 *    foo
@@ -5377,18 +5402,18 @@ lorem
 *  baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_unordered_list_11}
-```
+~~~
 <p>lorem</p>
 <p>*    foo<br/>
 *   bar<br/>
 *  baz</p>
 <p>ipsum</p>
-```
+~~~
 
 ## Ordered Lists (i.e. Numbered Lists)
 
@@ -5399,7 +5424,7 @@ ipsum
 ##### Markua Syntax
 
 {#input_ordered_list_1}
-```
+~~~
 lorem
 
 1. foo
@@ -5407,12 +5432,12 @@ lorem
 3. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_1}
-```
+~~~
 <p>lorem</p>
 <ol>
   <li>foo</li>
@@ -5420,14 +5445,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 2
 
 ##### Markua Syntax
 
 {#input_ordered_list_2}
-```
+~~~
 lorem
 
 9. foo
@@ -5435,12 +5460,12 @@ lorem
 11. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_2}
-```
+~~~
 <p>lorem</p>
 <ol start="9">
   <li>foo</li>
@@ -5448,14 +5473,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 3
 
 ##### Markua Syntax
 
 {#input_ordered_list_3}
-```
+~~~
 lorem
 
 3. foo
@@ -5463,12 +5488,12 @@ lorem
 1. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_3}
-```
+~~~
 <p>lorem</p>
 <ol start="3" reversed="true">
   <li>foo</li>
@@ -5476,14 +5501,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 4
 
 ##### Markua Syntax
 
 {#input_ordered_list_4}
-```
+~~~
 lorem
 
 11. foo
@@ -5491,12 +5516,12 @@ lorem
 9. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_4}
-```
+~~~
 <p>lorem</p>
 <ol start="11" reversed="true">
   <li>foo</li>
@@ -5504,12 +5529,12 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 5
 
 {#input_ordered_list_5}
-```
+~~~
 lorem
 
 1. foo
@@ -5517,12 +5542,12 @@ lorem
 1. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_5}
-```
+~~~
 <p>lorem</p>
 <ol>
   <li>foo</li>
@@ -5530,7 +5555,7 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 ### Examples: Uppercase Letters
 
@@ -5539,7 +5564,7 @@ ipsum
 ##### Markua Syntax
 
 {#input_ordered_list_uc_1}
-```
+~~~
 lorem
 
 A. foo
@@ -5547,12 +5572,12 @@ B. bar
 C. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_uc_1}
-```
+~~~
 <p>lorem</p>
 <ol type="A">
   <li>foo</li>
@@ -5560,14 +5585,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 2
 
 ##### Markua Syntax
 
 {#input_ordered_list_uc_2}
-```
+~~~
 lorem
 
 I. foo
@@ -5575,12 +5600,12 @@ J. bar
 K. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_uc_2}
-```
+~~~
 <p>lorem</p>
 <ol type="A" start="9">
 <ol start="9">
@@ -5589,14 +5614,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 3
 
 ##### Markua Syntax
 
 {#input_ordered_list_uc_3}
-```
+~~~
 lorem
 
 C. foo
@@ -5604,12 +5629,12 @@ B. bar
 A. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_uc_3}
-```
+~~~
 <p>lorem</p>
 <ol type="A" start="3" reversed="true">
   <li>foo</li>
@@ -5617,14 +5642,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 4
 
 ##### Markua Syntax
 
 {#input_ordered_list_uc_4}
-```
+~~~
 lorem
 
 K. foo
@@ -5632,12 +5657,12 @@ J. bar
 I. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_uc_4}
-```
+~~~
 <p>lorem</p>
 <ol type="A" start="11" reversed="true">
   <li>foo</li>
@@ -5645,12 +5670,12 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 5
 
 {#input_ordered_list_uc_5}
-```
+~~~
 lorem
 
 A. foo
@@ -5658,12 +5683,12 @@ A. bar
 A. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_uc_5}
-```
+~~~
 <p>lorem</p>
 <ol type="A">
   <li>foo</li>
@@ -5671,7 +5696,7 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 ### Examples: Lowercase Letters
 
@@ -5680,7 +5705,7 @@ ipsum
 ##### Markua Syntax
 
 {#input_ordered_list_lc_1}
-```
+~~~
 lorem
 
 a. foo
@@ -5688,12 +5713,12 @@ b. bar
 c. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lc_1}
-```
+~~~
 <p>lorem</p>
 <ol type="a">
   <li>foo</li>
@@ -5701,14 +5726,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 2
 
 ##### Markua Syntax
 
 {#input_ordered_list_lc_2}
-```
+~~~
 lorem
 
 i. foo
@@ -5716,12 +5741,12 @@ j. bar
 k. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lc_2}
-```
+~~~
 <p>lorem</p>
 <ol type="a" start="9">
 <ol start="9">
@@ -5730,14 +5755,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 3
 
 ##### Markua Syntax
 
 {#input_ordered_list_lc_3}
-```
+~~~
 lorem
 
 c. foo
@@ -5745,12 +5770,12 @@ b. bar
 a. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lc_3}
-```
+~~~
 <p>lorem</p>
 <ol type="a" start="3" reversed="true">
   <li>foo</li>
@@ -5758,14 +5783,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 4
 
 ##### Markua Syntax
 
 {#input_ordered_list_lc_4}
-```
+~~~
 lorem
 
 k. foo
@@ -5773,12 +5798,12 @@ j. bar
 i. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lc_4}
-```
+~~~
 <p>lorem</p>
 <ol type="a" start="11" reversed="true">
   <li>foo</li>
@@ -5786,12 +5811,12 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 5
 
 {#input_ordered_list_lc_5}
-```
+~~~
 lorem
 
 a. foo
@@ -5799,12 +5824,12 @@ a. bar
 a. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lc_5}
-```
+~~~
 <p>lorem</p>
 <ol type="a">
   <li>foo</li>
@@ -5812,7 +5837,7 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 ### Examples: Uppercase Roman Numerals
 
@@ -5821,7 +5846,7 @@ ipsum
 ##### Markua Syntax
 
 {#input_ordered_list_ucr_1}
-```
+~~~
 lorem
 
 I. foo
@@ -5829,12 +5854,12 @@ II. bar
 III. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_ucr_1}
-```
+~~~
 <p>lorem</p>
 <ol type="I">
   <li>foo</li>
@@ -5842,14 +5867,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 2
 
 ##### Markua Syntax
 
 {#input_ordered_list_ucr_2}
-```
+~~~
 lorem
 
 IX. foo
@@ -5857,12 +5882,12 @@ X. bar
 XI. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_ucr_2}
-```
+~~~
 <p>lorem</p>
 <ol type="I" start="9">
 <ol start="9">
@@ -5871,14 +5896,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 3
 
 ##### Markua Syntax
 
 {#input_ordered_list_ucr_3}
-```
+~~~
 lorem
 
 III. foo
@@ -5886,12 +5911,12 @@ II. bar
 I. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_ucr_3}
-```
+~~~
 <p>lorem</p>
 <ol type="I" start="3" reversed="true">
   <li>foo</li>
@@ -5899,14 +5924,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 4
 
 ##### Markua Syntax
 
 {#input_ordered_list_ucr_4}
-```
+~~~
 lorem
 
 XI. foo
@@ -5914,12 +5939,12 @@ X. bar
 IX. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_ucr_4}
-```
+~~~
 <p>lorem</p>
 <ol type="I" start="11" reversed="true">
   <li>foo</li>
@@ -5927,12 +5952,12 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 5
 
 {#input_ordered_list_ucr_5}
-```
+~~~
 lorem
 
 I. foo
@@ -5940,12 +5965,12 @@ I. bar
 I. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_ucr_5}
-```
+~~~
 <p>lorem</p>
 <ol type="I">
   <li>foo</li>
@@ -5953,7 +5978,7 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 ### Examples: Lowercase Roman Numerals
 
@@ -5962,7 +5987,7 @@ ipsum
 ##### Markua Syntax
 
 {#input_ordered_list_lcr_1}
-```
+~~~
 lorem
 
 i. foo
@@ -5970,12 +5995,12 @@ ii. bar
 iii. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lcr_1}
-```
+~~~
 <p>lorem</p>
 <ol type="i">
   <li>foo</li>
@@ -5983,14 +6008,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 2
 
 ##### Markua Syntax
 
 {#input_ordered_list_lcr_2}
-```
+~~~
 lorem
 
 ix. foo
@@ -5998,12 +6023,12 @@ x. bar
 xi. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lcr_2}
-```
+~~~
 <p>lorem</p>
 <ol type="i" start="9">
 <ol start="9">
@@ -6012,14 +6037,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 3
 
 ##### Markua Syntax
 
 {#input_ordered_list_lcr_3}
-```
+~~~
 lorem
 
 iii. foo
@@ -6027,12 +6052,12 @@ ii. bar
 i. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lcr_3}
-```
+~~~
 <p>lorem</p>
 <ol type="i" start="3" reversed="true">
   <li>foo</li>
@@ -6040,14 +6065,14 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 4
 
 ##### Markua Syntax
 
 {#input_ordered_list_lcr_4}
-```
+~~~
 lorem
 
 xi. foo
@@ -6055,12 +6080,12 @@ x. bar
 ix. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lcr_4}
-```
+~~~
 <p>lorem</p>
 <ol type="i" start="11" reversed="true">
   <li>foo</li>
@@ -6068,12 +6093,12 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 #### Example 5
 
 {#input_ordered_list_lcr_5}
-```
+~~~
 lorem
 
 i. foo
@@ -6081,12 +6106,12 @@ i. bar
 i. baz
 
 ipsum
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_lcr_5}
-```
+~~~
 <p>lorem</p>
 <ol type="I">
   <li>foo</li>
@@ -6094,7 +6119,7 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-```
+~~~
 
 ### In Markua, A Single Element Ordered List is Not a List
 
@@ -6103,7 +6128,7 @@ ipsum
 ##### Markua Syntax
 
 {#input_ordered_list_1}
-```
+~~~
 foo
 
 1. This isn't a list.
@@ -6129,12 +6154,12 @@ sit
 I. This isn't a list either.
 
 amet
-```
+~~~
 
 ##### HTML Output
 
 {#output_ordered_list_1}
-```
+~~~
 <p>foo</p>
 <p>1. This isn't a list.</p>
 <p>bar</p>
@@ -6148,18 +6173,18 @@ amet
 <p>sit</p>
 <p>I. This isn't a list either.</p>
 <p>amet</p>
-```
+~~~
 
 ##### HTML Output
 
 
 {#output_uppercase_alphabetical_lists_4}
-```
+~~~
 <ol type="A" start="4">
 <li>foo</li>
 <li>bar</li>
 </ol>
-```
+~~~
 
 ## Ordered List Numbering Rules
 
@@ -6168,7 +6193,7 @@ amet
 ##### Markua Syntax
 
 {#input_list_consecutive_or_same_1}
-```
+~~~
 This makes an ordered list with decimal numbers (1, 2, 3):
 
 1. one
@@ -6230,12 +6255,12 @@ a. one
 c. three
 
 That's it!
-```
+~~~
 
 ##### HTML Output
 
 {#output_list_consecutive_or_same_1}
-```
+~~~
 <p>This makes an ordered list with decimal numbers:</p>
 <ol>
   <li>one</li>
@@ -6285,10 +6310,10 @@ b\. two</p>
 <p>a. one<br/>
 c. three</p>
 <p>That's it!</p>
-```
+~~~
 
 {#input_headings_1}
-```
+~~~
 ## Part (h1) #
 
 This is a paragraph.
@@ -6316,10 +6341,10 @@ This is a paragraph.
 ###### Sub-Sub-Sub-Sub-Section (h6)
 
 This is a paragraph.
-```
+~~~
 
 {#output_headings_1}
-```
+~~~
 <h1 class="part">Part (h1)</h1>
 <p>This is a paragraph.</p>
 <h1>Chapter (also h1)</h1>
@@ -6334,7 +6359,7 @@ This is a paragraph.
 <p>This is a paragraph.</p>
 <h6>Sub-Sub-Sub-Sub-Section (h6)</h6>
 <p>This is a paragraph.</p>
-```
+~~~
 
 ## Text Formatting
 
@@ -6345,16 +6370,16 @@ This is a paragraph.
 {#input_italic_1}
 #### Markua Syntax
 
-```
+~~~
 This text _is italic_. This text *is also italic*.
-```
+~~~
 
 {#output_italic_1}
 #### HTML Output
 
-```
+~~~
 <p>This text <i>is italic</i>. This text <em>is also italic</em>.</p>
-```
+~~~
 
 ## Bold Text
 
@@ -6363,16 +6388,16 @@ This text _is italic_. This text *is also italic*.
 {#input_bold_1}
 #### Markua Syntax
 
-```
+~~~
 This text __is bold__. This text **is also bold**.
-```
+~~~
 
 {#output_bold_1}
 #### HTML Output
 
-```
+~~~
 <p>This text <b>is bold</b>. This text <strong>is also bold</strong>.</p>
-```
+~~~
 
 ## Bold + Italic Text
 
@@ -6381,16 +6406,16 @@ This text __is bold__. This text **is also bold**.
 {#input_bold_italic_1}
 #### Markua Syntax
 
-```
+~~~
 This text ___is bold and italic___. This text ***is also bold and italic***.
-```
+~~~
 
 {#output_bold_italic_1}
 #### HTML Output
 
-```
+~~~
 <p>This text <b><i>is bold and italic</i></b>. This text <strong><em>is also bold and italic</em></strong>.</p>
-```
+~~~
 
 You can even combine underscores and asterisks. This is not recommended stylistically, but it works.
 
@@ -6399,20 +6424,20 @@ You can even combine underscores and asterisks. This is not recommended stylisti
 {#input_bold_italic_2}
 #### Markua Syntax
 
-```
+~~~
 This text __*is bold and italic*__. This text **_is also bold and italic_**.
 
 This text *__is italic and bold__*. This text _**is also italic and bold**_.
-```
+~~~
 
 {#output_bold_italic_2}
 #### HTML Output
 
-```
+~~~
 <p>This text <b><em>is bold and italic</em></b>. This text <strong><i>is also bold and italic</i></strong>.</p>
 
 <p>This text <em><b>is italic and bold</b></em>. This text <i><strong>is also italic and bold</strong></i>.</p>
-```
+~~~
 
 ## Nesting Bold in Italic, and Italic in Bold
 
@@ -6421,7 +6446,7 @@ This text *__is italic and bold__*. This text _**is also italic and bold**_.
 {#input_nesting_1}
 #### Markua Syntax
 
-```
+~~~
 This text _is italic __and this is nested bold__ and this is still italic_ again.
 
 This text *is italic **and this is nested bold** and this is still italic* again.
@@ -6437,12 +6462,12 @@ This text **is bold *and this is nested italic* and this is still bold** again.
 This text __is bold *and this is nested italic* and this is still bold__ again.
 
 This text **is bold _and this is nested italic_ and this is still bold** again.
-```
+~~~
 
 {#output_nesting_1}
 #### HTML Output
 
-```
+~~~
 <p>This text <i>is italic <b>and this is nested bold</b> and this is still italic</i> again.</p>
 
 <p>This text <em>is italic <strong>and this is nested bold</strong> and this is still italic</em> again.</p>
@@ -6458,7 +6483,7 @@ This text **is bold _and this is nested italic_ and this is still bold** again.
 <p>This text <b>is bold <em>and this is nested italic</em> and this is still bold</b> again.</p>
 
 <p>This text <strong>is bold <i>and this is nested italic</i> and this is still bold</strong> again.</p>
-```
+~~~
 
 ## Underlined Text
 
@@ -6467,18 +6492,18 @@ This text **is bold _and this is nested italic_ and this is still bold** again.
 #### Markua Syntax
 
 {#input_underline_1}
-```
+~~~
 This is ____some underlined____ text.
-```
+~~~
 
 #### HTML Output
 
 The HTML which is output uses the `<u>` tag, which was added to HTML5.
 
 {#output_underline_1}
-```
+~~~
 <p>This is some <u>bold and italic</u> text.</p>
-```
+~~~
 
 ## Strikethrough
 
@@ -6489,16 +6514,16 @@ Strikethrough is made with `~~two tildes~~` surrounding the text.
 #### Markua Syntax
 
 {#input_strikethrough_1}
-```
+~~~
 Strikethrough is made with ~~two tildes~~ surrounding the text.
-```
+~~~
 
 #### HTML Output
 
 {#output_strikethrough_1}
-```
+~~~
 <p>Strikethrough is made with <span class="strikethrough">two tildes</span> surrounding the text.</p>
-```
+~~~
 
 
 ## Superscript
@@ -6510,16 +6535,16 @@ To make a span be in superscript, you surround it with carets.
 #### Markua Syntax
 
 {#input_superscript_1}
-```
+~~~
 5^3^ is 125.
-```
+~~~
 
 #### HTML Output
 
 {#output_superscript_1}
-```
+~~~
 <p>5<sup>3</sup> is 125.</p>
-```
+~~~
 
 ## Subscript
 
@@ -6530,16 +6555,16 @@ To make a span be in subscript, you surround it with one tilde each. (This is th
 #### Markua Syntax
 
 {#input_subscript_1}
-```
+~~~
 What he thought was H~2~O was H~2~SO~4~.
-```
+~~~
 
 #### HTML Output
 
 {#output_subscript_1}
-```
+~~~
 <p>What he thought was H<sub>2</sub>O was H<sub>2</sub>SO<sub>4</sub>.
-```
+~~~
 
 ## ABC: Asides, Blurbs and Callouts
 
@@ -6548,7 +6573,7 @@ What he thought was H~2~O was H~2~SO~4~.
 ##### Markua Syntax
 
 {#input_aside_1}
-```
+~~~
 This is a paragraph before the aside.
 
 A> This is a paragraph in the aside.
@@ -6560,7 +6585,7 @@ A>
 A> This is a third paragraph in the aside.
 
 This is a paragraph after the aside.
-```
+~~~
 
 ##### HTML Output
 
@@ -6569,7 +6594,7 @@ The HTML output for an Aside is simply a `div`, not a `section` or an `aside`, s
 TODO - is this correct approach?
 
 {#output_aside_1}
-```
+~~~
 <p>This is a paragraph before the aside.</p>
 <div class="aside">
 <p>This is a paragraph in the aside.</p>
@@ -6579,14 +6604,14 @@ which contains newlines.</p>
 <p>This is a third paragraph in the aside.</p>
 </div>
 <p>This is a paragraph after the aside.</p>
-```
+~~~
 
 #### Example
 
 ##### Markua Syntax
 
 {#input_blurb_1}
-```
+~~~
 This is a paragraph before the blurb.
 
 B> This is a paragraph in the blurb.
@@ -6598,14 +6623,14 @@ B>
 B> This is a third paragraph in the blurb.
 
 This is a paragraph after the blurb.
-```
+~~~
 
 ##### HTML Output
 
 The HTML output for an Blurb is simply a `div` with a class of "blurb".
 
 {#output_blurb_1}
-```
+~~~
 <p>This is a paragraph before the blurb.</p>
 <div class="blurb">
 <p>This is a paragraph in the blurb.</p>
@@ -6615,14 +6640,14 @@ which contains newlines.</p>
 <p>This is a third paragraph in the blurb.</p>
 </div>
 <p>This is a paragraph after the blurb.</p>
-```
+~~~
 
 #### Example
 
 ##### Markua Syntax
 
 {#input_blurb_1}
-```
+~~~
 This is a paragraph before the blurb.
 
 {class: warning}
@@ -6635,14 +6660,14 @@ B>
 B> This is a third paragraph in the blurb.
 
 This is a paragraph after the blurb.
-```
+~~~
 
 ##### HTML Output
 
 The HTML output for an Blurb is simply a `div` with a class of "blurb".
 
 {#output_blurb_1}
-```
+~~~
 <p>This is a paragraph before the blurb.</p>
 <div class="blurb warning">
 <p>This is a paragraph in the blurb.</p>
@@ -6652,7 +6677,7 @@ which contains newlines.</p>
 <p>This is a third paragraph in the blurb.</p>
 </div>
 <p>This is a paragraph after the blurb.</p>
-```
+~~~
 
 
 ## Block Quotes
@@ -6664,7 +6689,7 @@ which contains newlines.</p>
 ##### Markua Syntax
 
 {#input_block_quote_1}
-```
+~~~
 This is a paragraph before the block quote.
 
 > This is a paragraph in the block quote.
@@ -6676,7 +6701,7 @@ This is a paragraph before the block quote.
 > This is a third paragraph in the block quote.
 
 This is a paragraph after the block quote.
-```
+~~~
 
 ##### HTML Output
 
@@ -6685,7 +6710,7 @@ The HTML output for a block quote is simply a `div`, not a `section` or an `asid
 TODO - does `<blockquote>` cause problems for EPUB readers?
 
 {#output_block_quote_1}
-```
+~~~
 <p>This is a paragraph before the block quote.</p>
 <blockquote>
 <p>This is a paragraph in the block quote.</p>
@@ -6695,7 +6720,7 @@ which contains newlines.</p>
 <p>This is a third paragraph in the block quote.</p>
 </blockquote>
 <p>This is a paragraph after the block quote.</p>
-```
+~~~
 
 {#links}
 ## Links
@@ -6706,15 +6731,15 @@ which contains newlines.</p>
 
 #### Markua Syntax
 
-```
+~~~
 This is [link text](http://markua.com) a link.
-```
+~~~
 
 #### HTML Output
 
-```
+~~~
 <p>This is <a href="http://markua.com">link text</a> a link.</p>
-```
+~~~
 
 ## Automatic Links
 
@@ -6722,15 +6747,15 @@ This is [link text](http://markua.com) a link.
 
 #### Markua Syntax
 
-```
+~~~
 Markua's website is <http://markua.com>.
-```
+~~~
 
 #### HTML Output
 
-```
+~~~
 <p>Markua's website is <a href="http://markua.com">http://markua.com</a>.</p>
-```
+~~~
 
 ## Crosslinks and `id`s
 
@@ -6743,16 +6768,16 @@ TODO - single or double quotes on id attrs in HTML?
 ##### Markua Syntax
 
 {#input_span_id_1}
-```
+~~~
 The words foo{#foo} and bar{id: bar} both have ids.
-```
+~~~
 
 ##### HTML Output
 
 {#output_span_id_1}
-```
+~~~
 <p>The words <span id="foo">foo</span> and <span id="bar">bar</span> both have ids.</p>
-```
+~~~
 
 #### Example 2: Defining an `id` on a code span
 
@@ -6761,16 +6786,16 @@ Code spans, like any span, can have `id`s.
 ##### Markua Syntax
 
 {#input_span_id_2}
-```
+~~~
 Java code is verbose, e.g. `public static void main(String[] args)`{#java}.
-```
+~~~
 
 ##### HTML Output
 
 {#output_span_id_2}
-```
+~~~
 <p>Java code is verbose, e.g. <code id="java">public static void main(String[] args)`</code>.</p>
-```
+~~~
 
 #### Example 3: Defining an `id` on a span of emphasized text
 
@@ -6779,16 +6804,16 @@ Any span can have `id`s -- even spans which are produced by formatting character
 ##### Markua Syntax
 
 {#input_span_id_3}
-```
+~~~
 The ideas behind *Leanpub*{id: leanpub} are explained in Peter's book _Lean Publishing_{#lean}.
-```
+~~~
 
 ##### HTML Output
 
 {#output_span_id_3}
-```
+~~~
 <p>The ideas behind <em id="leanpub">Leanpub</em> are explained in Peter's book <i id="lean">Lean Publishing</i>.</p>
-```
+~~~
 
 #### Example 4: Nesting `id` definitions inside spans
 
@@ -6797,16 +6822,16 @@ An `id` attribute can be defined on a span or word regardless of whether it is c
 ##### Markua Syntax
 
 {#input_span_id_4}
-```
+~~~
 This is *a **very very{#very} contrived** example{id: example}*{#contrived} showing this.
-```
+~~~
 
 ##### HTML Output
 
 {#output_span_id_4}
-```
+~~~
 <p>This is <em id="contrived">a <strong>very <span id="very">very</span> contrived</strong> <span id="example">example</span></em> showing this.</p>
-```
+~~~
 
 ## Scene Breaks
 
@@ -6815,7 +6840,7 @@ This is *a **very very{#very} contrived** example{id: example}*{#contrived} show
 {input_scene_breaks}
 ##### Markua Syntax
 
-```
+~~~
 Yada yada yada.
 
 * * *
@@ -6841,12 +6866,12 @@ Yada yada yada.
 ____________________
 
 Yada yada yada.
-```
+~~~
 
 {output_scene_breaks}
 ##### HTML Output
 
-```
+~~~
 <p>Yada yada yada.</p>
 <hr/>
 <p>Yada yada yada.</p>
@@ -6860,15 +6885,15 @@ Yada yada yada.
 <p>Yada yada yada.</p>
 <hr/>
 <p>Yada yada yada.</p>
-```
+~~~
 
 ## Soft hyphen
 
 ## Markua Syntax
 
-```
+~~~
 You can use soft hyphens to suggest where to break long words like Rumpel\-stiltskin if you wish.
-```
+~~~
 
 ## HTML Output
 
@@ -6882,7 +6907,7 @@ You can use soft hyphens to suggest where to break long words like Rumpel\-stilt
 
 #### Markua Syntax
 
-```
+~~~
 foo
 
 term 1
@@ -6897,11 +6922,11 @@ term 3
 : definition 3
 
 bar
-```
+~~~
 
 #### HTML Output
 
-```
+~~~
 <p>foo</p>
 <dl>
   <dt>term 1</dt>
@@ -6918,7 +6943,7 @@ bar
   <dd>definition 3</dd>
 </dl>
 <p>bar</p>
-```
+~~~
 
 ## Embedding Lists, Figures and Code Blocks Inside a Paragraph
 
@@ -6930,7 +6955,7 @@ bar
 ##### Markua Syntax
 
 {#input_paragraphs_1}
-```
+~~~
 This is a paragraph.
 
 The opinion of the W3C about lists inside paragraphs is:
@@ -6944,12 +6969,12 @@ It also:
 This is still part of the second paragraph.
 
 This is a third paragraph.
-```
+~~~
 
 ##### HTML Output
 
 {#output_paragraphs_1}
-```
+~~~
 <p>This is a paragraph.</p>
 <div class="para">The opinion of the W3C about lists inside paragraphs is:
   <ul>
@@ -6966,7 +6991,7 @@ This is a third paragraph.
   This is still part of the second paragraph.
 </div>
 <p>This is a third paragraph.</p>
-```
+~~~
 
 {#embedding_inside_paragraphs_2}
 #### Example 2: Incorrect List Embedding
@@ -6974,7 +6999,7 @@ This is a third paragraph.
 ##### Markua Syntax
 
 {#input_paragraphs_1}
-```
+~~~
 This is a paragraph.
 
 The opinion of the W3C about lists inside paragraphs is:
@@ -6988,12 +7013,12 @@ It also:
 This is still part of the second paragraph, but the above lists were not embedded correctly.
 
 This is a third paragraph.
-```
+~~~
 
 ##### HTML Output
 
 {#output_paragraphs_1}
-```
+~~~
 <p>This is a paragraph.</p>
 <p>The opinion of the W3C about lists inside paragraphs is:<br/>
 * myopic<br/>
@@ -7005,7 +7030,7 @@ It also:<br/>
 3. encourages short paragraphs<br/>
 This is still part of the second paragraph, but the above lists were not embedded correctly.</p>
 <p>This is a third paragraph.</p>
-```
+~~~
 
 #### Example 3: Correct Figure Embedding
 
@@ -7014,7 +7039,7 @@ If a figure is inserted on its own line, with single newlines above and below it
 ##### Markua Syntax
 
 {#input_figures_7}
-```
+~~~
 This is paragraph 1.
 
 Markua has a fancy logo:
@@ -7022,14 +7047,14 @@ Markua has a fancy logo:
 Thanks Justin, it was fun making the logo with you!
 
 This is paragraph 3.
-```
+~~~
 
 ##### HTML Output
 
 W> TODO - do we add the br tags or not for inline figures?
 
 {#output_figures_7}
-```
+~~~
 <p>This is paragraph 1.</p>
 <div class="para">Markua has a fancy logo:
   <div class="figure">
@@ -7039,7 +7064,7 @@ W> TODO - do we add the br tags or not for inline figures?
   Thanks Justin, it was fun making the logo with you!
 </div>
 <p>This is paragraph 3.</p>
-```
+~~~
 
 ### Syntax for index entries
 
@@ -7062,11 +7087,11 @@ a b <span id="__i__2_C">c</span> d e
 ~~~
 
 
-```
+~~~
 The id will be `__i__<number>__<index>`. Where `index` is everything inside of the curly braces after `i:` and before the `|`, with `*` replaced with nothing and `!` replaced with `__`.
 index = (The thing inside the curly braces after `i:`).split(/\|/).first.gsub(/\!/, '__').gsub(/\*/, '').lower
 `number` is the number of times `index` has been indexed in the document already, counting from 1.
-```
+~~~
 
 {backmatter}
 
@@ -7164,7 +7189,7 @@ In the Setext-style of headings, top level headings can be made by adding a row 
 
 These are some Setext headers in Markdown:
 
-```
+~~~
 This is an h1
 =============
 
@@ -7184,7 +7209,7 @@ This is also an h2 (really)
 -
 
 This is a paragraph.
-```
+~~~
 
 There are two main issues with this style of heading in Markdown:
 
@@ -7198,7 +7223,7 @@ In Markdown, the other heading syntax is "atx" headers. The [atx format](http://
 
 These are some atx headers in Markdown:
 
-```
+~~~
 # This is an h1
 
 This is a paragraph.
@@ -7222,7 +7247,7 @@ This is a paragraph.
 ### This is also an h3 ##################
 
 This is a paragraph.
-```
+~~~
 
 Note that all the trailing `#` characters are ignored and are not part of the heading text.
 
