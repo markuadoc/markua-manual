@@ -145,14 +145,14 @@ The Markua specification specifies the Markua syntax and the conceptual mapping 
 There are four reasons why there is no mapping to HTML specified:
 
 1. Not having a formal specification encourages flexibility and competition among Markua Processors when outputting HTML.
-2. HTML is just one optional output format of Markua, and possibly not even the most important one. Whereas Markdown is a format for producing HTML, Markua is a format for producing books and documents. HTML does not deserve undue attention in the Markua specification.
+2. HTML is just one optional output format of Markua, and possibly not even the most important one. Whereas Markdown is a format for producing HTML, Markua is a format for producing books. HTML does not deserve undue attention in the Markua specification.
 3. In certain cases, the HTML mapping cannot be completely specified. For example, certain Markua Processors may recognize a given code sample as being for a specific programming language and add attributes accordingly, whereas other Markua Processors may not.
 4. HTML is not static. If Markua specified a mapping to some specific version of HTML, e.g. HTML5, then as HTML evolved Markua would either have to evolve or become outdated.
 
 Even though there is no HTML mapping specified, anyone who knows HTML well will realize that essentially every Markua concept maps cleanly to HTML concepts. Obviously, HTML is an important output format of Markua, and there is a clear mapping to HTML syntax from Markua syntax. To assist with the development of Markua Processors which produce HTML, two things are being provided:
 
 1. An open source, ES6-based reference implementation of a Markua Processor which outputs HTML5 is being provided [here](https://github.com/markuadoc/markua-js).
-2. Suggestions for how to generate HTML5 from Markua are specified [in an appendix at the end of this specification](#html5_suggestions).
+2. Suggestions for how to generate HTML5 from Markua are specified [in an appendix at the end of this specification](#html5_mapping).
 
 The reference implementation and the HTML5 generation suggestions should not be interpreted as providing compliance requirements for other Markua Processors, just strong recommendations.
 
@@ -211,11 +211,9 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
-Markua, however, is a way of writing books. Books have things like chapters, sections and subsections. Sometimes books have parts. Documents have sections and subsections.
+Markua, however, is a way of writing books. Books have things like chapters, sections and subsections. Sometimes books have parts. What Markua does is to use the heading levels that Markdown uses to create HTML to create the structure of the book.
 
-**What Markua does is to use the heading levels that Markdown uses to create HTML to create the structure of the book or document, as well as generating the `h1` through `h6` heading levels in the HTML version of the book.**
-
-Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings[^setext] are not supported. To learn more about Markdown headings, see the [Markdown Headings](#markdown_headings) appendix.
+Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings are not supported. To learn more about Markdown headings, see the [Markdown Headings](#markdown_headings) appendix.
 
 Here's the only way that headings are made in Markua:
 
@@ -3230,7 +3228,7 @@ Whereas Markua defines exactly one way of making every type of heading, Markdown
 {#setext_headings}
 ### Setext Headings in Markdown
 
-In the Setext-style of headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
+In the Setext-style of Markdown headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
 
 These are some Setext headers in Markdown:
 
@@ -3238,22 +3236,14 @@ These are some Setext headers in Markdown:
 This is an h1
 =============
 
-This is a paragraph.
-
 This is also an h1 (really)
 =
-
-This is a paragraph.
 
 This is an h2
 -------------
 
-This is a paragraph.
-
 This is also an h2 (really)
 -
-
-This is a paragraph.
 ~~~
 
 There are two main issues with this style of heading in Markdown:
@@ -3271,27 +3261,15 @@ These are some atx headers in Markdown:
 ~~~
 # This is an h1
 
-This is a paragraph.
-
 # This is also an h1 ####################
-
-This is a paragraph.
 
 ## This is an h2
 
-This is a paragraph.
-
 ## This is also an h2 ###################
-
-This is a paragraph.
 
 ### This is an h3
 
-This is a paragraph.
-
 ### This is also an h3 ##################
-
-This is a paragraph.
 ~~~
 
 Note that all the trailing `#` characters are ignored and are not part of the heading text.
@@ -3300,15 +3278,49 @@ From reading this, you'll recogrize that Markua headings are a subset of atx hea
 
 W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numbered if numbering is enabled
 
-{#html5_suggestions}
-## Suggestions for Mapping Markua to HTML5
+{#html5_mapping}
+## HTML5 Mapping Suggestions
 
-Implementors of Markua Processors can do whatever they want when outputting HTML5 from Markua.
+Strictly speaking, Markua Processors can do whatever they want when outputting HTML5 from Markua. However, some choices are clearly more useful than others. This appendix provides strong recommendations for how to map Markua to HTML5. However, this appendix is not a complete specification or a set of compatibility tests.
 
-However, some choices are clearly more useful than others. This chapter provides strong recommendations for how to map Markua to HTML5. This is not a complete specification or a set of compatibility tests.
+Chances are you will find this appendix very boring unless you're either implementing a Markua Processor or if you love reading W3C specifications. Feel free to skip this appendix, or to just close your computer and go outside.
 
-W> TODO
+In the HTML ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
+### Text Formatting
+
+{#text_formatting_html}
+A> The syntax for text formatting is described [here](#text_formatting).
+
+The preferred way to map Markua to HTML5 is as follows.
+
+There are two ways to produce each of italic, bold and bold + italic text in Markua.
+
+Italic
+: To produce *italic text*, surround it with either `_one underscore_` (producing `<i>` in HTML) or `*one asterisk*` (producing `<em>` in HTML[^w3c_em]).
+
+Bold
+: To produce **bold text**, surround it with either `__two underscores__` (producing `<b>` in HTML) or `**two asterisks**` (producing `<strong>` in HTML).
+
+Bold + Italic
+: To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML), `***three asterisks***` (producing `<strong><em>` in HTML).
+
+
+#### Markua Syntax
+
+{#input_text_formatting}
+~~~
+This is _an i tag_ and this is *an em tag*.
+~~~
+
+#### HTML5 Mapping
+
+{#output_italic_1}
+~~~
+<p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
+~~~
+
+### Headings
 
 Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
