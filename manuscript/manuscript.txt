@@ -3241,7 +3241,7 @@ Chances are you will find this chapter very boring unless you're either implemen
 
 This chapter is structured in an almost identical way to the Markua Syntax chapter. Unlike the Markua syntax chapter which did a bunch of explaining and showed almost no HTML, in this chapter there is essentially no explaining--just a bunch of examples.
 
-These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies. (In this section, there will be a number of Test Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test.) See <https://github.com/markuadoc/markua-test> for more information.
+These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies. (In this section, there will be a number of Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test.) See <https://github.com/markuadoc/markua-test> for more information.
 
 In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
@@ -3981,21 +3981,19 @@ A> The syntax for code is described [here](#code).
 
 ##### Span Example
 
-###### Markua Syntax
-
-{#input_local_code_span_1}
-~~~
-Hello in Ruby is a simple ![](hello.rb) statement.
-~~~
-
-###### Test Dependencies
-
-This defines the hello.rb file used in this example.
+###### Dependencies
 
 {#dependencies_local_code_span_1}
 ~~~
 hello.rb:
 puts "hello world"
+~~~
+
+###### Markua Syntax
+
+{#input_local_code_span_1}
+~~~
+Hello in Ruby is a simple ![](hello.rb) statement.
 ~~~
 
 ###### HTML Output
@@ -4006,6 +4004,20 @@ puts "hello world"
 ~~~
 
 ##### Figure Example
+
+###### Dependencies
+
+This defines the hello.rb file used in this example.
+
+{#dependencies_local_code_figure_1}
+~~~
+hello.rb:
+```
+puts "hello"
+
+puts "world"
+```
+~~~
 
 ###### Markua Syntax
 
@@ -4032,31 +4044,48 @@ Finally, note that the caption is optional in all figures:
 Here's a paragraph after the figure.
 ~~~
 
-
-
-
-
-
-
-
-~~~
-
-###### Test Dependencies
-
-This defines the hello.rb file used in this example.
-
-{#dependencies_local_code_figure_1}
-~~~
-hello.rb:
-```
-puts "hello world"
-```
-~~~
-
 ###### HTML Output
+
+W> TODO - this test does not work since it's indeterminate what format is guessed at, and the HTML would change accordingly???
 
 {#output_local_code_figure_1}
 ~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <pre><code format="guess">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>That is equivalent to:</p>
+<div class="figure">
+  <pre><code format="guess">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>If you don't want to take chances you can do this:</p>
+<div class="figure">
+  <pre><code format="ruby">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+
+
+Finally, note that the caption is optional in all figures:
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+
+
 <p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
 ~~~
 
