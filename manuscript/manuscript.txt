@@ -75,7 +75,7 @@ At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](h
 
 The Markua specification defines a precise mapping from Markua to HTML and to book concepts. While HTML is just one of the output formats of Markua, it is also the basis of EPUB. So, the mapping to HTML is fully specified and the mapping to EPUB is mostly specified. The mapping to PDF, MOBI and other formats is not discussed, and neither are the choices for the CSS to accompany the HTML produced by Markua--all of these are implementation-dependent, in order to encourage creativity and competition in the Markua ecosystem.
 
-The Markua specification specifies both the Markua syntax and the mapping from Markua syntax to book and document concepts and to HTML.
+The Markua specification specifies both the Markua syntax and the mapping from Markua syntax to book and document concepts and to HTML. The first chapter specifies and explains the Markua syntax; the second chapter species the Markua-to-HTML mapping. Note that a Markua Processor does not need to produce HTML from Markua at all. However, if it does, there is a precise specification of what HTML must be produced.
 
 {#novel_syntax}
 ## How to Write a Novel in Markua
@@ -103,7 +103,7 @@ The only type of formatting provided in Markua is semantic formatting. This is f
 
 The `class` attributes are added as class elements in the generated HTML, so an author or book designer can provide a CSS stylesheet to a Markua Processor which supports CSS stylesheets to format the elements accordingly in any HTML and, since EPUB is based on HTML, in EPUB versions. A Markua Processor can also use the class attributes as formatting hints when producing non-HTML-based formats, such as PDF. A Markua Processor can provide a set of predefined `class` attribute values that have a certain behaviour in PDF output and a similar behaviour accomplished via CSS to affect HTML and EPUB outputs.
 
-Note that Markua deliberately does not specify any requirements about how to do formatting based on values of a `class` attribute, about CSS styles or about PDF output at all. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors and among book designers. For simplicity, a Markua Processor does not need to even support formatting based on class attributes at all: while the class attribute must be present in the generated HTML (if present), there is no requirement for a given Markua Processor to even support CSS.
+Note that Markua deliberately does not specify any requirements about how to do formatting based on values of a `class` attribute, about CSS styles or about PDF output at all. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors and among book designers. For simplicity, a Markua Processor does not need to even support formatting based on class attributes at all: while the class attribute must be present in the generated HTML (if present), there is no requirement for a given Markua Processor to support CSS--or even to generate HTML at all.
 
 To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins! Also, Markua really, really, *really* does **not** care about "widows and orphans"--unless they're people!
 
@@ -161,7 +161,7 @@ To stay current on Markua progress, follow [@markuadoc](https://twitter.com/mark
 
 # Syntax
 
-This chapter is an informal, easy to read specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping to HTML, and for a more formal specification, read the remaining chapters.
+This chapter is an informal, easy to read specification of all of Markua's syntax. In this chapter, the HTML that is generated is only briefly mentioned where it's interesting. To learn the exact mapping from Markua to HTML, read the [next chapter](#html_mapping).
 
 ## Character Encoding
 
@@ -169,9 +169,9 @@ Markua documents are written in plain text.
 
 Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
-{#text_formatting}
 ## Text Formatting
 
+{#text_formatting}
 A> The HTML mapping for text formatting is specified [here](#text_formatting_html).
 
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
@@ -207,9 +207,9 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 
 [^w3c_em]: To learn about the hilarious issues around bold and italic text in HTML and why there are two ways of producing bold and italic text in Markua, see the Appendix [The W3C and Semantic Emphasis](#w3c_semantic_emphasis).
 
-{#headings}
 ## Headings
 
+{#headings}
 A> The HTML mapping for headings is specified [here](#headings_html).
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
@@ -287,9 +287,9 @@ The design of Markua headings meets these requirements, in what I feel is an opt
 
 A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
 
-{#whitespace}
 ## Whitespace, Paragraphs and Blank Lines
 
+{#whitespace}
 A> The HTML mapping for whitespace is specified [here](#whitespace_html).
 
 Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
@@ -308,9 +308,9 @@ This is paragraph three.
 
 A paragraph is the least-specialized example of something called a block element. Block elements are separated from each other by at least one blank line. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. Examples of other block elements include headings, figures and lists.
 
-{#newlines}
 ## Newlines, Indentation and Spaces
 
+{#newlines}
 A> The HTML mapping for newlines is specified [here](#newlines_html).
 
 The goal for newline and indentation handling in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
@@ -767,9 +767,9 @@ As an author, all you do is provide the correct file extension or set the format
 
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
-{#images}
 ### Images
 
+{#images}
 A> The HTML mapping for images is specified [here](#images_html).
 
 The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
@@ -894,9 +894,9 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-{#video}
 ### Video
 
+{#video}
 A> The HTML mapping for video is specified [here](#video_html).
 
 Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
@@ -970,9 +970,9 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-{#audio}
 ### Audio
 
+{#audio}
 A> The HTML mapping for audio is specified [here](#audio_html).
 
 Just like with video, the audio support in ebooks and on the web is more varied than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. It's entirely likely that many ebook readers won't support any of them.
@@ -3209,6 +3209,7 @@ A Markua Processor can optionally decide to output the original text (removing a
 
 W> TODO_LEANPUB - do this in Leanpub
 
+{#html_mapping}
 # HTML Mapping
 
 Markua specifies an exact mapping from Markua input to HTML output. A Markua Processor must follow this mapping when generating HTML from Markua. Also, a Markua Processor must follow this mapping when generating the HTML used in an EPUB book.
