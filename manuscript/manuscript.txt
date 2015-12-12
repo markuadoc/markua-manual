@@ -122,16 +122,6 @@ So, I started over.
 
 I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly, resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
 
-## What Is Specified
-
-The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book and document concepts. No mapping to a specific output format is specified--not even to HTML.
-
-There are three reasons why there is no mapping to HTML specified:
-
-1. To encourage flexibility and competition among Markua Processors when outputting HTML.
-2. HTML is just one optional output format of Markua, and possibly not even the most important one. Whereas Markdown is a format for producing HTML, Markua is a format for producing books and documents. HTML does not deserve special attention in the Markua specification.
-3. In certain cases, the HTML mapping cannot be completely specified. For example, certain Markua Processors may recognize a given code sample as being for a specific programming language, and add attributes accordingly.
-
 ## Why the Name "Markua"?
 
 When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
@@ -148,6 +138,24 @@ Supporting inline HTML would make Markua a worse format, both to write in and to
 
 One design consequence of the support for inline HTML in Markdown is that Markdown's syntax can stay artificially small--since Markdown authors can always fall back to using HTML directly, Markdown does not need to be able to produce all of HTML. Since Markua does not support inline HTML, any required output must be produceable by a Markua input. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books often require tables, Markua needs to add a table syntax.
 
+## What Is Specified
+
+The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book and document concepts. No mapping to a specific output format is specified--not even to HTML.
+
+There are four reasons why there is no mapping to HTML specified:
+
+1. Not having a formal specification encourages flexibility and competition among Markua Processors when outputting HTML.
+2. HTML is just one optional output format of Markua, and possibly not even the most important one. Whereas Markdown is a format for producing HTML, Markua is a format for producing books and documents. HTML does not deserve undue attention in the Markua specification.
+3. In certain cases, the HTML mapping cannot be completely specified. For example, certain Markua Processors may recognize a given code sample as being for a specific programming language and add attributes accordingly, whereas other Markua Processors may not.
+4. HTML is not static. If Markua specified a mapping to some specific version of HTML, e.g. HTML5, then as HTML evolved Markua would either have to evolve or become outdated.
+
+Even though there is no HTML mapping specified, anyone who knows HTML well will realize that essentially every Markua concept maps cleanly to HTML concepts. Obviously, HTML is an important output format of Markua, and there is a clear mapping to HTML syntax from Markua syntax. To assist with the development of Markua Processors which produce HTML, two things are being provided:
+
+1. An open source, ES6-based reference implementation of a Markua Processor which outputs HTML5 is being provided [here](https://github.com/markuadoc/markua-js).
+2. Suggestions for how to generate HTML5 from Markua are specified [in an appendix at the end of this specification](#html5_suggestions).
+
+The reference implementation and the HTML5 generation suggestions should not be interpreted as providing compliance requirements for other Markua Processors, just strong recommendations.
+
 ## Status of the Markua Specification and Implementations
 
 This is an in-progress, alpha quality specification. It is being constantly updated at <https://leanpub.com/markua>. To read the specification in PDF, EPUB, MOBI or HTML format, go there.
@@ -158,18 +166,14 @@ To stay current on Markua progress, follow [@markuadoc](https://twitter.com/mark
 
 At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can generate PDF, EPUB, MOBI and HTML ebooks with one click. We are also working on an open source, ES6-based [Markua-to-HTML converter](https://github.com/markuadoc/markua-js). We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc.
 
-# Syntax
-
-This chapter is an informal, easy to read specification of all of Markua's syntax.
-
-## Character Encoding
+# Character Encoding
 
 Markua documents are written in plain text.
 
 Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
 {#text_formatting}
-## Text Formatting
+# Text Formatting
 
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
 
@@ -216,31 +220,31 @@ Markua is also a lot more strict about heading syntax than Markdown. In Markdown
 Here's the only way that headings are made in Markua:
 
 ~~~
-# Part (h1) #
+# Part #
 
 This is a paragraph.
 
-# Chapter (also h1)
+# Chapter
 
 This is a paragraph.
 
-## Section (h2)
+## Section
 
 This is a paragraph.
 
-### Sub-Section (h3)
+### Sub-Section
 
 This is a paragraph.
 
-#### Sub-Sub-Section (h4)
+#### Sub-Sub-Section
 
 This is a paragraph.
 
-##### Sub-Sub-Sub-Section (h5)
+##### Sub-Sub-Sub-Section
 
 This is a paragraph.
 
-###### Sub-Sub-Sub-Sub-Section (h6)
+###### Sub-Sub-Sub-Sub-Section
 
 This is a paragraph.
 ~~~
@@ -253,8 +257,6 @@ Specificaly, to create a Markua heading, you put the following on a line by itse
 * followed (only for parts) by exactly one space and exactly one pound sign
 
 Making these headings divides your book or document into these divisions. If you add part headings, your book will have parts; if you don't, it won't. If you add chapter headings, your book will have chapters; if you don't, it won't.
-
-Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
 Markua is more strict about spaces and pound signs than Markdown:
 
@@ -3296,10 +3298,24 @@ Note that all the trailing `#` characters are ignored and are not part of the he
 
 From reading this, you'll recogrize that Markua headings are a subset of atx headers.
 
-W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numbered if numbering on
+W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numbered if numbering is enabled
+
+{#html5_suggestions}
+## Suggestions for Mapping Markua to HTML5
+
+Implementors of Markua Processors can do whatever they want when outputting HTML5 from Markua.
+
+However, some choices are clearly more useful than others. This chapter provides strong recommendations for how to map Markua to HTML5. This is not a complete specification or a set of compatibility tests.
+
+W> TODO
+
+
+Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
+
+
 
 {#acknowledgments}
-# Acknowledgments
+## Acknowledgments
 
 I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help.
 
