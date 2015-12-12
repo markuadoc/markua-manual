@@ -1105,25 +1105,49 @@ Note that in this example there can be no text inside the square brackets, since
 
 ##### Figure
 
+Code can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+
+This first figure will be a type of code and a format of `guess`. A Markua Processor which associates `.rb` file extensions with Ruby code will treat this as Ruby code; a Markua Processor which has no association for `.rb` files will treat it as plain text:
+
 ~~~
-This will be a type of code and a format of `guess` since the file extension is not specified:
+Here's a paragraph before the figure.
 
 ![Hello World in Ruby](hello.rb)
 
+Here's a paragraph after the figure.
+~~~
+
 That is equivalent to:
+
+~~~
+Here's a paragraph before the figure.
 
 {format: guess}
 ![Hello World in Ruby](hello.rb)
 
+Here's a paragraph after the figure.
+~~~
+
 If you don't want to take chances you can do this:
+
+~~~
+Here's a paragraph before the figure.
 
 {format: ruby}
 ![Hello World in Ruby](hello.rb)
 
-Here's a paragraph at the end.
+Here's a paragraph after the figure.
 ~~~
 
-Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+Finally, note that the caption is optional in all figures:
+
+~~~
+Here's a paragraph before the figure.
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
 
 #### Web Code Resources
 
@@ -3217,7 +3241,7 @@ Chances are you will find this chapter very boring unless you're either implemen
 
 This chapter is structured in an almost identical way to the Markua Syntax chapter. Unlike the Markua syntax chapter which did a bunch of explaining and showed almost no HTML, in this chapter there is essentially no explaining--just a bunch of examples.
 
-These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input. See <https://github.com/markuadoc/markua-test> for more information.
+These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies. (In this section, there will be a number of Test Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test.) See <https://github.com/markuadoc/markua-test> for more information.
 
 In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
@@ -4010,8 +4034,6 @@ puts "hello world"
 ```
 <p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
 ```
-
-
 
 #### Web Code Resources
 
