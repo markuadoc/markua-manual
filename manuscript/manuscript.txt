@@ -3960,16 +3960,28 @@ A> The syntax for code is described [here](#code).
 
 ###### Markua Syntax
 
-{#input_local_code_span_1}
+{#input_local_audio_span_1}
 ```
 Hello in Ruby is a simple ![](hello.rb) statement.
 ```
 
+###### Test Dependencies
+
+This defines the hello.rb file used in this example.
+
+{#dependencies_local_audio_span_1}
+~~~
+hello.rb:
+```
+puts "hello world"
+```
+~~~
+
 ###### HTML Output
 
-{#output_span_1}
+{#output_local_audio_span_1}
 ```
-<p>Hello in Ruby is a simple ![](hello.rb) statement.</p>
+<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
 ```
 
 ##### Figure Example
