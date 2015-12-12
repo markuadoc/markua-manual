@@ -172,7 +172,7 @@ Specifically, Markua documents must be saved in the **UTF-8** character encoding
 ## Text Formatting
 
 {#text_formatting}
-A> The HTML mapping for text formatting is specified [here](#text_formatting_html).
+B> The HTML mapping for text formatting is specified [here](#text_formatting_html).
 
 Markua's goal is to provide all the semantic formatting required by authors. Formatting that could be done by a book designer without needing to discuss it with the author is considered orthogonal to Markua, and is largely omitted from Markua.
 
@@ -210,7 +210,7 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 ## Headings
 
 {#headings}
-A> The HTML mapping for headings is specified [here](#headings_html).
+B> The HTML mapping for headings is specified [here](#headings_html).
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
 
@@ -285,12 +285,12 @@ I thought long and hard about Markua headings, and changed my mind (as Scott and
 
 The design of Markua headings meets these requirements, in what I feel is an optimal way.
 
-A> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
+B> Leanpub Flavoured Markdown violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
 
 ## Whitespace, Paragraphs and Blank Lines
 
 {#whitespace}
-A> The HTML mapping for whitespace is specified [here](#whitespace_html).
+B> The HTML mapping for whitespace is specified [here](#whitespace_html).
 
 Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
 
@@ -311,7 +311,7 @@ A paragraph is the least-specialized example of something called a block element
 ## Newlines, Indentation and Spaces
 
 {#newlines}
-A> The HTML mapping for newlines is specified [here](#newlines_html).
+B> The HTML mapping for newlines is specified [here](#newlines_html).
 
 The goal for newline and indentation handling in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
 
@@ -499,12 +499,12 @@ The last figure in the example above showed an **attribute list**, which is a li
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown.
 
-A> Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images.
-A>
-A> There are two main reasons for not supporting reference style resource syntax in Markua:
-A>
-A> 1. Resources in Markua are complex enough without having two syntaxes.
-A> 2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
+B> Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images.
+B>
+B> There are two main reasons for not supporting reference style resource syntax in Markua:
+B>
+B> 1. Resources in Markua are complex enough without having two syntaxes.
+B> 2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 
 ### Resource Insertion Methods
 
@@ -770,7 +770,7 @@ We will now consider each of the types of resources in more detail, as well as t
 ### Images
 
 {#images}
-A> The HTML mapping for images is specified [here](#images_html).
+B> The HTML mapping for images is specified [here](#images_html).
 
 The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
 
@@ -792,7 +792,7 @@ W> TODO_LEANPUB - Support table captions (there should be one in the table above
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
-A> Images in Markua are inserted in essentially the same way they are in Markdown for inline images. Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
+B> Images in Markua are inserted in essentially the same way they are in Markdown for inline images. Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
 
 We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
 
@@ -897,7 +897,7 @@ Here's a paragraph after the figure.
 ### Video
 
 {#video}
-A> The HTML mapping for video is specified [here](#video_html).
+B> The HTML mapping for video is specified [here](#video_html).
 
 Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
 
@@ -928,7 +928,7 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the video has two fallbacks: the `poster` image and then the `alt` text. (The use of video fallbacks, such as HTML5's `mediagroup` syntax or multiple `source` elements, is not supported in Markua.)
 
-A> When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
+B> When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
 
 #### Local Video
 
@@ -957,7 +957,7 @@ Here's a paragraph after the figure.
 Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
 ~~~
 
-A> Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
+B> Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
 
 ##### Figure
 
@@ -973,7 +973,7 @@ Here's a paragraph after the figure.
 ### Audio
 
 {#audio}
-A> The HTML mapping for audio is specified [here](#audio_html).
+B> The HTML mapping for audio is specified [here](#audio_html).
 
 Just like with video, the audio support in ebooks and on the web is more varied than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. It's entirely likely that many ebook readers won't support any of them.
 
@@ -992,7 +992,7 @@ The following types of audio resources are supported in Markua: MP3, AAC, WAV an
 | `.oga`    | `ogg`      | Ogg Vorbis    |
 |-----------|------------|---------------|
 
-A> Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
+B> Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
 
 The syntax to insert an audio file is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both audio formats; inline resource locations for audio are obviously not supported.
 
@@ -1011,7 +1011,7 @@ We will discuss the supported and the default attributes for audio files, and th
 
 Since the `alt` is a fallback for if the `poster` image cannot be displayed, the audio has two fallbacks: the `poster` image and then the `alt` text.
 
-A> When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
+B> When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
 
 #### Local Audio
 
@@ -1045,14 +1045,14 @@ The full version of the talk is here:
 ![Full Talk](http://markua.com/talk.m4a)
 ~~~
 
-{#code}
 ### Code
 
-A> The HTML mapping for code is specified [here](#code_html).
+{#code}
+B> The HTML mapping for code is specified [here](#code_html).
 
 Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-A> Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua. In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported.
+B> Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua. In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported.
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a code resource it is ignored.
 
@@ -1189,7 +1189,7 @@ Hello in Ruby is a `puts "hello"`text statement.
 
 The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
 
-A> The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
+B> The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
 
 ##### Figure
 
@@ -1239,9 +1239,9 @@ puts "hello"
 Some paragraph.
 ~~~
 
-A> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+B> The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
 
-A> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
+B> The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
 #### Typewriter Poetry with Code Resources
 
@@ -1307,7 +1307,7 @@ Code resources should have newlines added by the author to ensure that automatic
 
 Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-A> Just as with code, in Leanpub Flavoured Markdown we had a special syntax for inserting math. It looked like `{$$}...{/$$}`, which looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
+B> Just as with code, in Leanpub Flavoured Markdown we had a special syntax for inserting math. It looked like `{$$}...{/$$}`, which looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
 
 Math resources can be either LaTeX math or MathML.
 
@@ -1484,7 +1484,7 @@ You can build a list out of items starting with a hyphen and one tab:
 
 (My editor converts tabs to spaces, so that's actually 4 spaces, which also works.)
 
-A> Markdown also lets you use a plus sign (`+`) before each item, but Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`. Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
+B> Markdown also lets you use a plus sign (`+`) before each item, but Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`. Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
 
 These are the specific rules for unordered lists:
 
@@ -1503,7 +1503,7 @@ In terms of style guidance, the preferred bullet type is the asterisk, and the p
 
 Markua defines many more types of ordered list numbering than Markdown.
 
-A> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since ordered lists support numbering by letters, the term "ordered" is superior to "numbered" in some senses.)
+B> Despite the fact that all lists actually have an order (otherwise they would not be lists!), Markua is sticking with the HTML terminology for "ordered" vs. "unordered" lists, instead of "numbered" vs. "bulleted" lists. Even though these feel more like programming terms, HTML terminology is so widely understood that using any other terminology is distracting. (Also, since ordered lists support numbering by letters, the term "ordered" is superior to "numbered" in some senses.)
 
 In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list features.
 
@@ -1529,7 +1529,7 @@ Since Markua supports letters and Roman numerals as well as decimal numbers to s
 
 Note that there are one or more spaces after the period. Unlike with an unordered list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
 
-A> I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
+B> I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
 
 This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections. For the mapping to HTML lists, see the next chapter.
 
@@ -1611,11 +1611,11 @@ So, in Markua, the automatic creation of an ordered list only happens if you hav
 
 This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
-A> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markua is a way of writing books, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
+B> This is a microcosm of the difference between Markua and Markdown: since Markdown is a way of producing HTML, it is biased toward producing HTML constructs wherever it is most straightforward to do so. Markua is a way of writing books, and it only produces HTML constructs like lists when it is almost certainly appropriate to do so. So, whereas Markdown tries to make HTML wherever possible, Markua respects what the author wrote, and only substitutes HTML constructs where doing so is lossless in the text (period and parentheses are not equal) and unambiguous (a single element is probably not a 1 element list).
 
 #### Ordered List Numbering Rules
 
-A> If you are an author who is just trying to write straightforward Markua, you can probably skip this section.
+B> If you are an author who is just trying to write straightforward Markua, you can probably skip this section.
 
 There are a number of rules about what does and does not trigger the creation of an ordered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
 
@@ -1654,7 +1654,7 @@ For uppercase and lowercase alphabetical numbering, Markua actually supports cre
 1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase or `Z.` for uppercase. (This way, implementors of Markua processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
 2. Every item in the list begins with the same single letter, followed by a period.
 
-A> These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single element list beginning with "AA" instead!
+B> These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single element list beginning with "AA" instead!
 
 The term "single letter" means that consecutive `c.`s start an ordered list which starts with `c, d, e, ...`, but that consecutive `aa.`s or `aba.`s do not start an ordered list. Again, this greatly simplifies life (you're welcome!) for implementors of Markua processors, who otherwise would need to figure out what number in the sequence `aba` is, in order to generate the correct HTML.
 
@@ -2017,7 +2017,7 @@ At its most basic, a complex table looks like this:
 
 The header is separated from the body cells by a row of `=` signs and `|` characters. Every row of cells is separated by a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line.
 
-A> My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
+B> My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
 
 You can also specify left, center and right alignment of columns with colons in the header separator row, just as with simple tables. The following columns are left-, center-, and right-aligned respectively:
 
@@ -2333,9 +2333,7 @@ It can have multiple paragraphs.
 {/blurb}
 ~~~
 
-A> Blurbs are the better-named equivalent of the `G>` "generic boxes" of Leanpub Flavoured Markdown.
-
-W> TODO - Add B> to Leanpub
+B> Blurbs are the better-named equivalent of the `G>` "generic boxes" of Leanpub Flavoured Markdown.
 
 #### Supported Attributes for Blurbs
 
@@ -2649,7 +2647,7 @@ These restrictions ensure that your `id`s can then be linked to by a crosslink f
 
 The id needs to be defined on either a block or span element.
 
-A> If an id is defined with an invalid name, the Markua Processor must ignore it and should provide a warning in the list of warnings it produces when generating the document.
+B> If an id is defined with an invalid name, the Markua Processor must ignore it and should provide a warning in the list of warnings it produces when generating the document.
 
 ##### Defining an id on a Block Element
 
@@ -2763,7 +2761,7 @@ See [chapter #n](#span-elements), which is the best chapter in this book.
 This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this document.
 ~~~
 
-A> The only way to reference the title and numbers is in crosslinks. There's no syntax to do so without creating a crosslink--a crosslink is more helpful, since it is clickable, and adding another syntax simply to be less helpful to the reader is a bad idea. Markua has enough syntax as it is.
+B> The only way to reference the title and numbers is in crosslinks. There's no syntax to do so without creating a crosslink--a crosslink is more helpful, since it is clickable, and adding another syntax simply to be less helpful to the reader is a bad idea. Markua has enough syntax as it is.
 
 Notes:
 
@@ -2839,7 +2837,7 @@ Only text attribute values can be enclosed in quotation marks.
 
 If a text attribute value contains a quote, it must be escaped: e.g. `{caption: "\"Fresh\" Fish"}`
 
-A> Note that almost all attributes in Markua are text attributes which have an enumeration of legal values. However, because of Markua's extension attributes syntax, it makes sense to provide basic types so that people can be creative without having to deal with parsing strings everywhere.
+B> Note that almost all attributes in Markua are text attributes which have an enumeration of legal values. However, because of Markua's extension attributes syntax, it makes sense to provide basic types so that people can be creative without having to deal with parsing strings everywhere.
 
 #### `id` Attributes
 
@@ -3012,7 +3010,7 @@ goodbye
 
 Note that I didn't actually say hello or goodbye in Hebrew, Chinese or Arabic because the code font used for this specification does not support them all.
 
-A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: languages only have one direction, so there's no need to have separate `dir` and `lang` attributes.
+B> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: languages only have one direction, so there's no need to have separate `dir` and `lang` attributes.
 
 #### Book `section` Directives
 
@@ -3224,10 +3222,10 @@ These examples are not just examples--they are also the basis of a compatibility
 
 In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
-{#text_formatting_html}
 ## Text Formatting
 
-A> The syntax for text formatting is described [here](#text_formatting).
+{#text_formatting_html}
+B> The syntax for text formatting is described [here](#text_formatting).
 
 ### Italic
 
@@ -3365,10 +3363,10 @@ Water is H~2~O.
 <p>Water is H<sub>2</sub>O.</p>
 ```
 
-{#headings_html}
 ## Headings
 
-A> The syntax for headings is described [here](#headings).
+{#headings_html}
+B> The syntax for headings is described [here](#headings).
 
 ##### Example
 
@@ -3425,10 +3423,10 @@ This is a paragraph.
 <p>This is a paragraph.</p>
 ```
 
-{#whitespace_html}
 ## Whitespace, Paragraphs and Blank Lines
 
-A> The syntax for whitespace is described [here](#whitespace).
+{#whitespace_html}
+B> The syntax for whitespace is described [here](#whitespace).
 
 ##### Example
 
@@ -3452,10 +3450,10 @@ This is paragraph three.
 <p>This is paragraph three.</p>
 ```
 
-{#newlines_html}
 ## Newlines, Indentation and Spaces
 
-A> The syntax for newlines is described [here](#newlines).
+{#newlines_html}
+B> The syntax for newlines is described [here](#newlines).
 
 ### Single Newlines
 
@@ -3589,10 +3587,10 @@ foo   bar
 
 ## Resources
 
-{#images_html}
 ### Images
 
-A> The syntax for images is described [here](#images).
+{#images_html}
+B> The syntax for images is described [here](#images).
 
 #### Local Images
 
@@ -3772,10 +3770,10 @@ Here's a paragraph after the figure.
 <p>Here's a paragraph after the figure.</p>
 ~~~
 
-{#video_html}
 ### Video
 
-A> The syntax for video is described [here](#video).
+{#video_html}
+B> The syntax for video is described [here](#video).
 
 #### Local Video
 
@@ -3866,10 +3864,10 @@ Here's a paragraph after the figure.
 <p>Here's a paragraph after the figure.</p>
 ```
 
-{#audio_html}
 ### Audio
 
-A> The syntax for audio is described [here](#audio).
+{#audio_html}
+B> The syntax for audio is described [here](#audio).
 
 #### Local Audio
 
@@ -3951,10 +3949,10 @@ The full version of the talk is here:
 </div>
 ```
 
-{#code_html}
 ### Code
 
-A> The syntax for code is described [here](#code).
+{#code_html}
+B> The syntax for code is described [here](#code).
 
 #### Local Code Resources
 
