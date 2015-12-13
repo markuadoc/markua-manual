@@ -146,15 +146,7 @@ Markua documents are written in plain text. Specifically, Markua documents must 
 
 The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts.
 
-Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output the following formats:
-
-* PDF
-* EPUB
-* MOBI
-* HTML
-* InDesign
-
-None of these output formats is required to be supported by a given Markua Processor. A Markua Processor just has to output *some* output format.
+Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output PDF, EPUB, MOBI, HTML and InDesign. None of these output formats is required to be supported by a given Markua Processor. A Markua Processor just has to output *some* output format.
 
 Not only are there no required output formats for a Markua Processor, the full mapping from a Markua input to these output formats is also not formally specifed--not even for HTML. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors.
 
@@ -3380,7 +3372,7 @@ These examples are not just examples--they are also the basis of a compatibility
 
 In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
-## Text Formatting
+### Text Formatting
 
 A> The syntax for text formatting is described [here](#text_formatting).
 
@@ -3412,7 +3404,7 @@ This is _an i tag_ and this is *an em tag*.
 <p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
 ~~~
 
-### Italic
+#### Italic
 
 ##### Example
 
@@ -3430,7 +3422,7 @@ This is _an i tag_ and this is *an em tag*.
 <p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
 ~~~
 
-### Bold
+#### Bold
 
 ##### Example
 
@@ -3448,7 +3440,7 @@ This is __a b tag__ and this is **a strong tag**.
 <p>This is <b>a b tag</b> and this is <strong>a strong tag</strong>.</p>
 ~~~
 
-### Bold + Italic
+#### Bold + Italic
 
 ##### Example
 
