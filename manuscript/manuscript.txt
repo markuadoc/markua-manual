@@ -151,16 +151,26 @@ Markua Processors can output any number of output formats from a Markua document
 * PDF
 * EPUB
 * MOBI
-* HTML5
+* HTML
 * InDesign
 
 None of these output formats is required to be supported by a given Markua Processor. A Markua Processor just has to output *some* output format.
 
-Not only are there no required output formats for a Markua Processor, the mapping from a Markua input to these output formats is also not formally specifed--not even for HTML.
+Not only are there no required output formats for a Markua Processor, the full mapping from a Markua input to these output formats is also not formally specifed--not even for HTML. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors.
 
-This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors.
+## HTML Output Requirements
 
-Even though there is no canonical HTML mapping, there are suggestions for how Markua should be mapped to HTML5. These are not requirements, but they're useful recommendations. The [HTML5 Mapping Suggestions](#html5_mapping) appendix contains these recommendations. (It won't make much sense until you've read the spec though!)
+Even though there is no full, canonical HTML mapping or formal specification, Markua *does* specify how certain parts of Markua syntax **must** be mapped to HTML.
+
+These are requirements for any Markua Processor which outputs any version of HTML, including HTML5. These requirements also affect the HTML which is nested in EPUB, as EPUB is essentially just zipped HTML plus some metadata.
+
+A Markua Processor which violates these HTML output requirements is in error.
+
+The reason for there to be firm requirements about parts of the HTML output is that creativity requires some constraints, and there needs to be some basic level of constraints in order for there to be basic
+
+basic agreement on the most fundamental building blocks of a Markua
+
+suggestions for how parts of Markua should be mapped to HTML5. These are not requirements, but they're useful recommendations. The [HTML5 Mapping Suggestions](#html5_mapping) appendix contains these recommendations. (It won't make much sense until you've read the spec though!)
 
 ## Status of the Markua Specification and Implementations
 
@@ -170,7 +180,7 @@ To read the specification manuscript in Markua, see <https://github.com/markuado
 
 To stay current on Markua progress, follow [@markuadoc](https://twitter.com/markuadoc) or [@peterarmstrong](https://twitter.com/peterarmstrong) on Twitter.
 
-At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can generate PDF, EPUB, MOBI and HTML ebooks with one click. We are also working on an open source, ES6-based [Markua-to-HTML converter](https://github.com/markuadoc/markua-js). We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc.
+At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can take a Markdown or Markua manuscript and, with one click, generate an ebook which is available in PDF, EPUB, MOBI and HTML. (To generate an InDesign export requires a second click.) We are also working on an open source, ES6-based [Markua-to-HTML converter](https://github.com/markuadoc/markua-js). We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc, but we're not very good at programming in Haskell (which pandoc is written in).
 
 {#text_formatting}
 # Text Formatting
@@ -209,9 +219,7 @@ Note that if the asterisks and underscores needed to produce bold and italic are
 {#headings}
 # Headings
 
-Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`.
-
-Markua, however, is a way of writing books. Books have things like chapters, sections and subsections. Sometimes books have parts. What Markua does is to use the heading levels that Markdown uses to create HTML to create the structure of the book.
+Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`. Markua, however, is a way of writing books. Books have things like chapters, sections and subsections. Sometimes books have parts. What Markua does is to use the heading levels that Markdown uses to create HTML to create the structure of the book.
 
 Markua is also a lot more strict about heading syntax than Markdown. In Markdown, there are two syntaxes for making headings, atx and Setext, and [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings are not supported. To learn more about Markdown headings, see the [Markdown Headings](#markdown_headings) appendix.
 
@@ -262,13 +270,13 @@ Markua is more strict about spaces and pound signs than Markdown:
 2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
 3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem in traditional writing, but which would violate the principle of least surprise.)
 4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
-5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading, and output a `<br/>` tag in the heading HTML. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will probably look like an obvious error in the book.
+5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will probably look like an obvious error in the book.
 
 I thought long and hard about Markua headings, and changed my mind (as Scott and Braden will attest) a number of times. I settled on this design when I realized that the design requirements were as follows:
 
 1. From looking at a heading, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
 2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged.
-3. The number of leading pound signs must match the level of heading in HTML.
+3. The number of leading pound signs must match the level of heading.
 4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
 5. The syntax to create parts must be as economical as possible.
 6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
@@ -288,7 +296,7 @@ Because of this, the way that single newlines, three or more newlines and leadin
 
 ## Paragraphs and Blank Lines
 
-Paragraphs and blank lines are handled in almost the same way in Markua and Markdown. Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line.
+Paragraphs and blank lines are handled in almost the same way in Markua and Markdown. Normal Markua text is in paragraphs. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line.
 
 Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a code resource, so that the exact Markua manuscript text can be shown unprocessed. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
 
@@ -3178,6 +3186,7 @@ So, to show a literal backtick in a span, you start and end it with *two* backti
 
 This is the same reason that there are two ways to create inline figures, with three backticks and three tildes. Starting an inline figure with three tildes lets three backticks be used without closing the figure; similarly, starting an inline figure with three backticks lets three tildes be used without closing the figure. This is necessary for Markua to be usable to write about Markua!
 
+{#criticmarkup}
 # CriticMarkup
 
 [CriticMarkup](http://criticmarkup.com/) is supported in Markua. CriticMarkup describes itself as follows:
@@ -3211,7 +3220,15 @@ Markua Processors can support CriticMarkup in one of two ways:
 
 Both ways are appropriate, and a Markua Processor could support both. For example, a Markua Processor could output CriticMarkup when previewing, but output only the original text when publishing.
 
-W> TODO_LEANPUB - do this in Leanpub
+For example, the following example shows a paragraph annotated with all five types of CriticMarkup:
+
+~~~
+If you enjoy using track changes{>>Who enjoys this?<<} in Word, then {~~you'll enjoy~>you may like~~} using CriticMarkup {++annotations++}. If you don't enjoy working with editors{-- or getting feedback about your writing in the text itself--}, then CriticMarkup isn't for you! If this is the case, don't worry about it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>This sounds ambivalent.<<}. If you don't want to use it, you don't need to learn about it.
+~~~
+
+The HTML Mapping appendix [shows](#criticmarkup_html) the result of a Markua Processor either outputting or ignoring all the CriticMarkup.
+
+W> TODO_LEANPUB - support this in Leanpub
 
 {backmatter}
 
@@ -3276,8 +3293,10 @@ From reading this, you'll recogrize that Markua headings are a subset of atx hea
 
 W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numbered if numbering is enabled
 
-{#html5_mapping}
-## HTML5 Mapping Suggestions
+{#html_mapping}
+## HTML Mapping Subset Specification
+
+W> TODO - this is being rewritten; ignore it.
 
 If Markua specified one canonical HTML output format, there would be limits to what developers of a Markua Processor could do. This would limit creativity and competition, without providing much benefit.
 
@@ -3351,11 +3370,20 @@ Solution:
 - specify a subset so there is at least some sanity when comparing HTML5 output from a Markua Processor?!
 
 
+Markua specifies an exact mapping from Markua input to HTML output. A Markua Processor must follow this mapping when generating HTML from Markua. Also, a Markua Processor must follow this mapping when generating the HTML used in an EPUB book.
 
+This chapter defines this HTML mapping.
 
-### Text Formatting
+Chances are you will find this chapter very boring unless you're either implementing a Markua Processor or you love reading W3C specifications. The only things left in this specification are the [Appendices](#appendices), so feel free to skip this and just read those. Or, close your computer and go outside.
 
-{#text_formatting_html}
+This chapter is structured in an almost identical way to the Markua Syntax chapter. Unlike the Markua syntax chapter which did a bunch of explaining and showed almost no HTML, in this chapter there is essentially no explaining--just a bunch of examples.
+
+These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies. (In this section, there will be a number of Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test.) See <https://github.com/markuadoc/markua-test> for more information.
+
+In the HTML Ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. While the HTML Output is a requirement, including the attributes, note that in the examples below, no CSS is specified. This is a matter of policy: Markua never specifies CSS, to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
+
+## Text Formatting
+
 A> The syntax for text formatting is described [here](#text_formatting).
 
 The preferred way to map Markua to HTML5 is as follows.
@@ -3386,11 +3414,873 @@ This is _an i tag_ and this is *an em tag*.
 <p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
 ~~~
 
+### Italic
+
+##### Example
+
+###### Markua Syntax
+
+{#input_italic_1}
+~~~
+This is _an i tag_ and this is *an em tag*.
+~~~
+
+###### HTML Output
+
+{#output_italic_1}
+~~~
+<p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
+~~~
+
+### Bold
+
+##### Example
+
+###### Markua Syntax
+
+{#input_bold_1}
+~~~
+This is __a b tag__ and this is **a strong tag**.
+~~~
+
+###### HTML Output
+
+{#output_bold_1}
+~~~
+<p>This is <b>a b tag</b> and this is <strong>a strong tag</strong>.</p>
+~~~
+
+### Bold + Italic
+
+##### Example
+
+###### Markua Syntax
+
+{#input_bold_italic_1}
+~~~
+This is ___a b i tag combo___ and this is ***a strong em tag combo***.
+~~~
+
+###### HTML Output
+
+{#output_bold_italic_1}
+~~~
+<p>This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag combo</em></strong>.
+~~~
+
+### Underline
+
+##### Example
+
+###### Markua Syntax
+
+{#input_underline_1}
+~~~
+This is ____a u tag____. Yeah, it's ugly.
+~~~
+
+###### HTML Output
+
+{#output_underline_1}
+~~~
+<p>This is <u>a u tag</u>. Yeah, it's ugly.</p>
+~~~
+
+### Strikethrough
+
+#### CSS Recommendation
+
+The following CSS rule is recommended:
+
+~~~
+.strikethrough {
+  text-decoration: line-through;
+}
+~~~
+
+##### Example
+
+###### Markua Syntax
+
+{#input_strikethrough_1}
+~~~
+This is ~~a strikethrough tag~~.
+~~~
+
+###### HTML Output
+
+{#output_strikethrough_1}
+~~~
+<p>This is <span class="strikethrough">a strikethrough tag</span>.</p>
+~~~
+
+### Superscript
+
+##### Example
+
+###### Markua Syntax
+
+{#input_superscript_1}
+~~~
+5^3^ = 125
+~~~
+
+###### HTML Output
+
+{#output_superscript_1}
+~~~
+<p>5<sup>3</sup> = 125</p>
+~~~
+
+### Subscript
+
+##### Example
+
+###### Markua Syntax
+
+{#input_subscript_1}
+~~~
+Water is H~2~O.
+~~~
+
+###### HTML Output
+
+{#output_subscript_1}
+~~~
+<p>Water is H<sub>2</sub>O.</p>
+~~~
+
 ### Headings
 
 Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
+{#headings_html}
+A> The syntax for headings is described [here](#headings).
 
+##### Example
+
+###### Markua Syntax
+
+{#input_headings_1}
+~~~
+# Part (h1) #
+
+This is a paragraph.
+
+# Chapter (also h1)
+
+This is a paragraph.
+
+## Section (h2)
+
+This is a paragraph.
+
+### Sub-Section (h3)
+
+This is a paragraph.
+
+#### Sub-Sub-Section (h4)
+
+This is a paragraph.
+
+##### Sub-Sub-Sub-Section (h5)
+
+This is a paragraph.
+
+###### Sub-Sub-Sub-Sub-Section (h6)
+
+This is a paragraph.
+~~~
+
+###### HTML Output
+
+{#output_headings_1}
+~~~
+<h1 class="part">Part (h1)</h1>
+<p>This is a paragraph.</p>
+<h1 class="chapter">Chapter (also h1)</h1>
+<p>This is a paragraph.</p>
+<h2 class="section">Section (h2)</h2>
+<p>This is a paragraph.</p>
+<h3 class="sub-section">Sub-Section (h3)</h3>
+<p>This is a paragraph.</p>
+<h4 class="sub-sub-section">Sub-Sub-Section (h4)</h4>
+<p>This is a paragraph.</p>
+<h5 class="sub-sub-sub-section">Sub-Sub-Sub-Section (h5)</h5>
+<p>This is a paragraph.</p>
+<h6 class="sub-sub-sub-sub-section">Sub-Sub-Sub-Sub-Section (h6)</h6>
+<p>This is a paragraph.</p>
+~~~
+
+## Whitespace, Paragraphs and Blank Lines
+
+{#whitespace_html}
+A> The syntax for whitespace is described [here](#whitespace).
+
+##### Example
+
+###### Markua Syntax
+
+{#input_whitespace_1}
+~~~
+I'm paragraph one. Yay!
+
+This is paragraph two.
+
+This is paragraph three.
+~~~
+
+###### HTML Output
+
+{#output_whitespace_1}
+~~~
+<p>I'm paragraph one. Yay!</p>
+<p>This is paragraph two.</p>
+<p>This is paragraph three.</p>
+~~~
+
+## Newlines, Indentation and Spaces
+
+{#newlines_html}
+A> The syntax for newlines is described [here](#newlines).
+
+### Single Newlines
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_single_newlines_1}
+~~~
+I'm paragraph one. Yay!
+
+This is paragraph two.
+This is *still* in paragraph two, preceded by a forced line break.
+This is also in paragraph two, also preceded by a forced line break.
+
+This is paragraph three.
+~~~
+
+###### HTML Output
+
+{#output_single_newlines_1}
+~~~
+<p>I'm paragraph one. Yay!</p>
+<p>This is paragraph two.<br/>
+This is *still* in paragraph two, preceded by a forced line break.<br/>
+This is also in paragraph two, also preceded by a forced line break.</p>
+<p>This is paragraph three.</p>
+~~~
+
+##### Example 2 - A Presumably Incorrect Heading
+
+###### Markua Syntax
+
+{#input_single_newlines_2}
+~~~
+# This.
+Is.
+Heading Text!!!
+
+I'm paragraph one. Yay!
+~~~
+
+###### HTML Output
+
+{#output_single_newlines_2}
+~~~
+<h1>This.<br/>
+Is.<br/>
+Heading Text!!!</h1>
+<p>I'm paragraph one. Yay!</p>
+~~~
+
+### Three or More Newlines
+
+##### Example
+
+###### Markua Syntax
+
+{#input_three_or_more_newlines_1}
+~~~
+This paragraph is followed by two newlines.
+
+This paragraph is followed by three newlines.
+
+
+This paragraph is followed by five newlines.
+
+
+
+
+The End
+~~~
+
+###### HTML Output
+
+{#output_three_or_more_newlines_1}
+~~~
+<p>This paragraph is followed by two newlines.</p>
+<p>This paragraph is followed by three newlines.</p>
+<br/>
+<p>This paragraph is followed by five newlines.</p>
+<br/>
+<br/>
+<br/>
+<p>The End</p>
+~~~
+
+### Leading Spaces (Prose vs. Poetry)
+
+##### Poetic Example
+
+##### Markua Syntax
+
+{#input_leading_spaces_1}
+~~~
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+~~~
+
+##### HTML Output
+
+{#output_leading_spaces_1}
+~~~
+<p>
+I grant I never saw a goddess go;<br/>
+My mistress when she walks treads on the ground.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.<br/>
+</p>
+~~~
+
+### Internal Spaces are Collapsed to One Space
+
+##### Example
+
+###### Markua Syntax
+
+{#input_internal_spaces_1}
+~~~
+foo   bar
+~~~
+
+###### HTML Output
+
+{#output_internal_spaces_1}
+~~~
+<p>foo bar</p>
+~~~
+
+## Resources
+
+### Images
+
+{#images_html}
+A> The syntax for images is described [here](#images).
+
+#### Local Images
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_local_images_span_1}
+~~~
+Easy as ![pie](pie.png).
+~~~
+
+###### HTML Output
+
+{#output_local_images_span_1}
+~~~
+<p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_local_images_figure_1}
+~~~
+Here's a paragraph before the first figure.
+
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph between the first and second figures.
+
+{alt: "a slice of chocolate cake", class: "fullbleed"}
+![A Piece of Cake](cake.jpg)
+
+Here's a paragraph between the second and third figures.
+
+{alt: "a slice of apple pie with ice cream on top", class: "food-closeup"}
+![A Piece of Pie](pie.jpg)
+
+Here's a paragraph after the third figure.
+~~~
+
+###### HTML Output
+
+{#output_local_images_figure_1}
+~~~
+<p>Here's a paragraph before the first figure.</p>
+<div class="figure">
+  <img src="cake.jpg"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph between the first and second figures.</p>
+<div class="figure">
+  <img src="cake.jpg" alt="a slice of chocolate cake" class="fullbleed"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph between the second and third figures.</p>
+<div class="figure">
+  <img src="pie.jpg" alt="a slice of apple pie with ice cream on top" class="food-closeup"/>
+  <p class="caption">A Piece of Pie</p>
+</div>
+<p>Here's a paragraph after the third figure.</p>
+~~~
+
+#### Web Images
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_web_images_span_1}
+~~~
+Easy as ![pie](http://markua.com/pie.png).
+~~~
+
+###### HTML Output
+
+{#output_web_images_span_1}
+~~~
+<p>Easy as <img src="http://markua.com/pie.png" alt="pie"/>.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_web_images_figure_1}
+~~~
+Here's a paragraph before the first figure.
+
+![A Piece of Cake](http://markua.com/cake.jpg)
+
+Here's a paragraph between the first and second figures.
+
+{alt: "a slice of chocolate cake", class: "fullbleed"}
+![A Piece of Cake](http://markua.com/cake.jpg)
+
+Here's a paragraph between the second and third figures.
+
+{alt: "a slice of apple pie with ice cream on top", class: "food-closeup"}
+![A Piece of Pie](http://markua.com/pie.jpg)
+
+Here's a paragraph after the third figure.
+~~~
+
+###### HTML Output
+
+{#output_web_images_figure_1}
+~~~
+<p>Here's a paragraph before the first figure.</p>
+<div class="figure">
+  <img src="http://markua.com/cake.jpg"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph between the first and second figures.</p>
+<div class="figure">
+  <img src="http://markua.com/cake.jpg" alt="a slice of chocolate cake" class="fullbleed"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph between the second and third figures.</p>
+<div class="figure">
+  <img src="http://markua.com/pie.jpg" alt="a slice of apple pie with ice cream on top" class="food-closeup"/>
+  <p class="caption">A Piece of Pie</p>
+</div>
+<p>Here's a paragraph after the third figure.</p>
+~~~
+
+#### Inline Images (SVG only)
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_inline_images_span_1}
+~~~
+Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
+~~~
+
+###### HTML Output
+
+{#output_inline_images_span_1}
+~~~
+<p>Red <svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg> square.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_inline_images_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{caption: "Earth From Space (Simplified)"}
+~~~svg
+<svg width="20" height="20">
+  <desc>a blue circle</desc>
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+~~~
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_inline_images_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <svg width="20" height="20">
+    <desc>a blue circle</desc>
+    <circle cx="10" cy="10" r="9" fill="blue"/>
+  </svg>
+  <p class="caption">Earth From Space (Simplified)</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
+### Video
+
+{#video_html}
+A> The syntax for video is described [here](#video).
+
+#### Local Video
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_local_video_span_1}
+~~~
+Easy as ![pie](pie_eating_contest.mp4).
+~~~
+
+###### HTML Output
+
+{#output_local_video_span_1}
+~~~
+<p>Easy as <video src="resources/pie_eating_contest.mp4" alt="pie"/>.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_local_video_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{alt: "a man eating an entire chocolate cake"}
+![A Piece of Cake](cake_eating_contest.webm)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_local_video_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <video src="cake_eating_contest.webm" alt="a man eating an entire chocolate cake"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
+#### Web Video
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_web_video_span_1}
+~~~
+Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
+~~~
+
+###### HTML Output
+
+{#output_web_video_span_1}
+~~~
+<p>Easy as <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0" alt="Peter's Markua talk"/>.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_web_video_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
+![Introducing Markua](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_web_video_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0"
+    poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
+  <p class="caption">Introducing Markua</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
+### Audio
+
+{#audio_html}
+A> The syntax for audio is described [here](#audio).
+
+#### Local Audio
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_local_audio_span_1}
+~~~
+The talk audio highlights are here: ![](highlights.mp3).
+~~~
+
+###### HTML Output
+
+{#output_local_audio_span_1}
+~~~
+<p>The talk audio highlights are here: <audio src="resources/highlights.mp3"/>.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_local_audio_span_1}
+~~~
+The full version of the talk is here:
+
+![Full Talk](talk.m4a)
+~~~
+
+###### HTML Output
+
+{#output_local_audio_span_1}
+~~~
+<p>The full version of the talk is here:</p>
+<div class="figure">
+  <audio src="resources/talk.m4a"/>
+  <p class="caption">Full Talk</p>
+</div>
+~~~
+
+#### Web Audio
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_local_audio_span_1}
+~~~
+The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
+~~~
+
+###### HTML Output
+
+{#output_local_audio_span_1}
+~~~
+<p>The talk audio highlights are here: <audio src="http://markua.com/highlights.mp3"/>.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_local_audio_span_1}
+~~~
+The full version of the talk is here:
+
+![Full Talk](http://markua.com/talk.m4a)
+~~~
+
+###### HTML Output
+
+{#output_local_audio_span_1}
+~~~
+<p>The full version of the talk is here:</p>
+<div class="figure">
+  <audio src="http://markua.com/talk.m4a"/>
+  <p class="caption">Full Talk</p>
+</div>
+~~~
+
+### Code
+
+{#code_html}
+A> The syntax for code is described [here](#code).
+
+#### Local Code Resources
+
+##### Span Example
+
+###### Dependencies
+
+{#dependencies_local_code_span_1}
+~~~
+hello.rb:
+puts "hello world"
+~~~
+
+###### Markua Syntax
+
+{#input_local_code_span_1}
+~~~
+Hello in Ruby is a simple ![](hello.rb) statement.
+~~~
+
+###### HTML Output
+
+{#output_local_code_span_1}
+~~~
+<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
+~~~
+
+##### Figure Example
+
+###### Dependencies
+
+This defines the hello.rb file used in this example.
+
+{#dependencies_local_code_figure_1}
+~~~
+hello.rb:
+```
+puts "hello"
+
+puts "world"
+```
+~~~
+
+###### Markua Syntax
+
+{#input_local_code_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+![Hello World in Ruby](hello.rb)
+
+That is equivalent to:
+
+{format: guess}
+![Hello World in Ruby](hello.rb)
+
+If you don't want to take chances you can do this:
+
+{format: ruby}
+![Hello World in Ruby](hello.rb)
+
+Finally, note that the caption is optional in all figures:
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+W> TODO - this test does not work since it's indeterminate what format is guessed at, and the HTML would change accordingly???
+
+{#output_local_code_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <pre><code format="guess">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>That is equivalent to:</p>
+<div class="figure">
+  <pre><code format="guess">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>If you don't want to take chances you can do this:</p>
+<div class="figure">
+  <pre><code format="ruby">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+
+
+Finally, note that the caption is optional in all figures:
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+
+
+<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
+~~~
+
+{#criticmarkup_html}
+### CriticMarkup
+
+When outputting HTML, a Markua Processor can either output or ignore all the CriticMarkup.
+
+The choice is situation-dependent. For example, a Markua Processor could output CriticMarkup when previewing, but output only the original text when publishing.
+
+However, regardless of the fact that there is a choice, there is an exact specification for both cases. Also, there is only one choice: all or nothing. It's not acceptable to support some CriticMarkup annotations but not others.
+
+The following example shows a paragraph annotated with CriticMarkup:
+
+~~~
+If you enjoy using track changes{>>Who enjoys this?<<} in Word, then {~~you'll enjoy~>you may like~~} using CriticMarkup {++annotations++}. If you don't enjoy working with editors{-- or getting feedback about your writing in the text itself--}, then CriticMarkup isn't for you! If this is the case, don't worry about it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>This sounds ambivalent.<<}. If you don't want to use it, you don't need to learn about it.
+~~~
+
+Here's the HTML that must be produced when the Markua Processor is ignoring all CriticMarkup:
+
+~~~
+<p>If you enjoy using track changes in Word, then you'll enjoy using CriticMarkup. If you don't enjoy working with editors or getting feedback about your writing in the text itself, then CriticMarkup isn't for you! If this is the case, don't worry about it: the support for CriticMarkup has no impact on the rest of Markua. If you don't want to use it, you don't need to learn about it.</p>
+~~~
+
+Here's the HTML that must be produced when the Markua Processor is outputting all CriticMarkup:
+
+~~~
+<p>If you enjoy using track changes<span class="critic comment">Who enjoys this?</span> in Word, then <del>you'll enjoy</del><ins>you may like</ins> using CriticMarkup <ins>annotations</ins>. If you don't enjoy working with editors<del> or getting feedback about your writing in the text itself</del>, then CriticMarkup isn't for you! If this is the case, don't worry about it: <mark>the support for CriticMarkup has no impact on the rest of Markua</mark><span class="critic comment">This sounds ambivalent.</span>. If you don't want to use it, you don't need to learn about it.</p>
+~~~
 
 {#acknowledgments}
 # Acknowledgments
