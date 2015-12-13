@@ -122,6 +122,10 @@ So, I started over.
 
 I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly, resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
 
+## UTF-8 Character Encoding
+
+Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
+
 ## Why the Name "Markua"?
 
 When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
@@ -165,12 +169,6 @@ To read the specification manuscript in Markua, see <https://github.com/markuado
 To stay current on Markua progress, follow [@markuadoc](https://twitter.com/markuadoc) or [@peterarmstrong](https://twitter.com/peterarmstrong) on Twitter.
 
 At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can generate PDF, EPUB, MOBI and HTML ebooks with one click. We are also working on an open source, ES6-based [Markua-to-HTML converter](https://github.com/markuadoc/markua-js). We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc.
-
-# Character Encoding
-
-Markua documents are written in plain text.
-
-Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
 {#text_formatting}
 # Text Formatting
@@ -278,10 +276,15 @@ I thought long and hard about Markua headings, and changed my mind (as Scott and
 
 The design of Markua headings meets these requirements, in what I feel is an optimal way. This is in stark contrast to Leanpub Flavoured Markdown, which violated a number of these requirements, especially #2 (as parts were created with `-# Title`). Previous versions of Markua were even worse, violating many of these requirements (e.g. #1, #3, #4, #6, #7 and #8).
 
-{#whitespace}
-# Whitespace, Paragraphs and Blank Lines
+# Spaces, Newlines and Indentation
 
-Together, newlines, spaces and tabs are called whitespace. By a newline, I mean the character which is produced by the enter key on the keyboard. Two newlines in a row produce a blank line, i.e. a line with no text or whitespace on it.
+The goal for the handling of spaces, newlines and indentation in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
+
+In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books. Books can be in many formats, including HTML. The concepts in Markdown are HTML concepts; the concepts in Markua are book concepts.
+
+Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown. (By a newline, I mean the character which is produced by the enter key on the keyboard.)
+
+## Paragraphs and Blank Lines
 
 Paragraphs and blank lines are handled in almost the same way in Markua and Markdown. Normal Markua text is in paragraphs. A paragraph produces a `<p>` tag in HTML. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line.
 
@@ -296,15 +299,6 @@ This is paragraph three.
 ~~~
 
 A paragraph is the least-specialized example of something called a block element. Block elements are separated from each other by at least one blank line. Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. Examples of other block elements include headings, figures and lists.
-
-{#newlines}
-# Newlines, Indentation and Spaces
-
-The goal for newline and indentation handling in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
-
-In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books. Books can be in many formats, including HTML. The concepts in Markdown are HTML concepts; the concepts in Markua are book concepts.
-
-Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown.
 
 {#single_newlines}
 ## Single Newlines
@@ -1856,106 +1850,6 @@ Just like with list items, any leading whitespace after the linebreak is used to
 
 W> TODO_LEANPUB - confirm ids work on definition list items
 
-{#inserting_into_paras}
-# Inserting Block Elements Inside Paragraphs
-
-In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
-
-> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
-
-So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
-
-In Markdown, a block element like a list or figure is a sibling of the paragraphs before or after it:
-
-~~~
-This is paragraph one.
-
-* this is a
-* sibling of
-* paragraphs one and two
-
-This is paragraph two.
-~~~
-
-Markua supports this method of inserting block elements.
-
-However, Markua is more than just a way of producing HTML. Markua is a way of authoring books. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this too.
-
-Many block elements such as lists and figures can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
-
-This example shows a list nested in the middle of a paragraph:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-* this list is
-* part of
-* paragraph two
-This sentence is also in paragraph two.
-
-This is paragraph three.
-~~~
-
-This example shows a figure which is an inline code resource nested in the middle of a paragraph:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-```ruby
-puts "hello world"
-```
-This sentence is also in paragraph two.
-
-This is paragraph three.
-~~~
-
-This example shows a figure which is a local code resource nested in the middle of a paragraph:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-{format: ruby}
-![Hello, World](hello.rb)
-This sentence is also in paragraph two.
-
-This is paragraph three.
-~~~
-
-This example shows figures which are local or web image resources nested in the middle of paragraphs. Note that like with all figures, the square bracket text in both cases is the figure caption (not alt text):
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-![A Piece of Cake](cake.jpg)
-This sentence is also in paragraph two.
-
-This sentence is in paragraph three.
-{alt: "a slice of chocolate cake"}
-![A Piece of Cake](http://markua.com/cake.jpg)
-This sentence is also in paragraph three.
-
-This is paragraph four.
-~~~
-
-It is possible to insert a block element as the last part of a paragraph by adding a single newline before it, but a blank line after it:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-* this list is
-* part of
-* paragraph two
-
-This is paragraph three.
-~~~
-
-This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
-
 # Tables
 
 Markdown does not specify a table syntax. Since Markdown supports inline HTML, it does not need to--if you want a table, you can simply use an inline HTML table.
@@ -2512,7 +2406,109 @@ It can have multiple paragraphs.
 {/callout}
 ~~~
 
-C> I hate callouts, and so do Scott and Len. They ruin the flow of the text and they take the best line and make it a stupid infographic. "Here, I just did the thinking for you." But, that said, they're a thing, and Markua supports them.
+Finally: I hate callouts, and so do Scott and Len. They ruin the flow of the text, typically by taking the best line in an article and making it into a stupid graphic which essentially says "don't think; tweet this." But, that said, they're a thing, and Markua supports them.
+
+W> TODO_LEANPUB - make C> be callout not center in Markua.
+
+{#inserting_into_paras}
+## Inserting Block Elements Inside Paragraphs
+
+In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
+
+> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
+
+So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
+
+In Markdown, a block element like a list or figure is a sibling of the paragraphs before or after it:
+
+~~~
+This is paragraph one.
+
+* this is a
+* sibling of
+* paragraphs one and two
+
+This is paragraph two.
+~~~
+
+Markua supports this method of inserting block elements.
+
+However, Markua is more than just a way of producing HTML. Markua is a way of authoring books. HTML is just one of the output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua supports this too.
+
+Many block elements such as lists and figures can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
+
+This example shows a list nested in the middle of a paragraph:
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+* this list is
+* part of
+* paragraph two
+This sentence is also in paragraph two.
+
+This is paragraph three.
+~~~
+
+This example shows a figure which is an inline code resource nested in the middle of a paragraph:
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+```ruby
+puts "hello world"
+```
+This sentence is also in paragraph two.
+
+This is paragraph three.
+~~~
+
+This example shows a figure which is a local code resource nested in the middle of a paragraph:
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+{format: ruby}
+![Hello, World](hello.rb)
+This sentence is also in paragraph two.
+
+This is paragraph three.
+~~~
+
+This example shows figures which are local or web image resources nested in the middle of paragraphs. Note that like with all figures, the square bracket text in both cases is the figure caption (not alt text):
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+![A Piece of Cake](cake.jpg)
+This sentence is also in paragraph two.
+
+This sentence is in paragraph three.
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](http://markua.com/cake.jpg)
+This sentence is also in paragraph three.
+
+This is paragraph four.
+~~~
+
+It is possible to insert a block element as the last part of a paragraph by adding a single newline before it, but a blank line after it:
+
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+* this list is
+* part of
+* paragraph two
+
+This is paragraph three.
+~~~
+
+This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
 
 # Span Elements
 
