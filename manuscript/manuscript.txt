@@ -110,7 +110,7 @@ Markua is heavily inspired by Markdown. What Markua does is maps most Markdown s
 
 The most popular subset of Markdown exists virtually unchanged in Markua. For example, *all* the Markua syntax described [earlier](#novel_syntax) as necessary to write a novel is inherited verbatim from Markdown.
 
-One of the design goals of Markua is for it to be the most straightforward way for a Markdown document to become a book. So, if you already write your blog posts or lecture notes in Markdown, they are probably already valid Markua. You can use any Markua Processor, such as Leanpub, to turn them into an ebook with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books, this process will feel like adding, not converting. The process of going from a Markdown document into a Markua ebook is mostly a process of decorating--enhancing and reinterpreting the Markdown document appropriately. In fact, one of goals is for writers who are familiar with Markdown to feel as though they are still writing in Markdown, but that Markdown somehow *grew an understanding of book concepts*. Markua is really "Markdown for books".
+One of the design goals of Markua is for it to be the most straightforward way for a Markdown document to become a book. So, if you already write your blog posts or lecture notes in Markdown, they are probably already valid Markua. You can use any Markua Processor, such as [Leanpub](http://leanpub.com), to turn them into an ebook with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books, this process will feel like adding, not converting. The process of going from a Markdown document into a Markua ebook is mostly a process of decorating--enhancing and reinterpreting the Markdown document appropriately. In fact, one of goals is for writers who are familiar with Markdown to feel as though they are still writing in Markdown, but that Markdown somehow *grew an understanding of book concepts*. Markua is really "Markdown for books".
 
 I, [Peter Armstrong](https://twitter.com/peterarmstrong), am creating Markua. I'm the co-founder of Leanpub. (Unlike most specifications, this specification is being written by one person, so throughout it I will say "I", not "we". I'm not the Queen, so I shouldn't use the royal "we"!) At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and I created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
 
@@ -170,7 +170,7 @@ To read the specification manuscript in Markua, see <https://github.com/markuado
 
 To stay current on Markua progress, follow [@markuadoc](https://twitter.com/markuadoc) or [@peterarmstrong](https://twitter.com/peterarmstrong) on Twitter.
 
-At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](http://leanpub.com). Leanpub can take a Markdown or Markua manuscript and, with one click, generate an ebook which is available in PDF, EPUB, MOBI and HTML. (To generate an InDesign export requires a second click.) We are also working on an open source, ES6-based [Markua-to-HTML converter](https://github.com/markuadoc/markua-js). We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc, but we're not very good at programming in Haskell (which pandoc is written in).
+At [Ruboss](http://ruboss.com), we are busy adding Markua support to Leanpub. Leanpub can take a Markdown or Markua manuscript and, with one click, generate an ebook which is available in PDF, EPUB, MOBI and HTML. (To generate an InDesign export requires a second click.) We are also working on an open source, ES6-based [Markua-to-HTML converter](https://github.com/markuadoc/markua-js). We also hope to work with the [pandoc](http://pandoc.org/) team to enable Markua support in pandoc, but we're not very good at programming in Haskell (which pandoc is written in).
 
 {#text_formatting}
 # Text Formatting
@@ -286,7 +286,7 @@ Because of this, the way that single newlines, three or more newlines and leadin
 
 ## Paragraphs and Blank Lines
 
-Paragraphs and blank lines are handled in almost the same way in Markua and Markdown. Normal Markua text is in paragraphs. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line.
+Paragraphs and blank lines are handled in almost the same way in Markua and Markdown. Normal Markua text is in paragraphs, which produce a `<p>` tag in HTML output. The distinguishing thing about a paragraph is that there is nothing else distinguishing about it: unlike headings, lists and other Markua elements, a paragraph requires no special formatting. To create a new paragraph, you add two newlines to create a blank line.
 
 Here's an example of this in Markua syntax. Throughout this specification, examples of Markua syntax will be shown as a figure which is a code resource, so that the exact Markua manuscript text can be shown unprocessed. These are three paragraphs in Markua, each separated by the canonical two newlines which produce one blank line:
 
@@ -307,7 +307,7 @@ The way that single newlines are handled is the *single largest breaking differe
 
 In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
-In Markua, however, a forced line break in the input is a forced line break in the output: single newlines produce `<br/>` tags in the HTML output, and must produce forced line breaks in all other output formats like PDF. This is true for headings, paragraphs, lists, blockquotes, asides, blurbs and callouts.
+In Markua, however, a forced line break in the input is a forced line break in the output: single newlines produce `<br/>` tags in HTML output, and must produce forced line breaks in all other output formats like PDF. This is true for headings, paragraphs, lists, blockquotes, asides, blurbs and callouts.
 
 In ancient history, some text editors did not automatically wrap lines of text, so manual wrapping of plain text files was a good thing to do. Also, for computer programmers, we still do not wrap our text when programming. However, for *writing*, automatic wrapping of paragraphs is essential for staying in the flow while writing, and for being able to edit your text without needing to re-wrap every line in a paragraph. This is one decision that even Microsoft Word gets right.
 
@@ -717,7 +717,7 @@ The local resources approach can also be used by hosted services. Internally, se
 
 If web resources are supported, both `http:` and `https:` resources should be supported.
 
-Web resources are identified by URL. The `resource_path_or_url` is either the relative path to the resource inside the `resources` directory or the absolute URL of the resource on the internet. In the case of image, audio and video resources, this becomes the `src` attribute of the resource in HTML.
+Web resources are identified by the absolute URL of the resource on the internet. In the case of image, audio and video resources, this becomes the `src` attribute of the resource in HTML.
 
 ### Inline Resources
 
@@ -1491,7 +1491,7 @@ These are the specific rules for unordered lists:
 * Between 1 and 4 spaces or one tab is allowed after each bullet.
 * You cannot mix tabs and spaces: if a tab is used after a bullet, tabs must be used after each bullet.
 * If spaces are used after each bullet, the same number of spaces must be used after each bullet in the list.
-* A varied number of spaces or tabs or a mixture of tabs and spaces does not create an unordered list. Instead, it creates a paragraph with line breaks inside it, which produces break tags in HTML.
+* A varied number of spaces or tabs or a mixture of tabs and spaces does not create an unordered list. Instead, it creates a paragraph with line breaks inside it, which produces break tags in HTML output.
 * A single element unordered list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk, plus or hyphen would be even stupider.
 
 In terms of style guidance, the preferred bullet type is the asterisk, and the preferred whitespace after the bullet is one space.
@@ -1527,9 +1527,9 @@ Since Markua supports letters and Roman numerals as well as decimal numbers to s
 
 Note that there are one or more spaces after the period. Unlike with an unordered list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
 
-I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I'm giving up and not doing it. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items, so you basically get what you want, just not using HTML constructs.
+I had really wanted to support parentheses after the number as well as periods, since to me `a)` looks a lot better than `a.` does. However, there's no *good* way to do this in HTML, so I gave up. If you make a lettered list with parentheses, it just turns into a paragraph with a bunch of newlines for the list items--so you basically get what you want, just not using HTML constructs.
 
-This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections. For the mapping to HTML lists, see the next chapter.
+This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections. For the mapping to HTML lists, see the [HTML Mapping Requirements appendix](#html_mapping_requirements).
 
 Ascending decimal numbers starting from 1:
 
