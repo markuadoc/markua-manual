@@ -144,6 +144,28 @@ Markua documents are written in plain text. Specifically, Markua documents must 
 
 ## Markua Output Formats & HTML5 Mapping
 
+Choices:
+- no HTML5 examples
+- HTML5 subset examples
+- HTML5 subset spec
+- full HTML5 spec
+
+Things that can't be fully specified:
+- programming languages
+- icon support
+
+Things that could be implemented different ways:
+- figure divs
+- math as images
+- tables as images
+- scene breaks
+- asides, blurbs, callouts
+- footnotes and endnotes
+- index entries
+- directives
+- criticmarkup
+
+
 The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts.
 
 Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output the following formats:
@@ -169,8 +191,6 @@ Even though there is no HTML mapping specified, anyone who knows HTML well will 
 2. Suggestions for how to generate HTML5 from Markua are specified [in an appendix at the end of this specification](#html5_mapping).
 
 The reference implementation and the HTML5 generation suggestions should not be interpreted as providing compliance requirements for other Markua Processors, just strong recommendations.
-
-
 
 Strictly speaking, Markua Processors can do whatever they want when outputting HTML5 from Markua. However, while all choices are equally legal, some choices are more equal than others. This appendix provides strong recommendations for how to map Markua to HTML5. However, this appendix is not a complete specification or a set of compatibility tests.
 
@@ -2016,8 +2036,8 @@ You can also individually align cells with colons in the `-` part-row **above** 
 |:-----------:| and B3 merged |-------------|
 | Content A3  |               | Content C3  |
 |=============|===============|=============|
-| Footer A    | Footer B     | Footer C    |
-|=============|==============|=============|
+| Footer A    | Footer B      | Footer C    |
+|=============|===============|=============|
 ~~~
 
 In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
