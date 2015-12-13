@@ -122,10 +122,6 @@ So, I started over.
 
 I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly, resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
 
-## UTF-8 Character Encoding
-
-Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
-
 ## Why the Name "Markua"?
 
 When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
@@ -142,9 +138,23 @@ Supporting inline HTML would make Markua a worse format, both to write in and to
 
 One design consequence of the support for inline HTML in Markdown is that Markdown's syntax can stay artificially small--since Markdown authors can always fall back to using HTML directly, Markdown does not need to be able to produce all of HTML. Since Markua does not support inline HTML, any required output must be produceable by a Markua input. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books often require tables, Markua needs to add a table syntax.
 
-## What Is Specified
+## UTF-8 Character Encoding
 
-The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book and document concepts. No mapping to a specific output format is specified--not even to HTML.
+Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
+
+## Markua Output Formats & HTML5 Mapping
+
+The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts.
+
+Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output the following formats:
+
+* PDF
+* EPUB
+* MOBI
+* HTML5
+* InDesign
+
+The mapping from a Markua input to these output formats is not specifed--not even to HTML.
 
 There are four reasons why there is no mapping to HTML specified:
 
@@ -159,6 +169,15 @@ Even though there is no HTML mapping specified, anyone who knows HTML well will 
 2. Suggestions for how to generate HTML5 from Markua are specified [in an appendix at the end of this specification](#html5_mapping).
 
 The reference implementation and the HTML5 generation suggestions should not be interpreted as providing compliance requirements for other Markua Processors, just strong recommendations.
+
+
+
+Strictly speaking, Markua Processors can do whatever they want when outputting HTML5 from Markua. However, while all choices are equally legal, some choices are more equal than others. This appendix provides strong recommendations for how to map Markua to HTML5. However, this appendix is not a complete specification or a set of compatibility tests.
+
+In the HTML ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
+
+
+
 
 ## Status of the Markua Specification and Implementations
 
