@@ -86,15 +86,15 @@ That's it!
 
 ## Minimal Formatting
 
-Markua provides fairly minimal formatting options. When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting.
+When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting.
 
-The only type of formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which should not be changed by a book designer. It also includes `class` attributes on figures, which can be used by an author to identify a particular type of figure, so that these can be formatted in a consistent way in HTML or even in other output formats. With HTML and EPUB, a Markua Processor could support CSS formatting. A Markua Processor can also use the class attributes as formatting hints when producing non-HTML-based formats, such as PDF. A Markua Processor can provide a set of predefined `class` attribute values that have a certain behaviour in PDF output and a similar behaviour accomplished via CSS to affect HTML and EPUB outputs.
+So, Markua provides fairly minimal formatting options. The only type of formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which should not be changed by a book designer.
+
+Semantic formatting also includes `class` attributes on figures, which can be used by an author to identify a particular type of figure, so that these can be formatted in a consistent way in HTML or even in other output formats. With HTML and EPUB, a Markua Processor could support CSS formatting. A Markua Processor can also use the class attributes as formatting hints when producing non-HTML-based formats, such as PDF. A Markua Processor can provide a set of predefined `class` attribute values that have a certain behaviour in PDF output and a similar behaviour accomplished via CSS to affect HTML and EPUB outputs.
 
 Note that Markua deliberately does not specify any requirements about how to do formatting based on values of a `class` attribute, about CSS styles or about PDF output at all. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors and among book designers. For simplicity, a Markua Processor does not need to even support formatting based on class attributes at all: while the class attribute must be present in the generated HTML (if present), there is no requirement for a given Markua Processor to support CSS--or even to generate HTML at all.
 
 To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins! Also, Markua really, really, *really* does **not** care about "widows and orphans"--unless they're people!
-
-Markua is not intended to be used to automatically create the layout of a high quality print book--but it can certainly create the manuscript of that print book, and a Markua Processor can automatically generate a good looking ebook from that manuscript. Some Markua Processors like Leanpub can even generate InDesign from a Markua document as a starting point for the print book design process. This is preferable to current workflows, in which a book designer typically needs to start by undoing all the non-semantic formatting that a writer did, and then redoing it properly using different tools.
 
 ## Markua: Markdown for Books
 
@@ -130,11 +130,11 @@ When I set out to specify Markua, I realized I needed a name. I wanted a name th
 
 Inline HTML is not supported for both implementation and philosophical reasons.
 
-Supporting inline HTML would be very hard to implement, as Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write book. Since Markdown's only output format target is HTML, there is a strong temptation to support inline HTML--generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free. On the other hand, for Markua, there is a large amount of HTML that makes no sense in books. Supporting inline HTML would put an undue burden on Markua Processors, the book and document production systems which produce PDF, EPUB, MOBI and HTML from Markua documents. Mapping all of HTML to PDF or MOBI formats in a meaningful way would be difficult and arbitrary.
+Supporting inline HTML would be very hard to implement, as Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write a book. Since Markdown's only output format target is HTML, there is a strong temptation to support inline HTML--generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free. On the other hand, for Markua, there is a large amount of HTML that makes no sense in books. Supporting inline HTML would put an undue burden on Markua Processors, the book and document production systems which produce PDF, EPUB, MOBI and HTML from Markua documents. Mapping all of HTML to PDF or MOBI formats in a meaningful way would be difficult and arbitrary.
 
-Philosophically, Markua is intended to be a better way to write books. By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua is just not possible. And since it's not possible, the temptation to procrastinate by doing complex layout is not there.
+Philosophically, Markua is intended to be a better way to write books. By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate is reduced.
 
-Supporting inline HTML would make Markua a worse format, both to write in and to implement support for. So, it's not supported.
+Supporting inline HTML would make Markua a worse format, both for writers and implementors. So, it's not supported.
 
 One design consequence of the support for inline HTML in Markdown is that Markdown's syntax can stay artificially small--since Markdown authors can always fall back to using HTML directly, Markdown does not need to be able to produce all of HTML. Since Markua does not support inline HTML, any required output must be produceable by a Markua input. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books often require tables, Markua needs to add a table syntax.
 
@@ -142,29 +142,7 @@ One design consequence of the support for inline HTML in Markdown is that Markdo
 
 Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
-## Markua Output Formats & HTML5 Mapping
-
-Choices:
-- no HTML5 examples
-- HTML5 subset examples
-- HTML5 subset spec
-- full HTML5 spec
-
-Things that can't be fully specified:
-- programming languages
-- icon support
-
-Things that could be implemented different ways:
-- figure divs
-- math as images
-- tables as images
-- scene breaks
-- asides, blurbs, callouts
-- footnotes and endnotes
-- index entries
-- directives
-- criticmarkup
-
+## Markua Output Formats
 
 The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts.
 
@@ -176,28 +154,13 @@ Markua Processors can output any number of output formats from a Markua document
 * HTML5
 * InDesign
 
-The mapping from a Markua input to these output formats is not specifed--not even to HTML.
+None of these output formats is required to be supported by a given Markua Processor. A Markua Processor just has to output *some* output format.
 
-There are four reasons why there is no mapping to HTML specified:
+Not only are there no required output formats for a Markua Processor, the mapping from a Markua input to these output formats is also not formally specifed--not even for HTML.
 
-1. Not having a formal specification encourages flexibility and competition among Markua Processors when outputting HTML.
-2. HTML is just one optional output format of Markua, and possibly not even the most important one. Whereas Markdown is a format for producing HTML, Markua is a format for producing books. HTML does not deserve undue attention in the Markua specification.
-3. In certain cases, the HTML mapping cannot be completely specified. For example, certain Markua Processors may recognize a given code sample as being for a specific programming language and add attributes accordingly, whereas other Markua Processors may not.
-4. HTML is not static. If Markua specified a mapping to some specific version of HTML, e.g. HTML5, then as HTML evolved Markua would either have to evolve or become outdated.
+This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors.
 
-Even though there is no HTML mapping specified, anyone who knows HTML well will realize that essentially every Markua concept maps cleanly to HTML concepts. Obviously, HTML is an important output format of Markua, and there is a clear mapping to HTML syntax from Markua syntax. To assist with the development of Markua Processors which produce HTML, two things are being provided:
-
-1. An open source, ES6-based reference implementation of a Markua Processor which outputs HTML5 is being provided [here](https://github.com/markuadoc/markua-js).
-2. Suggestions for how to generate HTML5 from Markua are specified [in an appendix at the end of this specification](#html5_mapping).
-
-The reference implementation and the HTML5 generation suggestions should not be interpreted as providing compliance requirements for other Markua Processors, just strong recommendations.
-
-Strictly speaking, Markua Processors can do whatever they want when outputting HTML5 from Markua. However, while all choices are equally legal, some choices are more equal than others. This appendix provides strong recommendations for how to map Markua to HTML5. However, this appendix is not a complete specification or a set of compatibility tests.
-
-In the HTML ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
-
-
-
+Even though there is no canonical HTML mapping, there are suggestions for how Markua should be mapped to HTML5. These are not requirements, but they're useful recommendations. The [HTML5 Mapping Suggestions](#html5_mapping) appendix contains these recommendations. (It won't make much sense until you've read the spec though!)
 
 ## Status of the Markua Specification and Implementations
 
@@ -3316,9 +3279,79 @@ W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numb
 {#html5_mapping}
 ## HTML5 Mapping Suggestions
 
+If Markua specified one canonical HTML output format, there would be limits to what developers of a Markua Processor could do. This would limit creativity and competition, without providing much benefit.
+
+Specifically, there are four reasons why there is no mapping to HTML specified:
+
+1. Not having a formal specification encourages flexibility and innovation among Markua Processors when outputting HTML.
+2. HTML is just one optional output format of Markua, and possibly not even the most important one. Whereas Markdown is a format for producing HTML, Markua is a format for producing books. HTML does not deserve undue attention in the Markua specification.
+3. In certain cases, the HTML mapping cannot be completely specified. For example, certain Markua Processors may recognize a given code sample as being for a specific programming language and add attributes accordingly, whereas other Markua Processors may not. If the HTML mapping needed to be completely specified, then every programming language supported would need to be specified in Markua.
+4. Requiring a full specification would eliminate th
+4.
+
+Things that can't be fully specified:
+- programming languages
+- icon support
+
+Things that could be implemented different ways:
+- figure divs
+- math as images
+- tables as images
+- scene breaks
+- asides, blurbs, callouts
+- footnotes and endnotes
+- index entries
+- directives
+- criticmarkup
+
+
+4. HTML is not static. If Markua specified a mapping to some specific version of HTML, e.g. HTML5, then as HTML evolved Markua would either have to evolve or become outdated.
+
+Even though there is no HTML mapping specified, anyone who knows HTML well will realize that essentially every Markua concept maps cleanly to HTML concepts. Obviously, HTML is an important output format of Markua, and there is a clear mapping to HTML syntax from Markua syntax. To assist with the development of Markua Processors which produce HTML, two things are being provided:
+
+1. An open source, ES6-based reference implementation of a Markua Processor which outputs HTML5 is being provided [here](https://github.com/markuadoc/markua-js).
+2. Suggestions for how to generate HTML5 from Markua are specified [in an appendix at the end of this specification](#html5_mapping).
+
+The reference implementation and the HTML5 generation suggestions should not be interpreted as providing compliance requirements for other Markua Processors, just strong recommendations.
+
 Strictly speaking, Markua Processors can do whatever they want when outputting HTML5 from Markua. However, while all choices are equally legal, some choices are more equal than others. This appendix provides strong recommendations for how to map Markua to HTML5. However, this appendix is not a complete specification or a set of compatibility tests.
 
 In the HTML ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
+
+
+Strictly speaking, Markua Processors can do whatever they want when outputting HTML5 from Markua. However, while all choices are equally legal, some choices are more equal than others. This appendix provides strong recommendations for how to map Markua to HTML5. However, this appendix is not a complete specification or a set of compatibility tests.
+
+In the HTML ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
+
+
+Choices:
+- no HTML5 examples
+- HTML5 subset examples
+- HTML5 subset spec
+- full HTML5 spec
+
+Things that can't be fully specified:
+- programming languages
+- icon support
+
+Things that could be implemented different ways:
+- figure divs
+- math as images
+- tables as images
+- scene breaks
+- asides, blurbs, callouts
+- footnotes and endnotes
+- index entries
+- directives
+- criticmarkup
+
+Solution:
+- no full HTML5 mapping, but occasional HTML5 spec for subset?
+- just implementation dependent???
+- specify a subset so there is at least some sanity when comparing HTML5 output from a Markua Processor?!
+
+
+
 
 ### Text Formatting
 
