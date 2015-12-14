@@ -3299,7 +3299,7 @@ These examples are not just examples--they are also the basis of a compatibility
 ## Text Formatting
 
 {#text_formatting_html}
-A> The syntax for text formatting is described [here](#text_formatting).
+The syntax for text formatting is described [here](#text_formatting).
 
 Markua is a plain text format designed for the writing of books. Books contain bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood.
 
@@ -3379,7 +3379,7 @@ The following CSS rule is recommended:
 ## Headings
 
 {#headings_html}
-A> The syntax for headings is described [here](#headings).
+The syntax for headings is described [here](#headings).
 
 In Markua, both parts and chapters produce an `h1` in HTML. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
@@ -3439,7 +3439,7 @@ This is a paragraph.
 ## Whitespace, Paragraphs and Blank Lines
 
 {#whitespace_html}
-A> The syntax for whitespace is described [here](#whitespace).
+The syntax for whitespace is described [here](#whitespace).
 
 ### Markua Syntax
 
@@ -3464,7 +3464,7 @@ This is paragraph three.
 ## Newlines, Indentation and Spaces
 
 {#newlines_html}
-A> The syntax for newlines is described [here](#newlines).
+The syntax for newlines is described [here](#newlines).
 
 ### Single Newlines
 
@@ -3584,7 +3584,7 @@ TODO - finish!
 ### Images
 
 {#images_html}
-A> The syntax for images is described [here](#images).
+The syntax for images is described [here](#images).
 
 #### Local Images
 
@@ -3767,7 +3767,7 @@ Here's a paragraph after the figure.
 ### Video
 
 {#video_html}
-A> The syntax for video is described [here](#video).
+The syntax for video is described [here](#video).
 
 #### Local Video
 
@@ -3861,7 +3861,7 @@ Here's a paragraph after the figure.
 ### Audio
 
 {#audio_html}
-A> The syntax for audio is described [here](#audio).
+The syntax for audio is described [here](#audio).
 
 #### Local Audio
 
@@ -3946,7 +3946,7 @@ The full version of the talk is here:
 ### Code
 
 {#code_html}
-A> The syntax for code is described [here](#code).
+The syntax for code is described [here](#code).
 
 #### Local Code Resources
 
