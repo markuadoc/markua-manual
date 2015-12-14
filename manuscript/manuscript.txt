@@ -3292,22 +3292,32 @@ If you're implementing a Markua Processor, this chapter should be helpful. In ad
 
 In the HTML ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
 
-This chapter is ordered in an almost identical way to the rest of the spec, but only the examples where there is a spec are included. Unlike the rest of the spec, which did a bunch of explaining and showed almost no HTML, in this chapter there is essentially no explaining--just a bunch of examples.
+This chapter is ordered in an almost identical way to the rest of the spec, but only the examples where there is a spec are included. Unlike the rest of the spec, which did a bunch of explaining and showed almost no HTML, in this chapter there is not much explaining--it's mostly just a bunch of examples.
 
 These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies. (In this section, there will be a number of Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test.) See <https://github.com/markuadoc/markua-test> for more information.
 
-## TODO - the rest of the spec is being rewritten; please ignore everything after this
-
-TODO - finish!
-
-{#text_formatting_html}
 ## Text Formatting
 
+{#text_formatting_html}
 A> The syntax for text formatting is described [here](#text_formatting).
 
-The preferred way to map Markua to HTML5 is as follows.
+Markua is a plain text format designed for the writing of books. Books contain bold and italicized text--and have done so for centuries. Because of this, you'd think that the notion of making text bold or italic would be well understood.
 
-There are two ways to produce each of italic, bold and bold + italic text in Markua.
+If you think this, you are clearly not familiar with the work of the W3C. The notion of making something bold or italic is very controversial in HTML: first the `<b>` and `<i>` tags were used to do this, then they got kind of deprecated in favour of `<strong>` and `<em>`, and now there are four main ways of adding emphasis to text in HTML5: [`<strong>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-strong-element), [`<b>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-b-element), [`<em>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-em-element) and [`<i>`](http://www.w3.org/TR/html5/text-level-semantics.html#the-i-element). The `<strong>` and `<b>` tags can wrap a span of text and add bold-esque emphasis to it, while the `<em>` and `<i>` tags can wrap a span of text and add italic-esque emphasis to it. I say "esque" since there is no guarantee that any of the four tags will actually make anything bold or italic. Seriously.
+
+So, what to do in Markua? Clearly we need to be able to make text bold and italic, since authors have been doing this in books for centuries. How should bold and italic be mapped to HTML?
+
+Now, what Markdown does is to just always generate `<strong>` and `<em>` tags. Both `**two asterisks**` and `__two underscores__` make a `<strong>` tag, and `*one asterisk*` and `_one underscore_` make an `<em>` tag. This means that in 2004, John Gruber was clearly in the camp of "the `<b>` and `<i>` tags are unsemantic and bad". (At that time, many people were in this camp, as HTML had gone to a dark place full of presentational attributes in tags. The "move all presentation to CSS" backlash was very necessary, but there were a couple places--such as this, and such as the deprecating of the `start` element of an `<ol>`--where semantic information was lumped in with presentation-only information and was unfairly maligned.)
+
+Now, since you can inline HTML in Markdown, if you wanted filthy `<b>` and `<i>` tags, you could just add them yourself. In Markua, however, we don't support inlining HTML, so that's not an option.
+
+So, what to do?
+
+Let's think about the goal of Markua:
+
+> Markua is intended to be extremely simple and powerful. We want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
+
+Given this, we want to provide the power of picking what kind of emphasis that you want, while ensuring that Markua is simple to learn. We need to support all four ways of producing emphasis in Markdown (one and two asterisks and underscores), and we want to be able to produce all four of the (newly semantic!) emphasis tags in HTML5. That's exactly what we're going to do. Unlike Markdown which defines four input tags and only two outputs, we're going to map the four inputs to four outputs.
 
 Italic
 : To produce *italic text*, surround it with either `_one underscore_` (producing `<i>` in HTML) or `*one asterisk*` (producing `<em>` in HTML[^w3c_em]).
@@ -3318,96 +3328,45 @@ Bold
 Bold + Italic
 : To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML), `***three asterisks***` (producing `<strong><em>` in HTML).
 
+There are actually a number of benefits to this:
 
-#### Markua Syntax
+* Publishers can style `<b>` and `<strong>` differently. The `<strong>` tag can produce text which is using an even heavier-weight font than the `<b>` tag.
+* Authors can italicize things they are supposed to (e.g. the titles of books), without implying the kind of semantic emphasis of the `<em>` tag.
+* Since the four combinations of asterisks and underscores produces different output, which to choose will be determined by the desired output, not personal taste of "do you prefer underscores or asterisks". This means that multi-author Markua projects won't have to have pointless writing style debates about which type of Markua markup to use.
+* All Markdown text which has any of the four kinds of emphasis will still generate emphasis that looks like this in Markua.
+* Text editors (e.g. iA Writer) which know how to show emphasis for Markdown syntax will do so with Markua emphasis syntax.
 
-{#input_text_formatting}
+Whereas bold and italic are controversial, the other text formatting in Markua is entirely uncontroversial.
+
+This example shows all the text formatting:
+
+### Markua Syntax
+
+{#input_text_formatting_1}
 ~~~
 This is _an i tag_ and this is *an em tag*.
-~~~
-
-#### HTML5 Mapping
-
-{#output_italic_1}
-~~~
-<p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
-~~~
-
-#### Italic
-
-##### Example
-
-###### Markua Syntax
-
-{#input_italic_1}
-~~~
-This is _an i tag_ and this is *an em tag*.
-~~~
-
-###### HTML Output
-
-{#output_italic_1}
-~~~
-<p>This is <i>an i tag</i> and this is <em>an em tag</em>.</p>
-~~~
-
-#### Bold
-
-##### Example
-
-###### Markua Syntax
-
-{#input_bold_1}
-~~~
 This is __a b tag__ and this is **a strong tag**.
-~~~
-
-###### HTML Output
-
-{#output_bold_1}
-~~~
-<p>This is <b>a b tag</b> and this is <strong>a strong tag</strong>.</p>
-~~~
-
-#### Bold + Italic
-
-##### Example
-
-###### Markua Syntax
-
-{#input_bold_italic_1}
-~~~
 This is ___a b i tag combo___ and this is ***a strong em tag combo***.
-~~~
-
-###### HTML Output
-
-{#output_bold_italic_1}
-~~~
-<p>This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag combo</em></strong>.
-~~~
-
-### Underline
-
-##### Example
-
-###### Markua Syntax
-
-{#input_underline_1}
-~~~
 This is ____a u tag____. Yeah, it's ugly.
+This is ~~a strikethrough tag~~.
+5^3^ = 125
+Water is H~2~O.
 ~~~
 
-###### HTML Output
+### HTML Output
 
-{#output_underline_1}
+{#output_text_formatting_1}
 ~~~
-<p>This is <u>a u tag</u>. Yeah, it's ugly.</p>
+<p>This is <i>an i tag</i> and this is <em>an em tag</em>.<br/>
+This is <b>a b tag</b> and this is <strong>a strong tag</strong>.<br/>
+This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag combo</em></strong>.<br/>
+This is <u>a u tag</u>. Yeah, it's ugly.<br/>
+This is <span class="strikethrough">a strikethrough tag</span>.<br/>
+5<sup>3</sup> = 125<br/>
+Water is H<sub>2</sub>O.</p>
 ~~~
 
-### Strikethrough
-
-#### CSS Recommendation
+### CSS Recommendation
 
 The following CSS rule is recommended:
 
@@ -3417,68 +3376,14 @@ The following CSS rule is recommended:
 }
 ~~~
 
-##### Example
-
-###### Markua Syntax
-
-{#input_strikethrough_1}
-~~~
-This is ~~a strikethrough tag~~.
-~~~
-
-###### HTML Output
-
-{#output_strikethrough_1}
-~~~
-<p>This is <span class="strikethrough">a strikethrough tag</span>.</p>
-~~~
-
-### Superscript
-
-##### Example
-
-###### Markua Syntax
-
-{#input_superscript_1}
-~~~
-5^3^ = 125
-~~~
-
-###### HTML Output
-
-{#output_superscript_1}
-~~~
-<p>5<sup>3</sup> = 125</p>
-~~~
-
-### Subscript
-
-##### Example
-
-###### Markua Syntax
-
-{#input_subscript_1}
-~~~
-Water is H~2~O.
-~~~
-
-###### HTML Output
-
-{#output_subscript_1}
-~~~
-<p>Water is H<sub>2</sub>O.</p>
-~~~
-
-### Headings
-
-Note that in Markua, both parts and chapters produce an `h1`. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
+## Headings
 
 {#headings_html}
 A> The syntax for headings is described [here](#headings).
 
-##### Example
+In Markua, both parts and chapters produce an `h1` in HTML. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
-###### Markua Syntax
+### Markua Syntax
 
 {#input_headings_1}
 ~~~
@@ -3511,7 +3416,7 @@ This is a paragraph.
 This is a paragraph.
 ~~~
 
-###### HTML Output
+### HTML Output
 
 {#output_headings_1}
 ~~~
@@ -3536,9 +3441,7 @@ This is a paragraph.
 {#whitespace_html}
 A> The syntax for whitespace is described [here](#whitespace).
 
-##### Example
-
-###### Markua Syntax
+### Markua Syntax
 
 {#input_whitespace_1}
 ~~~
@@ -3549,7 +3452,7 @@ This is paragraph two.
 This is paragraph three.
 ~~~
 
-###### HTML Output
+### HTML Output
 
 {#output_whitespace_1}
 ~~~
@@ -3565,9 +3468,7 @@ A> The syntax for newlines is described [here](#newlines).
 
 ### Single Newlines
 
-##### Example 1
-
-###### Markua Syntax
+#### Markua Syntax
 
 {#input_single_newlines_1}
 ~~~
@@ -3578,9 +3479,15 @@ This is *still* in paragraph two, preceded by a forced line break.
 This is also in paragraph two, also preceded by a forced line break.
 
 This is paragraph three.
+
+# This.
+Is.
+Heading Text!!!
+
+This is paragraph four.
 ~~~
 
-###### HTML Output
+#### HTML Output
 
 {#output_single_newlines_1}
 ~~~
@@ -3589,36 +3496,15 @@ This is paragraph three.
 This is *still* in paragraph two, preceded by a forced line break.<br/>
 This is also in paragraph two, also preceded by a forced line break.</p>
 <p>This is paragraph three.</p>
-~~~
-
-##### Example 2 - A Presumably Incorrect Heading
-
-###### Markua Syntax
-
-{#input_single_newlines_2}
-~~~
-# This.
-Is.
-Heading Text!!!
-
-I'm paragraph one. Yay!
-~~~
-
-###### HTML Output
-
-{#output_single_newlines_2}
-~~~
 <h1>This.<br/>
 Is.<br/>
 Heading Text!!!</h1>
-<p>I'm paragraph one. Yay!</p>
+<p>This is paragraph four.</p>
 ~~~
 
 ### Three or More Newlines
 
-##### Example
-
-###### Markua Syntax
+#### Markua Syntax
 
 {#input_three_or_more_newlines_1}
 ~~~
@@ -3635,7 +3521,7 @@ This paragraph is followed by five newlines.
 The End
 ~~~
 
-###### HTML Output
+#### HTML Output
 
 {#output_three_or_more_newlines_1}
 ~~~
@@ -3651,9 +3537,7 @@ The End
 
 ### Leading Spaces (Prose vs. Poetry)
 
-##### Poetic Example
-
-##### Markua Syntax
+#### Markua Syntax
 
 {#input_leading_spaces_1}
 ~~~
@@ -3663,7 +3547,7 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ~~~
 
-##### HTML Output
+#### HTML Output
 
 {#output_leading_spaces_1}
 ~~~
@@ -3677,21 +3561,25 @@ My mistress when she walks treads on the ground.<br/>
 
 ### Internal Spaces are Collapsed to One Space
 
-##### Example
-
-###### Markua Syntax
+#### Markua Syntax
 
 {#input_internal_spaces_1}
 ~~~
 foo   bar
 ~~~
 
-###### HTML Output
+#### HTML Output
 
 {#output_internal_spaces_1}
 ~~~
 <p>foo bar</p>
 ~~~
+
+
+## TODO - the rest of the spec is being rewritten; please ignore everything after this
+
+TODO - finish!
+
 
 ## Resources
 
