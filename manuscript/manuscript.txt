@@ -3292,6 +3292,10 @@ This chapter is ordered in an almost identical way to the rest of the spec, but 
 
 These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies. (In this section, there will be a number of Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test.) See <https://github.com/markuadoc/markua-test> for more information.
 
+## TODO - the rest of the spec is being rewritten; please ignore...
+
+TODO
+
 {#text_formatting_html}
 ## Text Formatting
 
