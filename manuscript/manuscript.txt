@@ -3228,7 +3228,7 @@ W> TODO_LEANPUB - support this in Leanpub
 {#markdown_headings}
 ## Markdown Headings
 
-Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
+Whereas Markua defines [exactly one way of making every type of heading](#headings), Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
 
 {#setext_headings}
 ### Setext Headings in Markdown
@@ -4298,7 +4298,7 @@ I'm getting great feedback on Twitter and via email as well.
 * [Axel Rauschmayer](https://twitter.com/rauschma) was really helpful to me in an email thread that we had, which was the catalyst for me to rethink my goals with Markua and to start throwing out more than I had planned to from Leanpub Flavoured Markdown.
 * [Michael Müller](https://twitter.com/muellermi) was key in convincing me to add index entry support to Markua.
 * Dave Warnock helped me clarify my thinking about lists, and asked a number of insightful questions.
-* André Bacci provided good feedback on my HTML mapping decisions, back when HTML mapping was part of the Markua spec.
+* André Bacci provided good feedback on my HTML mapping decisions.
 
 Perhaps most important, Markua is benefiting from years of feedback about Leanpub Flavoured Markdown from Leanpub authors. If it wasn't for Leanpub authors, there would be no Markua.
 
