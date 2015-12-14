@@ -3590,10 +3590,6 @@ foo   bar
 <p>foo bar</p>
 ~~~
 
-## TODO - the rest of the spec is being rewritten; please ignore everything after this
-
-TODO - finish!
-
 ## Resources
 
 ### Images
@@ -3603,28 +3599,12 @@ The syntax for images is described [here](#images).
 
 #### Local Images
 
-##### Span Example
+##### Markua Syntax
 
-###### Markua Syntax
-
-{#input_local_images_span_1}
+{#input_local_images_1}
 ~~~
 Easy as ![pie](pie.png).
-~~~
 
-###### HTML Output
-
-{#output_local_images_span_1}
-~~~
-<p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
-~~~
-
-##### Figure Example
-
-###### Markua Syntax
-
-{#input_local_images_figure_1}
-~~~
 Here's a paragraph before the first figure.
 
 ![A Piece of Cake](cake.jpg)
@@ -3642,10 +3622,11 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
-###### HTML Output
+##### HTML Output
 
-{#output_local_images_figure_1}
+{#output_local_images_1}
 ~~~
+<p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
 <p>Here's a paragraph before the first figure.</p>
 <div class="figure">
   <img src="cake.jpg"/>
@@ -3666,28 +3647,12 @@ Here's a paragraph after the third figure.
 
 #### Web Images
 
-##### Span Example
+##### Markua Syntax
 
-###### Markua Syntax
-
-{#input_web_images_span_1}
+{#input_web_images_1}
 ~~~
 Easy as ![pie](http://markua.com/pie.png).
-~~~
 
-###### HTML Output
-
-{#output_web_images_span_1}
-~~~
-<p>Easy as <img src="http://markua.com/pie.png" alt="pie"/>.</p>
-~~~
-
-##### Figure Example
-
-###### Markua Syntax
-
-{#input_web_images_figure_1}
-~~~
 Here's a paragraph before the first figure.
 
 ![A Piece of Cake](http://markua.com/cake.jpg)
@@ -3705,10 +3670,11 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
-###### HTML Output
+##### HTML Output
 
-{#output_web_images_figure_1}
+{#output_web_images_1}
 ~~~
+<p>Easy as <img src="http://markua.com/pie.png" alt="pie"/>.</p>
 <p>Here's a paragraph before the first figure.</p>
 <div class="figure">
   <img src="http://markua.com/cake.jpg"/>
@@ -3729,45 +3695,30 @@ Here's a paragraph after the third figure.
 
 #### Inline Images (SVG only)
 
-##### Span Example
+##### Markua Syntax
 
-###### Markua Syntax
-
-{#input_inline_images_span_1}
+{#input_inline_images_1}
 ~~~
 Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
-~~~
 
-###### HTML Output
-
-{#output_inline_images_span_1}
-~~~
-<p>Red <svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg> square.</p>
-~~~
-
-##### Figure Example
-
-###### Markua Syntax
-
-{#input_inline_images_figure_1}
-~~~
 Here's a paragraph before the figure.
 
 {caption: "Earth From Space (Simplified)"}
-~~~svg
+```svg
 <svg width="20" height="20">
   <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
-~~~
+```
 
 Here's a paragraph after the figure.
 ~~~
 
 ###### HTML Output
 
-{#output_inline_images_figure_1}
+{#output_inline_images_1}
 ~~~
+<p>Red <svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg> square.</p>
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <svg width="20" height="20">
@@ -3786,28 +3737,12 @@ The syntax for video is described [here](#video).
 
 #### Local Video
 
-##### Span Example
+##### Markua Syntax
 
-###### Markua Syntax
-
-{#input_local_video_span_1}
+{#input_local_video_1}
 ~~~
 Easy as ![pie](pie_eating_contest.mp4).
-~~~
 
-###### HTML Output
-
-{#output_local_video_span_1}
-~~~
-<p>Easy as <video src="resources/pie_eating_contest.mp4" alt="pie"/>.</p>
-~~~
-
-##### Figure Example
-
-###### Markua Syntax
-
-{#input_local_video_figure_1}
-~~~
 Here's a paragraph before the figure.
 
 {alt: "a man eating an entire chocolate cake"}
@@ -3816,10 +3751,11 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-###### HTML Output
+##### HTML Output
 
-{#output_local_video_figure_1}
+{#output_local_video_1}
 ~~~
+<p>Easy as <video src="resources/pie_eating_contest.mp4" alt="pie"/>.</p>
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <video src="cake_eating_contest.webm" alt="a man eating an entire chocolate cake"/>
@@ -3830,28 +3766,12 @@ Here's a paragraph after the figure.
 
 #### Web Video
 
-##### Span Example
+##### Markua Syntax
 
-###### Markua Syntax
-
-{#input_web_video_span_1}
+{#input_web_video_1}
 ~~~
 Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
-~~~
 
-###### HTML Output
-
-{#output_web_video_span_1}
-~~~
-<p>Easy as <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0" alt="Peter's Markua talk"/>.</p>
-~~~
-
-##### Figure Example
-
-###### Markua Syntax
-
-{#input_web_video_figure_1}
-~~~
 Here's a paragraph before the figure.
 
 {poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
@@ -3860,10 +3780,11 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-###### HTML Output
+##### HTML Output
 
-{#output_web_video_figure_1}
+{#output_web_video_1}
 ~~~
+<p>Easy as <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0" alt="Peter's Markua talk"/>.</p>
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0"
@@ -3880,37 +3801,22 @@ The syntax for audio is described [here](#audio).
 
 #### Local Audio
 
-##### Span Example
+##### Markua Syntax
 
-###### Markua Syntax
-
-{#input_local_audio_span_1}
+{#input_local_audio_1}
 ~~~
 The talk audio highlights are here: ![](highlights.mp3).
-~~~
 
-###### HTML Output
-
-{#output_local_audio_span_1}
-~~~
-<p>The talk audio highlights are here: <audio src="resources/highlights.mp3"/>.</p>
-~~~
-
-##### Figure Example
-
-###### Markua Syntax
-
-{#input_local_audio_span_1}
-~~~
 The full version of the talk is here:
 
 ![Full Talk](talk.m4a)
 ~~~
 
-###### HTML Output
+##### HTML Output
 
-{#output_local_audio_span_1}
+{#output_local_audio_1}
 ~~~
+<p>The talk audio highlights are here: <audio src="resources/highlights.mp3"/>.</p>
 <p>The full version of the talk is here:</p>
 <div class="figure">
   <audio src="resources/talk.m4a"/>
@@ -3920,37 +3826,22 @@ The full version of the talk is here:
 
 #### Web Audio
 
-##### Span Example
+##### Markua Syntax
 
-###### Markua Syntax
-
-{#input_local_audio_span_1}
+{#input_local_audio_1}
 ~~~
 The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
-~~~
 
-###### HTML Output
-
-{#output_local_audio_span_1}
-~~~
-<p>The talk audio highlights are here: <audio src="http://markua.com/highlights.mp3"/>.</p>
-~~~
-
-##### Figure Example
-
-###### Markua Syntax
-
-{#input_local_audio_span_1}
-~~~
 The full version of the talk is here:
 
 ![Full Talk](http://markua.com/talk.m4a)
 ~~~
 
-###### HTML Output
+##### HTML Output
 
-{#output_local_audio_span_1}
+{#output_local_audio_1}
 ~~~
+<p>The talk audio highlights are here: <audio src="http://markua.com/highlights.mp3"/>.</p>
 <p>The full version of the talk is here:</p>
 <div class="figure">
   <audio src="http://markua.com/talk.m4a"/>
@@ -3967,7 +3858,9 @@ The syntax for code is described [here](#code).
 
 ##### Span Example
 
-###### Dependencies
+###### Example Dependency
+
+This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
 
 {#dependencies_local_code_span_1}
 ~~~
@@ -3993,7 +3886,7 @@ Hello in Ruby is a simple ![](hello.rb) statement.
 
 ###### Dependencies
 
-This defines the hello.rb file used in this example.
+This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
 
 {#dependencies_local_code_figure_1}
 ~~~
@@ -4011,50 +3904,17 @@ puts "world"
 ~~~
 Here's a paragraph before the figure.
 
-![Hello World in Ruby](hello.rb)
-
-That is equivalent to:
-
-{format: guess}
-![Hello World in Ruby](hello.rb)
-
-If you don't want to take chances you can do this:
-
 {format: ruby}
 ![Hello World in Ruby](hello.rb)
-
-Finally, note that the caption is optional in all figures:
-
-![](hello.rb)
 
 Here's a paragraph after the figure.
 ~~~
 
 ###### HTML Output
 
-W> TODO - this test does not work since it's indeterminate what format is guessed at, and the HTML would change accordingly???
-
 {#output_local_code_figure_1}
 ~~~
 <p>Here's a paragraph before the figure.</p>
-<div class="figure">
-  <pre><code format="guess">
-puts "hello"
-
-puts "world"
-  </code></pre>
-  <p class="caption">Hello World in Ruby</p>
-</div>
-<p>That is equivalent to:</p>
-<div class="figure">
-  <pre><code format="guess">
-puts "hello"
-
-puts "world"
-  </code></pre>
-  <p class="caption">Hello World in Ruby</p>
-</div>
-<p>If you don't want to take chances you can do this:</p>
 <div class="figure">
   <pre><code format="ruby">
 puts "hello"
@@ -4063,17 +3923,10 @@ puts "world"
   </code></pre>
   <p class="caption">Hello World in Ruby</p>
 </div>
-
-
-Finally, note that the caption is optional in all figures:
-
-![](hello.rb)
-
-Here's a paragraph after the figure.
-
-
-<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
+<p>Here's a paragraph after the figure.</p>
 ~~~
+
+## TODO_HERE
 
 {#criticmarkup_html}
 ## CriticMarkup
