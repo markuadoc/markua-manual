@@ -3324,7 +3324,9 @@ Given this, Markua needs to provide the power of picking what kind of emphasis t
 | `__two underscores__` | `<b>two underscores</b>`         | __bold__   |
 | `**two asterisks**`   | `<strong>two asterisks</strong>` | **bold**   |
 
-This also works for bold + italic. To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML) or `***three asterisks***` (producing `<strong><em>` in HTML).
+W> TODO_LEANPUB - fix two underscores in Leanpub
+
+This also works for ___bold + italic___. To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML) or `***three asterisks***` (producing `<strong><em>` in HTML).
 
 There are actually a number of benefits to this:
 
