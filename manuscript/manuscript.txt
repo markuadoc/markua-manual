@@ -4216,7 +4216,7 @@ Next, a huge thanks to [Ken Pratt](https://twitter.com/ken_pratt), who made a nu
 
 I'd also like to thank [Justin Damer](https://twitter.com/damerdamer). Justin and I designed the logo for Markua together, just as we designed the Leanpub logo together. I've never enjoyed working with a designer more than I enjoy working with Justin.
 
-I'd like to thank my father, who has read the manuscript and given me feedback more than once. This process helped me realize how much of a slog it was to read the first time through, and this led to my factoring out the HTML mapping stuff into its own chapter. That decision made the later decision of not specifying HTML mapping at all much easier to make.
+I'd like to thank my father, who has read the manuscript and given me feedback more than once. This process helped me realize how much of a slog it was to read the first time through, and this led to my factoring out the HTML mapping stuff into its own chapter.
 
 I'm getting great feedback on Twitter and via email as well.
 
