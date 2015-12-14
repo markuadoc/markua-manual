@@ -3313,20 +3313,18 @@ Now, since you can inline HTML in Markdown, if you wanted filthy `<b>` and `<i>`
 
 So, what to do?
 
-Let's think about the goal of Markua:
+The goal of Markua is to be the best way in the world to write books, to be simple and powerful.
 
-> Markua is intended to be extremely simple and powerful. We want Markua to be the best way in the world to write everything from a short story or a novel to a computer programming book, user manual or doctoral thesis.
+Given this, Markua needs to provide the power of picking what kind of emphasis that you want, while ensuring that Markua is simple to learn. We need to support all four ways of producing emphasis in Markdown (one and two asterisks, one and two underscores), and we want to be able to produce all four of the (newly semantic!) emphasis tags in HTML5. That's exactly what we're going to do. Unlike Markdown which defines four input tags and only two outputs (`<strong>` and `<em>`), we're going to map the four inputs to four outputs.
 
-Given this, we want to provide the power of picking what kind of emphasis that you want, while ensuring that Markua is simple to learn. We need to support all four ways of producing emphasis in Markdown (one and two asterisks and underscores), and we want to be able to produce all four of the (newly semantic!) emphasis tags in HTML5. That's exactly what we're going to do. Unlike Markdown which defines four input tags and only two outputs, we're going to map the four inputs to four outputs.
+| Markua Syntax         | HTML Produced                    | Appearance |
+|-----------------------|----------------------------------|------------|
+| `_one underscore_`    | `<i>one underscore</i>`          | _italic_   |
+| `*one asterisk*`      | `<em>one asterisk</em>`          | *italic*   |
+| `__two underscores__` | `<b>two underscores</b>`         | __bold__   |
+| `**two asterisks**`   | `<strong>two asterisks</strong>` | **bold**   |
 
-Italic
-: To produce *italic text*, surround it with either `_one underscore_` (producing `<i>` in HTML) or `*one asterisk*` (producing `<em>` in HTML[^w3c_em]).
-
-Bold
-: To produce **bold text**, surround it with either `__two underscores__` (producing `<b>` in HTML) or `**two asterisks**` (producing `<strong>` in HTML).
-
-Bold + Italic
-: To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML), `***three asterisks***` (producing `<strong><em>` in HTML).
+This also works for bold + italic. To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML) or `***three asterisks***` (producing `<strong><em>` in HTML).
 
 There are actually a number of benefits to this:
 
@@ -3575,11 +3573,9 @@ foo   bar
 <p>foo bar</p>
 ~~~
 
-
 ## TODO - the rest of the spec is being rewritten; please ignore everything after this
 
 TODO - finish!
-
 
 ## Resources
 
