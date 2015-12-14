@@ -3270,7 +3270,11 @@ Both ways are appropriate, and a Markua Processor could support both. For exampl
 For example, the following example shows a paragraph annotated with all five types of CriticMarkup:
 
 ~~~
-If you enjoy using track changes{>>Who enjoys this?<<} in Word, then {~~you'll enjoy~>you may like~~} using CriticMarkup {++annotations++}. If you don't enjoy working with editors{-- or getting feedback about your writing in the text itself--}, then CriticMarkup isn't for you! If this is the case, don't worry about it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>This sounds ambivalent.<<}. If you don't want to use it, you don't need to learn about it.
+If you enjoy using track changes{>>Who enjoys this?<<} in Word, then {~~you'll enjoy~>you may like~~} using
+CriticMarkup {++annotations++}. If you don't enjoy working with editors{-- or getting feedback about your
+writing in the text itself--}, then CriticMarkup isn't for you! If this is the case, don't worry about
+it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>This sounds ambivalent.<<}.
+If you don't want to use it, you don't need to learn about it.
 ~~~
 
 The CriticMarkup section in the HTML Mapping Requirements chapter [shows](#criticmarkup_html) the result of a Markua Processor either outputting or ignoring all the CriticMarkup.
@@ -4182,19 +4186,31 @@ However, regardless of the fact that there is a choice, there is an exact specif
 The following example shows a paragraph annotated with CriticMarkup:
 
 ~~~
-If you enjoy using track changes{>>Who enjoys this?<<} in Word, then {~~you'll enjoy~>you may like~~} using CriticMarkup {++annotations++}. If you don't enjoy working with editors{-- or getting feedback about your writing in the text itself--}, then CriticMarkup isn't for you! If this is the case, don't worry about it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>This sounds ambivalent.<<}. If you don't want to use it, you don't need to learn about it.
+If you enjoy using track changes{>>Who enjoys this?<<} in Word, then {~~you'll enjoy~>you may like~~} using
+CriticMarkup {++annotations++}. If you don't enjoy working with editors{-- or getting feedback about your
+writing in the text itself--}, then CriticMarkup isn't for you! If this is the case, don't worry about
+it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>This sounds ambivalent.<<}.
+If you don't want to use it, you don't need to learn about it.
 ~~~
 
 Here's the HTML that must be produced when the Markua Processor is ignoring all CriticMarkup:
 
 ~~~
-<p>If you enjoy using track changes in Word, then you'll enjoy using CriticMarkup. If you don't enjoy working with editors or getting feedback about your writing in the text itself, then CriticMarkup isn't for you! If this is the case, don't worry about it: the support for CriticMarkup has no impact on the rest of Markua. If you don't want to use it, you don't need to learn about it.</p>
+<p>If you enjoy using track changes in Word, then you'll enjoy using CriticMarkup. If you don't enjoy
+working with editors or getting feedback about your writing in the text itself, then CriticMarkup
+isn't for you! If this is the case, don't worry about it: the support for CriticMarkup has no impact
+on the rest of Markua. If you don't want to use it, you don't need to learn about it.</p>
 ~~~
 
 Here's the HTML that must be produced when the Markua Processor is outputting all CriticMarkup:
 
 ~~~
-<p>If you enjoy using track changes<span class="critic comment">Who enjoys this?</span> in Word, then <del>you'll enjoy</del><ins>you may like</ins> using CriticMarkup <ins>annotations</ins>. If you don't enjoy working with editors<del> or getting feedback about your writing in the text itself</del>, then CriticMarkup isn't for you! If this is the case, don't worry about it: <mark>the support for CriticMarkup has no impact on the rest of Markua</mark><span class="critic comment">This sounds ambivalent.</span>. If you don't want to use it, you don't need to learn about it.</p>
+<p>If you enjoy using track changes<span class="critic comment">Who enjoys this?</span> in Word,
+then <del>you'll enjoy</del><ins>you may like</ins> using CriticMarkup <ins>annotations</ins>. If
+you don't enjoy working with editors<del> or getting feedback about your writing in the text itself</del>,
+then CriticMarkup isn't for you! If this is the case, don't worry about it: <mark>the support for
+CriticMarkup has no impact on the rest of Markua</mark><span class="critic comment">This sounds
+ambivalent.</span>. If you don't want to use it, you don't need to learn about it.</p>
 ~~~
 
 {backmatter}
