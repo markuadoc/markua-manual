@@ -3926,7 +3926,207 @@ puts "world"
 <p>Here's a paragraph after the figure.</p>
 ~~~
 
+#### Local Code Resources
+
+##### Span Example
+
+###### Example Dependency
+
+This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
+
+{#dependencies_local_code_span_1}
+~~~
+hello.rb:
+```
+puts "hello world"
+```
+~~~
+
+###### Markua Syntax
+
+{#input_local_code_span_1}
+~~~
+Hello in Ruby is a simple ![](hello.rb) statement.
+~~~
+
+###### HTML Output
+
+{#output_local_code_span_1}
+~~~
+<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
+~~~
+
+##### Figure Example
+
+###### Dependencies
+
+This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
+
+{#dependencies_local_code_figure_1}
+~~~
+helloworld.rb:
+```
+puts "hello"
+
+puts "world"
+```
+~~~
+
+###### Markua Syntax
+
+{#input_local_code_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{format: ruby}
+![Hello World in Ruby](helloworld.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_local_code_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <pre><code format="ruby">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
+#### Web Code Resources
+
+##### Span Example
+
+###### Example Dependency
+
+This file exists on `http://markua.com` for test purposes.
+
+{#dependencies_web_code_span_1}
+~~~
+http://markua.com/hello.rb:
+```
+puts "hello world"
+```
+~~~
+
+###### Markua Syntax
+
+{#input_web_code_span_1}
+~~~
+Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
+~~~
+
+###### HTML Output
+
+{#output_web_code_span_1}
+~~~
+<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
+~~~
+
+##### Figure Example
+
+###### Dependencies
+
+This file exists on `http://markua.com` for test purposes.
+
+{#dependencies_web_code_figure_1}
+~~~
+http://markua.com/helloworld.rb:
+```
+puts "hello"
+
+puts "world"
+```
+~~~
+
+###### Markua Syntax
+
+{#input_web_code_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{format: ruby}
+![Hello World in Ruby](http://markua.com/helloworld.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_web_code_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <pre><code format="ruby">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
+#### Inline Code Resources
+
+##### Span Example
+
+###### Markua Syntax
+
+{#input_inline_code_span_1}
+~~~
+Hello in Ruby is a `puts "hello"`ruby statement.
+~~~
+
+###### HTML Output
+
+{#output_inline_code_span_1}
+~~~
+<p>Hello in Ruby is a <code format="ruby">puts "hello"`</code> statement.</p>
+~~~
+
+##### Figure Example
+
+###### Markua Syntax
+
+{#input_inline_code_figure_1}
+~~~
+Here's a paragraph before the figure.
+
+{caption: "Hello World in Ruby"}
+```ruby
+puts "hello"
+```
+
+Here's a paragraph after the figure.
+~~~
+
+###### HTML Output
+
+{#output_inline_code_figure_1}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <pre><code format="ruby">
+puts "hello"
+
+puts "world"
+  </code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
 ## TODO_HERE
+
+TODO
 
 {#criticmarkup_html}
 ## CriticMarkup
@@ -3988,7 +4188,7 @@ I'd also like to thank [Justin Damer](https://twitter.com/damerdamer). Justin an
 
 I'd like to thank my father, who has read the manuscript and given me feedback more than once. This process helped me realize how much of a slog it was to read the first time through, and this led to my factoring out the HTML mapping stuff into its own chapter.
 
-I'm getting great feedback on Twitter and via email as well.
+I'm getting great feedback on Twitter and via email as well:
 
 * [Iva Cheung](https://twitter.com/IvaCheung) helped me figure out how to think about front matter, main matter and back matter properly. She also organizes a Vancouver publishing unconference that I've had the pleasure of speaking at.
 * I know [Assaf Arkin](https://twitter.com/assaf) from my Silicon Valley days: Assaf was the CTO of Intalio for the four years that I was a developer there. Assaf is probably the smartest technologist that I have ever worked with (sorry Ken!), and his interest in Markua and his feedback during its early development were both motivating and helpful.
