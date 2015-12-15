@@ -4553,11 +4553,9 @@ ipsum
 <p>ipsum</p>
 ~~~
 
-### Ordered Lists (i.e. Numbered Lists)
+#### Ordered Lists (i.e. Numbered Lists)
 
-#### Examples: Decimal Numbers
-
-##### Example 1
+##### Example 1: Decimal Numbers
 
 ###### Markua Syntax
 
@@ -4570,6 +4568,30 @@ lorem
 3. baz
 
 ipsum
+
+9. foo
+10. bar
+11. baz
+
+dolor
+
+3. foo
+2. bar
+1. baz
+
+sit
+
+11. foo
+10. bar
+9. baz
+
+amet
+
+1. one
+1. two
+1. three
+
+etc.
 ~~~
 
 ###### HTML Output
@@ -4583,125 +4605,37 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-~~~
-
-##### Example 2
-
-###### Markua Syntax
-
-{#input_ordered_list_2}
-~~~
-lorem
-
-9. foo
-10. bar
-11. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_2}
-~~~
-<p>lorem</p>
 <ol start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 3
-
-###### Markua Syntax
-
-{#input_ordered_list_3}
-~~~
-lorem
-
-3. foo
-2. bar
-1. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_3}
-~~~
-<p>lorem</p>
+<p>dolor</p>
 <ol start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 4
-
-###### Markua Syntax
-
-{#input_ordered_list_4}
-~~~
-lorem
-
-11. foo
-10. bar
-9. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_4}
-~~~
-<p>lorem</p>
+<p>sit</p>
 <ol start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 5
-
-{#input_ordered_list_5}
-~~~
-lorem
-
-1. foo
-1. bar
-1. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_5}
-~~~
-<p>lorem</p>
+<p>amet</p>
 <ol>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
+<p>etc.</p>
 ~~~
 
-#### Examples: Uppercase Letters
-
-##### Example 1
+##### Example 2: Uppercase Letters
 
 ###### Markua Syntax
 
-{#input_ordered_list_uc_1}
+{#input_ordered_list_2}
 ~~~
 lorem
 
@@ -4710,11 +4644,35 @@ B. bar
 C. baz
 
 ipsum
+
+I. foo
+J. bar
+K. baz
+
+dolor
+
+C. foo
+B. bar
+A. baz
+
+sit
+
+K. foo
+J. bar
+I. baz
+
+amet
+
+A. foo
+A. bar
+A. baz
+
+etc.
 ~~~
 
 ###### HTML Output
 
-{#output_ordered_list_uc_1}
+{#output_ordered_list_2}
 ~~~
 <p>lorem</p>
 <ol type="A">
@@ -4723,126 +4681,38 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-~~~
-
-##### Example 2
-
-###### Markua Syntax
-
-{#input_ordered_list_uc_2}
-~~~
-lorem
-
-I. foo
-J. bar
-K. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_uc_2}
-~~~
-<p>lorem</p>
 <ol type="A" start="9">
 <ol start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 3
-
-###### Markua Syntax
-
-{#input_ordered_list_uc_3}
-~~~
-lorem
-
-C. foo
-B. bar
-A. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_uc_3}
-~~~
-<p>lorem</p>
+<p>dolor</p>
 <ol type="A" start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 4
-
-###### Markua Syntax
-
-{#input_ordered_list_uc_4}
-~~~
-lorem
-
-K. foo
-J. bar
-I. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_uc_4}
-~~~
-<p>lorem</p>
+<p>sit</p>
 <ol type="A" start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 5
-
-{#input_ordered_list_uc_5}
-~~~
-lorem
-
-A. foo
-A. bar
-A. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_uc_5}
-~~~
-<p>lorem</p>
+<p>amet</p>
 <ol type="A">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
+<p>etc.</p>
 ~~~
 
-#### Examples: Lowercase Letters
-
-##### Example 1
+##### Example 3: Lowercase Letters
 
 ###### Markua Syntax
 
-{#input_ordered_list_lc_1}
+{#input_ordered_list_3}
 ~~~
 lorem
 
@@ -4851,11 +4721,35 @@ b. bar
 c. baz
 
 ipsum
+
+i. foo
+j. bar
+k. baz
+
+dolor
+
+c. foo
+b. bar
+a. baz
+
+sit
+
+k. foo
+j. bar
+i. baz
+
+amet
+
+a. foo
+a. bar
+a. baz
+
+etc.
 ~~~
 
 ###### HTML Output
 
-{#output_ordered_list_lc_1}
+{#output_ordered_list_3}
 ~~~
 <p>lorem</p>
 <ol type="a">
@@ -4864,126 +4758,38 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-~~~
-
-##### Example 2
-
-###### Markua Syntax
-
-{#input_ordered_list_lc_2}
-~~~
-lorem
-
-i. foo
-j. bar
-k. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lc_2}
-~~~
-<p>lorem</p>
 <ol type="a" start="9">
 <ol start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 3
-
-###### Markua Syntax
-
-{#input_ordered_list_lc_3}
-~~~
-lorem
-
-c. foo
-b. bar
-a. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lc_3}
-~~~
-<p>lorem</p>
+<p>dolor</p>
 <ol type="a" start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 4
-
-###### Markua Syntax
-
-{#input_ordered_list_lc_4}
-~~~
-lorem
-
-k. foo
-j. bar
-i. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lc_4}
-~~~
-<p>lorem</p>
+<p>sit</p>
 <ol type="a" start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 5
-
-{#input_ordered_list_lc_5}
-~~~
-lorem
-
-a. foo
-a. bar
-a. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lc_5}
-~~~
-<p>lorem</p>
+<p>amet</p>
 <ol type="a">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
+<p>etc.</p>
 ~~~
 
-#### Examples: Uppercase Roman Numerals
-
-##### Example 1
+##### Example 4: Uppercase Roman Numerals
 
 ###### Markua Syntax
 
-{#input_ordered_list_ucr_1}
+{#input_ordered_list_4}
 ~~~
 lorem
 
@@ -4992,11 +4798,35 @@ II. bar
 III. baz
 
 ipsum
+
+IX. foo
+X. bar
+XI. baz
+
+dolor
+
+III. foo
+II. bar
+I. baz
+
+sit
+
+XI. foo
+X. bar
+IX. baz
+
+amet
+
+I. foo
+I. bar
+I. baz
+
+etc.
 ~~~
 
 ###### HTML Output
 
-{#output_ordered_list_ucr_1}
+{#output_ordered_list_4}
 ~~~
 <p>lorem</p>
 <ol type="I">
@@ -5005,126 +4835,38 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-~~~
-
-##### Example 2
-
-###### Markua Syntax
-
-{#input_ordered_list_ucr_2}
-~~~
-lorem
-
-IX. foo
-X. bar
-XI. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_ucr_2}
-~~~
-<p>lorem</p>
 <ol type="I" start="9">
 <ol start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 3
-
-###### Markua Syntax
-
-{#input_ordered_list_ucr_3}
-~~~
-lorem
-
-III. foo
-II. bar
-I. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_ucr_3}
-~~~
-<p>lorem</p>
+<p>dolor</p>
 <ol type="I" start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 4
-
-###### Markua Syntax
-
-{#input_ordered_list_ucr_4}
-~~~
-lorem
-
-XI. foo
-X. bar
-IX. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_ucr_4}
-~~~
-<p>lorem</p>
+<p>sit</p>
 <ol type="I" start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 5
-
-{#input_ordered_list_ucr_5}
-~~~
-lorem
-
-I. foo
-I. bar
-I. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_ucr_5}
-~~~
-<p>lorem</p>
+<p>amet</p>
 <ol type="I">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
+<p>etc.</p>
 ~~~
 
-#### Examples: Lowercase Roman Numerals
-
-##### Example 1
+##### Example 5: Lowercase Roman Numerals
 
 ###### Markua Syntax
 
-{#input_ordered_list_lcr_1}
+{#input_ordered_list_5}
 ~~~
 lorem
 
@@ -5133,11 +4875,35 @@ ii. bar
 iii. baz
 
 ipsum
+
+ix. foo
+x. bar
+xi. baz
+
+dolor
+
+iii. foo
+ii. bar
+i. baz
+
+sit
+
+xi. foo
+x. bar
+ix. baz
+
+amet
+
+i. foo
+i. bar
+i. baz
+
+etc.
 ~~~
 
 ###### HTML Output
 
-{#output_ordered_list_lcr_1}
+{#output_ordered_list_5}
 ~~~
 <p>lorem</p>
 <ol type="i">
@@ -5146,126 +4912,38 @@ ipsum
   <li>baz</li>
 </ol>
 <p>ipsum</p>
-~~~
-
-##### Example 2
-
-###### Markua Syntax
-
-{#input_ordered_list_lcr_2}
-~~~
-lorem
-
-ix. foo
-x. bar
-xi. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lcr_2}
-~~~
-<p>lorem</p>
 <ol type="i" start="9">
 <ol start="9">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 3
-
-###### Markua Syntax
-
-{#input_ordered_list_lcr_3}
-~~~
-lorem
-
-iii. foo
-ii. bar
-i. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lcr_3}
-~~~
-<p>lorem</p>
+<p>dolor</p>
 <ol type="i" start="3" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 4
-
-###### Markua Syntax
-
-{#input_ordered_list_lcr_4}
-~~~
-lorem
-
-xi. foo
-x. bar
-ix. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lcr_4}
-~~~
-<p>lorem</p>
+<p>sit</p>
 <ol type="i" start="11" reversed="true">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
-~~~
-
-##### Example 5
-
-{#input_ordered_list_lcr_5}
-~~~
-lorem
-
-i. foo
-i. bar
-i. baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_ordered_list_lcr_5}
-~~~
-<p>lorem</p>
-<ol type="I">
+<p>amet</p>
+<ol type="i">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ol>
-<p>ipsum</p>
+<p>etc.</p>
 ~~~
 
-#### In Markua, A Single Element Ordered List is Not a List
-
-##### Example
+##### Example 6: In Markua, A Single Element Ordered List is Not a List
 
 ###### Markua Syntax
 
-{#input_ordered_list_1}
+{#input_ordered_list_6}
 ~~~
 foo
 
@@ -5296,7 +4974,7 @@ amet
 
 ###### HTML Output
 
-{#output_ordered_list_1}
+{#output_ordered_list_6}
 ~~~
 <p>foo</p>
 <p>1. This isn't a list.</p>
@@ -5313,11 +4991,11 @@ amet
 <p>amet</p>
 ~~~
 
-### Ordered List Numbering Rules
+##### Example 7: Ordered List Numbering Rules
 
-#### Markua Syntax
+###### Markua Syntax
 
-{#input_list_consecutive_or_same_1}
+{#input_ordered_list_7}
 ~~~
 This makes an ordered list with decimal numbers (1, 2, 3):
 
@@ -5384,7 +5062,7 @@ That's it!
 
 #### HTML Output
 
-{#output_list_consecutive_or_same_1}
+{#output_ordered_list_7}
 ~~~
 <p>This makes an ordered list with decimal numbers:</p>
 <ol>
