@@ -1299,7 +1299,7 @@ A> The "four space indent" method of creating code blocks in Markdown is **NOT**
 
 ### Typewriter Poetry with Code Resources
 
-If you want to write "typewriter poetry" in the style of e e cummings, in which all the indentation and other whitespace matters, you can accomplish this with a code resource whose format is `text`.
+If you want to write "typewriter poetry" in the style of e e cummings, in which all the indentation and other whitespace matters, you can accomplish this by inserting a figure as an inline code resource whose format is `text`.
 
 There are three ways to insert such a code resource inline:
 
@@ -1307,11 +1307,16 @@ There are three ways to insert such a code resource inline:
 2. by specifying the `text` format after the three backticks or three tildes
 3. by specifying the `text` format in an attribute list
 
-Examples:
+These three methods are shown next, as a poem is inserted all three ways. Determining the artistic merit of this "poem" is left as an exercise for the reader. Note that in all cases, the inline code resource can have an optional caption.
 
-Using three tildes:
+This use case is why the default format for three backticks is `guess` and the default format for three tildes is `text`: you wouldn't want your poem inadvertently being syntax highlighted like code, and the three backticks plus `text` version does not look very poetic!
+
+#### Using three tildes
 
 ```
+Here's a paragraph before the poetry.
+
+{caption: "lazy cat"}
 ~~~
 i
   am
@@ -1320,11 +1325,16 @@ i
 
 me   ow
 ~~~
+
+Here's a paragraph after the poetry.
 ```
 
-Using three backticks plus the `text` format via syntactic sugar:
+#### Using three backticks plus the `text` format via syntactic sugar
 
 ~~~
+Here's a paragraph before the poetry.
+
+{caption: "lazy cat"}
 ```text
 i
   am
@@ -1333,12 +1343,16 @@ i
 
 me   ow
 ```
+
+Here's a paragraph after the poetry.
 ~~~
 
-Using three backticks plus the `text` format specified in an attribute list:
+#### Using three backticks plus the `text` format specified in an attribute list
 
 ~~~
-{format: text}
+Here's a paragraph before the poetry.
+
+{caption: "lazy cat", format: text}
 ```
 i
   am
@@ -1347,11 +1361,9 @@ i
 
 me   ow
 ```
+
+Here's a paragraph after the poetry.
 ~~~
-
-This use case is why the default format for three backticks is `guess` and the default format for three tildes is `text`: you wouldn't want your poem inadvertently being syntax highlighted like code, and the three backticks plus `text` version does not look very poetic!
-
-(Determining the artistic merit of this "poem" is left as an exercise for the reader.)
 
 ### Line Wrapping in Code Resources
 
@@ -4103,6 +4115,8 @@ Here's a paragraph before the figure.
 {caption: "Hello World in Ruby"}
 ```ruby
 puts "hello"
+
+puts "world"
 ```
 
 Here's a paragraph after the figure.
@@ -4123,6 +4137,1395 @@ puts "world"
 </div>
 <p>Here's a paragraph after the figure.</p>
 ~~~
+
+### Typewriter Poetry with Code Resources
+
+#### Example 1: Using three tildes
+
+##### Markua Syntax
+
+{#input_typewriter_poetry_1}
+```
+Here's a paragraph before the poetry.
+
+{caption: "lazy cat"}
+~~~
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+~~~
+
+Here's a paragraph after the poetry.
+```
+
+##### HTML Output
+
+{#output_typewriter_poetry_1}
+```
+<p>Here's a paragraph before the poetry.</p>
+<div class="figure">
+  <pre><code>
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+  </code></pre>
+</div>
+<p>Here's a paragraph after the poetry.</p>
+```
+
+#### Example 2: Using three backticks plus the `text` format via syntactic sugar
+
+##### Markua Syntax
+
+{#input_typewriter_poetry_2}
+~~~
+Here's a paragraph before the poetry.
+
+{caption: "lazy cat"}
+```text
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+```
+
+Here's a paragraph after the poetry.
+~~~
+
+##### HTML Output
+
+{#output_typewriter_poetry_2}
+```
+<p>Here's a paragraph before the poetry.</p>
+<div class="figure">
+  <pre><code>
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+  </code></pre>
+</div>
+<p>Here's a paragraph after the poetry.</p>
+```
+
+#### Example 3: Using three backticks plus the `text` format specified in an attribute list
+
+##### Markua Syntax
+
+{#input_typewriter_poetry_3}
+~~~
+Here's a paragraph before the poetry.
+
+{caption: "lazy cat", format: text}
+```
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+```
+
+Here's a paragraph after the poetry.
+~~~
+
+##### HTML Output
+
+{#output_typewriter_poetry_3}
+```
+<p>Here's a paragraph before the poetry.</p>
+<div class="figure">
+  <pre><code>
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+  </code></pre>
+</div>
+<p>Here's a paragraph after the poetry.</p>
+```
+
+### Lists
+
+#### Unordered Lists
+
+##### Example 1: A list (asterisks, one space after each)
+
+###### Markua Syntax
+
+{#input_unordered_list_1}
+~~~
+lorem
+
+* foo
+* bar
+* baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_1}
+~~~
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 2: A list (asterisks, two spaces after each)
+
+###### Markua Syntax
+
+{#input_unordered_list_2}
+~~~
+lorem
+
+*  foo
+*  bar
+*  baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_2}
+~~~
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 3: A list (asterisks, three spaces after each)
+
+###### Markua Syntax
+
+{#input_unordered_list_3}
+~~~
+lorem
+
+*   foo
+*   bar
+*   baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_3}
+~~~
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 4: A list (asterisks, four spaces after each)
+
+###### Markua Syntax
+
+{#input_unordered_list_4}
+~~~
+lorem
+
+*    foo
+*    bar
+*    baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_4}
+~~~
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 5: A list (asterisks, one tab after each)
+
+###### Markua Syntax
+
+{#input_unordered_list_5}
+~~~
+lorem
+
+* foo
+* bar
+* baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_5}
+~~~
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 6: A list (hyphens, one space after each)
+
+###### Markua Syntax
+
+{#input_unordered_list_6}
+~~~
+lorem
+
+- foo
+- bar
+- baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_6}
+~~~
+<p>lorem</p>
+<ul class="hyphen">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 7: A list (pluses, one space after each)
+
+###### Markua Syntax
+
+{#input_unordered_list_7}
+~~~
+lorem
+
++ foo
++ bar
++ baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_7}
+~~~
+<p>lorem</p>
+<ul class="plus">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 8: A list (one element list with asterisk)
+
+###### Markua Syntax
+
+{#input_unordered_list_8}
+~~~
+lorem
+
+* foo
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_8}
+~~~
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 9: A list (one element list with hyphen)
+
+###### Markua Syntax
+
+{#input_unordered_list_9}
+~~~
+lorem
+
+- foo
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_9}
+~~~
+<p>lorem</p>
+<ul class="hyphen">
+  <li>foo</li>
+</ul>
+<p>ipsum</p>
+~~~
+
+##### Example 10: Not a list (plus is not a list delimiter)
+
+###### Markua Syntax
+
+{#input_unordered_list_10}
+~~~
+lorem
+
++ foo
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_10}
+~~~
+<p>lorem</p>
+<p>+ foo</p>
+<p>ipsum</p>
+~~~
+
+##### Example 11: Not a list (variable number of spaces after bullets)
+
+###### Markua Syntax
+
+{#input_unordered_list_11}
+~~~
+lorem
+
+*    foo
+*   bar
+*  baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_unordered_list_11}
+~~~
+<p>lorem</p>
+<p>*    foo<br/>
+*   bar<br/>
+*  baz</p>
+<p>ipsum</p>
+~~~
+
+### Ordered Lists (i.e. Numbered Lists)
+
+#### Examples: Decimal Numbers
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_ordered_list_1}
+~~~
+lorem
+
+1. foo
+2. bar
+3. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_1}
+~~~
+<p>lorem</p>
+<ol>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_ordered_list_2}
+~~~
+lorem
+
+9. foo
+10. bar
+11. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_2}
+~~~
+<p>lorem</p>
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_ordered_list_3}
+~~~
+lorem
+
+3. foo
+2. bar
+1. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_3}
+~~~
+<p>lorem</p>
+<ol start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 4
+
+###### Markua Syntax
+
+{#input_ordered_list_4}
+~~~
+lorem
+
+11. foo
+10. bar
+9. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_4}
+~~~
+<p>lorem</p>
+<ol start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 5
+
+{#input_ordered_list_5}
+~~~
+lorem
+
+1. foo
+1. bar
+1. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_5}
+~~~
+<p>lorem</p>
+<ol>
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+#### Examples: Uppercase Letters
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_ordered_list_uc_1}
+~~~
+lorem
+
+A. foo
+B. bar
+C. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_uc_1}
+~~~
+<p>lorem</p>
+<ol type="A">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_ordered_list_uc_2}
+~~~
+lorem
+
+I. foo
+J. bar
+K. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_uc_2}
+~~~
+<p>lorem</p>
+<ol type="A" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_ordered_list_uc_3}
+~~~
+lorem
+
+C. foo
+B. bar
+A. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_uc_3}
+~~~
+<p>lorem</p>
+<ol type="A" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 4
+
+###### Markua Syntax
+
+{#input_ordered_list_uc_4}
+~~~
+lorem
+
+K. foo
+J. bar
+I. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_uc_4}
+~~~
+<p>lorem</p>
+<ol type="A" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 5
+
+{#input_ordered_list_uc_5}
+~~~
+lorem
+
+A. foo
+A. bar
+A. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_uc_5}
+~~~
+<p>lorem</p>
+<ol type="A">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+#### Examples: Lowercase Letters
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_ordered_list_lc_1}
+~~~
+lorem
+
+a. foo
+b. bar
+c. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lc_1}
+~~~
+<p>lorem</p>
+<ol type="a">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_ordered_list_lc_2}
+~~~
+lorem
+
+i. foo
+j. bar
+k. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lc_2}
+~~~
+<p>lorem</p>
+<ol type="a" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_ordered_list_lc_3}
+~~~
+lorem
+
+c. foo
+b. bar
+a. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lc_3}
+~~~
+<p>lorem</p>
+<ol type="a" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 4
+
+###### Markua Syntax
+
+{#input_ordered_list_lc_4}
+~~~
+lorem
+
+k. foo
+j. bar
+i. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lc_4}
+~~~
+<p>lorem</p>
+<ol type="a" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 5
+
+{#input_ordered_list_lc_5}
+~~~
+lorem
+
+a. foo
+a. bar
+a. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lc_5}
+~~~
+<p>lorem</p>
+<ol type="a">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+#### Examples: Uppercase Roman Numerals
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_ordered_list_ucr_1}
+~~~
+lorem
+
+I. foo
+II. bar
+III. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_ucr_1}
+~~~
+<p>lorem</p>
+<ol type="I">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_ordered_list_ucr_2}
+~~~
+lorem
+
+IX. foo
+X. bar
+XI. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_ucr_2}
+~~~
+<p>lorem</p>
+<ol type="I" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_ordered_list_ucr_3}
+~~~
+lorem
+
+III. foo
+II. bar
+I. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_ucr_3}
+~~~
+<p>lorem</p>
+<ol type="I" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 4
+
+###### Markua Syntax
+
+{#input_ordered_list_ucr_4}
+~~~
+lorem
+
+XI. foo
+X. bar
+IX. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_ucr_4}
+~~~
+<p>lorem</p>
+<ol type="I" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 5
+
+{#input_ordered_list_ucr_5}
+~~~
+lorem
+
+I. foo
+I. bar
+I. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_ucr_5}
+~~~
+<p>lorem</p>
+<ol type="I">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+#### Examples: Lowercase Roman Numerals
+
+##### Example 1
+
+###### Markua Syntax
+
+{#input_ordered_list_lcr_1}
+~~~
+lorem
+
+i. foo
+ii. bar
+iii. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lcr_1}
+~~~
+<p>lorem</p>
+<ol type="i">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_ordered_list_lcr_2}
+~~~
+lorem
+
+ix. foo
+x. bar
+xi. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lcr_2}
+~~~
+<p>lorem</p>
+<ol type="i" start="9">
+<ol start="9">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_ordered_list_lcr_3}
+~~~
+lorem
+
+iii. foo
+ii. bar
+i. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lcr_3}
+~~~
+<p>lorem</p>
+<ol type="i" start="3" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 4
+
+###### Markua Syntax
+
+{#input_ordered_list_lcr_4}
+~~~
+lorem
+
+xi. foo
+x. bar
+ix. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lcr_4}
+~~~
+<p>lorem</p>
+<ol type="i" start="11" reversed="true">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+##### Example 5
+
+{#input_ordered_list_lcr_5}
+~~~
+lorem
+
+i. foo
+i. bar
+i. baz
+
+ipsum
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_lcr_5}
+~~~
+<p>lorem</p>
+<ol type="I">
+  <li>foo</li>
+  <li>bar</li>
+  <li>baz</li>
+</ol>
+<p>ipsum</p>
+~~~
+
+#### In Markua, A Single Element Ordered List is Not a List
+
+##### Example
+
+###### Markua Syntax
+
+{#input_ordered_list_1}
+~~~
+foo
+
+1. This isn't a list.
+
+bar
+
+1975. Also, not a list.
+
+lorem
+
+a. This isn't a list either.
+
+ipsum
+
+A. This isn't a list either.
+
+dolor
+
+i. This isn't a list either.
+
+sit
+
+I. This isn't a list either.
+
+amet
+~~~
+
+###### HTML Output
+
+{#output_ordered_list_1}
+~~~
+<p>foo</p>
+<p>1. This isn't a list.</p>
+<p>bar</p>
+<p>1975. Also, not a list.</p>
+<p>lorem</p>
+<p>a. This isn't a list either.</p>
+<p>ipsum</p>
+<p>A. This isn't a list either.</p>
+<p>dolor
+<p>i. This isn't a list either.</p>
+<p>sit</p>
+<p>I. This isn't a list either.</p>
+<p>amet</p>
+~~~
+
+### Ordered List Numbering Rules
+
+#### Markua Syntax
+
+{#input_list_consecutive_or_same_1}
+~~~
+This makes an ordered list with decimal numbers (1, 2, 3):
+
+1. one
+1. two
+1. three
+
+This does not make a list, since the numbers are not all consecutive:
+
+1. foo
+2. bar
+4. baz
+
+This makes a list (1975, 1976):
+
+1975. An amazing year.
+1976. The year after 1975.
+
+This does not make a list:
+
+1975\. An amazing year.
+1976\. The year after 1975.
+
+This does not make a list:
+
+1975. An amazing year.
+2010. The year Leanpub was launched.
+
+This makes a lowercase alphabetical ordered list (a, b):
+
+a. one
+b. two
+
+This makes a lowercase alphabetical ordered list (e, f):
+
+e. five
+f. six
+
+This makes a lowercase alphabetical ordered list (i, ii, iii, iv):
+
+i. one
+ii. two
+iii. three
+iv. four
+
+Not a list:
+
+i. one
+ii. two
+iv. four
+
+Not a list:
+
+a\. one
+b\. two
+
+Not a list:
+
+a. one
+c. three
+
+That's it!
+~~~
+
+#### HTML Output
+
+{#output_list_consecutive_or_same_1}
+~~~
+<p>This makes an ordered list with decimal numbers:</p>
+<ol>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+</ol>
+<p>This does not make a list, since the numbers are not all consecutive:</p>
+<p>1. foo<br/>
+2. bar<br/>
+4. baz</p>
+<p>This makes a list (1975, 1976):</p>
+<ol start="1975">
+  <li>An amazing year.</li>
+  <li>The year after 1975.</li>
+</ol>
+<p>This does not make a list:</p>
+<p>1975. An amazing year.<br/>
+1976. The year after 1975.</p>
+<p>This does not make a list:</p>
+<p>1975. An amazing year.<br/>
+2010. The year Leanpub was launched.</p>
+<p>This makes a lowercase alphabetical ordered list (a, b):</p>
+<ol type="a">
+  <li>one</li>
+  <li>two</li>
+</ol>
+<p>This makes a lowercase alphabetical ordered list (e, f):</p>
+<ol type="a" start="5">
+  <li>five</li>
+  <li>six</li>
+</ol>
+<p>This makes a lowercase alphabetical ordered list (i, ii, iii, iv):</p>
+<ol type="i">
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ol>
+<p>Not a list:</p>
+<p>i. one<br/>
+ii. two<br/>
+iv. four</p>
+<p>Not a list:</p>
+<p>a\. one<br/>
+b\. two</p>
+<p>Not a list:</p>
+<p>a. one<br/>
+c. three</p>
+<p>That's it!</p>
+~~~
+
+### Multi-Paragraph List Items
+
+#### Markua Syntax
+
+{#input_multi_para_list_1}
+~~~
+Here's a paragraph before the list.
+
+1.  This is the first paragraph in the first list item. Yay!
+
+    This is a second paragraph in the first list item.
+
+2.  The second list item is simple.
+
+3.  The third list item has three paragraphs.
+    This is still part of the first paragraph.
+
+    Here's the second paragraph in the third list item.
+
+    Here's the third paragraph in the third list item.
+
+Here's a paragraph after the list.
+~~~
+
+#### HTML Output
+
+{#output_multi_para_list_1}
+~~~
+<p>Here's a paragraph before the list.</p>
+<ol>
+  <li>
+    <p>This is the first paragraph in the first list item. Yay!</p>
+    <p>This is a second paragraph in the first list item.</p>
+  </li>
+  <li>The second list item is simple.</li>
+  <li>
+    <p>The third list item has three paragraphs.<br/>
+    This is still part of the first paragraph.</p>
+    <p>Here's the second paragraph in the third list item.</p>
+    <p>Here's the third paragraph in the third list item.</p>
+  </li>
+</ol>
+<p>Here's a paragraph after the list.</p>
+~~~
+
+### Nested Lists
+
+#### Markua Syntax
+
+{#input_nested_lists_1}
+~~~
+* Foo
+  1. One
+  2. Two
+    a. This is 2a
+    b. This is 2b
+  3. Three
+* Bar
+  i.   Lorem
+  ii.  Ipsum
+  iii. Dolor
+* Baz
+~~~
+
+#### HTML Output
+
+{#output_nested_lists_1}
+~~~
+<ul>
+  <li>
+  Foo
+  </li>
+  <li>Bar</li>
+  <li>Baz</li>
+</ul>
+
+1. One
+  2. Two
+    a. This is 2a
+    b. This is 2b
+  3. Three
+* Bar
+  i.   Lorem
+  ii.  Ipsum
+  iii. Dolor
+* Baz
+~~~
+
+
 
 ## TODO_HERE
 
