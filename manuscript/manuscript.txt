@@ -4261,9 +4261,7 @@ me   ow
 
 #### Unordered Lists
 
-##### Example 1: A list (asterisks, one space after each)
-
-###### Markua Syntax
+##### Markua Syntax
 
 {#input_unordered_list_1}
 ~~~
@@ -4274,9 +4272,42 @@ lorem
 * baz
 
 ipsum
+
+*  foo
+*  bar
+*  baz
+
+dolor
+
+*   foo
+*   bar
+*   baz
+
+sit
+
+*    foo
+*    bar
+*    baz
+
+amet
+
+- foo
+- bar
+- baz
+
+lorem
+
+* foo
+
+ipsum
+
+- foo
+
+dolor
+
 ~~~
 
-###### HTML Output
+##### HTML Output
 
 {#output_unordered_list_1}
 ~~~
@@ -4287,153 +4318,45 @@ ipsum
   <li>baz</li>
 </ul>
 <p>ipsum</p>
-~~~
-
-##### Example 2: A list (asterisks, two spaces after each)
-
-###### Markua Syntax
-
-{#input_unordered_list_2}
-~~~
-lorem
-
-*  foo
-*  bar
-*  baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_2}
-~~~
-<p>lorem</p>
 <ul>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ul>
-<p>ipsum</p>
-~~~
-
-##### Example 3: A list (asterisks, three spaces after each)
-
-###### Markua Syntax
-
-{#input_unordered_list_3}
-~~~
-lorem
-
-*   foo
-*   bar
-*   baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_3}
-~~~
-<p>lorem</p>
+<p>dolor</p>
 <ul>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ul>
-<p>ipsum</p>
-~~~
-
-##### Example 4: A list (asterisks, four spaces after each)
-
-###### Markua Syntax
-
-{#input_unordered_list_4}
-~~~
-lorem
-
-*    foo
-*    bar
-*    baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_4}
-~~~
-<p>lorem</p>
+<p>sit</p>
 <ul>
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ul>
-<p>ipsum</p>
-~~~
-
-##### Example 5: A list (asterisks, one tab after each)
-
-###### Markua Syntax
-
-{#input_unordered_list_5}
-~~~
-lorem
-
-* foo
-* bar
-* baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_5}
-~~~
-<p>lorem</p>
-<ul>
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>ipsum</p>
-~~~
-
-##### Example 6: A list (hyphens, one space after each)
-
-###### Markua Syntax
-
-{#input_unordered_list_6}
-~~~
-lorem
-
-- foo
-- bar
-- baz
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_6}
-~~~
-<p>lorem</p>
+<p>amet</p>
 <ul class="hyphen">
   <li>foo</li>
   <li>bar</li>
   <li>baz</li>
 </ul>
+<p>lorem</p>
+<ul>
+  <li>foo</li>
+</ul>
 <p>ipsum</p>
+<ul class="hyphen">
+  <li>foo</li>
+</ul>
+<p>dolor</p>
 ~~~
 
-##### Example 7: A list (pluses, one space after each)
+#### Not Lists
 
-###### Markua Syntax
+##### Markua Syntax
 
-{#input_unordered_list_7}
+{#input_not_list_1}
 ~~~
 lorem
 
@@ -4442,115 +4365,33 @@ lorem
 + baz
 
 ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_7}
-~~~
-<p>lorem</p>
-<ul class="plus">
-  <li>foo</li>
-  <li>bar</li>
-  <li>baz</li>
-</ul>
-<p>ipsum</p>
-~~~
-
-##### Example 8: A list (one element list with asterisk)
-
-###### Markua Syntax
-
-{#input_unordered_list_8}
-~~~
-lorem
-
-* foo
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_8}
-~~~
-<p>lorem</p>
-<ul>
-  <li>foo</li>
-</ul>
-<p>ipsum</p>
-~~~
-
-##### Example 9: A list (one element list with hyphen)
-
-###### Markua Syntax
-
-{#input_unordered_list_9}
-~~~
-lorem
-
-- foo
-
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_9}
-~~~
-<p>lorem</p>
-<ul class="hyphen">
-  <li>foo</li>
-</ul>
-<p>ipsum</p>
-~~~
-
-##### Example 10: Not a list (plus is not a list delimiter)
-
-###### Markua Syntax
-
-{#input_unordered_list_10}
-~~~
-lorem
 
 + foo
 
-ipsum
-~~~
-
-###### HTML Output
-
-{#output_unordered_list_10}
-~~~
-<p>lorem</p>
-<p>+ foo</p>
-<p>ipsum</p>
-~~~
-
-##### Example 11: Not a list (variable number of spaces after bullets)
-
-###### Markua Syntax
-
-{#input_unordered_list_11}
-~~~
-lorem
+dolor
 
 *    foo
 *   bar
 *  baz
 
-ipsum
+sit
 ~~~
 
 ###### HTML Output
 
-{#output_unordered_list_11}
+{#output_not_list_1}
 ~~~
 <p>lorem</p>
+<p>+ foo</p>
+<p>+ bar</p>
+<p>+ baz</p>
+<p>ipsum</p>
+<p>+ foo</p>
+<p>dolor</p>
 <p>*    foo<br/>
 *   bar<br/>
 *  baz</p>
-<p>ipsum</p>
+<p>sit</p>
 ~~~
 
 #### Ordered Lists (i.e. Numbered Lists)
@@ -5260,8 +5101,6 @@ First, a huge thanks to [Scott Patten](https://twitter.com/scott_patten), my co-
 Second, I'd like to thank [Braden Simpson](https://twitter.com/bradensimpson). Braden has been instrumental in the development of the open source ES6 Markua parser, as well as the open source MarkuaPad editor and its usage in Leanpub. Braden has also been key in developing the test suite for Markua, and along with Scott has given me great feedback on crucial design decisions such as the image syntax.
 
 Third, I'd like to thank my other Leanpub co-founder, [Len Epp](https://twitter.com/lenepp). Len has been instrumental in the development of Leanpub. He joined in the very early days, and has greatly helped our customer development process, helping (as he likes to tease me) grow Leanpub over 100x before Scott and I made him a co-founder. Besides giving the Markua spec a thorough copy edit, he got me to change my mind about the three-or-more newline handling case--so, if you enjoy using gratuitous newlines, you have Len to thank!
-
-Fourth, an ongoing thanks to [Jordan Ell](https://twitter.com/jordanelltweets). Jordan is proving key in helping Scott, Braden, Len and me to bring Leanpub--and Markua--to the next order of magnitude of success, especially with the React rewrite.
 
 Next, a huge thanks to [Ken Pratt](https://twitter.com/ken_pratt), who made a number of key contributions to the development of Leanpub Flavoured Markdown and to Ruboss over his years working with us.
 
