@@ -5054,24 +5054,29 @@ Here's a paragraph after the list.
 ~~~
 <ul>
   <li>
-  Foo
+    Foo
+    <ol>
+      <li>One</li>
+      <li>
+        Two
+        <ol type="a">
+          <li>This is 2a</li>
+          <li>This is 2b</li>
+        </ol>
+      </li>
+      <li>Three</li>
+    </ol>
   </li>
-  <li>Bar</li>
+  <li>
+    Bar
+    <ol type="i">
+      <li>Lorem</li>
+      <li>Ispum</li>
+      <li>Dolor</li>
+    </ol>
+  </li>
   <li>Baz</li>
 </ul>
-
-TODO_HERE
-
-1. One
-  2. Two
-    a. This is 2a
-    b. This is 2b
-  3. Three
-* Bar
-  i.   Lorem
-  ii.  Ipsum
-  iii. Dolor
-* Baz
 ~~~
 
 
