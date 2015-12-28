@@ -3335,7 +3335,7 @@ These examples are not just examples--they are also the basis of a compatibility
 ## Text Formatting
 
 {#text_formatting_html}
-A> The syntax for text formatting is described [here](#text_formatting).
+The syntax for text formatting is described [here](#text_formatting).
 
 This example shows all the text formatting:
 
@@ -3433,7 +3433,7 @@ W> TODO_LEANPUB - fix three underscores in Leanpub
 ## Headings
 
 {#headings_html}
-A> The syntax for headings is described [here](#headings).
+The syntax for headings is described [here](#headings).
 
 In Markua, both parts and chapters produce an `h1` in HTML. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
@@ -3493,7 +3493,7 @@ This is a paragraph.
 ## Spaces, Newlines and Indentation
 
 {#spaces_html}
-A> The syntax for spaces, newlines and indentation is described [here](#spaces).
+The syntax for spaces, newlines and indentation is described [here](#spaces).
 
 ### Paragraphs and Blank Lines
 
@@ -3631,7 +3631,7 @@ foo   bar
 ### Images
 
 {#images_html}
-A> The syntax for images is described [here](#images).
+The syntax for images is described [here](#images).
 
 #### Local Images
 
@@ -3769,7 +3769,7 @@ Here's a paragraph after the figure.
 ### Video
 
 {#video_html}
-A> The syntax for video is described [here](#video).
+The syntax for video is described [here](#video).
 
 #### Local Video
 
@@ -3833,7 +3833,7 @@ Here's a paragraph after the figure.
 ### Audio
 
 {#audio_html}
-A> The syntax for audio is described [here](#audio).
+The syntax for audio is described [here](#audio).
 
 #### Local Audio
 
@@ -3888,7 +3888,7 @@ The full version of the talk is here:
 ### Code
 
 {#code_html}
-A> The syntax for code is described [here](#code).
+The syntax for code is described [here](#code).
 
 #### Local Code Resources
 
@@ -4164,6 +4164,8 @@ puts "world"
 
 ### Typewriter Poetry with Code Resources
 
+When the `format` is `text` (which happens as the default format of using tildes, or by specifying it explicitly), a `<pre>` block is used with **no** `<code>` block contained inside it. This way, CSS rules to format code won't inadvertently format poetry like code.
+
 #### Example 1: Using three tildes
 
 ##### Markua Syntax
@@ -4191,14 +4193,12 @@ Here's a paragraph after the poetry.
 ```
 <p>Here's a paragraph before the poetry.</p>
 <div class="figure">
-  <pre><code>
-i
+  <pre>i
   am
       a        cat
             a        l a z y          cat
 
-me   ow
-  </code></pre>
+me   ow</pre>
 </div>
 <p>Here's a paragraph after the poetry.</p>
 ```
@@ -4230,14 +4230,12 @@ Here's a paragraph after the poetry.
 ```
 <p>Here's a paragraph before the poetry.</p>
 <div class="figure">
-  <pre><code>
-i
+  <pre>i
   am
       a        cat
             a        l a z y          cat
 
-me   ow
-  </code></pre>
+me   ow</pre>
 </div>
 <p>Here's a paragraph after the poetry.</p>
 ```
@@ -4269,19 +4267,37 @@ Here's a paragraph after the poetry.
 ```
 <p>Here's a paragraph before the poetry.</p>
 <div class="figure">
-  <pre><code>
-i
+  <pre>i
   am
       a        cat
             a        l a z y          cat
 
-me   ow
-  </code></pre>
+me   ow</pre>
 </div>
 <p>Here's a paragraph after the poetry.</p>
 ```
 
-### Lists
+### Math
+
+Math resources can be either LaTeX math or MathML.
+
+Markua does not specify how LaTeX math is output in HTML. It is perfectly acceptable for a Markua processor to output any LaTeX math as an image, and then insert that image in place of the LaTeX math.
+
+With MathML, on the other hand, Markua does specify the HTML output.
+
+#### Local Math Resources
+
+TODO
+
+#### Inline Math Resources
+
+TODO
+
+#### Web Math Resources
+
+TODO
+
+## Lists
 
 #### Unordered Lists
 
