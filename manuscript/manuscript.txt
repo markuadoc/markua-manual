@@ -2054,7 +2054,7 @@ You can specify a row span just by skipping a part-row of `-` signs in the appro
 |:============|:============:|============:|
 | Content A1  | Content B1   | Content C1  |
 | and A2      |--------------|-------------|
-| merged      | Content B2   | Content C2  |
+| Merged      | Content B2   | Content C2  |
 |-------------|--------------|-------------|
 | Content A3  | Content B3   | Content C3  |
 |=============|==============|=============|
@@ -2071,7 +2071,7 @@ You can also individually align cells with colons in the `-` part-row **above** 
 | Content A1 and B1 Merged    | Content C1  |
 |------------:|:--------------|-------------|
 | Content A2  | Content B2    | Content C2  |
-|:-----------:| and B3 merged |-------------|
+|:-----------:| and B3 Merged |-------------|
 | Content A3  |               | Content C3  |
 |=============|===============|=============|
 | Footer A    | Footer B      | Footer C    |
@@ -2105,7 +2105,7 @@ This complex table has a caption:
 | Content A1 and B1 Merged    | Content C1  |
 |------------:|:--------------|-------------|
 | Content A2  | Content B2    | Content C2  |
-|:-----------:| and B3 merged |-------------|
+|:-----------:| and B3 Merged |-------------|
 | Content A3  |               | Content C3  |
 |=============|===============|=============|
 | Footer A    | Footer B      | Footer C    |
@@ -5212,25 +5212,179 @@ Here's a paragraph after the list.
 
 {#output_definition_lists_1}
 ~~~
+TODO
 ~~~
 
 ## Tables
 
+Tables are always output inside a `<figure>`, and table captions are always output as a `<figcaption>` of the `<figure>`, instead of as a `<caption>` of a `<table>`. This way, the captions can be handled the same way as other figures, and the tables can benefit from the figure styling.
+
 ### Simple Tables
 
-##### Example
+##### Example 1: No Leading Pipes, No Caption
 
 ###### Markua Syntax
 
 {#input_simple_tables_1}
 ~~~
+Header A   | Header B   | Header C
+-----------|------------|-----------
+Content A1 | Content B1 | Content C1
+Content A2 | Content B2 | Content C2
+Content A3 | Content B3 | Content C3
 ~~~
 
 ###### HTML Output
 
 {#output_simple_tables_1}
 ~~~
+<figure>
+  <table>
+    <thead>
+      <tr>
+        <th>Header A</th>
+        <th>Header B</th>
+        <th>Header C</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Content A1</td>
+        <td>Content B1</td>
+        <td>Content C1</td>
+      </tr>
+      <tr>
+        <td>Content A2</td>
+        <td>Content B2</td>
+        <td>Content C2</td>
+      </tr>
+      <tr>
+        <td>Content A3</td>
+        <td>Content B3</td>
+        <td>Content C3</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 ~~~
+
+##### Example 2: Leading Pipes, Caption
+
+###### Markua Syntax
+
+{#input_simple_tables_2}
+~~~
+{caption: "A Simple Table"}
+| Header A   | Header B   | Header C   |
+|------------|------------|------------|
+| Content A1 | Content B1 | Content C1 |
+| Content A2 | Content B2 | Content C2 |
+| Content A3 | Content B3 | Content C3 |
+~~~
+
+###### HTML Output
+
+{#output_simple_tables_2}
+~~~
+<figure>
+  <figcaption>A Simple Table</figcaption>
+  <table>
+    <thead>
+      <tr>
+        <th>Header A</th>
+        <th>Header B</th>
+        <th>Header C</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Content A1</td>
+        <td>Content B1</td>
+        <td>Content C1</td>
+      </tr>
+      <tr>
+        <td>Content A2</td>
+        <td>Content B2</td>
+        <td>Content C2</td>
+      </tr>
+      <tr>
+        <td>Content A3</td>
+        <td>Content B3</td>
+        <td>Content C3</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+~~~
+
+### Complex Tables
+
+##### Example
+
+###### Markua Syntax
+
+{#input_complex_tables_1}
+~~~
+{caption: "A Complex Table"}
+|=============|===============|=============|
+| Header A    | Header B      | Header C    |
+|:============|:=============:|============:|
+| Content A1 and B1 Merged    | Content C1  |
+|------------:|:--------------|-------------|
+| Content A2  | Content B2    | Content C2  |
+|:-----------:| and B3 Merged |-------------|
+| Content A3  |               | Content C3  |
+|=============|===============|=============|
+| Footer A    | Footer B      | Footer C    |
+|=============|===============|=============|
+~~~
+
+###### HTML Output
+
+{#output_complex_tables_1}
+~~~
+<figure>
+  <figcaption>A Complex Table</figcaption>
+  <table>
+    <thead>
+      <tr>
+        <th>Header A</th>
+        <th>Header B</th>
+        <th>Header C</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">Content A1 annd B1 Merged</td>
+        <td>Content C1</td>
+      </tr>
+      <tr>
+        <td>Content A2</td>
+        <td rowspan="2">Content B2 and B3 Merged</td>
+        <td>Content C2</td>
+      </tr>
+      <tr>
+        <td>Content A3</td>
+        <td>Content B3</td>
+        <td>Content C3</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## TODO_HERE
 
