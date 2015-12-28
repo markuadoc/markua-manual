@@ -338,6 +338,7 @@ Note that all the trailing `#` characters are ignored and are not part of the he
 
 From reading this, you'll recognize that Markua headings are a subset of Markdown's atx headers.
 
+{#spaces}
 # Spaces, Newlines and Indentation
 
 The goal for the handling of spaces, newlines and indentation in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
@@ -391,11 +392,9 @@ This is paragraph three.
 
 In Markdown, if you add more than two newlines in a row, the extra newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row. This makes sense because Markdown is a format for producing HTML.
 
-In Markua, however, the extra newlines after the second newline are respected. The author typed them; presumably they were intended to produce, well, extra newlines. So, every extra newline after the second newline becomes an extra newline (with a `<br/> tag in HTML) in between the close of the paragraph (or whatever Markua element was ending) and the start of the next paragraph (or whatever Markua element is beginning). In HTML terms, five newlines between paragraphs produces `...end of paragraph.</p><br/><br/><br/><p>Start of next paragraph...`.
+In Markua, however, the extra newlines after the second newline are respected. The author typed them; presumably they were intended to produce, well, extra newlines. So, every extra newline after the second newline becomes an extra newline in between the close of the paragraph (or whatever Markua element was ending) and the start of the next paragraph (or whatever Markua element is beginning).
 
-For the programmers: if there are n newlines after a paragraph, there are n-2 break tags in the HTML output, for all n > 2.
-
-Markua authors should **strongly** resist the temptation to try to do things like pagination by adding extra newlines. That's just a bad idea.
+A> Markua authors should **strongly** resist the temptation to try to do things like pagination by adding extra newlines. Not only is that a distraction from writing, but to make matters worse, any meaningful editing before the extra newlines will change all your page breaks anyway. (Furthermore, in EPUB and MOBI, the page breaks vary based on the size of the device and the font size--so any fiddling that you do only affects PDF anyway.)
 
 ## Leading Spaces (Prose vs. Poetry)
 
@@ -3491,12 +3490,14 @@ This is a paragraph.
 <p>This is a paragraph.</p>
 ~~~
 
-## Whitespace, Paragraphs and Blank Lines
+## Spaces, Newlines and Indentation
 
-{#whitespace_html}
-A> The syntax for whitespace is described [here](#whitespace).
+{#spaces_html}
+A> The syntax for spaces, newlines and indentation is described [here](#spaces).
 
-### Markua Syntax
+### Paragraphs and Blank Lines
+
+#### Markua Syntax
 
 {#input_whitespace_1}
 ~~~
@@ -3507,7 +3508,7 @@ This is paragraph two.
 This is paragraph three.
 ~~~
 
-### HTML Output
+#### HTML Output
 
 {#output_whitespace_1}
 ~~~
@@ -3515,11 +3516,6 @@ This is paragraph three.
 <p>This is paragraph two.</p>
 <p>This is paragraph three.</p>
 ~~~
-
-## Newlines, Indentation and Spaces
-
-{#newlines_html}
-A> The syntax for newlines is described [here](#newlines).
 
 ### Single Newlines
 
@@ -3556,6 +3552,77 @@ Is.<br/>
 Heading Text!!!</h1>
 <p>This is paragraph four.</p>
 ~~~
+
+### Three or More Newlines
+
+#### Markua Syntax
+
+{#input_multiple_newlines_1}
+~~~
+Lorem
+
+Ipsum
+
+
+Dolor
+
+
+
+Sit Amet
+~~~
+
+#### HTML Output
+
+If there are n newlines after a paragraph, there are n-2 break tags in the HTML output, for all n > 2.
+
+{#output_multiple_newlines_1}
+~~~
+<p>Lorem</p>
+<p>Ipsum</p>
+<br/>
+<p>Dolor</p>
+<br/>
+<br/>
+<p>Sit Amet</p>
+~~~
+
+### Leading Spaces (Prose vs. Poetry)
+
+#### Markua Syntax
+
+{#input_leading_spaces_1}
+~~~
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+~~~
+
+#### HTML Output
+
+{#output_leading_spaces_1}
+~~~
+<p>I grant I never saw a goddess go;<br/>
+My mistress when she walks treads on the ground.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.</p>
+~~~
+
+### Trailing Spaces are Stripped
+
+
+### Internal Spaces Are Collapsed to One Space
+
+
+### One Blank Line Is Added When Concatenating Manuscript Files
+
+
+
+{#newlines_html}
+A> The syntax for newlines is described [here](#newlines).
+
+
+### Single Newlines
 
 ### Three or More Newlines
 
