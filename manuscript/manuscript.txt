@@ -5348,33 +5348,42 @@ Content A3 | Content B3 | Content C3
   <table>
     <thead>
       <tr>
-        <th>Header A</th>
-        <th>Header B</th>
-        <th>Header C</th>
+        <th align="left">Header A</th>
+        <th align="center">Header B</th>
+        <th align="right">Header C</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td colspan="2">Content A1 annd B1 Merged</td>
-        <td>Content C1</td>
+        <td colspan="2" align="left">Content A1 annd B1 Merged</td>
+        <td align="right">Content C1</td>
       </tr>
       <tr>
-        <td>Content A2</td>
-        <td rowspan="2">Content B2 and B3 Merged</td>
-        <td>Content C2</td>
+        <td align="right">Content A2</td>
+        <td rowspan="2" align="left">Content B2 and B3 Merged</td>
+        <td align="right">Content C2</td>
       </tr>
       <tr>
-        <td>Content A3</td>
-        <td>Content B3</td>
-        <td>Content C3</td>
+        <td align="center">Content A3</td>
+        <td align="right">Content C3</td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td align="left">Footer A</td>
+        <td align="center">Footer B</td>
+        <td align="right">Footer C</td>
+      </tr>
+    </tfoot>
   </table>
 </figure>
 ~~~
 
+## Block Elements
 
+### Scene Breaks
 
+In HTML, scene breaks are always mapped to `<hr/>`. Book designers can use CSS to replace th e `<hr/>` with whatever they want: there are no other ways to produce an `<hr/>` in Markua, so an `<hr/>` always means scene break.
 
 
 
