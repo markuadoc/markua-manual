@@ -2223,9 +2223,27 @@ In Markdown, a single newline inside a blockquote (where both lines are preceded
 
 If a blockquote contains headings, these headings may be formatted by a Markua Processor differently than normal headings. Finally, if a Markua Processor is automatically generating a [Table of Contents](#toc) from chapter and section headings, any headings inside blockquotes should be ignored.
 
-A blockquote can have a citation.
+A blockquote can have a citation. This is done as an attribute list, which can include a `cite` attribute with the text of the citation and a `url` attribute with the URL of the citation. If both are specified, the text of the citation is linked to the URL. If only the `cite` attribute is specified it is shown as text; if only the `url` is specified it is inserted as text with a link to itself.
 
-W> TODO - specify
+The attribute list can be used regardless of which syntax is used to insert the blockquote:
+
+~~~
+Lots of people have opinions about software.
+
+Here's the most famous recent one:
+
+{cite: "Marc Andreessen", url: "TODO"}
+> Software is eating the world.
+
+It's quoted a lot, so let's quote it again:
+
+{cite: "Marc Andreessen", url: "TODO"}
+{blockquote}
+Software is eating the world.
+{/blockquote}
+
+That's it!
+~~~
 
 ## Asides (`A>`)
 
@@ -5432,6 +5450,14 @@ This is the first paragraph.
 > It is outside the paragraphs.
 
 This is the second paragraph.
+
+{blockquote}
+This is another blockquote.
+
+It is outside the paragraphs.
+{/blockquote}
+
+This is the third paragraph.
 ~~~
 
 ###### HTML Output
@@ -5439,18 +5465,48 @@ This is the second paragraph.
 {#output_blockquotes_1}
 ~~~
 <p>This is the first paragraph.</p>
-<
+<blockquote>
+  <p>This is a blockquote.</p>
+  <p>It is outside the paragraphs.</p>
+</blockquote>
+<p>This is the second paragraph.</p>
+<blockquote>
+  <p>This is another blockquote.</p>
+  <p>It is outside the paragraphs.</p>
+</blockquote>
+<p>This is the third paragraph.</p>
+~~~
 
-<blockquote cite="http://twitter.example.net/t31351234">
-   I'm on vacation, writing my blog.
+
+
+
+
+
+
+
+~~~
+Lots of people have opinions about software.
+
+Here's the most famous recent one:
+
+{cite: "Marc Andreessen", url: "TODO"}
+> Software is eating the world.
+
+It's quoted a lot, so let's quote it again:
+
+{cite: "Marc Andreessen", url: "TODO"}
+{blockquote}
+Software is eating the world.
+{/blockquote}
+
+That's it!
+~~~
+  <blockquote>
+    Software is eating the world.
+    <cite><a href="TODO">Marc Andreessen</a></cite>
   </blockquote>
 
-> This is a blockquote.
->
-> It is outside the paragraphs.
 
-This is the second paragraph.
-~~~
 
 ##### Example 2
 
