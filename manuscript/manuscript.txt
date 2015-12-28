@@ -5437,7 +5437,7 @@ This is after the second scene break.
 
 ### Blockquotes (`>`)
 
-##### Example 1
+##### Example 1: Blockquotes that are Siblings of Paragraphs
 
 ###### Markua Syntax
 
@@ -5452,7 +5452,7 @@ This is the first paragraph.
 This is the second paragraph.
 
 {blockquote}
-This is another blockquote.
+This is a blockquote.
 
 It is outside the paragraphs.
 {/blockquote}
@@ -5471,19 +5471,59 @@ This is the third paragraph.
 </blockquote>
 <p>This is the second paragraph.</p>
 <blockquote>
-  <p>This is another blockquote.</p>
+  <p>This is a blockquote.</p>
   <p>It is outside the paragraphs.</p>
 </blockquote>
 <p>This is the third paragraph.</p>
 ~~~
 
+##### Example 2: Blockquotes that are Nested in Paragraphs
 
+###### Markua Syntax
 
+{#input_blockquotes_2}
+~~~
+This is the first paragraph.
 
+This is the second paragraph.
+> This is a blockquote
+>
+> It is inside the second paragraph.
+This is part of the second paragraph.
+{blockquote}
+This is a blockquote.
 
+It is inside the second paragraph.
+{/blockquote}
+This is part of the second paragraph.
 
+This is the third paragraph.
+~~~
 
+###### HTML Output
 
+{#output_blockquotes_2}
+~~~
+<p>This is the first paragraph.</p>
+<p>This is the second paragraph.<br/>
+<blockquote>
+  <p>This is a blockquote</p>
+  <p>It is inside the second paragraph.</p>
+</blockquote>
+This is part of the second paragraph.<br/>
+<blockquote>
+  <p>This is a blockquote</p>
+  <p>It is inside the second paragraph.</p>
+</blockquote>
+This is part of the second paragraph.</p>
+<p>This is the third paragraph.</p>
+~~~
+
+##### Example 3: Blockquotes with Attribute Lists
+
+###### Markua Syntax
+
+{#input_blockquotes_3}
 ~~~
 Lots of people have opinions about software.
 
@@ -5501,46 +5541,29 @@ Software is eating the world.
 
 That's it!
 ~~~
-  <blockquote>
-    Software is eating the world.
-    <cite><a href="TODO">Marc Andreessen</a></cite>
-  </blockquote>
-
-
-
-##### Example 2
-
-###### Markua Syntax
-
-{#input_blockquotes_2}
-~~~
-~~~
-
-###### HTML Output
-
-{#output_blockquotes_2}
-~~~
-~~~
-
-##### Example 3
-
-###### Markua Syntax
-
-{#input_blockquotes_3}
-~~~
-~~~
 
 ###### HTML Output
 
 {#output_blockquotes_3}
 ~~~
+<p>Lots of people have opinions about software.</p>
+<p>Here's the most famous recent one:</p>
+<blockquote>
+  <p>Software is eating the world.</p>
+  <cite><a href="TODO">Marc Andreessen</a></cite>
+</blockquote>
+<p>It's quoted a lot, so let's quote it again:</p>
+<blockquote>
+  <p>Software is eating the world.</p>
+  <cite><a href="TODO">Marc Andreessen</a></cite>
+</blockquote>
+<p>That's it!</p>
 ~~~
 
+### Asides (`A>`)
 
 
-
-
-## TODO_HERE
+#### TODO_HERE
 
 TODO
 
