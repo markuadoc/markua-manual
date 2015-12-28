@@ -3383,6 +3383,7 @@ There are actually a number of benefits to this solution:
 * Since the four combinations of asterisks and underscores produces different output, which to choose will be determined by the desired output, not personal taste of "do you prefer underscores or asterisks". This means that multi-author Markua projects won't have to have pointless writing style debates about which type of Markua markup to use.
 * All Markdown text which has any of the four kinds of emphasis will still generate emphasis that looks like this in Markua.
 * Text editors (e.g. iA Writer) which know how to show emphasis for Markdown syntax will do so with Markua emphasis syntax.
+* If Markua text is processed by a Markdown processor, bold and italic will still look bold and italic. The only difference will be that only `<strong>` and `<em>` tags will be used.
 
 Note that this decision carries over to the ___bold + italic___ combinations. To produce ***bold + italic text***, surround it with either `___three underscores___` (producing `<b><i>` in HTML) or `***three asterisks***` (producing `<strong><em>` in HTML).
 
@@ -5056,6 +5057,8 @@ Here's a paragraph after the list.
   <li>Bar</li>
   <li>Baz</li>
 </ul>
+
+TODO_HERE
 
 1. One
   2. Two
