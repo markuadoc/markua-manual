@@ -1825,7 +1825,7 @@ Other block elements such as figures can also be inserted nested inside list ite
 
 W> TODO_LEANPUB - support this
 
-### Single paragraph list items
+### Single-Paragraph List Items
 
 ~~~
 * Foo
@@ -1840,7 +1840,7 @@ W> TODO_LEANPUB - support this
 
 In the single paragraph list items case, indenting the block element is optional but recommended.
 
-### Multiple paragraph list items
+### Multiple-Paragraph List Items
 
 ~~~
 * This is paragraph 1 in the first list item.
@@ -3339,9 +3339,9 @@ These examples are not just examples--they are also the basis of a compatibility
 {#text_formatting_html}
 The syntax for text formatting is described [here](#text_formatting).
 
-This example shows all the text formatting:
+##### Example
 
-### Markua Syntax
+###### Markua Syntax
 
 {#input_text_formatting_1}
 ~~~
@@ -3354,7 +3354,7 @@ This is ~~a strikethrough tag~~.
 Water is H~2~O.
 ~~~
 
-### HTML Output
+###### HTML Output
 
 {#output_text_formatting_1}
 ~~~
@@ -3367,7 +3367,7 @@ This is <span class="strikethrough">a strikethrough tag</span>.<br/>
 Water is H<sub>2</sub>O.</p>
 ~~~
 
-### CSS Recommendation
+##### CSS Recommendation
 
 The following CSS rule is recommended:
 
@@ -3439,7 +3439,9 @@ The syntax for headings is described [here](#headings).
 
 In Markua, both parts and chapters produce an `h1` in HTML. This is mildly surprising, but entirely appropriate: For books which have no parts, the chapter is the topmost organizational unit. In a book with parts, it is more important for chapters to behave the same way that they do in a book without parts (i.e. to be created with `# Title` and to produce an `h1`) than to be correctly "contained" (if you think like an outliner) inside the Part.
 
-### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_headings_1}
 ~~~
@@ -3472,7 +3474,7 @@ This is a paragraph.
 This is a paragraph.
 ~~~
 
-### HTML Output
+###### HTML Output
 
 {#output_headings_1}
 ~~~
@@ -3499,7 +3501,9 @@ The syntax for spaces, newlines and indentation is described [here](#spaces).
 
 ### Paragraphs and Blank Lines
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_whitespace_1}
 ~~~
@@ -3510,7 +3514,7 @@ This is paragraph two.
 This is paragraph three.
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_whitespace_1}
 ~~~
@@ -3521,7 +3525,9 @@ This is paragraph three.
 
 ### Single Newlines
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_single_newlines_1}
 ~~~
@@ -3540,7 +3546,7 @@ Heading Text!!!
 This is paragraph four.
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_single_newlines_1}
 ~~~
@@ -3559,7 +3565,9 @@ Heading Text!!!</h1>
 
 If there are n newlines after a paragraph, there are n-2 break tags in the HTML output, for all n > 2.
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_three_or_more_newlines_1}
 ~~~
@@ -3576,7 +3584,7 @@ This paragraph is followed by five newlines.
 The End
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_three_or_more_newlines_1}
 ~~~
@@ -3592,7 +3600,9 @@ The End
 
 ### Leading Spaces (Prose vs. Poetry)
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_leading_spaces_1}
 ~~~
@@ -3602,7 +3612,7 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_leading_spaces_1}
 ~~~
@@ -3614,14 +3624,16 @@ My mistress when she walks treads on the ground.<br/>
 
 ### Internal Spaces Are Collapsed to One Space
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_internal_spaces_1}
 ~~~
 foo   bar
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_internal_spaces_1}
 ~~~
@@ -3637,7 +3649,9 @@ The syntax for images is described [here](#images).
 
 #### Local Images
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_local_images_1}
 ~~~
@@ -3660,7 +3674,7 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_local_images_1}
 ~~~
@@ -3685,7 +3699,9 @@ Here's a paragraph after the third figure.
 
 #### Web Images
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_web_images_1}
 ~~~
@@ -3708,7 +3724,7 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_web_images_1}
 ~~~
@@ -3733,7 +3749,9 @@ Here's a paragraph after the third figure.
 
 #### Inline Images (SVG only)
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_inline_images_1}
 ~~~
@@ -3775,7 +3793,9 @@ The syntax for video is described [here](#video).
 
 #### Local Video
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_local_video_1}
 ~~~
@@ -3789,7 +3809,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_local_video_1}
 ~~~
@@ -3804,7 +3824,9 @@ Here's a paragraph after the figure.
 
 #### Web Video
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_web_video_1}
 ~~~
@@ -3818,7 +3840,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_web_video_1}
 ~~~
@@ -3839,7 +3861,9 @@ The syntax for audio is described [here](#audio).
 
 #### Local Audio
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_local_audio_1}
 ~~~
@@ -3850,7 +3874,7 @@ The full version of the talk is here:
 ![Full Talk](talk.m4a)
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_local_audio_1}
 ~~~
@@ -3864,7 +3888,9 @@ The full version of the talk is here:
 
 #### Web Audio
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_local_audio_1}
 ~~~
@@ -3875,7 +3901,7 @@ The full version of the talk is here:
 ![Full Talk](http://markua.com/talk.m4a)
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_local_audio_1}
 ~~~
@@ -4168,9 +4194,9 @@ puts "world"
 
 When the `format` is `text` (which happens as the default format of using tildes, or by specifying it explicitly), a `<pre>` block is used with **no** `<code>` block contained inside it. This way, CSS rules to format code won't inadvertently format poetry like code.
 
-#### Example 1: Using three tildes
+##### Example 1: Using three tildes
 
-##### Markua Syntax
+###### Markua Syntax
 
 {#input_typewriter_poetry_1}
 ```
@@ -4189,7 +4215,7 @@ me   ow
 Here's a paragraph after the poetry.
 ```
 
-##### HTML Output
+###### HTML Output
 
 {#output_typewriter_poetry_1}
 ~~~
@@ -4205,9 +4231,9 @@ me   ow</pre>
 <p>Here's a paragraph after the poetry.</p>
 ~~~
 
-#### Example 2: Using three backticks plus the `text` format via syntactic sugar
+##### Example 2: Using three backticks plus the `text` format via syntactic sugar
 
-##### Markua Syntax
+###### Markua Syntax
 
 {#input_typewriter_poetry_2}
 ~~~
@@ -4226,7 +4252,7 @@ me   ow
 Here's a paragraph after the poetry.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_typewriter_poetry_2}
 ~~~
@@ -4242,9 +4268,9 @@ me   ow</pre>
 <p>Here's a paragraph after the poetry.</p>
 ~~~
 
-#### Example 3: Using three backticks plus the `text` format specified in an attribute list
+##### Example 3: Using three backticks plus the `text` format specified in an attribute list
 
-##### Markua Syntax
+###### Markua Syntax
 
 {#input_typewriter_poetry_3}
 ~~~
@@ -4263,7 +4289,7 @@ me   ow
 Here's a paragraph after the poetry.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_typewriter_poetry_3}
 ~~~
@@ -4289,7 +4315,9 @@ Markua does not specify how math is output in HTML. It is perfectly acceptable f
 
 ### Unordered Lists
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_unordered_list_1}
 ~~~
@@ -4335,7 +4363,7 @@ dolor
 
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_unordered_list_1}
 ~~~
@@ -4382,7 +4410,9 @@ dolor
 
 ### Not Lists
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_not_lists_1}
 ~~~
@@ -4405,7 +4435,7 @@ dolor
 sit
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_not_lists_1}
 ~~~
@@ -4426,7 +4456,9 @@ sit
 
 #### Example 1: Decimal Numbers
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_ordered_lists_1}
 ~~~
@@ -4463,7 +4495,7 @@ amet
 etc.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_ordered_lists_1}
 ~~~
@@ -4502,7 +4534,9 @@ etc.
 
 #### Example 2: Uppercase Letters
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_ordered_lists_2}
 ~~~
@@ -4539,7 +4573,7 @@ A. baz
 etc.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_ordered_lists_2}
 ~~~
@@ -4579,7 +4613,9 @@ etc.
 
 #### Example 3: Lowercase Letters
 
-##### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_ordered_lists_3}
 ~~~
@@ -4616,7 +4652,7 @@ a. baz
 etc.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_ordered_lists_3}
 ~~~
@@ -4654,9 +4690,9 @@ etc.
 <p>etc.</p>
 ~~~
 
-#### Example 4: Uppercase Roman Numerals
+##### Example 4: Uppercase Roman Numerals
 
-##### Markua Syntax
+###### Markua Syntax
 
 {#input_ordered_lists_4}
 ~~~
@@ -4693,7 +4729,7 @@ I. baz
 etc.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_ordered_lists_4}
 ~~~
@@ -4731,9 +4767,9 @@ etc.
 <p>etc.</p>
 ~~~
 
-#### Example 5: Lowercase Roman Numerals
+##### Example 5: Lowercase Roman Numerals
 
-##### Markua Syntax
+###### Markua Syntax
 
 {#input_ordered_lists_5}
 ~~~
@@ -4770,7 +4806,7 @@ i. baz
 etc.
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_ordered_lists_5}
 ~~~
@@ -4808,9 +4844,9 @@ etc.
 <p>etc.</p>
 ~~~
 
-#### Example 6: In Markua, A Single Element Ordered List is Not a List
+##### Example 6: In Markua, A Single Element Ordered List is Not a List
 
-##### Markua Syntax
+###### Markua Syntax
 
 {#input_ordered_lists_6}
 ~~~
@@ -4841,7 +4877,7 @@ I. This isn't a list either.
 amet
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_ordered_lists_6}
 ~~~
@@ -4860,9 +4896,9 @@ amet
 <p>amet</p>
 ~~~
 
-#### Example 7: Ordered List Numbering Rules
+##### Example 7: Ordered List Numbering Rules
 
-##### Markua Syntax
+###### Markua Syntax
 
 {#input_ordered_lists_7}
 ~~~
@@ -4929,7 +4965,7 @@ c. three
 That's it!
 ~~~
 
-##### HTML Output
+###### HTML Output
 
 {#output_ordered_lists_7}
 ~~~
@@ -4986,7 +5022,9 @@ c. three</p>
 
 ### Multi-Paragraph List Items
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_multi_para_lists_1}
 ~~~
@@ -5008,7 +5046,7 @@ Here's a paragraph before the list.
 Here's a paragraph after the list.
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_multi_para_lists_1}
 ~~~
@@ -5031,7 +5069,9 @@ Here's a paragraph after the list.
 
 ### Nested Lists
 
-#### Markua Syntax
+##### Example
+
+###### Markua Syntax
 
 {#input_nested_lists_1}
 ~~~
@@ -5048,7 +5088,7 @@ Here's a paragraph after the list.
 * Baz
 ~~~
 
-#### HTML Output
+###### HTML Output
 
 {#output_nested_lists_1}
 ~~~
@@ -5079,7 +5119,118 @@ Here's a paragraph after the list.
 </ul>
 ~~~
 
+### Nesting Block Elements in List Items
 
+#### Single-Paragraph List Items
+
+##### Example
+
+###### Markua Syntax
+
+{#input_spli_1}
+~~~
+* Foo
+  ```ruby
+  puts "hello"
+  ```
+* Bar
+  {alt: "too large to fit in the alt text"}
+  ![Proof of Fermat's Last Theorem](fermat_proof.mathml)
+* Baz
+~~~
+
+###### HTML Output
+
+{#output_spli_1}
+~~~
+TODO
+~~~
+
+#### Multiple-Paragraph List Items
+
+##### Example
+
+###### Markua Syntax
+
+{#input_mpli_1}
+~~~
+* This is paragraph 1 in the first list item.
+
+  ```ruby
+  puts "hello"
+  ```
+
+  This is paragraph 2 in the first list item.
+
+* This is paragraph 1 in the second list item.
+
+  {alt: "too large to fit in the alt text"}
+  ![Proof of Fermat's Last Theorem](fermat_proof.mathml)
+
+  This is paragraph 2 in the second list item.
+
+* Baz
+~~~
+
+###### HTML Output
+
+{#output_mpli_1}
+~~~
+TODO
+~~~
+
+## Definition Lists
+
+##### Example
+
+###### Markua Syntax
+
+{#input_definition_lists_1}
+~~~
+Here's a paragraph before the list.
+
+one
+: This is the first paragraph in the first list item. Yay!
+
+  This is a second paragraph in the first list item.
+
+two
+: The second list item is simple.
+
+three
+: The third list item has three paragraphs.
+  This is still part of the first paragraph.
+
+  Here's the second paragraph in the third list item.
+
+  Here's the third paragraph in the third list item.
+
+Here's a paragraph after the list.
+~~~
+
+###### HTML Output
+
+{#output_definition_lists_1}
+~~~
+~~~
+
+## Tables
+
+### Simple Tables
+
+##### Example
+
+###### Markua Syntax
+
+{#input_simple_tables_1}
+~~~
+~~~
+
+###### HTML Output
+
+{#output_simple_tables_1}
+~~~
+~~~
 
 ## TODO_HERE
 
