@@ -2223,6 +2223,10 @@ In Markdown, a single newline inside a blockquote (where both lines are preceded
 
 If a blockquote contains headings, these headings may be formatted by a Markua Processor differently than normal headings. Finally, if a Markua Processor is automatically generating a [Table of Contents](#toc) from chapter and section headings, any headings inside blockquotes should be ignored.
 
+A blockquote can have a citation.
+
+W> TODO - specify
+
 ## Asides (`A>`)
 
 Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua Processors.
@@ -5413,10 +5417,68 @@ This is after the second scene break.
 <p>This is after the second scene break.</p>
 ~~~
 
+### Blockquotes (`>`)
 
+##### Example 1
 
+###### Markua Syntax
 
+{#input_blockquotes_1}
+~~~
+This is the first paragraph.
 
+> This is a blockquote.
+>
+> It is outside the paragraphs.
+
+This is the second paragraph.
+~~~
+
+###### HTML Output
+
+{#output_blockquotes_1}
+~~~
+<p>This is the first paragraph.</p>
+<
+
+<blockquote cite="http://twitter.example.net/t31351234">
+   I'm on vacation, writing my blog.
+  </blockquote>
+
+> This is a blockquote.
+>
+> It is outside the paragraphs.
+
+This is the second paragraph.
+~~~
+
+##### Example 2
+
+###### Markua Syntax
+
+{#input_blockquotes_2}
+~~~
+~~~
+
+###### HTML Output
+
+{#output_blockquotes_2}
+~~~
+~~~
+
+##### Example 3
+
+###### Markua Syntax
+
+{#input_blockquotes_3}
+~~~
+~~~
+
+###### HTML Output
+
+{#output_blockquotes_3}
+~~~
+~~~
 
 
 
@@ -5425,8 +5487,6 @@ This is after the second scene break.
 ## TODO_HERE
 
 TODO
-
-Tables are not specified, so that Markua Processors may transform them into images!?
 
 {#criticmarkup_html}
 ## CriticMarkup
