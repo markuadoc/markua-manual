@@ -2144,7 +2144,7 @@ This is after the first scene break and before the second.
 This is after the second scene break.
 ~~~
 
-Markua Processors can take great liberties in how they output scene breaks. For example, scene breaks can be displayed as a few centered asterisks, an image, or just a blank line, depending on whether the book is fiction or another type of book. Scene breaks can also be displayed as the `hr` element in HTML, but that is not a requirement.
+Markua Processors can take great liberties in how they output scene breaks in non-HTML formats. For example, scene breaks can be displayed as a few centered asterisks, an image, or just a blank line, depending on whether the book is fiction or another type of book. When producing HTML, Markua Processors must output the scene break as an `<hr/>` element, which can then be styled or replaced by book designers using CSS.
 
 ## Blockquotes (`>`)
 
@@ -5385,6 +5385,33 @@ Content A3 | Content B3 | Content C3
 
 In HTML, scene breaks are always mapped to `<hr/>`. Book designers can use CSS to replace th e `<hr/>` with whatever they want: there are no other ways to produce an `<hr/>` in Markua, so an `<hr/>` always means scene break.
 
+##### Example
+
+###### Markua Syntax
+
+{#input_scene_break_1}
+~~~
+This is before the first scene break.
+
+* * *
+
+This is after the first scene break and before the second.
+
+---
+
+This is after the second scene break.
+~~~
+
+###### HTML Output
+
+{#output_scene_break_1}
+~~~
+<p>This is before the first scene break.</p>
+<hr/>
+<p>This is after the first scene break and before the second.</p>
+<hr/>
+<p>This is after the second scene break.</p>
+~~~
 
 
 
