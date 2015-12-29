@@ -709,6 +709,10 @@ Note that as shown above, the caption for a figure can be provided either in the
 
 ### Context-Sensitive Meaning of Square Bracketed Text
 
+U+1F602
+
+😂
+
 You may have been surprised reading this section. Markua does not have many inconsistencies, but this is one of them: the optional text inside the square brackets with a local or web resource varies based on whether the resource is inserted as a span resource or as a figure!
 
 {caption: Meaning of the Text Inside Square Brackets}
