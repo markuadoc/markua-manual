@@ -2167,6 +2167,8 @@ Blockquotes in Markua are created in one of two ways:
 
 Option #1 is preferable for short quotes; option #2 is easier on authors for really long quotes.
 
+A> Do not confuse the curly-brace syntax for blockquotes, asides, blurbs and callouts with an attribute list. They are not attribute lists.
+
 Like figures and tables, blockquotes can be inserted in the middle of a paragraph or as a sibling of it.
 
 For non-programmers: I'm calling these things "blockquotes", not "block quotes", since their origin is in Markdown [blockquotes](http://daringfireball.net/projects/markdown/syntax#blockquote).
@@ -2260,7 +2262,7 @@ The syntaxes for asides are very similar to blockquotes:
 
 Option #1 is preferable for short asides; option #2 is easier on authors for really long asides.
 
-Like blockquotes, asides can be siblings of paragraphs or nested in them.
+For consistency with blockquotes, asides can be siblings of paragraphs or nested in them.
 
 Here's a short aside:
 
@@ -2297,8 +2299,6 @@ Asides can also have headings, like this one does.
 Multi-paragraph asides are more pleasant using this syntax.
 {/aside}
 ~~~
-
-A> Do not confuse the syntax for asides, blurbs and callouts with an attribute list. They are not attribute lists.
 
 ## Blurbs (`B>`)
 
@@ -5562,6 +5562,57 @@ That's it!
 
 ### Asides (`A>`)
 
+##### Example
+
+###### Markua Syntax
+
+{#input_asides_1}
+~~~
+This is the first paragraph.
+A> This is a short aside.
+This is still the first paragraph.
+
+A> # A Longer Aside
+A>
+A> This is a longer aside.
+A>
+A> It can have multiple paragraphs.
+
+This is the second paragraph.
+
+{aside}
+# A Longer Aside
+
+This is a longer aside.
+
+It can have multiple paragraphs.
+{/aside}
+
+This is the third paragraph.
+~~~
+
+###### HTML Output
+
+{#output_asides_1}
+~~~
+<p>This is the first paragraph.<br/>
+<aside>
+  <p>This is a short aside.</p>
+</aside>
+This is still the first paragraph.</p>
+<aside>
+  <h1>A Longer Aside</h1>
+  <p>This is a longer aside.</p>
+  <p>It can have multiple paragraphs.</p>
+</aside>
+<p>This is the second paragraph.</p>
+<aside>
+  <h1>A Longer Aside</h1>
+  <p>This is a longer aside.</p>
+  <p>It can have multiple paragraphs.</p>
+</aside>
+<p>This is the third paragraph.</p>
+~~~
 
 #### TODO_HERE
 
