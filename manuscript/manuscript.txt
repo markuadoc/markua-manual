@@ -123,7 +123,7 @@ Books have different abstractions than HTML. All abstractions [leak](http://www.
 
 So, I started over.
 
-I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly, resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
+I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
 
 ## Why the Name "Markua"?
 
@@ -556,7 +556,7 @@ Resources can be inserted either as spans or as figures.
 
 ### Spans
 
-When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource cannot have an attribute list.
+When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
 
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
@@ -569,7 +569,7 @@ The optional alt text is discussed shortly.
 The syntax for an inline resource inserted as a span is as follows:
 
 ~~~
-It's a single backtick `followed by inline resource content`optional_format and then a single backtick.
+It's a single backtick `followed by inline resource content` and then a single backtick.
 ~~~
 
 ### Figures
@@ -1090,7 +1090,7 @@ The full version of the talk is here:
 
 Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-A> Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua. In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<(code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported.
+A> Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Markdown but for computer programming books. So, everything you need to write a computer programming book is in Markua. In Leanpub Flavoured Markdown we had a special syntax for inserting code samples. It looked like `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource, and that syntax is not supported.
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a code resource, it is ignored.
 
@@ -1104,7 +1104,7 @@ Markua specifies only one specific file extension, `.txt`, to be associated with
 | (other)   | `guess`    | Implementation-dependent |
 |-----------|------------|--------------------------|
 
-All code must be formatted as monospaced text by Markua Processors.
+Regardless of whether syntax highlighting is supported and the programmming language is detected, all code must be formatted as **`monospaced text`** by Markua Processors.
 
 The `text` format means to not do any syntax highlighting as well.
 
@@ -1114,10 +1114,20 @@ Syntax highlighting is optional in Markua Processors. If a Markua Processor does
 
 Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
+### TODO
+
+- All inline span code is plain text.
+- No format on inline span.
+- All Local and Web Code resources inserted as span have implicit newline before and after, and are treated as a figure, not a span. This would support the figure caption in square brackets.
+- Maybe always use the square brackets for figure caption, and if there's a figure caption, then implicit br tags!?
+
 {#supported_attributes_for_code}
 ### Supported Attributes for Code
 
-`alt`, `caption` and `class`
+`alt`
+: TODO
+
+`caption` and `class`
 : These attributes function as they do for images.
 
 `format`
@@ -1140,7 +1150,7 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 #### Span
 
 ~~~
-Hello in Ruby is a simple ![](hello.rb) statement.
+Hello in Ruby is a simple ![Hello World in Ruby](hello.rb) statement.
 ~~~
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
@@ -3940,6 +3950,8 @@ The full version of the talk is here:
 {#code_html}
 The syntax for code is described [here](#code).
 
+Markua only specifies how code which has a format of `text` is formatted. All other formats of code are unspecified, since the behaviour depends on whether the programming language is recognized by the Markua Processor, whether syntax highlighting is enabled, and on what type and version of syntax highlighting library (e.g. Pygments) is used.
+
 #### Local Code Resources
 
 ##### Span Example
@@ -3990,7 +4002,7 @@ puts "world"
 ~~~
 Here's a paragraph before the figure.
 
-{format: ruby}
+{format: text}
 ![Hello World in Ruby](hello.rb)
 
 Here's a paragraph after the figure.
@@ -5152,12 +5164,10 @@ Here's a paragraph after the list.
 {#input_spli_1}
 ~~~
 * Foo
-  ```ruby
+  ```text
   puts "hello"
   ```
 * Bar
-  {alt: "too large to fit in the alt text"}
-  ![Proof of Fermat's Last Theorem](fermat_proof.mathml)
 * Baz
 ~~~
 
@@ -5166,6 +5176,36 @@ Here's a paragraph after the list.
 {#output_spli_1}
 ~~~
 TODO
+<ul>
+  <li>
+    Foo
+
+    <ol>
+      <li>One</li>
+      <li>
+        Two
+        <ol type="a">
+          <li>This is 2a</li>
+          <li>This is 2b</li>
+        </ol>
+      </li>
+      <li>Three</li>
+    </ol>
+  </li>
+  <li>
+    Bar
+    <ol type="i">
+      <li>Lorem</li>
+      <li>Ispum</li>
+      <li>Dolor</li>
+    </ol>
+  </li>
+  <li>Baz</li>
+</ul>
+
+
+
+
 ~~~
 
 #### Multiple-Paragraph List Items
@@ -5661,6 +5701,11 @@ ambivalent.</span>. If you don't want to use it, you don't need to learn about i
 ~~~
 
 {backmatter}
+
+# TODO
+
+* Support insert and delete of code lines in figures?
+* All code spans plain text?
 
 {#acknowledgments}
 # Acknowledgments
