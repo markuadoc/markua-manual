@@ -2921,18 +2921,18 @@ The syntax that Markua uses for emoji is a backslash (`\`), followed by a `u`, f
 
 The reason the semicolon is required is to clearly indicate the end of the Unicode hexadecimal value to the Markua Processor.
 
-In terms of output requirements, a Markua Processor can do one of the following four things with emoji:
+In terms of output requirements, a Markua Processor can do one of the following things with emoji:
 
 1. Output the emoji using an emoji font.
 2. Output the emoji as an image, along with alt text (optionally localized to the primary language of the book) in an appropriate manner (e.g. as a tooltip).
 3. Output the emoji as an image, without any alt text.
 4. Output the text description for the emoji (optionally localized to the primary language of the book) inside some optional delimiter (e.g. colons). For example, `\u1F602;` could be output as `:face with tears of joy:`.
 5. Output a "missing" character (the "tofu" box in many character sets).
-6. For HTML output, output the hexadecimal HTML entity reference (e.g. `&#x1F602;`).
+6. For HTML-based output (either HTML or EPUB), output the hexadecimal HTML entity reference (e.g. `&#x1F602;`).
 
 Pretty much the only two things a Markua Processor cannot do with emoji is to output nothing or to output the escape sequence (e.g. `\u1F602;`) literally. Outputting nothing at all could cause confusion with the surrounding text, and nobody wants to see an escape sequence.
 
-A> It is also possible to attempt to use emoji by actually pasting the Unicode characters into a Markua document. There is no requirement for a Markua Processor to handle this correctly however: in mast cases, this will produce the "missing" character (the "tofu" box).
+A> It is also possible to attempt to use emoji by actually pasting the Unicode characters into a Markua document. There is no requirement for a Markua Processor to handle this in any special way, however--in mast cases, this will produce the "missing" character (the "tofu" box).
 
 # Metadata
 
