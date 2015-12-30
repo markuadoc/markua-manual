@@ -2932,7 +2932,7 @@ In terms of output requirements, a Markua Processor can do one of the following 
 
 Pretty much the only two things a Markua Processor cannot do with emoji is to output nothing or to output the escape sequence (e.g. `\u1F602;`) literally. Outputting nothing at all could cause confusion with the surrounding text, and nobody wants to see an escape sequence.
 
-A> It is also possible to attempt to use emoji by actually pasting the Unicode characters into a Markua document. There is no requirement for a Markua Processor to handle this correctly however: in mast cases, this will produce the "missing" character (the "tofu" box). For example, the following character between the pipes (`|`) is the U+1F602 character |`😂`|, and when output, it produces the output between these pipes |😂|.
+A> It is also possible to attempt to use emoji by actually pasting the Unicode characters into a Markua document. There is no requirement for a Markua Processor to handle this correctly however: in mast cases, this will produce the "missing" character (the "tofu" box).
 
 # Metadata
 
