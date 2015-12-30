@@ -2913,7 +2913,7 @@ Now, in Unicode, this emoji is Unicode code point `U+1F602`. In HTML, this is th
 
 What should Markua do?
 
-Well, first of all, this is *fantastic* news. Emoji are the single use case for an inline span image, and I was having real problems figuring out what to do about alt text. Emoji should have alt text for readers with visual disabilities, but the alt text syntax for images is only in curly braces (which does not work for spans). So, now that emoji are on the rise and have standard Unicode characters for them, this problem is solved: emoji do not need to be inserted as inline span images. Instead, emoji can be inserted using some kind of entity syntax plus the Unicode character. This way, a Markua Processor that recognizes this emoji can provide the standard alt text (e.g. "face with tears of joy") for the character, without the author having provided it.
+Well, first of all, this is *fantastic* news. Emoji are the single legitimate use case for an inline span image, and I was having real problems figuring out what to do about alt text for inline span images. Emoji should have alt text for readers with visual disabilities, but the alt text syntax for images is only in curly braces (which does not work for spans). So, now that emoji are on the rise and have standard Unicode characters for them, this problem is solved: emoji do not need to be inserted as inline span images. Instead, emoji can be inserted using some kind of entity syntax for the Unicode character. This way, a Markua Processor that recognizes this emoji can provide the standard alt text (e.g. "face with tears of joy") for the character, without the author having provided it.
 
 The syntax that Markua uses for emoji is a backslash (`\`), followed by a `u`, followed by the hexadecimal value of the Unicode code point, followed by a semicolon. For the Face with Tears of Joy, this is:
 
@@ -2921,14 +2921,14 @@ The syntax that Markua uses for emoji is a backslash (`\`), followed by a `u`, f
 
 The reason the semicolon is required is to clearly indicate the end of the Unicode hexadecimal value to the Markua Processor.
 
-In terms of requirements, a Markua Processor can do one of the following things with emoji:
+In terms of output requirements, a Markua Processor can do one of the following four things with emoji:
 
-1. Output the emoji correctly.
-2. Output the alt text for the emoji inside some delimiter (e.g. colons), if it knows what the alt text for the emoji is.
-3. Output a missing character (the "tofu" box in many character sets).
-4. Output nothing.
+1. Output the emoji as an image correctly, along with the standard alt text provided in an appropriate manner (e.g. as a tooltip).
+2. Output the emoji as an image correctly, without any alt text.
+3. Output the alt text for the emoji inside some delimiter (e.g. colons), if it knows what the alt text for the emoji is.
+4. Output a missing character (the "tofu" box in many character sets).
 
-Pretty much the only thing a Markua Processor cannot do with emoji is to output the escape sequence (e.g. `\u1F602;`) literally. Nobody wants that.
+Pretty much the only two things a Markua Processor cannot do with emoji is to output nothing or to output the escape sequence (e.g. `\u1F602;`) literally. Nobody wants the escape sequence, and outputting nothing could cause confusion.
 
 # Metadata
 
