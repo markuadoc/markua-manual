@@ -558,7 +558,7 @@ Resources can be inserted either as spans or as figures.
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
 
-TODO - no more span local or web resource
+W> TODO - no more span local or web resource. all square brackets are figures, and the figure caption is in the square brackets always.
 
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
@@ -2907,7 +2907,7 @@ In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year [was
 
 ![Face with Tears of Joy](tears-of-joy-emoji.png)
 
-(I don't know whether to laugh or cry, but if I did cry, they wouldn't be tears of joy.)
+(I don't know whether to laugh or cry, but if I *did* cry, they wouldn't be tears of joy.)
 
 Now, in Unicode, this emoji is Unicode code point `U+1F602`. In HTML, this is the entity `&#x1F602;` (in hexadecimal) or `&#128514;` (in decimal). In JavaScript and many programming languages it is `\u1F602`.
 
@@ -2923,12 +2923,16 @@ The reason the semicolon is required is to clearly indicate the end of the Unico
 
 In terms of output requirements, a Markua Processor can do one of the following four things with emoji:
 
-1. Output the emoji as an image correctly, along with the standard alt text provided in an appropriate manner (e.g. as a tooltip).
-2. Output the emoji as an image correctly, without any alt text.
-3. Output the alt text for the emoji inside some delimiter (e.g. colons), if it knows what the alt text for the emoji is.
-4. Output a missing character (the "tofu" box in many character sets).
+1. Output the emoji using an emoji font.
+2. Output the emoji as an image, along with alt text (optionally localized to the primary language of the book) in an appropriate manner (e.g. as a tooltip).
+3. Output the emoji as an image, without any alt text.
+4. Output the text description for the emoji (optionally localized to the primary language of the book) inside some optional delimiter (e.g. colons). For example, `\u1F602;` could be output as `:face with tears of joy:`.
+5. Output a "missing" character (the "tofu" box in many character sets).
+6. For HTML output, output the hexadecimal HTML entity reference (e.g. `&#x1F602;`).
 
-Pretty much the only two things a Markua Processor cannot do with emoji is to output nothing or to output the escape sequence (e.g. `\u1F602;`) literally. Nobody wants the escape sequence, and outputting nothing could cause confusion.
+Pretty much the only two things a Markua Processor cannot do with emoji is to output nothing or to output the escape sequence (e.g. `\u1F602;`) literally. Outputting nothing at all could cause confusion with the surrounding text, and nobody wants to see an escape sequence.
+
+A> It is also possible to attempt to use emoji by actually pasting the Unicode characters into a Markua document. There is no requirement for a Markua Processor to handle this correctly however: in mast cases, this will produce the "missing" character (the "tofu" box). For example, the following character between the pipes (`|`) is the U+1F602 character |`😂`|, and when output, it produces the output between these pipes |😂|.
 
 # Metadata
 
