@@ -620,8 +620,6 @@ A figure can also have attributes. The supported attributes vary based on the ty
 
 Figures can also have alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss alt text first, and the figure caption second.
 
-#### Figure Alt Text
-
 A figure can have alt text, as long as the type of resource being inserted supports alt text. The alt text is defined in an attribute list above the figure. Since the alt text is defined in the attribute list, the resource location does not matter: local, web and inline resources all support alt text.
 
 The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` do not support alt text, since they themselves are just text. If any alt text is provided for a code resource it is ignored.
@@ -638,32 +636,16 @@ These are some examples of figures with alt text:
 
 {alt: "Denzel Washington on a jet ski in a river"}
 ![Washington Crossing the Delaware](delaware.jpg)
-
-{alt: "Denzel Washington on a jet ski in a river", caption: "Washington Crossing the Delaware"}
-![](delaware.jpg)
-
-{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
-```svg
-<svg width="20" height="20">
-  <circle cx="10" cy="10" r="9" fill="blue"/>
-</svg>
-```
 ~~~
-
-#### Figure Captions
 
 A resource which is inserted as a figure can have a figure caption.
 
-This caption shows up in two places:
+This caption shows up in two places in the output:
 
 1. Near the resource, typically above or below it, per the preference of the Markua Processor.
 2. As the name of the Figure in the List of Illustrations or Table of Figures, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
 
-Note that as shown above, the caption for a figure can be provided either in the metadata or in the square brackets in front of a local or web resource.
-
-W> TODO - rewrite
-
-So, given this rule, a figure which is an external code sample can be inserted in the following two ways:
+The caption for a figure can be provided either in the square brackets in front of a local or web resource or in the attribute list above the resource:
 
 ~~~
 ![My Amazing Algorithm](algorithm.rb)
@@ -674,9 +656,7 @@ So, given this rule, a figure which is an external code sample can be inserted i
 
 The first choice is clearly shorter, as well as more pleasant to write and to read.
 
-Since the text in square brackets is the figure caption in figures, both ways are supported. If the text in square brackets was alt text in figures, then only the longer, unpleasant second choice would be supported.
-
-Note that the second choice is how you add captions to figures which are inline resources, since there are no square brackets to use:
+Note that inline resources have no square brackets, so any captions must be added in the attribute list:
 
 ~~~
 Here's a paragraph before the figure.
@@ -689,7 +669,22 @@ puts "hello world"
 Here's a paragraph after the figure.
 ~~~
 
+Finally, these are some examples of figures with both alt text and a figure caption:
 
+~~~
+{alt: "Denzel Washington on a jet ski in a river"}
+![Washington Crossing the Delaware](delaware.jpg)
+
+{alt: "Denzel Washington on a jet ski in a river", caption: "Washington Crossing the Delaware"}
+![](delaware.jpg)
+
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
 
 ### Spans
 
