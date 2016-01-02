@@ -1215,9 +1215,7 @@ statement.
 
 #### Inline Code Resources
 
-Inline code resources are the most flexible way to insert code.
-
-They are the only way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
+Inline code resources are the most flexible way to insert code. They are the only way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
 
 ##### Span
 
@@ -1423,7 +1421,7 @@ Note that Markua procesors do not need to support either math markup language fu
 #### Supported Attributes for Math
 
 `alt`
-: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This can only be provided in square brackets for mathematical equations inserted as spans and only in the attribute list for figures.
+: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This can only be provided in the attribute list for figures.
 
 `caption` and `class`
 : These attributes function as they do for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
@@ -1431,17 +1429,9 @@ Note that Markua procesors do not need to support either math markup language fu
 `format`
 : For math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `tex` for LaTeX math and `mathml` for MathML math.
 
-Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
-
 #### Local Math Resources
 
-##### Span
-
-~~~
-This is ![too large to fit in the alt text](fermat_proof.tex) my proof.
-~~~
-
-##### Figure
+Local math resources can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
 ~~~
 Here's a paragraph before the figure.
@@ -1452,17 +1442,19 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
+As with code, note that there is no way to insert a local math resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
+
+~~~
+This is ![too large to fit in the figure caption](fermat_proof.tex) my proof.
+
+This is
+![too large to fit in the figure caption](fermat_proof.tex)
+my proof.
+~~~
+
 #### Web Math Resources
 
 This is identical to how local math resources work, including the significance of file extensions. The only difference is that the files are on the web.
-
-##### Span
-
-~~~
-This is ![too large to fit in the alt text](http://markua.com/fermat_proof.mathml) my proof.
-~~~
-
-##### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -1475,16 +1467,28 @@ Here's a paragraph after the figure.
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
+Again, there is no way to insert a web math resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
+
+~~~
+This is ![too large to fit in the figure caption](http://markua.com/fermat_proof.mathml) my proof.
+
+This is
+![too large to fit in the figure caption](http://markua.com/fermat_proof.mathml)
+my proof.
+~~~
+
 #### Inline Math Resources
 
-Inline math resources are the most flexible and appropriate way to insert math as a span resource, and the most straightforward way to add short math examples as figures. Both LaTeX and MathML can be inlined either as spans or figures, but only LaTeX is terse enough for it to be practical.
+Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. Both LaTeX and MathML can be inlined either as spans or figures, but only LaTeX is terse enough for it to be practical.
 
 ##### Span
+
+W> TODO - format decision...
 
 The format of an inline math resource inserted as a span is:
 
 ~~~
-Yada yada `some math here`optional_format yada yada.
+Yada yada `some math here` yada yada.
 ~~~
 
 The optional format specifies the math format used. While it's technically optional, it's not optional if you want math: you either need to say `latex` or `mathml`. Otherwise, if the format is not provided, the format defaults to `guess` and the resource is interpreted as code, not math.
