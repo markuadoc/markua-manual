@@ -558,8 +558,6 @@ Resources can be inserted either as spans or as figures. In most cases a resourc
 
 When a resource is properly inserted as a figure, the resource is inserted with at least one newline before and after it.
 
-Details on the distinction between inserting a figure with one and two newlines surrounding it are discussed [later](#inserting_into_paras).
-
 A figure can either be top-level (with a blank line before and after it), or it can be contained in a paragraph. The ways that figures and other block elements can be inserted in paragraphs is [discussed in depth](#inserting_into_paras) later.
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
@@ -607,7 +605,7 @@ puts "hello world"
 ```
 ~~~
 
-(Again, authors should never write Markua like this; the format should be specified only once.)
+Again, this is a mistake: the format should be specified only once.
 
 A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format`, `caption` and `class` attributes.
 
@@ -620,19 +618,19 @@ A figure can also have attributes. The supported attributes vary based on the ty
 `class`
 : Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
 
-Figures can have two things which span resources cannot have: alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss alt text first, and the figure caption second.
+Figures can also have alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss alt text first, and the figure caption second.
 
-#### Alt Text with Figures
+#### Figure Alt Text
 
-A resource whose type supports alt text and which is inserted as a figure can have alt text. The alt text is defined in an attribute list above the figure.
+A figure can have alt text, as long as the type of resource being inserted supports alt text. The alt text is defined in an attribute list above the figure. Since the alt text is defined in the attribute list, the resource location does not matter: local, web and inline resources all support alt text.
+
+The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` do not support alt text, since they themselves are just text. If any alt text is provided for a code resource it is ignored.
 
 Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
 
-Not all resource types support alt text. The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` do not support alt text, since they themselves are just text. If any alt text is provided for a code resource it is ignored.
-
 The alt text should **not** have the same content as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
-The alt text for a resource inserted as a figure is provided in the attribute list above the figure. This is true regardless of whether the resource location is local, web or inline, as shown in the following examples:
+These are some examples of figures with alt text:
 
 ~~~
 {alt: "The Delaware state map"}
