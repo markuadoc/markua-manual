@@ -2907,9 +2907,9 @@ In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year [was
 
 ![Face with Tears of Joy](tears-of-joy-emoji.png)
 
-(I don't know whether to laugh or cry, but if I *did* cry, they wouldn't be tears of joy.)
+(I don't know whether to laugh or cry, but if I *did* cry, they wouldn't be--wait for it--tears of joy.)
 
-Now, in Unicode, this emoji is Unicode code point `U+1F602`. In HTML, this is the entity `&#x1F602;` (in hexadecimal) or `&#128514;` (in decimal). In JavaScript and many programming languages it is `\u1F602`.
+Now, in Unicode, this emoji is Unicode code point `U+1F602`. In HTML, this is the entity `&#x1F602;` in hexadecimal or `&#128514;` in decimal. In JavaScript and many programming languages it is `\u1F602`.
 
 What should Markua do?
 
