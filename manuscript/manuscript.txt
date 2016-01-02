@@ -567,15 +567,6 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 ![Optional Figure Caption](resource_path_or_url)
 ~~~
 
-Note that if there is a figure caption specified in the attribute list and in the square brackets, the one in the attribute list wins. In the following figure, the caption would be "Foo" not "bar":
-
-~~~
-{caption: Foo}
-![bar](foo.png)
-~~~
-
-Note that this is a deliberate example of a mistake. Authors should never write Markua text like this; the caption should be specified only once.
-
 The syntax for an inline resource inserted as a figure is as follows:
 
 ~~~
@@ -605,7 +596,7 @@ puts "hello world"
 ```
 ~~~
 
-Again, this is a mistake: the format should be specified only once.
+This is a deliberate example of a mistake. Authors should never write Markua text like this; the format should be specified only once.
 
 A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format`, `caption` and `class` attributes.
 
@@ -669,7 +660,7 @@ puts "hello world"
 Here's a paragraph after the figure.
 ~~~
 
-Finally, these are some examples of figures with both alt text and a figure caption:
+These are some examples of figures with both alt text and a figure caption:
 
 ~~~
 {alt: "Denzel Washington on a jet ski in a river"}
@@ -686,6 +677,15 @@ Finally, these are some examples of figures with both alt text and a figure capt
 ```
 ~~~
 
+Finally, note that if there is a figure caption specified in the attribute list and in the square brackets, the one in the attribute list wins. In the following figure, the caption would be "Foo" not "bar":
+
+~~~
+{caption: Foo}
+![bar](foo.png)
+~~~
+
+Again, this is a deliberate example of a mistake. Authors should never write Markua text like this; the caption should be specified only once.
+
 ### Spans
 
 An inline resource can be inserted as a span using the following syntax:
@@ -694,22 +694,36 @@ An inline resource can be inserted as a span using the following syntax:
 It's a single backtick `followed by inline resource content` and then a single backtick.
 ~~~
 
-W> TODO - rewrite - no more span local or web resource. all square brackets are figures, and the figure caption is in the square brackets always.
-
-This only works for resources whose content can be defined
+This only works for inline resources -- resources whose content can be defined in the text of a Markua document.
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
 
-The syntax for a local resource or a web resource inserted as a span is as follows:
+### Figures That Look Like Spans
+
+If a local or web resource is inserted with no newlines before or after it, the resource is **NOT** inserted as a Span. Instead, it is treated as though there was one newline before and after the resource, and the resource is inserted as a Figure.
+
+The following two paragraphs are equivalent:
 
 ~~~
-It's just ![optional alt text](resource_path_or_url) right in the text.
+Here's some text ![Foo](bar.png) and more text.
+
+Here's some text
+![Foo](bar.png)
+and more text.
 ~~~
 
-The optional alt text is discussed shortly.
+In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption.
 
-The syntax for an inline resource inserted as a span is as follows:
+Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure. This is discussed further [here](#inserting_into_paras).
 
+Finally, note that even though both images are inserted as figures, in the first case there is no way to specifiy alt text. This is why this approach is inferior to using explicit newlines, since then an attribute list can be defined. For example:
+
+~~~
+Here's some text
+{alt: "a shoal"}
+![Foo](bar.png)
+and more text.
+~~~
 
 ## Resource Locations
 
