@@ -774,7 +774,7 @@ As an author, all you do is provide the correct file extension or set the format
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
 
 {#images}
-## Images
+### Images
 
 The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
 
@@ -800,7 +800,7 @@ Images in Markua are inserted in essentially the same way they are in Markdown f
 
 We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
 
-### Supported Attributes for Images
+#### Supported Attributes for Images
 
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in square brackets for images inserted as spans and only in the attribute list for figures.
@@ -814,15 +814,15 @@ We will discuss the supported and the default attributes for images, and then sh
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
 
-### Local Images
+#### Local Images
 
-#### Span
+##### Span
 
 ~~~
 Easy as ![pie](pie.png).
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 Here's a paragraph before the first figure.
@@ -842,15 +842,15 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
-### Web Images
+#### Web Images
 
-#### Span
+##### Span
 
 ~~~
 Easy as ![pie](http://markua.com/pie.png).
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 Here's a paragraph before the first figure.
@@ -870,19 +870,19 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
-### Inline Images (SVG only)
+#### Inline Images (SVG only)
 
 SVG images are just XML text, so they can be inserted inline in Markua.
 
 Note that there is no support for `alt` text in SVG, so there is no support for `alt` attributes with inline images in Markua. The recommendation is to use the `<desc>` attribute of the SVG as alt text.
 
-#### Span
+##### Span
 
 ~~~
 Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -899,7 +899,7 @@ Here's a paragraph after the figure.
 ~~~
 
 {#video}
-## Video
+### Video
 
 Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
 
@@ -917,7 +917,7 @@ The syntax to insert a video is the same compact and consistent syntax that is u
 
 We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local and web videos.
 
-### Supported Attributes for Video
+#### Supported Attributes for Video
 
 `format`
 : All resources support the format attribute. For video, the `format` is the specific video format. The legal set of formats is given in the `format` column in the above table.
@@ -932,15 +932,15 @@ Since the `alt` is a fallback for the situation where the `poster` image cannot 
 
 When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
 
-### Local Video
+#### Local Video
 
-#### Span
+##### Span
 
 ~~~
 Easy as ![pie](pie_eating_contest.mp4).
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -951,9 +951,9 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Web Video
+#### Web Video
 
-#### Span
+##### Span
 
 ~~~
 Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
@@ -961,7 +961,7 @@ Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v
 
 Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
 
-#### Figure
+##### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -973,7 +973,7 @@ Here's a paragraph after the figure.
 ~~~
 
 {#audio}
-## Audio
+### Audio
 
 Just as with video, the audio support in ebooks and on the web is more varied than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. It's entirely likely that many ebook readers won't support any of them.
 
@@ -998,7 +998,7 @@ The syntax to insert an audio file is the same compact and consistent syntax tha
 
 We will discuss the supported and the default attributes for audio files, and then show examples of audio being inserted as spans and as figures for both local and web audio files.
 
-### Supported Attributes for Audio
+#### Supported Attributes for Audio
 
 `format`
 : All resources support the format attribute. For audio, the `format` is the specific audio format. The legal set of formats is given in the `format` column in the above table.
@@ -1013,15 +1013,15 @@ Since the `alt` is a fallback for if the `poster` image cannot be displayed, the
 
 When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
 
-### Local Audio
+#### Local Audio
 
-#### Span
+##### Span
 
 ~~~
 The talk audio highlights are here: ![](highlights.mp3).
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 The full version of the talk is here:
@@ -1029,15 +1029,15 @@ The full version of the talk is here:
 ![Full Talk](talk.m4a)
 ~~~
 
-### Web Audio
+#### Web Audio
 
-#### Span
+##### Span
 
 ~~~
 The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 The full version of the talk is here:
@@ -1046,7 +1046,7 @@ The full version of the talk is here:
 ~~~
 
 {#code}
-## Code
+### Code
 
 Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
@@ -1074,7 +1074,7 @@ Syntax highlighting is optional in Markua Processors. If a Markua Processor does
 
 Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
-### TODO
+#### TODO
 
 - All inline span code is plain text.
 - No format on inline span.
@@ -1082,7 +1082,7 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 - Maybe always use the square brackets for figure caption, and if there's a figure caption, then implicit br tags!?
 
 {#supported_attributes_for_code}
-### Supported Attributes for Code
+#### Supported Attributes for Code
 
 `alt`
 : TODO
@@ -1105,9 +1105,9 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 `crop-end`
 : This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
 
-### Local Code Resources
+#### Local Code Resources
 
-#### Span
+##### Span
 
 ~~~
 Hello in Ruby is a simple ![Hello World in Ruby](hello.rb) statement.
@@ -1115,7 +1115,7 @@ Hello in Ruby is a simple ![Hello World in Ruby](hello.rb) statement.
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
-#### Figure
+##### Figure
 
 Code can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
@@ -1161,11 +1161,11 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Web Code Resources
+#### Web Code Resources
 
 This is identical to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
 
-#### Span
+##### Span
 
 ~~~
 Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
@@ -1173,7 +1173,7 @@ Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
 
 Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
 
-#### Figure
+##### Figure
 
 ~~~
 This will be a type of code and a format of `guess` since the file extension is not specified:
@@ -1195,11 +1195,11 @@ Here's a paragraph at the end.
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
-### Inline Code Resources
+#### Inline Code Resources
 
 Inline code resources are the most flexible and appropriate way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
 
-#### Span
+##### Span
 
 The format of an inline code resource inserted as a span is:
 
@@ -1223,7 +1223,7 @@ The first and second statement above are functionally identical since the defaul
 
 The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
 
-#### Figure
+##### Figure
 
 This will be a type of code and a format of `guess` since the format is not specified:
 
@@ -1275,7 +1275,7 @@ Note that the syntax for inline code resource figures is similar to the "fenced 
 
 A> The "four space indent" method of creating code blocks in Markdown is **NOT** supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
-### Typewriter Poetry with Code Resources
+#### Typewriter Poetry with Code Resources
 
 If you want to write "typewriter poetry" in the style of e e cummings, in which all the indentation and other whitespace matters, you can accomplish this by inserting a figure as an inline code resource whose format is `text`.
 
@@ -1289,7 +1289,7 @@ These three methods are shown next, as a poem is inserted all three ways. Determ
 
 This use case is why the default format for three backticks is `guess` and the default format for three tildes is `text`: you wouldn't want your poem inadvertently being syntax highlighted like code, and the three backticks plus `text` version does not look very poetic!
 
-#### Using three tildes
+##### Using three tildes
 
 ```
 Here's a paragraph before the poetry.
@@ -1307,7 +1307,7 @@ me   ow
 Here's a paragraph after the poetry.
 ```
 
-#### Using three backticks plus the `text` format via syntactic sugar
+##### Using three backticks plus the `text` format via syntactic sugar
 
 ~~~
 Here's a paragraph before the poetry.
@@ -1325,7 +1325,7 @@ me   ow
 Here's a paragraph after the poetry.
 ~~~
 
-#### Using three backticks plus the `text` format specified in an attribute list
+##### Using three backticks plus the `text` format specified in an attribute list
 
 ~~~
 Here's a paragraph before the poetry.
@@ -1343,12 +1343,12 @@ me   ow
 Here's a paragraph after the poetry.
 ~~~
 
-### Line Wrapping in Code Resources
+#### Line Wrapping in Code Resources
 
 Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
 
 {#math}
-## Math
+### Math
 
 Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
@@ -1366,7 +1366,7 @@ Math resources can be either LaTeX math or MathML.
 
 Note that Markua procesors do not need to support either math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
 
-### Supported Attributes for Math
+#### Supported Attributes for Math
 
 `alt`
 : The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This can only be provided in square brackets for mathematical equations inserted as spans and only in the attribute list for figures.
@@ -1379,15 +1379,15 @@ Note that Markua procesors do not need to support either math markup language fu
 
 Since a math resource inserted as a span cannot have its default attributes overridden, when a math resource is inserted as a span, it must be positioned where it is inserted according to the `position: here` default attribute--it cannot be floated and repositioned by Markua processors.
 
-### Local Math Resources
+#### Local Math Resources
 
-#### Span
+##### Span
 
 ~~~
 This is ![too large to fit in the alt text](fermat_proof.tex) my proof.
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -1398,17 +1398,17 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Web Math Resources
+#### Web Math Resources
 
 This is identical to how local math resources work, including the significance of file extensions. The only difference is that the files are on the web.
 
-#### Span
+##### Span
 
 ~~~
 This is ![too large to fit in the alt text](http://markua.com/fermat_proof.mathml) my proof.
 ~~~
 
-#### Figure
+##### Figure
 
 ~~~
 Here's a paragraph before the figure.
@@ -1421,11 +1421,11 @@ Here's a paragraph after the figure.
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
-### Inline Math Resources
+#### Inline Math Resources
 
 Inline math resources are the most flexible and appropriate way to insert math as a span resource, and the most straightforward way to add short math examples as figures. Both LaTeX and MathML can be inlined either as spans or figures, but only LaTeX is terse enough for it to be practical.
 
-#### Span
+##### Span
 
 The format of an inline math resource inserted as a span is:
 
@@ -1441,7 +1441,7 @@ One of the kinematic equations is `d = v_i t + \frac{1}{2} a t^2`latex this one.
 
 Since these are span elements, LaTeX math will look a lot better than MathML, since it's a lot more terse. However, both are supported.
 
-#### Figure
+##### Figure
 
 LaTeX math:
 
