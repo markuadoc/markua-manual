@@ -525,11 +525,11 @@ There are five types of resources: image, video, audio, code and math. Each type
 Before going into more detail, it's helpful to consider a brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
 ~~~
-Inserting a span image is as easy as ![pie](pie.png). Inserting an image as a figure is also:
+Inserting an image as a figure is...
 
 ![A Piece of Cake](http://markua.com/cake.jpg)
 
-Inline code resources are added as spans like this `hello world` or as figures:
+Inline code resources are added as spans like this `hello world` or as figures.
 
 ```ruby
 puts "hello world"
@@ -556,9 +556,17 @@ Resources can be inserted either as spans or as figures.
 
 ### Spans
 
-When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
+An inline resource can be inserted as a span using the following syntax:
 
-W> TODO - no more span local or web resource. all square brackets are figures, and the figure caption is in the square brackets always.
+~~~
+It's a single backtick `followed by inline resource content` and then a single backtick.
+~~~
+
+W> TODO - rewrite - no more span local or web resource. all square brackets are figures, and the figure caption is in the square brackets always.
+
+This only works for resources whose content can be defined
+
+When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
 
 The syntax for a local resource or a web resource inserted as a span is as follows:
 
@@ -569,10 +577,6 @@ It's just ![optional alt text](resource_path_or_url) right in the text.
 The optional alt text is discussed shortly.
 
 The syntax for an inline resource inserted as a span is as follows:
-
-~~~
-It's a single backtick `followed by inline resource content` and then a single backtick.
-~~~
 
 ### Figures
 
@@ -636,56 +640,17 @@ A figure can also have attributes. The supported attributes vary based on the ty
 `class`
 : Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
 
-Many resource types can also have alt text. Alt text is not the same thing as a figure caption.
+Figures can have two things which span resources cannot have: alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss alt text first, and the figure caption second.
 
-## Figure Captions
+#### Alt Text with Figures
 
-A resource which is inserted as a figure can have a caption.
+A resource whose type supports alt text and which is inserted as a figure can have alt text. The alt text is defined in an attribute list above the figure.
 
-This caption shows up in two places:
+Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
 
-1. Near the resource, typically above or below it, per the preference of the Markua Processor.
-2. As the name of the Figure in the List of Illustrations or Table of Figures, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
+Not all resource types support alt text. The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` do not support alt text, since they themselves are just text. If any alt text is provided for a code resource it is ignored.
 
-## Alt Text and Figure Captions
-
-Some resources support alt text. Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
-
-The four types of resource which can have alt text are image, video, audio and math. Resources of type code are themselves just text, so it makes no sense for them to have alt text. If any alt text is provided for a code resource it is ignored.
-
-The alt text should **not** be the same thing as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
-
-The syntax to provide alt text varies based on the resource location and insertion method.
-
-### Span + (Local or Web)
-
-The alt text for a local or web resource inserted as a span is provided in square brackets before the resource path or URL:
-
-~~~
-It's just ![optional alt text](resource_path_or_url) right in the text.
-~~~
-
-Here's an example:
-
-~~~
-This needs to ![a stop sign](stop.png) now.
-~~~
-
-If you omit the optional alt text with a local or web resource, you still need to type the square brackets:
-
-~~~
-This needs to ![](stop.png) now.
-~~~
-
-### Span + Inline
-
-Alt text is supported for inline span resources, but the syntax is ugly. To add this, you simply tack on an attribute list after the span. The following shows alt text on an inline span SVG image:
-
-~~~
-Red `<svg width="10" height="10"><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg{alt: a red square} square.
-~~~
-
-### Figure
+The alt text should **not** have the same content as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
 The alt text for a resource inserted as a figure is provided in the attribute list above the figure. This is true regardless of whether the resource location is local, web or inline, as shown in the following examples:
 
@@ -707,25 +672,18 @@ The alt text for a resource inserted as a figure is provided in the attribute li
 ```
 ~~~
 
+#### Figure Captions
+
+A resource which is inserted as a figure can have a figure caption.
+
+This caption shows up in two places:
+
+1. Near the resource, typically above or below it, per the preference of the Markua Processor.
+2. As the name of the Figure in the List of Illustrations or Table of Figures, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
+
 Note that as shown above, the caption for a figure can be provided either in the metadata or in the square brackets in front of a local or web resource.
 
-### Context-Sensitive Meaning of Square Bracketed Text
-
-You may have been surprised reading this section. Markua does not have many inconsistencies, but this is one of them: the optional text inside the square brackets with a local or web resource varies based on whether the resource is inserted as a span resource or as a figure!
-
-{caption: Meaning of the Text Inside Square Brackets}
-|------------------|-----------------------------|
-| Insertion Method | Text in Square Brackets is  |
-|------------------|-----------------------------|
-| Span             | The Alt Text                |
-| Figure           | The Figure Caption          |
-|------------------|-----------------------------|
-
-The reason for this inconsistency is that even though it's a bit harder to learn, it's much better for writers this way once they've learned it.
-
-The square brackets contain the text which is the most common use case for both span resources and for figures. For a span resource, that is the alt text. For a figure, that is the figure caption.
-
-This is especially true since a span image cannot have a figure caption, and since not all figures are of resource types that can have alt text. (Code resources are themselves text, so they cannot have alt text.) Also, many image, audio and video resources are inserted without alt text.
+W> TODO - rewrite
 
 So, given this rule, a figure which is an external code sample can be inserted in the following two ways:
 
