@@ -698,6 +698,8 @@ This only works for inline resources -- resources whose content can be defined i
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
 
+Finally, if you wish to insert an image in the middle of a sentence, chances are you are trying to insert an emoji. Emoji have special support in Markua, described [here](#emoji).
+
 ### Figures That Look Like Spans
 
 If a local or web resource is inserted with no newlines before or after it, the resource is **NOT** inserted as a Span. Instead, it is treated as though there was one newline before and after the resource, and the resource is inserted as a Figure.
@@ -817,7 +819,7 @@ We will discuss the supported and the default attributes for images, and then sh
 #### Supported Attributes for Images
 
 `alt`
-: The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in square brackets for images inserted as spans and only in the attribute list for figures.
+: The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in the attribute list for figures.
 
 `caption`
 : The `caption` is the figure caption. It can only be present when the image is inserted as a figure.
@@ -1121,17 +1123,7 @@ Besides the `text` and `guess` values of the format attribute, you can also spec
 
 #### Local Code Resources
 
-##### Span
-
-~~~
-Hello in Ruby is a simple ![Hello World in Ruby](hello.rb) statement.
-~~~
-
-Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
-
-##### Figure
-
-Code can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+Local code resources can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
 This first figure will be a type of code and a format of `guess`. A Markua Processor which associates `.rb` file extensions with Ruby code will treat this as Ruby code; a Markua Processor which has no association for `.rb` files will treat it as plain text:
 
@@ -1165,7 +1157,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-Finally, note that the caption is optional in all figures:
+Note that the caption is optional in all figures:
 
 ~~~
 Here's a paragraph before the figure.
@@ -1175,101 +1167,121 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
+Finally, note that there is no way to insert a local code resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
+
+~~~
+Hello in Ruby is a simple ![Hello World in Ruby](hello.rb) statement.
+
+Hello in Ruby is a simple
+![Hello World in Ruby](hello.rb)
+statement.
+~~~
+
 #### Web Code Resources
 
-This is identical to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
+Web code resources function identically to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
 
-##### Span
-
-~~~
-Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
-~~~
-
-Note that in this example there can be no text inside the square brackets, since in a span the square brackets are for alt text, and with a code resource alt text is not supported.
-
-##### Figure
-
-~~~
 This will be a type of code and a format of `guess` since the file extension is not specified:
 
+~~~
 ![Hello World in Ruby](http://markua.com/hello.rb)
+~~~
 
 That is equivalent to:
 
+~~~
 {format: guess}
 ![Hello World in Ruby](http://markua.com/hello.rb)
+~~~
 
 If you don't want to take chances you can do this:
 
+~~~
 {format: ruby}
 ![Hello World in Ruby](http://markua.com/hello.rb)
-
-Here's a paragraph at the end.
 ~~~
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
+Finally, note that there is no way to insert a web code resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
+
+~~~
+Hello in Ruby is a simple ![Hello World in Ruby](http://markua.com/hello.rb) statement.
+
+Hello in Ruby is a simple
+![Hello World in Ruby](http://markua.com/hello.rb)
+statement.
+~~~
+
 #### Inline Code Resources
 
-Inline code resources are the most flexible and appropriate way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
+Inline code resources are the most flexible way to insert code.
+
+They are the only way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
 
 ##### Span
 
 The format of an inline code resource inserted as a span is:
 
 ~~~
-Yada yada `some code here`optional_format yada yada.
+Yada yada `some code here` yada yada.
 ~~~
 
-The optional format specifies the programming language used. If it is not provided, the format defaults to `guess`, as shown in the following examples:
-
-~~~
-Hello in Ruby is a `puts "hello"` statement.
-
-Hello in Ruby is a `puts "hello"`guess statement.
-
-Hello in Ruby is a `puts "hello"`ruby statement.
-
-Hello in Ruby is a `puts "hello"`text statement.
-~~~
-
-The first and second statement above are functionally identical since the default format of an inline resource with no format specified is `guess`. The third statement forces the format to be `ruby`. The fourth statement forces it to be plain monospaced code with no syntax highlighting.
+The format of code inserted as a span is **always** `text`. There is no way to set it to be `guess` or a specific programming language such as `ruby`.
 
 The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
 
 ##### Figure
 
-This will be a type of code and a format of `guess` since the format is not specified:
+Inline code resources work great as figures.
+
+This will be a type of code and a format of `guess` since three backticks are used and since the format is not specified:
 
 ~~~
+Some paragraph.
+
 ```
 puts "hello"
 ```
+
+Some paragraph.
 ~~~
 
 That is equivalent to:
 
 ~~~
+Some paragraph.
+
 ```guess
 puts "hello"
 ```
+
+Some paragraph.
 ~~~
 
 If you don't want to take chances you can do this:
 
 ~~~
+Some paragraph.
+
 ```ruby
 puts "hello"
 ```
+
+Some paragraph.
 ~~~
 
 If you don't like syntactic sugar you can do:
 
 ~~~
+Some paragraph.
+
 {format: ruby}
 ```
 puts "hello"
 ```
+
+Some paragraph.
 ~~~
 
 If you want a figure caption, you can add it to the attribute list with any of the above. For example:
@@ -1285,6 +1297,32 @@ puts "hello"
 Some paragraph.
 ~~~
 
+Finally, if you want the code not to be potentially syntax highlighted, you can force format to be `text` in one of two ways.
+
+First, you can set it explicitly:
+
+~~~
+Some paragraph.
+
+```text
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+Second, you can use three tildes instead of three backticks, since the default with tildes is `text` not `guess`:
+
+```
+Some paragraph.
+
+~~~
+puts "hello"
+~~~
+
+Some paragraph.
+```
+
 Note that the syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
 
 A> The "four space indent" method of creating code blocks in Markdown is **NOT** supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
@@ -1295,13 +1333,15 @@ If you want to write "typewriter poetry" in the style of e e cummings, in which 
 
 There are three ways to insert such a code resource inline:
 
-1. by using three tildes to insert the inline code resource
-2. by specifying the `text` format after the three backticks or three tildes
+1. by using three tildes to insert the inline code resource, since the default format of code inserted with tildes is `text`
+2. by specifying the `text` format after the three backticks
 3. by specifying the `text` format in an attribute list
 
 These three methods are shown next, as a poem is inserted all three ways. Determining the artistic merit of this "poem" is left as an exercise for the reader. Note that in all cases, the inline code resource can have an optional caption.
 
 This use case is why the default format for three backticks is `guess` and the default format for three tildes is `text`: you wouldn't want your poem inadvertently being syntax highlighted like code, and the three backticks plus `text` version does not look very poetic!
+
+The following three ways of creating typewriter poetry are shown next:
 
 ##### Using three tildes
 
@@ -1359,7 +1399,7 @@ Here's a paragraph after the poetry.
 
 #### Line Wrapping in Code Resources
 
-Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement.
+Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
 
 {#math}
 ### Math
