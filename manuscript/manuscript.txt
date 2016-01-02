@@ -1506,11 +1506,11 @@ Here's a paragraph after the figure.
 
 Current copyright law makes the use of resources problematic. As such:
 
-* Support for `image`, `audio` and `video` resources is optional in Markua processors, regardless of location.
+* Support for `audio` and `video` resources is optional in Markua processors, regardless of location.
 * Support for web resources is optional in Markua processors, regardless of resource type.
 * Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
 
-For example, a Markua Processor could support web resources for code, math and text, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of to be missing resources at the time of book or document generation, and use fallback resources or alt text if provided.
+For example, a Markua Processor could support web resources for code and math, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of that type to be missing resources.
 
 # Lists
 
