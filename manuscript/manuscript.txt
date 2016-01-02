@@ -547,40 +547,20 @@ A> Markdown's reference style image syntax is not supported in Markua for *any* 
 A>
 A> There are two main reasons for not supporting reference style resource syntax in Markua:
 A>
-A> 1. Resources in Markua are complex enough without having two syntaxes.
+A> 1. Resources in Markua are complex enough without also having a reference syntax for them.
 A> 2. In something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 
 ## Resource Insertion Methods
 
-Resources can be inserted either as spans or as figures.
-
-### Spans
-
-An inline resource can be inserted as a span using the following syntax:
-
-~~~
-It's a single backtick `followed by inline resource content` and then a single backtick.
-~~~
-
-W> TODO - rewrite - no more span local or web resource. all square brackets are figures, and the figure caption is in the square brackets always.
-
-This only works for resources whose content can be defined
-
-When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
-
-The syntax for a local resource or a web resource inserted as a span is as follows:
-
-~~~
-It's just ![optional alt text](resource_path_or_url) right in the text.
-~~~
-
-The optional alt text is discussed shortly.
-
-The syntax for an inline resource inserted as a span is as follows:
+Resources can be inserted either as spans or as figures. In most cases a resource is inserted as a figure. Furthermore, as you will see, local and web resources are always converted to figures. We will discuss figures first and then spans.
 
 ### Figures
 
-When a resource is inserted as a figure, the resource is inserted with at least one newline before and after it. A figure can have an attribute list. A figure can either be top-level (with a blank line before and after it), or it can be part of the flow of text of a paragraph (with a single newline before it, and one or more newlines after it). The ways that figures and other block elements can be inserted in paragraphs is [discussed in depth](#inserting_into_paras) later.
+When a resource is properly inserted as a figure, the resource is inserted with at least one newline before and after it.
+
+Details on the distinction between inserting a figure with one and two newlines surrounding it are discussed [later](#inserting_into_paras).
+
+A figure can either be top-level (with a blank line before and after it), or it can be contained in a paragraph. The ways that figures and other block elements can be inserted in paragraphs is [discussed in depth](#inserting_into_paras) later.
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
@@ -710,6 +690,33 @@ puts "hello world"
 
 Here's a paragraph after the figure.
 ~~~
+
+
+
+### Spans
+
+An inline resource can be inserted as a span using the following syntax:
+
+~~~
+It's a single backtick `followed by inline resource content` and then a single backtick.
+~~~
+
+W> TODO - rewrite - no more span local or web resource. all square brackets are figures, and the figure caption is in the square brackets always.
+
+This only works for resources whose content can be defined
+
+When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
+
+The syntax for a local resource or a web resource inserted as a span is as follows:
+
+~~~
+It's just ![optional alt text](resource_path_or_url) right in the text.
+~~~
+
+The optional alt text is discussed shortly.
+
+The syntax for an inline resource inserted as a span is as follows:
+
 
 ## Resource Locations
 
