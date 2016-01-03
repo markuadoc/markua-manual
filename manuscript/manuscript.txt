@@ -1015,13 +1015,10 @@ We will discuss the supported and the default attributes for audio files, and th
 `format`
 : All resources support the format attribute. For audio, the `format` is the specific audio format. The legal set of formats is given in the `format` column in the above table.
 
-`poster`
-: The `poster` is the URL or path to an image which should be shown instead of the audio. (Think of it like an "album" cover: many humans have never seen an LP; for them, an album cover is as much a metaphor as the floppy disk which represents a save button.) The poster can have a play button superimposed on it by the Markua Processor. A Markua Processor can also ignore the poster entirely and just show a generic player for the audio resource. If a Markua Processor is outputting some format where it is known that audio resources are not supported (e.g. "books"), it must choose the poster to use as a replacement for the audio.
-
 `caption` and `class`
 : These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, not to the audio itself.
 
-Note that the `alt` attribute is not supported on video resources.
+Note that the `alt` and `poster` attributes are not supported on audio resources.
 
 When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
 
@@ -3952,8 +3949,6 @@ The syntax for audio is described [here](#audio).
 
 {#input_local_audio_1}
 ~~~
-The talk audio highlights are here: ![](highlights.mp3).
-
 The full version of the talk is here:
 
 ![Full Talk](talk.m4a)
@@ -3963,7 +3958,6 @@ The full version of the talk is here:
 
 {#output_local_audio_1}
 ~~~
-<p>The talk audio highlights are here: <audio src="resources/highlights.mp3"/>.</p>
 <p>The full version of the talk is here:</p>
 <div class="figure">
   <audio src="resources/talk.m4a"/>
@@ -3979,8 +3973,6 @@ The full version of the talk is here:
 
 {#input_local_audio_1}
 ~~~
-The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
-
 The full version of the talk is here:
 
 ![Full Talk](http://markua.com/talk.m4a)
@@ -3990,7 +3982,6 @@ The full version of the talk is here:
 
 {#output_local_audio_1}
 ~~~
-<p>The talk audio highlights are here: <audio src="http://markua.com/highlights.mp3"/>.</p>
 <p>The full version of the talk is here:</p>
 <div class="figure">
   <audio src="http://markua.com/talk.m4a"/>
