@@ -5104,6 +5104,7 @@ Here's a paragraph after the list.
 {#input_spli_1}
 ~~~
 * Foo
+  {caption: "Hello World in Ruby"}
   ```text
   puts "hello"
   ```
@@ -5117,35 +5118,15 @@ Here's a paragraph after the list.
 ~~~
 <ul>
   <li>
-    Foo
-
-
-    <ol>
-      <li>One</li>
-      <li>
-        Two
-        <ol type="a">
-          <li>This is 2a</li>
-          <li>This is 2b</li>
-        </ol>
-      </li>
-      <li>Three</li>
-    </ol>
+    <p>Foo</p>
+    <div class="figure">
+      <pre><code>puts "hello"</code></pre>
+      <p class="caption">Hello World in Ruby</p>
+    </div>
   </li>
-  <li>
-    Bar
-    <ol type="i">
-      <li>Lorem</li>
-      <li>Ispum</li>
-      <li>Dolor</li>
-    </ol>
-  </li>
+  <li>Bar</li>
   <li>Baz</li>
 </ul>
-
-
-
-
 ~~~
 
 #### Multiple-Paragraph List Items
@@ -5158,14 +5139,14 @@ Here's a paragraph after the list.
 ~~~
 * This is paragraph 1 in the first list item.
 
-  ```ruby
+  ```text
   puts "hello"
   ```
 
   This is paragraph 2 in the first list item.
 
 * This is paragraph 1 in the second list item.
-
+TODO
   {alt: "too large to fit in the alt text"}
   ![Proof of Fermat's Last Theorem](fermat_proof.mathml)
 
