@@ -1320,6 +1320,20 @@ Note that the syntax for inline code resource figures is similar to the "fenced 
 
 A> The "four space indent" method of creating code blocks in Markdown is **NOT** supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
+#### Marking Code as Deleted or Added
+
+Markua supports marking code as deleted or added, which can be helpful if you are writing a computer programming book and want to indicate what code should be removed or added to a larger program.
+
+The way to do this is to add special comment lines to your code.
+
+The magic words are `markua-start-delete`, `markua-end-delete`, `markua-start-insert` and `markua-end-insert`. Any line containing one of those strings will be removed completely by a Markua Processor before being inserted into the output.
+
+The Markua Processor will then be able to determine which code is being deleted or inserted, and format it accordingly.
+
+The recommended way for a Markua Processor to do this is to make code which is being inserted get **`bolded`**, and to make code which is getting deleted to be put in ~~`strikethrough`~~. Another recommendation for a Markua Processor is to not do any syntax highlighting when there is the presence of any of the special `markua-start-delete`, `markua-end-delete`, `markua-start-insert` and `markua-end-insert` comments. Syntax highlighting makes it harder to notice the bolded new code and the deleted code in strikethrough.
+
+A> In Leanpub Flavoured Markdown, the magic words were `leanpub-start-delete`, `leanpub-end-delete`, `leanpub-start-insert` and `leanpub-end-insert`. These are not supported in Markua.
+
 #### Typewriter Poetry with Code Resources
 
 If you want to write "typewriter poetry" in the style of e e cummings, in which all the indentation and other whitespace matters, you can accomplish this by inserting a figure as an inline code resource whose format is `text`.
@@ -5789,10 +5803,6 @@ ambivalent.</span>. If you don't want to use it, you don't need to learn about i
 ~~~
 
 {backmatter}
-
-# TODO
-
-* Support insert and delete of code lines in figures!
 
 {#acknowledgments}
 # Acknowledgments
