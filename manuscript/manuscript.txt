@@ -669,9 +669,10 @@ These are some examples of figures with both alt text and a figure caption:
 {alt: "Denzel Washington on a jet ski in a river", caption: "Washington Crossing the Delaware"}
 ![](delaware.jpg)
 
-{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
+{caption: "Earth From Space (Simplified)"}
 ```svg
 <svg width="20" height="20">
+  <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
@@ -722,11 +723,11 @@ Here's some text
 and more text.
 ~~~
 
-In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption.
+In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text.
 
 Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure. This is discussed further [here](#inserting_into_paras).
 
-Finally, note that even though both images are inserted as figures, in the first case there is no way to specifiy alt text. This is why this approach is inferior to using explicit newlines, since then an attribute list can be defined. For example:
+Even though both images are inserted as figures, in the first case there is no way to specifiy alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined like this:
 
 ~~~
 Here's some text
@@ -734,6 +735,24 @@ Here's some text
 ![Foo](bar.png)
 and more text.
 ~~~
+
+Finally, note that this is all true for all local or web resources, regardless of resource type. The following two paragraphs which contain a web code resource are also equivalent:
+
+~~~
+Hello in Ruby is a simple ![Hello World in Ruby](http://markua.com/hello.rb) statement.
+
+Hello in Ruby is a simple
+![Hello World in Ruby](http://markua.com/hello.rb)
+statement.
+~~~
+
+For the purpose of brevity, this point will not be explained in each section about different resource formats.
+
+To be clear:
+
+* It is not possible to insert any type of local or web resource as a span.
+* It is not possible to insert image, audio or video resources inline as a span.
+* It is only possible to insert code and math resources inline as spans. The code is formatted as `text`, and the math is formatted as `latex`. The specific syntax for this is covered further later.
 
 ## Resource Locations
 
@@ -800,8 +819,6 @@ We will now consider each of the types of resources in more detail, as well as t
 {#images}
 ### Images
 
-The most common type of resource in most Markua documents will probably be image. Like any resource, an image can be inserted as a span or as a figure.
-
 The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
 
 {caption: "Resource File Extensions Associated With Images"}
@@ -820,17 +837,19 @@ W> TODO_LEANPUB - Support table captions (there should be one in the table above
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
+Images are always inserted as figures.
+
 Images in Markua are inserted in essentially the same way they are in Markdown for inline images. Again, the reference style image syntax of Markdown is **NOT** supported in Markua for images or any type of resource.
 
-We will discuss the supported and the default attributes for images, and then show examples of images being inserted as spans and as figures for both local, web and inline images.
+We will discuss the supported and the default attributes for images, and then show examples of images being inserted for local, web and inline images.
 
 #### Supported Attributes for Images
 
 `alt`
-: The `alt` is the alt text, to be displayed when the image cannot be shown. This can only be provided in the attribute list for figures.
+: The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
 `caption`
-: The `caption` is the figure caption. It can only be present when the image is inserted as a figure.
+: The `caption` is the figure caption.
 
 `class`
 : The `class` can be used by Markua Processors to provide the approrpiate styling. With HTML and EPUB output this should be done via CSS. The class attribute can also be creatively used when generating non-HTML formats such as PDF.
@@ -838,15 +857,7 @@ We will discuss the supported and the default attributes for images, and then sh
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
 
-#### Local Images
-
-##### Span
-
-~~~
-Easy as ![pie](pie.png).
-~~~
-
-##### Figure
+#### Local Image Resources
 
 ~~~
 Here's a paragraph before the first figure.
@@ -867,11 +878,6 @@ Here's a paragraph after the third figure.
 ~~~
 
 #### Web Images
-
-Easy as ![pie](http://markua.com/pie.png).
-~~~
-
-##### Figure
 
 ~~~
 Here's a paragraph before the first figure.
@@ -895,23 +901,12 @@ Here's a paragraph after the third figure.
 
 SVG images are just XML text, so they can be inserted inline in Markua.
 
-Note that there is no support for `alt` text in SVG, so there is no support for `alt` attributes with inline images in Markua. The recommendation is to use the `<desc>` attribute of the SVG as alt text.
-
-##### Span
-
-~~~
-Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
-~~~
-
-##### Figure
-
 ~~~
 Here's a paragraph before the figure.
 
-{caption: "Earth From Space (Simplified)"}
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
 ```svg
 <svg width="20" height="20">
-  <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
@@ -955,14 +950,6 @@ When generating HTML, a Markua Processor may add attributes to the video resourc
 
 #### Local Video
 
-##### Span
-
-~~~
-Easy as ![pie](pie_eating_contest.mp4).
-~~~
-
-##### Figure
-
 ~~~
 Here's a paragraph before the figure.
 
@@ -974,16 +961,6 @@ Here's a paragraph after the figure.
 
 #### Web Video
 
-##### Span
-
-~~~
-Introducing Markua: ![Peter's Markua talk](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0).
-~~~
-
-Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
-
-##### Figure
-
 ~~~
 Here's a paragraph before the figure.
 
@@ -992,6 +969,8 @@ Here's a paragraph before the figure.
 
 Here's a paragraph after the figure.
 ~~~
+
+Ironically, it took me about a year after that talk was recorded to finally figure out what Markua was.
 
 {#audio}
 ### Audio
@@ -1036,14 +1015,6 @@ When generating HTML, a Markua Processor may add attributes to the audio resourc
 
 #### Local Audio
 
-##### Span
-
-~~~
-The talk audio highlights are here: ![](highlights.mp3).
-~~~
-
-##### Figure
-
 ~~~
 The full version of the talk is here:
 
@@ -1051,14 +1022,6 @@ The full version of the talk is here:
 ~~~
 
 #### Web Audio
-
-##### Span
-
-~~~
-The talk audio highlights are here: ![](http://markua.com/highlights.mp3).
-~~~
-
-##### Figure
 
 ~~~
 The full version of the talk is here:
@@ -1113,7 +1076,7 @@ Note that the default format can be overridden by specifying it via an attribute
 : For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. The default value of the format attribute for a code resource inserted as a figure varies based on whether the delimiter is three backticks or three tildes. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. The `guess` format works better for code; the `text` format works better for poetry and for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as syntactic sugar.
 
 `line-numbers`
-: This determines whether the code sample shows line numbers. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`. Note that a code resource inserted as a span should be a single line of code, so this attribute does not make sense with spans.
+: This determines whether the code sample shows line numbers. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`.
 
 `number-from`
 : If line numbers are shown, this lets you override the starting number of the line numbers. The default value is `1`.
@@ -1170,16 +1133,6 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-Finally, note that there is no way to insert a local code resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
-
-~~~
-Hello in Ruby is a simple ![Hello World in Ruby](hello.rb) statement.
-
-Hello in Ruby is a simple
-![Hello World in Ruby](hello.rb)
-statement.
-~~~
-
 #### Web Code Resources
 
 Web code resources function identically to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
@@ -1205,16 +1158,6 @@ If you don't want to take chances you can do this:
 ~~~
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
-
-Finally, note that there is no way to insert a web code resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
-
-~~~
-Hello in Ruby is a simple ![Hello World in Ruby](http://markua.com/hello.rb) statement.
-
-Hello in Ruby is a simple
-![Hello World in Ruby](http://markua.com/hello.rb)
-statement.
-~~~
 
 #### Inline Code Resources
 
@@ -1298,7 +1241,7 @@ puts "hello"
 Some paragraph.
 ~~~
 
-Finally, if you want the code not to be potentially syntax highlighted, you can force format to be `text` in one of two ways.
+Finally, if you want the code to definitely not get syntax highlighted, you can force format to be `text` in one of two ways.
 
 First, you can set it explicitly:
 
@@ -1328,19 +1271,19 @@ Note that the syntax for inline code resource figures is similar to the "fenced 
 
 A> The "four space indent" method of creating code blocks in Markdown is **NOT** supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
-#### Marking Code as Deleted or Added
+#### Marking Code as Added or Deleted
 
-Markua supports marking code as deleted or added, which can be helpful if you are writing a computer programming book and want to indicate what code should be removed or added to a larger program.
+Markua supports marking code as added or deleted, which can be helpful if you are writing a computer programming book and want to indicate what code should be added or removed to a larger program.
 
 The way to do this is to add special comment lines to your code.
 
-The magic words are `markua-start-delete`, `markua-end-delete`, `markua-start-insert` and `markua-end-insert`. Any line containing one of those strings will be removed completely by a Markua Processor before being inserted into the output.
+The magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`. Any line containing one of those words will be removed completely by a Markua Processor before being inserted into the output.
 
 The Markua Processor will then be able to determine which code is being deleted or inserted, and format it accordingly.
 
 The recommended way for a Markua Processor to do this is to make code which is being inserted get **`bolded`**, and to make code which is getting deleted to be put in ~~`strikethrough`~~. Another recommendation for a Markua Processor is to not do any syntax highlighting when there is the presence of any of the special `markua-start-delete`, `markua-end-delete`, `markua-start-insert` and `markua-end-insert` comments. Syntax highlighting makes it harder to notice the bolded new code and the deleted code in strikethrough.
 
-A> In Leanpub Flavoured Markdown, the magic words were `leanpub-start-delete`, `leanpub-end-delete`, `leanpub-start-insert` and `leanpub-end-insert`. These are not supported in Markua.
+A> In Leanpub Flavoured Markdown, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. These are not supported in Markua.
 
 #### Typewriter Poetry with Code Resources
 
@@ -1459,16 +1402,6 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-As with code, note that there is no way to insert a local math resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
-
-~~~
-This is ![too large to fit in the figure caption](fermat_proof.tex) my proof.
-
-This is
-![too large to fit in the figure caption](fermat_proof.tex)
-my proof.
-~~~
-
 #### Web Math Resources
 
 This is identical to how local math resources work, including the significance of file extensions. The only difference is that the files are on the web.
@@ -1483,16 +1416,6 @@ Here's a paragraph after the figure.
 ~~~
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
-
-Again, there is no way to insert a web math resource as a span. Attempting to do so will trigger the insertion of implicit newlines. The following two paragraphs are equivalent:
-
-~~~
-This is ![too large to fit in the figure caption](http://markua.com/fermat_proof.mathml) my proof.
-
-This is
-![too large to fit in the figure caption](http://markua.com/fermat_proof.mathml)
-my proof.
-~~~
 
 #### Inline Math Resources
 
@@ -3897,8 +3820,6 @@ Here's a paragraph after the third figure.
 
 {#input_inline_images_1}
 ~~~
-Red `<svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg>`svg square.
-
 Here's a paragraph before the figure.
 
 {caption: "Earth From Space (Simplified)"}
@@ -3916,7 +3837,6 @@ Here's a paragraph after the figure.
 
 {#output_inline_images_1}
 ~~~
-<p>Red <svg width="10" height="10"><desc>a red square</desc><rect x="0" y="0" width="10" height="10" fill="red"/></svg> square.</p>
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <svg width="20" height="20">
