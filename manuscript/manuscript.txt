@@ -580,14 +580,14 @@ Note that you can also insert an inline resource as a figure using tildes as the
 
 ```
 {key: value, comma: separated, optional: attribute_list}
-~~~optional_format
+~~~
 inline resource content
 ~~~
 ```
 
-The optional_format looks uglier after tildes than backticks, so the recommended style is to use backticks if there is an optional format being specified that way.
+The three tildes approach does not support an optional_format after the tildes, since it is ugly. If you want to specify an optional format, either use backticks or specify the format in the attribute list. (If an optional format is specified after the tildes, it must be ignored.
 
-Note that if there is a format specified in the attribute list and after the backticks, the one in the attribute list wins. In the following figure, the format is `text` not `ruby`:
+Note that if there is a format specified in both the attribute list and after the backticks, the one in the attribute list wins. In the following figure, the format is `text` not `ruby`:
 
 ~~~
 {format: text}
@@ -860,9 +860,6 @@ Here's a paragraph after the third figure.
 
 #### Web Images
 
-##### Span
-
-~~~
 Easy as ![pie](http://markua.com/pie.png).
 ~~~
 
@@ -1090,18 +1087,16 @@ Syntax highlighting is optional in Markua Processors. If a Markua Processor does
 
 Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
-#### TODO
+The default value of the format attribute for code is complex:
 
-- All inline span code is plain text.
-- No format on inline span.
-- All Local and Web Code resources inserted as span have implicit newline before and after, and are treated as a figure, not a span. This would support the figure caption in square brackets.
-- Maybe always use the square brackets for figure caption, and if there's a figure caption, then implicit br tags!?
+1. For code which is inserted as a span (which is only supported with inline resources), the default format is `text`.
+2. For code which is inserted as a figure which is inserted as an inline resource using three tildes, the default format is `text`.
+3. For all other code, the default format is `guess`. This includes local and web resources inserted as figures, and code inserted as an inline figure using three backticks.
+
+Note that the default format can be overridden by specifying it via an attribute list, or after the three backticks in syntactic sugar.
 
 {#supported_attributes_for_code}
 #### Supported Attributes for Code
-
-`alt`
-: TODO
 
 `caption` and `class`
 : These attributes function as they do for images.
