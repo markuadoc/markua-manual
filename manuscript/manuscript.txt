@@ -4030,11 +4030,9 @@ Here's a paragraph after the figure.
 ~~~
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
-  <pre><code format="text">
-puts "hello"
+  <pre><code>puts "hello"
 
-puts "world"
-  </code></pre>
+puts "world"</code></pre>
   <p class="caption">Hello World in Ruby</p>
 </div>
 <p>Here's a paragraph after the figure.</p>
@@ -4062,7 +4060,7 @@ puts "world"
 ~~~
 Here's a paragraph before the figure.
 
-{format: ruby}
+{format: text}
 ![Hello World in Ruby](http://markua.com/helloworld.rb)
 
 Here's a paragraph after the figure.
@@ -4074,11 +4072,9 @@ Here's a paragraph after the figure.
 ~~~
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
-  <pre><code format="ruby">
-puts "hello"
+  <pre><code>puts "hello"
 
-puts "world"
-  </code></pre>
+puts "world"</code></pre>
   <p class="caption">Hello World in Ruby</p>
 </div>
 <p>Here's a paragraph after the figure.</p>
@@ -4092,14 +4088,14 @@ puts "world"
 
 {#input_inline_code_span_1}
 ~~~
-Hello in Ruby is a `puts "hello"`ruby statement.
+Hello in Ruby is a `puts "hello"` statement.
 ~~~
 
 ###### HTML Output
 
 {#output_inline_code_span_1}
 ~~~
-<p>Hello in Ruby is a <code format="ruby">puts "hello"`</code> statement.</p>
+<p>Hello in Ruby is a <code>puts "hello"</code> statement.</p>
 ~~~
 
 ##### Figure Example
