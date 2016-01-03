@@ -1594,7 +1594,7 @@ You can build a list out of items starting with a hyphen and one tab:
 -    three
 ~~~
 
-(My editor converts tabs to spaces, so that's actually 4 spaces, which also works.)
+(My text editor converts tabs to spaces, so that's actually 4 spaces, which also works.)
 
 Markdown also lets you use a plus sign (`+`) before each item, but Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`. Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
 
@@ -4288,7 +4288,7 @@ Markua does not specify how math is output in HTML. It is perfectly acceptable f
 
 ## Lists
 
-### Unordered Lists
+### Unordered Lists (i.e. Bulleted Lists)
 
 ##### Example
 
@@ -4335,7 +4335,6 @@ ipsum
 - foo
 
 dolor
-
 ~~~
 
 ###### HTML Output
@@ -5116,10 +5115,10 @@ Here's a paragraph after the list.
 
 {#output_spli_1}
 ~~~
-TODO - finish example
 <ul>
   <li>
     Foo
+
 
     <ol>
       <li>One</li>
