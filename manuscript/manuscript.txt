@@ -717,9 +717,7 @@ It's a single backtick `followed by inline resource content`$ and then a single 
 
 The [code](#code) and [math](#math) resources are described more fully later.
 
-When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
-
-W> TODO - this is in conflict with later in the spec; rethink
+When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple. However, to support rare use cases, any span can have an attribute list. The attribute list on a span is specified immediately after the closing backtick. Examples of this are shown in the code and math sections.
 
 Finally, if you wish to insert an image in the middle of a sentence, chances are you are trying to insert an emoji. Emoji have special support in Markua, described [here](#emoji).
 
