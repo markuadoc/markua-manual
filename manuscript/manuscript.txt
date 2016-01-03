@@ -3998,8 +3998,6 @@ Markua only specifies how code which has a format of `text` is formatted. All ot
 
 #### Local Code Resources
 
-TODO - here
-
 ###### Dependencies
 
 This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
@@ -4032,7 +4030,7 @@ Here's a paragraph after the figure.
 ~~~
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
-  <pre><code format="ruby">
+  <pre><code format="text">
 puts "hello"
 
 puts "world"
