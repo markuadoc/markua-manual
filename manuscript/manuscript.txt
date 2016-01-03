@@ -5118,11 +5118,12 @@ Here's a paragraph after the list.
 ~~~
 <ul>
   <li>
-    <p>Foo</p>
-    <div class="figure">
-      <pre><code>puts "hello"</code></pre>
-      <p class="caption">Hello World in Ruby</p>
-    </div>
+    <p>Foo<br/>
+      <div class="figure">
+        <pre><code>puts "hello"</code></pre>
+        <p class="caption">Hello World in Ruby</p>
+      </div>
+    </p>
   </li>
   <li>Bar</li>
   <li>Baz</li>
@@ -5146,9 +5147,8 @@ Here's a paragraph after the list.
   This is paragraph 2 in the first list item.
 
 * This is paragraph 1 in the second list item.
-TODO
-  {alt: "too large to fit in the alt text"}
-  ![Proof of Fermat's Last Theorem](fermat_proof.mathml)
+
+  ![A Piece of Cake](cake.jpg)
 
   This is paragraph 2 in the second list item.
 
@@ -5159,7 +5159,43 @@ TODO
 
 {#output_mpli_1}
 ~~~
-TODO
+<ul>
+  <li>
+    <p>This is paragraph 1 in the first list item.</p>
+    <div class="figure">
+      <pre><code>puts "hello"</code></pre>
+      <p class="caption">Hello World in Ruby</p>
+    </div>
+  </li>
+  <li>Bar</li>
+  <li>Baz</li>
+
+TODO_HERE
+*
+
+  ```text
+  puts "hello"
+  ```
+
+  This is paragraph 2 in the first list item.
+
+* This is paragraph 1 in the second list item.
+
+  ![A Piece of Cake](cake.jpg)
+
+  This is paragraph 2 in the second list item.
+
+* Baz
+
+</ul>
+
+<p>Here's a paragraph before the first figure.</p>
+<div class="figure">
+  <img src="cake.jpg"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+
+
 ~~~
 
 ## Definition Lists
