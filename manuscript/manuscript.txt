@@ -688,13 +688,21 @@ Again, this is a deliberate example of a mistake. Authors should never write Mar
 
 ### Spans
 
-An inline resource can be inserted as a span using the following syntax:
+Two types of resources can be inserted as inline spans: code resources of format `text`, and math resources of format `latex`.
+
+An inline code resource of `text` format can be inserted as a span using the following syntax:
 
 ~~~
 It's a single backtick `followed by inline resource content` and then a single backtick.
 ~~~
 
-This only works for inline resources -- resources whose content can be defined in the text of a Markua document.
+An inline math resource of `latex` format can be inserted as a span using the following syntax:
+
+~~~
+It's a single backtick `followed by inline resource content`$ and then a single backtick and dollar sign.
+~~~
+
+The [code](#code) and [math](#math) resources are described more fully later.
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple, and **cannot** have an attribute list.
 
@@ -702,7 +710,7 @@ Finally, if you wish to insert an image in the middle of a sentence, chances are
 
 ### Figures That Look Like Spans
 
-If a local or web resource is inserted with no newlines before or after it, the resource is **NOT** inserted as a Span. Instead, it is treated as though there was one newline before and after the resource, and the resource is inserted as a Figure.
+If a local or web resource is inserted with no newlines before or after it, the resource is **NOT** inserted as a span. Instead, it is treated as though there was one newline before and after the resource, and the resource is inserted as a figure with a single line break before and after it.
 
 The following two paragraphs are equivalent:
 
