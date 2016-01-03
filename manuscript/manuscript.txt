@@ -3892,8 +3892,6 @@ The syntax for video is described [here](#video).
 
 {#input_local_video_1}
 ~~~
-Easy as ![pie](pie_eating_contest.mp4).
-
 Here's a paragraph before the figure.
 
 {alt: "a man eating an entire chocolate cake"}
@@ -3906,7 +3904,6 @@ Here's a paragraph after the figure.
 
 {#output_local_video_1}
 ~~~
-<p>Easy as <video src="resources/pie_eating_contest.mp4" alt="pie"/>.</p>
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
   <video src="cake_eating_contest.webm" alt="a man eating an entire chocolate cake"/>
