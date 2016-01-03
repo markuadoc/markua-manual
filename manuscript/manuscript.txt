@@ -2451,25 +2451,25 @@ These are equivalent to:
 
 ~~~
 {class: discussion}
-This is a discussion blurb.
+B> This is a discussion blurb.
 
 {class: error}
-This is an error blurb.
+B> This is an error blurb.
 
 {class: information}
-This is an information blurb.
+B> This is an information blurb.
 
 {class: question}
-This is a question blurb.
+B> This is a question blurb.
 
 {class: tip}
-This is a tip blurb.
+B> This is a tip blurb.
 
 {class: warning}
-This is a warning blurb.
+B> This is a warning blurb.
 
 {class: exercise}
-This is an exercise blurb.
+B> This is an exercise blurb.
 ~~~
 
 Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
@@ -2508,46 +2508,7 @@ B> Leanpub. Yes, we're in Font Awesome!
 {icon: github}
 B> So is GitHub, of course. Unicorns.
 
-## Callouts (C>)
-
-Callouts are essentially blurbs that float.
-
-The main difference between callouts and blubs or asides is that callouts can be freely and creatively positioned by the Markua Processor near the position in the manuscript it was defined. Asides and blurbs must be positioned exactly at the manuscript position. A callout can have page breaks in it, but shouldn't if possible.
-
-The other difference between callouts and blurbs is that like asides, callouts don't support `class` or `icon` (or any) attributes.
-
-The syntaxes for callouts are very similar to blurbs:
-
-1. By prefacing lines with `C> `, i.e. a C, then a greater than character, then a space.
-2. By wrapping the callout in `{callout}` ... `{/callout}`
-
-Examples:
-
-~~~
-C> This is a short callout.
-~~~
-
-~~~
-C> # A Longer Callout
-C>
-C> This is a longer callout.
-C>
-C> It can have multiple paragraphs.
-~~~
-
-~~~
-{callout}
-# A Longer Callout
-
-This is a longer callout.
-
-It can have multiple paragraphs.
-{/callout}
-~~~
-
-Finally: I hate callouts, and so do Scott and Len. They ruin the flow of the text, typically by taking the best line in an article and making it into a stupid graphic which essentially says "don't think; tweet this." But, that said, they're a thing, and Markua supports them.
-
-W> TODO_LEANPUB - make C> be callout not center in Markua.
+W> TODO_LEANPUB - make C> be unsupported in Markua, not center
 
 {#inserting_into_paras}
 ## Inserting Block Elements Inside Paragraphs
@@ -5614,27 +5575,163 @@ This is still the first paragraph.</p>
 
 ### Blurbs (`B>`)
 
-blurb is <aside class="blurb warning">...</aside>
+##### Example 1: Normal Blurbs
 
+###### Markua Syntax
+
+{#input_blurbs_1}
+~~~
+This is the first paragraph.
+B> This is a short blurb.
+This is still the first paragraph.
+
+B> # A Longer Blurb
+B>
+B> This is a longer blurb.
+B>
+B> It can have multiple paragraphs.
+
+This is the second paragraph.
+
+{blurb}
+# A Longer Blurb
+
+This is a longer blurb.
+
+It can have multiple paragraphs.
+{/blurb}
+
+This is the third paragraph.
+~~~
+
+###### HTML Output
+
+{#output_blurbs_1}
+~~~
 <p>This is the first paragraph.<br/>
-<aside>
-  <p>This is a short aside.</p>
+<aside class="blurb">
+  <p>This is a short blurb.</p>
 </aside>
 This is still the first paragraph.</p>
-<aside>
-  <h1>A Longer Aside</h1>
-  <p>This is a longer aside.</p>
+<aside class="blurb">
+  <h1>A Longer Blurb</h1>
+  <p>This is a longer blurb.</p>
   <p>It can have multiple paragraphs.</p>
 </aside>
 <p>This is the second paragraph.</p>
-<aside>
-  <h1>A Longer Aside</h1>
-  <p>This is a longer aside.</p>
+<aside class="blurb">
+  <h1>A Longer Blurb</h1>
+  <p>This is a longer blurb.</p>
   <p>It can have multiple paragraphs.</p>
 </aside>
 <p>This is the third paragraph.</p>
+~~~
 
-#### TODO_HERE
+##### Example 2: Blurb Classes
+
+###### Markua Syntax
+
+{#input_blurbs_2}
+~~~
+{class: discussion}
+B> This is a discussion blurb.
+
+{class: error}
+B> This is an error blurb.
+
+{class: information}
+B> This is an information blurb.
+
+{class: question}
+B> This is a question blurb.
+
+{class: tip}
+B> This is a tip blurb.
+
+{class: warning}
+B> This is a warning blurb.
+
+{class: exercise}
+B> This is an exercise blurb.
+~~~
+
+###### HTML Output
+
+{#output_blurbs_2}
+~~~
+<aside class="blurb discussion">
+  <p>This is a discussion blurb.</p>
+</aside>
+<aside class="blurb error">
+  <p>This is an error blurb.</p>
+</aside>
+<aside class="blurb information">
+  <p>This is an information blurb.</p>
+</aside>
+<aside class="blurb question">
+  <p>This is a question blurb.</p>
+</aside>
+<aside class="blurb tip">
+  <p>This is a tip blurb.</p>
+</aside>
+<aside class="blurb warning">
+  <p>This is a warning blurb.</p>
+</aside>
+<aside class="blurb exercise">
+  <p>This is an exercise blurb.</p>
+</aside>
+~~~
+
+##### Example 3: Syntactic Sugar for Blurb Classes
+
+###### Markua Syntax
+
+{#input_blurbs_3}
+~~~
+D> This is a discussion blurb.
+
+E> This is an error blurb.
+
+I> This is an information blurb.
+
+Q> This is a question blurb.
+
+T> This is a tip blurb.
+
+W> This is a warning blurb.
+
+X> This is an exercise blurb.
+~~~
+
+###### HTML Output
+
+{#output_blurbs_3}
+~~~
+<aside class="blurb discussion">
+  <p>This is a discussion blurb.</p>
+</aside>
+<aside class="blurb error">
+  <p>This is an error blurb.</p>
+</aside>
+<aside class="blurb information">
+  <p>This is an information blurb.</p>
+</aside>
+<aside class="blurb question">
+  <p>This is a question blurb.</p>
+</aside>
+<aside class="blurb tip">
+  <p>This is a tip blurb.</p>
+</aside>
+<aside class="blurb warning">
+  <p>This is a warning blurb.</p>
+</aside>
+<aside class="blurb exercise">
+  <p>This is an exercise blurb.</p>
+</aside>
+~~~
+
+
+## TODO_HERE
 
 TODO
 
