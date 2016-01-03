@@ -1934,15 +1934,16 @@ term
 : definition
 ~~~
 
-Finally, like list items, a definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definiton list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
+Finally, like list items, each definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definiton list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
 
 ~~~
 Here's a paragraph before the list.
 
 one
-: This is the first paragraph in the first list item. Yay!
+: This is the first definition of one. It's one paragraph.
+: This is the second definition of one. It's two paragraphs.
 
-  This is a second paragraph in the first list item.
+  This is a second paragraph in the second definition of one.
 
 two
 : The second list item is simple.
@@ -5190,9 +5191,10 @@ Here's a paragraph after the list.
 Here's a paragraph before the list.
 
 one
-: This is the first paragraph in the first list item. Yay!
+: This is the first definition of one. It's one paragraph.
+: This is the second definition of one. It's two paragraphs.
 
-  This is a second paragraph in the first list item.
+  This is a second paragraph in the second definition of one.
 
 two
 : The second list item is simple.
@@ -5212,7 +5214,25 @@ Here's a paragraph after the list.
 
 {#output_definition_lists_1}
 ~~~
-TODO
+<p>Here's a paragraph before the list.</p>
+<dl>
+  <dt>one</dt>
+  <dd>This is the first definition of one. It's one paragraph.</dd>
+  <dd>
+    <p>This is the second definition of one. It's two paragraphs.</p>
+    <p>This is a second paragraph in the second definition of one.</p>
+  </dd>
+  <dt>two</dt>
+  <dd>The second list item is simple.</dd>
+  <dt>three</dt>
+  <dd>
+    <p>The third list item has three paragraphs.<br/>
+    This is still part of the first paragraph.</p>
+    <p>Here's the second paragraph in the third list item.</p>
+    <p>Here's the third paragraph in the third list item.</p>
+  </dd>
+</dl>
+<p>Here's a paragraph after the list.</p>
 ~~~
 
 ## Tables
