@@ -737,7 +737,9 @@ Here's some text
 and more text.
 ~~~
 
-In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text. The text in square brackets is **always** the figure caption.
+In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text.
+
+**The text in square brackets before a local or web resource is always the figure caption.**
 
 Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure, unless there are two newlines after it to start a new paragraph. This is discussed further [here](#inserting_into_paras).
 
@@ -764,9 +766,9 @@ For the purpose of brevity, this point will not be explained in each section abo
 
 To be clear:
 
-* It is not possible to insert any type of local or web resource as a span.
-* It is not possible to insert image, audio or video resources inline as a span.
-* It is only possible to insert code and math resources inline as spans. The code is formatted as `text`, and the math is formatted as `latex`. The specific syntax for these use cases is covered later.
+* All local or web resources are inserted as figures. It is not possible to insert any type of local or web resource as a span.
+* All image, audio and video resources are inserted as figures. It is not possible to insert image, audio or video resources inline as a span.
+* It is only possible to insert `code` and `math` resources inline as spans. The code is formatted as `text`, and the math is formatted as `latex`. The specific syntax for these use cases is covered later.
 
 ## Resource Locations
 
