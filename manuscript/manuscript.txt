@@ -3998,33 +3998,7 @@ Markua only specifies how code which has a format of `text` is formatted. All ot
 
 #### Local Code Resources
 
-##### Span Example
-
-###### Example Dependency
-
-This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
-
-{#dependencies_local_code_span_1}
-~~~
-hello.rb:
-puts "hello world"
-~~~
-
-###### Markua Syntax
-
-{#input_local_code_span_1}
-~~~
-Hello in Ruby is a simple ![](hello.rb) statement.
-~~~
-
-###### HTML Output
-
-{#output_local_code_span_1}
-~~~
-<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
-~~~
-
-##### Figure Example
+TODO - here
 
 ###### Dependencies
 
@@ -4068,111 +4042,7 @@ puts "world"
 <p>Here's a paragraph after the figure.</p>
 ~~~
 
-#### Local Code Resources
-
-##### Span Example
-
-###### Example Dependency
-
-This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
-
-{#dependencies_local_code_span_1}
-~~~
-hello.rb:
-```
-puts "hello world"
-```
-~~~
-
-###### Markua Syntax
-
-{#input_local_code_span_1}
-~~~
-Hello in Ruby is a simple ![](hello.rb) statement.
-~~~
-
-###### HTML Output
-
-{#output_local_code_span_1}
-~~~
-<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
-~~~
-
-##### Figure Example
-
-###### Dependencies
-
-This file must exist in the resources directory. The filename is given, followed by a colon, a newline and the file contents.
-
-{#dependencies_local_code_figure_1}
-~~~
-helloworld.rb:
-```
-puts "hello"
-
-puts "world"
-```
-~~~
-
-###### Markua Syntax
-
-{#input_local_code_figure_1}
-~~~
-Here's a paragraph before the figure.
-
-{format: ruby}
-![Hello World in Ruby](helloworld.rb)
-
-Here's a paragraph after the figure.
-~~~
-
-###### HTML Output
-
-{#output_local_code_figure_1}
-~~~
-<p>Here's a paragraph before the figure.</p>
-<div class="figure">
-  <pre><code format="ruby">
-puts "hello"
-
-puts "world"
-  </code></pre>
-  <p class="caption">Hello World in Ruby</p>
-</div>
-<p>Here's a paragraph after the figure.</p>
-~~~
-
 #### Web Code Resources
-
-##### Span Example
-
-###### Example Dependency
-
-This file exists on `http://markua.com` for test purposes.
-
-{#dependencies_web_code_span_1}
-~~~
-http://markua.com/hello.rb:
-```
-puts "hello world"
-```
-~~~
-
-###### Markua Syntax
-
-{#input_web_code_span_1}
-~~~
-Hello in Ruby is a simple ![](http://markua.com/hello.rb) statement.
-~~~
-
-###### HTML Output
-
-{#output_web_code_span_1}
-~~~
-<p>Hello in Ruby is a simple <code>puts "hello world"</code> statement.</p>
-~~~
-
-##### Figure Example
 
 ###### Dependencies
 
