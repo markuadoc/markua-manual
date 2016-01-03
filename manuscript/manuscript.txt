@@ -285,7 +285,7 @@ The design of Markua headings meets these requirements, in what I feel is an opt
 
 ## Markdown Headings
 
-Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown.
+Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". For the purpose of contrast, this section explains how headings are done in Markdown. If you don't care, feel free to [skip it](#spaces).
 
 {#setext_headings}
 ### Setext Headings in Markdown
@@ -772,7 +772,7 @@ The formats can either be specified by the `format` attribute or (in most cases)
 
 Certain file extensions must be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
 
-When a local or web resource is inserted as a span, the file extension is the only way to provide the format. When a local or web resource is inserted as a figure, the default type and format can be overridden by a type and/or format specified in the attribute list.
+The default type and format can be overridden by a type and/or format specified in the attribute list of a figure.
 
 {caption: "Formats Mapped to Resource Types"}
 |-------------------------------------|------------------------|
