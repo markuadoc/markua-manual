@@ -666,10 +666,9 @@ These are some examples of figures with both alt text and a figure caption:
 {alt: "Denzel Washington on a jet ski in a river", caption: "Washington Crossing the Delaware"}
 ![](delaware.jpg)
 
-{caption: "Earth From Space (Simplified)"}
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
 ```svg
 <svg width="20" height="20">
-  <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
@@ -871,7 +870,7 @@ We will discuss the supported and the default attributes for images, and then sh
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
 
-#### Local Image Resources
+#### Local Images
 
 ~~~
 Here's a paragraph before the first figure.
@@ -3757,8 +3756,6 @@ The syntax for images is described [here](#images).
 
 {#input_local_images_1}
 ~~~
-Easy as ![pie](pie.png).
-
 Here's a paragraph before the first figure.
 
 ![A Piece of Cake](cake.jpg)
@@ -3780,7 +3777,6 @@ Here's a paragraph after the third figure.
 
 {#output_local_images_1}
 ~~~
-<p>Easy as <img src="resources/pie.png" alt="pie"/>.</p>
 <p>Here's a paragraph before the first figure.</p>
 <div class="figure">
   <img src="cake.jpg"/>
@@ -3807,8 +3803,6 @@ Here's a paragraph after the third figure.
 
 {#input_web_images_1}
 ~~~
-Easy as ![pie](http://markua.com/pie.png).
-
 Here's a paragraph before the first figure.
 
 ![A Piece of Cake](http://markua.com/cake.jpg)
@@ -3830,7 +3824,6 @@ Here's a paragraph after the third figure.
 
 {#output_web_images_1}
 ~~~
-<p>Easy as <img src="http://markua.com/pie.png" alt="pie"/>.</p>
 <p>Here's a paragraph before the first figure.</p>
 <div class="figure">
   <img src="http://markua.com/cake.jpg"/>
@@ -3859,10 +3852,9 @@ Here's a paragraph after the third figure.
 ~~~
 Here's a paragraph before the figure.
 
-{caption: "Earth From Space (Simplified)"}
+{caption: "Earth From Space (Simplified)", alt: "a blue circle"}
 ```svg
 <svg width="20" height="20">
-  <desc>a blue circle</desc>
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
@@ -3871,6 +3863,8 @@ Here's a paragraph after the figure.
 ~~~
 
 ###### HTML Output
+
+Note that any alt text specified in the figure attribute list must be set as the `<desc>` attribute in the SVG.
 
 {#output_inline_images_1}
 ~~~
