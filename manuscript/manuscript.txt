@@ -723,11 +723,11 @@ Here's some text
 and more text.
 ~~~
 
-In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text.
+In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text. The text in square brackets is **always** the figure caption.
 
-Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure. This is discussed further [here](#inserting_into_paras).
+Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure, unless there are two newlines after it to start a new paragraph. This is discussed further [here](#inserting_into_paras).
 
-Even though both images are inserted as figures, in the first case there is no way to specifiy alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined like this:
+Even though both images are inserted as figures, in the first case there is no way to specifiy alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined on the figure like this:
 
 ~~~
 Here's some text
@@ -752,7 +752,7 @@ To be clear:
 
 * It is not possible to insert any type of local or web resource as a span.
 * It is not possible to insert image, audio or video resources inline as a span.
-* It is only possible to insert code and math resources inline as spans. The code is formatted as `text`, and the math is formatted as `latex`. The specific syntax for this is covered further later.
+* It is only possible to insert code and math resources inline as spans. The code is formatted as `text`, and the math is formatted as `latex`. The specific syntax for these use cases is covered later.
 
 ## Resource Locations
 
@@ -814,7 +814,7 @@ The default type and format can be overridden by a type and/or format specified 
 
 As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to look up the type. (If the format is unrecognized, then the resource is a code resource with a format of `guess`.) Because of this, there is no way to specify a resource type in the attribute list: it is always inferred from the format. Also, there's no default value for the format of a given resource type: the format is determined first, and it determines the type.
 
-We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method. These default attributes are important, especially for resources inserted as a span, since they cannot have an actual attribute list--only resources inserted as a figure can have an attribute list.
+We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method.
 
 {#images}
 ### Images
@@ -931,7 +931,7 @@ The following types of videos are supported in Markua: MP4 and WebM.
 
 The syntax to insert a video is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both video formats; inline resource locations for video are obviously not supported.
 
-We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted as spans and as figures for both local and web videos.
+We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted for both local and web videos.
 
 #### Supported Attributes for Video
 
@@ -996,7 +996,7 @@ Note that .mp4 is not supported as a file extension for MP4 AAC audio, since tha
 
 The syntax to insert an audio file is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both audio formats; inline resource locations for audio are obviously not supported.
 
-We will discuss the supported and the default attributes for audio files, and then show examples of audio being inserted as spans and as figures for both local and web audio files.
+We will discuss the supported and the default attributes for audio files, and then show examples of audio being inserted for both local and web audio files.
 
 #### Supported Attributes for Audio
 
@@ -1171,7 +1171,7 @@ The format of an inline code resource inserted as a span is:
 Yada yada `some code here` yada yada.
 ~~~
 
-The format of code inserted as a span is **always** `text`. There is no way to set it to be `guess` or a specific programming language such as `ruby`.
+The format of code inserted as a span is **always** `text`. There is no way to set it to be `guess` or a specific programming language such as `ruby`. Syntax highlighting does not make any sense for code which is inserted in the middle of a sentence--there's just not enough code there for it to be worthwhile.
 
 The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
 
