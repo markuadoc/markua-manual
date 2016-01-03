@@ -2294,12 +2294,12 @@ Lots of people have opinions about software.
 
 Here's the most famous recent one:
 
-{cite: "Marc Andreessen", url: "TODO"}
+{cite: "Marc Andreessen", url: "http://www.wsj.com/articles/SB10001424053111903480904576512250915629460"}
 > Software is eating the world.
 
 It's quoted a lot, so let's quote it again:
 
-{cite: "Marc Andreessen", url: "TODO"}
+{cite: "Marc Andreessen", url: "http://www.wsj.com/articles/SB10001424053111903480904576512250915629460"}
 {blockquote}
 Software is eating the world.
 {/blockquote}
@@ -5263,7 +5263,7 @@ Here's a paragraph after the list.
 
 {#output_spli_1}
 ~~~
-TODO
+TODO - finish example
 <ul>
   <li>
     Foo
@@ -5657,12 +5657,12 @@ Lots of people have opinions about software.
 
 Here's the most famous recent one:
 
-{cite: "Marc Andreessen", url: "TODO"}
+{cite: "Marc Andreessen", url: "http://www.wsj.com/articles/SB10001424053111903480904576512250915629460"}
 > Software is eating the world.
 
 It's quoted a lot, so let's quote it again:
 
-{cite: "Marc Andreessen", url: "TODO"}
+{cite: "Marc Andreessen", url: "http://www.wsj.com/articles/SB10001424053111903480904576512250915629460"}
 {blockquote}
 Software is eating the world.
 {/blockquote}
@@ -5678,12 +5678,12 @@ That's it!
 <p>Here's the most famous recent one:</p>
 <blockquote>
   <p>Software is eating the world.</p>
-  <cite><a href="TODO">Marc Andreessen</a></cite>
+  <cite><a href="http://www.wsj.com/articles/SB10001424053111903480904576512250915629460">Marc Andreessen</a></cite>
 </blockquote>
 <p>It's quoted a lot, so let's quote it again:</p>
 <blockquote>
   <p>Software is eating the world.</p>
-  <cite><a href="TODO">Marc Andreessen</a></cite>
+  <cite><a href="http://www.wsj.com/articles/SB10001424053111903480904576512250915629460">Marc Andreessen</a></cite>
 </blockquote>
 <p>That's it!</p>
 ~~~
@@ -5792,8 +5792,7 @@ ambivalent.</span>. If you don't want to use it, you don't need to learn about i
 
 # TODO
 
-* Support insert and delete of code lines in figures?
-* All code spans plain text?
+* Support insert and delete of code lines in figures!
 
 {#acknowledgments}
 # Acknowledgments
