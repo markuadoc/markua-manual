@@ -2472,7 +2472,7 @@ B> This is a warning blurb.
 B> This is an exercise blurb.
 ~~~
 
-Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
+Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor must output the `class` in HTML, but it is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
 
 ### Using Extension Attributes on Blurbs to add `icon` Support
 
@@ -5730,8 +5730,99 @@ X> This is an exercise blurb.
 </aside>
 ~~~
 
+### Inserting Block Elements Inside Paragraphs
 
-## TODO_HERE
+##### Example
+
+###### Markua Syntax
+
+{#input_ibeip_1}
+~~~
+This is paragraph one.
+
+This sentence is in paragraph two.
+* this list is
+* part of
+* paragraph two
+This sentence is also in paragraph two.
+
+This is paragraph three.
+
+This sentence is in paragraph four.
+{caption: "Hello, World"}
+```text
+puts "hello world"
+```
+This sentence is also in paragraph four.
+
+This sentence is in paragraph five.
+![A Piece of Cake](cake.jpg)
+This sentence is also in paragraph five.
+
+This sentence is in paragraph six.
+{alt: "a slice of chocolate cake"}
+![A Piece of Cake](http://markua.com/cake.jpg)
+This sentence is also in paragraph six.
+
+This sentence is in paragraph seven.
+* this list is
+* part of
+* paragraph seven
+
+This is paragraph eight.
+~~~
+
+###### HTML Output
+
+{#output_ibeip_1}
+~~~
+<p>This is paragraph one.</p>
+
+<p>This sentence is in paragraph two.<br/>
+<ul>
+  <li>this list is</li>
+  <li>part of</li>
+  <li>paragraph two</li>
+</ul>
+This sentence is also in paragraph two.</p>
+
+<p>This is paragraph three.</p>
+
+<p>This sentence is in paragraph four.<br/>
+<div class="figure">
+  <pre><code>puts "hello world"</code></pre>
+  <p class="caption">Hello, World</p>
+</div>
+puts
+```
+This sentence is also in paragraph four.</p>
+
+<p>This sentence is in paragraph five.<br/>
+<div class="figure">
+  <img src="cake.jpg"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+This sentence is also in paragraph five.</p>
+
+<p>This sentence is in paragraph six.<br/>
+<div class="figure">
+  <img src="http://markua.com/cake.jpg" alt="a slice of chocolate cake"/>
+  <p class="caption">A Piece of Cake</p>
+</div>
+This sentence is also in paragraph six.</p>
+
+<p>This sentence is in paragraph seven.<br/>
+<ul>
+  <li>this list is</li>
+  <li>part of</li>
+  <li>paragraph seven</li>
+</ul>
+</p>
+
+<p>This is paragraph eight.</p>
+~~~
+
+## Span Elements
 
 TODO
 
