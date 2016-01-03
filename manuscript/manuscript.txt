@@ -2295,7 +2295,7 @@ Asides are typically short or long notes in books which are tangential to the ma
 
 The syntaxes for asides are very similar to blockquotes:
 
-1. By prefacing lines with `A> `, i.e. an A, then a greater than character, then a space.
+1. By prefacing lines with `A> `, i.e. an `A`, then a greater than character (`>`), then a space.
 2. By wrapping the aside in `{aside}` ... `{/aside}`
 
 Option #1 is preferable for short asides; option #2 is easier on authors for really long asides.
@@ -2340,11 +2340,11 @@ Multi-paragraph asides are more pleasant using this syntax.
 
 ## Blurbs (`B>`)
 
-Blurbs are like asides, but shorter. A blurb cannot span multiple pages. A blurb can contain headings.
+Blurbs are like asides, but shorter. A blurb is not intended to span multiple pages of output.
 
 The syntaxes for blurbs are very similar to asides:
 
-1. By prefacing lines with `B> `, i.e. a B, then a greater than character, then a space.
+1. By prefacing lines with `B> `, i.e. a `B`, then a greater than character (`>`), then a space.
 2. By wrapping the blurb in `{blurb}` ... `{/blurb}`
 
 Examples:
@@ -5614,6 +5614,25 @@ This is still the first paragraph.</p>
 
 ### Blurbs (`B>`)
 
+blurb is <aside class="blurb warning">...</aside>
+
+<p>This is the first paragraph.<br/>
+<aside>
+  <p>This is a short aside.</p>
+</aside>
+This is still the first paragraph.</p>
+<aside>
+  <h1>A Longer Aside</h1>
+  <p>This is a longer aside.</p>
+  <p>It can have multiple paragraphs.</p>
+</aside>
+<p>This is the second paragraph.</p>
+<aside>
+  <h1>A Longer Aside</h1>
+  <p>This is a longer aside.</p>
+  <p>It can have multiple paragraphs.</p>
+</aside>
+<p>This is the third paragraph.</p>
 
 #### TODO_HERE
 
