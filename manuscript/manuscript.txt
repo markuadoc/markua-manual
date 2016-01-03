@@ -572,31 +572,22 @@ The syntax for an inline resource inserted as a figure is as follows:
 ~~~
 {key: value, comma: separated, optional: attribute_list}
 ```optional_format
-inline resource content
+inline resource content (default format is `guess`)
 ```
 ~~~
 
-Note that you can also insert an inline resource as a figure using tildes as the delimiter. Otherwise, it would be really difficult to write about Markua in Markua. This syntax is as follows:
+Note that you can also insert an inline resource as a figure using tildes as the delimiter. If the only delimiter was backticks, it would be really difficult to write about Markua in Markua. This syntax is as follows:
 
 ```
 {key: value, comma: separated, optional: attribute_list}
 ~~~
-inline resource content
+inline resource content (default format is `text`)
 ~~~
 ```
 
 The three tildes approach does not support an optional_format after the tildes, since it is ugly. If you want to specify an optional format, either use backticks or specify the format in the attribute list. (If an optional format is specified after the tildes, it must be ignored.
 
-Note that if there is a format specified in both the attribute list and after the backticks, the one in the attribute list wins. In the following figure, the format is `text` not `ruby`:
-
-~~~
-{format: text}
-```ruby
-puts "hello world"
-```
-~~~
-
-This is a deliberate example of a mistake. Authors should never write Markua text like this; the format should be specified only once.
+#### Figure Attributes
 
 A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format`, `caption` and `class` attributes.
 
@@ -609,25 +600,9 @@ A figure can also have attributes. The supported attributes vary based on the ty
 `class`
 : Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
 
-Figures can also have alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss alt text first, and the figure caption second.
+Figures can also have alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss the figure caption first and the alt text second.
 
-A figure can have alt text, as long as the type of resource being inserted supports alt text. The alt text is defined in an attribute list above the figure. Since the alt text is defined in the attribute list, the resource location does not matter: local, web and inline resources all support alt text.
-
-The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` do not support alt text, since they themselves are just text. If any alt text is provided for a code resource it is ignored.
-
-Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
-
-The alt text should **not** have the same content as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
-
-These are some examples of figures with alt text:
-
-~~~
-{alt: "The Delaware state map"}
-![Where To Incorporate](delaware.svg)
-
-{alt: "Denzel Washington on a jet ski in a river"}
-![Washington Crossing the Delaware](delaware.jpg)
-~~~
+#### Figure Captions
 
 A resource which is inserted as a figure can have a figure caption.
 
@@ -660,6 +635,28 @@ puts "hello world"
 Here's a paragraph after the figure.
 ~~~
 
+#### Figure Alt Text
+
+A figure can have alt text, as long as the type of resource being inserted supports alt text. The alt text is defined in an attribute list above the figure. Since the alt text is defined in the attribute list, the resource location does not matter: local, web and inline resources all support alt text.
+
+The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` do not support alt text, since they themselves are just text. If any alt text is provided for a code resource it is ignored.
+
+Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
+
+The alt text should **not** have the same content as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
+
+These are some examples of figures with alt text:
+
+~~~
+{alt: "The Delaware state map"}
+![Where To Incorporate](delaware.svg)
+
+{alt: "Denzel Washington on a jet ski in a river"}
+![Washington Crossing the Delaware](delaware.jpg)
+~~~
+
+#### Figure Captions and Alt Text Together
+
 These are some examples of figures with both alt text and a figure caption:
 
 ~~~
@@ -678,14 +675,29 @@ These are some examples of figures with both alt text and a figure caption:
 ```
 ~~~
 
-Finally, note that if there is a figure caption specified in the attribute list and in the square brackets, the one in the attribute list wins. In the following figure, the caption would be "Foo" not "bar":
+#### The Figure Attribute List Takes Precedence
+
+It is always an error to specify an attribute both in the attribute list for a figure and in the syntactic sugar locations, either after the backticks or in the square brackets.
+
+However, if this is done, then the value in the attribute list takes precedence.
+
+In the following figure, the format is `text` not `ruby`:
+
+~~~
+{format: text}
+```ruby
+puts "hello world"
+```
+~~~
+
+In the following figure, the caption would be "Foo" not "bar":
 
 ~~~
 {caption: Foo}
 ![bar](foo.png)
 ~~~
 
-Again, this is a deliberate example of a mistake. Authors should never write Markua text like this; the caption should be specified only once.
+Again, both of these are not good Markua: attribute values should be specified only once.
 
 ### Spans
 
