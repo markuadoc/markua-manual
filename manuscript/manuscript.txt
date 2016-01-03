@@ -1400,7 +1400,7 @@ Note that Markua procesors do not need to support either math markup language fu
 #### Supported Attributes for Math
 
 `alt`
-: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This can only be provided in the attribute list for figures.
+: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This is provided in the figure attribute list. This is primarily intended for Markua Processors that output math as images; there are no output requirements for the alt text.
 
 `caption` and `class`
 : These attributes function as they do for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
@@ -4098,7 +4098,7 @@ Hello in Ruby is a `puts "hello"` statement.
 <p>Hello in Ruby is a <code>puts "hello"</code> statement.</p>
 ~~~
 
-##### Figure Example
+##### Figure Example 1
 
 ###### Markua Syntax
 
@@ -4107,7 +4107,7 @@ Hello in Ruby is a `puts "hello"` statement.
 Here's a paragraph before the figure.
 
 {caption: "Hello World in Ruby"}
-```ruby
+```text
 puts "hello"
 
 puts "world"
@@ -4122,19 +4122,47 @@ Here's a paragraph after the figure.
 ~~~
 <p>Here's a paragraph before the figure.</p>
 <div class="figure">
-  <pre><code format="ruby">
+  <pre><code>puts "hello"
+
+puts "world"</code></pre>
+  <p class="caption">Hello World in Ruby</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+~~~
+
+##### Figure Example 2
+
+###### Markua Syntax
+
+{#input_inline_code_figure_2}
+```
+Here's a paragraph before the figure.
+
+{caption: "Hello World in Ruby"}
+~~~
 puts "hello"
 
 puts "world"
-  </code></pre>
+~~~
+
+Here's a paragraph after the figure.
+```
+
+###### HTML Output
+
+{#output_inline_code_figure_2}
+~~~
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+  <pre><code>puts "hello"
+
+puts "world"</code></pre>
   <p class="caption">Hello World in Ruby</p>
 </div>
 <p>Here's a paragraph after the figure.</p>
 ~~~
 
 ### Typewriter Poetry with Code Resources
-
-When the `format` is `text` (which happens as the default format of using tildes, or by specifying it explicitly), a `<pre>` block is used with **no** `<code>` block contained inside it. This way, CSS rules to format code won't inadvertently format poetry like code.
 
 ##### Example 1: Using three tildes
 
@@ -4159,16 +4187,19 @@ Here's a paragraph after the poetry.
 
 ###### HTML Output
 
+Typewriter poetry is output with the `<pre><code>` combination, just like any other inline code resource with a format of `text`. It is up to a book designer to use CSS to style the poetry accordingly.
+
 {#output_typewriter_poetry_1}
 ~~~
 <p>Here's a paragraph before the poetry.</p>
 <div class="figure">
-  <pre>i
+  <pre><code>i
   am
       a        cat
             a        l a z y          cat
 
-me   ow</pre>
+me   ow</code></pre>
+  <p class="caption">lazy cat</p>
 </div>
 <p>Here's a paragraph after the poetry.</p>
 ~~~
@@ -4200,12 +4231,13 @@ Here's a paragraph after the poetry.
 ~~~
 <p>Here's a paragraph before the poetry.</p>
 <div class="figure">
-  <pre>i
+  <pre><code>i
   am
       a        cat
             a        l a z y          cat
 
-me   ow</pre>
+me   ow</code></pre>
+  <p class="caption">lazy cat</p>
 </div>
 <p>Here's a paragraph after the poetry.</p>
 ~~~
@@ -4237,12 +4269,13 @@ Here's a paragraph after the poetry.
 ~~~
 <p>Here's a paragraph before the poetry.</p>
 <div class="figure">
-  <pre>i
+  <pre><code>i
   am
       a        cat
             a        l a z y          cat
 
-me   ow</pre>
+me   ow</code></pre>
+  <p class="caption">lazy cat</p>
 </div>
 <p>Here's a paragraph after the poetry.</p>
 ~~~
