@@ -828,7 +828,7 @@ The default type and format can be overridden by a type and/or format specified 
 | `text`, `guess` (unrecognized)      | code                   |
 |-------------------------------------|------------------------|
 
-As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to look up the type. (If the format is unrecognized, then the resource is a code resource with a format of `guess`.) Because of this, there is no way to specify a resource type in the attribute list: it is always inferred from the format. Also, there's no default value for the format of a given resource type: the format is determined first, and it determines the type.
+As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to look up the type. (If the format is unrecognized, then the resource is a code resource with a format of `guess`.) Because of this, there is no way to specify a resource type in the attribute list: it is **always** inferred from the format. Also, there's no default value for the format of a given resource type: the format is determined first, and it determines the type.
 
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method.
 
@@ -1187,9 +1187,19 @@ The format of an inline code resource inserted as a span is:
 Yada yada `some code here` yada yada.
 ~~~
 
-The format of code inserted as a span is **always** `text`. There is no way to set it to be `guess` or a specific programming language such as `ruby`. Syntax highlighting does not make any sense for code which is inserted in the middle of a sentence--there's just not enough code there for it to be worthwhile.
+The format of code inserted as a span defaults to `text`. However, you can override this by attaching an attribute list to the end of a span.
 
-The syntax of adding inline code resources as spans is identical to the code span syntax of Markdown.
+In the following example, the first statement let the format of the code default to `text`, whereas the second statement specifies the format of the code as `ruby`:
+
+~~~
+Hello World in Ruby is a simple `puts "hello world"` statement.
+
+Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
+~~~
+
+Note that there is no syntactic sugar for this, e.g. `puts "hello world"`ruby, since I consider this gross. Syntax highlighting does not make much sense for code which is inserted in the middle of a sentence--there's just not enough code there for it to be worthwhile. However, in Markua, any span can have an attribute list attached to it (in order to add index entries, for example), so there is no reason to explicitly forbid specifying a format in the attribute list.
+
+The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
 
 ##### Figure
 
@@ -1219,7 +1229,7 @@ puts "hello"
 Some paragraph.
 ~~~
 
-If you don't want to take chances you can do this:
+If you don't want to take chances you can do this to explicitly specify the format:
 
 ~~~
 Some paragraph.
@@ -1435,19 +1445,17 @@ Note that in the above examples of figures, the text in the square brackets is t
 
 #### Inline Math Resources
 
-Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. Both LaTeX math and MathML can be inserted inline as a figure. However, only LaTeX math can be inserted as a span: since MathML is too verbose for it to be practical, there is no syntax support for it.
+Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. Both LaTeX math and MathML can be inserted inline as a figure or as a span.
 
 ##### Span
 
-All math inserted as a span is LaTeX math.
-
-The format of an inline math resource inserted as a span is:
+There is syntactic sugar for LaTeX math which is inserted as a span:
 
 ~~~
 Yada yada `some math here`$ yada yada.
 ~~~
 
-The `$` character is a requirement: without it, the content of the backticks is treated as code, and is output verbatim as monospaced text.
+The `$` character indicates the inline resource is LaTeX math.
 
 Here's an example of LaTeX math inserted as a span:
 
@@ -1455,13 +1463,29 @@ Here's an example of LaTeX math inserted as a span:
 One of the kinematic equations is `d = v_i t + \frac{1}{2} a t^2`$ this one.
 ~~~
 
+If you don't like syntactic sugar, you can also do a lot of typing to insert math as LaTeX math:
+
+~~~
+Yada yada `some math here`{format: latex} yada yada.
+~~~
+
+Or, if you *really* like typing, you can insert MathML as an inline resource inserted as a span:
+
+~~~
+Yada yada `really verbose MathML here`{format: mathml} yada yada.
+~~~
+
+As with code resources, note that there is no syntactic sugar for this, e.g. `some verbose mathml here`mathml, since I consider MathML to be too verbose to be productively inserted as a span resource. However, just as with code resources, since any span can have an attribute list attached to it, there is no reason to explicitly forbid specifying a format of MathML in the attribute list.
+
+Finally, if there is no `$` character after the closing backtick and no attribute list specifying a format of `latex` or `mathml`, the content of the backticks is treated as code and is output verbatim as monospaced text.
+
 ##### Figure
 
 Both LaTeX math and MathML can be inserted inline as a figure.
 
-LaTeX math can be inserted by specifying either `latex` or `$` after three backticks, or by specifying an attribute list of `{format: latex}` or (to be explicit) `{type: math, format: latex}`.
+LaTeX math can be inserted by specifying either `latex` or `$` after three backticks, or by specifying an attribute list of `{format: latex}`.
 
-MathML math can be inserted by specifying `mathml` after three backticks, or by specifying an attribute list of `{format: mathml}` or (to be explicit) `{type: math, format: mathml}`.
+MathML math can be inserted by specifying `mathml` after three backticks, or by specifying an attribute list of `{format: mathml}`.
 
 LaTeX math:
 
@@ -1487,11 +1511,9 @@ Here's the same thing, with even more syntactic sugar:
 Here's a paragraph after the figures.
 ~~~
 
-These are some examples of MathML math:
+This is an example of MathML math from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
 
 ~~~
-Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
-
 ```mathml
 <apply>
   <plus/>
@@ -1511,10 +1533,13 @@ Here's an example from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
   </apply>
   <ci>c</ci>
 </apply>
+```
+~~~
 
 Here's the same thing with a verbose attribute list:
 
-{type: math, format: mathml}
+~~~
+{format: mathml}
 ```
 <apply>
   <plus/>
@@ -1535,8 +1560,6 @@ Here's the same thing with a verbose attribute list:
   <ci>c</ci>
 </apply>
 ```
-
-Here's a paragraph after the figure.
 ~~~
 
 ## Required and Optional Resource Support
@@ -2962,8 +2985,8 @@ Note that you can skip the space between the colon and the value: the following 
 
 An attribute list can be inserted into a Markua document in one of three ways:
 
-1. Immediately above a block element (e.g. heading, figure, etc), with one newline separating it from the block element.
-2. Immediately after a span element (e.g. a word, italicized phrase, etc), with no spaces separating it from the span element.
+1. Immediately above a block element (e.g. heading, figure, etc), with **one newline** separating it from the block element.
+2. Immediately after a span element (e.g. a word, italicized phrase, etc), with **no spaces** separating it from the span element.
 3. On a line by itself, with one blank line above and below it. In this format, the attribute list contains [directives](#directives).
 
 Regarding #2 and #3: Any line outside of a code resource which starts with an opening curly brace `{` and ends with a closing curly brace `}` is assumed to be an attribute list, and will not be output by a Markua processor. If you want to start a line with a literal opening curly brace `{` you need to preface it with a backslash (`\`).
