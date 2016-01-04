@@ -2871,7 +2871,7 @@ Notes:
 * Figures, chapters, code samples, etc all have implicit numbering. So, #n always works even if numbering is off. However, you will confuse readers if you refer to numbering they cannot see.
 * If numbering is off, the `#f` will not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
 
-## Soft hyphen
+## Soft Hyphen
 
 In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hypenation can be done.
 
@@ -3392,6 +3392,8 @@ This chapter is ordered in an almost identical way to the rest of the spec, but 
 These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies.
 
 In this section, there will be a number of Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test. See <https://github.com/markuadoc/markua-test> for more information.
+
+Finally, a Markua Processor can feel free to generate as many HTML files as it chooses for a given Markua document. But for the purposes of Markua compatibility testing, all HTML output must be in one HTML file. (This way, there is predictability for how to reference elements by their `id` attributes, etc.)
 
 ## Text Formatting
 
@@ -4244,9 +4246,7 @@ me   ow</code></pre>
 
 ### Math
 
-Math resources can be either LaTeX math or MathML.
-
-Markua does not specify how math is output in HTML. It is perfectly acceptable for a Markua processor to output any math block as an image or as the LaTeX or MathML text of the math equation itself.
+Markua does not specify how math is output in HTML. It is perfectly acceptable for a Markua Processor to output any math block as an image or as the LaTeX or MathML text of the math equation itself.
 
 ## Lists
 
@@ -5824,7 +5824,131 @@ This sentence is also in paragraph six.</p>
 
 ## Span Elements
 
-TODO
+### Links
+
+##### Example
+
+###### Markua Syntax
+
+{#input_links_1}
+~~~
+Markua was developed at [Leanpub](http://leanpub.com).
+
+Markua was developed at <http://leanpub.com>.
+~~~
+
+###### HTML Output
+
+{#output_links_1}
+~~~
+Markua was developed at <a href="http://leanpub.com">Leanpub</a>.
+
+Markua was developed at <a href="http://leanpub.com">http://leanpub.com</a>.
+~~~
+
+### Footnotes and Endnotes
+
+Markua does not specify how footnotes and endnotes are output in HTML. A Markua Processor should output them *somewhere*, but the details are not specified. This is deliberate, in order to maximize implementation flexibility for implementers of Markua Processors.
+
+### Crosslinks and ids
+
+##### Example
+
+###### Markua Syntax
+
+{#input_crosslinks_ids_1}
+~~~
+{id: id1}
+This is a paragraph with an id of `id1`.
+
+{#id2}
+This is a paragraph with an id of `id2`.
+
+This link to [Markua](#markua) is before the id definition.
+
+The word Markua{id: markua} has an id of `markua`.
+
+This link to [Markua](#markua) is after the id definition.
+
+Leanpub is based in **Victoria, BC, Canada**{#victoria}.
+
+The [quick sly fox]{#quick_sly} jumped over the lazy dogs.
+~~~
+
+###### HTML Output
+
+{#output_crosslinks_ids_1}
+~~~
+<h1>Crosslink Example</h1>
+<p id="id1">This is a paragraph with an id of <code>id1</code>.</p>
+<p id="id2">This is a paragraph with an id of <code>id2</code>.</p>
+<p>This link to <a href="#markua">Markua</a> is before the id definition.</p>
+<p>The word <span id="markua">Markua</span> has an id of <code>markua</code>.</p>
+<p>This link to <a href="#markua">Markua</a> is after the id definition.</p>
+<p>Leanpub is based in <strong id="victoria">Victoria, BC, Canada</strong>.
+<p>The <span id="quick_sly">quick sly fox</span> jumped over the lazy dogs.</p>
+~~~
+
+### Soft Hyphen
+
+##### Example
+
+###### Markua Syntax
+
+{#input_soft_hyphen_1}
+~~~
+My name is Rumpel\-stiltskin.
+~~~
+
+###### HTML Output
+
+{#input_soft_hyphen_1}
+~~~
+<p>My name is Rumpel&shy;stiltskin.</p>
+~~~
+
+### Emoji
+
+Markua does not specify how emoji are output in HTML. The various choices are discussed in the [Emoji section](#emoji).
+
+## Metadata
+
+### Index Entries
+
+Markua does not specify how index entries are output in HTML. Markua Processors can take great liberties in the construction of an index based on index entries.
+
+### Book Section Directives
+
+Markua does not specify how book section directives affect the HTML output. Markua Processors have lots of freedom here.
+
+### Table of Contents
+
+Markua does not specify how a table of contents is output in HTML. Again, Markua Processors can innovate here. For example, Leanpub provides settings about how many levels to include in the Table of Contents, whether to show dots in it, etc.
+
+Markua does, however, strongly recommend that the entries in a Table of Contents be clickable links in HTML. This is HTML after all, not print.
+
+## Comments
+
+##### Example
+
+###### Markua Syntax
+
+{#input_comments_1}
+~~~
+This is included.
+<!--
+This is not included.
+-->
+This is also included.
+~~~
+
+###### HTML Output
+
+{#output_comments_1}
+~~~
+<p>This is included.</p>
+<p>This is also included.</p>
+~~~
 
 {#criticmarkup_html}
 ## CriticMarkup
@@ -5872,17 +5996,17 @@ ambivalent.</span>. If you don't want to use it, you don't need to learn about i
 
 I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help.
 
-First, a huge thanks to [Scott Patten](https://twitter.com/scott_patten), my co-founder at Ruboss and Leanpub. Scott is the lead developer of Leanpub's book generation engine. Leanpub Flavoured Markdown would not have existed without Scott's code. Furthermore, Scott is providing valuable feedback in the development of the Markua specification, as well as adding Markua support to Leanpub's book generation engine. Scott is giving me opinionated feedback on the Markua syntax, just as Aaron Swartz gave John Gruber feedback on the Markdown syntax. In many instances, e.g. the poetry syntax, what happens is that I come up with an idea which is good but flawed, Scott points the flaws out and suggests an alternative which often feels like giving into the status quo or feels too much like programming, I get really mad, and then I come up with something better than I would have otherwise. So, Markua probably also wouldn't exist if I couldn't--repeatedly and productively--get mad at Scott.
+First, a huge thanks to [Scott Patten](https://twitter.com/scott_patten), my co-founder at Ruboss and Leanpub. Scott is the lead developer of Leanpub's book generation engine. Leanpub Flavoured Markdown would not have existed without Scott's code. Furthermore, Scott provided lots of valuable feedback in the development of the Markua specification, as well as adding Markua support to Leanpub's book generation engine. Scott gave me opinionated feedback on the Markua syntax, just as Aaron Swartz gave John Gruber feedback on the Markdown syntax. In many instances, e.g. the poetry syntax, what happens is that I come up with an idea which is good but flawed, Scott points the flaws out and suggests an alternative which often feels like giving into the status quo or feels too much like programming, I get really mad, and then I come up with something better than I would have otherwise. So, Markua probably also wouldn't exist if I couldn't--repeatedly and productively--get mad at Scott. (This sums up much of Leanpub's development, actually!)
 
 Second, I'd like to thank [Braden Simpson](https://twitter.com/bradensimpson). Braden has been instrumental in the development of the open source ES6 Markua parser, as well as the open source MarkuaPad editor and its usage in Leanpub. Braden has also been key in developing the test suite for Markua, and along with Scott has given me great feedback on crucial design decisions such as the image syntax.
 
 Third, I'd like to thank my other Leanpub co-founder, [Len Epp](https://twitter.com/lenepp). Len has been instrumental in the development of Leanpub. He joined in the very early days, and has greatly helped our customer development process, helping (as he likes to tease me) grow Leanpub over 100x before Scott and I made him a co-founder. Besides giving the Markua spec a thorough copy edit, he got me to change my mind about the three-or-more newline handling case--so, if you enjoy using gratuitous newlines, you have Len to thank!
 
-Next, a huge thanks to [Ken Pratt](https://twitter.com/ken_pratt), who made a number of key contributions to the development of Leanpub Flavoured Markdown and to Ruboss over his years working with us.
+Next, a huge thanks to [Ken Pratt](https://twitter.com/ken_pratt), who made a number of key contributions to the development of Leanpub and Ruboss over his years working with us.
 
 I'd also like to thank [Justin Damer](https://twitter.com/damerdamer). Justin and I designed the logo for Markua together, just as we designed the Leanpub logo together. I've never enjoyed working with a designer more than I enjoy working with Justin.
 
-I'd like to thank my father, who has read the manuscript and given me feedback more than once. This process helped me realize how much of a slog it was to read the first time through, and this led to my factoring out the HTML mapping stuff into its own chapter.
+I'd like to thank my father, who has read the manuscript and given me feedback more than once. This process helped me realize how much of a slog it was to read the first time through, and this led to my factoring out the HTML mapping stuff into its own chapter. Also, now I've (sort of) learned what a subjunctive is--again.
 
 I'm getting great feedback on Twitter and via email as well:
 
