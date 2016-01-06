@@ -3413,9 +3413,13 @@ This is ____a u tag____. Yeah, it's ugly.
 This is ~~a strikethrough tag~~.
 5^3^ = 125
 Water is H~2~O.
+When there's one superscript and subscript there's a span: 3^2^~1~ and 1~456~^234^.
+When there's more, there's no span: 3^2^~1~^0^ and 1~456~^234^~789~.
 ~~~
 
 ###### HTML Output
+
+When there's *exactly one* subscript and superscript on the same element (which can happen in chemistry and physics), they are wrapped in a span. This lets a Markua Processor use CSS to format them better.
 
 {#output_text_formatting_1}
 ~~~
@@ -3425,10 +3429,12 @@ This is <b><i>a b i tag combo</i></b> and this is <strong><em>a strong em tag co
 This is <u>a u tag</u>. Yeah, it's ugly.<br/>
 This is <span class="strikethrough">a strikethrough tag</span>.<br/>
 5<sup>3</sup> = 125<br/>
-Water is H<sub>2</sub>O.</p>
+Water is H<sub>2</sub>O.<br/>
+When there's one superscript and subscript there's a span: 3<span><sup>2</sup><sub>1</sub></span> and 1<span><sub>456</sub><sup>234</sup></span>.<br/>
+When there's more, there's no span: 3<sup>2</sup><sub>1</sub><sup>0</sup> and 1<sub>456</sub><sup>234</sup><sub>789</sub>.</p>
 ~~~
 
-##### CSS Recommendation
+##### CSS Recommendations
 
 The following CSS rule is recommended:
 
@@ -3437,6 +3443,21 @@ The following CSS rule is recommended:
   text-decoration: line-through;
 }
 ~~~
+
+CSS rules similar to the following help a Markua processor better handle the case of *exactly one* subscript and superscript on the same element:
+
+span {
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+span sub,
+span sup {
+  display: table-row;
+  font-size: 50%;
+  line-height: 110%;
+  text-align: left;
+}
 
 ### Why Markua Produces `<b>`, `<strong>`, `<i>` and `<em>` Tags
 
