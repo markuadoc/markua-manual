@@ -3221,7 +3221,7 @@ While these book `section` directives are mere hints, there are strict rules abo
 
 Authors new to Markua can completely ignore all directives, including book `section` directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about book `section` directives. And using directives is very simple, despite how formally specified this section makes them.
 
-W> TODO_LEANPUB - add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub
+W> TODO_LEANPUB - add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub.
 
 {#toc}
 ## Table of Contents
@@ -3235,6 +3235,8 @@ Markua does not specify any hard requirements about a Table of Contents. However
 * A Markua Processor should allow the author to specify whether parts, chapters, sections and sub-sections are numbered.
 
 Also, a Markua Processor may allow precise positioning of the Table of Contents in the front matter with a `{section: toc}` book section directive.
+
+W> TODO_LEANPUB - We need to ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
 
 {#settings}
 ## Settings
