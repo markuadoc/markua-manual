@@ -2013,7 +2013,7 @@ Simple tables work fine in most cases, and they are the simplest to type.
 
 Complex tables are slightly more effort to type than simple tables. However, they're just as easy to read, and they have more features. These include being able to individually align cells and to specify a cell that spans multiple rows or multiple columns.
 
-At its most basic, a complex table looks like this:
+At its most standard, a complex table looks like this:
 
 ~~~
 |============|============|============|
@@ -2029,7 +2029,71 @@ At its most basic, a complex table looks like this:
 |============|============|============|
 ~~~
 
-The header is separated from the body cells by a row of `=` signs and `|` characters. Every row of cells is separated by a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line.
+The header is separated from the body cells by a section separator, i.e. a row of `=` signs and `|` characters. Every row of cells is separated by a row separator, i.e. a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line.
+
+The header and footer rows are both optional. The following are also legal tables...
+
+Just content rows:
+
+~~~
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|------------|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|------------|------------|------------|
+| Content A3 | Content B3 | Content C3 |
+|============|============|============|
+~~~
+
+Header, one content row, footer:
+
+~~~
+|============|============|============|
+| Header A   | Header B   | Header C   |
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|============|============|============|
+| Footer A   | Footer B   | Footer C   |
+|============|============|============|
+~~~
+
+No footer:
+
+~~~
+|============|============|============|
+| Header A   | Header B   | Header C   |
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|------------|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|------------|------------|------------|
+| Content A3 | Content B3 | Content C3 |
+|============|============|============|
+~~~
+
+No header:
+
+~~~
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|------------|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|------------|------------|------------|
+| Content A3 | Content B3 | Content C3 |
+|============|============|============|
+| Footer A   | Footer B   | Footer C   |
+|============|============|============|
+~~~
+
+If there are only two rows, they are interpreted as a header and a content row:
+
+~~~
+|============|============|============|
+| Header A   | Header B   | Header C   |
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|============|============|============|
+~~~
 
 My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
 
@@ -2047,6 +2111,18 @@ You can also specify left, center and right alignment of columns with colons in 
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
+~~~
+
+Since the alignment is done on the separator row above the first content row, it even works to align a column with no header or footer. The following columns are also left-, center-, and right-aligned respectively:
+
+~~~
+|:===========|:==========:|===========:|
+| Content A1 | Content B1 | Content C1 |
+|------------|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|------------|------------|------------|
+| Content A3 | Content B3 | Content C3 |
+|============|============|============|
 ~~~
 
 You can have more than one row of content in cells, and there is no ambiguity since each row of cells is separated with a row of `-` signs and `|` characters:
