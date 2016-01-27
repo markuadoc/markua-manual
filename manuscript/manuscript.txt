@@ -2085,11 +2085,29 @@ No header:
 |============|============|============|
 ~~~
 
-If there are only two rows, they are interpreted as a header and a content row:
+If there are only two rows separated by a section separator, they are interpreted as a header and a content row:
 
 ~~~
 |============|============|============|
 | Header A   | Header B   | Header C   |
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|============|============|============|
+~~~
+
+If there are only two rows separated by a row separator, they are just two content rows:
+
+~~~
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|------------|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|============|============|============|
+~~~
+
+If there is only one row, it is interpreted as a content row, not a header row:
+
+~~~
 |============|============|============|
 | Content A1 | Content B1 | Content C1 |
 |============|============|============|
