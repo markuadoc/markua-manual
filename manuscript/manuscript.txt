@@ -2749,14 +2749,10 @@ Markua was developed at <http://leanpub.com>.
 Surrounding text in square brackets can be useful not just for giving it a URL to link to. If you wish to add attributes to an arbitrary span of text, you can create an arbitrary span of text using square brackets and then add an attribute list immediately afterward:
 
 ~~~
-My friend said [bonjour mon ami]{lang: fr} to me.
+Some text [then a span]{and: an, attribute: list} attached to the span.
 ~~~
 
-With the attribute I have indicated that the bonjour is a French word. So, if the Markua processor uses a different font for French, it can do so.
-
-This is a contrived example, but it makes a lot more sense with intermixing right-to-left languages like Hebrew and Arabic with left-to-right languages. In those cases, bad output can result if a Markua Processor does not realize it needs to reverse directions and switch fonts.
-
-You can use any attribute list on this span, and you can also just use the id syntactic sugar `{#theid}` on this span. The most common use cases are for `id`s, index entries and language overrides.
+You can use any attribute list on this span, and you can also just use the id syntactic sugar `{#theid}` on this span. The most common uses of this are to add `id`s or index entries, which are discussed later.
 
 ### Sometimes a Square Bracket is Just a Square Bracket
 
@@ -3196,57 +3192,7 @@ Directives are switches which affect the future behaviour of a Markua Processor.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it.
 
-### Language Attributes and Directives
-
-A Markua document has a language. By default, the language is `en` for English. The default language can be set in the settings, discussed later.
-
-Every human language has a direction, either left-to-right or right-to-left. Also, some fonts only handle certain languages correctly.
-
-So, it's important to be able to indicate in Markua which language the text is in, so that a Markua Processor can use the correct fonts and apply the correct direction.
-
-To do this, you use the `lang` attribute.
-
-If you use the `lang` attribute in an attribute list of a block or span, the `lang` change just applies to that block or span, which can help ensure that the font was correctly set.
-
-However, if you use the `lang` attribute as a directive, it applies as the new default until a different `lang` directive is encountered.
-
-The following example shows how you would say hello in English, then switch the language to Hebrew, then Chinese (Simplified), then Arabic, and then switch back to English to say goodbye:
-
-~~~
-hello
-
-{lang: he}
-
-Hebrew
-
-text
-
-here
-
-{lang: zh}
-
-Chinese
-
-text
-
-here
-
-{lang: ar}
-
-Arabic
-
-text
-
-here
-
-{lang: en}
-
-goodbye
-~~~
-
-Note that I didn't actually say hello or goodbye in Hebrew, Chinese or Arabic because the code font used for this specification does not support them all.
-
-A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: while there are left-to-right languages (most of them) and right-to-left languages (e.g. Arabic and Hebrew), any given language is either a left-to-right or a right-to-left language. So, specifying the language is sufficient--there's no need to have separate `dir` and `lang` attributes.
+A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: while there are left-to-right languages (most of them) and right-to-left languages (e.g. Arabic and Hebrew), any given language is either a left-to-right or a right-to-left language. Furthermore, there is no need to even specify the language: the Unicode characters are sufficient for a Markua processor to detect whether it is dealing with a left-to-right language or right-to-left language, even though they may not be able to identify the language itself.
 
 ### Book Section Directives
 
