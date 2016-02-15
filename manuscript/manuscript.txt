@@ -5965,7 +5965,7 @@ My name is Rumpel\-stiltskin.
 
 ###### HTML Output
 
-{#input_soft_hyphen_1}
+{#output_soft_hyphen_1}
 ~~~
 <p>My name is Rumpel&shy;stiltskin.</p>
 ~~~
