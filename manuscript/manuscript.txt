@@ -199,8 +199,6 @@ Underline
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
 
-W> TODO_LEANPUB - add strikethrough to Leanpub
-
 Superscript
 : To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`. (This is the same syntax as is used by pandoc.)
 
@@ -249,8 +247,6 @@ This is a paragraph.
 
 This is a paragraph.
 ~~~
-
-W> TODO_LEANPUB - bug - h6 needs proper newlines afterward, and needs to be numbered if numbering is enabled
 
 Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
 
@@ -440,8 +436,6 @@ A> This section is intended for programmers. Non-programmers can skip it, knowin
 A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
 
 To see why this rule is important, consider the following single-file Markua manuscript:
-
-W> TODO_LEANPUB - add caption support to Leanpub
 
 {caption: manuscript.txt}
 ~~~
@@ -845,8 +839,6 @@ The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and z
 | `.svg`    | `svg`      | SVG image     |
 | `.svgz`   | `svgz`     | Zipped SVG    |
 |-----------|------------|---------------|
-
-W> TODO_LEANPUB - Support table captions (there should be one in the table above)
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
@@ -2602,8 +2594,6 @@ B> Leanpub. Yes, we're in Font Awesome!
 {icon: github}
 B> So is GitHub, of course. Unicorns.
 
-W> TODO_LEANPUB - make C> be unsupported in Markua, not center
-
 {#inserting_into_paras}
 ## Inserting Block Elements Inside Paragraphs
 
@@ -3538,8 +3528,6 @@ Given this, Markua needs to provide the power of picking what kind of emphasis t
 | `*one asterisk*`      | `<em>one asterisk</em>`          | *italic*   |
 | `__two underscores__` | `<b>two underscores</b>`         | __bold__   |
 | `**two asterisks**`   | `<strong>two asterisks</strong>` | **bold**   |
-
-W> TODO_LEANPUB - fix two underscores in Leanpub
 
 This way, the appearance of Markua text is the same as Markdown: `**two asterisks**` and `__two underscores__` look bold, and `*one asterisk*` and `_one underscore_` look italic. They just happen to produce four tags, not two.
 
