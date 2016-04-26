@@ -1,16 +1,16 @@
 {frontmatter}
 
-# Note For Leanpub Authors: Markua Is NOT Yet Live in Leanpub!
-
-**Markua support is NOT yet live in Leanpub for anyone but admins.**
+# Note For Leanpub Authors
 
 If you're reading this, you are a really, *really* early adopter of Markua.
 
+Markua should be fully supported in Leanpub and in the open source version by the end of June 2016.
+
+Markua support is currently in **VERY EARLY BETA** on Leanpub. Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for about 5 years.
+
+But if you are curious to try Markua, to see what currently works (not much!) and what doesn't (lots!), now you can! We have now made Markua mode available to all Leanpub authors. This makes sense, since writing a book can take a long time. We will have Markua fully supported in Leanpub in the next few months, so for many authors, Markua will be complete before their books will be complete. So, we want to enable all Leanpub authors to choose to write in Markua starting now.
+
 I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
-
-Markua should be live in Leanpub and in the open source version by the end of June 2016. In the meantime, what Leanpub books are written in is what they have been written in for about 5 years: [Leanpub Flavoured Markdown, which is documented at this link](https://leanpub.com/help/manual).
-
-When Markua support is live on Leanpub we will provide the option of writing either in Markua or in Leanpub Flavoured Markdown. In the meantime, please enjoy using Leanpub and Leanpub Flavoured Markdown.
 
 {mainmatter}
 
