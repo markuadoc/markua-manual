@@ -2780,6 +2780,17 @@ Here is some unrelated text.
 Here is some more unrelated text.
 ~~~
 
+Footnotes can themselves have footnotes, *à la* David Foster Wallace's writing:
+
+~~~
+This has a footnote[^thenote].
+
+Here is some unrelated text.
+
+[^thenote]: This is the footnote[^anothernote].
+
+[^anothernote]: This is the first footnote's footnote.
+
 Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#restart-footnote-numbering) setting.
 
 ## Endnotes
@@ -2801,6 +2812,8 @@ Then, you define the endnote later in the document, using the same square bracke
 ~~~
 
 Just as with a footnote, if you wish to write multiple paragraphs in the endnote, you must indent the subsequent paragraphs by four spaces or one tab.
+
+Just as with a footnote, endnotes may themselves have endnotes as well.
 
 Whether the numbering of endnotes restarts every chapter is something that can be specified by the [`restart-endnote-numbering`](#restart-endnote-numbering) setting.
 
