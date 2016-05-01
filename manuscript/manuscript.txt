@@ -862,6 +862,28 @@ We will discuss the supported and the default attributes for images, and then sh
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
 
+`cite`
+: An image can have a citation. A Markua Processor is free to combine this citation with the caption attribute or display it separately.
+
+`url`
+: An image can have a URL, which is the URL of the `cite` attribute if present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote.
+
+For example, if there was the following hypothetical image:
+
+```
+{alt: "a slice of chocolate cake", cite: "Peter Armstrong's Food Photography", url: "http://peterarmstrong.com/pictures/1.jpg"}
+![A Piece of Cake](cake.jpg)
+```
+
+or the equivalent
+
+```
+{alt: "a slice of chocolate cake", caption: "A Piece of Cake", cite: "Peter Armstrong's Food Photography", url: "http://peterarmstrong.com/pictures/1.jpg"}
+![](cake.jpg)
+```
+
+The `caption` is "A Piece of Cake", and the question of what to do with the `cite` and `url` is dependent on the implementation of the Markua Processor.
+
 #### Local Images
 
 ~~~
