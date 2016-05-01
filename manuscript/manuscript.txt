@@ -589,7 +589,7 @@ A figure can also have attributes. The supported attributes vary based on the ty
 : This is the resource format. Different resource types have different legal values for format.
 
 `caption`
-: This is text which is shown near the figure, typically above or below it.
+: This is text which is shown near the figure, typically above or below it. A Markua Processor can choose where to position captions based on any criteria it chooses. For example, a Markua Processor can position all captions above or below figures, or use a different behaviour based on the resource format.
 
 `class`
 : Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
