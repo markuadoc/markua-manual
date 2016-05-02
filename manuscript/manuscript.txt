@@ -3212,20 +3212,18 @@ A book has a global `lang` [setting](#setting-keys-and-values), which defaults t
 
 However, many books are written in more than one language. Switching between languages in accomplished using the `lang` directive.
 
-For example, say I'm writing a book about Japanese Waka. If I want to switch to Japanese to display a poem I can do so using a `lang` directive `{lang: jpn}` and then switch back to English using `{lang: eng}`.
+For example, say I'm writing a book about Waka. If I want to switch to Japanese to display a poem I can do so using a `lang` directive `{lang: jpn}` and then switch back to English using `{lang: eng}`.
 
 The value of the `lang` directive must be a valid [ISO 639-3](https://en.wikipedia.org/wiki/ISO_639-3) language code.
 
 The two main things that the `lang` directive affects are:
 
-1. the direction of the output (left-to-right or right-to-left)
+1. the direction of the text (left-to-right or right-to-left)
 2. the font used for the language
 
-Since English is the default language of a Markua document, all Markua Processors must support the `eng` value of the `lang` directive. Support for all other language codes is optional. If the language code given as the value of a `lang` directive is not supported or is unrecognized, it must be interpreted as `eng` and switch the font and direction of the output accordingly.
+Since English is the default language of a Markua document, all Markua Processors must support the `eng` value of the `lang` directive. Support for all other language codes is optional. If the language code given as the value of a `lang` directive is not supported or is unrecognized, it must be interpreted as `eng` and switch the font accordingly and switch the direction to left-to-right. This way, a Markua Processor can add support for right-to-left languages such as Arabic (`{lang: ara}`) or Hebrew  (`{lang: heb}`), and know that when a different language is specified the direction will switch to left-to-right even if the given language was not supported--there are a lot of languages, but almost all of them are left-to-right languages.
 
-This way, a Markua Processor can add support for right-to-left languages such as Arabic (`{lang: ara}`) or Hebrew  (`{lang: heb}`), and know that when a different language is specified the direction will switch to left-to-right even if the given language was not supported--there are a lot of languages, but almost all of them are left-to-right languages.
-
-A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: while there are left-to-right languages (most of them) and right-to-left languages (e.g. Arabic and Hebrew), any given language is either a left-to-right or a right-to-left language.
+A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
 ### Book Section Directives
 
