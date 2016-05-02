@@ -3204,7 +3204,28 @@ Directives are switches which affect the future behaviour of a Markua Processor.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it.
 
-A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: while there are left-to-right languages (most of them) and right-to-left languages (e.g. Arabic and Hebrew), any given language is either a left-to-right or a right-to-left language. Furthermore, there is no need to even specify the language: the Unicode characters are sufficient for a Markua processor to detect whether it is dealing with a left-to-right language or right-to-left language, even though they may not be able to identify the language itself.
+A directive does not have any kind of "closing tag"--it simply remains in effect for the rest of the Markua document, or until the directive is overridden by another use of the same directive with a different value.
+
+### The `lang` Directive
+
+A book has a global `lang` [setting](#setting-keys-and-values), which defaults to `eng`, for English.
+
+However, many books are written in more than one language. Switching between languages in accomplished using the `lang` directive.
+
+For example, say I'm writing a book about Japanese Waka. If I want to switch to Japanese to display a poem I can do so using a `lang` directive `{lang: jpn}` and then switch back to English using `{lang: eng}`.
+
+The value of the `lang` directive must be a valid [ISO 639-3](https://en.wikipedia.org/wiki/ISO_639-3) language code.
+
+The two main things that the `lang` directive affects are:
+
+1. the direction of the output (left-to-right or right-to-left)
+2. the font used for the language
+
+Since English is the default language of a Markua document, all Markua Processors must support the `eng` value of the `lang` directive. Support for all other language codes is optional. If the language code given as the value of a `lang` directive is not supported or is unrecognized, it must be interpreted as `eng` and switch the font and direction of the output accordingly.
+
+This way, a Markua Processor can add support for right-to-left languages such as Arabic (`{lang: ara}`) or Hebrew  (`{lang: heb}`), and know that when a different language is specified the direction will switch to left-to-right even if the given language was not supported--there are a lot of languages, but almost all of them are left-to-right languages.
+
+A> In Leanpub Flavoured Markdown, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: while there are left-to-right languages (most of them) and right-to-left languages (e.g. Arabic and Hebrew), any given language is either a left-to-right or a right-to-left language.
 
 ### Book Section Directives
 
@@ -3356,8 +3377,8 @@ The following settings must be supported by all Markua Processors. Markua Proces
 code
 : The default language that code is. The default is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua processor does not recognize the programming language specified, it must format it as `text`.
 
-language
-: The IS0 639-2 alpha-3 language code of the language that the Markua document is written in. The list of choices is here: <http://www.loc.gov/standards/iso639-2/php/code_list.php>. The default is `eng`.
+lang
+: The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
 
 ## Escaping Special Characters
 
