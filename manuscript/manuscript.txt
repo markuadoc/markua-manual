@@ -971,6 +971,8 @@ We will discuss the supported and the default attributes for videos, and then sh
 `caption` and `class`
 : These attributes work exactly as they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
 
+A Markua Processor should interpret the `class` attribute value of "fullbleed" to indicate that the photo should be the full size of the page, with no margins left on that page. However, supporting this behaviour is not a requirement.
+
 Note that the `alt` attribute is not supported on video resources.
 
 When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
