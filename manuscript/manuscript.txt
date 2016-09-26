@@ -784,7 +784,7 @@ A file called `bar.png` in a subdirectory `images` of the resources directory is
 
 Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub will create subdirectories of the `resources` directory for every type of resource (images, audio, video, code and math), but this is not a requirement.
 
-W> TODO_LEANPUB - implement the resources directory support
+W> TODO_LEANPUB - implement the resources directory support. Also, need to tell people to rename their images directory, etc.
 
 The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file centaining an export should contain a `resources` directory which contains an `images` subdirectory with the images.
 
