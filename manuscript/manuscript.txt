@@ -2534,7 +2534,7 @@ This is a warning!
 
 The attribute list must precede the `{blurb}` with no blank line between it.
 
-### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `Q>`, `T>`, `W>`, `X>`
+### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `T>`, `W>`
 
 Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
 
