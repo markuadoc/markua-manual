@@ -23,7 +23,8 @@ TODO
 
 ## What Does Not Work in Leanpub's Current Markua Support
 
-* The resources directory is currently called images, per Leanpub Flavoured Markdown.
+* The `resources` directory is currently called `images`, per Leanpub Flavoured Markdown.
+
 TODO
 
 {mainmatter}
@@ -2509,9 +2510,7 @@ In computer programming books, there are a number of blurb types which are a def
 
 * `discussion`
 * `error`
-* `exercise`
 * `information`
-* `question`
 * `tip`
 * `warning`
 
@@ -2548,10 +2547,8 @@ These are the syntactic sugar values you can use:
 | `D>`  | `{class: discussion}`   |
 | `E>`  | `{class: error}`        |
 | `I>`  | `{class: information}`  |
-| `Q>`  | `{class: question}`     |
 | `T>`  | `{class: tip}`          |
 | `W>`  | `{class: warning}`      |
-| `X>`  | `{class: exercise}`     |
 
 Examples:
 
@@ -2562,13 +2559,9 @@ E> This is an error blurb.
 
 I> This is an information blurb.
 
-Q> This is a question blurb.
-
 T> This is a tip blurb.
 
 W> This is a warning blurb.
-
-X> This is an exercise blurb.
 ~~~
 
 These are equivalent to:
@@ -2583,17 +2576,11 @@ B> This is an error blurb.
 {class: information}
 B> This is an information blurb.
 
-{class: question}
-B> This is a question blurb.
-
 {class: tip}
 B> This is a tip blurb.
 
 {class: warning}
 B> This is a warning blurb.
-
-{class: exercise}
-B> This is an exercise blurb.
 ~~~
 
 Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor must output the `class` in HTML, but it is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
@@ -5750,17 +5737,11 @@ B> This is an error blurb.
 {class: information}
 B> This is an information blurb.
 
-{class: question}
-B> This is a question blurb.
-
 {class: tip}
 B> This is a tip blurb.
 
 {class: warning}
 B> This is a warning blurb.
-
-{class: exercise}
-B> This is an exercise blurb.
 ~~~
 
 ###### HTML Output
@@ -5776,17 +5757,11 @@ B> This is an exercise blurb.
 <aside class="blurb information">
   <p>This is an information blurb.</p>
 </aside>
-<aside class="blurb question">
-  <p>This is a question blurb.</p>
-</aside>
 <aside class="blurb tip">
   <p>This is a tip blurb.</p>
 </aside>
 <aside class="blurb warning">
   <p>This is a warning blurb.</p>
-</aside>
-<aside class="blurb exercise">
-  <p>This is an exercise blurb.</p>
 </aside>
 ~~~
 
@@ -5802,13 +5777,9 @@ E> This is an error blurb.
 
 I> This is an information blurb.
 
-Q> This is a question blurb.
-
 T> This is a tip blurb.
 
 W> This is a warning blurb.
-
-X> This is an exercise blurb.
 ~~~
 
 ###### HTML Output
@@ -5824,17 +5795,11 @@ X> This is an exercise blurb.
 <aside class="blurb information">
   <p>This is an information blurb.</p>
 </aside>
-<aside class="blurb question">
-  <p>This is a question blurb.</p>
-</aside>
 <aside class="blurb tip">
   <p>This is a tip blurb.</p>
 </aside>
 <aside class="blurb warning">
   <p>This is a warning blurb.</p>
-</aside>
-<aside class="blurb exercise">
-  <p>This is an exercise blurb.</p>
 </aside>
 ~~~
 
