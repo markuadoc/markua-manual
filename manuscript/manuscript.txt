@@ -79,7 +79,7 @@ Markua is designed for the writing of books, but it can also be used to write do
 
 Markua is a plain text format. Markua book manuscripts, called Markua documents, can be written however you want. On a computer, you can use any text editor you want. Beginning authors can use things like Notepad or TextEdit; novelists can use Scrivener; programmers can use Emacs, vi, Sublime or Atom; writers who like elegant, minimalist programs can use programs like iA Writer. You can also write Markua on a tablet, phone or even using an online editor like [MarkuaPad](http://markuapad.com). Since Markua syntax is so similar to Markdown syntax, many programs will already format Markua documents nicely.
 
-Markua documents can be automatically transformed into every current popular type of ebook format. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats.
+Markua documents can be automatically transformed into every current popular type of ebook format. The computer programs which do this transformation are called Markua processors. These programs understand both Markua syntax and how to generate the various output formats.
 
 {#novel_syntax}
 ## How to Write a Novel in Markua
@@ -108,9 +108,9 @@ When you are writing, *formatting is procrastination*. Writing is hard enough wi
 
 So, Markua provides fairly minimal formatting options. The only type of formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which should not be changed by a book designer.
 
-Semantic formatting also includes `class` attributes on figures, which can be used by an author to identify a particular type of figure, so that these can be formatted in a consistent way in HTML or even in other output formats. With HTML and EPUB, a Markua Processor can support CSS formatting. (For non-programmers: CSS, or Cascading Style Sheets, is the way that HTML is properly formatted.) A Markua Processor can also use the class attributes as formatting hints when producing non-HTML-based formats, such as PDF. A Markua Processor can provide a set of predefined `class` attribute values that have a certain behaviour in PDF output and a similar behaviour accomplished via CSS to affect HTML and EPUB outputs.
+Semantic formatting also includes `class` attributes on figures, which can be used by an author to identify a particular type of figure, so that these can be formatted in a consistent way in HTML or even in other output formats. With HTML and EPUB, a Markua processor can support CSS formatting. (For non-programmers: CSS, or Cascading Style Sheets, is the way that HTML is properly formatted.) A Markua processor can also use the class attributes as formatting hints when producing non-HTML-based formats, such as PDF. A Markua processor can provide a set of predefined `class` attribute values that have a certain behaviour in PDF output and a similar behaviour accomplished via CSS to affect HTML and EPUB outputs.
 
-Note that Markua deliberately does not specify any requirements about how to do formatting based on values of a `class` attribute, about CSS styles or about PDF output at all. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors and among book designers. For simplicity, a Markua Processor does not need to even support formatting based on class attributes at all: while the class attribute must be present in the generated HTML (if present), there is no requirement for a given Markua Processor to support CSS--or even to generate HTML at all.
+Note that Markua deliberately does not specify any requirements about how to do formatting based on values of a `class` attribute, about CSS styles or about PDF output at all. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua processors and among book designers. For simplicity, a Markua processor does not need to even support formatting based on class attributes at all: while the class attribute must be present in the generated HTML (if present), there is no requirement for a given Markua processor to support CSS--or even to generate HTML at all.
 
 To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins! Also, Markua really, really, *really* does **not** care about "widows and orphans"--unless they're people!
 
@@ -128,7 +128,7 @@ Markua is heavily inspired by Markdown. What Markua does is to map most Markdown
 
 The most popular subset of Markdown exists virtually unchanged in Markua. For example, *all* the Markua syntax described [earlier](#novel_syntax) as necessary to write a novel is inherited verbatim from Markdown.
 
-One of the design goals of Markua is for it to be the most straightforward way for a Markdown document to become a book. So, if you already write your blog posts or lecture notes in Markdown, they are probably already valid Markua. You can use any Markua Processor, such as [Leanpub](http://leanpub.com), to turn them into an ebook with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books, this process will feel like adding, not converting. The process of going from a Markdown document into a Markua ebook is mostly a process of decorating--enhancing and reinterpreting the Markdown document appropriately. In fact, one of the goals is for writers who are familiar with Markdown to feel as though they are still writing in Markdown, but that Markdown somehow *grew an understanding of book concepts*. Markua is really "Markdown for books".
+One of the design goals of Markua is for it to be the most straightforward way for a Markdown document to become a book. So, if you already write your blog posts or lecture notes in Markdown, they are probably already valid Markua. You can use any Markua processor, such as [Leanpub](http://leanpub.com), to turn them into an ebook with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books, this process will feel like adding, not converting. The process of going from a Markdown document into a Markua ebook is mostly a process of decorating--enhancing and reinterpreting the Markdown document appropriately. In fact, one of the goals is for writers who are familiar with Markdown to feel as though they are still writing in Markdown, but that Markdown somehow *grew an understanding of book concepts*. Markua is really "Markdown for books".
 
 At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and I created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
 
@@ -142,13 +142,13 @@ I started with Markdown. I then removed or changed the few things which were eit
 
 ## Why the Name "Markua"?
 
-When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
+When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which referenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
 
 ## Why is Inline HTML Not Supported in Markua?
 
 Inline HTML is not supported for both implementation and philosophical reasons.
 
-Supporting inline HTML would be very hard to implement, as Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write a book. Since Markdown's only output format target is HTML, there is a strong temptation to support inline HTML--generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free. On the other hand, for Markua, there is a large amount of HTML that makes no sense in books. Supporting inline HTML would put an undue burden on Markua Processors, the book and document production systems which produce PDF, EPUB, MOBI and HTML from Markua documents. Mapping all of HTML to PDF or MOBI formats in a meaningful way would be difficult and arbitrary.
+Supporting inline HTML would be very hard to implement, as Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write a book. Since Markdown's only output format target is HTML, there is a strong temptation to support inline HTML--generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free. On the other hand, for Markua, there is a large amount of HTML that makes no sense in books. Supporting inline HTML would put an undue burden on Markua processors, the book and document production systems which produce PDF, EPUB, MOBI and HTML from Markua documents. Mapping all of HTML to PDF or MOBI formats in a meaningful way would be difficult and arbitrary.
 
 Philosophically, Markua is intended to be a better way to write books. By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate is reduced.
 
@@ -164,19 +164,19 @@ Markua documents are written in plain text. Specifically, Markua documents must 
 
 The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts.
 
-Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output PDF, EPUB, MOBI, HTML and InDesign. None of these output formats is required to be supported by a given Markua Processor. A Markua Processor just has to output *some* output format.
+Markua processors can output any number of output formats from a Markua document. For example, Leanpub can output PDF, EPUB, MOBI, HTML and InDesign. None of these output formats is required to be supported by a given Markua processor. A Markua processor just has to output *some* output format.
 
-Not only are there no required output formats for a Markua Processor, the complete mapping from a Markua input to these output formats is also not formally specifed--not even for HTML. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua Processors.
+Not only are there no required output formats for a Markua processor, the complete mapping from a Markua input to these output formats is also not formally specifed--not even for HTML. This is deliberate, in order to maximize implementation flexibility and encourage competition among implementers of Markua processors.
 
 ## HTML Mapping
 
-Even though the mapping from Markua to HTML is not fully specified, Markua *does* specify how many parts of Markua syntax **must** be mapped to HTML, if HTML is being generated by a Markua Processor.
+Even though the mapping from Markua to HTML is not fully specified, Markua *does* specify how many parts of Markua syntax **must** be mapped to HTML, if HTML is being generated by a Markua processor.
 
-These are requirements for any Markua Processor which outputs any version of HTML, including HTML5. These requirements also affect the HTML which is contained in an EPUB file. A Markua Processor which violates these HTML output requirements is in error.
+These are requirements for any Markua processor which outputs any version of HTML, including HTML5. These requirements also affect the HTML which is contained in an EPUB file. A Markua processor which violates these HTML output requirements is in error.
 
 For the most part, the HTML mapping which is specified relates to the type of formatting that a book designer typically has no discretion to change. This includes things like bold, italics, paragraphs, single newlines, etc. The HTML mapping also specifies things which it makes no sense for there to be any variation in the generated HTML. This includes things like headings and figures--even though they may be styled radically differently in CSS, the HTML that produces them should be consistent.
 
-Creativity requires some constraints, and having a simple set of requirements around a basic subset of the HTML that is generated from a Markua document frees the implementors of Markua Processors to innovate in areas where it makes sense, while still sharing a common foundation. This common foundation will also make life easier for book designers to style the HTML output which is generated by a Markua Processor, since the basic HTML elements that are output will not change between Markua Processors.
+Creativity requires some constraints, and having a simple set of requirements around a basic subset of the HTML that is generated from a Markua document frees the implementors of Markua processors to innovate in areas where it makes sense, while still sharing a common foundation. This common foundation will also make life easier for book designers to style the HTML output which is generated by a Markua processor, since the basic HTML elements that are output will not change between Markua processors.
 
 The [HTML Mapping Requirements](#html_mapping_requirements) chapter contains these requirements. (Don't read it now, however--it won't make much sense until you've read the rest of the spec first, which is why it's at the end! Also, don't read it unless you're a programmer.)
 
@@ -263,7 +263,7 @@ This is a paragraph.
 This is a paragraph.
 ~~~
 
-Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
+Specifically, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
 
 * between one and six pound signs (`#`)
 * followed by exactly one space
@@ -276,9 +276,9 @@ Markua is more strict about spaces and pound signs than Markdown:
 
 1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
 2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading. (This is different than the atx headers in Markdown.)
-3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem in traditional writing, but which would violate the principle of least surprise.)
+3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem in traditional writing, but which would violate the principle of least surprise.)
 4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
-5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will probably look like an obvious error in the book.
+5. If there is only a single newline after the heading, a Markua processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will probably look like an obvious error in the book.
 
 I thought long and hard about Markua headings, and changed my mind (as Scott and Braden will attest) a number of times. I settled on this design when I realized that the design requirements were as follows:
 
@@ -448,7 +448,7 @@ Because of this, if you want to write poetry like e e cummings in which the exac
 
 A> This section is intended for programmers. Non-programmers can skip it, knowing that Markua does the right thing.
 
-A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
+A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua processors with **two newlines** added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
 
 To see why this rule is important, consider the following single-file Markua manuscript:
 
@@ -607,7 +607,7 @@ A figure can also have attributes. The supported attributes vary based on the ty
 : This is text which is shown near the figure, typically above or below it. A Markua Processor can choose where to position captions based on any criteria it chooses. For example, a Markua Processor can position all captions above or below figures, or use a different behaviour based on the resource format.
 
 `class`
-: Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
+: Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
 
 Figures can also have alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss the figure caption first and the alt text second.
 
@@ -617,7 +617,7 @@ A resource which is inserted as a figure can have a figure caption.
 
 This caption shows up in two places in the output:
 
-1. Near the resource, typically above or below it, per the preference of the Markua Processor.
+1. Near the resource, typically above or below it, per the preference of the Markua processor.
 2. As the name of the Figure in the List of Illustrations or Table of Figures, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
 
 The caption for a figure can be provided either in the square brackets in front of a local or web resource or in the attribute list above the resource:
@@ -749,7 +749,7 @@ In both cases, the `bar.png` image is inserted as a figure, and the text in the 
 
 Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure, unless there are two newlines after it to start a new paragraph. This is discussed further [here](#inserting_into_paras).
 
-Even though both images are inserted as figures, in the first case there is no way to specifiy alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined on the figure like this:
+Even though both images are inserted as figures, in the first case there is no way to specify alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined on the figure like this:
 
 ~~~
 Here's some text
@@ -791,7 +791,7 @@ Inline Resource
 
 ### Local Resources
 
-If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. Implementors of Markua processors must ensure they do not support navigating upward with `../` in paths.
 
 A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
 
@@ -801,7 +801,7 @@ Markua does not specify whether there are any subdirectories of the `resources` 
 
 W> TODO_LEANPUB - implement the resources directory support. Also, need to tell people to rename their images directory, etc.
 
-The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file centaining an export should contain a `resources` directory which contains an `images` subdirectory with the images.
+The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file containing an export should contain a `resources` directory which contains an `images` subdirectory with the images.
 
 ### Web Resources
 
@@ -819,7 +819,7 @@ There are five types of resources: image, video, audio, code, and math. Each typ
 
 The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-Certain file extensions must be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
+Certain file extensions must be associated with a specific type of resource. These are specified in the sections below. Also, as discussed in the [code](#code) section, Markua processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
 
 The default type and format can be overridden by a type and/or format specified in the attribute list of a figure.
 
@@ -872,7 +872,7 @@ We will discuss the supported and the default attributes for images, and then sh
 : The `caption` is the figure caption. Note that the caption attribute can also be put in square brackets in front of the image (except in the case of an SVG image inserted as an inline resource).
 
 `class`
-: The `class` can be used by Markua Processors to provide the approrpiate styling. With HTML and EPUB output this should be done via CSS. The class attribute can also be creatively used when generating non-HTML formats such as PDF.
+: The `class` can be used by Markua processors to provide the appropriate styling. With HTML and EPUB output this should be done via CSS. The class attribute can also be creatively used when generating non-HTML formats such as PDF.
 
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
@@ -981,7 +981,7 @@ We will discuss the supported and the default attributes for videos, and then sh
 : All resources support the format attribute. For video, the `format` is the specific video format. The legal set of formats is given in the `format` column in the above table.
 
 `poster`
-: The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
+: The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it.
 
 `caption` and `class`
 : These attributes work exactly as they do for images. They apply to the image specified by the `poster` attribute, and to the size of the video once it starts playing. Once the video starts playing, it can obviously be made fullscreen by any player that supports it.
@@ -990,7 +990,7 @@ A Markua Processor should interpret the `class` attribute value of "fullbleed" t
 
 Note that the `alt` attribute is not supported on video resources.
 
-When generating HTML, a Markua Processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
+When generating HTML, a Markua processor may add attributes to the video resource that are not based on the attributes in this list. The supported HTML5 video attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element).
 
 #### Local Video
 
@@ -1051,7 +1051,7 @@ We will discuss the supported and the default attributes for audio files, and th
 
 Note that the `alt` and `poster` attributes are not supported on audio resources.
 
-When generating HTML, a Markua Processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
+When generating HTML, a Markua processor may add attributes to the audio resource that are not based on the attributes in this list. The supported HTML5 audio attributes are [here](http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element).
 
 #### Local Audio
 
@@ -1078,7 +1078,7 @@ A> Markua's origins are in Leanpub Flavoured Markdown, which evolved based on Ma
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a code resource, it is ignored.
 
-Markua specifies only one specific file extension, `.txt`, to be associated with the code type. However, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
+Markua specifies only one specific file extension, `.txt`, to be associated with the code type. However, Markua processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
 
 {caption: "Resource File Extensions Associated With Code"}
 |-----------|------------|--------------------------|
@@ -1088,13 +1088,13 @@ Markua specifies only one specific file extension, `.txt`, to be associated with
 | (other)   | `guess`    | Implementation-dependent |
 |-----------|------------|--------------------------|
 
-Regardless of whether syntax highlighting is supported and the programmming language is detected, all code must be formatted as **`monospaced text`** by Markua Processors.
+Regardless of whether syntax highlighting is supported and the programming language is detected, all code must be formatted as **`monospaced text`** by Markua processors.
 
 The `text` format means to not do any syntax highlighting as well.
 
-The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code.
+The `guess` format is a request for the Markua processor to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which the Markua processor recognizes, and if the Markua processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code.
 
-Syntax highlighting is optional in Markua Processors. If a Markua Processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
+Syntax highlighting is optional in Markua processors. If a Markua processor does not support syntax highlighting, or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
 
 Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
@@ -1131,7 +1131,7 @@ Note that the default format can be overridden by specifying it via an attribute
 
 Local code resources can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
-This first figure will be a type of code and a format of `guess`. A Markua Processor which associates `.rb` file extensions with Ruby code will treat this as Ruby code; a Markua Processor which has no association for `.rb` files will treat it as plain text:
+This first figure will be a type of code and a format of `guess`. A Markua processor which associates `.rb` file extensions with Ruby code will treat this as Ruby code; a Markua processor which has no association for `.rb` files will treat it as plain text:
 
 ~~~
 Here's a paragraph before the figure.
@@ -1327,11 +1327,11 @@ Markua supports marking code as added or deleted, which can be helpful if you ar
 
 The way to do this is to add special comment lines to your code.
 
-The magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`. Any line containing one of those words will be removed completely by a Markua Processor before being inserted into the output.
+The magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`. Any line containing one of those words will be removed completely by a Markua processor before being inserted into the output.
 
-The Markua Processor will then be able to determine which code is being deleted or inserted, and format it accordingly.
+The Markua processor will then be able to determine which code is being deleted or inserted, and format it accordingly.
 
-The recommended way for a Markua Processor to do this is to make code which is being inserted get **`bolded`**, and to make code which is getting deleted to be put in ~~`strikethrough`~~. Another recommendation for a Markua Processor is to not do any syntax highlighting when there is the presence of any of the special `markua-start-delete`, `markua-end-delete`, `markua-start-insert` and `markua-end-insert` comments. Syntax highlighting makes it harder to notice the bolded new code and the deleted code in strikethrough.
+The recommended way for a Markua processor to do this is to make code which is being inserted get **`bolded`**, and to make code which is getting deleted to be put in ~~`strikethrough`~~. Another recommendation for a Markua processor is to not do any syntax highlighting when there is the presence of any of the special `markua-start-delete`, `markua-end-delete`, `markua-start-insert` and `markua-end-insert` comments. Syntax highlighting makes it harder to notice the bolded new code and the deleted code in strikethrough.
 
 A> In Leanpub Flavoured Markdown, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. These are not supported in Markua.
 
@@ -1407,7 +1407,7 @@ Here's a paragraph after the poetry.
 
 #### Line Wrapping in Code Resources
 
-Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
+Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
 
 {#math}
 ### Math
@@ -1426,15 +1426,15 @@ Math resources can be either LaTeX math or MathML.
 | `.mathml` | `mathml`   | MathML math   |
 |-----------|------------|---------------|
 
-Note that Markua procesors do not need to support either math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
+Note that Markua processors do not need to support either math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
 
 #### Supported Attributes for Math
 
 `alt`
-: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This is provided in the figure attribute list. This is primarily intended for Markua Processors that output math as images; there are no output requirements for the alt text.
+: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This is provided in the figure attribute list. This is primarily intended for Markua processors that output math as images; there are no output requirements for the alt text.
 
 `caption` and `class`
-: These attributes function as they do for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
+: These attributes function as they do for images. (In fact, a Markua processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
 
 `format`
 : For math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `latex` for LaTeX math and `mathml` for MathML math.
@@ -1592,9 +1592,9 @@ Current copyright law makes the use of resources problematic. As such:
 
 * Support for `audio` and `video` resources is optional in Markua processors, regardless of location.
 * Support for web resources is optional in Markua processors, regardless of resource type.
-* Support for web resources is not all or nothing--a Markua Processor can support web resources for some resource types but not others.
+* Support for web resources is not all or nothing--a Markua processor can support web resources for some resource types but not others.
 
-For example, a Markua Processor could support web resources for code and math, but not for images, audio and video. If a Markua Processor does not support a particular type of web resource, it must consider all web resources of that type to be missing resources.
+For example, a Markua processor could support web resources for code and math, but not for images, audio and video. If a Markua processor does not support a particular type of web resource, it must consider all web resources of that type to be missing resources.
 
 # Lists
 
@@ -1832,7 +1832,7 @@ If lists were simple, they would contain be a bunch of simple one-line list item
 
 However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this. If a list is going to contain list items with multiple paragraphs, then there should be blank lines between each list item.
 
-As with Markdown, every paragraph in a list item after the first one must be indented by four spaces or one tab. This lets the Markua Processor know that the list is not over, but is instead being continued.
+As with Markdown, every paragraph in a list item after the first one must be indented by four spaces or one tab. This lets the Markua processor know that the list is not over, but is instead being continued.
 
 The following is legal Markdown and legal Markua:
 
@@ -1855,7 +1855,7 @@ Here's a paragraph before the list.
 Here's a paragraph after the list.
 ~~~
 
-Just as with normal non-list-item text, a single newline functions as a forced line break within the list item in question. However, to encourage the text to be lined up nicely in the list item, any leading whitespace after the linebreak is ignored. This is different from the whitespace being preserved after single newlines in paragraphs. That rule exists to support poetry, and if there's one thing that lists are not, it's poetry.
+Just as with normal non-list-item text, a single newline functions as a forced line break within the list item in question. However, to encourage the text to be lined up nicely in the list item, any leading whitespace after the line break is ignored. This is different from the whitespace being preserved after single newlines in paragraphs. That rule exists to support poetry, and if there's one thing that lists are not, it's poetry.
 
 ## Nested Lists
 
@@ -1883,7 +1883,7 @@ This example shows the maximum three levels of nesting:
 * Baz
 ~~~
 
-If you try to nest a fourth level of nesting (or more), the Markua Processor will simply interpret the additional levels as forced newlines and manual indentation.
+If you try to nest a fourth level of nesting (or more), the Markua processor will simply interpret the additional levels as forced newlines and manual indentation.
 
 ## Nesting Block Elements in List Items
 
@@ -1965,7 +1965,7 @@ term
 : definition
 ~~~
 
-Finally, like list items, each definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definiton list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
+Finally, like list items, each definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definition list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
 
 ~~~
 Here's a paragraph before the list.
@@ -1990,7 +1990,7 @@ three
 Here's a paragraph after the list.
 ~~~
 
-Just as with list items, any leading whitespace after the linebreak is used to continue the definiton list item, and is thus ignored. Like list items, definition list items are not poetry.
+Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored. Like list items, definition list items are not poetry.
 
 W> TODO_LEANPUB - confirm ids work on definition list items
 
@@ -2281,7 +2281,7 @@ This complex table has a caption:
 : The `caption` is the table caption.
 
 `class`
-: Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
+: Just as with images, the `class` can be used by Markua processors to provide the appropriate styling. (In fact, a Markua processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
 
 # Block Elements
 
@@ -2307,48 +2307,48 @@ This is after the first scene break and before the second.
 This is after the second scene break.
 ~~~
 
-Markua Processors can take great liberties in how they output scene breaks in non-HTML formats. For example, scene breaks can be displayed as a few centered asterisks, an image, or just a blank line, depending on whether the book is fiction or another type of book. When producing HTML, Markua Processors must output the scene break as an `<hr/>` element, which can then be styled or replaced by book designers using CSS.
+Markua processors can take great liberties in how they output scene breaks in non-HTML formats. For example, scene breaks can be displayed as a few centered asterisks, an image, or just a blank line, depending on whether the book is fiction or another type of book. When producing HTML, Markua processors must output the scene break as an `<hr/>` element, which can then be styled or replaced by book designers using CSS.
 
-## Blockquotes (`>`)
+## Block Quotes (`>`)
 
-Blockquotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
+Block quotes in Markdown are created by prefacing lines with `> `, i.e. a greater than character followed by a space:
 
 ~~~
 This is the first paragraph.
 
-> This is a blockquote.
+> This is a block quote.
 >
 > It is outside the paragraphs.
 
 This is the second paragraph.
 ~~~
 
-Blockquotes in Markua are created in one of two ways:
+Block quotes in Markua are created in one of two ways:
 
 1. By prefacing lines with `> `, i.e. a greater than character followed by a space.
-2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
+2. By wrapping the block quote in `{blockquote}` ... `{/blockquote}`
 
 Option #1 is preferable for short quotes; option #2 is easier on authors for really long quotes.
 
-A> Do not confuse the curly-brace syntax for blockquotes, asides, blurbs and callouts with an attribute list. They are not attribute lists.
+A> Do not confuse the curly-brace syntax for block quotes, asides, blurbs and callouts with an attribute list. They are not attribute lists.
 
-Like figures and tables, blockquotes can be inserted in the middle of a paragraph or as a sibling of it.
+Like figures and tables, block quotes can be inserted in the middle of a paragraph or as a sibling of it.
 
-For non-programmers: I'm calling these things "blockquotes", not "block quotes", since their origin is in Markdown [blockquotes](http://daringfireball.net/projects/markdown/syntax#blockquote).
+For non-programmers: I'm calling these things "block quotes", not "block quotes", since their origin is in Markdown [blockquotes](http://daringfireball.net/projects/markdown/syntax#blockquote).
 
-These Markua blockquotes are siblings of the paragraphs:
+These Markua block quotes are siblings of the paragraphs:
 
 ~~~
 This is the first paragraph.
 
-> This is a blockquote.
+> This is a block quote.
 >
 > It is outside the paragraphs.
 
 This is the second paragraph.
 
 {blockquote}
-This is a blockquote.
+This is a block quote.
 
 It is outside the paragraphs.
 {/blockquote}
@@ -2356,18 +2356,18 @@ It is outside the paragraphs.
 This is the third paragraph.
 ~~~
 
-These Markua blockquotes are nested in the paragraph:
+These Markua block quotes are nested in the paragraph:
 
 ~~~
 This is the first paragraph.
 
 This is the second paragraph.
-> This is a blockquote
+> This is a block quote
 >
 > It is inside the second paragraph.
 This is part of the second paragraph.
 {blockquote}
-This is a blockquote.
+This is a block quote.
 
 It is inside the second paragraph.
 {/blockquote}
@@ -2376,21 +2376,21 @@ This is part of the second paragraph.
 This is the third paragraph.
 ~~~
 
-A blockquote can contain other block-level elements, most commonly paragraphs.
+A block quote can contain other block-level elements, most commonly paragraphs.
 
 If you are using the `{blockquote}` ... `{/blockquote}` approach, this is trivial: just pretend you're in a normal paragraph, and the syntax is the same.
 
-If you are using the Markdown approach of `>`, then to start a new block level element within a blockquote, just put a line starting with a `>` followed by a space, followed by the block level element. It is equivalent to placing a `>` and a space in front of every line of the paragraphs.
+If you are using the Markdown approach of `>`, then to start a new block level element within a block quote, just put a line starting with a `>` followed by a space, followed by the block level element. It is equivalent to placing a `>` and a space in front of every line of the paragraphs.
 
-Blockquotes can be multi-paragraph. To create a multi-paragraph blockquote, you need to separate each paragraph with a line containing a `>` and (optionally) whitespace.
+Block quotes can be multi-paragraph. To create a multi-paragraph block quote, you need to separate each paragraph with a line containing a `>` and (optionally) whitespace.
 
-In Markdown, a single newline inside a blockquote (where both lines are preceded by a `>` and a space) adds a single space. In Markua, however, a single newline inside a blockquote adds a forced line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a normal Markua paragraph function. This is discussed at length in the [Single Newlines](#single_newlines) section earlier. Note that it means you **cannot** manually wrap blockquotes to make them look nicer. Manually wrapping blockquotes is tedious and discourages editing of your own work. If you have really long blockquotes which span multiple paragraphs, the `{blockquote}` syntax is more pleasant to write in.
+In Markdown, a single newline inside a block quote (where both lines are preceded by a `>` and a space) adds a single space. In Markua, however, a single newline inside a block quote adds a forced line break, which produces a `<br/>` in HTML. This is identical to how single newlines inside a normal Markua paragraph function. This is discussed at length in the [Single Newlines](#single_newlines) section earlier. Note that it means you **cannot** manually wrap block quotes to make them look nicer. Manually wrapping block quotes is tedious and discourages editing of your own work. If you have really long block quotes which span multiple paragraphs, the `{blockquote}` syntax is more pleasant to write in.
 
-If a blockquote contains headings, these headings may be formatted by a Markua Processor differently than normal headings. Finally, if a Markua Processor is automatically generating a [Table of Contents](#toc) from chapter and section headings, any headings inside blockquotes should be ignored.
+If a block quote contains headings, these headings may be formatted by a Markua processor differently than normal headings. Finally, if a Markua processor is automatically generating a [Table of Contents](#toc) from chapter and section headings, any headings inside block quotes should be ignored.
 
-A blockquote can have a citation. This is done as an attribute list, which can include a `cite` attribute with the text of the citation and a `url` attribute with the URL of the citation. If both are specified, the text of the citation is linked to the URL. If only the `cite` attribute is specified it is shown as text; if only the `url` is specified it is inserted as text with a link to itself.
+A block quote can have a citation. This is done as an attribute list, which can include a `cite` attribute with the text of the citation and a `url` attribute with the URL of the citation. If both are specified, the text of the citation is linked to the URL. If only the `cite` attribute is specified it is shown as text; if only the `url` is specified it is inserted as text with a link to itself.
 
-The attribute list can be used regardless of which syntax is used to insert the blockquote:
+The attribute list can be used regardless of which syntax is used to insert the block quote:
 
 ~~~
 Lots of people have opinions about software.
@@ -2412,20 +2412,20 @@ That's it!
 
 ## Asides (`A>`)
 
-Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua Processors.
+Since Markua is for writing books, including technical books, it needs not just a syntax for block quotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for block quotes. Like block quotes, any headings inside asides, blurbs and callouts do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua processors.
 
 We will consider asides first.
 
 Asides are typically short or long notes in books which are tangential to the main idea--sort of like footnotes, but in the body text itself. In technical books, quite often they are formatted in a box. Asides can span multiple pages.
 
-The syntaxes for asides are very similar to blockquotes:
+The syntaxes for asides are very similar to block quotes:
 
 1. By prefacing lines with `A> `, i.e. an `A`, then a greater than character (`>`), then a space.
 2. By wrapping the aside in `{aside}` ... `{/aside}`
 
 Option #1 is preferable for short asides; option #2 is easier on authors for really long asides.
 
-For consistency with blockquotes, asides can be siblings of paragraphs or nested in them.
+For consistency with block quotes, asides can be siblings of paragraphs or nested in them.
 
 Here's a short aside:
 
@@ -2506,7 +2506,7 @@ Blurbs also have support for an attribute list, which can contain a `class` attr
 
 Markua has its origin in Leanpub Flavoured Markdown, and Leanpub has its origin in authoring computer programming books.
 
-In computer programming books, there are a number of blurb types which are a defacto standard:
+In computer programming books, there are a number of blurb types which are a *de facto* standard:
 
 * `discussion`
 * `error`
@@ -2514,7 +2514,7 @@ In computer programming books, there are a number of blurb types which are a def
 * `tip`
 * `warning`
 
-These blurb types can be set on a blurb as its `class` attribute. A Markua Processor can optionally style these blurbs appropriately based on the class, for example by adding custom icons for each class of blurb.
+These blurb types can be set on a blurb as its `class` attribute. A Markua processor can optionally style these blurbs appropriately based on the class, for example by adding custom icons for each class of blurb.
 
 Here's how this looks with the `B> ` syntax:
 
@@ -2583,11 +2583,11 @@ B> This is a tip blurb.
 B> This is a warning blurb.
 ~~~
 
-Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. A Markua Processor must output the `class` in HTML, but it is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
+Note that nothing in this section defines what a Markua processor must *do* with the given class of blurb. A Markua processor must output the `class` in HTML, but it is free to ignore the `class` entirely. Or it can do something it considers appropriate--Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
 
 ### Using Extension Attributes on Blurbs to add `icon` Support
 
-Markua Processors must ignore any attributes which they do not understand.
+Markua processors must ignore any attributes which they do not understand.
 
 Because of this, Markua attribute lists can contain any number of extension attributes. An extension attribute is an attribute which is not defined in the Markua specification.
 
@@ -2855,7 +2855,7 @@ These restrictions ensure that your `id`s can then be linked to by a crosslink f
 
 The id needs to be defined on either a block or span element.
 
-A> If an id is defined with an invalid name, the Markua Processor must ignore it and should provide a warning in the list of warnings it produces when generating the document.
+A> If an id is defined with an invalid name, the Markua processor must ignore it and should provide a warning in the list of warnings it produces when generating the document.
 
 #### Defining an id on a Block Element
 
@@ -2879,7 +2879,7 @@ This is a paragraph with the id of `some-id`.
 
 To define an id on a span element you simply add the id definition immediately after the span element.
 
-Here's how to use the attribute list syntax to define an id attribute on a span elemnet:
+Here's how to use the attribute list syntax to define an id attribute on a span element:
 
 ~~~
 The word Markua{id: markua} has an id.
@@ -2921,8 +2921,8 @@ Note that order of definition and use does not matter: crosslinks will work rega
 
 ### Rules for `id`s and Crosslinks
 
-* If a Markua document contains duplicate `id` attribute values, the **first** one is used and the subsequent ones are ignored. A Markua Processor should output a warning about duplicate `id`s.
-* Crosslinks that reference an unused `id` may either be created as a (broken, non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also output a warning about this somewhere, but not in the actual document text itself.
+* If a Markua document contains duplicate `id` attribute values, the **first** one is used and the subsequent ones are ignored. A Markua processor should output a warning about duplicate `id`s.
+* Crosslinks that reference an unused `id` may either be created as a (broken, non-functional) link or be created as normal text (not a link) by a Markua processor. The Markua processor may also output a warning about this somewhere, but not in the actual document text itself.
 
 ### Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
 
@@ -2947,7 +2947,7 @@ So, for "Figure 8.2: Anatomy of a Squirrel", these are:
 * `#d` is "Figure"
 * `#f` is "Figure 8.2: Anatomy of a Squirrel"
 
-Note that in this example, "Anatomy of a Squirrel" was typed by the author, whereas "Figure 8.2: " was generated by the Markua Processor. It does not matter; both can be referenced.
+Note that in this example, "Anatomy of a Squirrel" was typed by the author, whereas "Figure 8.2: " was generated by the Markua processor. It does not matter; both can be referenced.
 
 Also, note that regardless of section level, sections referenced in `#d` or `#f` are all called "Section" (not "Sub-Section", "Sub-Sub-Section", etc.)
 
@@ -2978,7 +2978,7 @@ Notes:
 
 ## Soft Hyphen
 
-In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hypenation can be done.
+In certain rare situations, it's desirable to be able to give hints to a Markua processor about where hyphenation can be done.
 
 This attribute makes me sad. However, it's a nod to reality. Hopefully this attribute is never used by authors writing the first draft of anything.
 
@@ -3007,15 +3007,15 @@ What should Markua do?
 
 Well, first of all, this is *fantastic* news. Emoji are the single legitimate use case for an inline span image, but any syntax I could invent to specify alt text on an inline span image was either inconsistent or disgusting.
 
-So, now that emoji are on the rise and have standard Unicode characters for them, this problem is solved: emoji do not need to be inserted as inline span images. Instead, emoji can be inserted using some kind of entity syntax for the Unicode character for the emoji. This way, a Markua Processor that recognizes this emoji can provide the standard alt text (e.g. "face with tears of joy") for the character, without the author having provided it.
+So, now that emoji are on the rise and have standard Unicode characters for them, this problem is solved: emoji do not need to be inserted as inline span images. Instead, emoji can be inserted using some kind of entity syntax for the Unicode character for the emoji. This way, a Markua processor that recognizes this emoji can provide the standard alt text (e.g. "face with tears of joy") for the character, without the author having provided it.
 
 The syntax that Markua uses for emoji is a backslash (`\`), followed by a `u`, followed by the hexadecimal value of the Unicode code point, followed by a semicolon. For the Face with Tears of Joy, this is:
 
 `\u1F602;`
 
-The reason the semicolon is required is to clearly indicate the end of the Unicode hexadecimal value to the Markua Processor.
+The reason the semicolon is required is to clearly indicate the end of the Unicode hexadecimal value to the Markua processor.
 
-In terms of output requirements, a Markua Processor can do one of the following things with emoji:
+In terms of output requirements, a Markua processor can do one of the following things with emoji:
 
 1. Output the emoji using an emoji font.
 2. Output the emoji as an image, along with alt text (optionally localized to the primary language of the book) in an appropriate manner (e.g. as a tooltip).
@@ -3024,16 +3024,16 @@ In terms of output requirements, a Markua Processor can do one of the following 
 5. Output a "missing" character (the "tofu" box in many character sets).
 6. For HTML-based output (either HTML or EPUB), output the hexadecimal HTML entity reference (e.g. `&#x1F602;`).
 
-Pretty much the only two things a Markua Processor cannot do with emoji is to output nothing or to output the escape sequence (e.g. `\u1F602;`) literally. Outputting nothing at all could cause confusion with the surrounding text, and nobody wants to see an escape sequence.
+Pretty much the only two things a Markua processor cannot do with emoji is to output nothing or to output the escape sequence (e.g. `\u1F602;`) literally. Outputting nothing at all could cause confusion with the surrounding text, and nobody wants to see an escape sequence.
 
-A> It is also possible to attempt to use emoji by actually pasting the Unicode characters into a Markua document. There is no requirement for a Markua Processor to handle this in any special way, however--in mast cases, this will produce the "missing" character (the "tofu" box).
+A> It is also possible to attempt to use emoji by actually pasting the Unicode characters into a Markua document. There is no requirement for a Markua processor to handle this in any special way, however--in mast cases, this will produce the "missing" character (the "tofu" box).
 
 # Metadata
 
 {#attributes}
 ## Attributes
 
-Attributes are used to do everything from specify the language of code blocks, add ids for crosslinkng and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
+Attributes are used to do everything from specify the language of code blocks, add ids for cross-linkng and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
 
 ### Attribute List Format
 
@@ -3055,7 +3055,7 @@ Regarding #2 and #3: Any line outside of a code resource which starts with an op
 
 The keys of attributes must consist exclusively of lowercase letters and underscores (`_`). (For you programmers, this is [`a-z_`].)
 
-If a key is duplicated in an attribute list, the first key value is used and subsequent ones are ignored. A Markua Processor should add a warning in its list of warnings, which are *not* output in the ouptut itself.
+If a key is duplicated in an attribute list, the first key value is used and subsequent ones are ignored. A Markua processor should add a warning in its list of warnings, which are *not* output in the output itself.
 
 ### Attribute Value Types
 
@@ -3090,7 +3090,7 @@ As previously discussed, there is special syntactic sugar for ids: `{#foo}` is e
 {#extension-attributes}
 ### Extension Attributes
 
-Markua Processors must silently ignore any attributes which they do not understand. This is true whether the attributes are inserted in an attribute list attached to a span, block or even in free-floating directives.
+Markua processors must silently ignore any attributes which they do not understand. This is true whether the attributes are inserted in an attribute list attached to a span, block or even in free-floating directives.
 
 Because of this, Markua attribute lists can contain any number of extension attributes. An extension attribute is an attribute which is not defined in the Markua specification.
 
@@ -3203,7 +3203,7 @@ Note that adding index entries is best left until the end of a book. At that tim
 {#directives}
 ## Directives
 
-Directives are switches which affect the future behaviour of a Markua Processor.
+Directives are switches which affect the future behaviour of a Markua processor.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it.
 
@@ -3244,7 +3244,7 @@ The book `section` directive is the solution to this. You add a book `section` d
 
 `{section: mainmatter}`
 
-Adding multiple instances of the `section` directive throughout the book lets you indicate to Markua Processors what section of a book they are in, in order to affect numbering, formatting and other concerns like the placement of the Table of Contents.
+Adding multiple instances of the `section` directive throughout the book lets you indicate to Markua processors what section of a book they are in, in order to affect numbering, formatting and other concerns like the placement of the Table of Contents.
 
 Markua is a fairly minimalist format, so this is all accomplished with one directive. Furthermore, for authors who do not know about this directive, nothing bad or unexpected will happen.
 
@@ -3284,7 +3284,7 @@ You can write a book or document in Markua without using any directives at all, 
 
 If you're an author and this seems confusing, don't fear. Almost all of the book `section` directives will typically be added either by someone working for a publisher or automatically by book generation software. The only `section` directives that many authors will use are `{section: dedication}` and `{section: mainmatter}`.
 
-Also, note that Markua Processors may ignore all of the book `section` directives. Book `section` directives are only hints that indicate that the Markua Processor may wish to do things like switch to hanging indents, change the font size, use a custom layout, etc. based on what section of the book they are in.
+Also, note that Markua processors may ignore all of the book `section` directives. Book `section` directives are only hints that indicate that the Markua processor may wish to do things like switch to hanging indents, change the font size, use a custom layout, etc. based on what section of the book they are in.
 
 While these book `section` directives are mere hints, there are strict rules about their use:
 
@@ -3304,11 +3304,11 @@ Books often have a Table of Contents.
 
 Markua does not specify any hard requirements about a Table of Contents. However, the following are recommendations:
 
-* A Markua Processor should provide the option of automatically generating a Table of Contents from the names of the parts (if any), chapters, sections and sub-sections of the book.
-* A Markua Processor should allow the author to specify how many levels of section are included in the Table of Contents.
-* A Markua Processor should allow the author to specify whether parts, chapters, sections and sub-sections are numbered.
+* A Markua processor should provide the option of automatically generating a Table of Contents from the names of the parts (if any), chapters, sections and sub-sections of the book.
+* A Markua processor should allow the author to specify how many levels of section are included in the Table of Contents.
+* A Markua processor should allow the author to specify whether parts, chapters, sections and sub-sections are numbered.
 
-Also, a Markua Processor may allow precise positioning of the Table of Contents in the front matter with a `{section: toc}` book section directive.
+Also, a Markua processor may allow precise positioning of the Table of Contents in the front matter with a `{section: toc}` book section directive.
 
 W> TODO_LEANPUB - We need to ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
 
@@ -3317,7 +3317,7 @@ W> TODO_LEANPUB - We need to ensure that the `toc` directive is used to position
 
 As discussed earlier, a Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input.
 
-The settings for a Markua document can alse be provided in four ways:
+The settings for a Markua document can also be provided in four ways:
 
 1. at the top of the first file, enclosed in curly braces
 2. in a separate settings file
@@ -3339,7 +3339,7 @@ authors: Peter Armstrong
 Imagine...
 ~~~
 
-With approaches #2, #3 and #4, the Markua Processor must act as though there is one file as follows:
+With approaches #2, #3 and #4, the Markua processor must act as though there is one file as follows:
 
 ~~~
 {
@@ -3373,7 +3373,7 @@ Any whitespace at the beginning or end of the keys and values will be stripped. 
 {#setting-keys-and-values}
 ### Markua-Defined Settings
 
-The following settings must be supported by all Markua Processors. Markua Processors can also add their own settings, just as Markua Processors can understand their own extension attributes.
+The following settings must be supported by all Markua processors. Markua processors can also add their own settings, just as Markua processors can understand their own extension attributes.
 
 code
 : The default language that code is. The default is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua processor does not recognize the programming language specified, it must format it as `text`.
@@ -3400,7 +3400,7 @@ This is the same reason that there are two ways to create inline figures, with t
 
 While Markua does not support inline HTML, Markua does support using the HTML comment syntax (`<!--` .... `-->`) to comment out portions of a Markua manuscript.
 
-A Markua Processor must ignore any manuscript text inside an HTML comment.
+A Markua processor must ignore any manuscript text inside an HTML comment.
 
 Note that inside an inline code block, an HTML comment is not special: it is just part of the code block, like anything else.
 
@@ -3431,12 +3431,12 @@ There are five types of changes supported by the markup in CriticMarkup:
 
 These types of markup do not conflict with any Markua markup for attribute lists, since the opening curly brace is always followed by special characters.
 
-Markua Processors can support CriticMarkup in one of two ways:
+Markua processors can support CriticMarkup in one of two ways:
 
 1. By outputting the additions, deletions, substitutions, comments and highlights appropriately, as defined in the very well-written [CriticMarkup spec](http://criticmarkup.com/spec.php).
 2. By outputting the original text, removing all suggestions made in CriticMarkup.
 
-Both ways are appropriate, and a Markua Processor could support both. For example, a Markua Processor could output CriticMarkup when previewing, but output only the original text when publishing.
+Both ways are appropriate, and a Markua processor could support both. For example, a Markua processor could output CriticMarkup when previewing, but output only the original text when publishing.
 
 For example, the following example shows a paragraph annotated with all five types of CriticMarkup:
 
@@ -3448,28 +3448,28 @@ it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>Thi
 If you don't want to use it, you don't need to learn about it.
 ~~~
 
-The CriticMarkup section in the HTML Mapping Requirements chapter [shows](#criticmarkup_html) the result of a Markua Processor either outputting or ignoring all the CriticMarkup.
+The CriticMarkup section in the HTML Mapping Requirements chapter [shows](#criticmarkup_html) the result of a Markua processor either outputting or ignoring all the CriticMarkup.
 
 W> TODO_LEANPUB - support this in Leanpub
 
 {#html_mapping_requirements}
 # HTML Mapping Requirements
 
-Even though there is no full, canonical HTML mapping, Markua *does* specify how certain parts of Markua syntax **must** be mapped to HTML, if HTML is being generated by a Markua Processor either as an output format or as the basis of an EPUB file.
+Even though there is no full, canonical HTML mapping, Markua *does* specify how certain parts of Markua syntax **must** be mapped to HTML, if HTML is being generated by a Markua processor either as an output format or as the basis of an EPUB file.
 
 This chapter defines this HTML mapping.
 
-If you're implementing a Markua Processor, this chapter should be helpful. In addition, note that an open source, ES6-based reference implementation of a Markua Processor which outputs HTML5 is [here](https://github.com/markuadoc/markua-js).
+If you're implementing a Markua processor, this chapter should be helpful. In addition, note that an open source, ES6-based reference implementation of a Markua processor which outputs HTML5 is [here](https://github.com/markuadoc/markua-js).
 
-In the HTML ouptut, note the use of `class` attributes where appropriate. This is to enable Markua Processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua Processor implementations. However, in some rare cases, CSS rules will be recommended.
+In the HTML output, note the use of `class` attributes where appropriate. This is to enable Markua processors to use CSS better. Note that no CSS is specified, in order to allow for maximum flexibility and competition on behalf of Markua processor implementations. However, in some rare cases, CSS rules will be recommended.
 
 This chapter is ordered in an almost identical way to the rest of the spec, but only the examples where there is an HTML mapping specified are included. Unlike the rest of the spec, which did a bunch of explaining and showed almost no HTML, in this chapter there is not much explanation--it's mostly just a bunch of examples.
 
-These examples are not just examples--they are also the basis of a compatibility test suite for Markua Processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies.
+These examples are not just examples--they are also the basis of a compatibility test suite for Markua processors. These examples are automatically extracted from this specification and used as tests: Markua processors must generate the given HTML output (ignoring indentation whitespace between HTML tags) for the given Markua input and the given test dependencies.
 
 In this section, there will be a number of Dependencies shown. These are the names and contents of files which get created by the software that generates the Markua test. See <https://github.com/markuadoc/markua-test> for more information.
 
-Finally, a Markua Processor can feel free to generate as many HTML files as it chooses for a given Markua document. But for the purposes of Markua compatibility testing, all HTML output must be in one HTML file. (This way, there is predictability for how to reference elements by their `id` attributes, etc.)
+Finally, a Markua processor can feel free to generate as many HTML files as it chooses for a given Markua document. But for the purposes of Markua compatibility testing, all HTML output must be in one HTML file. (This way, there is predictability for how to reference elements by their `id` attributes, etc.)
 
 ## Text Formatting
 
@@ -3495,7 +3495,7 @@ When there's more, there's no span: 3^2^~1~^0^ and 1~456~^234^~789~.
 
 ###### HTML Output
 
-When there's *exactly one* subscript and superscript on the same element (which can happen in chemistry and physics), they are wrapped in a span. This lets a Markua Processor use CSS to format them better.
+When there's *exactly one* subscript and superscript on the same element (which can happen in chemistry and physics), they are wrapped in a span. This lets a Markua processor use CSS to format them better.
 
 {#output_text_formatting_1}
 ~~~
@@ -4053,7 +4053,7 @@ The full version of the talk is here:
 {#code_html}
 The syntax for code is described [here](#code).
 
-Markua only specifies how code which has a format of `text` is formatted. All other formats of code are unspecified, since the behaviour depends on whether the programming language is recognized by the Markua Processor, whether syntax highlighting is enabled, and on what type and version of syntax highlighting library (e.g. Pygments) is used.
+Markua only specifies how code which has a format of `text` is formatted. All other formats of code are unspecified, since the behaviour depends on whether the programming language is recognized by the Markua processor, whether syntax highlighting is enabled, and on what type and version of syntax highlighting library (e.g. Pygments) is used.
 
 #### Local Code Resources
 
@@ -4341,7 +4341,7 @@ me   ow</code></pre>
 
 ### Math
 
-Markua does not specify how math is output in HTML. It is perfectly acceptable for a Markua Processor to output any math block as an image or as the LaTeX or MathML text of the math equation itself.
+Markua does not specify how math is output in HTML. It is perfectly acceptable for a Markua processor to output any math block as an image or as the LaTeX or MathML text of the math equation itself.
 
 ## Lists
 
@@ -5431,7 +5431,7 @@ Content A3 | Content B3 | Content C3
     </thead>
     <tbody>
       <tr>
-        <td colspan="2" align="left">Content A1 annd B1 Merged</td>
+        <td colspan="2" align="left">Content A1 and B1 Merged</td>
         <td align="right">Content C1</td>
       </tr>
       <tr>
@@ -5459,7 +5459,7 @@ Content A3 | Content B3 | Content C3
 
 ### Scene Breaks
 
-In HTML, scene breaks are always mapped to `<hr/>`. Book designers can use CSS to replace th e `<hr/>` with whatever they want: there are no other ways to produce an `<hr/>` in Markua, so an `<hr/>` always means scene break.
+In HTML, scene breaks are always mapped to `<hr/>`. Book designers can use CSS to replace the `<hr/>` with whatever they want: there are no other ways to produce an `<hr/>` in Markua, so an `<hr/>` always means scene break.
 
 ##### Example
 
@@ -5489,9 +5489,9 @@ This is after the second scene break.
 <p>This is after the second scene break.</p>
 ~~~
 
-### Blockquotes (`>`)
+### Block Quotes (`>`)
 
-##### Example 1: Blockquotes that are Siblings of Paragraphs
+##### Example 1: Block Quotes that are Siblings of Paragraphs
 
 ###### Markua Syntax
 
@@ -5499,14 +5499,14 @@ This is after the second scene break.
 ~~~
 This is the first paragraph.
 
-> This is a blockquote.
+> This is a block quote.
 >
 > It is outside the paragraphs.
 
 This is the second paragraph.
 
 {blockquote}
-This is a blockquote.
+This is a block quote.
 
 It is outside the paragraphs.
 {/blockquote}
@@ -5520,18 +5520,18 @@ This is the third paragraph.
 ~~~
 <p>This is the first paragraph.</p>
 <blockquote>
-  <p>This is a blockquote.</p>
+  <p>This is a block quote.</p>
   <p>It is outside the paragraphs.</p>
 </blockquote>
 <p>This is the second paragraph.</p>
 <blockquote>
-  <p>This is a blockquote.</p>
+  <p>This is a block quote.</p>
   <p>It is outside the paragraphs.</p>
 </blockquote>
 <p>This is the third paragraph.</p>
 ~~~
 
-##### Example 2: Blockquotes that are Nested in Paragraphs
+##### Example 2: Block Quotes that are Nested in Paragraphs
 
 ###### Markua Syntax
 
@@ -5540,12 +5540,12 @@ This is the third paragraph.
 This is the first paragraph.
 
 This is the second paragraph.
-> This is a blockquote
+> This is a block quote
 >
 > It is inside the second paragraph.
 This is part of the second paragraph.
 {blockquote}
-This is a blockquote.
+This is a block quote.
 
 It is inside the second paragraph.
 {/blockquote}
@@ -5561,19 +5561,19 @@ This is the third paragraph.
 <p>This is the first paragraph.</p>
 <p>This is the second paragraph.<br/>
 <blockquote>
-  <p>This is a blockquote</p>
+  <p>This is a block quote</p>
   <p>It is inside the second paragraph.</p>
 </blockquote>
 This is part of the second paragraph.<br/>
 <blockquote>
-  <p>This is a blockquote</p>
+  <p>This is a block quote</p>
   <p>It is inside the second paragraph.</p>
 </blockquote>
 This is part of the second paragraph.</p>
 <p>This is the third paragraph.</p>
 ~~~
 
-##### Example 3: Blockquotes with Attribute Lists
+##### Example 3: Block Quotes with Attribute Lists
 
 ###### Markua Syntax
 
@@ -5921,7 +5921,7 @@ Markua was developed at <a href="http://leanpub.com">http://leanpub.com</a>.
 
 ### Footnotes and Endnotes
 
-Markua does not specify how footnotes and endnotes are output in HTML. A Markua Processor should output them *somewhere*, but the details are not specified. This is deliberate, in order to maximize implementation flexibility for implementers of Markua Processors.
+Markua does not specify how footnotes and endnotes are output in HTML. A Markua processor should output them *somewhere*, but the details are not specified. This is deliberate, in order to maximize implementation flexibility for implementers of Markua processors.
 
 ### Crosslinks and ids
 
@@ -5988,15 +5988,15 @@ Markua does not specify how emoji are output in HTML. The various choices are di
 
 ### Index Entries
 
-Markua does not specify how index entries are output in HTML. Markua Processors can take great liberties in the construction of an index based on index entries.
+Markua does not specify how index entries are output in HTML. Markua processors can take great liberties in the construction of an index based on index entries.
 
 ### Book Section Directives
 
-Markua does not specify how book section directives affect the HTML output. Markua Processors have lots of freedom here.
+Markua does not specify how book section directives affect the HTML output. Markua processors have lots of freedom here.
 
 ### Table of Contents
 
-Markua does not specify how a table of contents is output in HTML. Again, Markua Processors can innovate here. For example, Leanpub provides settings about how many levels to include in the Table of Contents, whether to show dots in it, etc.
+Markua does not specify how a table of contents is output in HTML. Again, Markua processors can innovate here. For example, Leanpub provides settings about how many levels to include in the Table of Contents, whether to show dots in it, etc.
 
 Markua does, however, strongly recommend that the entries in a Table of Contents be clickable links in HTML. This is HTML after all, not print.
 
@@ -6026,9 +6026,9 @@ This is also included.
 {#criticmarkup_html}
 ## CriticMarkup
 
-When outputting HTML, a Markua Processor can either output or ignore all the CriticMarkup.
+When outputting HTML, a Markua processor can either output or ignore all the CriticMarkup.
 
-The choice is situation-dependent. For example, a Markua Processor could output CriticMarkup when previewing, but output only the original text when publishing.
+The choice is situation-dependent. For example, a Markua processor could output CriticMarkup when previewing, but output only the original text when publishing.
 
 However, regardless of the fact that there is a choice, there is an exact specification for both cases. Also, there is only one choice: all or nothing. It's not acceptable to support some CriticMarkup annotations but not others.
 
@@ -6042,7 +6042,7 @@ it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>Thi
 If you don't want to use it, you don't need to learn about it.
 ~~~
 
-Here's the HTML that must be produced when the Markua Processor is ignoring all CriticMarkup:
+Here's the HTML that must be produced when the Markua processor is ignoring all CriticMarkup:
 
 ~~~
 <p>If you enjoy using track changes in Word, then you'll enjoy using CriticMarkup. If you don't enjoy
@@ -6051,7 +6051,7 @@ isn't for you! If this is the case, don't worry about it: the support for Critic
 on the rest of Markua. If you don't want to use it, you don't need to learn about it.</p>
 ~~~
 
-Here's the HTML that must be produced when the Markua Processor is outputting all CriticMarkup:
+Here's the HTML that must be produced when the Markua processor is outputting all CriticMarkup:
 
 ~~~
 <p>If you enjoy using track changes<span class="critic comment">Who enjoys this?</span> in Word,
