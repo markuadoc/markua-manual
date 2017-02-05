@@ -247,8 +247,6 @@ Resources vary in four different ways:
 3. **Types**: `image`, `video`, `audio`, `code`, `math` or `table`
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
 
-There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `table`. Each type of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
-
 Before going into more detail, it's helpful to consider a brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
 ~~~
@@ -274,7 +272,9 @@ Tables are also resources, and can alse be local, web or inline. However, the ta
 
 ## Resource Insertion Methods
 
-Resources can be inserted either as spans or as figures. In most cases a resource is inserted as a figure. Furthermore, as you will see, local and web resources are always converted to figures. We will discuss figures first and then spans.
+Resources can be inserted either as spans or as figures. All resources can be inserted as figures, but only inline `code` and `math` resources can be inserted as spans.
+
+We will discuss figures first and then spans.
 
 ### Figures
 
@@ -526,62 +526,51 @@ Inline resources can be of type code or math (regardless of format) and they can
 
 ## Resource Types and Formats
 
-There are five types of resources: `image`, `video`, `audio`, `code`, and `math`. Each type of resource has a number of supported formats.
+There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `table`. Each type of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
 Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes. The type and the format can also be inferred from the file extension and, in the case of web resources, the URL.
 
-Certain file extensions must be associated with a specific type of resource. These are specified in the sections below.
-
-TODO - file extensions or detected formats here???
-
 {caption: "Formats Mapped to Resource Types"}
-|-------------------------------------|------------------------|
-| Format Detected                     | Resource Type Inferred |
-|-------------------------------------|------------------------|
-| `gif`, `png`, `jpeg`, `svg`, `svgz` | image                  |
-| `mp4`, `webm`                       | video                  |
-| `mp3`, `aac`, `wav`, `ogg`          | audio                  |
-| `latex`, `mathml`                   | math                   |
-| `table`                             | table                  |
-| `text`, `guess`                     | code                   |
-|-------------------------------------|------------------------|
-
-TODO - .tbl or .table
-
-
+|-----------|------------|--------|--------------|
+| Extension | `format`   | `type` | Description  |
+|-----------|------------|--------|--------------|
+| `.gif`    | `gif`      | image  | GIF image    |
+| `.png`    | `png`      | image  | PNG image    |
+| `.jpg`    | `jpeg`     | image  | JPEG image   |
+| `.jpeg`   | `jpeg`     | image  | JPEG image   |
+| `.svg`    | `svg`      | image  | SVG image    |
+| `.svgz`   | `svgz`     | image  | Zipped SVG   |
+| `.mp4`    | `mp4`      | video  | MP4 video    |
+| `.webm`   | `webm`     | video  | WebM video   |
+| `.mp3`    | `mp3`      | audio  | MP3 audio    |
+| `.m4a`    | `aac`      | audio  | AAC audio    |
+| `.aac`    | `aac`      | audio  | AAC audio    |
+| `.wav`    | `wav`      | audio  | WAV audio    |
+| `.wave`   | `wav`      | audio  | WAV audio    |
+| `.ogg`    | `ogg`      | audio  | Ogg Vorbis   |
+| `.oga`    | `ogg`      | audio  | Ogg Vorbis   |
+| `.tex`    | `latex`    | math   | LaTeX math   |
+| `.mathml` | `mathml`   | math   | MathML math  |
+| `.tbl`    | `table`    | table  | Markua table |
+| `.txt`    | `text`     | code   | Plain text   |
+| (other)   | `guess`    | code   | Unknown      |
+|-----------|------------|--------|--------------|
 
  Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
 
+If the type is not specified in the attribute list, the format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-TODO - list file extensions here??
+As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to determine the type. If the format is unrecognized, then the resource is treated as a resource of type `code` and with a format of `guess`.
 
-If the type is not specified in the attribute list, the format (whether specified or inferred) determines the type.
-
-If the `format` is not specified in an attribute list, a Markua Processor must use th...
-
-
-
-
-Besides being specified explicitly in an attribute list, the `format` attribute can also be
-
-The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
-
-
-As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to look up the type. If the format is unrecognized, then the resource is treated as a resource of type `code` and with a format of `guess`.
-
-We will consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method.
-
-First, however, it's important to understand that the type and format of a resource can be overridden using an attribute list.
-
-### Overriding `type` and `format` Using an Attribute List
-
-In rare instances, it is useful to override the `type` and `format` which have been inferred by the Markua Processor based on the file extension of the resource. This is done by specifying a type and/or format in the attribute list of the resource.
+It's important to emphasize that the type and format of a resource can be overridden using an attribute list. In rare instances, it is useful to override the `type` and `format` which have been inferred by the Markua Processor based on the file extension of the resource. This is done by specifying a type and/or format in the attribute list of the resource.
 
 Three examples of when this could be desired are:
 
 1. When writing about, say, the SVG file format, you may want to treat a `.svg` file as a resource of type `code` instead of type `image`. This way, the SVG image (which is just XML text) would be shown as code, instead of interpreted as an image. This would be accomplished by the attribute list `{type: code, format: text}`.
 2. When writing about a programming language which is not identified correctly by a Markua processor, you may want to force the format of the language.
 3. When writing about LaTeX math, you may want to force the type to be `code` not `math`.
+
+We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method.
 
 {#images}
 ### Images
@@ -1339,7 +1328,9 @@ Here's the start of the same thing with a verbose attribute list:
 {#tables}
 ### Tables
 
-Tables are important elements in many Markua documents. Tables are similar to resources, but have some important differences. Like resources, tables can be defined inline in a Markua document or in external files. Unlike resources, tables cannot be defined on the web.
+Tables are important elements in many Markua documents. Tables are resources.
+
+TODO - rewrite this section
 
 Tables are always inserted as figures, whereas resources can be inserted as span elements or as figures. (Note that tables are not *actually* figures--they're tables, and are listed separately as tables.)
 
