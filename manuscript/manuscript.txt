@@ -524,6 +524,7 @@ Web resources are identified by the absolute URL of the resource on the internet
 
 Inline resources can be of type code or math (regardless of format) and they can also be image resources of `svg` format. Since an SVG image is just XML text, it can be contained in the text of a Markua document. This is not something that is true for binary resources like PNG or JPEG images or any type of audio or video file--these can only be local or web resources.
 
+{#resource-types-and-formats}
 ## Resource Types and Formats
 
 There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `table`. Each type of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
@@ -556,6 +557,8 @@ Both the type and the format can be specified in an attribute list, by the respe
 | (other)   | `guess`    | code   | Unknown      |
 |-----------|------------|--------|--------------|
 
+Note that .mp4 is used for MP4 video, not MP4 AAC audio.
+
  Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
 
 If the type is not specified in the attribute list, the format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
@@ -575,21 +578,9 @@ We will now consider each of the types of resources in more detail, as well as t
 {#images}
 ### Images
 
-The following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
-
-{caption: "Resource File Extensions Associated With Images"}
-|-----------|------------|---------------|
-| Extension | `format`   | Description   |
-|-----------|------------|---------------|
-| `.gif`    | `gif`      | GIF image     |
-| `.png`    | `png`      | PNG image     |
-| `.jpg`    | `jpeg`     | JPEG image    |
-| `.jpeg`   | `jpeg`     | JPEG image    |
-| `.svg`    | `svg`      | SVG image     |
-| `.svgz`   | `svgz`     | Zipped SVG    |
-|-----------|------------|---------------|
-
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
+
+Per the [table](#resource-types-and-formats) of resource types and formats, the following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG,
 
 Images are always inserted as figures.
 
@@ -614,19 +605,30 @@ So, Markua provides fairly minimal formatting options. For example, images can h
 : The `caption` is the figure caption. Note that the caption attribute can also be put in square brackets in front of the image (except in the case of an SVG image inserted as an inline resource).
 
 `class`
-: The `class` can be used by Markua Processors to provide the approrpiate styling. Specifically, a Markua Processor should interpret a `class` attribute value of "fullbleed" to indicate that the image should be the full size of the page, with no margins on the page.
+: The `class` can be used by Markua Processors to provide the approrpiate styling.
 
 `float`
-: The `float` can be `left`, `right`, `middle`, `inside`, `outside`.
+: The `float` can be `left`, `right`, `middle`, `inside`, `outside`. Combined with `width` and `height`, this provides basic image formatting.
 
 `format`
 : All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in the above table.
+
+`fullbleed`
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `float` attributes are used instead and margins are respected.
+
+`height`
+: The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100.
 
 `cite`
 : An image can have a citation. A Markua Processor is free to combine this citation with the caption attribute or display it separately.
 
 `url`
 : An image can have a URL, which is the URL of the `cite` attribute if present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote.
+
+`width`
+: The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100.
+
+The width and height attributes are not at all semantic, but they are a nod to pragmatic concerns: many authors want this, and forcing elaborate workarounds involving custom class attributes would be cumbersome and pointless. If only one of width and height are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both width and height are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both width and height.)
 
 For example, consider the following hypothetical image:
 
@@ -643,17 +645,6 @@ Or consider the following equivalent form:
 ```
 
 In both cases, the `caption` is "A Piece of Cake", and the question of what to do with the `cite` and `url` attributes is dependent on the implementation of the Markua Processor.
-
-
-width - % not px
-
-height - % not px
-
-(if spec 1 of w and h, scale; if both, stretch. don't do both. do do w.)
-
-fullbleed - true / false
-
-
 
 #### Local Images
 
@@ -723,15 +714,7 @@ Also, unlike images where many images will accompany the manuscript itself, with
 
 Furthermore, unlike with web images where the format (and thus the type) are typically discoverable from the file extension in the URL, with web video it's usually not. So, for web videos, there will typically be a `{type: video}` attribute list at a minimum.
 
-The following types of videos are supported in Markua: MP4 and WebM.
-
-{caption: "Resource File Extensions Associated With Video"}
-|-----------|------------|---------------|
-| Extension | `format`   | Description   |
-|-----------|------------|---------------|
-| `.mp4`    | `mp4`      | MP4 video     |
-| `.webm`   | `webm`     | WebM video    |
-|-----------|------------|---------------|
+Per the [table](#resource-types-and-formats) of resource types and formats, the following types of videos are supported in Markua: MP4 and WebM.
 
 We will discuss the supported and the default attributes for videos, and then show examples of videos being inserted for both local and web videos.
 
@@ -785,22 +768,7 @@ Ironically, it took me about a year after that talk was recorded to finally figu
 
 Just as with video, the audio support in ebooks and on the web is more varied than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. It's entirely likely that many ebook readers won't support any of them.
 
-The following types of audio resources are supported in Markua: MP3, AAC, WAV and Ogg Vorbis.
-
-{caption: "Resource File Extensions Associated With Audio"}
-|-----------|------------|---------------|
-| Extension | `format`   | Description   |
-|-----------|------------|---------------|
-| `.mp3`    | `mp3`      | MP3 audio     |
-| `.m4a`    | `aac`      | AAC audio     |
-| `.aac`    | `aac`      | AAC audio     |
-| `.wav`    | `wav`      | WAV audio     |
-| `.wave`   | `wav`      | WAV audio     |
-| `.ogg`    | `ogg`      | Ogg Vorbis    |
-| `.oga`    | `ogg`      | Ogg Vorbis    |
-|-----------|------------|---------------|
-
-Note that .mp4 is not supported as a file extension for MP4 AAC audio, since that is the file extension used for MP4 video.
+Per the [table](#resource-types-and-formats) of resource types and formats, the following types of audio resources are supported in Markua: MP3, AAC, WAV and Ogg Vorbis.
 
 The syntax to insert an audio file is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both audio formats; inline resource locations for audio are obviously not supported.
 
@@ -839,15 +807,7 @@ Code can be a local, web or inline resource, just like any other resource, and t
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a code resource, it is ignored.
 
-Markua specifies only one specific file extension, `.txt`, to be associated with the code type. However, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`.
-
-{caption: "Resource File Extensions Associated With Code"}
-|-----------|------------|--------------------------|
-| Extension | `format`   | Description              |
-|-----------|------------|--------------------------|
-| `.txt`    | `text`     | Monospaced plain text    |
-| (other)   | `guess`    | Implementation-dependent |
-|-----------|------------|--------------------------|
+Markua specifies only one specific file extension to be associated with a type of `code`: the `.txt` extension, which is for the format of `text`. However, Markua Processors must interpret **all** unspecified file extensions as specifying a resource of type `code` with a format of `guess`.
 
 Regardless of whether syntax highlighting is supported and the programmming language is detected, all code must be formatted as **`monospaced text`** by Markua Processors.
 
@@ -1103,15 +1063,7 @@ Code resources should have newlines added by the author to ensure that automatic
 
 Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-Math resources can be either LaTeX math or MathML.
-
-{caption: "Resource File Extensions Associated With Math"}
-|-----------|------------|---------------|
-| Extension | `format`   | Description   |
-|-----------|------------|---------------|
-| `.tex`    | `latex`    | LaTeX math    |
-| `.mathml` | `mathml`   | MathML math   |
-|-----------|------------|---------------|
+Per the [table](#resource-types-and-formats) of resource types and formats, the following types of math resources are supported in Markua: LaTeX math or MathML.
 
 Note that Markua procesors do not need to support either math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
 
@@ -1258,11 +1210,11 @@ Here's the start of the same thing with a verbose attribute list:
 {#tables}
 ### Tables
 
-Tables are important elements in many Markua documents. Tables are resources.
+Tables are important elements in many Markua documents. Tables are also resources, albeit with a special syntax when used as an inline resource.
 
-TODO - rewrite this section
+Per the [table](#resource-types-and-formats) of resource types and formats, a Markua table in an external file will be interpreted as such if it has a file extension of `.tbl`, or if it has a `format` of table or `type` of table specified via an attribute list.
 
-Tables are always inserted as figures, whereas resources can be inserted as span elements or as figures. (Note that tables are not *actually* figures--they're tables, and are listed separately as tables.)
+Tables are always inserted as figures. Note, however, that a Markua Processor should list tables as tables, not figures, if the book has a list of tables and list of figures.
 
 The syntax to insert a table defined in an external file on the local filesystem is the same as the syntax to insert a local resource:
 
@@ -1271,7 +1223,11 @@ The syntax to insert a table defined in an external file on the local filesystem
 ![Optional Table Caption](table_path)
 ~~~
 
-The table_path lists the path to the external file which defines the table. A Markua Processor must
+
+
+The table_path lists the path to the external file which defines the table.
+
+
 
 The syntax to insert a table defined inline in the Markua document is as follows:
 
@@ -1289,6 +1245,21 @@ Markua defines one table syntax.
 It's slightly more complex than other excellent Markdown table syntaxes. The reason for the complexity is that since Markua does not support inline HTML, Markua tables need to be able to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
 
 A Markua Processor is free to support other Markdown table syntaxes in addition to the Markua table syntax. For example, Leanpub also supports the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/).
+
+
+#### Supported Attributes for Tables
+
+`caption`
+: The `caption` is the table caption.
+
+`class`
+: Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
+
+`widths`
+: Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
+
+### Inline Tables
+
 
 At its most standard, a complex table looks like this:
 
@@ -1520,21 +1491,6 @@ This complex table has a caption:
 | Footer A    | Footer B      | Footer C    |
 |=============|===============|=============|
 ~~~
-
-#### Supported Attributes for Tables
-
-`caption`
-: The `caption` is the table caption.
-
-`class`
-: Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
-
-`widths`
-: Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
-
-#### Inserting an External Table
-
-TODO
 
 {#spaces}
 # Spaces, Newlines and Indentation
