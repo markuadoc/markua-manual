@@ -3404,37 +3404,11 @@ title
 
 # Appendices
 
-## Markua Specification Status
+These appendices contain
 
-This is an in-progress, beta-quality specification. It is being constantly updated at <https://leanpub.com/markua>. To read the specification in PDF, EPUB, MOBI or HTML format, go there.
+## Plain Text Encoding in UTF-8
 
-To read the specification manuscript in Markua, see <https://github.com/markuadoc/markua>.
-
-To stay current on Markua progress, follow [@markuadoc](https://twitter.com/markuadoc) or [@peterarmstrong](https://twitter.com/peterarmstrong) on Twitter.
-
-At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](https://leanpub.com). Leanpub can take a Markdown or Markua manuscript and, with one click, generate an ebook which is available in PDF, EPUB, MOBI and HTML. (To generate an InDesign export requires a second click.)
-
-## Markua Specification Scope
-
-The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts. It does not specify the specific mapping from Markua syntax to any output format.
-
-To be clear: the Markua Specification defines the syntax and semantics of a plain text writing format. This writing format can be used to produce a type of document which can be understood by a Markua Processor. **The Markua Specification defines the input to a Markua Processor, but it does not define the output.**
-
-Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output PDF, EPUB, MOBI, HTML and InDesign all from the same Markua source document. None of these output formats is required to be supported by a given Markua Processor. To be useful, however, a Markua Processor should output *some* output format. (For the programmers: `/dev/null` is not a good Markua Processor.)
-
-Not only are there no required output formats for a Markua Processor, the mapping from a Markua document to any output format is also not formally specifed--not even for HTML.
-
-## No Canonical HTML Mapping
-
-There are a number of reasons that the Markua specification does not contain a canonical mapping from Markua to HTML:
-
-1. The main reason that the mapping from Markua to HTML is not specified is that **HTML is not special**; it's just **one possible output format** of a Markua Processor. Specifying the mapping from Markua to HTML but not to other output formats would be inconsistent and wrong.
-2. HTML and HTML5 are evolving specifications. Including a mapping to one specific version of them would be arbitrary, and would force the Markua Specification to be constantly updated or become dated. The Markua Specification is intended to be stable.
-3. HTML5 has certain strong opinions toward concepts like emphasis, whitespace, paragraphs and lists which I do not agree with. If I was to specify a canonical mapping to HTML5, I would either have to adopt positions I don't agree with or fight battles I have no interest in winning. Life is too short to do either.
-4. By not specifying an HTML mapping, this maximizes implementation flexibility and encourages competition among implementers of Markua Processors. Markua is very feature-rich, and specifying every single detail of the HTML output would highly limit flexibility. It doesn't make much sense to only specify the HTML output for a subset of the Markua specification: it's all-or-nothing, so I choose nothing.
-5. This specification is long enough as it is.
-
-Obviously, Leanpub has a mapping from Markua to HTML5: we use it to produce the EPUB versions of our ebooks. At some point, we may specify this mapping to be helpful to the open source community. If we do this, the specification of our mapping from Markua to HTML5 will be found in the book [An Unofficial Mapping from Markua to HTML5](https://leanpub.com/markuatohtml5). As the title of that unpublished book suggests, any mapping that we specify is just one possible mapping from Markua to HTML5. In the delightful phrasing of the W3C, it is "non-normative".
+Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
 {#no-inline-html}
 ## No Inline HTML
@@ -3448,10 +3422,6 @@ Markua and Markdown have different use cases. Markdown is a better way to write 
 By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate by doing formatting is reduced.
 
 Now, one design benefit of the support for inline HTML in Markdown is that Markdown's syntax can stay artificially small--since Markdown authors can always fall back to using HTML directly, Markdown does not need to be able to produce all of HTML. Since Markua does not support inline HTML, Markua must contain all concepts that it supports directly expressed using Markua syntax. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books often require tables, Markua needs to add a table syntax.
-
-## Plain Text Encoding in UTF-8
-
-Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
@@ -3514,6 +3484,28 @@ It turns out that the question of additive versus subtractive forms of Roman num
 In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
+
+## Markua Specification Scope
+
+The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts. It does not specify the specific mapping from Markua syntax to any output format.
+
+To be clear: the Markua Specification defines the syntax and semantics of a plain text writing format. This writing format can be used to produce a type of document which can be understood by a Markua Processor. **The Markua Specification defines the input to a Markua Processor, but it does not define the output.**
+
+Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output PDF, EPUB, MOBI, HTML and InDesign all from the same Markua source document. None of these output formats is required to be supported by a given Markua Processor. To be useful, however, a Markua Processor should output *some* output format. (For the programmers: `/dev/null` is not a good Markua Processor.)
+
+Not only are there no required output formats for a Markua Processor, the mapping from a Markua document to any output format is also not formally specifed--not even for HTML.
+
+## No Canonical HTML Mapping
+
+There are a number of reasons that the Markua specification does not contain a canonical mapping from Markua to HTML:
+
+1. The main reason that the mapping from Markua to HTML is not specified is that **HTML is not special**; it's just **one possible output format** of a Markua Processor. Specifying the mapping from Markua to HTML but not to other output formats would be inconsistent and wrong.
+2. HTML and HTML5 are evolving specifications. Including a mapping to one specific version of them would be arbitrary, and would force the Markua Specification to be constantly updated or become dated. The Markua Specification is intended to be stable.
+3. HTML5 has certain strong opinions toward concepts like emphasis, whitespace, paragraphs and lists which I do not agree with. If I was to specify a canonical mapping to HTML5, I would either have to adopt positions I don't agree with or fight battles I have no interest in winning. Life is too short to do either.
+4. By not specifying an HTML mapping, this maximizes implementation flexibility and encourages competition among implementers of Markua Processors. Markua is very feature-rich, and specifying every single detail of the HTML output would highly limit flexibility. It doesn't make much sense to only specify the HTML output for a subset of the Markua specification: it's all-or-nothing, so I choose nothing.
+5. This specification is long enough as it is.
+
+Obviously, Leanpub has a mapping from Markua to HTML5: we use it to produce the EPUB versions of our ebooks. At some point, we may specify this mapping to be helpful to the open source community. If we do this, the specification of our mapping from Markua to HTML5 will be found in the book [An Unofficial Mapping from Markua to HTML5](https://leanpub.com/markuatohtml5). As the title of that unpublished book suggests, any mapping that we specify is just one possible mapping from Markua to HTML5. In the delightful phrasing of the W3C, it is "non-normative".
 
 {#markdown-diffs}
 ## Differences with Markdown
@@ -3640,6 +3632,16 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 8. In LFM, we had a `{pagebreak}` directive. This is replaced by `___`.
 
+## Markua Specification Status
+
+This is an in-progress, beta-quality specification. It is being constantly updated at <https://leanpub.com/markua>. To read the specification in PDF, EPUB, MOBI or HTML format, go there.
+
+To read the specification manuscript in Markua, see <https://github.com/markuadoc/markua>.
+
+To stay current on Markua progress, follow [@markuadoc](https://twitter.com/markuadoc) or [@peterarmstrong](https://twitter.com/peterarmstrong) on Twitter.
+
+At [Ruboss](http://ruboss.com), we are busy adding Markua support to [Leanpub](https://leanpub.com). Leanpub can take a Markdown or Markua manuscript and, with one click, generate an ebook which is available in PDF, EPUB, MOBI and HTML. (To generate an InDesign export requires a second click.)
+
 {#leanpub-authors}
 ## A Note For Leanpub Authors
 
@@ -3683,7 +3685,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support `exercise-answers` and `quiz-answers`.
 
 {#acknowledgments}
-# Acknowledgments
+## Acknowledgments
 
 I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help.
 
