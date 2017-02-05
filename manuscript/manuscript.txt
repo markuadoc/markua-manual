@@ -3404,7 +3404,7 @@ title
 
 # Appendices
 
-These appendices contain
+These appendices contain details which would ruin be distracting or boring if included in the main body of the specification. These include highly technical details, differences with Markdown, discussions of HTML mapping, notes for Leanpub authors and Acknowledgments.
 
 ## Plain Text Encoding in UTF-8
 
