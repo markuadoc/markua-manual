@@ -3128,33 +3128,11 @@ The keys of attributes must consist exclusively of lowercase letters and undersc
 
 If a key is duplicated in an attribute list, the first key value is used and subsequent ones are ignored. A Markua Processor should add a warning in its list of warnings, which are *not* output in the ouptut itself.
 
-### Attribute Value Types
+### Attribute Values
 
-TODO - decision 2017-01-31 - all attrs are text, some have specific set of values ("true" / "false"), quotes are optional unless needed for multiple words etc.
-
-no more attr types.
-
-TODO - is this all bullshit, and are all attributes just text? (There's no way to type an attribute, you just infer it.)
-
-Every attribute in Markua has a default.
-
-Here's how attribute values are interpreted:
-
-`boolean`
-: The values `true` or `false` are boolean values. Unless otherwise specified by the attribute itself, the default value of a boolean attribute is `false`. Any value other than `true` is interpreted as `false`.
-
-`integer`
-: Any number which does not contain a decimal point is interpreted as an integer. Unless otherwise specified by the attribute itself, the default value of an integer is 0.
-
-`float`
-: Any number which contains a decimal point is interpreted as a float. If an attribute is a float, it can accept attribute values that are integers as well. (You're not required to type 0.0 for 0.) Unless otherwise specified by the attribute itself, the default value of a float is 0.
-
-`text`
-: Any value other than `true`, `false` or a number is text. A text attribute value must be enclosed in quotes unless every character in it is a lowercase letter, uppercase letter, number, hyphen (`-`) or underscore (`_`). (For you programmers, this is [`a-zA-Z0-9_-`].)
+All attributes are text. Markua Processors should interpret text values of "true" and "false" as representing true and false. Quotes are optional for attribute values, and are only needed if the attribute value contains whitespace or special characters.
 
 If a text attribute value contains a quote, it must be "escaped" with a backslash: e.g. `{caption: "\"Fresh\" Fish"}`
-
-A> Note that almost all attributes in Markua are text attributes which have an enumeration of legal values. However, because of Markua's extension attributes syntax, it makes sense to provide basic types so that people can be creative without having to deal with parsing strings everywhere.
 
 ### `id` Attributes
 
