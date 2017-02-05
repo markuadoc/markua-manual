@@ -1,6 +1,6 @@
 # The Markua Specification
 
-This is the specification of Markua. It is copyright © 2015 Peter Armstrong. All rights reserved.
+This is the specification of Markua. It is copyright © 2014-2017 Peter Armstrong. All rights reserved.
 
 Markua is being specified by Peter Armstrong and being implemented by Leanpub. The Markua specification is free and open for anyone to implement.
 
