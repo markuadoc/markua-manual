@@ -1204,6 +1204,8 @@ Here's the start of the same thing with a verbose attribute list:
 {#tables}
 ### Tables
 
+TODO - rewrite to be like other resource type sections
+
 Tables are important elements in many Markua documents. Tables are also resources, albeit with a special syntax when used as an inline resource.
 
 Per the [table](#resource-types-and-formats) of resource types and formats, a Markua table in an external file will be interpreted as such if it has a file extension of `.tbl`, or if it has a `format` of table or `type` of table specified via an attribute list.
@@ -1216,8 +1218,6 @@ The syntax to insert a table defined in an external file on the local filesystem
 {type: table, key: value, comma: separated, optional: attribute_list}
 ![Optional Table Caption](table_path)
 ~~~
-
-
 
 The table_path lists the path to the external file which defines the table.
 
