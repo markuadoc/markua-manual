@@ -3570,6 +3570,8 @@ There are a number of reasons that the Markua specification does not contain a c
 4. By not specifying an HTML mapping, this maximizes implementation flexibility and encourages competition among implementers of Markua Processors. Markua is very feature-rich, and specifying every single detail of the HTML output would highly limit flexibility. It doesn't make much sense to only specify the HTML output for a subset of the Markua specification: it's all-or-nothing, so I choose nothing.
 5. This specification is long enough as it is.
 
+Obviously, Leanpub has a mapping from Markua to HTML5: we use it to produce the EPUB versions of our ebooks. At some point, we may specify this mapping to be helpful to the open source community. If we do this, the specification of our mapping from Markua to HTML5 will be found in the book [An Unofficial Mapping from Markua to HTML5](https://leanpub.com/markuatohtml5). As the title of that unpublished book suggests, any mapping that we specify is just one possible mapping from Markua to HTML5. In the delightful phrasing of the W3C, it is "non-normative".
+
 {#no-inline-html}
 ## No Inline HTML
 
