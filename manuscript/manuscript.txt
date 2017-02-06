@@ -1701,7 +1701,7 @@ II.  bar
 III. baz
 ~~~
 
-The full set of numbering rules for numbered lists are specified in an [appendix](#numbered-list-numbering-rules). However, it's important to emphasize what heppons with single-element numbered lists.
+The full set of numbering rules for numbered lists are specified in an [appendix](#numbered-list-numbering-rules). However, it's important to emphasize what happens with single-element numbered lists.
 
 ### In Markua, A Single-Element Numbered List is Not a List
 
