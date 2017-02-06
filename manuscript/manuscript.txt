@@ -1271,7 +1271,7 @@ If there is only one row, it is interpreted as a content row, not a header row:
 |============|============|============|
 ~~~
 
-My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
+You may initially balk at typing row separators. My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
 
 You can also specify left, center and right alignment of columns with colons in the header separator row, just as with simple tables. The following columns are left-, center-, and right-aligned respectively:
 
@@ -1378,6 +1378,14 @@ The following is the supported attribute for table resources, in addition to the
 : Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
 
 Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.)
+
+#### Optional Simpler Table Syntax Support
+
+The actual syntax to define a Markua table, either in an external file or inline, is slightly more complex than other excellent Markdown table syntaxes, such as the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/).
+
+The reason the complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
+
+Markua makes the following compromise: Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) table syntax in Markua documents.
 
 {#spaces}
 # Spaces, Newlines and Indentation
@@ -3414,10 +3422,9 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 11. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
 12. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 13. Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". Markua's headers are essentially a subset of Markdown's atx headers, reinterpreted for book semantics. I say essentially, since Markua is a bit cheeky in that it interprets the same type of atx header (`#`) as either a Chapter or Part based on whether there's a `#` at the end. This is discussed further below.
-14. The actual syntax to define a Markua table, either in an external file or inline, is slightly more complex than other excellent Markdown table syntaxes, such as the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). The reason the complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells. Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the GitHub Flavored Markdown table syntax in Markua documents.
-15. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
-16. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
-17. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
+14. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
+15. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+16. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
