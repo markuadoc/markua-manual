@@ -401,7 +401,7 @@ Again, both of these are not good Markua: attribute values should be specified o
 
 ### Spans
 
-Two types of resources can be inserted as inline spans: code resources of format `text`, and math resources of format `latex`.
+Two types of resources can be inserted as inline spans: code resources of format `text`, and math resources.
 
 An inline code resource of `text` format can be inserted as a span using the following syntax:
 
@@ -415,7 +415,7 @@ An inline math resource of `latex` format can be inserted as a span using the fo
 It's a single backtick `followed by inline resource content`$ and then a single backtick and dollar sign.
 ~~~
 
-The [code](#code) and [math](#math) resources are described more fully later.
+The [code](#code) and [math](#math) resources are described more fully later. (You can actually insert a math resource of `mathml` format as a span, but that's really verbose!)
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple. However, to support rare use cases, any span can have an attribute list. The attribute list on a span is specified immediately after the closing backtick. Examples of this are shown in the code and math sections.
 
@@ -1085,7 +1085,7 @@ Or, if you *really* like typing, you can insert MathML as an inline resource ins
 Yada yada `really verbose MathML here`{format: mathml} yada yada.
 ~~~
 
-As with code resources, note that there is no syntactic sugar for this, e.g. `some verbose mathml here`mathml, since I consider MathML to be too verbose to be productively inserted as a span resource. However, just as with code resources, since any span can have an attribute list attached to it, there is no reason to explicitly forbid specifying a format of MathML in the attribute list.
+As with code resources, note that this is syntactic salt for MathML, since I consider MathML to be too verbose to be productively inserted as a span resource. However, just as with code resources, since any span can have an attribute list attached to it, there is no reason to explicitly forbid specifying a format of `mathml` in the attribute list.
 
 Finally, if there is no `$` character after the closing backtick and no attribute list specifying a format of `latex` or `mathml`, the content of the backticks is treated as code and is output verbatim as monospaced text.
 
