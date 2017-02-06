@@ -1392,20 +1392,22 @@ Markua makes the following compromise: Markdown Processors are free to support a
 
 The goal for the handling of spaces, newlines and indentation in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
 
-In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for *writers*. Markdown is a format for authors to write HTML; Markua is a format for authors to write books. Books can be in many formats, including HTML. The concepts in Markdown are HTML concepts; the concepts in Markua are book concepts.
+In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for **writers**. Markdown is a format for authors to write HTML; Markua is a format for authors to write books. Books can be in many formats, including HTML. The concepts in Markdown are HTML concepts; the concepts in Markua are book concepts.
 
 Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown. (By a newline, I mean the character which is produced by the enter key on the keyboard.)
+
+Usually, Markua tries to not break Markdown syntax. The newline handling is the main exception. As such, the difference between Markua and Markdown is discussed here, not in [the appendix](#markdown-diffs).
 
 {#single-newlines}
 ## Single Newlines
 
-The way that single newlines are handled is the single largest **breaking** difference between Markdown and Markua. Usually, Markua tries hard to not break Markdown syntax. This is the main exception. As such, it's discussed here, not in [the appendix](#markdown-diffs).
+The way that single newlines are handled is the single largest breaking difference between Markdown and Markua. (I say breaking, since if you're relying on Markdown's behaviour in your writing, you may be in for some unpleasant surprises in switching to Markua.)
 
 In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
-In Markua, however, a forced line break in the input is a forced line break in the output: single newlines produce `<br/>` tags in HTML output, and must produce forced line breaks in all other output formats like PDF. This is true for headings, paragraphs, lists, blockquotes, asides, blurbs and callouts.
+In Markua, however, a forced line break in the input is a forced line break in all output formats. This is true for headings, paragraphs, lists, blockquotes, asides, blurbs and callouts.
 
-In ancient history, some text editors did not automatically wrap lines of text, so manual wrapping of plain text files was a good thing to do. Also, for computer programmers, we still do not wrap our text when programming. However, for *writing*, automatic wrapping of paragraphs is essential for staying in the flow while writing, and for being able to edit your text without needing to re-wrap every line in a paragraph. This is one decision that even Microsoft Word gets right.
+In ancient history, some text editors did not automatically wrap lines of text, so manual wrapping of plain text files was a good thing to do. Also, for computer programmers, we still do not wrap our text when programming. However, for writing, automatic wrapping of paragraphs is essential for staying in the flow while writing, and for being able to edit your text without needing to re-wrap every line in a paragraph. This is one decision that even Microsoft Word gets right.
 
 The decision in Markua to treat single newlines as forced line breaks means that Markua does *not* need to use the **horrible hack** that Markdown uses to output forced line breaks. In Markdown, to output a forced line break (a `<br/>` tag in HTML), you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line!
 
