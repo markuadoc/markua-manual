@@ -36,9 +36,9 @@ This is its specification.
 
 # Overview
 
-## TODO
+## Note for Leanpub Authors
 
-Leanpub authors please [read this first](#leanpub-authors). Also, here's an [incomplete list of what we still need to build](#leanpub-todo) in Leanpub.
+Leanpub authors please [read this first](#leanpub-authors). Also, here's an [incomplete list of what we still need to build](#leanpub-unfinished) in Leanpub.
 
 ## What is Markua?
 
@@ -3595,8 +3595,8 @@ If you are curious to try Markua, to see what currently works (not much!) and wh
 
 I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
 
-{#leanpub-todo}
-## Leanpub Markua TODO
+{#leanpub-unfinished}
+## Partial List of Incomplete Markua Features in Leanpub
 
 Here's an incomplete list of some of the work we still need to do in Leanpub to support Markua. Hopefully it gives you a clue about some things that do not work yet:
 
