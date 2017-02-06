@@ -532,7 +532,7 @@ Both the type and the format can be specified in an attribute list, by the respe
 
 Note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
- Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource.
+ Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource. If the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
 
 If the type is not specified in the attribute list, the format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
@@ -545,8 +545,6 @@ Three examples of when this could be desired are:
 1. When writing about, say, the SVG file format, you may want to treat a `.svg` file as a resource of type `code` instead of type `image`. This way, the SVG image (which is just XML text) would be shown as code, instead of interpreted as an image. This would be accomplished by the attribute list `{type: code, format: text}`.
 2. When writing about a programming language which is not identified correctly by a Markua processor, you may want to force the format of the language.
 3. When writing about LaTeX math, you may want to force the type to be `code` not `math`.
-
-Finally, if the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
 
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method.
 
