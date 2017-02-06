@@ -202,21 +202,9 @@ Markua is very strict about its heading syntax:
 2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading.
 3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem traditionally, but which might be these days.)
 4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
-5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will probably look like an obvious error in the book.
+5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will be caught, since it will look like an obvious error in the book.
 
-The design of Markua headings meets the following requirements, in what I feel is an optimal way:
-
-1. From looking at a heading in a Markua manuscript, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
-2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged.
-3. The number of leading pound signs must match the level of heading.
-4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
-5. The syntax to create parts must be as economical as possible.
-6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
-7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
-8. Books with parts and chapters must be able to have the same number of levels of sub-sections, without arbitrarily losing the ability to create a sub-sub-sub-sub-section.
-9. Documents can have parts, chapters and sections just like books, and it's up to the document designer to create the appropriate CSS.
-
-To learn more about the differences between Markua and Markdown headings, see [the appendix](#heading-diffs).
+To learn more about the [design goals of Markua headings](#heading-design-goals) and the [differences between Markua and Markdown headings](#heading-diffs), see the appendix.
 
 {#paragraphs}
 # Paragraphs and Blank Lines
@@ -3488,6 +3476,23 @@ This is paragraph two.
 Markua supports this method of inserting block elements.
 
 However, Markua is more than just a way of producing HTML. Markua is a way of authoring books. HTML is just one of the many output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua [supports this too](#inserting-into-paras).
+
+{#heading-design-goals}
+### Design Goals of Markua Headings
+
+The following are the design goals of Markua headings:
+
+1. From looking at a heading in a Markua manuscript, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
+2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged in essentially the correct way.
+3. The number of leading pound signs must match the level of heading.
+4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
+5. The syntax to create parts must be as economical as possible.
+6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
+7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
+8. Books with parts and chapters must be able to have the same number of levels of sub-sections, without arbitrarily losing the ability to create a sub-sub-sub-sub-section.
+9. Documents can have parts, chapters and sections just like books.
+
+The design of Markua headings meets these requirements, in a better way than any other design I could come up with.
 
 {#heading-diffs}
 ### Differences with Markdown Headings
