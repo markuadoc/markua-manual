@@ -2712,7 +2712,7 @@ Here is some unrelated text.
 Here is some more unrelated text.
 ~~~
 
-Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#restart-footnote-numbering) setting.
+Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#setting-keys-and-values) setting.
 
 ## Endnotes
 
@@ -2734,7 +2734,7 @@ Then, you define the endnote later in the document, using the same square bracke
 
 Just as with a footnote, if you wish to write multiple paragraphs in the endnote, you must indent the subsequent paragraphs by four spaces or one tab.
 
-Whether the numbering of endnotes restarts every chapter is something that can be specified by the [`restart-endnote-numbering`](#restart-endnote-numbering) setting.
+Whether the numbering of endnotes restarts every chapter is something that can be specified by the [`restart-endnote-numbering`](#setting-keys-and-values) setting.
 
 ## Crosslinks and ids
 
@@ -3298,6 +3298,12 @@ default-code-language
 
 lang
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
+
+restart-endnote-numbering
+: `true` or `false`. Default `false`. Whether the endnote numbering is restarted at the end of a chapter.
+
+restart-footnote-numbering
+: `true` or `false`. Default `false`. Whether the footnote numbering is restarted at the end of a chapter.
 
 title
 : The title of the Markua document.
