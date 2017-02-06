@@ -1204,74 +1204,37 @@ Here's the start of the same thing with a verbose attribute list:
 {#tables}
 ### Tables
 
-TODO - rewrite to be like other resource type sections
-
 Tables are important elements in many Markua documents. Tables are also resources, albeit with a special syntax when used as an inline resource.
 
-Per the [table](#resource-types-and-formats) of resource types and formats, a Markua table in an external file will be interpreted as such if it has a file extension of `.tbl`, or if it has a `format` of table or `type` of table specified via an attribute list.
+Per the [table](#resource-types-and-formats) of resource types and formats, a Markua table in an external file (either as a local or web resource) will be interpreted as such if it has a file extension of `.tbl`, or if it has a `format` of table or `type` of table specified via an attribute list.
 
 Tables are always inserted as figures. Note, however, that a Markua Processor should list tables as tables, not figures, if the book has a list of tables and list of figures.
 
 The syntax to insert a table defined in an external file on the local filesystem is the same as the syntax to insert a local resource:
 
 ~~~
-{type: table, key: value, comma: separated, optional: attribute_list}
+{type: table, optional: attribute_list}
 ![Optional Table Caption](table_path)
 ~~~
 
 The table_path lists the path to the external file which defines the table.
 
-
-
-The syntax to insert a table defined inline in the Markua document is as follows:
+To insert a table defined inline, you just insert it:
 
 ~~~
-{key: value, comma: separated, optional: attribute_list, with: caption}
-SimpleOrComplexTableSyntax
-~~~
-
-In both the external file approach or the inline approach, there are two syntaxes to actually define a table: a simple table syntax and a complex table syntax. Both syntaxes are somewhat annoying to type. However, it's not actually so bad--unless you make columns that are too narrow at first, and then you need to widen them. Also, there will probably be tooling that evolves to help with tables--especially in the more complex cases.
-
-The examples which follow all show tables being defined inline in a Markua document. The syntax to insert a table defined in an external file is shown later.
-
-Markua defines one table syntax.
-
-It's slightly more complex than other excellent Markdown table syntaxes. The reason for the complexity is that since Markua does not support inline HTML, Markua tables need to be able to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
-
-A Markua Processor is free to support other Markdown table syntaxes in addition to the Markua table syntax. For example, Leanpub also supports the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/).
-
-
-#### Supported Attributes for Tables
-
-`caption`
-: The `caption` is the table caption.
-
-`class`
-: Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
-
-`widths`
-: Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
-
-### Inline Tables
-
-
-At its most standard, a complex table looks like this:
-
-~~~
+{type: table, optional: attribute_list}
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
 | Content A1 | Content B1 | Content C1 |
 |------------|------------|------------|
 | Content A2 | Content B2 | Content C2 |
-|------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
 ~~~
 
-The header is separated from the body cells by a section separator, i.e. a row of `=` signs and `|` characters. Every row of cells is separated by a row separator, i.e. a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line.
+The header is separated from the body cells by a section separator, i.e. a row of `=` signs and `|` characters. Every row of cells is separated by a row separator, i.e. a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line. The header and footer rows are both optional, of course.
 
 The header and footer rows are both optional. The following are also legal tables...
 
@@ -1454,37 +1417,16 @@ You can also individually align cells with colons in the `-` part-row **above** 
 
 In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
 
-#### Tables Can Have Captions and Other Attributes
+#### Supported Attributes for Tables
 
-Regardless of whether they are simple or complex, tables can have captions and other attributes which are specified in an attribute list. The syntax for the attribute list is identical to that used for figures--but tables are not figures, they are tables.
+`caption`
+: The `caption` is the table caption.
 
-This simple table has a caption:
+`class`
+: Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
 
-~~~
-{caption: "A Simple Table"}
-| Header A   | Header B   | Header C   |
-|------------|------------|------------|
-| Content A1 | Content B1 | Content C1 |
-| Content A2 | Content B2 | Content C2 |
-| Content A3 | Content B3 | Content C3 |
-~~~
-
-This complex table has a caption:
-
-~~~
-{caption: "A Complex Table"}
-|=============|===============|=============|
-| Header A    | Header B      | Header C    |
-|:============|:=============:|============:|
-| Content A1 and B1 Merged    | Content C1  |
-|------------:|:--------------|-------------|
-| Content A2  | Content B2    | Content C2  |
-|:-----------:| and B3 Merged |-------------|
-| Content A3  |               | Content C3  |
-|=============|===============|=============|
-| Footer A    | Footer B      | Footer C    |
-|=============|===============|=============|
-~~~
+`widths`
+: Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
 
 {#spaces}
 # Spaces, Newlines and Indentation
@@ -3519,6 +3461,7 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 11. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
 12. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 13. Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". Markua's headers are essentially a subset of Markdown's atx headers, reinterpreted for book semantics. I say essentially, since Markua is a bit cheeky in that it interprets the same type of atx header (`#`) as either a Chapter or Part based on whether there's a `#` at the end. This is discussed further below.
+14. The actual syntax to define a Markua table, either in an external file or inline, is slightly more complex than other excellent Markdown table syntaxes, such as the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). The reason the complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells. Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the GitHub Flavored Markdown table syntax in Markau documents.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
