@@ -608,6 +608,8 @@ The `caption` is "A Piece of Cake", and the question of what to do with the `cit
 
 #### Local Images
 
+The following are some examples of local images:
+
 ~~~
 Here's a paragraph before the first figure.
 
@@ -616,7 +618,7 @@ Here's a paragraph before the first figure.
 Here's a paragraph between the first and second figures.
 
 {alt: "a slice of chocolate cake", class: "fullbleed"}
-![A Piece of Cake](cake.jpg)
+![A Piece of Cake](images/cake.jpg)
 
 Here's a paragraph between the second and third figures.
 
@@ -626,7 +628,11 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
+In the above example, the first and third images were directly in the `resources` directory, whereas te second image was in an `images` subdirectory of the `resources` directory.
+
 #### Web Images
+
+The following are some examples of web images:
 
 ~~~
 Here's a paragraph before the first figure.
@@ -648,7 +654,7 @@ Here's a paragraph after the third figure.
 
 #### Inline Images (SVG only)
 
-SVG images are just XML text, so they can be inserted inline in Markua.
+SVG images are just XML text, so they can be inserted inline in Markua:
 
 ~~~
 Here's a paragraph before the figure.
