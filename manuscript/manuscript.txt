@@ -2305,7 +2305,7 @@ This is paragraph three.
 
 This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
 
-# Quizzes (`Q>` or `{quiz}`) and Exercises (`X>` or `{exercise}`)
+# Quizzes and Exercises
 
 The final two block elements that Markua provides are quizzes and exercises. These two block elements are very special, however, in that they enable a single Markua document to construct everything from traditional textbooks and paper-based quizzes to entire online courses (or MOOCs). So, they're discussed in their own chapter.
 
@@ -2645,8 +2645,6 @@ The normal way to create a link is as follows:
 ~~~
 [link text](absolute_url)
 ~~~
-
-In Markdown, the URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
 
 Example:
 
@@ -3432,6 +3430,7 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 14. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
 15. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
 16. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
+17. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
