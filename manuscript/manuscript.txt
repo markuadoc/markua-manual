@@ -226,7 +226,7 @@ There are other more technical rules about spaces, newlines and indentation, whi
 {#resources}
 # Resources
 
-Markua documents are written in plain text, either in one text file or multiple text files. However, modern books are not just text. Books embed many types of *resources*. These resources have traditionally included things like images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
+Markua documents are written in plain text, either in one text file or multiple text files. However, modern books are not just text. Books embed many types of *resources*. These resources have traditionally included things like tables, images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
 Resources vary in four different ways:
 
