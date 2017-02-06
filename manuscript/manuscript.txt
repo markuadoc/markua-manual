@@ -1476,9 +1476,15 @@ More generally, the rules about single and double newlines mean that in Markua y
 
 ## Internal Spaces are Preserved, Except After Periods
 
-In Markua, spaces or tabs that are in the middle of a line of text are preserved. The one exception is that a Markua Processor must consider exactly two spaces after a period (`.  `) to be identical to one space after a period (`. `). This is because there is no agreement about whether to use one or two spaces at the end of a sentence. The actual amount of space output at the end of a sentence can be varied by the Markua Processor (e.g. it can use 1 space, 2 spaces, or some other amount of space), but this amount of space is not affected by whether the Markua document contains one or two spaces after a given sentence.
+In Markdown (and HTML), multiple internal spaces or tabs in the the middle of a line of text are all collapsed to one space.
 
-The two reasons for this decision are (1) respect for the author and (2) the Principle of Least Surprise: If an author types a number of spaces in the middle of a sentence in their manuscript, they are doing it for a reason--and it's disrespectful, presumptive and surprising to remove them.
+In Markua, however, spaces or tabs that are in the middle of a line of text are preserved.
+
+The one exception is that a Markua Processor must consider exactly two spaces after a period to be identical to one space after a period. This is because there is no agreement about whether to use one or two spaces at the end of a sentence, and multiple authors may collaborate on Markua documents.
+
+The actual amount of space output at the end of a sentence can be varied by the Markua Processor (e.g. it can use 1 space, 2 spaces, or some other amount of space), but this amount of space is not affected by whether the Markua document contains one or two spaces after a given sentence.
+
+The two reasons for preserving internal spaces (except after periods) are (1) respect for the author and (2) the Principle of Least Surprise: If an author types a number of spaces in the middle of a sentence in their manuscript, they are doing it for a reason--and it's disrespectful, presumptive and surprising to remove them.
 
 The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so. The one exception is that if you use periods, the difference between 1 and 2 spaces after them will not be preserved. If that's a deal-breaker, you need to use a code resource. Markua defines many different types of resources, including math and code resources. Resources are discussed later in this chapter.
 
