@@ -3624,7 +3624,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support `exercise-answers` and `quiz-answers`.
 
 {#acknowledgments}
-## Acknowledgments
+# Acknowledgments
 
 I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help.
 
