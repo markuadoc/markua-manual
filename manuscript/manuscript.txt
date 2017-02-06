@@ -1909,7 +1909,7 @@ So, Markua uses the Markdown horizontal rule syntax to produce all three cases, 
 : Three or more asterisks on a line by themselves, with or without spaces between them (e.g. `***`, `* * *`, etc.), produce a scene break which is **not** followed by a page break.
 
 `- - -`
-: Three or more hyphens on a line by themselves, with or without spaces between them (e.g. `---`, `- - -`, etc.), produce a scene break which **is** followed by a page break. Note that three hyphens in a row (`---`) produces an [en dash (–)](#charsub); this is an exception to that.
+: Three or more hyphens on a line by themselves, with or without spaces between them (e.g. `---`, `- - -`, etc.), produce a scene break which **is** followed by a page break. Note that three hyphens in a row (`---`) when used somewhere other than on a line by themselves produces an [en dash (–)](#charsub); this is an exception to that. That's fine though, since an en dash on a line by itself would be stupid.
 
 `___`
 : Three or more underscores on a line by themselves, with or without spaces between them (e.g. `___`, `_ _ _`, etc.), produce a page break. Page breaks look a bit ugly, and are discouraged in Markua: when you're writing, unsemantic formatting is procrastination, and most page breaks are exactly this. (Much like width and height attributes on images, however, page breaks are supported in Markua due to pragmatic concerns.)
