@@ -1431,15 +1431,21 @@ In Markdown, if you add more than two newlines in a row, the extra newlines are 
 
 In Markua, however, the extra newlines are respected. The author typed them; presumably they were intended to produce, well, extra newlines. So, every extra newline becomes an extra newline in between the close of the paragraph (or whatever Markua element was ending) and the start of the next paragraph (or whatever Markua element is beginning).
 
-A> Markua authors should not do pagination by adding extra newlines--instead, a [scene break or page break](#scene-and-page-breaks) should be used. More generally, however, authors should just shy away from doing any page breaks at all--it's just a distraction from writing.
+Markua authors should not do pagination by adding extra newlines--instead, a [scene break or page break](#scene-and-page-breaks) should be used. More generally, however, authors should just shy away from doing any page breaks at all--it's just a distraction from writing.
 
-A> Spaces on a line vs. an empty blank line are equivalent.
+Finally, note that spaces on a line and an empty blank line are equivalent.
 
 ## Blank Lines at the Beginning of a File are Preserved
 
 Since a blank line is added when concatenating multiple manuscript files, there is almost no good reason to support blank lines, or lines containing only whitespace, at the beginning of a file. However, there is no reason not to support them. Since they are at the beginning of a file, they are clearly visible to the author. So, an author who really wants to add multiple blank lines can do so.
 
-(For the programmers: if a file contains only blank lines or lines containing only whitespace, these lines are considered to be at the end of the file, not the beginning. So, these lines are all removed.)
+## Trailing Spaces and Blank Lines are Removed
+
+Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
+
+Furthermore, all trailing whitespace at the end of a Markua file is stripped. This includes all blank lines and all lines containing only whitespace. Trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting is insanity.
+
+For the programmers: if a file contains only blank lines or lines containing only whitespace, every line is removed. (These lines are considered at the end of the file, not the beginning.) So, concatenating this file with other Markua manuscript files just produces the extra blank line which is added by Markua when concatenating any Markua file.
 
 ## Leading Spaces (Prose vs. Poetry)
 
@@ -1467,12 +1473,6 @@ My mistress when she walks treads on the ground.
 In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used, in which whitespace is added at the end of the line), this would *all* be collapsed to one line! (Note how this shows that the two space hack is unacceptable: you should be able to tell what output is produced by looking at the input.)
 
 More generally, the rules about single and double newlines mean that in Markua you can just write poetry without any formatting characters. Stanzas are separated with a blank line, and any indentation is preserved except on the first line of a stanza.
-
-## Trailing Spaces and Blank Lines are Stripped
-
-Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
-
-Furthermore, all trailing whitespace at the end of a Markua file is stripped. This includes all blank lines and all lines containing only whitespace. Trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting is insanity.
 
 ## Internal Spaces are Preserved, Except After Periods
 
