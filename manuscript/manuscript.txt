@@ -290,16 +290,17 @@ Note that you can also insert an inline resource as a figure using tildes as the
 
 ```
 {key: value, comma: separated, optional: attribute_list}
-~~~
+~~~optional_format
 inline resource content (default format is `text`)
 ~~~
 ```
 
-The three tildes approach does not support an optional_format after the tildes, since it is ugly. If you want to specify an optional format, either use backticks or specify the format in the attribute list. (If an optional format is specified after the tildes, it must be ignored.
-
 #### Figure Attributes
 
-A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `format`, `caption` and `class` attributes.
+A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `type`, `format`, `caption` and `class` attributes.
+
+`type`
+: This is the resource type. This is usually inferred from the format instead of being specified.
 
 `format`
 : This is the resource format. Different resource types have different legal values for format.
