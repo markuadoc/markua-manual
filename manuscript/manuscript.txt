@@ -678,7 +678,7 @@ Unlike images, which are supported in most circumstances, with video files it's 
 
 Also, unlike images where many images will accompany the manuscript itself, with video it's expected that authors will be uploading their videos to sites such as YouTube first, and then reusing these videos in the contents of their Markua books. So, while video must support local and web video, web video will be much more prominent than web images in a Markua book.
 
-Furthermore, unlike with web images where the format (and thus the type) are typically discoverable from the file extension in the URL, with web video it's usually not. So, for web videos, there will typically be a `{type: video}` attribute list at a minimum.
+Furthermore, unlike with web images where the format (and thus the type) are typically discoverable from the file extension in the URL, with web video it's usually not. So, for web videos, there will typically be a `{type: video}` attribute list at a minimum. That said, if the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. So YouTube videos may just work in some Markua processors, like Leanpub, without specifying either the `type` or `format`.
 
 Per the [table](#resource-types-and-formats) of resource types and formats, the following types of videos are supported in Markua: MP4 and WebM.
 
