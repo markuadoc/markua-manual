@@ -435,13 +435,7 @@ Here's some text
 and more text.
 ~~~
 
-In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text.
-
-**The text in square brackets before a local or web resource is always the figure caption.**
-
-Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure, unless there are two newlines after it to start a new paragraph. This is discussed further [here](#inserting-into-paras).
-
-Even though both images are inserted as figures, in the first case there is no way to specifiy alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined on the figure like this:
+In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text. **The text in square brackets before a local or web resource is always the figure caption.** Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure, unless there are two newlines after it to start a new paragraph. This is discussed further [here](#inserting-into-paras). Even though both images above are inserted as figures, in the first case there is no way to specifiy alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined on the figure like this:
 
 ~~~
 Here's some text
@@ -465,7 +459,7 @@ For the purpose of brevity, this point will not be explained in each section abo
 To be clear:
 
 * All local or web resources are inserted as figures. It is not possible to insert any type of local or web resource as a span.
-* All image, audio and video resources are inserted as figures. It is not possible to insert image, audio or video resources inline as a span.
+* All `table`, `image`, `audio` and `video` resources are inserted as figures. It is not possible to insert `table`, `image`, `audio` or `video` resources inline as a span.
 * It is only possible to insert `code` and `math` resources inline as spans. The code is formatted as `text`, and the math is formatted as `latex`. The specific syntax for these use cases is covered later.
 
 ## Resource Locations
@@ -473,7 +467,7 @@ To be clear:
 A resource is either considered a local, web or inline resource based on its location:
 
 Local Resource
-: The resource is stored along with the manuscript--either in a `resources` directory on a local filesystem, or uploaded to the same web service where the manuscript is being written.
+: The resource is stored along with the manuscript--either in a `resources` directory on a local filesystem, or uploaded to the same web service where the Markua document is being written.
 
 Web Resource
 : The resource is referred to via an `http` or `https` URL.
