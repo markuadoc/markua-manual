@@ -3596,6 +3596,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Auto-create `images`, `audio`, `video`, `code`, `math` and `tables` directories in resources directory.
 - Support `cite` and `url` attributes on images.
 - Vary the code format default based on delimiter.
+- Tables seem to [mess up the alignment](#tables) of some text after them.
 
 {#acknowledgments}
 # Acknowledgments
