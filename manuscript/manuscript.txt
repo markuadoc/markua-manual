@@ -2325,15 +2325,17 @@ Note that, as with asides and blurbs, if an attribute list is present it is imme
 
 You can see why the `Q>` or `X>` syntax is only intended for very short quizzes or exercises, just as the `A>` and `B>` syntaxes are only intended for short asides and blurbs!
 
-### Quizzes and Exercises Can Have Other Content
+{#quiz-headings}
+### Quiz and Exercise Headings and Other Content
 
 A quiz or exercise can contain any Markua content, not just questions and answers. This is true regardless of whether the quiz or exercise is in a MOOC, an ebook or on paper. Note that video and audio resources don't work so well on paper, however.
+
+If a quiz or exercise starts with a chapter heading (starting with a `# `) immediately after the `{quiz}` or `{exercise}` line or as the first line of the `Q>` or `X>` block, this heading's content should be considered the name of the quiz or exercise. This can be used in a list of quizzes or exercises produced by the Markua Processor.
 
 Example:
 
 ~~~
 {quiz, id: quiz2}
-
 # Markua Quiz
 
 Watch this [video](https://www.youtube.com/watch?time_continue=1&v=VOCYL-FNbr0) of Peter Armstrong explaining Markua.
@@ -2387,7 +2389,7 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 `start-at`
 : The `start_at` is the number of the first question. The default is 1. Any integer is permitted. Subsequent questions will have a number which is 1 higer than the previous question.
 
-Note that there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz itself, using normal Markua formatting for headings. Or, you can add the quiz itself inside an appropriate section in the book. (TODO - revisit?)
+As [discussed above](#quiz-headings), there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz or exercise itself, using the normal Markua formatting for a chapter heading.
 
 ### Question Types: Multiple Choice, Fill In The Blank, Written
 
