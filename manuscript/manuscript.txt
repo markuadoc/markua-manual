@@ -1932,7 +1932,7 @@ ___
 This is on a new page, after the forced page break.
 ~~~
 
-Markua Processors can take great liberties in how they output scene breaks and page breaks.
+Markua Processors can take great liberties in how they output scene breaks.
 
 ## Blockquotes (`>`)
 
@@ -3599,7 +3599,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support CriticMarkup.
 - Support tables in external files.
 - Support `---` for en dash (unless it's on a line by itself, in which case it's a scene break + page break.
-- Support modified scene breaks and page breaks.
+- Support modified scene breaks (- - -) and page breaks (___).
 - Support parentheses in numbered lists
 - Remove HTML comment syntax, since the CriticMarkup comment syntax is enough.
 - Finish Leanpub for Courses.
