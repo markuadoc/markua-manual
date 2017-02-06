@@ -1001,7 +1001,7 @@ The magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-de
 
 The Markua Processor will then be able to determine which code is being deleted or inserted, and format it accordingly. The recommended way for a Markua Processor to do this is to make code which is being inserted get **`bolded`**, and to make code which is getting deleted to be put in ~~`strikethrough`~~.
 
-Finally, while syntax highlighting is optional in a Markua Processor, if a Markua Processor does support syntax highlighting it is allowed for the Markua Processor to not do any syntax highlighting when there is the presence of any of any special `markua-start-delete`, `markua-end-delete`, `markua-start-insert` and `markua-end-insert` comments. Syntax highlighting may make it harder to notice the added and removed code, if they are formatted with bold and strikethrough respectively.
+Finally, while syntax highlighting is optional in a Markua Processor, if a Markua Processor does support syntax highlighting it is allowed for the Markua Processor to not do any syntax highlighting when there is the presence of any of any special `markua-*` comments. Syntax highlighting may make it harder to notice the added and removed code, if they are formatted with bold and strikethrough respectively.
 
 #### Line Wrapping in Code Resources
 
