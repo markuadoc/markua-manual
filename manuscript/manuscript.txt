@@ -1545,7 +1545,7 @@ Lorem ipsum dolor.
 Yada yada yada.
 ~~~
 
-However, since Markua requires that headings be separated by blank lines above and below them, the `# Chapter Two` heading would not be a heading. It would be considered part of the previous paragraph! This would be very surprising and the source of a number of bugs. Worse, since a number of text editors such as Emacs have a "strip blank lines at the end of files" setting, it would be possible to introduce such a bug if Markua simply relied on blank lines being added to the end of a file by the author.
+However, since Markua requires that headings be separated by blank lines above and below them, the Chapter Two heading would not be a heading. It would be considered part of the previous paragraph! This would be very surprising and the source of a number of bugs. Worse, since a number of text editors such as Emacs have a "strip blank lines at the end of files" setting, it would be possible to introduce such a bug if Markua simply relied on blank lines being added to the end of a file by the author.
 
 So, because of the blank line rule, concatenating the files produces the same manuscript as the single-file manuscript above:
 
@@ -3614,6 +3614,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Vary the code format default based on delimiter.
 - Tables seem to [mess up the alignment](#tables) of some text after them.
 - Make the change to preserve internal space except after periods, instead of the inconssitent mess we currently have.
+- The kerning on figure captions is a disaster. It looks like one word!
 
 {#acknowledgments}
 # Acknowledgments
