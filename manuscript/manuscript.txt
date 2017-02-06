@@ -766,9 +766,7 @@ Regardless of whether syntax highlighting is supported and the programmming lang
 
 The `text` format means to not do any syntax highlighting as well.
 
-The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code.
-
-Syntax highlighting is entirely optional in Markua Processors. If a Markua Processor does not support syntax highlighting, and/or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
+The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code. Syntax highlighting is entirely optional in Markua Processors. If a Markua Processor does not support syntax highlighting, and/or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
 
 Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
