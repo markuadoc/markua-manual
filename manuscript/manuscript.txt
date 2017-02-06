@@ -875,6 +875,7 @@ If you don't want to take chances you can do this:
 
 Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
+{#inline-code-resources}
 #### Inline Code Resources
 
 Inline code resources are the most flexible way to insert code. They are the only way to insert code as a span resource, and the most straightforward way to add short code examples as figures.
@@ -1486,7 +1487,7 @@ The actual amount of space output at the end of a sentence can be varied by the 
 
 The two reasons for preserving internal spaces (except after periods) are (1) respect for the author and (2) the Principle of Least Surprise: If an author types a number of spaces in the middle of a sentence in their manuscript, they are doing it for a reason--and it's disrespectful, presumptive and surprising to remove them.
 
-The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so. The one exception is that if you use periods, the difference between 1 and 2 spaces after them will not be preserved. If that's a deal-breaker, you need to use a code resource. Markua defines many different types of resources, including math and code resources. Resources are discussed later in this chapter.
+The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so. The one exception is that if you use periods, the difference between 1 and 2 spaces after them will not be preserved. If that's a deal-breaker, you need to use an [inline code resource](#inline-code-resources), delimited with three tildes so as to not get inadvertently syntax highlighted.
 
 ## One Blank Line Is Added When Concatenating Manuscript Files
 
