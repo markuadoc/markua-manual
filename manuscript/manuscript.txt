@@ -297,7 +297,7 @@ inline resource content (default format is `text`)
 
 #### Figure Attributes
 
-A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `type`, `format`, `caption` and `class` attributes.
+A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `type`, `format`, `caption` and `class` attributes. (As such, these four attributes are not shown on the specific resource types below.)
 
 `type`
 : This is the resource type. This is usually inferred from the format instead of being specified.
@@ -565,20 +565,13 @@ Images have some of the only non-semantic formatting in Markua. Images can have 
 
 #### Supported Attributes for Images
 
+The following are the supported attributes for image resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
+
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
-`caption`
-: The `caption` is the figure caption. Note that the caption attribute can also be put in square brackets in front of the image (except in the case of an SVG image inserted as an inline resource).
-
-`class`
-: The `class` can be used by Markua Processors to provide the approrpiate styling.
-
 `float`
 : The `float` can be `left`, `right`, `middle`, `inside`, `outside`. Combined with `width` and `height`, this provides basic image formatting.
-
-`format`
-: All resources support the format attribute. For images, the `format` is the specific image format. The legal set of formats is given in the `format` column in [table](#resource-types-and-formats) of resource types and formats.
 
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `float` attributes are used instead and margins are respected.
@@ -686,22 +679,13 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 #### Supported Attributes for Video
 
-Note that in the list below, the `caption`, `class`, `float`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
-
-`caption`
-: The `caption` is the figure caption. Note that the caption attribute can also be put in square brackets in front of the video.
-
-`class`
-: The `class` can be used by Markua Processors to provide the approrpiate styling.
+The following are the supported attributes for video resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support. Note that the `caption`, `class`, `float`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
 
 `embed`
 : true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like youtube which disallows this. In this case, this should function like a link to external web page which (youtube app etc). A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
 
 `float`
 : The `float` can be `left`, `right`, `middle`, `inside`, `outside`. Combined with `width` and `height`, this provides basic formatting.
-
-`format`
-: All resources support the format attribute. For video, the `format` is the specific video format. The legal set of formats is given in the `format` column in [table](#resource-types-and-formats) of resource types and formats.
 
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `float` attributes are used instead and margins are respected.
@@ -751,11 +735,7 @@ We will discuss the supported and the default attributes for audio files, and th
 
 #### Supported Attributes for Audio
 
-`caption`
-: The `caption` is the figure caption. Note that the caption attribute can also be put in square brackets in front of the video.
-
-`format`
-: All resources support the format attribute. For audio, the `format` is the specific audio format. The legal set of formats is given in the `format` column in the above table.
+There are no supported attributes for audio, other than the `type`, `format`, `caption` and `class` attributes which all resources support.
 
 #### Local Audio
 
@@ -803,11 +783,7 @@ Note that the default format can be overridden by specifying it via an attribute
 {#supported-attributes-for-code}
 #### Supported Attributes for Code
 
-`caption` and `class`
-: These attributes function as they do for images.
-
-`format`
-: For code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. The default value of the format attribute for a code resource inserted as a figure varies based on whether the delimiter is three backticks or three tildes. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. The `guess` format works better for code; the `text` format works better for poetry and for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as syntactic sugar.
+The following are the supported attributes for code resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
 
 `line-numbers`
 : This determines whether the code sample shows line numbers. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`.
@@ -820,6 +796,8 @@ Note that the default format can be overridden by specifying it via an attribute
 
 `crop-end`
 : This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
+
+Note that for code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. The default value of the `format` attribute for a code resource inserted as a figure varies based on whether the delimiter is three backticks or three tildes. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. The `guess` format works better for code; the `text` format works better for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as syntactic sugar.
 
 #### Local Code Resources
 
@@ -1042,14 +1020,12 @@ Note that Markua procesors do not need to support either math markup language fu
 
 #### Supported Attributes for Math
 
+The following is the supported attribute for math resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
+
 `alt`
-: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This is provided in the figure attribute list. This is primarily intended for Markua Processors that output math as images; there are no output requirements for the alt text.
+: The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. This is provided in the figure attribute list. This is primarily intended for Markua Processors that output math as images; there are no output requirements for the alt text. This attribute functions as it does for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
 
-`caption` and `class`
-: These attributes function as they do for images. (In fact, a Markua Processor may choose to transform the math into an image, for maximum ebook reader compatibility.)
-
-`format`
-: For math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `latex` for LaTeX math and `mathml` for MathML math.
+Note that for math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `latex` for LaTeX math and `mathml` for MathML math.
 
 #### Local Math Resources
 
@@ -1398,14 +1374,12 @@ In that table, column A is left-aligned, column B is center-aligned and column C
 
 #### Supported Attributes for Tables
 
-`caption`
-: The `caption` is the table caption.
-
-`class`
-: Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility.)
+The following is the supported attribute for table resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
 `widths`
 : Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
+
+Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.)
 
 {#spaces}
 # Spaces, Newlines and Indentation
