@@ -1564,7 +1564,7 @@ Yada yada yada.
 
 Markua supports bulleted lists, numbered lists and definition lists.
 
-All lists have an order--otherwise they would not be lists! So, Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown).
+Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
 {#bulleted-lists}
 ## Bulleted Lists
