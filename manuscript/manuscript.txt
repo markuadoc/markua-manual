@@ -356,16 +356,6 @@ Alt text is text which is intended to take the place of the resource if the reso
 
 The alt text should **not** have the same content as the figure caption, if the figure caption is present. (Imagine the annoyance of having a visual disability and having your screen reader read identical alt text and figure captions to you throughout an entire book!) Instead, the alt text should be descriptive of the image content, while the figure caption can be more creative. For example, a figure caption may be "Washington Crossing the Delaware" and the alt text could be "Denzel Washington riding a jet ski in a river". Having good alt text would enable readers who cannot see the image to still get the joke which the figure caption makes.
 
-These are some examples of figures with alt text:
-
-~~~
-{alt: "The Delaware state map"}
-![Where To Incorporate](delaware.svg)
-
-{alt: "Denzel Washington on a jet ski in a river"}
-![Washington Crossing the Delaware](delaware.jpg)
-~~~
-
 #### Figure Captions and Alt Text Together
 
 These are some examples of figures with both alt text and a figure caption:
