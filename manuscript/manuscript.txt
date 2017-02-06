@@ -3312,7 +3312,7 @@ title
 
 # Appendices
 
-These appendices contain details which would ruin be distracting or boring if included in the main body of the specification. These include highly technical details, differences with Markdown, discussions of HTML mapping and notes for Leanpub authors.
+These appendices contain details which would be distracting or boring if included in the main body of the Markua specification. These include highly technical details, differences with Markdown, discussions of HTML mapping and notes for Leanpub authors.
 
 ## Plain Text Encoding in UTF-8
 
