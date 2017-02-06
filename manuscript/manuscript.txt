@@ -762,7 +762,7 @@ As discussed, code cannot have alt text. It's just text. If any alt text is prov
 
 Markua specifies only one specific file extension to be associated with a type of `code`: the `.txt` extension, which is for the format of `text`. However, Markua Processors must interpret **all** unspecified file extensions as specifying a resource of type `code` with a format of `guess`.
 
-Regardless of whether syntax highlighting is supported and the programmming language is detected, all code must be formatted as **`monospaced text`** by Markua Processors.
+Regardless of whether syntax highlighting is supported and the programmming language is detected, all code must be formatted as `monospaced text` by Markua Processors.
 
 The `text` format means to not do any syntax highlighting as well.
 
