@@ -320,7 +320,7 @@ A resource which is inserted as a figure can have a figure caption.
 This caption shows up in two places in the output:
 
 1. Near the resource, typically above or below it, per the preference of the Markua Processor.
-2. As the name of the Figure in the List of Illustrations or Table of Figures, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
+2. As the name of the Figure in the List of Illustrations, Table of Figures or Table of Tables, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
 
 The caption for a figure can be provided either in the square brackets in front of a local or web resource or in the attribute list above the resource:
 
@@ -350,7 +350,7 @@ Here's a paragraph after the figure.
 
 A figure can have alt text, as long as the type of resource being inserted supports alt text. The alt text is defined in an attribute list above the figure. Since the alt text is defined in the attribute list, the resource location does not matter: local, web and inline resources all support alt text.
 
-The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` do not support alt text, since they themselves are just text. If any alt text is provided for a code resource it is ignored.
+The four types of resource which can have alt text when inserted as a figure are `image`, `video`, `audio` and `math`. Resources of type `code` and `table` do not support alt text, since they themselves are just text. If any alt text is provided for a code or table resource it is ignored.
 
 Alt text is text which is intended to take the place of the resource if the resource itself cannot be seen. In the case of images, the obvious use case is for readers with visual disabilities who are using a screen reader, but it also includes audiobooks and ebook readers which often do not support embedded images, audio and video.
 
