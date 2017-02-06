@@ -1161,7 +1161,7 @@ Tables are important elements in many Markua documents. Tables are also resource
 
 Per the [table](#resource-types-and-formats) of resource types and formats, a Markua table in an external file (either as a local or web resource) will be interpreted as such if it has a file extension of `.tbl`, or if it has a `format` of table or `type` of table specified via an attribute list.
 
-Tables are always inserted as figures. Note, however, that a Markua Processor should list tables as tables, not figures, if the book has a list of tables and list of figures.
+Tables are always inserted as figures. Note, however, that a Markua Processor should list tables as tables, not figures, if the book has a Table of Figures and Table of Tables.
 
 The syntax to insert a table defined in an external file on the local filesystem is the same as the syntax to insert a local resource:
 
