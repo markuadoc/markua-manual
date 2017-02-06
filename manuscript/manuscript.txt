@@ -751,13 +751,11 @@ We will discuss the supported and the default attributes for audio files, and th
 
 #### Supported Attributes for Audio
 
+`caption`
+: The `caption` is the figure caption. Note that the caption attribute can also be put in square brackets in front of the video.
+
 `format`
 : All resources support the format attribute. For audio, the `format` is the specific audio format. The legal set of formats is given in the `format` column in the above table.
-
-`caption` and `class`
-: These attributes work exactly how they do for images. They apply to the image specified by the `poster` attribute, not to the audio itself.
-
-Note that the `alt` and `poster` attributes are not supported on audio resources.
 
 #### Local Audio
 
