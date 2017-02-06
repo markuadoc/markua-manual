@@ -553,7 +553,7 @@ We will now consider each of the types of resources in more detail, as well as t
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
 
-Per the [table](#resource-types-and-formats) of resource types and formats, the following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG,
+Per the [table](#resource-types-and-formats) of resource types and formats, the following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
 
 Images are always inserted as figures.
 
