@@ -1406,7 +1406,7 @@ The way that single newlines are handled is the single largest breaking differen
 
 In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
-In Markua, however, a forced line break in the input is a forced line break in all output formats. This is true for headings, paragraphs, lists, blockquotes, asides, blurbs and callouts.
+In Markua, however, a forced line break in the input is a forced line break in all output formats. This is true for headings, paragraphs, lists, blockquotes, asides and blurbs.
 
 In ancient history, some text editors did not automatically wrap lines of text, so manual wrapping of plain text files was a good thing to do. Also, for computer programmers, we still do not wrap our text when programming. However, for writing, automatic wrapping of paragraphs is essential for staying in the flow while writing, and for being able to edit your text without needing to re-wrap every line in a paragraph. This is one decision that even Microsoft Word gets right.
 
@@ -1955,7 +1955,7 @@ Blockquotes in Markua are created in one of two ways:
 
 Option #1 is preferable for short quotes; option #2 is easier on authors for really long quotes.
 
-A> Do not confuse the curly-brace syntax for blockquotes, asides, blurbs and callouts with an attribute list. They are not attribute lists.
+A> Do not confuse the curly-brace syntax for blockquotes, asides and blurbs with an attribute list. They are not attribute lists.
 
 Like figures and tables, blockquotes can be inserted in the middle of a paragraph or as a sibling of it.
 
@@ -2036,7 +2036,7 @@ That's it!
 
 ## Asides (`A>` or `{aside}`)
 
-Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides, as well as for blurbs and callouts. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides, blurbs and callouts do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua Processors.
+Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides and for blurbs. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides or blurbs do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Markua Processors.
 
 We will consider asides first.
 
