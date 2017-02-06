@@ -1470,7 +1470,7 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ~~~
 
-In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used, in which whitespace is added at the end of the line), this would *all* be collapsed to one line! (Note how this shows that the two space hack is unacceptable: you should be able to tell what output is produced by looking at the input.)
+In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used, in which whitespace is added at the end of the line), this would *all* be collapsed to one line! (Note how this shows that Markdown's two space hack is completely unacceptable: you should be able to tell what output is produced by looking at the input.)
 
 More generally, the rules about single and double newlines mean that in Markua you can just write poetry without any formatting characters. Stanzas are separated with a blank line, and any indentation is preserved except on the first line of a stanza.
 
