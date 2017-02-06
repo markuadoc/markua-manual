@@ -536,7 +536,7 @@ Note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
 If the type is not specified in the attribute list, the format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
-As an author, all you do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to determine the type. If the format is unrecognized, then the resource is treated as a resource of type `code` and with a format of `guess`.
+As an author, all you typically do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to determine the type. If the format is unrecognized, then the resource is treated as a resource of type `code` and with a format of `guess`.
 
 It's important to emphasize that the type and format of a resource can be overridden using an attribute list. In rare instances, it is useful to override the `type` and `format` which have been inferred by the Markua Processor based on the file extension of the resource. This is done by specifying a type and/or format in the attribute list of the resource.
 
