@@ -1449,11 +1449,11 @@ For the programmers: if a file contains only blank lines or lines containing onl
 
 ## Leading Spaces (Prose vs. Poetry)
 
-In Markua, leading spaces are interpreted based on context: specifically, based on what came before them.
+In Markua, leading whitespace (spaces or tabs at the beginning of a line) is interpreted based on context: specifically, based on what came before it.
 
-Following **exactly one** newline, whitespace is **preserved**.
+Following **exactly one** newline, leading whitespace is **preserved**.
 
-Following **two or more** newlines (one or more blank lines), whitespace is **ignored**. So, you can manually indent your paragraphs if you're used to doing so, and it will have no effect.
+Following **two or more** newlines (one or more blank lines), leading whitespace is **ignored**. So, you can manually indent your paragraphs if you're used to doing so, and it will have no effect.
 
 This distinction also helps Markua support prose and poetry without a bunch of special syntax.
 
