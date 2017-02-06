@@ -83,7 +83,7 @@ That's it!
 
 When you are writing, *formatting is procrastination*. Writing is hard enough without needing to worry about formatting. Markua is a format for use by writers, not book designers.
 
-So, Markua provides fairly minimal formatting options. However, almost all formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which could not be changed by a book designer without possibly changing the meaning of the text.
+So, Markua provides fairly minimal formatting options. Almost all formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which could not be changed by a book designer without possibly changing the meaning of the text.
 
 To emphasize how little formatting is in Markua: Markua doesn't have any concept of font sizes or margins! Also, Markua really, really, *really* does **not** care about "widows and orphans"--unless they're people!
 
