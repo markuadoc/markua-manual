@@ -500,7 +500,7 @@ Inline resources can be of type `code`, `math` (regardless of format), `table`, 
 {#resource-types-and-formats}
 ## Resource Types and Formats
 
-There are six types of resources: `image`, `video`, `audio`, `code`, `math` and `table`. Each type of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+As discussed, there are six types of resources: `image`, `video`, `audio`, `code`, `math` and `table`. Each type of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
 Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes. The type and the format can also be inferred from the file extension and, in the case of web resources, the URL.
 
