@@ -561,11 +561,7 @@ We will discuss the supported and the default attributes for images, and then sh
 
 Note that regardless of the image location, a Markua Processor can embed the image in the output format. For example, a web image does not need to be loaded from the web every time; it can be inlined in the output by the Markua Processor. A Markua Processor can also process images such that all images are placed on the web with URLs, and the images are loaded by the reader from the web.
 
-Images have some of the only non-semantic formatting in Markua. Images can have `width` and `height` attributes, as well as having a `float`. Images can also be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. That approach would be more semantic, but would lead to reduced portability between Markua Processors. By requiring this basic level of image formatting, Markua ensures that a Markua Processor gives the author the minimum viable set of formatting options with images, without getting bogged down in complex layouts.
-
-Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books not look completely ugly.
-
-So, Markua provides fairly minimal formatting options. For example, images can have some formatting, such as `width` and `height` attributes. However, most formatting provided in Markua is semantic formatting. This is formatting which has meaning in the text, and which should not be changed by a book designer.
+Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height` and `float` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough.
 
 #### Supported Attributes for Images
 
