@@ -280,7 +280,7 @@ The syntax for a local resource or a web resource inserted as a figure is as fol
 The syntax for an inline resource inserted as a figure is as follows:
 
 ~~~
-{key: value, comma: separated, optional: attribute_list, with: caption}
+{key: value, comma: separated, optional: attribute_list}
 ```optional_format
 inline resource content (default format is `guess`)
 ```
