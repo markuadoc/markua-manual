@@ -3312,7 +3312,7 @@ title
 
 # Appendices
 
-These appendices contain details which would ruin be distracting or boring if included in the main body of the specification. These include highly technical details, differences with Markdown, discussions of HTML mapping, notes for Leanpub authors and Acknowledgments.
+These appendices contain details which would ruin be distracting or boring if included in the main body of the specification. These include highly technical details, differences with Markdown, discussions of HTML mapping and notes for Leanpub authors.
 
 ## Plain Text Encoding in UTF-8
 
@@ -3618,6 +3618,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Tables seem to [mess up the alignment](#tables) of some text after them.
 - Make the change to preserve internal space except after periods, instead of the inconssitent mess we currently have.
 - The kerning on figure captions is a disaster. It looks like one word!
+- Support crosslinks on spans
 
 {#acknowledgments}
 # Acknowledgments
