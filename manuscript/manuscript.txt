@@ -897,9 +897,7 @@ Hello World in Ruby is a simple `puts "hello world"` statement.
 Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
 ~~~
 
-Note that there is no syntactic sugar for this, e.g. `puts "hello world"`ruby, since I consider this gross. Syntax highlighting does not make much sense for code which is inserted in the middle of a sentence--there's just not enough code there for it to be worthwhile. However, in Markua, any span can have an attribute list attached to it (in order to add index entries, for example), so there is no reason to explicitly forbid specifying a format in the attribute list.
-
-The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
+Note that there is no syntactic sugar for this, since I don't like this, and I want it to be as distasteful as possible. So, this is a sort of "syntactic salt". Syntax highlighting does not make much sense for code which is inserted in the middle of a sentence--there's just not enough code there for it to be worthwhile. However, in Markua, any span can have an attribute list attached to it (in order to add index entries, for example), so there is no reason to explicitly forbid specifying a format in the attribute list.
 
 ##### Figure
 
@@ -992,10 +990,6 @@ puts "hello"
 
 Some paragraph.
 ```
-
-Note that the syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
-
-A> The "four space indent" method of creating code blocks in Markdown is **NOT** supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has bad effects on the rest of the specification.
 
 #### Marking Code as Added or Deleted
 
@@ -3420,7 +3414,10 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 11. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
 12. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 13. Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". Markua's headers are essentially a subset of Markdown's atx headers, reinterpreted for book semantics. I say essentially, since Markua is a bit cheeky in that it interprets the same type of atx header (`#`) as either a Chapter or Part based on whether there's a `#` at the end. This is discussed further below.
-14. The actual syntax to define a Markua table, either in an external file or inline, is slightly more complex than other excellent Markdown table syntaxes, such as the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). The reason the complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells. Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the GitHub Flavored Markdown table syntax in Markau documents.
+14. The actual syntax to define a Markua table, either in an external file or inline, is slightly more complex than other excellent Markdown table syntaxes, such as the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). The reason the complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells. Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the GitHub Flavored Markdown table syntax in Markua documents.
+15. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
+16. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+17. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
