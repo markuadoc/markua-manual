@@ -3612,6 +3612,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Use `table-of-contents` not `toc`.
 - Support `exercise-answers` and `quiz-answers`.
 - Auto-create `images`, `audio`, `video`, `code`, `math` and `tables` directories in resources directory.
+- Support `cite` and `url` attributes on images.
 
 {#acknowledgments}
 # Acknowledgments
