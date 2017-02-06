@@ -628,7 +628,7 @@ Here's a paragraph between the second and third figures.
 Here's a paragraph after the third figure.
 ~~~
 
-In the above example, the first and third images were directly in the `resources` directory, whereas te second image was in an `images` subdirectory of the `resources` directory.
+In the above example, the first and third images were directly in the `resources` directory, whereas the second image was in an `images` subdirectory of the `resources` directory.
 
 #### Web Images
 
