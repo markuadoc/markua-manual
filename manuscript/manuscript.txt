@@ -1411,7 +1411,7 @@ In ancient history, some text editors did not automatically wrap lines of text, 
 
 The decision in Markua to treat single newlines as forced line breaks means that Markua does *not* need to use the **horrible hack** that Markdown uses to output forced line breaks. In Markdown, to output a forced line break (a `<br/>` tag in HTML), you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line!
 
-Worse, some text editors (like Emacs, the editor I use) can be configured to remove trailing spaces at the ends of lines automatically when a file is saved. So, it's possible for me to inadvertently modify the meaning of a Markdown document by simply opening it and saving it! Also, in Markdown, it's impossible to type a sonnet without relying on the two space hack at the end of every line to force a newline--which isn't very poetic at all.
+Worse, some text editors (like Emacs, the editor I use) can be configured to remove trailing spaces at the ends of lines automatically when a file is saved. So, it's possible for me to inadvertently modify the meaning of a Markdown document by simply opening it and saving it unedited! Also, in Markdown, it's impossible to type a sonnet without relying on the two space hack at the end of every line to force a newline--which isn't very poetic at all.
 
 The following is an example of Markua's single newlines:
 
