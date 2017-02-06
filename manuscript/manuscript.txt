@@ -795,7 +795,13 @@ The following are the supported attributes for code resources, in addition to th
 `crop-end`
 : This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
 
-Note that for code, the `format` is the name of the programming language. There are two special types of `format` for code baked into Markua: `text` and `guess`. The default value of the `format` attribute for a code resource inserted as a figure varies based on whether the delimiter is three backticks or three tildes. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. The `guess` format works better for code; the `text` format works better for code that you don't want the language guessed at. You can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as syntactic sugar.
+##### Default Value of the `format` attribute in Inline Code Samples
+
+The default value of the `format` attribute for a code resource inserted as a figure varies based on context.
+
+If the code resource is a local or web resource, it defaults to `guess`.
+
+If the code resource is an inline resource, the default varies based on the delimiter. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the code language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
 
 #### Local Code Resources
 
@@ -3592,6 +3598,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support `exercise-answers` and `quiz-answers`.
 - Auto-create `images`, `audio`, `video`, `code`, `math` and `tables` directories in resources directory.
 - Support `cite` and `url` attributes on images.
+- Vary the code format default based on delimiter.
 
 {#acknowledgments}
 # Acknowledgments
