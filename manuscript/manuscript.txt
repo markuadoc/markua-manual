@@ -2889,33 +2889,10 @@ Note that resources, chapters and sections all have implicit numbering. So, #n a
 : To produce an em dash (—), what is thought of by non-typography people as a "dash" or a "long dash", you can just type `--`. You can also use the proper Unicode character, U+2014, of course.
 
 `~~`
-: To produce an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type `~~`. You can also use the proper Unicode character, U+2013, of course.
+: To produce an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type `~~`. You can also use the proper Unicode character, U+2013, of course. To learn more about why this was chosen, see the [appendix](#en-dash-rationale).
 
 `...`
 : To produce a horizontal ellipsis (…), you can just type `...`. You can also use the proper Unicode character, U+2026, of course.
-
-{aside}
-**Why not just use `---` for en dash, like atx?**
-
-I had considered following Aaron Swartz's approach in [atx](http://www.aaronsw.com/2002/atx/intro) of using `--` for em dash and `---` for en dash. However, the problem is that en dash (–) is physically shorter than em dash (—), and using `---` for something that is shorter than what is produced by `--` feels a bit wrong.
-
-**Why not just use `--` for en dash and `---` for em dash?**
-
-There are two arguments to use `---` for em dash and `--` for en dash:
-
-1. The em dash is longer than the en dash, so the number of hyphens to produce it should be longer.
-2. Other Markdown extensions do this, as does TeX.
-
-However, there are two strong reasons to not do this:
-
-1. Many other programs (e.g. Word) replace `--` with em dash. For Markua to replace it with en dash would be surprising. Worse, since an en dash is longer than a hyphen, an author might assume that Markua was in fact replacing `--` with em dash, and that their font just had short em dashes. It's possible to be literate and not know that en dashes exist--I managed it for a few decades! So, inadvertently producing it would be bad.
-
-2. The en dash is used far, far less than the em dash, so it shouldn't be easier to produce. (This is essentially the same rationale for using Dvorak layout instead of QWERTY.) The existence of an en dash shouldn't make typing an em dash worse, and having to type an extra `-` character every time you want to make an em dash would, in fact, make your life just a little bit worse.
-
-**Why not just replace hyphens with en dashes?**
-
-Simple: that would be wrong. Hyphens are legitimate punctuation, and are different than en dashes.
-{/aside}
 
 ## Soft Hyphen
 
@@ -3629,6 +3606,31 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support Section directives
 - Finish Leanpub for Courses.
 
+{#en-dash-rationale}
+## En Dash: What the `~~`?
+
+I had considered a number of options before settling on `~~` to produce an en dash.
+
+**Why not just use `---` for en dash, like atx?**
+
+I had considered following Aaron Swartz's approach in [atx](http://www.aaronsw.com/2002/atx/intro) of using `--` for em dash and `---` for en dash. However, the problem is that en dash (–) is physically shorter than em dash (—), and using `---` for something that is shorter than what is produced by `--` feels a bit wrong.
+
+**Why not just use `--` for en dash and `---` for em dash?**
+
+There are two arguments to use `---` for em dash and `--` for en dash:
+
+1. The em dash is longer than the en dash, so the number of hyphens to produce it should be longer.
+2. Other Markdown extensions do this, as does TeX.
+
+However, there are two strong reasons to not do this:
+
+1. Many other programs (e.g. Word) replace `--` with em dash. For Markua to replace it with en dash would be surprising. Worse, since an en dash is longer than a hyphen, an author might assume that Markua was in fact replacing `--` with em dash, and that their font just had short em dashes. It's possible to be literate and not know that en dashes exist--I managed it for a few decades! So, inadvertently producing it would be bad.
+
+2. The en dash is used far, far less than the em dash, so it shouldn't be easier to produce. (This is essentially the same rationale for using Dvorak layout instead of QWERTY.) The existence of an en dash shouldn't make typing an em dash worse, and having to type an extra `-` character every time you want to make an em dash would, in fact, make your life just a little bit worse.
+
+**Why not just replace hyphens with en dashes?**
+
+Simple: that would be wrong. Hyphens are legitimate punctuation, and are different than en dashes.
 
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
