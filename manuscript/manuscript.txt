@@ -3020,7 +3020,7 @@ If you don't want to use it, you don't need to learn about it.
 {#attributes}
 ## Attributes
 
-Attributes are used to do everything from specify the language of code blocks, add ids for crosslinkng and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
+Attributes are used to do everything from specify the language of code blocks, add ids for crosslinking and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
 
 ### Attribute List Format
 
@@ -3097,6 +3097,8 @@ These are the various formats of an index entry:
 
 Here's what they do:
 
+A> TODO - Leanpub: A few of these definition list items are broken, due to Leanpub bugs.
+
 `{i: hello}`
 : Adds an index entry for `hello`. If an index entry has no punctuation or formatting then it does not need quotes.
 
@@ -3160,19 +3162,18 @@ My wife read some book about a whale by Herman Melville{i: "Melville, Herman"}.
 Multiple index entries can exist in a block, or even a sentence:
 
 ~~~
-Supposedly the great-great-great-granduncle of the musician
-Moby{i: "Moby"} was Herman Melville{i: "Melville, Herman"},
-the author of a book about a whale{i: "Moby-Dick; or, The Whale"}.
+Supposedly the great-great-great-granduncle of the musician Moby{i: "Moby"} was Herman
+Melville{i: "Melville, Herman"}, the author of a book about a whale{i: "Moby-Dick; or, The Whale"}.
 ~~~
 
-Note that adding index entries is best left until the end of a book. At that time, ids like {#myid} can be converted to {id: #myid, i: "blah"} if index entries are being added where ids already are.
+Note that adding index entries is best left until the author is done writing the book. At that time, ids like {#myid} can be converted to {id: #myid, i: "blah"} if index entries are being added where ids already are.
 
 {#directives}
 ## Directives
 
 Directives are switches which affect the future behaviour of a Markua Processor.
 
-The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it.
+The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it. (There are two exceptions: if the directive is at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.)
 
 A directive does not have any kind of "closing tag"--it simply remains in effect for the rest of the Markua document, or until the directive is overridden by another use of the same directive with a different value.
 
@@ -3248,7 +3249,7 @@ The following values of the `section` directive can occur in back matter:
 * `exercise-answers`
 * `quiz-answers`
 
-The `bibliography` directive allows a Markua Processor to specially format the text insid ethat section appropriately. The `exercise-answers` and `quiz-answers` directives are used to position the answers to any exercises or quizzes in the text of the Markua document. If neither of these directives are present, a Markua Processor should position the exercise answers somewhere near the back of the book (in the back matter, if it exists). For quiz answers, on the other hand, a Markua Processor may do whatever it wants in terms of whether the quiz answers are included in the book, regardless of the presence or position of the `quiz-answers` directive. For example, in Leanpub's online courses, the quiz answers are only provided when quizzes are completed and automatically marked, and are never output in the material book for the course.
+The `bibliography` directive allows a Markua Processor to specially format the text inside that section appropriately. The `exercise-answers` and `quiz-answers` directives are used to position the answers to any exercises or quizzes in the text of the Markua document. If neither of these directives are present, a Markua Processor should position the exercise answers somewhere near the back of the book (in the back matter, if it exists). For quiz answers, on the other hand, a Markua Processor may do whatever it wants in terms of whether the quiz answers are included in the book, regardless of the presence or position of the `quiz-answers` directive. For example, in Leanpub's online courses, the quiz answers are only provided when quizzes are completed and automatically marked, and are never output in the material book for the course.
 
 You can write a book or document in Markua without using any directives at all, including book `section` directives. However, if you add a `section` directive with a value of any of the front matter values, the `{section: mainmatter}` directive is required.
 
@@ -3258,10 +3259,9 @@ Also, note that Markua Processors may ignore all of the book `section` directive
 
 While these book `section` directives are mere hints, there are strict rules about their use:
 
-1. Like any directive, each book `section` directive must be on a line by itself with blank lines above and below it.
-2. Each value of a book `section` directive can only appear once.
-3. The book `section` directives are all optional; it is legal to have a Markua document with no book `section` directives.
-4. If any book section directives with values which occur in front matter are present, a `{section: mainmatter}` directive is required.
+1. Each value of a book `section` directive can only appear once.
+2. The book `section` directives are all optional; it is legal to have a Markua document with no book `section` directives.
+3. If any book section directives with values which occur in front matter are present, a `{section: mainmatter}` directive is required.
 
 Authors new to Markua can completely ignore all directives, including book `section` directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about book `section` directives. And using directives is very simple, despite how formally specified this section makes them.
 
@@ -3323,10 +3323,10 @@ lang
 : `true` or `false`. Default `true`. Whether resources are numbered when inserted as figures. Note that different types of resources (e.g. code listings, tables, images, etc.) have different numbering.
 
 restart-endnote-numbering
-: `true` or `false`. Default `false`. Whether the endnote numbering is restarted at the end of a chapter.
+: `true` or `false`. Default `true`. Whether the endnote numbering is restarted at the end of a chapter.
 
 restart-footnote-numbering
-: `true` or `false`. Default `false`. Whether the footnote numbering is restarted at the end of a chapter.
+: `true` or `false`. Default `true`. Whether the footnote numbering is restarted at the end of a chapter.
 
 title
 : The title of the Markua document.
@@ -3593,7 +3593,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
 
-There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
+There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
 
 If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
 
