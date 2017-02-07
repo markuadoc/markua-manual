@@ -2372,7 +2372,7 @@ Example:
 {quiz, id: quiz2}
 # Markua Quiz
 
-Watch this [video](https://www.youtube.com/watch?time_continue=1&v=VOCYL-FNbr0) of Peter Armstrong explaining Markua.
+Watch this [video](https://www.youtube.com/watch?time_continue=1&v=VOCYL-FNbr0) of Peter explaining Markua.
 
 ? What year was that video from?
 
@@ -2383,14 +2383,10 @@ b) 2013
 C) 2014
 d) 2015
 
-? Assuming Markua is in fact at 1.0 in 2017, during how many calendar years was Peter working on the first version of the Markua spec?
-
-! 3
-
 {words: 500}
 ? Why do you think the first version of the Markua spec took so long?
 
-Look at the Leanpub website, watch other videos and read the [pricing essay](https://leanpub.com/pricing) and see if you can figure it out.
+Look at the Leanpub website and read the [pricing essay](https://leanpub.com/pricing).
 
 ! Answers could include "bootstrapped startup", the spec evolving, removing HTML mapping, etc.
 
