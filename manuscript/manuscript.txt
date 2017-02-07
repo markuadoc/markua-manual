@@ -2960,7 +2960,8 @@ The emoji support in Markua makes me :smile:.
 When outputting a sentence containing emoji inserted using the `:emoji_name:` syntax, the Markua Processor can either:
 
 1. Output the emoji as a span image (right in the flow of the text with no line breaks before or after it) with the `:emoji_name:` (including the colons) as alt text.
-2. Output the `:emoji_name:` as an inline code span showing the `:emoji_name:` verbatim.
+2. Output the emoji using an emoji-aware font, having mapped the emoji name to some Unicode code point using some cannoical table somewhere. There are online resources such as <http://www.webpagefx.com/tools/emoji-cheat-sheet/> which may be a starting point for any Markua Processor wishing to do this.
+3. Output the `:emoji_name:` as an inline code span showing the `:emoji_name:` verbatim.
 
 {#criticmarkup}
 ## CriticMarkup
