@@ -3617,16 +3617,7 @@ I had considered following Aaron Swartz's approach in [atx](http://www.aaronsw.c
 
 **Why not just use `--` for en dash and `---` for em dash?**
 
-There are two arguments to use `---` for em dash and `--` for en dash:
-
-1. The em dash is longer than the en dash, so the number of hyphens to produce it should be longer.
-2. Other Markdown extensions do this, as does TeX.
-
-However, there are two strong reasons to not do this:
-
-1. Many other programs (e.g. Word) replace `--` with em dash. For Markua to replace it with en dash would be surprising. Worse, since an en dash is longer than a hyphen, an author might assume that Markua was in fact replacing `--` with em dash, and that their font just had short em dashes. It's possible to be literate and not know that en dashes exist--I managed it for a few decades! So, inadvertently producing it would be bad.
-
-2. The en dash is used far, far less than the em dash, so it shouldn't be easier to produce. (This is essentially the same rationale for using Dvorak layout instead of QWERTY.) The existence of an en dash shouldn't make typing an em dash worse, and having to type an extra `-` character every time you want to make an em dash would, in fact, make your life just a little bit worse.
+There are two arguments to use `--` for en dash and `---` for em dash. First, The em dash is longer than the en dash, so the number of hyphens to produce it should be longer. Second, other Markdown extensions do this, as does TeX. However, there are two strong reasons to not do this. First, many other programs (e.g. Word) replace `--` with em dash. For Markua to replace it with en dash would be surprising. Worse, since an en dash is longer than a hyphen, an author might assume that Markua was in fact replacing `--` with em dash, and that their font just had short em dashes. It's possible to be literate and not know that en dashes exist--I managed it for a few decades! So, inadvertently producing it would be bad. Second, the en dash is used far, far less than the em dash, so it shouldn't be easier to produce. (This is essentially the same rationale for using Dvorak layout instead of QWERTY.) The existence of an en dash shouldn't make typing an em dash worse, and having to type an extra `-` character every time you want to make an em dash would, in fact, make your life just a little bit worse.
 
 **Why not just replace hyphens with en dashes?**
 
