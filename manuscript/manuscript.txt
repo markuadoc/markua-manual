@@ -38,7 +38,7 @@ This is its specification.
 
 ## Note for Leanpub Authors
 
-Leanpub authors please [read this first](#leanpub-authors) to see an incomplete list of what we still need to build in Leanpub.
+Leanpub authors please [read this first](#leanpub-authors) to see an incomplete list of what we still need to build in Leanpub. Also, please note that statements about Leanpub for Courses are "forward-looking statements" -- Leanpub for Courses is currently in private beta. To request access to the beta, email hello@leanpub.com.
 
 ## What is Markua?
 
@@ -1384,12 +1384,10 @@ In this regard, Markua has broader design goals than Markdown: Markdown is for w
 
 Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown. (By a newline, I mean the character which is produced by the enter key on the keyboard.)
 
-Usually, Markua tries to not break Markdown syntax. The newline handling is the main exception. As such, the difference between Markua and Markdown is discussed here, not in [the appendix](#markdown-diffs).
+The ways that spaces, newlines and indentation are handled in Markua are the largest breaking differences between it and Markdown. (I say breaking, since if you're relying on Markdown's behaviour in your writing, you may be in for some unpleasant surprises in switching to Markua.) As such, the differences between Markua and Markdown are discussed here, not in [the appendix](#markdown-diffs).
 
 {#single-newlines}
 ## Single Newlines
-
-The way that single newlines are handled is the single largest breaking difference between Markdown and Markua. (I say breaking, since if you're relying on Markdown's behaviour in your writing, you may be in for some unpleasant surprises in switching to Markua.)
 
 In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
@@ -1433,7 +1431,7 @@ In Markua, leading whitespace (spaces or tabs at the beginning of a line) is int
 
 Following **exactly one** newline, leading whitespace is **preserved**.
 
-Following **two or more** newlines (one or more blank lines), leading whitespace is **ignored**. So, you can manually indent your paragraphs if you're used to doing so, and it will have no effect.
+Following **two or more** newlines (one or more blank lines), leading whitespace is **ignored**. So, you can manually indent your paragraphs if you're used to doing so, and it will have no effect. This way, you don't have to worry about whether your amount of indentation is the same as that produced by the book designer. Also, since multiple authors may collaborate on Markua documents, there's no issue if one author indents paragraphs and another doesn't. (Markua uses the same logic for spaces after periods.)
 
 This distinction also helps Markua support prose and poetry without a bunch of special syntax.
 
@@ -1450,7 +1448,7 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ~~~
 
-In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used, in which whitespace is added at the end of the line), this would *all* be collapsed to one line! (Note how this shows that Markdown's two space hack is completely unacceptable: you should be able to tell what output is produced by looking at the input.)
+In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used (in which whitespace is added at the end of the line), this would *all* be collapsed to one line! (Note how this shows that Markdown's two space hack is completely unacceptable: you should be able to tell what output is produced by looking at the input.)
 
 More generally, the rules about single and double newlines mean that in Markua you can just write poetry without any formatting characters. Stanzas are separated with a blank line, and any indentation is preserved except on the first line of a stanza.
 
@@ -2409,19 +2407,19 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 ## Supported Attributes on Quizzes and Exercises
 
 `case-sensitive`
-: `true` or `false`. The default is `true`. This sets the default behaivour of fill in the blank questions. If `true`, the fill in the blank question answers are case-sensitive. If false, they are not.
+: `true` or `false`. The default is `true`. This sets the default behaviour of fill in the blank questions. If `true`, the fill in the blank question answers are case-sensitive. If false, they are not.
 
 `points`
-: If present, this is the total number of points the quiz or exercise is worth. (This really only matters for quizzes, but is supported for exercises as well, in case a Markua Processor wishes to display the points on exercises to make them feel more real.) If `points` is not present, the worth of the quiz is determined by summing the points of the questions. (Questions are worth 1 point each if they have no `points` attribute.) If the quiz has a `points` attribute and its questions also have `points` attributes, the worth of each question is determined as follows: its `points` are the numerator, and the total `points` in the quiz or exercise is the denominator. So, a 2 point question in a 10 point quiz that has 20 points worth of questions is actually worth 1 point, and a 1 point question in the same quiz is worth half a point.
+: If present, this is the total number of points the quiz or exercise is worth. (This really only matters for quizzes, but is supported for exercises as well, in case a Markua Processor wishes to display the points on exercises to make them feel more real.) If `points` is not present, the worth of the quiz is determined by summing the points of the questions. (Questions are worth 1 point each if they have no `points` attribute.) If the quiz has a `points` attribute and its questions also have `points` attributes, the worth of each question in a larger course context is determined as follows: its `points` are the numerator, and the total `points` in the quiz or exercise is the denominator.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`. This sets the default behaivour of multiple choice questions. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written.
+: `true` or `false`. The default is `false`. This sets the default behaviour of multiple choice questions. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written.
 
 `random-question-order`
-: `true` or `false`. The default is `false`. This sets the default behaivour of the quiz or exercise. If `true`, the questions are randomly arranged; if `false`, they are presented in the order written.
+: `true` or `false`. The default is `false`. This sets the default behaviour of the quiz or exercise. If `true`, the questions are randomly arranged; if `false`, they are presented in the order written.
 
 `start-at`
-: The `start_at` is the number of the first question. The default is 1. Any integer is permitted. Subsequent questions will have a number which is 1 higer than the previous question.
+: The `start_at` is the number of the first question. The default is 1. Any integer is permitted. Subsequent questions will have a number which is 1 higher than the previous question.
 
 As [discussed above](#quiz-headings), there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz or exercise itself, using the normal Markua formatting for a chapter heading.
 
@@ -2463,7 +2461,7 @@ Obviously, when generating the question in the actual quiz or exercise, a Markua
 : The number of points the question is worth.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`. This sets the behaivour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
+: `true` or `false`. The default is `false`. This sets the behaviour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
 
 ### Fill In The Blank Questions
 
@@ -2509,13 +2507,13 @@ Note that it's not acceptable to make the format based on the language of the bo
 : The number of points the question is worth.
 
 `case-sensitive`
-: `true` or `false`. The default is `true`. This sets the behaivour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them.
+: `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them.
 
 ### Written Questions
 
 A written question corresponds to short answer, long answer or essay questions in traditional tests. It looks the same as a fill in the blank question, except the answer is optional.
 
-A question is interpreted as being a written question, as opposed to a fill in the blank question, if either the `words`, `lines` or `pages` attribute is specified, or ifthere is no answer provided.
+A question is interpreted as being a written question, as opposed to a fill in the blank question, if either the `words`, `lines` or `pages` attribute is specified, or if there is no answer provided.
 
 Note that an answer may be provided in a written question. If this is done, the answer is not matched like a fill in the blank answer. Instead, the answer is essentially a "note to markers", whether those markers are underpaid graduate students or unpaid AIs. Markua does not specify any microformat for this note to markers.
 
@@ -2580,7 +2578,7 @@ The fact that a Markua document can be used to create an online course or MOOC m
 
 In an online course or MOOC, some professors might not want every question the same, despite the fact that question order and answer order can be randomized. So, Markua supports question alternates, using a simple (if slightly ugly) syntax. Question alternates are supported in both quizzes and exercises (since there's no reason not to support them in exercises), but they make the most sense in quizzes.
 
-To create question alternates, every question must be numbered using a `?#` syntax, e.g. `?1, ?2, ?3`. The alternates are specifying by providing the same number for multiple questions, e.g. `?1, ?1, ?1, ?2, ?3, ?4, ?4, ?5`. When the actual quiz is given, only one of the questions for the given question number is used.
+To create question alternates, every question must be numbered using a `?#` syntax, e.g. `?1, ?2, ?3`. The alternates are specifyied by providing the same number for multiple questions, e.g. `?1, ?1, ?1, ?2, ?3, ?4, ?4, ?5`. When the actual quiz is given, only one of the questions for the given question number is used.
 
 Note that only the first question with a given number may have a `points` attribute--since all other alternates must use the same points value, specifying it would be, ahem, pointless.
 
@@ -2830,7 +2828,11 @@ Chapters, sections and figures with captions often have two useful properties fo
 1. A name which is often short and useful to reference.
 2. A number, if numbering is turned on.
 
-Whether the numbers exist is determined by the `number-chapters`, `number-parts` and `number-figures` attributes.
+Whether the numbers exist is determined by the `number-chapters`, `number-parts` and `number-figures` attributes .
+
+In your writing, it's often desirable to refer to these figures from elsewhere in your book. When creating such a reference, it's helpful to be able to reference the title and number of the chapter, section or figure.
+
+A> Adding a reference to the page number would also be helpful in print, but it is obviously problematic in an ebook, since certain ebook formats have resizable text and since the page displayed by PDF readers is often different than the printed page number, because of front matter Roman numerals. So, Markua doesn't provide any special magical syntax to refer to a page number, in order to discourage it--if Markua did support a reference to a page number, then the next logical step would be to only do so in certain output formats, and then writing Markua text would feel like programming. Instead of this nightmare, a really smart Markua Processor could hypothetically (and with the author's permission) automatically add page number references to these references when producing a print-ready PDF.
 
 Here's how these references to titles and numbers work:
 
@@ -2868,12 +2870,9 @@ See [chapter #n](#span-elements), which is the best chapter in this book.
 This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this document.
 ~~~
 
-A> The only way to reference the title and numbers is in crosslinks. There's no syntax to do so without creating a crosslink--a crosslink is more helpful, since it is clickable, and adding another syntax simply to be less helpful to the reader is a bad idea. Markua has enough syntax as it is.
+The only way to reference the title and numbers is in crosslinks. There's no syntax to do so without creating a crosslink--a crosslink is more helpful, since it is clickable, and adding another syntax simply to be less helpful to the reader is a bad idea. Markua has enough syntax as it is.
 
-Notes:
-
-* Figures, chapters, code samples, etc all have implicit numbering. So, #n always works even if numbering is off. However, you will confuse readers if you refer to numbering they cannot see.
-* If numbering is off, the `#f` will not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
+Note that resources, chapters and sections all have implicit numbering. So, #n always works even if numbering is off. However, you will confuse readers if you refer to numbering they cannot see. Also, if numbering is off, the `#f` must not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
 
 {#charsub}
 ## Character Substitution (`--` for —, `~~` for –, `...` for …)
@@ -3314,6 +3313,15 @@ default-code-language
 lang
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
 
+`number-chapters`
+: `true` or `false`. Default `true`. Whether the chapters are numbered.
+
+`number-sections`
+: `true` or `false`. Default `false`. Whether the sections (and sub-sections) are numbered.
+
+`number-figures`
+: `true` or `false`. Default `true`. Whether resources are numbered when inserted as figures. Note that different types of resources (e.g. code listings, tables, images, etc.) have different numbering.
+
 restart-endnote-numbering
 : `true` or `false`. Default `false`. Whether the endnote numbering is restarted at the end of a chapter.
 
@@ -3393,15 +3401,14 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 6. Markua supports definition lists; Markdown does not (except via inline HTML).
 7. Markdown lets you use a plus sign (`+`) before each item in an unordered ("bulleted" in Markua) list; Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`.
 8. Markdown does not support closing parentheses (`)`) as ordered ("numbered" in Markua) list delimiters; Markua does.
-9. In Markdown, spaces or tabs that are in the middle of a line of text are collapsed to a single space. The reason for this is presumably that this is how things work in HTML, unless a non-breaking space (`&nbsp;`) is used. In Markua, spaces or tabs that are in the middle of a line of text are preserved, with the one exception that exactly two spaces after a period are treated identically to one space
-10. Single newlines are [respected](#single-newlines) in Markua. In Markdown, they're ignored unless you use a hack in which you add two spaces at the end of a line.
-11. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
-12. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
-13. Whereas Markua defines exactly one way of making every type of heading, Markdown defines two syntaxes for making headings: "Setext" and "atx". Markua's headers are essentially a subset of Markdown's atx headers, reinterpreted for book semantics. I say essentially, since Markua is a bit cheeky in that it interprets the same type of atx header (`#`) as either a Chapter or Part based on whether there's a `#` at the end. This is discussed further below.
-14. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
-15. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
-16. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
-17. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
+9. Markua and Markdown handle spaces, newlines and indentation differently. This is discussed in the [Spaces, Newlines and Indentation](#spaces) section.
+10. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
+11. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
+12. Markua and Markdown handle headings differently. This is discussed further below.
+13. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
+14. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+15. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
+16. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
