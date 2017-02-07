@@ -38,7 +38,7 @@ This is its specification.
 
 ## Note for Leanpub Authors
 
-Leanpub authors please [read this first](#leanpub-authors). Also, here's an [incomplete list of what we still need to build](#leanpub-unfinished) in Leanpub.
+Leanpub authors please [read this first](#leanpub-authors) to see an incomplete list of what we still need to build in Leanpub.
 
 ## What is Markua?
 
@@ -63,13 +63,13 @@ Markua documents can be automatically transformed into every currently-popular t
 
 You only need to know nine things to write a novel in Markua:
 
-1. Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key **twice**.
-2. To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
+1. To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
    `# The Chapter Name`
-3. To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
+2. To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
    `## The Section Name`
-4. To make a new paragraph just start typing. You don't need to indent your paragraphs, but you can add a tab if you want.
-5. To force a line break within a paragraph, just hit the Enter key **once**.
+3. To make a new paragraph just start typing. You don't need to indent your paragraphs.
+4. Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
+5. To force a line break within a paragraph, just hit the Enter key once.
 6. Surround text with one asterisk (`*`) on each side to make it `*italic*`.
 7. Surround text with two asterisks (`**`) on each side to make it `**bold**`.
 8. To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want:
@@ -103,21 +103,6 @@ The most popular subset of Markdown exists virtually unchanged in Markua. For ex
 
 One of the design goals of Markua is for it to be the most straightforward way for a Markdown document to become a book. So, if you already write your blog posts or lecture notes in Markdown, they are probably already valid Markua. You can use any Markua Processor, such as Leanpub, to turn them into an ebook with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books, this process will feel like adding, not converting. The process of going from a Markdown document into a Markua ebook is mostly a process of decorating--enhancing and reinterpreting the Markdown document appropriately. In fact, one of the goals is for writers who are familiar with Markdown to feel as though they are still writing in Markdown, but that Markdown somehow *grew an understanding of book concepts*. Markua is really "Markdown for books".
 
-At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and I created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
-
-Markua is the evolution of how Markdown is used at Leanpub. After years of experience with Leanpub Flavoured Markdown, I ([Peter Armstrong](https://twitter.com/peterarmstrong)) set out to specify it properly. I originally thought that this is what Markua would be: just a formalization of Leanpub Flavoured Markdown. But as the specification work evolved, I realized that Markua was really a descendant of Markdown, not just a flavour of it.
-
-Books have different abstractions than HTML. All abstractions [leak](http://www.joelonsoftware.com/articles/LeakyAbstractions.html), so HTML's abstractions leak into Markdown and the abstractions of books leak into Markua.
-
-So, I started over.
-
-I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this whole. Hopefully it is a coherent whole.
-
-## Why the Name "Markua"?
-
-When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
-
-
 {#text-formatting}
 # Text Formatting
 
@@ -140,7 +125,7 @@ Underline
 : To produce ____underlined text____, surround it with `____four underscores____`. This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually preferable to use italic instead of underline. However, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
 
 Strikethrough
-: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).)
+: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
 
 Superscript
 : To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`. (This is the same syntax as is used by pandoc.)
@@ -187,18 +172,20 @@ This is a paragraph.
 This is a paragraph.
 ~~~
 
-Specificaly, to create a Markua heading, you put the following on a line by itself, with a blank line above and below it:
+Specifically, to create a Markua heading, you put the following on a line by itself:
 
 * between one and six pound signs (`#`)
 * followed by exactly one space
 * followed by text
 * followed (only for parts) by exactly one space and exactly one pound sign
 
+A Markua heading usually needs a blank line above and below it. There are two exceptions: if it's at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.
+
 Making these headings divides your book or document into these divisions. If you add part headings, your book will have parts; if you don't, it won't. If you add chapter headings, your book will have chapters; if you don't, it won't.
 
 Markua is very strict about its heading syntax:
 
-1. In Markua, to make a part heading you make a heading like `# Title #` -- the heading starts with exactly one pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
+1. In Markua, to make a part heading you make a heading like `# Title #`--the heading starts with exactly one pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
 2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading.
 3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem traditionally, but which might be these days.)
 4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
@@ -268,7 +255,7 @@ We will discuss figures first and then spans.
 
 When a resource is properly inserted as a figure, the resource is inserted with at least one newline before and after it.
 
-A figure can either be top-level (with a blank line before and after it), or it can be contained in a paragraph. The ways that figures and other block elements can be inserted in paragraphs is [discussed in depth](#inserting-into-paras) later.
+A figure can either be top-level (with a blank line before and after it), or it can be contained in a paragraph. The ways that figures and other block elements can be inserted in paragraphs as [discussed in depth](#inserting-into-paras) later.
 
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
@@ -320,7 +307,7 @@ A resource which is inserted as a figure can have a figure caption.
 This caption shows up in two places in the output:
 
 1. Near the resource, typically above or below it, per the preference of the Markua Processor.
-2. As the name of the Figure in the List of Illustrations, Table of Figures or Table of Tables, if one is generated for the book. In this case, the caption name should serve as the text, and be a crosslink to the caption associated with the figure itself.
+2. Based on the resource type, either in the List of Illustrations, List of Tables or Table of Figures, if they are generated for the book. This text should also be a crosslink to the caption inserted near the figure itself.
 
 The caption for a figure can be provided either in the square brackets in front of a local or web resource or in the attribute list above the resource:
 
@@ -1378,13 +1365,13 @@ The following is the supported attribute for table resources, in addition to the
 `widths`
 : Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
 
-Just as with images, the `class` can be used by Markua Processors to provide the approrpiate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.)
+Just as with images, the `class` can be used by Markua Processors to provide the appropriate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.)
 
 #### Optional Simpler Table Syntax Support
 
 The actual syntax to define a Markua table, either in an external file or inline, is slightly more complex than other excellent Markdown table syntaxes, such as the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/).
 
-The reason the complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
+The reason for this complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
 
 Markua makes the following compromise: Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) table syntax in Markua documents.
 
@@ -1440,14 +1427,6 @@ Finally, note that spaces on a line and an empty blank line are equivalent.
 
 Since a blank line is added when concatenating multiple manuscript files, there is almost no good reason to support blank lines, or lines containing only whitespace, at the beginning of a file. However, there is no reason not to support them. Since they are at the beginning of a file, they are clearly visible to the author. So, an author who really wants to add multiple blank lines can do so.
 
-## Trailing Spaces and Blank Lines are Removed
-
-Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
-
-Furthermore, all trailing whitespace at the end of a Markua file is stripped. This includes all blank lines and all lines containing only whitespace. Trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting is insanity.
-
-For the programmers: if a file contains only blank lines or lines containing only whitespace, every line is removed. (These lines are considered at the end of the file, not the beginning.) So, concatenating this file with other Markua manuscript files just produces the extra blank line which is added by Markua when concatenating any Markua file.
-
 ## Leading Spaces (Prose vs. Poetry)
 
 In Markua, leading whitespace (spaces or tabs at the beginning of a line) is interpreted based on context: specifically, based on what came before it.
@@ -1489,6 +1468,17 @@ The two reasons for preserving internal spaces (except after periods) are (1) re
 
 The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so. The one exception is that if you use periods, the difference between 1 and 2 spaces after them will not be preserved. If that's a deal-breaker, you need to use an [inline code resource](#inline-code-resources), delimited with three tildes so as to not get inadvertently syntax highlighted.
 
+## Trailing Spaces at the End of a Line are Removed
+
+Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
+
+## Blank Lines at the End of a File are Removed
+
+All blank lines and all lines containing only whitespace at the end of a Markua file are removed. Trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting--whether at the end of a line or the end of a file--is insanity.
+
+For the programmers: if a file contains only blank lines or lines containing only whitespace, every line is removed. (These lines are considered at the end of the file, not the beginning.) So, concatenating this file with other Markua manuscript files just produces the extra blank line which is added by Markua when concatenating any Markua file.
+
+{#concatenating}
 ## One Blank Line Is Added When Concatenating Manuscript Files
 
 A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** (i.e. one blank line) added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
@@ -1709,15 +1699,15 @@ Markdown has the interesting combination of supporting one element lists and ign
 
 `1986. What a great season.`
 
-This would produce a single-element numbered list starting with `1.` -- which in my opinion, is a blatant violation of the Principle of Least Surprise.
+This would produce a single-element numbered list starting with `1.`--which in my opinion, is a blatant violation of the Principle of Least Surprise.
 
-Now, in Markua, if we supported single-element numbered lists, this would produce a single-element numbered list starting with `1986.` -- which would be almost as bad as in Markdown.
+Now, in Markua, if we supported single-element numbered lists, this would produce a single-element numbered list starting with `1986.`--which would be almost as bad as in Markdown.
 
 (By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1986\. What a great season.` to avoid this.)
 
 But what to do?
 
-The answer is simple: in Markua, **single-element numbered lists are not lists**. This is true for numbered lists only -- single-element bulleted lists and single-element definition lists are both lists. (In the case of a bulleted list it's stupid, but the alternative is stupider. In the case of a definition list there's actually a legitimate usage of a single-element definition list: a single definition.)
+The answer is simple: in Markua, **single-element numbered lists are not lists**. This is true for numbered lists only--single-element bulleted lists and single-element definition lists are both lists. (In the case of a bulleted list it's stupid, but the alternative is stupider. In the case of a definition list there's actually a legitimate usage of a single-element definition list: a single definition.)
 
 So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses.
 
@@ -2225,7 +2215,7 @@ B> Yes, we're in Font Awesome!
 B> So is GitHub, of course. Unicorns.
 ~~~
 
-In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon. In a Markua implementation that does not understand the icon attribute, nothing will be generated for that attribute -- it will be functionally equivalent to the attribute not being present.
+In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon. In a Markua implementation that does not understand the icon attribute, nothing will be generated for that attribute--it will be functionally equivalent to the attribute not being present.
 
 {#inserting-into-paras}
 ## Inserting Block Elements Inside Paragraphs
@@ -2561,6 +2551,8 @@ Note that only one of `words`, `lines` or `pages` may be provided. Providing mor
 
 ## Markua Processor Behaviour
 
+TODO - specify more clearly that whether quizzes are output in an ebook for MOOC or online course is Markua Processor dependent etc
+
 A Markua Processor needs to be able to output questions in a medium-appropriate way. This includes outputting multiple-choice questions without showing their answers, of course. The display of fill in the blank and essay questions varies greatly based on whether the question is in an online quiz or exercise, in an ebook or on paper. Markua Processors are encouraged to be creative here.
 
 When a quiz is output by a Markua Processor in an ebook or a physical book, the following things must occur:
@@ -2884,18 +2876,41 @@ Notes:
 * If numbering is off, the `#f` will not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
 
 {#charsub}
-## Character Substitution (`--` for —, `---` for –, `...` for …)
+## Character Substitution (`--` for —, `~~` for –, `...` for …)
 
  All Markua documents are written in UTF-8, so to produce any Unicode chracter, it possible to just use the proper Unicode characters. However, in certain cases, it's desirable for Markua to specify automatic replacement of certain combinations of characters with a Unicode replacement. If a Markua Processor encounters one of these combinations of characters outside of a code block, the Markua Processor must replace the combination of characters with the appropriate Unicode character in the output.
 
 `--`
 : To produce an em dash (—), what is thought of by non-typography people as a "dash" or a "long dash", you can just type `--`. You can also use the proper Unicode character, U+2014, of course.
 
-`---`
-: To produce an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type `---`. This is the same syntax as used by Aaron Swartz in [atx](http://www.aaronsw.com/2002/atx/intro), and the rationale is correct: this is the least used of the dashes, so it should be the most cumbersome to type. Note that there are two cases when `---` does not produce an en dash: when the `---` is on a line by itself (in which case it produces a scene break + page break), and when the `---` is used as part of a table definition.
+`~~`
+: To produce an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type `~~`.
 
 `...`
 : To produce a horizontal ellipsis (…), you can just type `...`. You can also use the proper Unicode character, U+2026, of course.
+
+{aside}
+# Why not just use `---` for en dash, like atx?
+
+I had considered following Aaron Swartz's approach in [atx](http://www.aaronsw.com/2002/atx/intro) of using `--` for em dash and `---` for en dash. However, the problem is that en dash (–) is physically shorter than em dash (—), and using `---` for something that is shorter than what is produced by `--` feels a bit wrong.
+
+# Why not just use `--` for en dash and `---` for em dash?
+
+There are two arguments to use `---` for em dash and `--` for en dash:
+
+1. The em dash is longer than the en dash, so the number of hyphens to produce it should be longer.
+2. Other Markdown extensions do this, as does TeX.
+
+However, there are two strong reasons to not do this:
+
+1. Many other programs (e.g. Word) replace `--` with em dash. For Markua to replace it with en dash would be surprising. Worse, since an en dash is longer than a hyphen, an author might assume that Markua was in fact replacing `--` with em dash, and that their font just had short em dashes. It's possible to be literate and not know that en dashes exist--I managed it for a few decades! So, inadvertently producing it would be bad.
+
+2. The en dash is used far, far less than the em dash, so it shouldn't be easier to produce. (This is essentially the same rationale for using Dvorak layout instead of QWERTY.) The existence of an en dash shouldn't make typing an em dash worse, and having to type an extra `-` character every time you want to make an em dash would, in fact, make your life just a little bit worse.
+
+# Why not just replace hyphens with en dashes?
+
+Simple: that would be wrong. Hyphens are legitimate punctuation, and are different than en dashes.
+{/aside}
 
 ## Soft Hyphen
 
@@ -3314,6 +3329,18 @@ title
 
 These appendices contain details which would be distracting or boring if included in the main body of the Markua specification. These include highly technical details, differences with Markdown, discussions of HTML mapping and notes for Leanpub authors.
 
+## Origins of Markua
+
+At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and [I](https://twitter.com/peterarmstrong) created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
+
+Markua is the evolution of how Markdown is used at Leanpub. After years of experience with Leanpub Flavoured Markdown, I set out to specify it properly. I originally thought that this is what Markua would be: just a formalization of Leanpub Flavoured Markdown. But as the specification work evolved, I realized that Markua was really a descendant of Markdown, not just a flavour of it.
+
+Books have different abstractions than HTML. All abstractions [leak](http://www.joelonsoftware.com/articles/LeakyAbstractions.html), so HTML's abstractions leak into Markdown and the abstractions of books leak into Markua. So, I started over. I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this (hopefully coherent) whole.
+
+## Why the Name "Markua"?
+
+When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
+
 ## Plain Text Encoding in UTF-8
 
 Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
@@ -3330,68 +3357,6 @@ Markua and Markdown have different use cases. Markdown is a better way to write 
 By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate by doing formatting is reduced.
 
 Now, one design benefit of the support for inline HTML in Markdown is that Markdown's syntax can stay artificially small--since Markdown authors can always fall back to using HTML directly, Markdown does not need to be able to produce all of HTML. Since Markua does not support inline HTML, Markua must contain all concepts that it supports directly expressed using Markua syntax. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books often require tables, Markua needs to add a table syntax.
-
-{#numbered-list-numbering-rules}
-## Numbered List Numbering Rules
-
-There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
-
-If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
-
-In theory, Markua supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive number, either increasing or decreasing.
-2. Every item in the list begins with the same number.
-
-This is not actually quite true.
-
-See, the notion of "consecutive" is easy to explain and to check for decimal numbers, either in increasing or decreasing order. `1, 2, 3, ...`, `456, 457, 458, ...`, or `5, 4, 3` are all easily verified as consecutive, both by humans and computers.
-
-However, Markua also supports numbered lists using uppercase and lowercase alphabetical numbering, as well as uppercase and lowercase Roman numeral numbering, and in increasing or decreasing order.
-
-In the case of alphabetical numbering, checking "consecutive" is harder. It's relatively straightforward for the first 26 items, but then all bets are off. In case you're curious, here is the sequence used in HTML for increasing alphabetical numbering:
-
-`a, b, ..., z, aa, ab, ..., az, ba, bb, ... bz, za, zb, ..., zz, aaa, aab, ..., aaz, aba, abb, ...`
-
-In terms of Roman numerals, it's even worse. I'm sure that someone in a Classics department (or in the NFL) knows the algorithm by heart, but I don't.
-
-So, what are Markua authors and implementors of Markua processors to do?
-
-Markua makes this simpler by specifying the following rules.
-
-Markua *actually* supports creating a numbered list based on a different set of conditions based on the numbering type.
-
-For decimal numbers, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive number, either increasing or decreasing.
-2. Every item in the list begins with `1.`
-
-For uppercase and lowercase alphabetical numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase, or `Z.` for uppercase. (This way, implementors of Markua processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
-2. Every item in the list begins with `a.` for lowercase letters or `A.` for uppercase letters.
-
-These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single-element list beginning with "AA" instead!
-
-For uppercase and lowercase Roman numeral numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive Roman numeral, followed by a period, and the lettering does not extend past `xii.` for lowercase Roman numerals or `XII.` for uppercase Roman numerals. To be clear, this means that the only valid consecutive lowercase Roman numerals are `i, ii, iii, iv, v, vi, vii, viii, ix, x, xi, xii`, and that the only valid consecutive uppercase Roman numerals are `I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII`.
-2. Every item in the list begins with `i.` for lowercase Roman numerals or `I.` for uppercase Roman numerals.
-
-The combination of the rules for Roman numeral numbering means that you can have an arbitrarily long Roman numeral list starting from `i.` or `I.`, but that implementors of Markua processors don't need to write code to figure out whether `MCMLXXV` is a valid Roman numeral, and what the consecutive Roman numeral sequence after it is.
-
-If you're wondering why I picked `xii` and `XII` for the last consecutive lowercase and uppercase Roman numerals to respect: this is Roman numeral 12, and the main usage of Roman numerals in modern life is in clock faces.
-
-Speaking of clock faces, I have bad news for fans of watches and antique clocks:
-
-* The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
-* The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
-
-It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
-
-In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
-
-If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
 ## Markua Specification Scope
 
@@ -3587,9 +3552,6 @@ If you are curious to try Markua, to see what currently works (not much!) and wh
 
 I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
 
-{#leanpub-unfinished}
-## Partial List of Incomplete Markua Features in Leanpub
-
 Here's an incomplete list of some of the work we still need to do in Leanpub to support Markua. Hopefully it gives you a clue about some things that do not work yet:
 
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
@@ -3619,6 +3581,69 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Make the change to preserve internal space except after periods, instead of the inconssitent mess we currently have.
 - The kerning on figure captions is a disaster. It looks like one word!
 - Support crosslinks on spans
+- Our definition lists sometimes don't force newlines after the term, e.g. “type This is the resource type..."
+
+{#numbered-list-numbering-rules}
+## Numbered List Numbering Rules
+
+There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
+
+If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
+
+In theory, Markua supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive number, either increasing or decreasing.
+2. Every item in the list begins with the same number.
+
+This is not actually quite true.
+
+See, the notion of "consecutive" is easy to explain and to check for decimal numbers, either in increasing or decreasing order. `1, 2, 3, ...`, `456, 457, 458, ...`, or `5, 4, 3` are all easily verified as consecutive, both by humans and computers.
+
+However, Markua also supports numbered lists using uppercase and lowercase alphabetical numbering, as well as uppercase and lowercase Roman numeral numbering, and in increasing or decreasing order.
+
+In the case of alphabetical numbering, checking "consecutive" is harder. It's relatively straightforward for the first 26 items, but then all bets are off. In case you're curious, here is the sequence used in HTML for increasing alphabetical numbering:
+
+`a, b, ..., z, aa, ab, ..., az, ba, bb, ... bz, za, zb, ..., zz, aaa, aab, ..., aaz, aba, abb, ...`
+
+In terms of Roman numerals, it's even worse. I'm sure that someone in a Classics department (or in the NFL) knows the algorithm by heart, but I don't.
+
+So, what are Markua authors and implementors of Markua processors to do?
+
+Markua makes this simpler by specifying the following rules.
+
+Markua *actually* supports creating a numbered list based on a different set of conditions based on the numbering type.
+
+For decimal numbers, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive number, either increasing or decreasing.
+2. Every item in the list begins with `1.`
+
+For uppercase and lowercase alphabetical numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase, or `Z.` for uppercase. (This way, implementors of Markua processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
+2. Every item in the list begins with `a.` for lowercase letters or `A.` for uppercase letters.
+
+These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single-element list beginning with "AA" instead!
+
+For uppercase and lowercase Roman numeral numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive Roman numeral, followed by a period, and the lettering does not extend past `xii.` for lowercase Roman numerals or `XII.` for uppercase Roman numerals. To be clear, this means that the only valid consecutive lowercase Roman numerals are `i, ii, iii, iv, v, vi, vii, viii, ix, x, xi, xii`, and that the only valid consecutive uppercase Roman numerals are `I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII`.
+2. Every item in the list begins with `i.` for lowercase Roman numerals or `I.` for uppercase Roman numerals.
+
+The combination of the rules for Roman numeral numbering means that you can have an arbitrarily long Roman numeral list starting from `i.` or `I.`, but that implementors of Markua processors don't need to write code to figure out whether `MCMLXXV` is a valid Roman numeral, and what the consecutive Roman numeral sequence after it is.
+
+If you're wondering why I picked `xii` and `XII` for the last consecutive lowercase and uppercase Roman numerals to respect: this is Roman numeral 12, and the main usage of Roman numerals in modern life is in clock faces.
+
+Speaking of clock faces, I have bad news for fans of watches and antique clocks:
+
+* The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
+* The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
+
+It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
+
+In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
+
+If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
 {#acknowledgments}
 # Acknowledgments
