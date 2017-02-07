@@ -654,9 +654,11 @@ Here's a paragraph after the figure.
 
 The syntax to insert a video is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for both video formats; inline resource locations for video are obviously not supported.
 
+A Markua Processor may choose to not support video at all, or to only support one of local or web video due to bandwidth or copyright concerns.
+
 Unlike images, which are supported in most circumstances, with video files it's currently a bit of a crapshoot. There's currently a dominant proprietary format (H.264, or .mp4) and a new open source challenger (WebM). It's entirely likely that many ebook readers won't support either.
 
-Also, unlike images where many images will accompany the manuscript itself, with video it's expected that authors will be uploading their videos to sites such as YouTube first, and then reusing these videos in the contents of their Markua books. So, while video must support local and web video, web video will be much more prominent than web images in a Markua book.
+Also, unlike images where many images will accompany the manuscript itself, with video it's expected that authors will be uploading their videos to sites such as YouTube first, and then reusing these videos in the contents of their Markua books. So, while video can be local or web video, web video will be much more prominent than web images in a Markua book.
 
 Furthermore, unlike with web images where the format (and thus the type) are typically discoverable from the file extension in the URL, with web video it's usually not. So, for web videos, there will typically be a `{type: video}` attribute list at a minimum. That said, if the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. So YouTube videos may just work in some Markua processors, like Leanpub, without specifying either the `type` or `format`.
 
@@ -713,6 +715,8 @@ Ironically, it took me about a year after that talk was recorded to finally figu
 ### Audio
 
 Just as with video, the audio support in ebooks and on the web is more varied than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in widespread use, and there are a number of other formats with supporters. It's entirely likely that many ebook readers won't support any of them.
+
+A Markua Processor may choose to not support audio at all, or to only support one of local or web audio due to bandwidth or copyright concerns.
 
 Per the [table](#resource-types-and-formats) of resource types and formats, the following types of audio resources are supported in Markua: MP3, AAC, WAV and Ogg Vorbis.
 
@@ -3561,6 +3565,8 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's an incomplete list of some of the work we still need to do in Leanpub to support Markua. Hopefully it gives you a clue about some things that do not work yet:
 
+### TODO in Leanpub
+
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
 - There is no more type attribute on quizzes. Quizzes are always marked.
 - Support Nested Lists.
@@ -3568,15 +3574,12 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Confirm ids work on definition list items.
 - Add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub.
 - Ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
-- Support CriticMarkup.
 - Support tables in external files.
 - Support `---` for en dash (unless it's on a line by itself, in which case it's a scene break + page break.
 - Support modified scene breaks (- - -) and page breaks (___).
 - Support parentheses in numbered lists
 - Remove HTML comment syntax, since the CriticMarkup comment syntax is enough.
-- Finish Leanpub for Courses.
 - Support question alternates (?1, ?1).
-- Support index entries.
 - Support the other directives.
 - Support `cite` and `url` on blockquotes.
 - Use `table-of-contents` not `toc`.
@@ -3589,6 +3592,41 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - The kerning on figure captions is a disaster. It looks like one word!
 - Support crosslinks on spans
 - Our definition lists sometimes don't force newlines after the term, e.g. “type This is the resource type..."
+- SVG support
+- Support MathML
+- Support External and local tables, tables as resources in general
+- Be stricter about headers (#foo should not start a chapter, blank lines before and after, etc)
+- Support inline resources
+- Support type attribute on resources
+- Support image attributes fullbleed, height, cite, url
+- Decide what we are doing with the cite and url attributes
+- Specifically forbid local video resources
+- Support video attributes embed, fullbleed, float, height, width
+- Support dashed attributes for code resources line-numbers, number-from, crop-start, crop-end
+- Support three-tildes defaults to text, backticks default to guess approach
+- Support inline math with format attribute
+- Support table widths attributes on columns
+- Support Internal white-space is preserved, except after periods
+- Support `-` for lists
+- Support tab instead of space for lists
+- Support descending lists
+- Support specs for all of the list types
+- Support multi-paragraph lists and whitespace
+- Support max list-nesting in Markua of three levels
+- Support scene breaks with page-breaks, and page-breaks
+- Support blockquotes inside of a paragraph
+- Support cite and url attributes for blockquotes
+- Support the quiz or exercise chapter heading being considered the name of the quiz or exercise.
+- Does this quiz or exercise heading show up in the ToC?
+- Support ids and other attributes on span elements
+- Support smart crosslinks
+- Support Emoji
+- Support CriticMarkup.
+- Support index entries and index generation.
+- Support language directives
+- Support Section directives
+- Finish Leanpub for Courses.
+
 
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
