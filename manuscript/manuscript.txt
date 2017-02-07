@@ -2573,9 +2573,9 @@ Over the past decade, there has been a steady growth of interest in courses deli
 3. Exercises, with answers provided to the student
 4. Quizzes, with answers used to automatically mark the quiz
 
-It turns out the four things in this list all work perfectly in a Markua document. So, not only can Markua be used to easily create a textbook which includes video, audio, images and quizzes, it is also an amazingly simple and flexible way of creating a MOOC. A MOOC is essentially just a textbook which is executable, plus discussion forums and credentials. For example, [Leanpub](https://leanpub.com) authors can click one button to create a massive open online course (MOOC), complete with automated marking for all the quizzes in the course, entirely from one Markua source document.
+It turns out the four things in this list all work perfectly in a Markua document. So, not only can Markua be used to easily create a textbook which includes video, audio, images and quizzes, it is also an amazingly simple and flexible way of creating a MOOC. A MOOC is essentially just a textbook which is executable, plus discussion forums and credentials. For example, [Leanpub](https://leanpub.com) authors can click one button[^fwdstmt] to create a massive open online course (MOOC), complete with automated marking for all the quizzes in the course, entirely from one Markua source document.
 
-A> That's a forward-looking statement--Leanpub for Courses is currently in private beta!
+[^fwdstmt]: That's a forward-looking statement--Leanpub for Courses is currently in private beta!
 
 The fact that a Markua document can be used to create an online course or MOOC means that certain aspects of the syntax for quizzes and exercises are more robust than they would otherwise. One example of this is question alternates.
 
