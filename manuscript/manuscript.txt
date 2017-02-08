@@ -210,14 +210,14 @@ There are other more technical rules about spaces, newlines and indentation, whi
 {#resources}
 # Resources
 
-Markua documents are written in plain text, either in one text file or multiple text files. However, modern books sometimes contain more than text. Books may embed many types of *resources*. These resources have traditionally included things like tables, images, computer code listings and mathematical equations. More recently, with the development of ebooks and formats like EPUB3, ebooks have gained the ability to embed audio and video resources. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
+Markua documents are written in plain text, either in one text file or multiple text files. However, modern books sometimes contain more than text. Books may embed many types of *resources*. Each type of resource has a number of supported formats. Markua's goal is to make inserting all types of resources simple and consistent, while staying as close to Markdown's syntax as possible.
 
 Resources vary in four different ways:
 
 1. **Insertion Methods**: Span and Figure
 2. **Locations**: Local, Web and Inline
-3. **Types**: `image`, `video`, `audio`, `code`, `math` or `table`
-4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, `plain`, etc.
+3. **Types**: `audio`, `code`, `image`, `math`, `poetry`, `table` and `video`
+4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, etc.
 
 Before going into more detail, it's helpful to consider a brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
