@@ -1000,6 +1000,254 @@ Finally, while syntax highlighting is optional in a Markua Processor, if a Marku
 
 Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
 
+
+
+
+
+
+
+
+
+{#poetry}
+### Poetry
+
+Poetry can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to poetry as to all other resources.
+
+As discussed, poetry cannot have alt text. It's just text. If any alt text is provided for a poetry resource, it is ignored.
+
+Markua specifies only one specific file extension to be associated with a type of `poetry`: the `.txt` extension, which is for the format of `text`. However, Markua Processors must interpret **all** unspecified file extensions as specifying a resource of type `poetry` with a format of `guess`.
+
+Regardless of whether syntax highlighting is supported and the programmming language is detected, all poetry must be formatted as `monospaced text` by Markua Processors.
+
+The `text` format means to not do any syntax highlighting as well.
+
+The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the poetry itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted poetry. Syntax highlighting is entirely optional in Markua Processors. If a Markua Processor does not support syntax highlighting, and/or if it cannot detect a matching supported programming language, then it must format the poetry as though the format was `text`--i.e. to format it as unformatted monospaced text.
+
+Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
+
+The default value of the format attribute for poetry is complex:
+
+1. For poetry which is inserted as a span (which is only supported with inline resources), the default format is `text`.
+2. For poetry which is inserted as a figure which is inserted as an inline resource using three tildes, the default format is `text`.
+3. For all other poetry, the default format is `guess`. This includes local and web resources inserted as figures, and poetry inserted as an inline figure using three backticks.
+
+Note that the default format can be overridden by specifying it via an attribute list, or after the three backticks in syntactic sugar.
+
+{#supported-attributes-for-poetry}
+#### Supported Attributes for Poetry
+
+The following are the supported attributes for poetry resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
+
+`line-numbers`
+: This determines whether the poetry sample shows line numbers. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`.
+
+`number-from`
+: If line numbers are shown, this lets you override the starting number of the line numbers. The default value is `1`.
+
+`crop-start`
+: Sometimes it's desirable to only show part of a poetry resource defined in an external file as the poetry example. The `crop-start` and `crop-end` attributes let you accomplish this. The `crop-start` attribute defines the line which represents the first line included from the resource. For example, `{crop-start: 10, crop-end: 15, line-numbers: true, number-from: 10}` ensures that lines 10-15 are shown and are numbered as lines 10-15. The default value is 1, which is the first line of the file.
+
+`crop-end`
+: This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
+
+##### Default Value of the `format` attribute in Inline Poetry Samples
+
+The default value of the `format` attribute for a poetry resource inserted as a figure varies based on context.
+
+If the poetry resource is a local or web resource, it defaults to `guess`.
+
+If the poetry resource is an inline resource, the default varies based on the delimiter. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the poetry language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
+
+#### Local Poetry Resources
+
+Local poetry resources can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+
+This first figure will be a type of poetry and a format of `guess`. A Markua Processor which associates `.rb` file extensions with Ruby poetry will treat this as Ruby poetry; a Markua Processor which has no association for `.rb` files will treat it as plain text:
+
+~~~
+Here's a paragraph before the figure.
+
+![Hello World in Ruby](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+That is equivalent to:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: guess}
+![Hello World in Ruby](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+If you don't want to take chances you can do this:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: ruby}
+![Hello World in Ruby](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+Note that the caption is optional in all figures:
+
+~~~
+Here's a paragraph before the figure.
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+#### Web Poetry Resources
+
+Web poetry resources function identically to how local poetry resources work, including the significance of file extensions. The only differences is that the files are on the web.
+
+This will be a type of poetry and a format of `guess` since the file extension is not specified:
+
+~~~
+![Hello World in Ruby](http://markua.com/hello.rb)
+~~~
+
+That is equivalent to:
+
+~~~
+{format: guess}
+![Hello World in Ruby](http://markua.com/hello.rb)
+~~~
+
+If you don't want to take chances you can do this:
+
+~~~
+{format: ruby}
+![Hello World in Ruby](http://markua.com/hello.rb)
+~~~
+
+Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+
+{#inline-poetry-resources}
+#### Inline Poetry Resources
+
+Inline poetry resources are the most flexible way to insert poetry as figures.
+
+This will be a type of poetry and a format of `guess` since three backticks are used and since the format is not specified:
+
+~~~
+Some paragraph.
+
+---
+===
+puts "hello"
+
+
+
+Some paragraph.
+~~~
+
+
+
+
+
+That is equivalent to:
+
+~~~
+Some paragraph.
+
+```guess
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+If you don't want to take chances you can do this to explicitly specify the format:
+
+~~~
+Some paragraph.
+
+```ruby
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+If you don't like syntactic sugar you can do:
+
+~~~
+Some paragraph.
+
+{format: ruby}
+```
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+If you want a figure caption, you can add it to the attribute list with any of the above. For example:
+
+~~~
+Some paragraph.
+
+{caption: "Hello World in Ruby"}
+```ruby
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+Finally, if you want the poetry to definitely not get syntax highlighted, you can force format to be `text` in one of two ways.
+
+First, you can set it explicitly:
+
+~~~
+Some paragraph.
+
+```text
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+Second, you can use three tildes instead of three backticks, since the default with tildes is `text` not `guess`:
+
+```
+Some paragraph.
+
+~~~
+puts "hello"
+~~~
+
+Some paragraph.
+```
+
+#### Line Wrapping in Poetry Resources
+
+Poetry resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all poetry is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {#math}
 ### Math
 
@@ -1902,37 +2150,33 @@ Broadly speaking, Markua documents consist of three things: block elements, span
 These are the remaining block elements defined by Markua.
 
 {#scene-and-page-breaks}
-## Scene Breaks and Page Breaks (`* * *`, `- - -` and `___`)
+## Scene Breaks and Page Breaks (`* * *` and `===`)
 
 In fiction, scene breaks are sometimes added between paragraphs in a chapter to denote a break in context.
-
-In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML. However, books do have the concepts of scene breaks (with or without a page break after them) and of page breaks.
 
 So, Markua uses the Markdown horizontal rule syntax to produce all three cases, as follows:
 
 `* * *`
-: Three or more asterisks on a line by themselves, with or without spaces between them (e.g. `***`, `* * *`, etc.), produce a scene break which is **not** followed by a page break.
+: Three or more asterisks on a line by themselves, with or without spaces between them (e.g. `***`, `* * *`, `**********`, etc.), produce a scene break.
 
-`- - -`
-: Three or more hyphens on a line by themselves, with or without spaces between them (e.g. `---`, `- - -`, etc.), produce a scene break which **is** followed by a page break.
+`===`
+: Three or more equals signs on a line by themselves, with or without spaces between them (e.g. `===`, `= = =`, `==========`, etc.), produce a page break. Page breaks are discouraged in Markua: when you're writing, unsemantic formatting is procrastination, and most page breaks are exactly this. (Much like width and height attributes on images, however, page breaks are supported in Markua due to pragmatic concerns.)
 
-`___`
-: Three or more underscores on a line by themselves, with or without spaces between them (e.g. `___`, `_ _ _`, etc.), produce a page break. Page breaks look a bit ugly, and are discouraged in Markua: when you're writing, unsemantic formatting is procrastination, and most page breaks are exactly this. (Much like width and height attributes on images, however, page breaks are supported in Markua due to pragmatic concerns.)
-
-Here is an example showing all three uses:
+Here is an example showing both uses:
 
 ~~~
 This is before the first scene break.
 
 * * *
 
-This is after the first scene break and before the second. There is no forced page break after the first scene break.
+This is after the scene break. It has a page break after it.
 
----
+===
 
-This is after the second scene break. There is a forced page break after the second scene break.
+This is on a new page, after the forced page break. It has a scene break and then a page break after it.
 
-___
+***
+===
 
 This is on a new page, after the forced page break.
 ~~~
@@ -3414,6 +3658,7 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 14. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
 15. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
 16. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
+17. In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML or horizontal rules. The `***` is used for section breaks, `___` starts poetry, and `---` starts monospaced poetry.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
