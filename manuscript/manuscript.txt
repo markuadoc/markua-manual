@@ -484,35 +484,39 @@ Inline resources can be of type `code`, `math` (regardless of format), `table`, 
 {#resource-types-and-formats}
 ## Resource Types and Formats
 
-As discussed, there are six types of resources: `image`, `video`, `audio`, `code`, `math` and `table`. Each type of resource has a number of supported formats. Any of the six resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+There are seven types of resources: `audio`, `code`, `image`, `math`, `poetry`, `table` and `video`. Each type of resource has a number of supported formats. Any of the seven resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
-Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes. The type and the format can also be inferred from the file extension and, in the case of web resources, the URL.
+Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes.
+
+The type and the format can also be inferred from the file extension and, in the case of web resources, the URL. The following table shows the mapping of file extensions to the default `format` and `type` inferred. Note that these are just defaults: a resource can be set to be any type and format using the attribute list, and this overrides what is inferred from the file extension.
 
 {caption: "Formats Mapped to Resource Types"}
-|-----------|------------|--------|--------------|
-| Extension | `format`   | `type` | Description  |
-|-----------|------------|--------|--------------|
-| `.gif`    | `gif`      | image  | GIF image    |
-| `.png`    | `png`      | image  | PNG image    |
-| `.jpg`    | `jpeg`     | image  | JPEG image   |
-| `.jpeg`   | `jpeg`     | image  | JPEG image   |
-| `.svg`    | `svg`      | image  | SVG image    |
-| `.svgz`   | `svgz`     | image  | Zipped SVG   |
-| `.mp4`    | `mp4`      | video  | MP4 video    |
-| `.webm`   | `webm`     | video  | WebM video   |
-| `.mp3`    | `mp3`      | audio  | MP3 audio    |
-| `.m4a`    | `aac`      | audio  | AAC audio    |
-| `.aac`    | `aac`      | audio  | AAC audio    |
-| `.wav`    | `wav`      | audio  | WAV audio    |
-| `.wave`   | `wav`      | audio  | WAV audio    |
-| `.ogg`    | `ogg`      | audio  | Ogg Vorbis   |
-| `.oga`    | `ogg`      | audio  | Ogg Vorbis   |
-| `.tex`    | `latex`    | math   | LaTeX math   |
-| `.mathml` | `mathml`   | math   | MathML math  |
-| `.tbl`    | `table`    | table  | Markua table |
-| `.txt`    | `text`     | code   | Plain text   |
-| (other)   | `guess`    | code   | Unknown      |
-|-----------|------------|--------|--------------|
+|-----------|--------------|----------|--------------------|
+| Extension | `format`     | `type`   | Description        |
+|-----------|--------------|----------|--------------------|
+| `.aac`    | `aac`        | `audio`  | AAC audio          |
+| `.gif`    | `gif`        | `image`  | GIF image          |
+| `.jpg`    | `jpeg`       | `image`  | JPEG image         |
+| `.jpeg`   | `jpeg`       | `image`  | JPEG image         |
+| `.mathml` | `mathml`     | `math`   | MathML math        |
+| `.mono`   | `monospaced` | `poetry` | Monospaced poetry  |
+| `.mp3`    | `mp3`        | `audio`  | MP3 audio          |
+| `.mp4`    | `mp4`        | `video`  | MP4 video          |
+| `.m4a`    | `aac`        | `audio`  | AAC audio          |
+| `.oga`    | `ogg`        | `audio`  | Ogg Vorbis         |
+| `.ogg`    | `ogg`        | `audio`  | Ogg Vorbis         |
+| `.png`    | `png`        | `image`  | PNG image          |
+| `.svg`    | `svg`        | `image`  | SVG image          |
+| `.svgz`   | `svgz`       | `image`  | Zipped SVG         |
+| `.tbl`    | `table`      | `table`  | Markua table       |
+| `.tex`    | `latex`      | `math`   | LaTeX math         |
+| `.text`   | `text`       | `poetry` | Poetry             |
+| `.txt`    | `code`       | `code`   | Unformatted code   |
+| `.wav`    | `wav`        | `audio`  | WAV audio          |
+| `.wave`   | `wav`        | `audio`  | WAV audio          |
+| `.webm`   | `webm`       | `video`  | WebM video         |
+| (other)   | `guess`      | `code`   | Formatted code     |
+|-----------|--------------|----------|--------------------|
 
 Note that these file extensions are case-insensitive. Also, note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
