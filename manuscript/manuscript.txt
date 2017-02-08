@@ -495,26 +495,26 @@ The type and the format can also be inferred from the file extension and, in the
 | Extension | `format`     | `type`   | Description         |
 |-----------|--------------|----------|---------------------|
 | `.aac`    | `aac`        | `audio`  | AAC audio           |
-| `.gif`    | `gif`        | `image`  | GIF image           |
-| `.jpg`    | `jpeg`       | `image`  | JPEG image          |
-| `.jpeg`   | `jpeg`       | `image`  | JPEG image          |
-| `.mathml` | `mathml`     | `math`   | MathML math         |
-| `.mp3`    | `mp3`        | `audio`  | MP3 audio           |
-| `.mp4`    | `mp4`        | `video`  | MP4 video           |
 | `.m4a`    | `aac`        | `audio`  | AAC audio           |
+| `.mp3`    | `mp3`        | `audio`  | MP3 audio           |
 | `.oga`    | `ogg`        | `audio`  | Ogg Vorbis          |
 | `.ogg`    | `ogg`        | `audio`  | Ogg Vorbis          |
+| `.wav`    | `wav`        | `audio`  | WAV audio           |
+| `.wave`   | `wav`        | `audio`  | WAV audio           |
+| `.txt`    | `text`       | `code`   | Unformatted code    |
+| (other)   | `guess`      | `code`   | Formatted code      |
+| `.gif`    | `gif`        | `image`  | GIF image           |
+| `.jpeg`   | `jpeg`       | `image`  | JPEG image          |
+| `.jpg`    | `jpeg`       | `image`  | JPEG image          |
 | `.png`    | `png`        | `image`  | PNG image           |
 | `.svg`    | `svg`        | `image`  | SVG image           |
 | `.svgz`   | `svgz`       | `image`  | Zipped SVG          |
-| `.tbl`    | `table`      | `table`  | Markua table        |
+| `.mathml` | `mathml`     | `math`   | MathML math         |
 | `.tex`    | `latex`      | `math`   | LaTeX math          |
 | `.text`   | `poetry`     | `poetry` | Poetry              |
-| `.txt`    | `text`       | `code`   | Unformatted code    |
-| `.wav`    | `wav`        | `audio`  | WAV audio           |
-| `.wave`   | `wav`        | `audio`  | WAV audio           |
+| `.tbl`    | `table`      | `table`  | Markua table        |
+| `.mp4`    | `mp4`        | `video`  | MP4 video           |
 | `.webm`   | `webm`       | `video`  | WebM video          |
-| (other)   | `guess`      | `code`   | Formatted code      |
 |-----------|--------------|----------|---------------------|
 
 Note that these file extensions are case-insensitive. Also, note that .mp4 is used for MP4 video, not MP4 AAC audio.
@@ -1019,7 +1019,7 @@ The following are the supported attributes for poetry resources, in addition to 
 {#spacing-poetry-and-newlines}
 #### Spacing, Poetry and Newlines
 
-Regardless of the value of the monospaced attribute, all whitespace inside a poetry resource is respected. This includes all spaces and newlines, regardless of whether they are leading, internal or trailing spaces, and regardless of the number of consecutive newlines.
+Regardless of the value of the `monospaced` attribute, all whitespace inside a poetry resource is respected. This includes all spaces and newlines, regardless of whether they are leading, internal or trailing spaces, and regardless of the number of consecutive newlines.
 
 Poetry resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon.
 
