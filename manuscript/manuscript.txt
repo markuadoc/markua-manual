@@ -61,20 +61,17 @@ Markua documents can be automatically transformed into every currently-popular t
 {#novel-syntax}
 ## How to Write a Novel in Markua
 
-You only need to know nine things to write a novel in Markua:
+You only need to know seven things to write a novel in Markua:
 
 1. To make a new chapter you start a line with a pound sign (`#`), followed by a space, the name of the chapter and a blank line:
    `# The Chapter Name`
-2. To make a new section you start a line with two pound signs (`##`), followed by a space, the name of the section and a blank line:
-   `## The Section Name`
-3. To make a new paragraph just start typing. You don't need to indent your paragraphs.
-4. Chapters, sections and paragraphs are separated by blank lines. To add a blank line, you hit the Enter key twice.
-5. To force a line break within a paragraph, just hit the Enter key once.
-6. Surround text with one asterisk (`*`) on each side to make it `*italic*`.
-7. Surround text with two asterisks (`**`) on each side to make it `**bold**`.
-8. To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them. You can have spaces between the asterisks if you want:
+2. To make a new paragraph, hit Enter twice to add a blank line.
+3. Chapter headings and paragraphs are separated by blank lines.
+4. Surround text with one asterisk (`*`) on each side to make it `*italic*`.
+5. Surround text with two asterisks (`**`) on each side to make it `**bold**`.
+6. To add a scene break, put three asterisks on a line by themselves, with blank lines above and below them:
    `* * *`
-9. All other text and punctuation is typed normally:
+7. All other text and punctuation is typed normally:
     `He asked, "How do you type quotes?" "Like this," I replied.`
 
 That's it!
@@ -1004,9 +1001,9 @@ Code resources should have newlines added by the author to ensure that automatic
 
 Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-Per the [table](#resource-types-and-formats) of resource types and formats, the following types of math resources are supported in Markua: LaTeX math or MathML.
+Per the [table](#resource-types-and-formats) of resource types and formats, the following types of math resources can be supported by Markua Processors: LaTeX math or MathML.
 
-Note that Markua procesors do not need to support either math markup language fully in order to be compliant: if they choose to, they can simply render the text as a code resource of format `text`.
+Note that Markua procesors do not need to support either math markup syntax (LaTeX math or MathML). If a Markua Processor does not support a math markup syntax, it should simply render the text of the math resource as unformatted monospaced text, much like a code resource of format `text`.
 
 #### Supported Attributes for Math
 
@@ -1456,19 +1453,31 @@ In Markdown, not only would you lose the indents on the third and fourth lines, 
 
 More generally, the rules about single and double newlines mean that in Markua you can just write poetry without any formatting characters. Stanzas are separated with a blank line, and any indentation is preserved except on the first line of a stanza.
 
-## Internal Spaces are Preserved, Except After Periods
+## Spaces at the End of Sentences are Treated Specially
+
+A Markua Processor should be smart about interpreting what is the end of a sentence.
+
+At the end of sentences that aren't followed by newlines, a Markua Processor may output one space, one and a half spaces, two spaces or some other amount of space. (Yes, one and a half spaces at the end of a sentence is a real thing, and it is arguably the one true amount of space at the end of a sentence.)
+
+The amount of space chosen to be output at the end of sentences must be output by the Markua Processor at the end of all sentences which aren't followed by newlines, regardless of whether any given sentence has one or two spaces at its end.
+
+But what's the end of a sentence?
+
+This would be a lot easier to determine if all authors typed two spaces at the end of their sentences! This way, a Markua Processor could easily determine that something like "Mr. Armstrong" did not, in fact, contain the end of a sentence.
+
+However, many authors type one space at the end of their sentences. So, a Markua Processor should use heuristics to determine what is the end of a sentence and what is not.
+
+Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
+
+## Internal Spaces are Preserved, Except At the End of Sentences
 
 In Markdown (and HTML), multiple internal spaces or tabs in the the middle of a line of text are all collapsed to one space.
 
 In Markua, however, spaces or tabs that are in the middle of a line of text are preserved.
 
-The one exception is that a Markua Processor must consider exactly two spaces after a period to be identical to one space after a period. This is because there is no agreement about whether to use one or two spaces at the end of a sentence, and multiple authors may collaborate on Markua documents.
+The two reasons for preserving internal spaces (except at then end of sentences) are (1) respect for the author and (2) the Principle of Least Surprise: If an author types a number of spaces in the middle of a sentence in their manuscript, they are doing it for a reason--and it's disrespectful, presumptive and surprising to remove them.
 
-The actual amount of space output at the end of a sentence can be varied by the Markua Processor (e.g. it can use 1 space, 2 spaces, or some other amount of space), but this amount of space is not affected by whether the Markua document contains one or two spaces after a given sentence.
-
-The two reasons for preserving internal spaces (except after periods) are (1) respect for the author and (2) the Principle of Least Surprise: If an author types a number of spaces in the middle of a sentence in their manuscript, they are doing it for a reason--and it's disrespectful, presumptive and surprising to remove them.
-
-The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so. The one exception is that if you use periods, the difference between 1 and 2 spaces after them will not be preserved. If that's a deal-breaker, you need to use an [inline code resource](#inline-code-resources), delimited with three tildes so as to not get inadvertently syntax highlighted.
+The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so.
 
 ## Trailing Spaces at the End of a Line are Removed
 
@@ -1901,7 +1910,7 @@ So, Markua uses the Markdown horizontal rule syntax to produce all three cases, 
 : Three or more asterisks on a line by themselves, with or without spaces between them (e.g. `***`, `* * *`, etc.), produce a scene break which is **not** followed by a page break.
 
 `- - -`
-: Three or more hyphens on a line by themselves, with or without spaces between them (e.g. `---`, `- - -`, etc.), produce a scene break which **is** followed by a page break. Note that three hyphens in a row (`---`) when used somewhere other than on a line by themselves produces an [en dash (–)](#charsub); this is an exception to that. That's fine though, since an en dash on a line by itself would be stupid.
+: Three or more hyphens on a line by themselves, with or without spaces between them (e.g. `---`, `- - -`, etc.), produce a scene break which **is** followed by a page break.
 
 `___`
 : Three or more underscores on a line by themselves, with or without spaces between them (e.g. `___`, `_ _ _`, etc.), produce a page break. Page breaks look a bit ugly, and are discouraged in Markua: when you're writing, unsemantic formatting is procrastination, and most page breaks are exactly this. (Much like width and height attributes on images, however, page breaks are supported in Markua due to pragmatic concerns.)
@@ -2583,7 +2592,7 @@ The fact that a Markua document can be used to create an online course or MOOC m
 
 In an online course or MOOC, some professors might not want every question the same, despite the fact that question order and answer order can be randomized. So, Markua supports question alternates, using a simple (if slightly ugly) syntax. Question alternates are supported in both quizzes and exercises (since there's no reason not to support them in exercises), but they make the most sense in quizzes.
 
-To create question alternates, every question in the quiz or exercise (not just those with alternates) must be numbered using a `?#` syntax. This is a question mark followed by the number of the question, e.g. `?1, ?2, ?3`. The questions in a quiz or exercise are numbered using sequential positive integers starting from 1: 1, 2, 3, etc.
+To create question alternates, every question in the quiz or exercise (not just those with alternates) must be numbered sequentially, starting from 1, using a `?#` syntax. This is a question mark followed by the number of the question, e.g. `?1, ?2, ?3`. The questions in a quiz or exercise are numbered using sequential positive integers starting from 1: 1, 2, 3, etc.
 
 The alternates are specifyied by providing the same number for multiple questions, e.g. `?1, ?1, ?1, ?2, ?3, ?4, ?4, ?5`. When the actual quiz is given, only one of the questions for the given question number is used.
 
@@ -2880,15 +2889,15 @@ The only way to reference the title and numbers is in crosslinks. There's no syn
 Note that resources, chapters and sections all have implicit numbering. So, #n always works even if numbering is off. However, you will confuse readers if you refer to numbering they cannot see. Also, if numbering is off, the `#f` must not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
 
 {#charsub}
-## Character Substitution (`--` for —, `~~` for –, `...` for …)
+## Character Substitution (`X--` for X—, `X --` for X–, `...` for …)
 
  All Markua documents are written in UTF-8, so to produce any Unicode chracter, it possible to just use the proper Unicode characters. However, in certain cases, it's desirable for Markua to specify automatic replacement of certain combinations of characters with a Unicode replacement. If a Markua Processor encounters one of these combinations of characters outside of a code block, the Markua Processor must replace the combination of characters with the appropriate Unicode character in the output.
 
 `--`
-: To produce an em dash (—), what is thought of by non-typography people as a "dash" or a "long dash", you can just type `--`. You can also use the proper Unicode character, U+2014, of course.
+: To produce an em dash (—), what is thought of by non-typography people as a "dash" or a "long dash", you can just type two hyphens (`--`) directly after a non-space character. You can also use the proper Unicode character, U+2014, of course. The following all produce em dashes: `foo--bar, foo-- bar, foo--`.
 
-`~~`
-: To produce an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type `~~`. You can also use the proper Unicode character, U+2013, of course. The substitution of `~~` to – is only done when there are exactly two tildes in a row, not three. To learn more about why the `~~` syntax was chosen, see the [appendix](#en-dash-rationale).
+` --`
+: To produce an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type a space, followed by two hyphens (` --`). You can also use the proper Unicode character, U+2013, of course. The following both produce en dashes: `foo -- bar, foo --`.
 
 `...`
 : To produce a horizontal ellipsis (…), you can just type `...`. You can also use the proper Unicode character, U+2026, of course.
@@ -3525,31 +3534,6 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 8. In LFM, we had a `{pagebreak}` directive. This is replaced by `___`.
 
-{#en-dash-rationale}
-## En Dash: What the `~~`?
-
-I had considered a number of options before settling on `~~` to produce an en dash.
-
-**Why not just use `---` for en dash, like atx?**
-
-I had considered following Aaron Swartz's approach in [atx](http://www.aaronsw.com/2002/atx/intro) of using `--` for em dash and `---` for en dash. However, the problem is that en dash (–) is physically shorter than em dash (—), and using `---` for something that is shorter than what is produced by `--` feels a bit wrong.
-
-**Why not just use `--` for en dash and `---` for em dash?**
-
-There are two arguments to use `--` for en dash and `---` for em dash.
-
-First, the em dash is longer than the en dash, so the number of hyphens to produce it should be longer. Second, other Markdown extensions do this, as does TeX.
-
-However, there are two strong reasons to not do this.
-
-First, many other programs (e.g. Word) replace `--` with em dash. For Markua to replace it with en dash would be surprising. Worse, since an en dash is longer than a hyphen, an author might assume that Markua was in fact replacing `--` with em dash, and that their font just had short em dashes. It's possible to be literate and not know that en dashes exist--I managed it for a few decades! So, inadvertently producing it would be bad.
-
-Second, the en dash is used far, far less than the em dash, so it shouldn't be easier to produce. (This is why the Dvorak keyboard layout is better than QWERTY, for example.) The existence of an en dash shouldn't make typing an em dash worse, and having to type an extra `-` character every time you want to make an em dash would, in fact, make your life just a little bit worse every time you typed one.
-
-**Why not just replace hyphens with en dashes?**
-
-Simple: that would be wrong. Hyphens are legitimate punctuation, and are different than en dashes.
-
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
 
@@ -3666,7 +3650,6 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support crosslinks on spans
 - Our definition lists sometimes don't force newlines after the term, e.g. “type This is the resource type..."
 - SVG support
-- Support MathML
 - Support External and local tables, tables as resources in general
 - Be stricter about headers (#foo should not start a chapter, blank lines before and after, etc)
 - Support inline resources
