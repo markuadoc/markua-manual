@@ -491,32 +491,32 @@ Both the type and the format can be specified in an attribute list, by the respe
 The type and the format can also be inferred from the file extension and, in the case of web resources, the URL. The following table shows the mapping of file extensions to the default `format` and `type` inferred. Note that these are just defaults: a resource can be set to be any type and format using the attribute list, and this overrides what is inferred from the file extension.
 
 {caption: "Formats Mapped to Resource Types"}
-|-----------|--------------|----------|--------------------|
-| Extension | `format`     | `type`   | Description        |
-|-----------|--------------|----------|--------------------|
-| `.aac`    | `aac`        | `audio`  | AAC audio          |
-| `.gif`    | `gif`        | `image`  | GIF image          |
-| `.jpg`    | `jpeg`       | `image`  | JPEG image         |
-| `.jpeg`   | `jpeg`       | `image`  | JPEG image         |
-| `.mathml` | `mathml`     | `math`   | MathML math        |
-| `.mono`   | `monospaced` | `poetry` | Monospaced poetry  |
-| `.mp3`    | `mp3`        | `audio`  | MP3 audio          |
-| `.mp4`    | `mp4`        | `video`  | MP4 video          |
-| `.m4a`    | `aac`        | `audio`  | AAC audio          |
-| `.oga`    | `ogg`        | `audio`  | Ogg Vorbis         |
-| `.ogg`    | `ogg`        | `audio`  | Ogg Vorbis         |
-| `.png`    | `png`        | `image`  | PNG image          |
-| `.svg`    | `svg`        | `image`  | SVG image          |
-| `.svgz`   | `svgz`       | `image`  | Zipped SVG         |
-| `.tbl`    | `table`      | `table`  | Markua table       |
-| `.tex`    | `latex`      | `math`   | LaTeX math         |
-| `.text`   | `text`       | `poetry` | Poetry             |
-| `.txt`    | `code`       | `code`   | Unformatted code   |
-| `.wav`    | `wav`        | `audio`  | WAV audio          |
-| `.wave`   | `wav`        | `audio`  | WAV audio          |
-| `.webm`   | `webm`       | `video`  | WebM video         |
-| (other)   | `guess`      | `code`   | Formatted code     |
-|-----------|--------------|----------|--------------------|
+|-----------|--------------|----------|---------------------|
+| Extension | `format`     | `type`   | Description         |
+|-----------|--------------|----------|---------------------|
+| `.aac`    | `aac`        | `audio`  | AAC audio           |
+| `.gif`    | `gif`        | `image`  | GIF image           |
+| `.jpg`    | `jpeg`       | `image`  | JPEG image          |
+| `.jpeg`   | `jpeg`       | `image`  | JPEG image          |
+| `.mathml` | `mathml`     | `math`   | MathML math         |
+| `.mono`   | `monospaced` | `poetry` | Poetry (monospaced) |
+| `.mp3`    | `mp3`        | `audio`  | MP3 audio           |
+| `.mp4`    | `mp4`        | `video`  | MP4 video           |
+| `.m4a`    | `aac`        | `audio`  | AAC audio           |
+| `.oga`    | `ogg`        | `audio`  | Ogg Vorbis          |
+| `.ogg`    | `ogg`        | `audio`  | Ogg Vorbis          |
+| `.png`    | `png`        | `image`  | PNG image           |
+| `.svg`    | `svg`        | `image`  | SVG image           |
+| `.svgz`   | `svgz`       | `image`  | Zipped SVG          |
+| `.tbl`    | `table`      | `table`  | Markua table        |
+| `.tex`    | `latex`      | `math`   | LaTeX math          |
+| `.text`   | `text`       | `poetry` | Poetry              |
+| `.txt`    | `code`       | `code`   | Unformatted code    |
+| `.wav`    | `wav`        | `audio`  | WAV audio           |
+| `.wave`   | `wav`        | `audio`  | WAV audio           |
+| `.webm`   | `webm`       | `video`  | WebM video          |
+| (other)   | `guess`      | `code`   | Formatted code      |
+|-----------|--------------|----------|---------------------|
 
 Note that these file extensions are case-insensitive. Also, note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
