@@ -499,7 +499,6 @@ The type and the format can also be inferred from the file extension and, in the
 | `.jpg`    | `jpeg`       | `image`  | JPEG image          |
 | `.jpeg`   | `jpeg`       | `image`  | JPEG image          |
 | `.mathml` | `mathml`     | `math`   | MathML math         |
-| `.mono`   | `monospaced` | `poetry` | Poetry (monospaced) |
 | `.mp3`    | `mp3`        | `audio`  | MP3 audio           |
 | `.mp4`    | `mp4`        | `video`  | MP4 video           |
 | `.m4a`    | `aac`        | `audio`  | AAC audio           |
@@ -510,8 +509,8 @@ The type and the format can also be inferred from the file extension and, in the
 | `.svgz`   | `svgz`       | `image`  | Zipped SVG          |
 | `.tbl`    | `table`      | `table`  | Markua table        |
 | `.tex`    | `latex`      | `math`   | LaTeX math          |
-| `.text`   | `text`       | `poetry` | Poetry              |
-| `.txt`    | `code`       | `code`   | Unformatted code    |
+| `.text`   | `poetry`     | `poetry` | Poetry              |
+| `.txt`    | `text`       | `code`   | Unformatted code    |
 | `.wav`    | `wav`        | `audio`  | WAV audio           |
 | `.wave`   | `wav`        | `audio`  | WAV audio           |
 | `.webm`   | `webm`       | `video`  | WebM video          |
@@ -1000,253 +999,127 @@ Finally, while syntax highlighting is optional in a Markua Processor, if a Marku
 
 Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
 
-
-
-
-
-
-
-
-
 {#poetry}
 ### Poetry
 
 Poetry can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to poetry as to all other resources.
 
-As discussed, poetry cannot have alt text. It's just text. If any alt text is provided for a poetry resource, it is ignored.
+Poetry can only be inserted as a figure. It cannot be inserted as a span resource, like code can.
 
-Markua specifies only one specific file extension to be associated with a type of `poetry`: the `.txt` extension, which is for the format of `text`. However, Markua Processors must interpret **all** unspecified file extensions as specifying a resource of type `poetry` with a format of `guess`.
-
-Regardless of whether syntax highlighting is supported and the programmming language is detected, all poetry must be formatted as `monospaced text` by Markua Processors.
-
-The `text` format means to not do any syntax highlighting as well.
-
-The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the poetry itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted poetry. Syntax highlighting is entirely optional in Markua Processors. If a Markua Processor does not support syntax highlighting, and/or if it cannot detect a matching supported programming language, then it must format the poetry as though the format was `text`--i.e. to format it as unformatted monospaced text.
-
-Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
-
-The default value of the format attribute for poetry is complex:
-
-1. For poetry which is inserted as a span (which is only supported with inline resources), the default format is `text`.
-2. For poetry which is inserted as a figure which is inserted as an inline resource using three tildes, the default format is `text`.
-3. For all other poetry, the default format is `guess`. This includes local and web resources inserted as figures, and poetry inserted as an inline figure using three backticks.
-
-Note that the default format can be overridden by specifying it via an attribute list, or after the three backticks in syntactic sugar.
+Markua specifies only one specific file extension to be associated with a type of `poetry`: the `.text` extension, which is for the format of `poetry`.
 
 {#supported-attributes-for-poetry}
 #### Supported Attributes for Poetry
 
 The following are the supported attributes for poetry resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
 
-`line-numbers`
-: This determines whether the poetry sample shows line numbers. Legal values are `true` or `false`. The default value is `false`. Any value other than `true` is interpreted as `false`.
+`monospaced`
+: `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, the Markua Processor must use a monospaced font to output the poetry. If false, the Markua Processor may use whatever font (proportional or monospaced) it is configured to use to output poeetry.
 
-`number-from`
-: If line numbers are shown, this lets you override the starting number of the line numbers. The default value is `1`.
+{#spacing-poetry-and-newlines}
+#### Spacing, Poetry and Newlines
 
-`crop-start`
-: Sometimes it's desirable to only show part of a poetry resource defined in an external file as the poetry example. The `crop-start` and `crop-end` attributes let you accomplish this. The `crop-start` attribute defines the line which represents the first line included from the resource. For example, `{crop-start: 10, crop-end: 15, line-numbers: true, number-from: 10}` ensures that lines 10-15 are shown and are numbered as lines 10-15. The default value is 1, which is the first line of the file.
+Regardless of the value of the monospaced attribute, all whitespace inside a poetry resource is respected. This includes all spaces and newlines, regardless of whether they are leading, internal or trailing spaces, and regardless of the number of consecutive newlines.
 
-`crop-end`
-: This attribute ends the range started with crop-start. The default value of crop-end is to be omitted, which is equivalent to specifying the last line of the file.
+Poetry resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon.
 
-##### Default Value of the `format` attribute in Inline Poetry Samples
+Markua Processors may wrap lines to ensure that all poetry is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped by the Markua Processor.
 
-The default value of the `format` attribute for a poetry resource inserted as a figure varies based on context.
-
-If the poetry resource is a local or web resource, it defaults to `guess`.
-
-If the poetry resource is an inline resource, the default varies based on the delimiter. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the poetry language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
+Obviously, seeing a continuation character is in poetry is terrible, so the author should consider this a mistake that needs to be fixed by manually line wrapping.
 
 #### Local Poetry Resources
 
-Local poetry resources can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
-
-This first figure will be a type of poetry and a format of `guess`. A Markua Processor which associates `.rb` file extensions with Ruby poetry will treat this as Ruby poetry; a Markua Processor which has no association for `.rb` files will treat it as plain text:
+Local poetry resources look like many other resources inserted as figures. The text in the square brackets is the figure caption, like it is in all figures.
 
 ~~~
-Here's a paragraph before the figure.
+Here's a Shakesperean sonnet:
 
-![Hello World in Ruby](hello.rb)
+![Sonnet 130](sonnet130.text)
 
-Here's a paragraph after the figure.
-~~~
+Here's an E. E. Cummings poem:
 
-That is equivalent to:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: guess}
-![Hello World in Ruby](hello.rb)
-
-Here's a paragraph after the figure.
-~~~
-
-If you don't want to take chances you can do this:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: ruby}
-![Hello World in Ruby](hello.rb)
-
-Here's a paragraph after the figure.
-~~~
-
-Note that the caption is optional in all figures:
-
-~~~
-Here's a paragraph before the figure.
-
-![](hello.rb)
-
-Here's a paragraph after the figure.
+{monospaced: true}
+![I Will Be](iwillbe.text)
 ~~~
 
 #### Web Poetry Resources
 
 Web poetry resources function identically to how local poetry resources work, including the significance of file extensions. The only differences is that the files are on the web.
 
-This will be a type of poetry and a format of `guess` since the file extension is not specified:
-
 ~~~
-![Hello World in Ruby](http://markua.com/hello.rb)
-~~~
+Here's a Shakesperean sonnet:
 
-That is equivalent to:
+![Sonnet 130](http://markua.com/sonnet130.text)
 
+Here's a paragraph after the figure.
 ~~~
-{format: guess}
-![Hello World in Ruby](http://markua.com/hello.rb)
-~~~
-
-If you don't want to take chances you can do this:
-
-~~~
-{format: ruby}
-![Hello World in Ruby](http://markua.com/hello.rb)
-~~~
-
-Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
 
 {#inline-poetry-resources}
 #### Inline Poetry Resources
 
-Inline poetry resources are the most flexible way to insert poetry as figures.
+With an inline poetry resource, the default value of the `monospaced` attribute for a poetry resource varies based on the delimiter used.
 
-This will be a type of poetry and a format of `guess` since three backticks are used and since the format is not specified:
+There are two types of delimiters that can be used to insert a poetry resource inline:
+
+`---`
+: With three hyphens, the default value of `monospaced` is `true`.
+
+`___`
+: With three underscores (`___`), the default value of `monospaced` is `false`.
+
+This way, you can vary the default value of `monospaced` without having to type an attribute list--attribute lists aren't very poetic!
+
+To repeat: regardles of the value of the `monospaced` attribute, all whitespace is respected in a poetry resource. So, you can indent the last two lines of a sonnet without requiring a monospaced font.
+
+The following example shows how you can get different default behaviour without an attribute list required:
 
 ~~~
-Some paragraph.
+Here's a Shakesperean sonnet:
+
+___
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+___
+
+Here's a pretend poem which wants a monospaced font:
 
 ---
-===
-puts "hello"
+i
+  am
+      a        cat
+            a        l a z y          cat
 
-
-
-Some paragraph.
+me   ow
+---
 ~~~
 
-
-
-
-
-That is equivalent to:
+Now, if you want to add captions to the poems which are inserted as inline resources, then you're stuck adding an attribute list after all:
 
 ~~~
-Some paragraph.
+Here's a Shakesperean sonnet:
 
-```guess
-puts "hello"
-```
+{caption: "Sonnet 130"}
+___
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+___
 
-Some paragraph.
+Here's a pretend poem which wants a monospaced font:
+
+{caption: "Peter's Pretentious Poem"}
+---
+i
+  am
+      a        cat
+            a        l a z y          cat
+
+me   ow
+---
 ~~~
-
-If you don't want to take chances you can do this to explicitly specify the format:
-
-~~~
-Some paragraph.
-
-```ruby
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-If you don't like syntactic sugar you can do:
-
-~~~
-Some paragraph.
-
-{format: ruby}
-```
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-If you want a figure caption, you can add it to the attribute list with any of the above. For example:
-
-~~~
-Some paragraph.
-
-{caption: "Hello World in Ruby"}
-```ruby
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-Finally, if you want the poetry to definitely not get syntax highlighted, you can force format to be `text` in one of two ways.
-
-First, you can set it explicitly:
-
-~~~
-Some paragraph.
-
-```text
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-Second, you can use three tildes instead of three backticks, since the default with tildes is `text` not `guess`:
-
-```
-Some paragraph.
-
-~~~
-puts "hello"
-~~~
-
-Some paragraph.
-```
-
-#### Line Wrapping in Poetry Resources
-
-Poetry resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all poetry is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {#math}
 ### Math
@@ -1680,6 +1553,8 @@ Since a blank line is added when concatenating multiple manuscript files, there 
 
 ## Leading Spaces (Prose vs. Poetry)
 
+TODO - rethink
+
 In Markua, leading whitespace (spaces or tabs at the beginning of a line) is interpreted based on context: specifically, based on what came before it.
 
 Following **exactly one** newline, leading whitespace is **preserved**.
@@ -1693,13 +1568,6 @@ Two (or more) newlines in Markua create a new paragraph in prose, or a new stanz
 One newline, on the other hand, is used to add a forced line break, but to keep the existing paragraph (or stanza). Because of this, any leading space after a single newline is not paragraph indentation, but is instead deliberate indentation on the specific line. As such, it should be respected.
 
 This means you can write a sonnet without typing any special formatting characters. In the following Markua text (courtesy of Shakespeare), every line break will be added correctly, and the last two lines will be indented:
-
-~~~
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-~~~
 
 In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used (in which whitespace is added at the end of the line), this would *all* be collapsed to one line! (Note how this shows that Markdown's two space hack is completely unacceptable: you should be able to tell what output is produced by looking at the input.)
 
@@ -1722,6 +1590,8 @@ However, many authors type one space at the end of their sentences. So, a Markua
 Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
 
 ## Internal Spaces are Preserved, Except At the End of Sentences
+
+TODO - rethink
 
 In Markdown (and HTML), multiple internal spaces or tabs in the the middle of a line of text are all collapsed to one space.
 
@@ -2175,8 +2045,8 @@ This is after the scene break. It has a page break after it.
 
 This is on a new page, after the forced page break. It has a scene break and then a page break after it.
 
-***
-===
+*****
+= = =
 
 This is on a new page, after the forced page break.
 ~~~
