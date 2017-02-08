@@ -205,7 +205,7 @@ This is paragraph two.
 This is paragraph three.
 ~~~
 
-There are other more technical rules about spaces, newlines and indentation, which are discussed [later](#spaces).
+There are other more technical rules about spaces, newlines and indentation, which are discussed [later](#whitespace).
 
 {#resources}
 # Resources
@@ -1501,29 +1501,43 @@ The reason for this complexity is as follows: since Markua does not support inli
 
 Markua makes the following compromise: Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) table syntax in Markua documents.
 
-{#spaces}
-# Spaces, Newlines and Indentation
+{#whitespace}
+# Whitespace: Spaces, Tabs and Newlines
 
-The goal for the handling of spaces, newlines and indentation in Markua is for everything to just work. Prose, poetry, code and figures should just work. There should be no surprises. Above all, no invisible formatting characters can be used.
+The goal for the handling of normal whitespace (spaces, tabs and newlines) in Markua is for everything to just work.
 
-In this regard, Markua has broader design goals than Markdown: Markdown is for web writers; Markua is for **writers**. Markdown is a format for authors to write HTML; Markua is a format for authors to write books. Books can be in many formats, including HTML. The concepts in Markdown are HTML concepts; the concepts in Markua are book concepts.
+Note that these decisions about normal whitespace handling are decisions about prose, not poetry. Poetry has its own rules, and in poetry, all whitespace is preserved unchanged. The way this is accomplished is that poetry, whether in an external file or in the body of a Markua document itself, is handled as a [poetry resource](#poetry).
 
-Because of this, the way that single newlines, three or more newlines and leading spaces are handled in Markua is different from the way that they are handled in Markdown. (By a newline, I mean the character which is produced by the enter key on the keyboard.)
+So, with poetry taken care of, the question of prose remains.
 
-The ways that spaces, newlines and indentation are handled in Markua are the largest breaking differences between it and Markdown. (I say breaking, since if you're relying on Markdown's behaviour in your writing, you may be in for some unpleasant surprises in switching to Markua.) As such, the differences between Markua and Markdown are discussed here, not in [the appendix](#markdown-diffs).
+There are the four principles of Markua's whitespace handling:
+
+1. No invisible formatting is allowed. If you can't see it, it has no effect.
+2. Paragraphs and sentences should be handled consistently, regardless of indentation and spaces after periods.
+3. Manual whitespace formatting should be discouraged.
+4. Newlines are newlines; spaces are spaces. These are different things.
+
+These simple goals have far-reaching consequences:
+
+1. Whitespace at the end of a line or file is ignored.
+2. It doesn't matter how many spaces you add after a sentence.
+3. All consecutive newlines after the second newline are ignored.
+4. You can't manually wrap lists and blockquotes, but you can add forced line breaks in paragraphs without hacks.
+
+Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
 
 {#single-newlines}
-## Single Newlines
+## Single Newline = Forced Line Break
 
 In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
-In Markua, however, a forced line break in the input is a forced line break in all output formats. This is true for headings, paragraphs, lists, blockquotes, asides and blurbs.
+In Markua, however, a forced line break in the input is a forced line break in all output formats. This is true for paragraphs, lists, blockquotes, asides and blurbs.
 
 In ancient history, some text editors did not automatically wrap lines of text, so manual wrapping of plain text files was a good thing to do. Also, for computer programmers, we still do not wrap our text when programming. However, for writing, automatic wrapping of paragraphs is essential for staying in the flow while writing, and for being able to edit your text without needing to re-wrap every line in a paragraph. This is one decision that even Microsoft Word gets right.
 
-The decision in Markua to treat single newlines as forced line breaks means that Markua does *not* need to use the **horrible hack** that Markdown uses to output forced line breaks. In Markdown, to output a forced line break (a `<br/>` tag in HTML), you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line!
+The decision in Markua to treat single newlines as forced line breaks means that Markua does *not* need to use the **horrible hack** that Markdown uses to output forced line breaks. In Markdown, to output a forced line break (a `<br/>` tag in HTML), you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line to find out if the newlines mean "newline" or "single space". Yuck!
 
-Worse, some text editors (like Emacs, the editor I use) can be configured to remove trailing spaces at the ends of lines automatically when a file is saved. So, it's possible for me to inadvertently modify the meaning of a Markdown document by simply opening it and saving it unedited! Also, in Markdown, it's impossible to type a sonnet without relying on the two space hack at the end of every line to force a newline--which isn't very poetic at all.
+Worse, some text editors (like Emacs, the editor I use) can be configured to remove trailing spaces at the ends of lines automatically when a file is saved. So, it's possible for me to dramatically modify a Markdown document by simply opening it and saving it unedited. Yikes!
 
 The following is an example of Markua's single newlines:
 
@@ -1537,27 +1551,76 @@ This is also in paragraph two, also preceded by a forced line break.
 This is paragraph three.
 ~~~
 
-## Three or More Newlines
+## Two Newlines = Blank Line
 
-TODO - rethink
+Markua handles two consecutive newlines identically to Markdown: they produce a blank line, which separates block elements like paragraphs from each other.
 
-In Markdown and Markua, if you add more than two newlines in a row, the extra newlines are ignored: two newlines in a row is equivalent to three (or ten!) newlines in a row.
+## Three or More Newlines = Two Newlines
 
-In Markua, however, the extra newlines are respected. The author typed them; presumably they were intended to produce, well, extra newlines. So, every extra newline becomes an extra newline in between the close of the paragraph (or whatever Markua element was ending) and the start of the next paragraph (or whatever Markua element is beginning).
+Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
 
-Markua authors should not do pagination by adding extra newlines--instead, a [scene break or page break](#scene-and-page-breaks) should be used. More generally, however, authors should just shy away from doing any page breaks at all--it's just a distraction from writing.
+When writing prose, there's basically no reason to add multiple blank lines. Worse, the most popular reason is a bad one: to hopefully accomplish a page break, or to make something look like a section break. However, Markua has special syntax for [scene breaks and page breaks](#scene-and-page-breaks), which should be used for these purposes.
 
-Finally, note that spaces on a line and an empty blank line are equivalent.
+If you absolutely must insert a bunch of newlines in a row, you can do this by starting a poetry block and doing so:
 
-## Blank or Whitespace-Only Lines at the Beginning of a File are Ignored
+~~~
+...the end of a paragraph.
 
-TODO - rethink
+___
 
-Since a blank line is added when concatenating multiple manuscript files, there is no good reason to support blank lines, or lines containing only whitespace, at the beginning of a file.
+
+
+___
+
+That empty poetry block is 3 lines long, so it adds three poetic blank lines to the output.
+~~~
+
+{#concatenating}
+## One Blank Line Is Added When Concatenating Manuscript Files
+
+A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input.
+
+Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** (i.e. one blank line) added between the end of each file and the beginning of the next file.
+
+This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
+
+To see why this is essential, see the [appendix](#concatenating-details).
+
+## All Blank Lines at the Beginning and End of a File are Removed
+
+Since a blank line is added when concatenating multiple manuscript files, there is no good reason to support blank lines, or lines containing only whitespace, at the beginning or end of a file. So, all blank lines and all whitespace-only lines at the beginning or end of a file are removed.
+
+This is especially important with the whitespace at the end of a file: trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting--whether at the end of a line or the end of a file--is insanity.
+
+## Trailing Spaces at the End of a Line are Removed
+
+Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
+
+## Spaces at the End of Sentences are Treated Specially
+
+A Markua Processor should be smart about interpreting what is the end of a sentence.
+
+At the end of sentences that aren't followed by newlines, a Markua Processor may output one space, one and a half spaces, two spaces or some other amount of space. (Yes, one and a half spaces at the end of a sentence is a real thing, and it is arguably the one true amount of space at the end of a sentence.)
+
+The amount of space chosen to be output at the end of sentences must be output by the Markua Processor at the end of all sentences which aren't followed by newlines, regardless of whether any given sentence has one or two spaces at its end.
+
+But what's the end of a sentence?
+
+This would be a lot easier to determine if all authors typed two spaces at the end of their sentences! This way, a Markua Processor could easily determine that something like "Mr. Armstrong" did not, in fact, contain the end of a sentence.
+
+However, many authors type one space at the end of their sentences. So, a Markua Processor should use heuristics to determine what is the end of a sentence and what is not.
+
+Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
+
+
+
 
 ## Leading Spaces (Prose vs. Poetry)
 
 TODO - rethink
+
+Finally, note that spaces on a line and an empty blank line are equivalent.
+
 
 In Markua, leading whitespace (spaces or tabs at the beginning of a line) is interpreted based on context: specifically, based on what came before it.
 
@@ -1577,21 +1640,6 @@ In Markdown, not only would you lose the indents on the third and fourth lines, 
 
 More generally, the rules about single and double newlines mean that in Markua you can just write poetry without any formatting characters. Stanzas are separated with a blank line, and any indentation is preserved except on the first line of a stanza.
 
-## Spaces at the End of Sentences are Treated Specially
-
-A Markua Processor should be smart about interpreting what is the end of a sentence.
-
-At the end of sentences that aren't followed by newlines, a Markua Processor may output one space, one and a half spaces, two spaces or some other amount of space. (Yes, one and a half spaces at the end of a sentence is a real thing, and it is arguably the one true amount of space at the end of a sentence.)
-
-The amount of space chosen to be output at the end of sentences must be output by the Markua Processor at the end of all sentences which aren't followed by newlines, regardless of whether any given sentence has one or two spaces at its end.
-
-But what's the end of a sentence?
-
-This would be a lot easier to determine if all authors typed two spaces at the end of their sentences! This way, a Markua Processor could easily determine that something like "Mr. Armstrong" did not, in fact, contain the end of a sentence.
-
-However, many authors type one space at the end of their sentences. So, a Markua Processor should use heuristics to determine what is the end of a sentence and what is not.
-
-Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
 
 ## Internal Spaces are Preserved, Except At the End of Sentences
 
@@ -1604,88 +1652,6 @@ In Markua, however, spaces or tabs that are in the middle of a line of text are 
 The two reasons for preserving internal spaces (except at then end of sentences) are (1) respect for the author and (2) the Principle of Least Surprise: If an author types a number of spaces in the middle of a sentence in their manuscript, they are doing it for a reason--and it's disrespectful, presumptive and surprising to remove them.
 
 The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so.
-
-## Trailing Spaces at the End of a Line are Removed
-
-Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
-
-## Blank Lines at the End of a File are Removed
-
-All blank lines and all lines containing only whitespace at the end of a Markua file are removed. Trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting--whether at the end of a line or the end of a file--is insanity.
-
-For the programmers: if a file contains only blank lines or lines containing only whitespace, every line is removed. (These lines are considered at the end of the file, not the beginning.) So, concatenating this file with other Markua manuscript files just produces the extra blank line which is added by Markua when concatenating any Markua file.
-
-{#concatenating}
-## One Blank Line Is Added When Concatenating Manuscript Files
-
-A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input. Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** (i.e. one blank line) added between the end of each file and the beginning of the next file. This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
-
-To see why this rule is important, consider the following single-file Markua manuscript:
-
-{caption: manuscript.txt}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-
-# Chapter Two
-
-Yada yada yada.
-~~~
-
-Suppose instead a multiple-file approach was used, in which there were two files, ch1.txt and ch2.txt, with the following content:
-
-{caption: ch1.txt}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-~~~
-
-{caption: ch2.txt}
-~~~
-# Chapter Two
-
-Yada yada yada.
-~~~
-
-If Markua did not add any newlines between files, then these files would produce the following manuscript:
-
-{caption: Incorrect Temporary Auto-Created Manuscript #1}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.# Chapter Two
-
-Yada yada yada.
-~~~
-
-If Markua only added one newline when concatenating, this would produce the following manuscript:
-
-{caption: Incorrect Temporary Auto-Created Manuscript #2}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-# Chapter Two
-
-Yada yada yada.
-~~~
-
-However, since Markua requires that headings be separated by blank lines above and below them, the Chapter Two heading would not be a heading. It would be considered part of the previous paragraph! This would be very surprising and the source of a number of bugs. Worse, since a number of text editors such as Emacs have a "strip blank lines at the end of files" setting, it would be possible to introduce such a bug if Markua simply relied on blank lines being added to the end of a file by the author.
-
-So, because of the blank line rule, concatenating the files produces the same manuscript as the single-file manuscript above:
-
-{caption: Correct Temporary Auto-Created Manuscript}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-
-# Chapter Two
-
-Yada yada yada.
-~~~
 
 # Lists
 
@@ -3524,7 +3490,7 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 6. Markua supports definition lists; Markdown does not (except via inline HTML).
 7. Markdown lets you use a plus sign (`+`) before each item in an unordered ("bulleted" in Markua) list; Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`.
 8. Markdown does not support closing parentheses (`)`) as ordered ("numbered" in Markua) list delimiters; Markua does.
-9. Markua and Markdown handle spaces, newlines and indentation differently. This is discussed in the [Spaces, Newlines and Indentation](#spaces) section.
+9. Markua and Markdown handle spaces, newlines and indentation differently. This is discussed in the [Whitespace: Spaces, Tabs and Newlines](#whitespace) section.
 10. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
 11. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 12. Markua and Markdown handle headings differently. This is discussed further below.
@@ -3718,6 +3684,76 @@ It turns out that the question of additive versus subtractive forms of Roman num
 In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
+
+{#concatenating-details}
+## Example of Why One Blank Line Is Added When Concatenating Manuscript Files
+
+As [discussed](#concatenating), one blank line is added when concatenating multiple manuscript files. To see why this rule is important, consider the following single-file Markua manuscript:
+
+{caption: manuscript.txt}
+~~~
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+~~~
+
+Suppose instead a multiple-file approach was used, in which there were two files, ch1.txt and ch2.txt, with the following content:
+
+{caption: ch1.txt}
+~~~
+# Chapter One
+
+Lorem ipsum dolor.
+~~~
+
+{caption: ch2.txt}
+~~~
+# Chapter Two
+
+Yada yada yada.
+~~~
+
+If Markua did not add any newlines between files, then these files would produce the following manuscript:
+
+{caption: Incorrect Temporary Auto-Created Manuscript #1}
+~~~
+# Chapter One
+
+Lorem ipsum dolor.# Chapter Two
+
+Yada yada yada.
+~~~
+
+If Markua only added one newline when concatenating, this would produce the following manuscript:
+
+{caption: Incorrect Temporary Auto-Created Manuscript #2}
+~~~
+# Chapter One
+
+Lorem ipsum dolor.
+# Chapter Two
+
+Yada yada yada.
+~~~
+
+However, since Markua requires that headings be separated by blank lines above and below them, the Chapter Two heading would not be a heading. It would be considered part of the previous paragraph! This would be very surprising and the source of a number of bugs. Worse, since a number of text editors such as Emacs have a "strip blank lines at the end of files" setting, it would be possible to introduce such a bug if Markua simply relied on blank lines being added to the end of a file by the author.
+
+So, because of the blank line rule, concatenating the files produces the same manuscript as the single-file manuscript above:
+
+{caption: Correct Temporary Auto-Created Manuscript}
+~~~
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+~~~
 
 ## Markua Specification Status
 
