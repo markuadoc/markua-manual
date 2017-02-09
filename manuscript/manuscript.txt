@@ -3764,8 +3764,8 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub.
 - Ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
 - Support tables in external files.
-- Support `---` for en dash (unless it's on a line by itself, in which case it's a scene break + page break.
-- Support modified scene breaks (- - -) and page breaks (___).
+- Support poetry in external files and poetry resources in general.
+- Support updates to en dashes, em dashes, scene breaks and page breaks.
 - Support parentheses in numbered lists
 - Remove HTML comment syntax, since the CriticMarkup comment syntax is enough.
 - Support question alternates (?1, ?1).
@@ -3777,7 +3777,6 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support `cite` and `url` attributes on images.
 - Vary the code format default based on delimiter.
 - Tables seem to [mess up the alignment](#tables) of some text after them.
-- Make the change to preserve internal space except after periods, instead of the inconssitent mess we currently have.
 - The kerning on figure captions is a disaster. It looks like one word!
 - Support crosslinks on spans
 - Our definition lists sometimes don't force newlines after the term, e.g. “type This is the resource type..."
@@ -3794,14 +3793,13 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support three-tildes defaults to text, backticks default to guess approach
 - Support inline math with format attribute
 - Support table widths attributes on columns
-- Support Internal white-space is preserved, except after periods
 - Support `-` for lists
 - Support tab instead of space for lists
 - Support descending lists
 - Support specs for all of the list types
 - Support multi-paragraph lists and whitespace
 - Support max list-nesting in Markua of three levels
-- Support scene breaks with page-breaks, and page-breaks
+- Support scene breaks and page-breaks
 - Support blockquotes inside of a paragraph
 - Support cite and url attributes for blockquotes
 - Support the quiz or exercise chapter heading being considered the name of the quiz or exercise.
