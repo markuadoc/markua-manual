@@ -1528,8 +1528,10 @@ These simple goals have far-reaching consequences:
 
 Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
 
+## Newlines
+
 {#single-newlines}
-## Single Newline = Forced Line Break
+### Single Newline = Forced Line Break
 
 In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
@@ -1553,13 +1555,11 @@ This is also in paragraph two, also preceded by a forced line break.
 This is paragraph three.
 ~~~
 
-## Two Newlines = Blank Line
+### Three or More Newlines = Two Newlines = One Blank Line
 
 Markua handles two consecutive newlines identically to Markdown: they produce a blank line, which separates block elements like paragraphs from each other.
 
-## Three or More Newlines = Two Newlines = Blank Line
-
-Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
+Similarly, Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
 
 When writing prose, there's basically no reason to add multiple blank lines. Worse, the most popular reason is a bad one: to hopefully accomplish a page break, or to make something look like a section break. However, Markua has special syntax for [scene breaks and page breaks](#scene-and-page-breaks), which should be used for these purposes.
 
@@ -1578,7 +1578,7 @@ That empty poetry block is 3 lines long, so it adds three poetic blank lines to 
 ~~~
 
 {#concatenating}
-## One Blank Line Is Added When Concatenating Manuscript Files
+### One Blank Line Is Added When Concatenating Manuscript Files
 
 A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua processor to produce one temporary manuscript file, and that one file is used as the input.
 
@@ -1588,25 +1588,27 @@ This is needed in order to separate the content of the two files with one blank 
 
 To see why this is essential, see the [appendix](#concatenating-details).
 
-## All Blank Lines at the Beginning and End of a File are Removed
+### All Blank Lines at the Beginning and End of a File are Removed
 
 Since a blank line is added when concatenating multiple manuscript files, there is no good reason to support blank lines, or lines containing only whitespace, at the beginning or end of a file. So, all blank lines and all whitespace-only lines at the beginning or end of a file are removed.
 
 This is especially important with the whitespace at the end of a file: trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting--whether at the end of a line or the end of a file--is insanity.
 
-## Whitespace at the End of a Line is Removed
+## Spaces and Tabs
 
-Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
+### Spaces and Tabs at the Beginning of a Line are Removed
 
-## Whitespace at the Beginning of a Line is Removed
-
-Markua handles whitespace at the beginning of a line similarly to Markdown: it is only used to determine whether the content is in the paragraph or some nested block element (e.g. a nested list).
+Markua handles spaces and tabs at the beginning of a line similarly to Markdown: it is only used to determine whether the content is in the paragraph or some nested block element (e.g. a nested list).
 
 So, you can't manually indent any lines in a paragraph in Markua, even after a forced line break.
 
-If you want to write a sonnet, start a poetry resource with `___` or `---`.
+If you want to write a poem in Markua, start a poetry resource with `___` or `---`. This will have the added benefit of allowing your poetry to be formatted using special font sizes and margins, to be more poetic than prose.
 
-## Internal Spaces are Collapsed to One Space, Except At the End of Sentences
+### Spaces and Tabs at the End of a Line are Removed
+
+Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no [reliance on invisible formatting to produce newlines](#single-newlines), and editors which strip trailing spaces have no effect on a Markua document.
+
+### Internal Spaces are Collapsed to One Space, Except At the End of Sentences
 
 Markua handles internal whitespace in a paragpraph in a similar way to Markdown:
 
