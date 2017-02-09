@@ -1016,6 +1016,8 @@ The following are the supported attributes for poetry resources, in addition to 
 `monospaced`
 : `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, the Markua Processor must use a monospaced font to output the poetry. If false, the Markua Processor may use whatever font (proportional or monospaced) it is configured to use to output poeetry.
 
+Note that inside a poetry resource, Markua text formatting still applies. So, if you want to write poetry involving asterisks and underscores, use a code block.
+
 {#spacing-poetry-and-newlines}
 #### Spacing, Poetry and Newlines
 
@@ -1032,7 +1034,7 @@ Obviously, seeing a continuation character is in poetry is terrible, so the auth
 Local poetry resources look like many other resources inserted as figures. The text in the square brackets is the figure caption, like it is in all figures.
 
 ~~~
-Here's a Shakesperean sonnet:
+Here's a Shakespearean sonnet:
 
 ![Sonnet 130](sonnet130.text)
 
@@ -1047,7 +1049,7 @@ Here's an E. E. Cummings poem:
 Web poetry resources function identically to how local poetry resources work, including the significance of file extensions. The only differences is that the files are on the web.
 
 ~~~
-Here's a Shakesperean sonnet:
+Here's a Shakespearean sonnet:
 
 ![Sonnet 130](http://markua.com/sonnet130.text)
 
@@ -1074,7 +1076,7 @@ To repeat: regardles of the value of the `monospaced` attribute, all whitespace 
 The following example shows how you can get different default behaviour without an attribute list required:
 
 ~~~
-Here's a Shakesperean sonnet:
+Here's a Shakespearean sonnet:
 
 ___
 I grant I never saw a goddess go;
@@ -1098,7 +1100,7 @@ me   ow
 Now, if you want to add captions to the poems which are inserted as inline resources, then you're stuck adding an attribute list after all:
 
 ~~~
-Here's a Shakesperean sonnet:
+Here's a Shakespearean sonnet:
 
 {caption: "Sonnet 130"}
 ___
@@ -1522,7 +1524,7 @@ These simple goals have far-reaching consequences:
 1. Whitespace at the end of a line or file is ignored.
 2. It doesn't matter how many spaces you add after a sentence.
 3. All consecutive newlines after the second newline are ignored.
-4. You can't manually wrap lists and blockquotes, but you can add forced line breaks in paragraphs without hacks.
+4. You can't manually wrap text with newlines being used as though they are spaces, but you can add forced line breaks without hacks.
 
 Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
 
@@ -1555,7 +1557,7 @@ This is paragraph three.
 
 Markua handles two consecutive newlines identically to Markdown: they produce a blank line, which separates block elements like paragraphs from each other.
 
-## Three or More Newlines = Two Newlines
+## Three or More Newlines = Two Newlines = Blank Line
 
 Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
 
