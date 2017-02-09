@@ -1592,13 +1592,25 @@ Since a blank line is added when concatenating multiple manuscript files, there 
 
 This is especially important with the whitespace at the end of a file: trailing whitespace at the end of a file is invisible to the author, and supporting invisible formatting--whether at the end of a line or the end of a file--is insanity.
 
-## Trailing Spaces at the End of a Line are Removed
+## Whitespace at the End of a Line is Removed
 
 Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua. This way, there is no reliance on invisible formatting characters, and editors which strip trailing spaces have no effect on a Markua document.
 
-## Spaces at the End of Sentences are Treated Specially
+## Whitespace at the Beginning of a Line is Removed
 
-A Markua Processor should be smart about interpreting what is the end of a sentence.
+Markua handles whitespace at the beginning of a line similarly to Markdown: it is only used to determine whether the content is in the paragraph or some nested block element (e.g. a nested list).
+
+So, you can't manually indent any lines in a paragraph in Markua, even after a forced line break.
+
+If you want to write a sonnet, start a poetry resource with `___` or `---`.
+
+## Internal Spaces are Collapsed to One Space, Except At the End of Sentences
+
+Markua handles internal whitespace in a paragpraph in a similar way to Markdown:
+
+First, in Markua and Markdown, multiple internal spaces or tabs in the the middle of a sentence are all collapsed to one space.
+
+However, a Markua Processor should be smart about interpreting what is the end of a sentence, and handle that specially.
 
 At the end of sentences that aren't followed by newlines, a Markua Processor may output one space, one and a half spaces, two spaces or some other amount of space. (Yes, one and a half spaces at the end of a sentence is a real thing, and it is arguably the one true amount of space at the end of a sentence.)
 
@@ -1611,47 +1623,6 @@ This would be a lot easier to determine if all authors typed two spaces at the e
 However, many authors type one space at the end of their sentences. So, a Markua Processor should use heuristics to determine what is the end of a sentence and what is not.
 
 Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
-
-
-
-
-## Leading Spaces (Prose vs. Poetry)
-
-TODO - rethink
-
-Finally, note that spaces on a line and an empty blank line are equivalent.
-
-
-In Markua, leading whitespace (spaces or tabs at the beginning of a line) is interpreted based on context: specifically, based on what came before it.
-
-Following **exactly one** newline, leading whitespace is **preserved**.
-
-Following **two or more** newlines (one or more blank lines), leading whitespace is **ignored**. So, you can manually indent your paragraphs if you're used to doing so, and it will have no effect. This way, you don't have to worry about whether your amount of indentation is the same as that produced by the book designer. Also, since multiple authors may collaborate on Markua documents, there's no issue if one author indents paragraphs and another doesn't. (Markua uses the same logic for spaces after periods.)
-
-This distinction also helps Markua support prose and poetry without a bunch of special syntax.
-
-Two (or more) newlines in Markua create a new paragraph in prose, or a new stanza in poetry. That's it. Paragraphs can either be indented or not indented, but this is a global setting at the book or document level--not something that is specific to a given paragraph. Authors may choose to indent their paragraphs in their manuscript based on personal preference or habit, but this should have no effect on whether the paragraphs are indented in the output.
-
-One newline, on the other hand, is used to add a forced line break, but to keep the existing paragraph (or stanza). Because of this, any leading space after a single newline is not paragraph indentation, but is instead deliberate indentation on the specific line. As such, it should be respected.
-
-This means you can write a sonnet without typing any special formatting characters. In the following Markua text (courtesy of Shakespeare), every line break will be added correctly, and the last two lines will be indented:
-
-In Markdown, not only would you lose the indents on the third and fourth lines, but without any trailing space hack used (in which whitespace is added at the end of the line), this would *all* be collapsed to one line! (Note how this shows that Markdown's two space hack is completely unacceptable: you should be able to tell what output is produced by looking at the input.)
-
-More generally, the rules about single and double newlines mean that in Markua you can just write poetry without any formatting characters. Stanzas are separated with a blank line, and any indentation is preserved except on the first line of a stanza.
-
-
-## Internal Spaces are Preserved, Except At the End of Sentences
-
-TODO - rethink
-
-In Markdown (and HTML), multiple internal spaces or tabs in the the middle of a line of text are all collapsed to one space.
-
-In Markua, however, spaces or tabs that are in the middle of a line of text are preserved.
-
-The two reasons for preserving internal spaces (except at then end of sentences) are (1) respect for the author and (2) the Principle of Least Surprise: If an author types a number of spaces in the middle of a sentence in their manuscript, they are doing it for a reason--and it's disrespectful, presumptive and surprising to remove them.
-
-The preservation of internal spaces isn't just true for prose--if you want to write poetry like e e cummings in which the exact spacing is preserved in leading and internal spaces, you can do so.
 
 # Lists
 
