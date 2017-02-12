@@ -311,7 +311,7 @@ The caption for a figure can be provided either in the square brackets in front 
 ~~~
 ![My Amazing Algorithm](algorithm.rb)
 
-{caption: "My Amazing Algorithm}
+{caption: "My Amazing Algorithm"}
 ![](algorithm.rb)
 ~~~
 
@@ -322,7 +322,7 @@ Note that inline resources have no square brackets, so any captions must be adde
 ~~~
 Here's a paragraph before the figure.
 
-{caption: "My Amazing Algorithm}
+{caption: "My Amazing Algorithm"}
 ```ruby
 puts "hello world"
 ```
@@ -1016,7 +1016,7 @@ The following are the supported attributes for poetry resources, in addition to 
 `monospaced`
 : `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, the Markua Processor must use a monospaced font to output the poetry. If false, the Markua Processor may use whatever font (proportional or monospaced) it is configured to use to output poeetry.
 
-Note that inside a poetry resource, Markua text formatting still applies. So, if you want to write poetry involving asterisks and underscores, use a code block.
+Note that inside a poetry resource, Markua [text formatting](#text-formatting) still applies. You can't do arbitrary Markua stuff like headings, images and tables, but you can do the text formatting like bold, italic, strikethrough, etc. So, if you want to write poetry involving asterisks and underscores, use a code block.
 
 {#spacing-poetry-and-newlines}
 #### Spacing, Poetry and Newlines
@@ -3086,6 +3086,8 @@ If you don't want to use it, you don't need to learn about it.
 
 Attributes are used to do everything from specify the language of code blocks, add ids for crosslinking and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
 
+TODO - add a `title` attribute to attr list for chapter, section, subsection, etc and anything that can show up in a toc or list of stuff. this accompanise caption in resources. if not provided, either the caption (resources) or the displayed heading (chapters, sections) is used.
+
 ### Attribute List Format
 
 An attribute list is one or more key-value, comma-separated pairs:
@@ -3761,7 +3763,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
 - There is no more type attribute on quizzes. Quizzes are always marked.
 - Support Nested Lists.
-- Support Nesting Block Elements in List Items.
+- Support Nesting Block Elements in List Items. Ensure that nesting code resources works.
 - Confirm ids work on definition list items.
 - Add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub.
 - Ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
