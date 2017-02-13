@@ -281,19 +281,22 @@ inline resource content (default format is `text`)
 
 #### Figure Attributes
 
-A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `type`, `format`, `caption` and `class` attributes. (As such, these four attributes are not shown on the specific resource types below.)
-
-`type`
-: This is the resource type. This is usually inferred from the format instead of being specified.
-
-`format`
-: This is the resource format. Different resource types have different legal values for format.
+A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `caption`, `class`, `format`, `title` and `type` attributes. (As such, these five attributes are not shown on the specific resource types below.)
 
 `caption`
 : This is text which is shown near the figure, typically above or below it. A Markua Processor can choose where to position captions based on any criteria it chooses. For example, a Markua Processor can position all captions above or below figures, or use a different behaviour based on the resource format. Note that the figure caption itself may contain the Markua text formatting specified earlier in the [Text Formatting](#text-formatting) chapter.
 
 `class`
 : Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
+
+`format`
+: This is the resource format. Different resource types have different legal values for format.
+
+`title`
+: This is text which is displayed for the figure wherever the figure is listed (e.g. List of Illustrations, Table of Tables, etc.). If no `title` is provided, the `caption` should be used in those places.
+
+`type`
+: This is the resource type. This is usually inferred from the format instead of being specified.
 
 Figures can have alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss the figure caption first and the alt text second.
 
@@ -3086,8 +3089,6 @@ If you don't want to use it, you don't need to learn about it.
 
 Attributes are used to do everything from specify the language of code blocks, add ids for crosslinking and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
 
-TODO - add a `title` attribute to attr list for chapter, section, subsection, etc and anything that can show up in a toc or list of stuff. this accompanise caption in resources. if not provided, either the caption (resources) or the displayed heading (chapters, sections) is used.
-
 ### Attribute List Format
 
 An attribute list is one or more key-value, comma-separated pairs:
@@ -3119,6 +3120,10 @@ If a text attribute value contains a quote, it must be "escaped" with a backslas
 ### `id` Attributes
 
 As previously discussed, there is special syntactic sugar for ids: `{#foo}` is equivalent to `{id: foo}`. However, ids are just attributes.
+
+### `title` Attributes
+
+Markua headings (part, chapter, section, sub-section, etc.) can all have `title` attributes specified in an attribute list on the heading. This is text which overrides what is displayed for the heading in the table of contents. It is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the caption attribute for a resource) is not appropriate, say if it's too long.
 
 {#extension-attributes}
 ### Extension Attributes
