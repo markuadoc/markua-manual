@@ -2955,7 +2955,7 @@ The only way to reference the title and numbers is in crosslinks. There's no syn
 Note that resources, chapters and sections all have implicit numbering. So, #n always works even if numbering is off. However, you will confuse readers if you refer to numbering they cannot see. Also, if numbering is off, the `#f` must not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
 
 {#charsub}
-## Character Substitution (`X--` for X—, `X --` for X–, `...` for …)
+## Character Substitution (`X--` for X—, `X --` for X –, `...` for …)
 
  All Markua documents are written in UTF-8, so to produce any Unicode chracter, it possible to just use the proper Unicode characters. However, in certain cases, it's desirable for Markua to specify automatic replacement of certain combinations of characters with a Unicode replacement. If a Markua Processor encounters one of these combinations of characters outside of a code block, the Markua Processor must replace the combination of characters with the appropriate Unicode character in the output.
 
@@ -2963,7 +2963,7 @@ Note that resources, chapters and sections all have implicit numbering. So, #n a
 : To produce an em dash (—), what is thought of by non-typography people as a "dash" or a "long dash", you can just type two hyphens (`--`) directly after a non-space character. You can also use the proper Unicode character, U+2014, of course. The following all produce em dashes: `foo--bar, foo-- bar, foo--`.
 
 ` --`
-: To produce an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type a space, followed by two hyphens (` --`). You can also use the proper Unicode character, U+2013, of course. The following both produce en dashes: `foo -- bar, foo --`.
+: To produce a space followed by an en dash (–), or the kind of dash that's wider than a hyphen but narrower than an em dash, you can just type a space, followed by two hyphens (` --`). You can also use the proper Unicode character, U+2013, of course. The following both produce en dashes preceded by spaces: `foo -- bar, foo --`. (With `foo -- bar`, there's a space before and after the en dash; with `foo --`, there's no space after it (e.g. at the end of a paragraph).
 
 `...`
 : To produce a horizontal ellipsis (…), you can just type `...`. You can also use the proper Unicode character, U+2026, of course.
