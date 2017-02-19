@@ -279,6 +279,8 @@ inline resource content (default format is `text`)
 ~~~
 ```
 
+Note that **exactly** three backticks or three tildes must be used to insert an inline resource as a figure. If more backticks or tildes are used, these will be interpreted as normal text.
+
 #### Figure Attributes
 
 A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `caption`, `class`, `format`, `title` and `type` attributes. (As such, these five attributes are not shown on the specific resource types below.)
@@ -3123,7 +3125,11 @@ As previously discussed, there is special syntactic sugar for ids: `{#foo}` is e
 
 ### `title` Attributes
 
-Markua headings (part, chapter, section, sub-section, etc.) can all have `title` attributes specified in an attribute list on the heading. This is text which overrides what is displayed for the heading in the table of contents. It is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the caption attribute for a resource) is not appropriate, say if it's too long.
+Markua headings (part, chapter, section, sub-section, etc.) and figures can all have `title` attributes specified in an attribute list. This is text which overrides what is displayed for the heading or figure in the table of contents. For a heading, it is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the `caption` attribute for a resource) is not appropriate, say if it's too long.
+
+### `include` Attributes
+
+Markua headings may have an `include` attribute which specifies which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If no `include` attribute is present, the default is that specified by the parent heading. If no `include` attribute is present at a top-level heading, the default is for the content to be included everywhere. The values of the `include` attribute are a comma-separated list of output targets, can be extended by the Markua Processor. The only output targets predefined by Markua are `book` (for the book or the course material), `sample` (for the sample book or sample course material, if any) and `prof` (if an instructor version of the book or course material is being output).
 
 {#extension-attributes}
 ### Extension Attributes
@@ -3821,6 +3827,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support language directives
 - Support Section directives
 - Finish Leanpub for Courses.
+- Support `{include: book|sample|prof}` for output targets
 
 {#acknowledgments}
 # Acknowledgments
