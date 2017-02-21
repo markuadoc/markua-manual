@@ -2578,7 +2578,7 @@ So, the format of the answer values in a fill in the blank question is out of sc
 #### Supported Attributes on Fill In The Blank Questions
 
 `points`
-: The number of points the question is worth.
+: The number of points the question is worth. This number can be 0 or higher.
 
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them.
@@ -2603,6 +2603,38 @@ Examples:
 
 {words: 100, points: 2}
 ? Why is doubleplusungood the worst?
+```
+
+Since a written question can have long answers, this increases the likelihood that typing these anwers after a bunch of `! ` delimiters will be a pain. So, written quesions (and **only** written questions) support answers in the form of `{answer} ... {/answer}`, like this:
+
+~~~
+{quiz, points: 0}
+
+{lines: 10}
+? Write a function in Ruby that takes an argument and returns three times that argument.
+
+{answer}
+The most straightforward way to do this is like this, since the last value evaluated in the function is returned:
+
+```ruby
+def triple(y)
+  y*3
+end
+```
+
+However, you can also explicitly say `return` if you like:
+
+```ruby
+def triple(y)
+  return y*3
+end
+```
+{/answer}
+
+? Show how to evaluate 2 + 2 in irb.
+
+! `2 + 2`
+{/quiz}
 ```
 
 #### Supported Attributes on Written Questions
@@ -3084,6 +3116,8 @@ it: {==the support for CriticMarkup has no impact on the rest of Markua==}{>>Thi
 If you don't want to use it, you don't need to learn about it.
 ~~~
 
+Note that to hide an entire chapter or section, it's cleaner to use the `book` attribute, described [here](#conditional-inclusion).
+
 # Metadata
 
 {#attributes}
@@ -3127,9 +3161,67 @@ As previously discussed, there is special syntactic sugar for ids: `{#foo}` is e
 
 Markua headings (part, chapter, section, sub-section, etc.) and figures can all have `title` attributes specified in an attribute list. This is text which overrides what is displayed for the heading or figure in the table of contents. For a heading, it is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the `caption` attribute for a resource) is not appropriate, say if it's too long.
 
-### `include` Attributes
+{#conditional-inclusion}
+### Conditional Inclusion Attributes: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
 
-Markua headings may have an `include` attribute which specifies which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If no `include` attribute is present, the default is that specified by the parent heading. If no `include` attribute is present at a top-level heading, the default is for the content to be included everywhere. The values of the `include` attribute are a comma-separated list of output targets, can be extended by the Markua Processor. The only output targets predefined by Markua are `book` (for the book or the course material), `sample` (for the sample book or sample course material, if any) and `prof` (if an instructor version of the book or course material is being output).
+Markua headings may have various attributes which specify which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If the given attribute is not present, the default value of it is that specified by the nearest ancestor heading. If no such attribute is present at a top-level heading, the default is given by the default value for the attribute defined of Markua.
+
+There are six attributes which specify conditional inclusion in output targets; three for books, and three for courses.
+
+`book`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the book that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your book.
+
+`sample`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`.
+
+`instructor`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the book that is being generated, if one exists. If `false`, omit it. The default is `true`.
+
+`course`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the course material that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your course.
+
+`course-sample`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the sample of the course material that is being generated. If `false`, omit it. The default is `false`.
+
+`course-instructor`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the course material that is being generated, if one exists. If `false`, omit it. The default is `true`.
+
+This set of defaults means that by default, there is nothing in the sample version of a book or course.
+
+The reason that there are different attributes used for books and courses, instead of a course just reusing the same values that are used by a book, is that this way the same manuscript can be used to produce a book and a course.
+
+Note that specifying one of these attributes in a nested section overrides any value inherited from its ancestors, or from the default. This way, you can include a chapter in the sample, except for a specific section of the chapter.
+
+Example:
+
+~~~
+{sample: true}
+# Chapter One
+
+This is included in the sample.
+
+## Section One
+
+This is included in the sample.
+
+{sample: false}
+## Section Two
+
+This is *not* included in the sample.
+
+## Section Three
+
+This is included in the sample.
+
+{book: false, sample: true}
+# Buy the book!
+
+What you read was just a sample. Why not buy the full book?
+
+# Chapter Two
+
+This is not included in the sample.
+~~~
 
 {#extension-attributes}
 ### Extension Attributes
@@ -3827,7 +3919,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support language directives
 - Support Section directives
 - Finish Leanpub for Courses.
-- Support `{include: book|sample|prof}` for output targets
+- Support conditional inclusion targets for books and courses.
 
 {#acknowledgments}
 # Acknowledgments
