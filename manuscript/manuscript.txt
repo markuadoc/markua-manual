@@ -3919,7 +3919,8 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support language directives
 - Support Section directives
 - Finish Leanpub for Courses.
-- Support conditional inclusion targets for books and courses.
+- Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
+- Support `{answer}` blocks in quizzes
 
 {#acknowledgments}
 # Acknowledgments
