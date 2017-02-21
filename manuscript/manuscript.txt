@@ -3162,7 +3162,7 @@ As previously discussed, there is special syntactic sugar for ids: `{#foo}` is e
 Markua headings (part, chapter, section, sub-section, etc.) and figures can all have `title` attributes specified in an attribute list. This is text which overrides what is displayed for the heading or figure in the table of contents. For a heading, it is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the `caption` attribute for a resource) is not appropriate, say if it's too long.
 
 {#conditional-inclusion}
-### Conditional Inclusion Attributes: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
+### Conditional Inclusion Attributes: `book`, `sample`, etc.
 
 Markua headings may have various attributes which specify which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If the given attribute is not present, the default value of it is that specified by the nearest ancestor heading. If no such attribute is present at a top-level heading, the default is given by the default value for the attribute defined of Markua.
 
@@ -3703,6 +3703,10 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 8. In LFM, we had a `{pagebreak}` directive. This is replaced by `___`.
 
+9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
+
+10. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
 
@@ -3918,9 +3922,10 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support index entries and index generation.
 - Support language directives
 - Support Section directives
-- Finish Leanpub for Courses.
+- Finish Leanpub for Courses
 - Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
 - Support `{answer}` blocks in quizzes
+- Only support Sample.txt in LFM books, not Markua books
 
 {#acknowledgments}
 # Acknowledgments
