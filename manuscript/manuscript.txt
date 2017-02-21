@@ -2635,7 +2635,7 @@ end
 
 ! `2 + 2`
 {/quiz}
-```
+~~~
 
 #### Supported Attributes on Written Questions
 
