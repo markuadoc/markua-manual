@@ -524,7 +524,7 @@ The type and the format can also be inferred from the file extension and, in the
 
 Note that these file extensions are case-insensitive. Also, note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
- Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource. If the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
+Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource. If the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
 
 If the type is not specified in the attribute list, the format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
@@ -2784,7 +2784,9 @@ If there are no round brackets or curly braces immediately after some text in sq
 
 This is useful when you want to [sic.] something, etc.
 
-## Footnotes
+## Footnotes and Endnotes
+
+### Footnotes
 
 Books often have footnotes.
 
@@ -2814,11 +2816,9 @@ Here is some unrelated text.
 Here is some more unrelated text.
 ~~~
 
-Note that you can only refer to a footnote once.
-
 Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#setting-keys-and-values) setting.
 
-## Endnotes
+### Endnotes
 
 Books often have endnotes. Sometimes these are instead of footnotes, but other times, these are in addition to footnotes. So, it makes sense for Markua to define separate syntaxes for both, rather than just defining one "footnote or endnote" syntax and letting the author pick whether the notes are footnotes or endnotes via a global setting.
 
@@ -2836,10 +2836,21 @@ Then, you define the endnote later in the document, using the same square bracke
 [^^thenote]: This is the endnote content.
 ~~~
 
-Just as with footnotes, if you wish to write multiple paragraphs in an endnote, you must indent the subsequent paragraphs by four spaces or one tab. Also, you can only refer to an endnote once.
+Just as with footnotes, if you wish to write multiple paragraphs in an endnote, you must indent the subsequent paragraphs by four spaces or one tab.
 
 Whether the numbering of endnotes restarts every chapter is something that can be specified by the [`restart-endnote-numbering`](#setting-keys-and-values) setting.
 
+### Single Reference to Footnotes and Endnotes
+
+You can only refer to a footnote or endnote once. You can't define a footnote or endnote in one place and refer to it multiple times in the same Markua manuscript. If you wish to refer to a parenthetical piece of text from multiple places in a Markua manuscript, the best approach is to put it in a section (or sub-section, sub-sub-section, etc.) or aside and refer to it from multiple places using a [crosslink](#crosslinks).
+
+### No Requirement to Support Footnote or Endnote References in Footnotes or Endnotes
+
+There is no requirement for a Markua Processor to support referencing a footnote or endnote from within a footnote or endnote. This style has been used on rare occasions, most notably by David Foster Wallace. However, supporting this puts an increased burden on implementors of Markua Processors. So, support for this is entirely optional.
+
+To be clear: it is entirely optional to support referencing either a footnote or an endnote within a footnote, and it is also optional to support referencing either a footnote or an endnote within an endnote. Authors should not assume that a particular Markua Processor supports this unless its documentation specifically states that it does. For example, Leanpub does **not** support this feature.
+
+{#crosslinks}
 ## Crosslinks and ids
 
 There are two parts to making a crosslink.
@@ -3941,7 +3952,7 @@ Third, I'd like to thank [Braden Simpson](https://twitter.com/bradensimpson). Br
 
 I'd like to thank my father, who has read the manuscript and given me feedback more than once. This was a horrible slog when the spec included a partial HTML mapping!
 
-I'd also like to thank Assaf Arkin, Alberto De Lucca, André Bacci, Ann Chia-hui Tai, Axel Rauschmayer, Dave Warnock, Iva Cheung, Joseph Harfouch, Justin Damer, Ken Pratt, Matt Fikowski and Michael Müller.
+I'd also like to thank Assaf Arkin, Alberto De Lucca, André Bacci, Ann Chia-hui Tai, Axel Rauschmayer, Dave Warnock, Iva Cheung, Jacob Evelyn, Joseph Harfouch, Justin Damer, Ken Pratt, Matt Fikowski and Michael Müller.
 
 Perhaps most important, Markua is benefiting from years of feedback about Leanpub Flavoured Markdown from many Leanpub authors. If it wasn't for these authors, there would be no Markua.
 
