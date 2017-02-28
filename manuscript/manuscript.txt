@@ -3015,11 +3015,11 @@ Note that resources, chapters and sections all have implicit numbering. So, #n a
 
 ### Optional Automatic Curly Quotes Outside of Code Blocks and Spans
 
-A Markua Processor may replace the `"` character with the appropriate "curly quote" at its discretion. This lets `"typography"` become `“typography”`, and `"it's"` become `it’s` as appropriate.
+A Markua Processor may replace the `"` character with the appropriate "curly quote" at its discretion. This lets `"typography"` become `“typography”`, and `it's` become `it’s` as appropriate.
 
 Note that this is an optional behaviour: a Markua Procesor may support this fully, only in some output formats, or not at all.
 
-Also, note that it is **NEVER** acceptable for a Markua Processor to do this, or *any* character substitution, to text inside a code block or code span. In almost all instances this would completely break the code.
+Also, note that it is **NEVER** acceptable for a Markua Processor to do this, or *any* character substitution, to text inside a code block or code span. In almost all instances this would completely break the code. (If you wonder how I got curly quotes into the code spans for `“typography”` and `it’s` above, it's because I pasted them into the manuscript that way. Just as a Markua Processor doesn't make straight quotes curly in a code span, it doesn't make curly quotes straight in a code span either.)
 
 ## Soft Hyphen
 
