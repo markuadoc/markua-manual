@@ -2026,7 +2026,7 @@ Option #1 is preferable for short quotes; option #2 is easier on authors for rea
 
 Like figures and tables, blockquotes can be inserted in the middle of a paragraph or as a sibling of it.
 
-For non-programmers: I'm calling these things "blockquotes", not "block quotes", since their origin is in Markdown [blockquotes](http://daringfireball.net/projects/markdown/syntax#blockquote).
+A> For non-programmers: I'm calling these things "blockquotes", not "block quotes", since their origin is in Markdown [blockquotes](http://daringfireball.net/projects/markdown/syntax#blockquote), and since they can be inserted by typing `{blockquote}`. If I called them "block quotes", that might encourage someone to incorrectly try to insert them as `{block quote}`, which would not work.
 
 These Markua blockquotes are siblings of the paragraphs:
 
