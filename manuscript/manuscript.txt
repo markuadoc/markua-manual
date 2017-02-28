@@ -3013,6 +3013,14 @@ Note that resources, chapters and sections all have implicit numbering. So, #n a
 `...`
 : To produce a horizontal ellipsis (…), you can just type `...`. You can also use the proper Unicode character, U+2026, of course.
 
+### Optional Automatic Curly Quotes Outside of Code Blocks and Spans
+
+A Markua Processor may replace the `"` character with the appropriate "curly quote" at its discretion. This lets `"typography"` become `“typography”`, and `"it's"` become `it’s` as appropriate.
+
+Note that this is an optional behaviour: a Markua Procesor may support this fully, only in some output formats, or not at all.
+
+Also, note that it is **NEVER** acceptable for a Markua Processor to do this, or *any* character substitution, to text inside a code block or code span. In almost all instances this would completely break the code.
+
 ## Soft Hyphen
 
 In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hyphenation can be done.
