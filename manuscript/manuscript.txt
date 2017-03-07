@@ -1566,7 +1566,7 @@ Markua handles two consecutive newlines identically to Markdown: they produce a 
 
 Similarly, Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
 
-When writing prose, there's basically no reason to add multiple blank lines. Worse, the most popular reason is a bad one: to hopefully accomplish a page break, or to make something look like a section break. However, Markua has special syntax for [scene breaks and page breaks](#scene-and-page-breaks), which should be used for these purposes.
+When writing prose, there's basically no reason to add multiple blank lines. Worse, the most popular reason is a bad one: to hopefully accomplish a page break, or to make something look like a section break. However, Markua has special syntax for [scene breaks](#scene-breaks) and [page breaks](#page-breaks), which should be used for these purposes.
 
 If you absolutely must insert a bunch of newlines in a row, you can do this by starting a poetry block and doing so:
 
@@ -1969,39 +1969,44 @@ Broadly speaking, Markua documents consist of three things: block elements, span
 
 These are the remaining block elements defined by Markua.
 
-{#scene-and-page-breaks}
-## Scene Breaks and Page Breaks (`* * *` and `===`)
+{#scene-breaks}
+## Scene Breaks (`* * *`)
 
-In fiction, scene breaks are sometimes added between paragraphs in a chapter to denote a break in context.
+In fiction, scene breaks are sometimes added between paragraphs in a chapter to denote a break in context. To add a scene break, add three or more asterisks on a line by themselves, with or without spaces between them. For example, `***`, `* * *` and `**********` on a line by themselves all produce a scene break.
 
-So, Markua uses the Markdown horizontal rule syntax to produce all three cases, as follows:
-
-`* * *`
-: Three or more asterisks on a line by themselves, with or without spaces between them (e.g. `***`, `* * *`, `**********`, etc.), produce a scene break.
-
-`===`
-: Three or more equals signs on a line by themselves, with or without spaces between them (e.g. `===`, `= = =`, `==========`, etc.), produce a page break. Page breaks are discouraged in Markua: when you're writing, unsemantic formatting is procrastination, and most page breaks are exactly this. (Much like width and height attributes on images, however, page breaks are supported in Markua due to pragmatic concerns.)
-
-Here is an example showing both uses:
+Example:
 
 ~~~
-This is before the first scene break.
+This is before the scene break.
 
 * * *
 
-This is after the scene break. It has a page break after it.
+This is after the scene break.
+~~~
+
+Markua Processors can take great liberties in how they output scene breaks. They can output a set number of asterisks, or an image, or whatever else they choose. Note that typically a scene break is not followed by a page break. However, to add this, you can simply add a manual page break after it.
+
+{#page-breaks}
+## Page Breaks (`===`)
+
+Three or more equals signs on a line by themselves, with or without spaces between them (e.g. `===`, `= = =`, `==========`, etc.), produce a page break.
+
+Page breaks are discouraged in Markua: when you're writing, unsemantic formatting is procrastination, and most page breaks are exactly this. Much like width and height attributes on images, however, page breaks are supported in Markua due to pragmatic concerns.
+
+Here is an example showing a page break following a paragraph, and a page break following a scene break:
+
+~~~
+This is before the page break.
 
 ===
 
 This is on a new page, after the forced page break. It has a scene break and then a page break after it.
 
-*****
-= = =
+* * *
+===
 
-This is on a new page, after the forced page break.
+This is on a new page, after the scene break and the forced page break.
 ~~~
-
-Markua Processors can take great liberties in how they output scene breaks.
 
 ## Blockquotes (`>`)
 
@@ -3597,7 +3602,7 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 14. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
 15. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
 16. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
-17. In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML or horizontal rules. The `***` is used for section breaks, `___` starts poetry, and `---` starts monospaced poetry.
+17. In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML or horizontal rules. The `***` is used for scene breaks, `___` starts poetry, and `---` starts monospaced poetry.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
@@ -3720,7 +3725,7 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
-8. In LFM, we had a `{pagebreak}` directive. This is replaced by `___`.
+8. In LFM, we had a `{pagebreak}` directive. This is replaced by `===`.
 
 9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
