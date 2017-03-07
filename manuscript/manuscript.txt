@@ -3629,7 +3629,7 @@ Markua supports this method of inserting block elements.
 However, Markua is more than just a way of producing HTML. Markua is a way of authoring books. HTML is just one of the many output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua [supports this too](#inserting-into-paras).
 
 {#heading-design-goals}
-### Design Goals of Markua Headings
+## Design Goals of Markua Headings
 
 The following are the design goals of Markua headings:
 
@@ -3646,7 +3646,7 @@ The following are the design goals of Markua headings:
 The design of Markua headings meets these requirements, in a better way than any other design I could come up with.
 
 {#heading-diffs}
-### Differences with Markdown Headings
+## Differences with Markdown Headings
 
 Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`. In Markdown, you can create the 6 HTML heading levels using Markdown syntax.
 
@@ -3654,10 +3654,10 @@ What Markua does is to use a subset of the Markdown heading syntax, and then rei
 
 Markua is also a lot more strict about heading syntax than Markdown. In Markdown, not only are there two syntaxes (atx and Setext) for making headings, what's worse is that [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings are not supported.
 
-To understand Markua headings, it's helpful to understand the atx and Setext headings of Markdown.
+To understand Markua headings and the differences with Markdown headings, it's helpful to understand the atx and Setext headings of Markdown.
 
 {#setext_headings}
-#### Setext Headings in Markdown
+### Setext Headings in Markdown
 
 In the Setext-style of Markdown headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
 
@@ -3683,7 +3683,7 @@ There are two main issues with this style of heading in Markdown:
 2. It is confusing: Authors are confused about how many equals or minus signs you need to use. (As we saw above, the answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
 
 {#atx_headings}
-#### atx Headings in Markdown
+### atx Headings in Markdown
 
 In Markdown, the other heading syntax is "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown. To create an atx heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text, followed optionally by whitespace and any number of `#` characters. The number of `#` characters determines the level of heading.
 
