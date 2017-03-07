@@ -3196,7 +3196,7 @@ There are six attributes which specify conditional inclusion in output targets; 
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the book that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your book.
 
 `sample`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`.
+: If `true`, include the content under this heading (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`. Note that this attribute just governs the inclusion of the content, not the heading itself. A Markua Processor may choose to include every heading in the sample version of a book or course, in order to produce a representative Table of Contents. In a case such as this where `sample` is `false`, the Markua Processor may output special content inside the chapter, section or subsection to indicate that the content itself is being omitted from the sample.
 
 `instructor`
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the book that is being generated, if one exists. If `false`, omit it. The default is `true`.
@@ -3210,9 +3210,9 @@ There are six attributes which specify conditional inclusion in output targets; 
 `course-instructor`
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the course material that is being generated, if one exists. If `false`, omit it. The default is `true`.
 
-This set of defaults means that by default, there is nothing in the sample version of a book or course.
+This set of defaults means that by default, there is no book or course content included in the sample version of a book or course. As discussed, the headings themselves may all be included, in order to generate an appropriate Table of Contents for the sample book or course.
 
-The reason that there are different attributes used for books and courses, instead of a course just reusing the same values that are used by a book, is that this way the same manuscript can be used to produce a book and a course.
+The reason that there are different attributes used for books and courses, instead of a course just reusing the same values that are used by a book, is that this way the same manuscript can be used to produce a book and a course. This approach is obviously not for everyone, but it may appeal to highly technical authors who wish to not repeat themselves.
 
 Note that specifying one of these attributes in a nested section overrides any value inherited from its ancestors, or from the default. This way, you can include a chapter in the sample, except for a specific section of the chapter.
 
