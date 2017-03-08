@@ -2849,7 +2849,7 @@ Whether the numbering of endnotes restarts every chapter is something that can b
 
 You can only refer to a footnote or endnote once. You can't define a footnote or endnote in one place and refer to it multiple times in the same Markua manuscript. If you wish to refer to a parenthetical piece of text from multiple places in a Markua manuscript, the best approach is to put it in a section (or sub-section, sub-sub-section, etc.) or aside and refer to it from multiple places using a [crosslink](#crosslinks).
 
-### No Requirement to Support Inserting Footnote or Endnote References Anywhere but Within Paragraphs
+### Footnotes and Endnotes Support Required for Paragraphs Only
 
 A Markua Processor must support footnote and endnote references inserted in normal paragraph content. However, that's it.
 
