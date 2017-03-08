@@ -2849,11 +2849,17 @@ Whether the numbering of endnotes restarts every chapter is something that can b
 
 You can only refer to a footnote or endnote once. You can't define a footnote or endnote in one place and refer to it multiple times in the same Markua manuscript. If you wish to refer to a parenthetical piece of text from multiple places in a Markua manuscript, the best approach is to put it in a section (or sub-section, sub-sub-section, etc.) or aside and refer to it from multiple places using a [crosslink](#crosslinks).
 
-### No Requirement to Support Footnote or Endnote References in Footnotes or Endnotes
+### No Requirement to Support Inserting Footnote or Endnote References Anywhere but Within Paragraphs
 
-There is no requirement for a Markua Processor to support referencing a footnote or endnote from within a footnote or endnote. This style has been used on rare occasions, most notably by David Foster Wallace. However, supporting this puts an increased burden on implementors of Markua Processors. So, support for this is entirely optional.
+A Markua Processor must support footnote and endnote references inserted in normal paragraph content. However, that's it.
 
-To be clear: it is entirely optional to support referencing either a footnote or an endnote within a footnote, and it is also optional to support referencing either a footnote or an endnote within an endnote. Authors should not assume that a particular Markua Processor supports this unless its documentation specifically states that it does. For example, Leanpub does **not** support this feature.
+However, sometimes authors want to get creative with their footnotes and endnotes. Sometimes they want to add them in headings, or in footnotes or endnotes themselves. This latter style has been used on rare occasions, most notably by David Foster Wallace.
+
+However, supporting inserting footnotes and endnotes in places other than normal paragraph content puts a hugely increased burden on implementors of Markua Processors. As such, there is no requirement for a Markua Processor to support inserting a footnote or endnote anywhere other than in normal paragraph content.
+
+Authors should **not** assume that a particular Markua Processor supports inserting a footnote or endnote anywhere other than in normal paragraph content unless its documentation specifically states that it does. For example, Leanpub only supports inserting footnotes or endnotes in normal paragraph content.
+
+A> In software, [abstractions leak](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/). Leanpub uses LaTeX for its PDF generation, and presumably many other Markua Processors will as well. In LaTeX, inserting footnotes or endnotes in places like headings, footnotes or endnotes is very problematic. So, it's optional. The best thing about writing a specification for something you are implementing is that there is often a very easy solution to a very difficult implementation problem!
 
 {#crosslinks}
 ## Crosslinks and ids
