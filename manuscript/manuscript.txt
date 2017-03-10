@@ -2735,6 +2735,7 @@ The following is an example of a quiz which uses question alternates. This ensur
 ?5 What's 7 + 7?
 
 ! 14
+{/quiz}
 ```
 
 # Span Elements
