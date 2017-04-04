@@ -2592,7 +2592,7 @@ So, the format of the answer values in a fill in the blank question is out of sc
 
 A written question corresponds to short answer, long answer or essay questions in traditional tests. It looks the same as a fill in the blank question, except the answer is optional.
 
-A question is interpreted as being a written question, as opposed to a fill in the blank question, if either the `words`, `lines` or `pages` attribute is specified, or if there is no answer provided.
+A question is interpreted as a written question if either the `words`, `lines` or `pages` attribute is specified, if there is no answer provided, or if an answer is provided using the `{answer}` syntax discussed shortly.
 
 Note that an answer may be provided in a written question. If this is done, the answer is not matched like a fill in the blank answer. Instead, the answer is essentially a "note to markers", whether those markers are underpaid graduate students or unpaid AIs. Markua does not specify any microformat for this note to markers.
 
@@ -2647,7 +2647,7 @@ end
 Note that only one of `words`, `lines` or `pages` may be provided. Providing more than one is an error.
 
 `points`
-: The number of points the question is worth.
+: The number of points the question is worth. A Markua Processor generating a MOOC may override this. For example, when generating a MOOC, Leanpub overrides all written questions to have a points attribute of 0, regardless of what (if anything) is specified for this attribute by the author.
 
 `words`
 : The maximum number of words the answer can be. Obviously this is more useful for online quizzes than paper ones.
