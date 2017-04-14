@@ -3104,6 +3104,9 @@ When outputting a sentence containing emoji inserted using the `:emoji_name:` sy
 1. Output the emoji as a span image (right in the flow of the text with no line breaks before or after it) with the `:emoji_name:` (including the colons) as alt text.
 2. Output the emoji using an emoji-aware font, having mapped the emoji name to some Unicode code point using some cannoical table somewhere. There are online resources such as <http://www.webpagefx.com/tools/emoji-cheat-sheet/> which may be a starting point for any Markua Processor wishing to do this.
 3. Output the `:emoji_name:` as an inline code span showing the `:emoji_name:` verbatim.
+4. Output a "missing image" character, if it does not recognize the given emoji.
+
+Because of this, Markua's emoji support can also optionally be used by Markua Processors for a wide range of emoji. For example, a Markua Processor could output Font Awesome icons with an emoji syntax, such as `:fa-leanpub:` to output the Leanpub logo in Font Awesome. Since all Font Awesome icons have an `fa-` prefix, these are namespaced nicely.
 
 {#criticmarkup}
 ## CriticMarkup
@@ -3951,6 +3954,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support ids and other attributes on span elements
 - Support smart crosslinks
 - Support Emoji
+- Support Font Awesome in emoji syntax, such as `:fa-leanpub:`
 - Support CriticMarkup.
 - Support index entries and index generation.
 - Support language directives
