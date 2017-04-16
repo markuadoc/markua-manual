@@ -2486,8 +2486,19 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 
 ## Supported Attributes on Quizzes and Exercises
 
+TODO - should things like `attempts` and `auto-submit` be in Markua, or be extension attrs?
+
+`attempts`
+: (Quizzes only.) The number of allowed attempts on a quiz. The default is defined by the value of `quiz-attempts` on the containing course, or `1` if this is not present.
+
+`auto-submit`
+: (Quizzes only.) `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
+
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the default behaviour of fill in the blank questions. If `true`, the fill in the blank question answers are case-sensitive. If false, they are not.
+
+`id`
+: All Markua elements support an `id` attribute. The reason the `id` attribute is explicitly listed here is to emphasize that a Markua Processor may require an `id` attribute on a quiz or exercise. For example, Leanpub requires the `id` attribute on all quizzes, in order to determine the identity of quizzes when a course is being published in-progress. (As a student, you'd be pretty unhappy if you had to re-take an unchanged quiz simply because a professor published a new course version.)
 
 `points`
 : If present, this is the total number of points the quiz or exercise is worth. (This really only matters for quizzes, but is supported for exercises as well, in case a Markua Processor wishes to display the points on exercises to make them feel more real.) If `points` is not present, the worth of the quiz is determined by summing the points of the questions. (Questions are worth 1 point each if they have no `points` attribute.) If the quiz has a `points` attribute and its questions also have `points` attributes, the worth of each question in a larger course context is determined as follows: its `points` are the numerator, and the total `points` in the quiz or exercise is the denominator.
@@ -2500,6 +2511,9 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 
 `start-at`
 : The `start_at` is the number of the first question. The default is 1. Any integer is permitted. Subsequent questions will have a number which is 1 higher than the previous question.
+
+`time-limit`
+: The time limit to finish the quiz, once started. The format is `XdYhZm`. For example, 3 days, 6 hours and 45 minutes is expressed as `3d6h45m`; 7 days is expressed as `7d`. The default is `7d`.
 
 As [discussed above](#quiz-headings), there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz or exercise itself, using the normal Markua formatting for a chapter heading.
 
