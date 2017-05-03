@@ -2228,17 +2228,16 @@ A> The attribute list must either directly precede the `B>` with no blank line b
 A> `{class: warning}`
 A> `{blurb}`
 
-### Syntactic Sugar for Blurb Classes: `C>`, `D>`, `E>`, `I>`, `T`, `W>`
+### Syntactic Sugar for Specific Blurb Classes: `D>`, `E>`, `I>`, `T`, `W>`
 
 Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
 
 So, Markua defines a standard shorthand syntax for these classes of blurbs. With this syntax, you use a different letter than `B` in the `B>`, to create a blurb with the appropriate `class`.
 
-These are the syntactic sugar values you can use:
+These are the syntactic sugar values you can use which have a heritage in computer programming books:
 
 | Sugar | Equivalent To a B> With |
 |-------|-------------------------|
-| `C>`  | `{class: center}`       |
 | `D>`  | `{class: discussion}`   |
 | `E>`  | `{class: error}`        |
 | `I>`  | `{class: information}`  |
@@ -2248,8 +2247,6 @@ These are the syntactic sugar values you can use:
 Examples:
 
 ~~~
-C> This is a centered blurb.
-
 D> This is a discussion blurb.
 
 E> This is an error blurb.
@@ -2264,9 +2261,6 @@ W> This is a warning blurb.
 These are equivalent to:
 
 ~~~
-{class: center}
-B> This is a centered blurb.
-
 {class: discussion}
 B> This is a discussion blurb.
 
@@ -2296,7 +2290,7 @@ A Markua Processor is free to either override this silently, or to raise an erro
 
 ### Using Blurbs to Center Text with `C>`
 
-As discussed above, you can use a blurb to center text. The important point is that this is the only way to center text in Markua.
+You can also use a blurb to center text.
 
 The following two ways to do this are equivalent:
 
@@ -2306,6 +2300,10 @@ C> This is a centered blurb.
 {class: center}
 B> This is a centered blurb.
 ~~~
+
+This is the only way to center text in Markua.
+
+Unlike other blurb types which have their origin in technical books, centering text has a wide range of uses. So, it could have been thought of as something different than a blurb. However, in terms of its behaviour and the way it's inserted, centered text is a blurb--whether it's inserted via syntactic sugar or via a class attribute on a normal blurb element. So, it's discussed here.
 
 ### Using Extension Attributes on Blurbs to add `icon` Support
 
