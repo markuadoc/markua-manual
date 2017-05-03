@@ -2200,6 +2200,7 @@ Blurbs also have support for an attribute list, which can contain a `class` attr
 
 Markua has its origin in authoring computer programming books. In computer programming books, there are a number of blurb types which are a de facto standard:
 
+* `center`
 * `discussion`
 * `error`
 * `information`
@@ -2227,7 +2228,7 @@ A> The attribute list must either directly precede the `B>` with no blank line b
 A> `{class: warning}`
 A> `{blurb}`
 
-### Syntactic Sugar for Blurb Classes: `D>`, `E>`, `I>`, `T`, `W>`
+### Syntactic Sugar for Blurb Classes: `C>`, `D>`, `E>`, `I>`, `T`, `W>`
 
 Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
 
@@ -2237,6 +2238,7 @@ These are the syntactic sugar values you can use:
 
 | Sugar | Equivalent To a B> With |
 |-------|-------------------------|
+| `C>`  | `{class: center}`       |
 | `D>`  | `{class: discussion}`   |
 | `E>`  | `{class: error}`        |
 | `I>`  | `{class: information}`  |
@@ -2246,6 +2248,8 @@ These are the syntactic sugar values you can use:
 Examples:
 
 ~~~
+C> This is a centered blurb.
+
 D> This is a discussion blurb.
 
 E> This is an error blurb.
@@ -2260,6 +2264,9 @@ W> This is a warning blurb.
 These are equivalent to:
 
 ~~~
+{class: center}
+B> This is a centered blurb.
+
 {class: discussion}
 B> This is a discussion blurb.
 
@@ -2277,6 +2284,28 @@ B> This is a warning blurb.
 ~~~
 
 Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb, but other Markua Processors are free to do something different.
+
+Finally, note that specifying a class in metadata overrides what the syntactic sugar does:
+
+~~~
+{class: tip}
+W> This is a tip blurb, not a warning blurb.
+~~~
+
+A Markua Processor is free to either override this silently, or to raise an error if this happens.
+
+### Using Blurbs to Center Text with `C>`
+
+As discussed above, you can use a blurb to center text. The important point is that this is the only way to center text in Markua.
+
+The following two ways to do this are equivalent:
+
+~~~
+C> This is a centered blurb.
+
+{class: center}
+B> This is a centered blurb.
+~~~
 
 ### Using Extension Attributes on Blurbs to add `icon` Support
 
@@ -2655,6 +2684,8 @@ end
 ! `2 + 2`
 {/quiz}
 ~~~
+
+#### TODO - support {why} after answer, so prof can explain why the answer is what it is?
 
 #### Supported Attributes on Written Questions
 
@@ -3747,15 +3778,17 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
 
-6. In LFM, `X>` defines an exercise block which is similar to a blurb in Markua, but styled as an exercise. In Markua, `X>` is used for structured exercises, which are essentially unmarked quizzes that have questions and answers provided. So, Markua does not define a blurb with a class of `exercise`, or any syntactic sugar for it.
+6. In LFM, we had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a center-aligned blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a {class: center} attribute.
 
-7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
+7. In LFM, `X>` defines an exercise block which is similar to a blurb in Markua, but styled as an exercise. In Markua, `X>` is used for structured exercises, which are essentially unmarked quizzes that have questions and answers provided. So, Markua does not define a blurb with a class of `exercise`, or any syntactic sugar for it.
 
-8. In LFM, we had a `{pagebreak}` directive. This is replaced by `===`.
+8. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
-9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
+9. In LFM, we had a `{pagebreak}` directive. This is replaced by `===`.
 
-10. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+10. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
+
+11. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
 
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
