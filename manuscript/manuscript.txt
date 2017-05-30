@@ -3241,9 +3241,9 @@ As previously discussed, there is special syntactic sugar for ids: `{#foo}` is e
 Markua headings (part, chapter, section, sub-section, etc.) and figures can all have `title` attributes specified in an attribute list. This is text which overrides what is displayed for the heading or figure in the table of contents. For a heading, it is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the `caption` attribute for a resource) is not appropriate, say if it's too long.
 
 {#conditional-inclusion}
-### Conditional Inclusion Attributes: `book`, `sample`, etc.
+### Conditional Inclusion Attributes on Headings: `book`, `sample`, etc.
 
-Markua headings may have various attributes which specify which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If the given attribute is not present, the default value of it is that specified by the nearest ancestor heading. If no such attribute is present at a top-level heading, the default is given by the default value for the attribute defined of Markua.
+Markua headings (and *only* headings) may have various attributes which specify which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If the given attribute is not present, the default value of it is that specified by the nearest ancestor heading. If no such attribute is present at a top-level heading, the default is given by the default value for the attribute defined of Markua.
 
 There are six attributes which specify conditional inclusion in output targets; three for books, and three for courses.
 
@@ -3301,6 +3301,12 @@ What you read was just a sample. Why not buy the full book?
 
 This is not included in the sample.
 ~~~
+
+To be clear: ALL conditional inclusion attributes *ONLY* have meaning when used as an attribute list on headings, i.e. the things that are defined with 1-6 `#` signs followed by a space, followed by text.
+
+For example, you can only say `{sample: true}` immediately above a heading. You can't have a blank line below it (otherwise it would be a directive, and not be valid) and you can't attach it to anything other than a heading (like a paragraph, figure, etc.).
+
+A Markua Processor must raise an error if it encounters a conditional inclusion attribute used incorrectly, so as to help the author understand how to properly use them.
 
 {#extension-attributes}
 ### Extension Attributes
