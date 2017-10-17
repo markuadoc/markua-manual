@@ -2513,7 +2513,31 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 
 ## Supported Attributes on Quizzes and Exercises
 
-TODO - should things like `attempts` and `auto-submit` be in Markua, or be extension attrs?
+TODO - need to add default-quiz-attempts, default-random-choice-order, default-random-question-order, default-quiz-auto-submit to attributes on courses, use-result (latest / best), defult-quiz-use-result. Default is latest.
+
+TODO
+
+incorrect, all, none (edited)
+
+
+[11:07]
+default: incorrect
+
+
+[11:08]
+TODO - need to add default-quiz-attempts, default-random-choice-order, default-random-question-order, default-quiz-auto-submit to attributes on courses, use-result (latest / best), defult-quiz-use-result. Default is latest.
+
+
+[11:08]
+`show-answers` : `incorrect`, `all`, `none`
+
+
+[11:09]
+`default-quiz-show-answers` : `incorrect`, `all`, `none`
+
+
+[11:09]
+default default is `incorrect`
 
 `attempts`
 : (Quizzes only.) The number of allowed attempts on a quiz. The default is defined by the value of `quiz-attempts` on the containing course, or `1` if this is not present.
