@@ -2517,7 +2517,7 @@ TODO - need to add default-quiz-attempts, default-random-choice-order, default-r
 
 TODO - PETER WRITE THESE
 
-{type: code}
+{format: ruby}
 ![foo](code/foo)
 
 TODO - re. what answers to show: incorrect (the default), all, none - and default-quiz-show-answers
