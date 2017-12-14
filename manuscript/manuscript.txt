@@ -553,7 +553,7 @@ We will discuss the supported and the default attributes for images, and then sh
 
 Note that regardless of the image location, a Markua Processor can embed the image in the output format. For example, a web image does not need to be loaded from the web every time; it can be inlined in the output by the Markua Processor. A Markua Processor can also process images such that all images are placed on the web with URLs, and the images are loaded by the reader from the web.
 
-Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height` and `float` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
+Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, `wrap` and `align` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
 
 #### Supported Attributes for Images
 
@@ -562,14 +562,14 @@ The following are the supported attributes for image resources, in addition to t
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
-`float`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that text flows around the image, based on the value of the `align` attribute. Note that a Markua Processor may interpret `float` to be `false` if `align` is `middle`, since flowing text around both sides of an image does not work well on some output formats.
+`wrap`
+: `true` or `false`. This specifies whether text wraps around the image, or whether it is only above or below the image. The default is determined by the value of the `align` attribute. If there is no value set for `align` or if the `align` is `middle`, the default value of `wrap` is `false`. Otherwise (if the `align` is `left`, `right`, `inside` or `outside`), the default value of `wrap` is true. If `true`, the Markua Processor should ensure that text flows around the image, based on the value of the `align` attribute. Note that a Markua Processor may force `wrap` to be `false` if `align` is `middle`, since flowing text around both sides of an image does not work well on some output formats.
 
 `align`
-: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. Combined with `width`, `height` and `float`, this provides basic image formatting. A Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead. Finally, note that the value of `middle` may cause a Markua Processor to ignore the value of `float` and consider `float` to be false.
+: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. Combined with `width`, `height` and `wrap`, this provides basic image formatting. A Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead. Finally, note that the value of `middle` may cause a Markua Processor to ignore the value of `wrap` and consider `wrap` to be false.
 
 `fullbleed`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `float` attributes are used instead and margins are respected.
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height`, `wrap` and `align` attributes are used instead and margins are respected.
 
 `height`
 : The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100.
@@ -676,25 +676,28 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 #### Supported Attributes for Video
 
-The following are the supported attributes for video resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support. Note that the `caption`, `class`, `float`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
+The following are the supported attributes for video resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support. Note that the `caption`, `class`, `wrap`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
 
 `embed`
 : true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like youtube which disallows this. In this case, this should function like a link to external web page which (youtube app etc). A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
 
-`float`
-: The `float` can be `left`, `right`, `middle`, `inside`, `outside`. Combined with `width` and `height`, this provides basic formatting.
+`wrap`
+: `true` or `false`. This applies to the `poster` image for the video, and works just like it does with images.
+
+`align`
+: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. This applies to the `poster` image for the video, and works just like it does with images.
 
 `fullbleed`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `float` attributes are used instead and margins are respected.
+: `true` or `false`. The default is `false`.  This applies to the `poster` image for the video, and works just like it does with images.
 
 `height`
-: The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100.
+: This applies to the `poster` image for the video, and works just like it does with images.
 
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it. Finally, if a Markua Processor is embedding a web video from a web video service (e.g. YouTube) which has a known algorithm for the location of the poster images for its videos, the Markua Processor may choose to use that poster image if a `poster` attribute is not explicitly specified. However, if a poster attribute is specified, then it must be used by the Markua Processor.
 
 `width`
-: The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100.
+: This applies to the `poster` image for the video, and works just like it does with images.
 
 #### Local Video
 
@@ -3999,7 +4002,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 - Support image attributes fullbleed, height, cite, url
 - Decide what we are doing with the cite and url attributes
 - Specifically forbid local video resources
-- Support video attributes embed, fullbleed, float, height, width
+- Support video attributes embed, fullbleed, wrap, height, width
 - Support dashed attributes for code resources line-numbers, number-from, crop-start, crop-end
 - Support three-tildes defaults to text, backticks default to guess approach
 - Support inline math with format attribute
