@@ -568,6 +568,9 @@ The following are the supported attributes for image resources, in addition to t
 `align`
 : The `align` can be `left`, `right`, `middle`, `inside` or `outside`. Combined with `width`, `height` and `wrap`, this provides basic image formatting. A Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead. Finally, note that the value of `middle` may cause a Markua Processor to ignore the value of `wrap` and consider `wrap` to be false.
 
+`float`
+: A Markua Processor may support `float` as a synonym for `align`. If both `float` and `align` are specified, `float` must be ignored.
+
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height`, `wrap` and `align` attributes are used instead and margins are respected.
 
