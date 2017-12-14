@@ -563,7 +563,7 @@ The following are the supported attributes for image resources, in addition to t
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
 `float`
-: The `float` can be `left`, `right`, `middle`, `inside`, `outside`. Combined with `width` and `height`, this provides basic image formatting.
+: The `float` can be `left`, `right`, `middle`, `inside`, `outside`. Combined with `width` and `height`, this provides basic image formatting. A Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead.
 
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `float` attributes are used instead and margins are respected.
