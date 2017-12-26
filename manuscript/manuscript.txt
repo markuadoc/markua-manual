@@ -2522,10 +2522,6 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 
 ## Supported Attributes on Quizzes and Exercises
 
-TODO - need to add default-quiz-attempts, default-random-choice-order, default-random-question-order, default-quiz-auto-submit to attributes on courses, use-result (latest / best), defult-quiz-use-result. Default is best not latest.
-
-TODO - PETER WRITE THESE
-
 {format: ruby}
 ![foo](code/foo)
 
@@ -2535,10 +2531,10 @@ TODO - `default-quiz-show-answers` : `incorrect` (the default), `all`, `none`
 TODO - default default is `incorrect`
 
 `attempts`
-: (Quizzes only.) The number of allowed attempts on a quiz. The default is defined by the value of `quiz-attempts` on the containing course, or `1` if this is not present.
+: The number of allowed attempts on a quiz. The default is defined by the value of `default-quiz-attempts` on the containing course, or `1` if this is not present.
 
 `auto-submit`
-: (Quizzes only.) `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
+: `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
 
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the default behaviour of fill in the blank questions. If `true`, the fill in the blank question answers are case-sensitive. If false, they are not.
@@ -2560,6 +2556,9 @@ TODO - default default is `incorrect`
 
 `time-limit`
 : The time limit to finish the quiz, once started. The format is `XdYhZm`. For example, 3 days, 6 hours and 45 minutes is expressed as `3d6h45m`; 7 days is expressed as `7d`. The default is `7d`.
+
+`use-result`
+: `best` or `latest`. Whether the best result on the quiz is used, or the latest one. The default is `best`.
 
 As [discussed above](#quiz-headings), there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz or exercise itself, using the normal Markua formatting for a chapter heading.
 
@@ -3571,19 +3570,19 @@ A Markua Processor may also get settings from elsewhere, like a web interface. H
 
 The following settings must be supported by all Markua Processors. Markua Processors can also add their own settings, just as Markua Processors can understand their own extension attributes.
 
-authors
+`authors`
 : The authors of the Markua document.
 
-contributors
+`contributors`
 : Any contributors to the Markua document who are not authors.
 
-copyright
+`copyright`
 : The owner of the copyright.
 
-default-code-language
+`default-code-language`
 : The default language that code is. The default is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`.
 
-lang
+`lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
 
 `number-chapters`
@@ -3595,14 +3594,32 @@ lang
 `number-figures`
 : `true` or `false`. Default `true`. Whether resources are numbered when inserted as figures. Note that different types of resources (e.g. code listings, tables, images, etc.) have different numbering.
 
-restart-endnote-numbering
+`restart-endnote-numbering`
 : `true` or `false`. Default `true`. Whether the endnote numbering is restarted at the end of a chapter.
 
-restart-footnote-numbering
+`restart-footnote-numbering`
 : `true` or `false`. Default `true`. Whether the footnote numbering is restarted at the end of a chapter.
 
-title
+`title`
 : The title of the Markua document.
+
+{#course-setting-keys-and-values}
+### Settings for Courses
+
+The following settings are defined by Markua, but only make sense in the context of a course. So, a Markua Processor which is not generating a course can ignore them.
+
+`default-quiz-attempts`
+: The default number of allowed attempts on a quiz. The default is `1`.
+
+`default-random-choice-order`
+: `true` or `false`. The default is `false`. This sets the default behaviour of multiple choice questions. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written.
+
+`default-random-question-order`
+: `true` or `false`. The default is `false`. This sets the default behaviour of the quiz or exercise. If `true`, the questions are randomly arranged; if `false`, they are presented in the order written.
+
+`default-quiz-auto-submit`
+: `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
+
 
 {backmatter}
 
