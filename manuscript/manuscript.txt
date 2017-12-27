@@ -699,6 +699,9 @@ The following are the supported attributes for video resources, in addition to t
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it. Finally, if a Markua Processor is embedding a web video from a web video service (e.g. YouTube) which has a known algorithm for the location of the poster images for its videos, the Markua Processor may choose to use that poster image if a `poster` attribute is not explicitly specified. However, if a poster attribute is specified, then it must be used by the Markua Processor.
 
+`transcript`
+: The URL or path to a transcript of the video, which should be shown or dictated to people who cannot view video. This helps people with visual disabilities view course material, and helps with ADA compliance.
+
 `width`
 : This applies to the `poster` image for the video, and works just like it does with images.
 
@@ -740,7 +743,10 @@ We will discuss the supported and the default attributes for audio files, and th
 
 #### Supported Attributes for Audio
 
-There are no supported attributes for audio, other than the `type`, `format`, `caption` and `class` attributes which all resources support.
+The following are the supported attributes for audio resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
+
+`transcript`
+: The URL or path to a transcript of the audio, which should be shown to people who cannot hear audio. This helps people with auditory disabilities view course material, and helps with ADA compliance.
 
 #### Local Audio
 
@@ -2552,7 +2558,7 @@ TODO - default default is `incorrect`
 : `true` or `false`. The default is `false`. This sets the default behaviour of the quiz or exercise. If `true`, the questions are randomly arranged; if `false`, they are presented in the order written.
 
 `start-at`
-: The `start_at` is the number of the first question. The default is 1. Any integer is permitted. Subsequent questions will have a number which is 1 higher than the previous question.
+: The `start-at` is the number of the first question. The default is 1. Any integer is permitted. Subsequent questions will have a number which is 1 higher than the previous question.
 
 `time-limit`
 : The time limit to finish the quiz, once started. The format is `XdYhZm`. For example, 3 days, 6 hours and 45 minutes is expressed as `3d6h45m`; 7 days is expressed as `7d`. The default is `7d`.
