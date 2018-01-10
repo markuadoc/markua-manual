@@ -700,7 +700,7 @@ The following are the supported attributes for video resources, in addition to t
 : The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it. Finally, if a Markua Processor is embedding a web video from a web video service (e.g. YouTube) which has a known algorithm for the location of the poster images for its videos, the Markua Processor may choose to use that poster image if a `poster` attribute is not explicitly specified. However, if a poster attribute is specified, then it must be used by the Markua Processor.
 
 `transcript`
-: The URL or path to a transcript of the video, which should be shown or dictated to people who cannot view video. This helps people with visual disabilities view course material, and helps with ADA compliance.
+: The URL or path to a transcript of the video, which should be shown or dictated to people who cannot view video. This helps people with visual disabilities view course material, and helps with ADA compliance. For example, what Leanpub does with a `transcript` is as follows: a URL is linked to in the caption (but in a way which does not affect the Table of Contents), and a path is assumed to be a path to a Markua file which is then used to produce a web page at a public URL, which then is also linked to in the caption in a way which does not affect the Table of Contents.
 
 `width`
 : This applies to the `poster` image for the video, and works just like it does with images.
@@ -746,7 +746,7 @@ We will discuss the supported and the default attributes for audio files, and th
 The following are the supported attributes for audio resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
 
 `transcript`
-: The URL or path to a transcript of the audio, which should be shown to people who cannot hear audio. This helps people with auditory disabilities view course material, and helps with ADA compliance.
+: The URL or path to a transcript of the audio, which should be shown to people who cannot hear audio. This helps people with auditory disabilities view course material, and helps with ADA compliance. For example, what Leanpub does with a `transcript` is as follows: a URL is linked to in the caption (but in a way which does not affect the Table of Contents), and a path is assumed to be a path to a Markua file which is then used to produce a web page at a public URL, which then is also linked to in the caption in a way which does not affect the Table of Contents.
 
 #### Local Audio
 
