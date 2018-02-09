@@ -2678,7 +2678,7 @@ Examples:
 Since a written question can have long answers, this increases the likelihood that typing these anwers after a bunch of `! ` delimiters will be a pain. So, written quesions (and **only** written questions) support answers in the form of `{answer} ... {/answer}`, like this:
 
 ~~~
-{quiz, points: 0}
+{quiz, points: 0, id: "quiz3"}
 
 {lines: 10}
 ? Write a function in Ruby that takes an argument and returns three times that argument.
