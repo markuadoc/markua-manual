@@ -2466,6 +2466,8 @@ This quiz contains two questions: a multiple-choice question where the correct a
 
 Here's the same example, but as an exercise, using the `X>` syntax:
 
+TODO - scrap X> and Q> syntax???
+
 ~~~
 {id: exercise1}
 X> ? How many letters are in the word Markua?
@@ -2666,6 +2668,8 @@ A Markua Processor generating a MOOC may handle written questions at its own dis
 Examples:
 
 ```
+{quiz, id: "quiz3"}
+
 {pages: 2, points: 10}
 ? Why is 2017 like *1984*?
 
