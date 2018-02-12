@@ -2432,21 +2432,9 @@ Quizzes or exercises in a textbook consist of two things:
 
 The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices. The specific location that they are positioned can be controlled by the author using [book section directives](#book-section-directives), discussed later.
 
-Just like asides and blurbs, there are two syntaxes to add quizzes an exercises.
+There is only one syntax to create a quiz or exercise. For a quiz, it's by wrapping the quiz in `{quiz}` ... `{/quiz}`; for an exercise, it's by wrapping the exercise in `{exercise}` ... `{/exercise}`.
 
-Quizzes:
-
-1. By wrapping the quiz in `{quiz}` ... `{/quiz}`.
-2. By prefacing lines with `Q> `, i.e. a `Q`, then a greater than character (`>`), then a space.
-
-Exercises:
-
-1. By wrapping the exercise in `{exercise}` ... `{/exercise}`.
-2. By prefacing lines with `X> `, i.e. an `X`, then a greater than character (`>`), then a space.
-
-While the `{quiz}...{/quiz}` or `{exercise}...{/exercise}` syntax is by far the preferred syntax for longer quizzes or exercises, both syntaxes work. The `Q>` or `X>` syntax is supported for consistency with asides and blurbs, and because it is possibly preferable for short, blurb-length quizzes or exercises containing a few questions at most.
-
-Here is a brief example of a quiz, using the curly brace syntax:
+Here is a brief example of a quiz:
 
 ~~~
 {quiz, id: quiz1}
@@ -2464,26 +2452,27 @@ c) 7
 
 This quiz contains two questions: a multiple-choice question where the correct answer is b, and a fill-in-the-blank question where the correct answer is 5. Quizzes and exercises have the same question types, discussed later.
 
-Here's the same example, but as an exercise, using the `X>` syntax:
+With a quiz, the `id` attribute is **required**. This is so the identity of a quiz can be preserved across generations of a course.
 
-TODO - scrap X> and Q> syntax???
+Here is the same example, but as an exercise:
 
 ~~~
-{id: exercise1}
-X> ? How many letters are in the word Markua?
-X>
-X> a) 5
-X> B) 6
-X> c) 7
-X>
-X> ? How many unique letters are in the word Markua?
-X>
-X> ! 5
+{exercise, id: exercise1}
+? How many letters are in the word Markua?
+
+a) 5
+B) 6
+c) 7
+
+? How many unique letters are in the word Markua?
+
+! 5
+{/exercise}
 ~~~
 
-Note that, as with asides and blurbs, if an attribute list is present it is immediately above the first `Q>` or `X>` line.
+Just like with quiz, with an exercise the `id` attribute is **required**. This is so the identity of an exercise can be preserved across generations of a course.
 
-You can see why the `Q>` or `X>` syntax is only intended for very short quizzes or exercises, just as the `A>` and `B>` syntaxes are only intended for short asides and blurbs!
+Unlike asides and blurbs, there is no short syntax (i.e. there is no `Q>` or `X>` syntax) to add a quiz or exercise. Since an id attribute is required, you're stuck typing an attribute list anyway. So, a "short" syntax wouldn't actually save typing, and would look ugly. Furthermore, having a short syntax would encourage forgetting to add an id attribute.
 
 {#quiz-headings}
 ## Quiz and Exercise Headings and Other Content
@@ -2710,8 +2699,6 @@ end
 ! `2 + 2`
 {/quiz}
 ~~~
-
-#### TODO - support {why} after answer, so prof can explain why the answer is what it is
 
 #### Supported Attributes on Written Questions
 
