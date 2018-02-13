@@ -466,11 +466,15 @@ Inline Resource
 
 ### Local Resources
 
-If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. Implementors of Markua Processors must ensure they do not support navigating upward with `../` in paths.
+If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. Implementors of Markua Processors must ensure they do NOT support navigating upward with `../` in paths.
 
 A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
 
 A file called `bar.png` in a subdirectory `images` of the resources directory is referenced as `![](images/bar.png)`--not as `![](/images/bar.png)`, `![](resources/images/bar.png)` or  `![](/resources/images/bar.png)`.
+
+Nested directory trees work as well. A file called `foo.rb` in a `ch1/examples/ruby` directory tree inside the `resources` directory is referenced as `![](ch1/examples/ruby/foo.rb)`.
+
+Again, you cannot navigate upward in paths with `../`: this would be a security hole, so it must be forbidden by a Markua Processor.
 
 Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub will create subdirectories of the `resources` directory for every type of resource (`images`, `audio`, `video`, `code`, `math` and `tables`), but this is not a requirement. (To be clear, the names of these directories have no meaning; they could be anything.)
 
