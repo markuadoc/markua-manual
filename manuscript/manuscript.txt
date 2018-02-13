@@ -3995,6 +3995,7 @@ Here's an incomplete list of some of the work we still need to do in Leanpub to 
 
 ### TODO in Leanpub
 
+- Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
 - There is no more type attribute on quizzes. Quizzes are always marked.
 - Support Nested Lists.
