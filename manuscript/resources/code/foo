@@ -1,3 +1,0 @@
-def foo
-  puts "in the foo file"
-end
