@@ -3604,7 +3604,7 @@ The following settings must be supported by all Markua Processors. Markua Proces
 
 The following settings are defined by Markua, but only make sense in the context of a course. So, a Markua Processor which is not generating a course can ignore them.
 
-`attempts`
+`course-attempts`
 : The number of allowed attempts on the course itself. The default is `1`.
 
 `default-exercise-show-answers`
