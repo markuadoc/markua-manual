@@ -2519,14 +2519,6 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 
 ## Supported Attributes on Quizzes and Exercises
 
-{format: ruby}
-![foo](code/foo)
-
-TODO - re. what answers to show: incorrect (the default), all, none - and default-quiz-show-answers
-TODO - `show-answers` : `incorrect` (the default), `all`, `none`
-TODO - `default-quiz-show-answers` : `incorrect` (the default), `all`, `none`
-TODO - default default is `incorrect`
-
 `attempts`
 : The number of allowed attempts on a quiz. The default is defined by the value of `default-quiz-attempts` on the containing course, or `1` if this is not present.
 
@@ -2550,6 +2542,9 @@ TODO - default default is `incorrect`
 
 `start-at`
 : The `start-at` is the number of the first question. The default is 1. Any integer is permitted. Subsequent questions will have a number which is 1 higher than the previous question.
+
+`show-answers`
+: This can be `all`, `incorrect` or `none`. It affects how answers are shown after a quiz or exercise is completed, say in a MOOC. For exercises, the default value is determined by the value of the `default-exercise-show-answers` global setting, with `all` being the default value of that attribute. For quizzes, the default value is determined by the value of the `default-quiz-show-answers` global setting, with `incorrect` being the default value of that attribute. Global settings are discussed later.
 
 `time-limit`
 : The time limit to finish the quiz, once started. The format is `XdYhZm`. For example, 3 days, 6 hours and 45 minutes is expressed as `3d6h45m`; 7 days is expressed as `7d`. The default is `7d`.
@@ -3607,6 +3602,12 @@ The following settings are defined by Markua, but only make sense in the context
 
 `attempts`
 : The number of allowed attempts on the course itself. The default is `1`.
+
+`default-exercise-show-answers`
+: This can be `all` (the default), `incorrect` or `none`. It affects how answers are shown after an exercise is completed, say in a MOOC.
+
+`default-quiz-show-answers`
+: This can be `all`, `incorrect` (the default) or `none`. It affects how answers are shown after a quiz is completed, say in a MOOC.
 
 `default-quiz-attempts`
 : The default number of allowed attempts on a quiz. The default is `1`.
