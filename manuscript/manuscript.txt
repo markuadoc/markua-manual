@@ -3625,6 +3625,8 @@ The following settings are defined by Markua, but only make sense in the context
 `default-quiz-auto-submit`
 : `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
 
+`course-completeness`
+: How "done" the course itself is. Expressed as a percentage, in decimal value. The default is `0`. A value of `100` or `100.0` is the maximum. A Markua Processor may do something smart when a course which is 100% complete changes the `id` values of a quiz or quizzes, since this will affect current students.
 
 {backmatter}
 
