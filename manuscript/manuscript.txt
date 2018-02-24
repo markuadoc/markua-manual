@@ -2556,6 +2556,9 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 `use-result`
 : `best` or `latest`. Whether the best result on the quiz is used, or the latest one. The default is `best`.
 
+`version`
+: The version of the quiz. This does not replace the function of the `id`; it's more for use in analytics by the instructor. The default is `1`.
+
 As [discussed above](#quiz-headings), there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz or exercise itself, using the normal Markua formatting for a chapter heading.
 
 ## Question Types: Multiple Choice, Fill In The Blank, Written
