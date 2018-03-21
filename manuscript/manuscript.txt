@@ -3991,20 +3991,16 @@ To stay current on Markua progress, follow [@markuadoc](https://twitter.com/mark
 
 If you're reading this, you are a really, *really* early adopter of Markua.
 
-Markua should be fully supported in Leanpub and in the open source version by the end of June 2017.
-
-Markua support is currently in **VERY EARLY BETA** on Leanpub. Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for about 5 years. Below, I'm briefly listing what does and does not work in Leanpub's current Markua support. Arguably this should not be done in this spec, but I'm doing it here until Leanpub fully supports Markua for two reasons:
+Markua support is currently in an **EARLY BETA** on Leanpub. Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for about 7 years. Below, I'm briefly listing what does and does not work in Leanpub's current Markua support. Arguably this should not be done in this spec, but I'm doing it here until Leanpub fully supports Markua for two reasons:
 
 1. It will save Leanpub authors who are reading this spec a lot of pain.
 2. It will give readers of the spec a sense of which parts of the Markua spec have been tested, and which have not.
 
-If you are curious to try Markua, to see what currently works (not much!) and what doesn't (lots!), now you can! We have now made Markua mode available to all Leanpub authors. This makes sense, since writing a book can take a long time. We will have Markua fully supported in Leanpub in the next few months, so for many authors, Markua will be complete before their books will be complete. So, we want to enable all Leanpub authors to choose to write in Markua starting now.
+If you are curious to try Markua, to see what currently works and what doesn't, now you can! We have now made Markua mode available to all Leanpub authors. This makes sense, since writing a book can take a long time.
 
 I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
 
-Here's an incomplete list of some of the work we still need to do in Leanpub to support Markua. Hopefully it gives you a clue about some things that do not work yet:
-
-### TODO in Leanpub
+Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
 - Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
