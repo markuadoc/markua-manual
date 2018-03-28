@@ -1713,7 +1713,7 @@ The following choices of numbering system are supported:
 
 Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
 
-To make a numbered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by between 1 and 4 spaces or 1 tab, followed by text content, followed by a period or a right-parenthesis.
+To make a numbered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by a period or a right-parenthesis, followed by between 1 and 4 spaces or 1 tab, followed by text content.
 
 Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex.
 
