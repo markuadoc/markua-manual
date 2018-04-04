@@ -797,7 +797,7 @@ The default value of the format attribute for code is complex:
 
 Note that the default format can be overridden by specifying it via an attribute list, or after the three backticks in syntactic sugar.
 
-This is some Ruby code:
+This is some Ruby code, which may be formatted as such if the Markua Processor understands `ruby`. If not, the `ruby` format will be ignored:
 
 ~~~
 ```ruby
@@ -807,7 +807,7 @@ end
 ```
 ~~~
 
-This is some console input and output:
+This is some console input and output, which should be formatted as such by the Markua Processor:
 
 ~~~
 ```console
