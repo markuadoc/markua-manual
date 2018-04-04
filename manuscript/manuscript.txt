@@ -797,25 +797,6 @@ The default value of the format attribute for code is complex:
 
 Note that the default format can be overridden by specifying it via an attribute list, or after the three backticks in syntactic sugar.
 
-This is some Ruby code, which may be formatted as such if the Markua Processor understands `ruby`. If not, the `ruby` format will be ignored:
-
-~~~
-```ruby
-def foo
-  puts "bar"
-end
-```
-~~~
-
-This is some console input and output, which should be formatted as such by the Markua Processor:
-
-~~~
-```console
-$ git init
-Initialized empty Git repository in /path/to/repo
-```
-~~~
-
 {#supported-attributes-for-code}
 #### Supported Attributes for Code
 
@@ -978,6 +959,8 @@ puts "hello"
 Some paragraph.
 ~~~
 
+This Ruby code may be formatted as such if the Markua Processor understands `ruby`. If not, the `ruby` format will be ignored.
+
 If you don't like syntactic sugar you can do:
 
 ~~~
@@ -1029,6 +1012,15 @@ puts "hello"
 
 Some paragraph.
 ```
+
+Finally, as discussed previously, console input and output should be formatted as such by a Markua Processor:
+
+~~~
+```console
+$ git init
+Initialized empty Git repository in /path/to/repo
+```
+~~~
 
 #### Marking Code as Added or Deleted
 
