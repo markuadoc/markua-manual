@@ -787,6 +787,8 @@ The `guess` format is a request for the Markua Processor to guess at the program
 
 Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
+However, while a complete set of the values of the `format` attribute is not specified, Markua does specify the `console` value of the `format` attribute to indicate console input. A Markua Processor should format console input as such. (For example, Leanpub uses the open source Pygments library for its code formatting, and Pygments handles `console` format correctly, so Leanpub gets this for free.)
+
 The default value of the format attribute for code is complex:
 
 1. For code which is inserted as a span (which is only supported with inline resources), the default format is `text`.
@@ -794,6 +796,25 @@ The default value of the format attribute for code is complex:
 3. For all other code, the default format is `guess`. This includes local and web resources inserted as figures, and code inserted as an inline figure using three backticks.
 
 Note that the default format can be overridden by specifying it via an attribute list, or after the three backticks in syntactic sugar.
+
+This is some Ruby code:
+
+~~~
+```ruby
+def foo
+  puts "bar"
+end
+```
+~~~
+
+This is some console input and output:
+
+~~~
+```console
+$ git init
+Initialized empty Git repository in /path/to/repo
+```
+~~~
 
 {#supported-attributes-for-code}
 #### Supported Attributes for Code
