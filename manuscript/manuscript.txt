@@ -2536,10 +2536,10 @@ If a Markua Processor encounters a malformed quiz or exercise it must treat this
 
 However, it is also an error to parse quiz syntax outside a quiz or exercise block. A Markua Processor must not parse lines starting with ? or ! as representing questions or answers unless those are contained in a quiz or exercise block.
 
-## Supported Attributes on Quizzes and Exercises
+## Supported Attributes on Quizzes and/or Exercises
 
 `attempts`
-: The number of allowed attempts on a quiz. The default is defined by the value of `default-quiz-attempts` on the containing course, or `1` if this is not present.
+: The number of allowed attempts on a quiz. The default is defined by the value of `default-quiz-attempts` on the containing course, or `1` if this is not present. A value of `0` means the quiz cannot be taken (yet). A value of `-1` means the quiz has an unlimited number of attempts. Since an exercise does not count toward the mark on a course, an exercise always has an unlimited number of attempts.
 
 `auto-submit`
 : `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
@@ -3633,7 +3633,7 @@ The following settings are defined by Markua, but only make sense in the context
 : This can be `all` (the default), `incorrect` or `none`. It affects how answers are shown after an exercise is completed, say in a MOOC.
 
 `default-quiz-attempts`
-: The default number of allowed attempts on a quiz. The default is `1`.
+: The default number of allowed attempts on a quiz. The default is `1`. Note that for quizzes, a value of `0` means the quiz cannot be taken (yet). A value of `-1` means the quiz has an unlimited number of attempts. Setting either of these as the value of `default-quiz-attempts` is a legitimate value, and has the effect of changing the default value for all quizzes. Again, an exercise always has an unlimited number of attempts, so there is no corresponding `default-exercise-attempts` value.
 
 `default-quiz-auto-submit`
 : `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
