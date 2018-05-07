@@ -2623,7 +2623,15 @@ The multiple choice answers all must start from a or A, and must use a right-par
 
 ### Fill In The Blank Questions
 
-A fill in the blank question consists of a question and an answer. The answer is specified by `! ` and then the acceptable values of that answer. For a fill in the blank question with more than one acceptable answer value, each legal answer value is separated by a space, followed by a semicolon, followed by a space (` ; `). (To put an actual space, followed by a semicolon, followed by a space in a single fill in the blank answer value, the semicolon must be backslash-escaped (` \; `).)
+A fill in the blank question consists of a question and an answer. The answer is specified by `! ` and then the acceptable values of that answer.
+
+For a fill in the blank question with more than one acceptable answer value, each legal answer value is separated by a space, followed by a semicolon, followed by a space (` ; `). (To put an actual space, followed by a semicolon, followed by a space in a single fill in the blank answer value, the semicolon must be backslash-escaped (` \; `).)
+
+A fill in the blank question can also contain a regular expression. A Markua Processor should interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression.
+
+Support for regular expression marking of fill in the blank questions is optional. Also, the particular format of the regular expression is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
+
+Finally, a fill in the blank question can contain a hint. The hint starts on a line with an asterisk (`*`) followed by a single space. The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
 
 Examples:
 
@@ -2640,6 +2648,12 @@ Examples:
 ? What's pi?
 
 ! "The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416
+
+? Where's the Eiffel Tower?
+
+! /(Paris|France)/i
+
+* The answer must contain the city and/or country.
 ~~~
 
 If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
