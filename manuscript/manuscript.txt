@@ -2607,12 +2607,12 @@ c) 7
 
 Obviously, when generating the question in the actual quiz or exercise, a Markua Processor must make all answer choices have the same type of letter. This is usually a lowercase letter, although either all lowercase or all uppercase letters would be fine.
 
-Unless a `choose` attribute is used, the multiple choice answers all must start from a or A, and must use a right-parenthesis after the a or A. Any line starting with a) ar A) in a quiz is considered a set of multiple choice quiz answers, not a numbered list using a) or A) as a delimiter. If you want to put a numbered list in a quiz body, use periods for the delimiter.
+Unless a `choose-answers` attribute is used, the multiple choice answers all must start from a or A, and must use a right-parenthesis after the a or A. Any line starting with a) ar A) in a quiz is considered a set of multiple choice quiz answers, not a numbered list using a) or A) as a delimiter. If you want to put a numbered list in a quiz body, use periods for the delimiter.
 
-A multiple choice question may also have a dynamic number of answer choices, including for the correct answer. This done with the special `choose` attribute, shown and explained below.
+A multiple choice question may also have a dynamic number of answer choices, including for the correct answer. This done with the special `choose-answers` attribute, shown and explained below.
 
 ```
-{choose: 4}
+{choose-answers: 4}
 ? How many grams are in a pound?
 
 C) 454
@@ -2627,29 +2627,29 @@ o) 300
 o) 500
 ```
 
-The `choose` attribute specifies how many answer choices should be shown. This includes one of the correct answers (indicated with `C`), all of the mandatory incorrect answers (indicated with `m`) and as many of the optional incorrect answers (indicated with `o`) as are needed.
+The `choose-answers` attribute specifies how many answer choices should be shown. This includes one of the correct answers (indicated with `C`), all of the mandatory incorrect answers (indicated with `m`) and as many of the optional incorrect answers (indicated with `o`) as are needed.
 
 So, in the above example, either `453` or `454` will be shown, along with the mandatory incorrect answer choices `451` (a literary joke) and `1000` (a kilogram, not a pound) and one of the optional incorrect answers (`100`, `150`, `200`, `250`, `300` or `500`).
 
-When a `choose` attribute is used, the question will always have `random-choice-order`.
+When a `choose-answers` attribute is used, the question will always have `random-choice-order`.
 
-The following are errors in a question where a `choose` attribute is used:
+The following are errors in a question where a `choose-answers` attribute is used:
 - 0 correct (`C`) answers
-- not enough mandatory (`m`) or optional (`o`) incorrect answers for the `choose`
-- if choose is n, a number of mandatory (`m`) answers >= n
-- if choose is n and the number of mandatory (`m`) answers is n - 1, then any optional (`o`) incorrect answers existing
+- not enough mandatory (`m`) or optional (`o`) incorrect answers for the `choose-answers`
+- if `choose-answers` is n, a number of mandatory (`m`) answers >= n
+- if `choose-answers` is n and the number of mandatory (`m`) answers is n - 1, then any optional (`o`) incorrect answers existing
 - answers starting with something other than `C`, `m` or `o`
 
 #### Supported Attributes on Multiple Choice Questions
 
-`choose`
-: This is described above. If `choose` is used, `random-choice-order` is forced to true.
+`choose-answers`
+: This is described above. If `choose-answers` is used, `random-choice-order` is forced to true.
 
 `points`
 : The number of points the question is worth.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`, unless `choose` is used. This sets the behaviour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
+: `true` or `false`. The default is `false`, unless `choose-answers` is used. This sets the behaviour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
 
 ### Fill In The Blank Questions
 
@@ -2860,12 +2860,12 @@ The following is an example of a quiz which uses question alternates. This ensur
 
 Note that the syntax for question alternates is very strict. Every question must have a number, and these numbers must be in ascending order (except for the alternates, which have the same number as each other).
 
-Question alternates can also be grouped by a `choose` attribute attached to the first question alternate. In this case, the Markua Processor must choose the number of questions `m` specified from the given alternates with that number `n`, or `n choose m`. Note that in this scenario, the numbering after the alternates increases by `m`: for example, if a quiz starts with a `choose: 3`, the next question is numbered 4, not 2. This ensures that the person constructing the quiz knows what they are doing, and saves them from having to keep track in a scenario where there are multiple question attributes with a `choose` attribute.
+Question alternates can also be grouped by a `choose-questions` attribute attached to the first question alternate. In this case, the Markua Processor must choose the number of questions `m` specified from the given alternates with that number `n`, or `n choose m`. Note that in this scenario, the numbering after the alternates increases by `m`: for example, if a quiz starts with a `choose: 3`, the next question is numbered 4, not 2. This ensures that the person constructing the quiz knows what they are doing, and saves them from having to keep track in a scenario where there are multiple questions with a `choose-questions` attribute.
 
 ```
 {quiz, id: "midterm", random-question-order: true}
 
-{choose: 3}
+{choose-questions: 3}
 ?1 What's 2 + 2?
 
 ! 4
