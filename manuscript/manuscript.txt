@@ -2591,9 +2591,11 @@ These types are not specified by a `{type}` attribute. Instead, they are inferre
 
 ### Multiple Choice Questions
 
-A multiple choice question has 2 or more answer choices, and 1 or more correct answer choices. Correct answer choices have capital letters before the parentheses; incorrect answer choices have lowercase letters before the parentheses.
+A multiple choice question has 2 or more answer choices, and 1 correct answer choice.
 
-Examples:
+The correct answer choice is in capital letters before the parentheses; incorrect answer choices have lowercase letters before the parentheses.
+
+Example:
 
 ```
 ? How many letters are in the word Markua?
@@ -2601,25 +2603,53 @@ Examples:
 a) 5
 B) 6
 c) 7
-
-? How many letters (either the total number, or the number of unique letters) are in the word Markua?
-
-A) 5
-B) 6
-c) 7
 ```
 
 Obviously, when generating the question in the actual quiz or exercise, a Markua Processor must make all answer choices have the same type of letter. This is usually a lowercase letter, although either all lowercase or all uppercase letters would be fine.
 
-The multiple choice answers all must start from a or A, and must use a right-parenthesis after the a or A. Any line starting with a) ar A) in a quiz is considered a set of multiple choice quiz answers, not a numbered list using a) or A) as a delimiter. If you want to put a numbered list in a quiz body, use periods for the delimiter.
+Unless a `choose` attribute is used, the multiple choice answers all must start from a or A, and must use a right-parenthesis after the a or A. Any line starting with a) ar A) in a quiz is considered a set of multiple choice quiz answers, not a numbered list using a) or A) as a delimiter. If you want to put a numbered list in a quiz body, use periods for the delimiter.
+
+A multiple choice question may also have a dynamic number of answer choices, including for the correct answer. This done with the special `choose` attribute, shown and explained below.
+
+```
+{choose: 4}
+? How many grams are in a pound?
+
+C) 454
+C) 453
+m) 451
+m) 1000
+o) 100
+o) 150
+o) 200
+o) 250
+o) 300
+o) 500
+```
+
+The `choose` attribute specifies how many answer choices should be shown. This includes one of the correct answers (indicated with `C`), all of the mandatory incorrect answers (indicated with `m`) and as many of the optional incorrect answers (indicated with `o`) as are needed.
+
+So, in the above example, either `453` or `454` will be shown, along with the mandatory incorrect answer choices `451` (a literary joke) and `1000` (a kilogram, not a pound) and one of the optional incorrect answers (`100`, `150`, `200`, `250`, `300` or `500`).
+
+When a `choose` attribute is used, the question will always have `random-choice-order`.
+
+The following are errors in a question where a `choose` attribute is used:
+- 0 correct (`C`) answers
+- not enough mandatory (`m`) or optional (`o`) incorrect answers for the `choose`
+- if choose is n, a number of mandatory (`m`) answers >= n
+- if choose is n and the number of mandatory (`m`) answers is n - 1, then any optional (`o`) incorrect answers existing
+- answers starting with something other than `C`, `m` or `o`
 
 #### Supported Attributes on Multiple Choice Questions
+
+`choose`
+: This is described above. If `choose` is used, `random-choice-order` is forced to true.
 
 `points`
 : The number of points the question is worth.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`. This sets the behaviour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
+: `true` or `false`. The default is `false`, unless `choose` is used. This sets the behaviour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
 
 ### Fill In The Blank Questions
 
@@ -2631,7 +2661,7 @@ A fill in the blank question can also contain a regular expression. A Markua Pro
 
 Support for regular expression marking of fill in the blank questions is optional. Also, the particular format of the regular expression is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
 
-Finally, a fill in the blank question can contain a hint. The hint starts on a line with an asterisk (`*`) followed by a single space. The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
+Finally, a fill in the blank question can contain a hint. The hint starts on a line with a percent sign (`%`) followed by a single space. The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
 
 Examples:
 
@@ -2653,7 +2683,7 @@ Examples:
 
 ! /(Paris|France)/i
 
-* The answer must contain the city and/or country.
+% The answer must contain the city and/or country.
 ~~~
 
 If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
@@ -2828,7 +2858,46 @@ The following is an example of a quiz which uses question alternates. This ensur
 {/quiz}
 ```
 
-Note that the syntax for question alternates is very strict. Every question must have a number, and these numbers must be in ascending order (except for the alternates, which have the same number as each other). A Markua Processor must treat any deviation from this rule as an error, and not generate the quiz if there is any error. This is preferable to a Markua Processor of trying to guess at what the author meant, and trying to do the right thing. Fixing a syntax error takes a couple minutes of editing and a few minutes to publish the book or course again. However, fixing the consequences of a quiz being administered to hundreds--or thousands, or tens of thousands--of people with an incorrect number of questions, or with questions incorrectly used as alternates for each other, would be much more difficult.
+Note that the syntax for question alternates is very strict. Every question must have a number, and these numbers must be in ascending order (except for the alternates, which have the same number as each other).
+
+Question alternates can also be grouped by a `choose` attribute attached to the first question alternate. In this case, the Markua Processor must choose the number of questions `m` specified from the given alternates with that number `n`, or `n choose m`. Note that in this scenario, the numbering after the alternates increases by `m`: for example, if a quiz starts with a `choose: 3`, the next question is numbered 4, not 2. This ensures that the person constructing the quiz knows what they are doing, and saves them from having to keep track in a scenario where there are multiple question attributes with a `choose` attribute.
+
+```
+{quiz, id: "midterm", random-question-order: true}
+
+{choose: 3}
+?1 What's 2 + 2?
+
+! 4
+
+?1 What's 2.2 + 2.2?
+
+! 4.4
+
+?1 what's 3 + 3?
+
+! 6
+
+?1 What's 4 + 4?
+
+! 8
+
+?1 What's 5 + 5?
+
+! 10
+
+{points: 2}
+?4 What's 6 + 6?
+
+! 12
+
+?5 What's 7 + 7?
+
+! 14
+{/quiz}
+```
+
+A Markua Processor must treat any error in the numbering of question alternates (and the questions which follow) as an error, and not generate the quiz if there is any error. This is preferable to a Markua Processor of trying to guess at what the author meant, and trying to do the right thing. Fixing a syntax error takes a couple minutes of editing and a few minutes to publish the book or course again. However, fixing the consequences of a quiz being administered to hundreds--or thousands, or tens of thousands--of people with an incorrect number of questions, or with questions incorrectly used as alternates for each other, would be much more difficult.
 
 # Span Elements
 
@@ -3631,6 +3700,9 @@ The following settings must be supported by all Markua Processors. Markua Proces
 
 `title`
 : The title of the Markua document.
+
+`version`
+: The version of the Markua document. This is primarily intended for use when producing analytics for courses.
 
 {#course-setting-keys-and-values}
 ### Settings for Courses
