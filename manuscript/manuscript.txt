@@ -2657,7 +2657,7 @@ A fill in the blank question consists of a question and an answer. The answer is
 
 For a fill in the blank question with more than one acceptable answer value, each legal answer value is separated by a space, followed by a semicolon, followed by a space (` ; `). (To put an actual space, followed by a semicolon, followed by a space in a single fill in the blank answer value, the semicolon must be backslash-escaped (` \; `).)
 
-A fill in the blank question can also contain a regular expression. A Markua Processor should interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression.
+Instead of alternating acceptable answer values with semicolons, the acceptable answer value can instead be exactly one regular expression (regex). A Markua Processor should interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. (This is exactly one regex, not n of them separated by semicolons, since regular expressions are powerful enough that all alternating of matches can be done within them.)
 
 Support for regular expression marking of fill in the blank questions is optional. Also, the particular format of the regular expression is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
 
