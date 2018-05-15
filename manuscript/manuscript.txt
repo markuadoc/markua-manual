@@ -3668,6 +3668,8 @@ A Markua Processor may also get settings from elsewhere, like a web interface. H
 
 The following settings must be supported by all Markua Processors. Markua Processors can also add their own settings, just as Markua Processors can understand their own extension attributes.
 
+If a Markua Processor also provides a UI to define settings which are specified here, the Markua Processor should respect the settings defined in the Markua manuscript over the settings defined in the UI. This can be phrased as "document wins", not "database wins".
+
 `authors`
 : The authors of the Markua document.
 
@@ -3686,11 +3688,11 @@ The following settings must be supported by all Markua Processors. Markua Proces
 `number-chapters`
 : `true` or `false`. Default `true`. Whether the chapters are numbered.
 
-`number-sections`
-: `true` or `false`. Default `false`. Whether the sections (and sub-sections) are numbered.
-
 `number-figures`
 : `true` or `false`. Default `true`. Whether resources are numbered when inserted as figures. Note that different types of resources (e.g. code listings, tables, images, etc.) have different numbering.
+
+`number-sections`
+: `true` or `false`. Default `false`. Whether the sections (and sub-sections) are numbered.
 
 `restart-endnote-numbering`
 : `true` or `false`. Default `true`. Whether the endnote numbering is restarted at the end of a chapter.
@@ -3702,7 +3704,7 @@ The following settings must be supported by all Markua Processors. Markua Proces
 : The title of the Markua document.
 
 `version`
-: The version of the Markua document. This is primarily intended for use when producing analytics for courses.
+: The version of the Markua document. This is primarily intended for use when producing analytics for courses. The default is `0.1`.
 
 {#course-setting-keys-and-values}
 ### Settings for Courses
