@@ -2661,8 +2661,6 @@ Instead of alternating acceptable answer values with semicolons, the acceptable 
 
 Support for regular expression marking of fill in the blank questions is optional. Also, the particular format of the regular expression is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
 
-Finally, a fill in the blank question can contain a hint. The hint starts on a line with a percent sign (`%`) followed by a single space. The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
-
 Examples:
 
 ~~~
@@ -2682,13 +2680,11 @@ Examples:
 ? Where's the Eiffel Tower?
 
 ! /(Paris|France)/i
-
-% The answer must contain the city and/or country.
 ~~~
 
 If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
 
-As shown by the last answer, acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`.
+As shown by the second last answer, acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`.
 
 If you're a programmer, you may wonder what number types and formats are supported. Are they integers? Floating point numbers? Can you use scientific notation? And how are the numbers formatted? Are they US or Canadian numbers (`123,456.78`) or EU numbers (`123 456,78`)?  What if there's a number that means something different in the US and EU--does `123,456` mean `123456` or `123.456`?
 
@@ -2779,6 +2775,46 @@ Note that only one of `words`, `lines` or `pages` may be provided. Providing mor
 
 `pages`
 : The maximum number of pages the answer can be. Obviously this is more useful for paper quizzes than online ones. On paper, this is most useful for an essay question.
+
+### Hints on Questions
+
+Any question can contain a hint, regardless of question type or whether an answer is provided.
+
+The hint starts on a line with a percent sign (`%`) followed by a single space. It must follow the question, but it can come either before or after the answer choices.
+
+The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
+
+~~~
+? What's 1 + 2
+
+% In a multiple choice question, if you're not sure, `c` is usually a good guess.
+
+a) 1
+b) 2
+c) 3
+d) 4
+
+? Explain the meaning of *The Myth of Sisyphus*.
+
+% Not the actual myth, the essay by Camus.
+
+? Where's the Eiffel Tower?
+
+! /(Paris|France)/i
+
+% The answer must contain the city and/or country.
+~~~
+
+The hint can be a useful feature for a Markua Processor. There is a lot of discretion here for Markua Processors to compete on features.
+
+For example, here's how Leanpub handles hints:
+
+1. We will show the hint as a popup next to the question in the web and mobile quiz views.
+2. We will track if the student looked at the hint.
+3. We will not subtract points for looking at hints for Leanpub-marked questions.
+4. Whether the hint was used will be provided in the analytics, such as a CSV download that we make available to professors.
+5. We will also output the hints for exercises in the "material book" for a course, in a section near the end of the book. This will be linked to via crosslinks from each exercise.
+6. The answers page for a quiz or exercise will show the question, hint and answers for each question.
 
 ## Markua Processor Behaviour
 
