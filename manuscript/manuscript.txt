@@ -2785,7 +2785,7 @@ The hint starts on a line with a percent sign (`%`) followed by a single space. 
 The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
 
 ~~~
-? What's 1 + 2
+? What's 1 + 2?
 
 % In a multiple choice question, if you're not sure, `c` is usually a good guess.
 
