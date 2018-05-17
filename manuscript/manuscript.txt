@@ -2782,6 +2782,8 @@ Any question can contain a hint, regardless of question type or whether an answe
 
 The hint starts on a line with a percent sign (`%`) followed by a single space. It must follow the question, but it can come either before or after the answer choices.
 
+Hints can span multiple lines, if each line starts with a `%` sign. This is similar to Markdown handles block quotes with `>`.
+
 The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
 
 ~~~
@@ -2797,6 +2799,8 @@ d) 4
 ? Explain the meaning of *The Myth of Sisyphus*.
 
 % Not the actual myth, the essay by Camus.
+%
+% For bonus points, speculate about Camus' life, death, and what he would have thought about autonomous cars.
 
 ? Where's the Eiffel Tower?
 
