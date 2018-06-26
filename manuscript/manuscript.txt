@@ -242,7 +242,7 @@ If you're familiar with Markdown syntax, you'll note that the syntax for local a
 
 Tables are also resources, and can also be local, web or inline. However, the table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
 
-Finally, if any resource is missing during book generation, a Markua processor can either fail to generate the book or can insert something like the "missing image" often seen on web pages into the book. This behaviour is up to the implementor of the Markua processor, and could even be something which is configurable by the author.
+Finally, if any resource is missing during book generation, a Markua processor can either fail to generate the book or can insert something like the "missing image" often seen on web pages into the book. This behaviour is up to the implementor of the Markua processor, and could even be something which is configurable by the author. (In general, a Markua Processor should error if the author is trying to do something unsupported, and should recover if the author is trying to do something which is supported, but in an erroneous way.)
 
 ## Resource Insertion Methods
 
