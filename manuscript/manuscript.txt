@@ -410,6 +410,16 @@ The [code](#code) and [math](#math) resources are described more fully later. (Y
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple. However, to support rare use cases, any span can have an attribute list. The attribute list on a span is specified immediately after the closing backtick. Examples of this are shown in the code and math sections.
 
+Note that inside a code span, whitespace must be preserved by a Markua Processor. The reasoning here is simple: in source code, whitespace matters, so it must not get collapsed into a single space. Thankfully, this is easy to do. If a Markua Processor is producing HTML, the following CSS prevents spaces from being collapsed to one space:
+
+```
+code {
+  white-space: pre;
+}
+```
+
+(There may be other CSS in future which meets this requirement, so this exact CSS is not a requirement for a Markua Processor to use. However, the behaviour that results when this CSS is added is a requirement for a Markua Processor.)
+
 Finally, if you wish to insert an image in the middle of a sentence, chances are you are trying to insert an emoji. Emoji have special support in Markua, described [here](#emoji).
 
 ### Figures That Look Like Spans
