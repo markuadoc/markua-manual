@@ -2803,7 +2803,7 @@ The hint can be used by a Markua processor to show to students at appropriate ti
 
 a) 1
 b) 2
-c) 3
+C) 3
 d) 4
 
 ? Explain the meaning of *The Myth of Sisyphus*.
