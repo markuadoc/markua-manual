@@ -3411,19 +3411,27 @@ Markua headings (part, chapter, section, sub-section, etc.) and figures can all 
 
 Markua headings (and *only* headings) may have various attributes which specify which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If the given attribute is not present, the default value of it is that specified by the nearest ancestor heading. If no such attribute is present at a top-level heading, the default is given by the default value for the attribute defined of Markua.
 
-There are six attributes which specify conditional inclusion in output targets; three for books, and three for courses.
+There are eight attributes which specify conditional inclusion in output targets; four for books, and four for courses.
 
 `book`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the book that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your book.
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the book (PDF, EPUB and/or MOBI) that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your book.
+
+`web`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the web version of the book that is being generated. If `false`, omit it. If `book`, then include it or exclude it based on the value of the `book` attribute. The default is `book`, meaning that if this attribute is omitted, every section which is included in the book is included in the web version of the book.
 
 `sample`
-: If `true`, include the content under this heading (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`. Note that this attribute just governs the inclusion of the content, not the heading itself. A Markua Processor may choose to include every heading in the sample version of a book or course, in order to produce a representative Table of Contents. In a case such as this where `sample` is `false`, the Markua Processor may output special content inside the chapter, section or subsection to indicate that the content itself is being omitted from the sample.
+: If `true`, include the content under this heading (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`. Note that this attribute just governs the inclusion of the content, not the heading itself. A Markua Processor may choose to include every heading in the sample version of a book or course, in order to produce a representative Table of Contents. In a case such as this where `sample` is `false`, the Markua Processor may output special content inside the chapter, section or subsection to indicate that the content itself is being omitted from the sample. This attribute applies to both the book version (PDF, EPUB and/or MOBI) and the web version of the sample.
 
 `instructor`
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the book that is being generated, if one exists. If `false`, omit it. The default is `true`.
 
 `course`
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the course material that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your course.
+
+`course-web`
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the web version of the course that is being generated. If `false`, omit it. If `course`, then include it or exclude it based on the value of the `course` attribute. The default is `book`, meaning that if this attribute is omitted, every section which is included in the book is included in the web version of the book.
+
+TODO - should courses just use book, web, sample, instructor?
 
 `course-sample`
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the sample of the course material that is being generated. If `false`, omit it. The default is `false`.
@@ -3462,6 +3470,11 @@ This is included in the sample.
 # Buy the book!
 
 What you read was just a sample. Why not buy the full book?
+
+{web: false}
+# Here's a Coupon!
+
+This coupon will show up in the book version, but not the web book version. It will have the default values for book (true) and sample (false).
 
 # Chapter Two
 
