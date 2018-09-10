@@ -2272,7 +2272,7 @@ A> The attribute list must either directly precede the `B>` with no blank line b
 A> `{class: warning}`
 A> `{blurb}`
 
-### Syntactic Sugar for Specific Blurb Classes: `D>`, `E>`, `I>`, `T`, `W>`
+### Syntactic Sugar for Specific Blurb Classes: `D>`, `E>`, `I>`, `Q`, `T`, `W>`, `X>`
 
 Having to constantly type `{class: warning}` in a computer programming book with a number of warnings would get tedious, as would any of the other blurb classes listed above.
 
@@ -2285,8 +2285,10 @@ These are the syntactic sugar values you can use which have a heritage in comput
 | `D>`  | `{class: discussion}`   |
 | `E>`  | `{class: error}`        |
 | `I>`  | `{class: information}`  |
+| `Q>`  | `{class: quiz}`         |
 | `T>`  | `{class: tip}`          |
 | `W>`  | `{class: warning}`      |
+| `X>`  | `{class: exercise}`     |
 
 Examples:
 
@@ -2297,9 +2299,13 @@ E> This is an error blurb.
 
 I> This is an information blurb.
 
+Q> This is a question blurb.
+
 T> This is a tip blurb.
 
 W> This is a warning blurb.
+
+X> This is an exercise blurb.
 ~~~
 
 These are equivalent to:
@@ -2314,14 +2320,27 @@ B> This is an error blurb.
 {class: information}
 B> This is an information blurb.
 
+{class: question}
+B> This is a question blurb.
+
 {class: tip}
 B> This is a tip blurb.
 
 {class: warning}
 B> This is a warning blurb.
+
+{class: exercise}
+B> This is an exercise blurb.
 ~~~
 
-Note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb, but other Markua Processors are free to do something different.
+Note that `Q>` and `X>` are a bit controversial:
+
+* `Q>` defines a blurb which is formatted like a question, but `{quiz}` (discussed later) defines a quiz. It is unfortunate that both start with the letter `Q`.
+* `X>` defines a blurb which is formatted like an exercise, but `{exercise}` (discussed later) defines a structured exercise similar to a quiz. It is unfortunate that the term "exercise" is used for both.
+
+There are issues, in both cases. However, the alternative is worse: removing the `Q>` or `X>` syntax would cause issues for every author who is familiar with, or has a manuscript formatted in, Leanpub Flavoured Markdown. This is not worth the reduced functionality, just to avoid one possible bit of confusion and one naming collision. So, the `Q>` and `X>` blurb syntactic sugar do exist, as do the `{class: question}` and `{class: exercise}` full blurb syntaxes.
+
+Also note that nothing in this section defines what a Markua Processor must *do* with the given class of blurb. Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb, but other Markua Processors are free to do something different.
 
 Finally, note that specifying a class in metadata overrides what the syntactic sugar does:
 
@@ -2500,8 +2519,6 @@ c) 7
 ~~~
 
 Just like with quiz, with an exercise the `id` attribute is **required**. This is so the identity of an exercise can be preserved across generations of a course.
-
-Unlike asides and blurbs, there is no short syntax (i.e. there is no `Q>` or `X>` syntax) to add a quiz or exercise. Since an id attribute is required, you're stuck typing an attribute list anyway. So, a "short" syntax wouldn't actually save typing, and would look ugly. Furthermore, having a short syntax would encourage forgetting to add an id attribute.
 
 {#quiz-headings}
 ## Quiz and Exercise Headings and Other Content
@@ -4000,15 +4017,13 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 6. In LFM, we had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a center-aligned blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a {class: center} attribute.
 
-7. In LFM, `X>` defines an exercise block which is similar to a blurb in Markua, but styled as an exercise. In Markua, `X>` is used for structured exercises, which are essentially unmarked quizzes that have questions and answers provided. So, Markua does not define a blurb with a class of `exercise`, or any syntactic sugar for it.
+7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
-8. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
+8. In LFM, we had a `{pagebreak}` directive. This is replaced by `===`.
 
-9. In LFM, we had a `{pagebreak}` directive. This is replaced by `===`.
+9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
-10. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
-
-11. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+10. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
 
 {#numbered-list-numbering-rules}
 ## Numbered List Numbering Rules
