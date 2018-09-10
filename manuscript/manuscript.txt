@@ -2285,7 +2285,7 @@ These are the syntactic sugar values you can use which have a heritage in comput
 | `D>`  | `{class: discussion}`   |
 | `E>`  | `{class: error}`        |
 | `I>`  | `{class: information}`  |
-| `Q>`  | `{class: quiz}`         |
+| `Q>`  | `{class: question}`     |
 | `T>`  | `{class: tip}`          |
 | `W>`  | `{class: warning}`      |
 | `X>`  | `{class: exercise}`     |
@@ -2335,7 +2335,7 @@ B> This is an exercise blurb.
 
 Note that `Q>` and `X>` are a bit controversial:
 
-* `Q>` defines a blurb which is formatted like a question, but `{quiz}` (discussed later) defines a quiz. It is unfortunate that both start with the letter `Q`.
+* `Q>` defines a blurb which is formatted like a question, but `{quiz}` (discussed later) defines a quiz, and quizzes have actual numbered questions in them. It is unfortunate that the words `quiz` and `question` both start with the letter `Q`, and that the `question` blurb is not the same thing as a question in a quiz.
 * `X>` defines a blurb which is formatted like an exercise, but `{exercise}` (discussed later) defines a structured exercise similar to a quiz. It is unfortunate that the term "exercise" is used for both.
 
 There are issues, in both cases. However, the alternative is worse: removing the `Q>` or `X>` syntax would cause issues for every author who is familiar with, or has a manuscript formatted in, Leanpub Flavoured Markdown. This is not worth the reduced functionality, just to avoid one possible bit of confusion and one naming collision. So, the `Q>` and `X>` blurb syntactic sugar do exist, as do the `{class: question}` and `{class: exercise}` full blurb syntaxes.
