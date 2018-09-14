@@ -3443,22 +3443,20 @@ There are eight attributes which specify conditional inclusion in output targets
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the book that is being generated, if one exists. If `false`, omit it. The default is `true`.
 
 `course`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the course material that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your course.
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the course material that is being generated. If `false`, omit it. If `book`, then include it or exclude it based on the value of the `book` attribute. The default is `book`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
 
 `course-web`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the web version of the course that is being generated. If `false`, omit it. If `course`, then include it or exclude it based on the value of the `course` attribute. The default is `book`, meaning that if this attribute is omitted, every section which is included in the book is included in the web version of the book.
-
-TODO - should courses just use book, web, sample, instructor?
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the web version of the course that is being generated. If `false`, omit it. If `web`, then include it or exclude it based on the value of the `web` attribute. The default is `web`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
 
 `course-sample`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the sample of the course material that is being generated. If `false`, omit it. The default is `false`.
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the sample of the course material that is being generated. If `false`, omit it. If `sample`, then include it or exclude it based on the value of the `sample` attribute. The default is `sample`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
 
 `course-instructor`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the course material that is being generated, if one exists. If `false`, omit it. The default is `true`.
+: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the course material that is being generated, if one exists. If `false`, omit it. If `instructor`, then include it or exclude it based on the value of the `instructor` attribute. The default is `instructor`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
 
 This set of defaults means that by default, there is no book or course content included in the sample version of a book or course. As discussed, the headings themselves may all be included, in order to generate an appropriate Table of Contents for the sample book or course.
 
-The reason that there are different attributes used for books and courses, instead of a course just reusing the same values that are used by a book, is that this way the same manuscript can be used to produce a book and a course. This approach is obviously not for everyone, but it may appeal to highly technical authors who wish to not repeat themselves.
+The reason that there are different attributes used for books and courses, instead of a course just reusing the same values that are used by a book, is that this way the same manuscript can be used to produce a book and a course. This approach is obviously not for everyone, but it may appeal to highly technical authors who wish to not repeat themselves, and who don't want to have to maintain separate git branches for a book and a course. Our assumption, however, is that most books or courses will require separate git branches, and that thus this approach merely saves some labour at the cost of some added complexity.
 
 Note that specifying one of these attributes in a nested section overrides any value inherited from its ancestors, or from the default. This way, you can include a chapter in the sample, except for a specific section of the chapter.
 
