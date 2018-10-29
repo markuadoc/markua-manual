@@ -4179,9 +4179,6 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
-- Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
-- There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
-- There is no more type attribute on quizzes. Quizzes are always marked.
 - Support Nested Lists.
 - Support Nesting Block Elements in List Items. Ensure that nesting code resources works.
 - Confirm ids work on definition list items.
@@ -4191,7 +4188,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support updates to en dashes, em dashes, scene breaks and page breaks.
 - Support parentheses in numbered lists
 - Remove HTML comment syntax, since the CriticMarkup comment syntax is enough.
-- Support question alternates (?1, ?1).
 - Support the other directives.
 - Support `cite` and `url` on blockquotes.
 - Use `table-of-contents` not `toc`.
@@ -4224,7 +4220,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support scene breaks and page-breaks
 - Support blockquotes inside of a paragraph
 - Support cite and url attributes for blockquotes
-- Support the quiz or exercise chapter heading being considered the name of the quiz or exercise.
 - Does this quiz or exercise heading show up in the ToC?
 - Support ids and other attributes on span elements
 - Support smart crosslinks
@@ -4233,10 +4228,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support CriticMarkup.
 - Support index entries and index generation.
 - Support language directives
-- Finish Leanpub for Courses
 - Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
-- Support `{answer}` blocks in quizzes
-- Only support Sample.txt in LFM books, not Markua books
 - Investigate regression of formatting in caption attributes of figures; should support text formatting
 
 {#acknowledgments}
