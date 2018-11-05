@@ -3102,10 +3102,12 @@ There are two parts to making a crosslink.
 
 There are two ways to define an id:
 
-1. Using an id attribute `{id: some-id}` in an attribute list which can contain other attributes.
-2. Using a shorter "syntactic sugar" approach when the id is by itself: `{#some-id}`
+1. Using an id attribute `{id: some-id}`
+2. Using a shorter "syntactic sugar" approach: `{#some-id}`
 
-The shorter approach is preferred. The main reason the `{id: some-id}` syntax is supported is that it allows it to be added in with other attributes in a larger attribute list. You **CANNOT** add the `{#some-id}` to an attribute list.
+The shorter "syntactic sugar" approach is usually preferred. However, it can look a bit odd in an attribute list with other attributes in it. So, in that case, the `{id: some-id}` syntax is preferred.
+
+W> Note for Leanpub authors: The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list.
 
 In terms of the value of an `id`, it has some special restrictions:
 
@@ -4179,6 +4181,7 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
+- The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
 - Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
 - There is no more type attribute on quizzes. Quizzes are always marked.
