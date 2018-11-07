@@ -832,6 +832,8 @@ If the code resource is a local or web resource, it defaults to `guess`.
 
 If the code resource is an inline resource, the default varies based on the delimiter. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the code language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
 
+Finally, note that there is a `default-code-language` setting on the entire Markua document. The value of this setting only affects local resources, web resources or inline resources inserted with backticks--it has no effect on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
+
 #### Local Code Resources
 
 Local code resources can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
@@ -3760,7 +3762,7 @@ If a Markua Processor also provides a UI to define settings which are specified 
 : The owner of the copyright.
 
 `default-code-language`
-: The default language that code is. The default is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`.
+: The default language that code which is a local resource, web resource or inline resource inserted with backticks is interpreted as. The default value is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`. Finally, note that the value of this setting only affects local resources, web resources or inline resources inserted with backticks--it has no effect on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
