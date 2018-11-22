@@ -1639,6 +1639,22 @@ You can specify a column span just by skipping a `|` in the appropriate place:
 
 Note that the alignment of the cell in the merged columns is that of its leftmost column, if no override is done. So, in the above table, Body A1 and B1 Merged is left-aligned not centered.
 
+Now, if you want to override the alignment on a merged cell, you do that in the leftmost cell. So, in the below table, Body A2 and B2 Merged is centered not left-aligned.
+
+~~~
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Body A1     | Body B1      | Body C1     |
+|:-----------:|--------------|-------------|
+| Body A2 and B2 Merged      | Body C2     |
+|-------------|--------------|-------------|
+| Body A3     | Body B3      | Body C3     |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
 You can specify a row span just by skipping a part-row of `-` signs in the appropriate place:
 
 ~~~
