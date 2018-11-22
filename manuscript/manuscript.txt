@@ -1480,7 +1480,7 @@ This is in keeping with the principles that formatting never applies to anything
 
 The exact rules will be specified shortly, but it helps to start with a few examples.
 
-This table has a left-aligned column with a header of Header A, a center-aligned column with a header of Header B, and a right-aligned column with a header of Header C:
+This table has a left-aligned column with a header of Header A, a centered column with a header of Header B, and a right-aligned column with a header of Header C:
 
 ~~~
 |:============|:============:|============:|
@@ -1532,7 +1532,7 @@ This table is just like the previous one, but it has left-aligned (Header A), ce
 |=============|==============|=============|
 ~~~
 
-You can also override the alignment of an individual cell. This table is just like the previous one, but its Body B2 cell is overridden to be center-aligned not left-aligned:
+You can also override the alignment of an individual cell. This table is just like the previous one, but its Body B2 cell is overridden to be centered not left-aligned:
 
 ~~~
 |:============|:============:|============:|
@@ -1669,7 +1669,7 @@ You can also individually align cells with colons in the `-` part-row **above** 
 |=============|===============|=============|
 ~~~
 
-In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
+In that table, column A is left-aligned, column B is centered and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is centered and merged cell B2 and B3 is left-aligned.
 
 #### Supported Attributes for Tables
 
@@ -4154,7 +4154,7 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
 
-6. In LFM, we had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a center-aligned blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a {class: center} attribute.
+6. In LFM, we had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a {class: center} attribute.
 
 7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
