@@ -591,7 +591,7 @@ The following are the supported attributes for image resources, in addition to t
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height`, `wrap` and `align` attributes are used instead and margins are respected.
 
 `height`
-: The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100.
+: The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}` or `{height: 70%}`.
 
 `cite`
 : An image can have a citation. A Markua Processor is free to combine this citation with the caption attribute or display it separately.
@@ -600,7 +600,7 @@ The following are the supported attributes for image resources, in addition to t
 : An image can have a URL, which is the URL of the `cite` attribute if present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote.
 
 `width`
-: The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100.
+: The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}` or `{width: 70%}`.
 
 Note that if only one of width and height are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both width and height are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both width and height.)
 
