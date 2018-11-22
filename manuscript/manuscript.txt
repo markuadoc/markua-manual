@@ -1339,6 +1339,12 @@ The syntax to insert a table defined in an external file on the local filesystem
 
 The table_path lists the path to the external file which defines the table.
 
+The following are the principles of Markua tables:
+
+1. Formatting never applies to anything above it.
+2. Use the fewest formatting characters possible.
+3. Use the fewest attributes possible.
+
 To insert a table defined inline, you just insert it:
 
 ~~~
@@ -1438,14 +1444,48 @@ If there is only one row, it is interpreted as a content row, not a header row:
 |============|============|============|
 ~~~
 
-You may initially balk at typing row separators. My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
-
-You can also specify left, center and right alignment of columns with colons in the header separator row, just as with simple tables. The following columns are left-, center-, and right-aligned respectively:
+Finally, headers and footers can have multiple rows in them. This won't be used that frequently, but it is fully supported:
 
 ~~~
-|=============|==============|=============|
-| Header A    | Header B     | Header C    |
+|============|============|============|
+| Header A1  | Header B1  | Header C1  |
+|------------|------------|------------|
+| Header A2  | Header B2  | Header C2  |
+|------------|------------|------------|
+| Header A3  | Header B3  | Header C3  |
+|============|============|============|
+| Content A1 | Content B1 | Content C1 |
+|------------|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|------------|------------|------------|
+| Content A3 | Content B3 | Content C3 |
+|------------|------------|------------|
+| Content A4 | Content B4 | Content C4 |
+|============|============|============|
+| Footer A1  | Footer B1  | Footer C1  |
+|------------|------------|------------|
+| Footer A2  | Footer B2  | Footer C2  |
+|------------|------------|------------|
+| Footer A3  | Footer B3  | Footer C3  |
+|============|============|============|
+~~~
+
+You may initially think that typing row separators would be annoying. My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
+
+#### Table Column Alignment
+
+You can also specify the left, center and right alignment of columns. This can be done separately for the header, for the body, and for the footer. Also, any individual table cell--except the first one in the header, body or footer--can override the column alignment of the header, body, and footer.
+
+This is in keeping with the principles that formatting never applies to anything above it, and to use the fewest formatting characters possible.
+
+The exact rules will be specified shortly, but it helps to start with a few examples.
+
+This table has a left-aligned column with a header of Header A, a center-aligned column with a header of Header B, and a right-aligned column with a header of Header C:
+
+~~~
 |:============|:============:|============:|
+| Header A    | Header B     | Header C    |
+|=============|==============|=============|
 | Content A1  | Content B1   | Content C1  |
 |-------------|--------------|-------------|
 | Content A2  | Content B2   | Content C2  |
@@ -1455,6 +1495,68 @@ You can also specify left, center and right alignment of columns with colons in 
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
 ~~~
+
+By default, all cells in the table header, body and footer are left-aligned.
+
+So, the following table has left-aligned headers, but its body columns are left-, center-, and right-aligned respectively:
+
+~~~
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Content A1  | Content B1   | Content C1  |
+|-------------|--------------|-------------|
+| Content A2  | Content B2   | Content C2  |
+|:------------|--------------|-------------|
+| Content A3  | Content B3   | Content C3  |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
+You can use different alignments for the header and the body of the table.
+
+This table is just like the previous one, but it has left-aligned (Header A), centered (Header B) and right-aligned (Header C) header columns, with right-aligned, left-aligned and then centered body columns.
+
+~~~
+|:============|:============:|============:|
+| Header A    | Header B     | Header C    |
+|============:|:=============|:===========:|
+| Content A1  | Content B1   | Content C1  |
+|-------------|--------------|-------------|
+| Content A2  | Content B2   | Content C2  |
+|-------------|--------------|-------------|
+| Content A3  | Content B3   | Content C3  |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
+You can also override the alignment of an individual cell. This table is just like the previous one, but its Content B2 cell is overridden to be center-aligned not left-aligned:
+
+~~~
+|:============|:============:|============:|
+| Header A    | Header B     | Header C    |
+|============:|:=============|:===========:|
+| Content A1  | Content B1   | Content C1  |
+|-------------|:------------:|-------------|
+| Content A2  | Content B2   | Content C2  |
+|-------------|--------------|-------------|
+| Content A3  | Content B3   | Content C3  |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
+Formatting a separator row (`====`) cascades downward. Header alignent cascades into the body and footer; body alignment cascades into the footer.
+
+However, individual cell separater row (`----`) footing does NOT cascade downward. It overrides an individual cell only; it does not change the column alignment going forward. In the above table, Content B3 is left-aligned (like its body column) not centered (like Content B2).
+
+This has the following consequence:
+
+The cells in the first row of a table header, table body or table footer must have the same alignment as the header, body or footer column they are in. They are used to define the alignment, not override it. If you need other cells in the table header, body or footer to have different alignments, those must do the overriding.
+
+So, if you want every other cell in a column to have a different alignment than the first non-header cell in that column, each of them must have the overridden alignment. This would not be true if alignment overrides cascaded downward, but that would confuse a lot more people than helping this small edge case.
 
 Since the alignment is done on the separator row above the first content row, it even works to align a column with no header or footer. The following columns are also left-, center-, and right-aligned respectively:
 
@@ -1467,6 +1569,38 @@ Since the alignment is done on the separator row above the first content row, it
 | Content A3 | Content B3 | Content C3 |
 |============|============|============|
 ~~~
+
+You can override alignments anywhere.
+
+The following table has left-aligned (A), centered (B) and right-aligned (C) header and footer columns, with right-aligned (A), left-aligned (B) and then centered (C) body columns--and it also overrides Header B2 to be right-aligned, Content A2 to be centered and Footer C2 to be left-aligned:
+
+~~~
+|:===========|:==========:|===========:|
+| Header A1  | Header B1  | Header C1  |
+|------------|-----------:|------------|
+| Header A2  | Header B2  | Header C2  |
+|------------|------------|------------|
+| Header A3  | Header B3  | Header C3  |
+|===========:|:===========|:==========:|
+| Content A1 | Content B1 | Content C1 |
+|:----------:|------------|------------|
+| Content A2 | Content B2 | Content C2 |
+|------------|------------|------------|
+| Content A3 | Content B3 | Content C3 |
+|------------|------------|------------|
+| Content A4 | Content B4 | Content C4 |
+|:===========|:==========:|===========:|
+| Footer A1  | Footer B1  | Footer C1  |
+|------------|------------|:-----------|
+| Footer A2  | Footer B2  | Footer C2  |
+|------------|------------|------------|
+| Footer A3  | Footer B3  | Footer C3  |
+|============|============|============|
+~~~
+
+However, just because you can, doesn't mean that you should.
+
+#### Multiple-line rows, row spans and column spans
 
 You can have more than one row of content in cells, and there is no ambiguity since each row of cells is separated with a row of `-` signs and `|` characters:
 
@@ -1544,7 +1678,10 @@ The following is the supported attribute for table resources, in addition to the
 `widths`
 : Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
 
-Just as with images, the `class` can be used by Markua Processors to provide the appropriate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.)
+`style`:
+Tables can have a `style` attribute which can have values of `simple`, `grid` or any other value. All Markua Processors must support values of `simple` and `grid` for tables. The default is `simple`. A Markua Processor may use whatever formatting it wants with `simple`, but it should be clear which cells are part of the table header, body and footer. A Markua Processor may also use whatever formatting it wants with `grid`, but it must show grid lines around each table cell. If a Markua Processor does not recognize the value of the `style`, it must format it as `simple` instead of producing an error. (It can, however, produce a warning.)
+
+A Markua Processor may do whatever it wants when outputting a table. For example, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.
 
 #### Optional Simpler Table Syntax Support
 
@@ -4183,6 +4320,7 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
+- Table alignment does not work as specified. This is being fixed in the next couple of weeks.
 - The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
 - Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
