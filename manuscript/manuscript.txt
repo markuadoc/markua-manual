@@ -1352,9 +1352,9 @@ To insert a table defined inline, you just insert it:
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
@@ -1368,11 +1368,11 @@ Just content rows:
 
 ~~~
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 ~~~
 
@@ -1382,7 +1382,7 @@ Header, one content row, footer:
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
@@ -1394,11 +1394,11 @@ No footer:
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 ~~~
 
@@ -1406,11 +1406,11 @@ No header:
 
 ~~~
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
@@ -1422,7 +1422,7 @@ If there are only two rows separated by a section separator, they are interprete
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |============|============|============|
 ~~~
 
@@ -1430,9 +1430,9 @@ If there are only two rows separated by a row separator, they are just two conte
 
 ~~~
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |============|============|============|
 ~~~
 
@@ -1440,7 +1440,7 @@ If there is only one row, it is interpreted as a content row, not a header row:
 
 ~~~
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |============|============|============|
 ~~~
 
@@ -1454,13 +1454,13 @@ Finally, headers and footers can have multiple rows in them. This won't be used 
 |------------|------------|------------|
 | Header A3  | Header B3  | Header C3  |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |------------|------------|------------|
-| Content A4 | Content B4 | Content C4 |
+| Body A4    | Body B4    | Body C4    |
 |============|============|============|
 | Footer A1  | Footer B1  | Footer C1  |
 |------------|------------|------------|
@@ -1486,11 +1486,11 @@ This table has a left-aligned column with a header of Header A, a center-aligned
 |:============|:============:|============:|
 | Header A    | Header B     | Header C    |
 |=============|==============|=============|
-| Content A1  | Content B1   | Content C1  |
+| Body A1     | Body B1      | Body C1     |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1504,11 +1504,11 @@ So, the following table has left-aligned headers, but its body columns are left-
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
-| Content A1  | Content B1   | Content C1  |
+| Body A1     | Body B1      | Body C1     |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
-|:------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A2     | Body B2      | Body C2     |
+|-------------|--------------|-------------|
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1522,27 +1522,27 @@ This table is just like the previous one, but it has left-aligned (Header A), ce
 |:============|:============:|============:|
 | Header A    | Header B     | Header C    |
 |============:|:=============|:===========:|
-| Content A1  | Content B1   | Content C1  |
+| Body A1     | Body B1      | Body C1     |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
 ~~~
 
-You can also override the alignment of an individual cell. This table is just like the previous one, but its Content B2 cell is overridden to be center-aligned not left-aligned:
+You can also override the alignment of an individual cell. This table is just like the previous one, but its Body B2 cell is overridden to be center-aligned not left-aligned:
 
 ~~~
 |:============|:============:|============:|
 | Header A    | Header B     | Header C    |
 |============:|:=============|:===========:|
-| Content A1  | Content B1   | Content C1  |
+| Body A1     | Body B1      | Body C1     |
 |-------------|:------------:|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1550,7 +1550,7 @@ You can also override the alignment of an individual cell. This table is just li
 
 Formatting a separator row (`====`) cascades downward. Header alignent cascades into the body and footer; body alignment cascades into the footer.
 
-However, individual cell separater row (`----`) footing does NOT cascade downward. It overrides an individual cell only; it does not change the column alignment going forward. In the above table, Content B3 is left-aligned (like its body column) not centered (like Content B2).
+However, individual cell separater row (`----`) footing does NOT cascade downward. It overrides an individual cell only; it does not change the column alignment going forward. In the above table, Body B3 is left-aligned (like its body column) not centered (like Body B2).
 
 This has the following consequence:
 
@@ -1562,17 +1562,17 @@ Since the alignment is done on the separator row above the first content row, it
 
 ~~~
 |:===========|:==========:|===========:|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 ~~~
 
 You can override alignments anywhere.
 
-The following table has left-aligned (A), centered (B) and right-aligned (C) header and footer columns, with right-aligned (A), left-aligned (B) and then centered (C) body columns--and it also overrides Header B2 to be right-aligned, Content A2 to be centered and Footer C2 to be left-aligned:
+The following table has left-aligned (A), centered (B) and right-aligned (C) header and footer columns, with right-aligned (A), left-aligned (B) and then centered (C) body columns--and it also overrides Header B2 to be right-aligned, Body A2 to be centered and Footer C2 to be left-aligned:
 
 ~~~
 |:===========|:==========:|===========:|
@@ -1582,13 +1582,13 @@ The following table has left-aligned (A), centered (B) and right-aligned (C) hea
 |------------|------------|------------|
 | Header A3  | Header B3  | Header C3  |
 |===========:|:===========|:==========:|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |:----------:|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |------------|------------|------------|
-| Content A4 | Content B4 | Content C4 |
+| Body A4    | Body B4    | Body C4    |
 |:===========|:==========:|===========:|
 | Footer A1  | Footer B1  | Footer C1  |
 |------------|------------|:-----------|
@@ -1608,14 +1608,14 @@ You can have more than one row of content in cells, and there is no ambiguity si
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
-| Content A1  | Content B1   | Content C1  |
-| is really   | is longer    |             |
+| Body A1     | Body B1      | Body C1     |
+| is really   | is here      |             |
 | really      |              |             |
 | long        |              |             |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1627,11 +1627,11 @@ You can specify a column span just by skipping a `|` in the appropriate place:
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
-| Content A1 and B1 Merged   | Content C1  |
+| Body A1 and B1 Merged      | Body C1     |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1643,11 +1643,11 @@ You can specify a row span just by skipping a part-row of `-` signs in the appro
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
-| Content A1  | Content B1   | Content C1  |
+| Body A1     | Body B1      | Body C1     |
 | and A2      |--------------|-------------|
-| Merged      | Content B2   | Content C2  |
+| Merged      | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1659,11 +1659,11 @@ You can also individually align cells with colons in the `-` part-row **above** 
 |=============|===============|=============|
 | Header A    | Header B      | Header C    |
 |:============|:=============:|============:|
-| Content A1 and B1 Merged    | Content C1  |
+| Body A1 and B1 Merged       | Body C1     |
 |------------:|:--------------|-------------|
-| Content A2  | Content B2    | Content C2  |
+| Body A2     | Body B2       | Body C2     |
 |:-----------:| and B3 Merged |-------------|
-| Content A3  |               | Content C3  |
+| Body A3     |               | Body C3     |
 |=============|===============|=============|
 | Footer A    | Footer B      | Footer C    |
 |=============|===============|=============|
