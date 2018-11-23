@@ -1975,6 +1975,47 @@ III. baz
 
 The full set of numbering rules for numbered lists are specified in an [appendix](#numbered-list-numbering-rules). However, it's important to emphasize what happens with single-element numbered lists.
 
+### Blank Lines in Lists
+
+You can optionally...
+
+One list:
+
+~~~
+* foo
+* bar
+* baz
+~~~
+
+One list:
+
+~~~
+* foo
+
+* bar
+
+* baz
+~~~
+
+Two lists:
+
+~~~
+* foo
+
+
+* bar
+
+* baz
+~~~
+
+Two blank lines is a new list.
+
+We ignore leading whitespace for paragraphs.
+
+The code block parsing strips the number of spaces that the beginning of the block was indented by.
+
+
+
 ### In Markua, A Single-Element Numbered List is Not a List
 
 Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
@@ -2105,6 +2146,8 @@ Other block elements such as figures can also be inserted nested inside list ite
 
 ### Single-Paragraph List Items
 
+You can nest block content inside bulleted lists:
+
 ~~~
 * Foo
   ```ruby
@@ -2116,9 +2159,65 @@ Other block elements such as figures can also be inserted nested inside list ite
 * Baz
 ~~~
 
-In the single paragraph list items case, indenting the block element is optional but recommended.
+You can nest block content inside numbered lists:
+
+~~~
+1. Foo
+   ```ruby
+   puts "hello"
+   ```
+2. Bar
+   {alt: "too large to fit in the alt text"}
+   ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
+3. Baz
+~~~
+
+You do not need to have blank lines after single-paragraph list items, even if there are forced linebreaks in them.
+
+This is ok:
+
+~~~
+9. This is paragraph 1 in the first list item.
+   This is still paragraph 1 in the first list item.
+10. This is paragraph 1 in the second list item.
+    This is still paragraph 1 in the second list item.
+~~~
+
+1. foo
+
+   bar
+
+1. bar
+
+   bar
+
+1. baz
+
+1. foo
+
+1. bar
+
+
+
+
+1. one
+
+1. two
+
+   continue
+
+1. three
+
+   continue
+
+1. four
+
+
+
 
 ### Multiple-Paragraph List Items
+
+You can nest block content and have multiple-paragraph list items inside bulleted lists:
 
 ~~~
 * This is paragraph 1 in the first list item.
@@ -2139,7 +2238,66 @@ In the single paragraph list items case, indenting the block element is optional
 * Baz
 ~~~
 
-In the case of multiple paragraph list items, you need to indent the block element by the same four spaces (or one tab) that you use to indent subsequent paragraphs in the list item. Doing this ensures the continuation of the list.
+You can nest block content and have multiple-paragraph list items inside numbered lists:
+
+~~~
+1. This is paragraph 1 in the first list item.
+
+   ```ruby
+   puts "hello"
+   ```
+
+   This is paragraph 2 in the first list item.
+
+2. This is paragraph 1 in the second list item.
+
+   {alt: "too large to fit in the alt text"}
+   ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
+
+   This is paragraph 2 in the second list item.
+
+3. Baz
+~~~
+
+Note that with both single and multiple paragraph list items, for either numbered or bulleted lists, you need to indent the block element by at least the number of spaces (or one tab) to line it up exactly with the start of the list item that contains it. So, if you do `* Foo`, any block element must be indented by at least two spaces; if you do `*  Foo`, any block element must be indented by at least three spaces, etc. Note that tabs can only be used if you do a tab after the period; if you do a space after the period, you must use the correct number of spaces to line it up. We cannot tell how big your tab, so you can never mix tabs and spaces.
+
+Specifically, the following is ok:
+
+~~~
+9. This is paragraph 1 in the first list item.
+
+   This is paragraph 2 in the first list item.
+
+10. This is paragraph 1 in the second list item.
+
+    This is paragraph 2 in the second list item.
+~~~
+
+Specifically, the following is not ok, and will result in the start of a new paragraph with "This is paragraph 2 in the first list item.":
+
+~~~
+9. This is paragraph 1 in the first list item.
+
+  This is paragraph 2 in the first list item.
+
+10. This is paragraph 1 in the second list item.
+
+   This is paragraph 2 in the second list item.
+~~~
+
+Also, at the end of a multiple-paragraph list item, there must be a blank line before the start of the next numbered or bulleted list item.
+
+
+~~~
+9. This is paragraph 1 in the first list item.
+   This is still paragraph 1 in the first list item.
+10. This is paragraph 1 in the second list item.
+    This is still paragraph 1 in the second list item.
+~~~
+
+
+
+Doing this correctly ensures the continuation of the list.
 
 ## Definition Lists
 
