@@ -1804,11 +1804,9 @@ This is especially important with the whitespace at the end of a file: trailing 
 
 ### Spaces and Tabs at the Beginning of a Line are Removed
 
-Markua handles spaces and tabs at the beginning of a line similarly to Markdown: it is only used to determine whether the content is in the paragraph or some nested block element (e.g. a nested list).
+In a paragraph, any manual indentation (using spaces or tabs at the beginning of a line) is just removed. This is even true after a forced line break, using a single newline.
 
-So, you can't manually indent any lines in a paragraph in Markua, even after a forced line break.
-
-If you want to write a poem in Markua, start a poetry resource with `___` or `---`. This will have the added benefit of allowing your poetry to be formatted using special font sizes and margins, to be more poetic than prose.
+So, if you're writing a sonnet, you can't manually indent the last two lines just by hitting Enter and adding two spaces at the beginning of the line. Instead, you need to use a [poetry resource](#poetry). To do this, you start a poetry resource with `___` or `---`. This will have the added benefit of allowing your poetry to be formatted using special font sizes and margins, to be more poetic than prose.
 
 ### Spaces and Tabs at the End of a Line are Removed
 
@@ -1843,7 +1841,7 @@ Markua distinguishes between "bulleted" and "numbered" lists, not between "unord
 {#bulleted-lists}
 ## Bulleted Lists
 
-Markua lets you make a bulleted list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by 1-4 spaces or 1 tab, followed by text content. You can't mix and match asterisks and hyphens in the same list. Here's how this looks:
+Markua lets you make a bulleted list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by 1 or more spaces or 1 tab, followed by text content. (Markua does not allow more than 1 tab here, since that's what tab stops are for.) You can't mix and match asterisks and hyphens in the same list. Here's how this looks:
 
 You can build a list out of items starting with an asterisk and one space:
 
@@ -1856,9 +1854,9 @@ You can build a list out of items starting with an asterisk and one space:
 You can build a list out of items starting with a hyphen and one tab:
 
 ~~~
--    one
--    two
--    three
+-	one
+-	two
+-	three
 ~~~
 
 Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
@@ -1867,7 +1865,7 @@ These are the specific rules for bulleted lists:
 
 * Start each list item a bullet which is either an asterisk (`*`) or a hyphen (`-`).
 * You can't mix and match asterisks and hyphens in the same list.
-* Between 1 and 4 spaces or one tab is allowed after each bullet.
+* 1 or more spaces or one tab is allowed after each bullet.
 * You cannot mix tabs and spaces: if a tab is used after a bullet, tabs must be used after each bullet.
 * If spaces are used after each bullet, the same number of spaces must be used after each bullet in the list.
 * A varied number of spaces or tabs or a mixture of tabs and spaces does not create a bulleted list. Instead, it creates a paragraph with line breaks inside it.
@@ -1895,7 +1893,7 @@ The following choices of numbering system are supported:
 
 Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
 
-To make a numbered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by a period or a right-parenthesis, followed by between 1 and 4 spaces or 1 tab, followed by text content.
+To make a numbered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by a period or a right-parenthesis, followed by 1 or more spaces or 1 tab, followed by text content. (Again, Markua does not allow more than 1 tab here, since that's what tab stops are for.)
 
 Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex.
 
@@ -2010,7 +2008,7 @@ If lists were simple, they would contain be a bunch of simple one-line list item
 
 However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this. If a list is going to contain list items with multiple paragraphs, then there should be blank lines between each list item.
 
-As with Markdown, every paragraph in a list item after the first one must be indented by four spaces or one tab. This lets the Markua Processor know that the list is not over, but is instead being continued.
+As with Markdown, every paragraph in a list item after the first one must be indented by the appropriate number of spaces (or one tab) to line up with the first paragraph. This lets the Markua Processor know that the list is not over, but is instead being continued.
 
 The following is legal Markdown and legal Markua:
 
@@ -2023,7 +2021,7 @@ Here's a paragraph before the list.
 
 2.  The second list item is simple.
 
-3.  The third list item has three paragraphs.
+3.  The third list item has three paragraphs. This is the first paragraph.
     This is still part of the first paragraph.
 
     Here's the second paragraph in the third list item.
@@ -2033,21 +2031,25 @@ Here's a paragraph before the list.
 Here's a paragraph after the list.
 ~~~
 
-Just as with normal non-list-item text, a single newline functions as a forced line break within the list item in question. However, to encourage the text to be lined up nicely in the list item, any leading whitespace after the line break is ignored. This is different from the whitespace being preserved after single newlines in paragraphs. That rule exists to support poetry, and if there's one thing that lists are not, it's poetry.
+Just as with normal non-list-item text, a single newline functions as a forced line break within the list item in question. As with any paragraph, any leading whitespace after the line break is ignored, so you should line up your list item paragraphs.
 
 ## Nested Lists
 
-Lists can nest lists. To do this, simply insert the list nested inside a list item by 2 spaces for each level of nesting.
+Lists can nest lists. To do this, simply insert the list nested inside a list item by **two or more spaces or one tab** for each level of nesting. The number of spaces (or one tab) per indent level must be consistent across levels of nesting within a list, but it does not need to be consistent across lists in a Markua document. So, to be clear, if you nest a list with two spaces, any further nested list must also use two spaces. If you nest a list with one tab, any further nested list must also use one tab. If you violate this rule, the Markua Processor must output the entire attempt at a nested list as just a paragraph with line breaks. This way, Markua does not prevent an author from writing a paragraph which looks a lot like a nested list but is not one. (All the leading space will be ignored, of course.)
 
-There is a limit of **THREE** levels of nesting, including the outermost list. In an ebook, you don't have infinite space--especially on phones. You can nest any kind of list inside any kind of list.
+There is a limit of **FOUR** levels of nesting, including the outermost list. In an ebook, you don't have infinite space--especially on phones.
 
-This example shows the maximum three levels of nesting:
+You can nest any kind of list inside any kind of list.
+
+This example shows the maximum four levels of nesting, using two spaces for each level:
 
 ~~~
 * Foo
   1. One
   2. Two
     a. This is 2a
+      - point one
+      - point two
     b. This is 2b
   3. Three
 * Bar
@@ -2057,7 +2059,43 @@ This example shows the maximum three levels of nesting:
 * Baz
 ~~~
 
-If you try to nest a fourth level of nesting (or more), the Markua Processor will simply interpret the additional levels as forced newlines and manual indentation.
+Here's the same example but with more four spaces for each level:
+
+~~~
+* Foo
+    1. One
+    2. Two
+        a. This is 2a
+            - point one
+            - point two
+        b. This is 2b
+    3. Three
+* Bar
+    i.   Lorem
+    ii.  Ipsum
+    iii. Dolor
+* Baz
+~~~
+
+Here's the same example but with one tab for each level:
+
+~~~
+* Foo
+	1. One
+	2. Two
+		a. This is 2a
+			- point one
+			- point two
+		b. This is 2b
+	3. Three
+* Bar
+	i.   Lorem
+	ii.  Ipsum
+	iii. Dolor
+* Baz
+~~~
+
+If you try to nest a fifth level of nesting (or more), the Markua Processor will simply interpret the additional levels as forced newlines, and keep them at the fourth level.
 
 ## Nesting Block Elements in List Items
 
