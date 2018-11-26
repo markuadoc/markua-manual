@@ -1804,7 +1804,8 @@ There are the four principles of Markua's whitespace handling:
 These simple goals have far-reaching consequences:
 
 1. You never need to know whether some whitespace was produced by spaces or tabs. The effect must always be the same.
-2. Tabs which are used for indentation (i.e. starting from the beginning of a line, with no text before them in the line) are treated as four (yes, 4) spaces.
+2. Tabs which are used for indentation (i.e. starting from the beginning of a line, with no text before them in the line) are treated as four (yes, 4) spaces. - TODO
+TODO
 3. Whitespace at the end of a line or file is ignored.
 4. It doesn't matter how many spaces you add after a sentence.
 5. All consecutive blank lines after the first blank line are ignored when separating paragraphs, and all consecutive blank lines after the second blank line are ignored when separating lists.
@@ -2408,7 +2409,7 @@ A normal paragraph followed by a list, which will confuse anyone reading the man
 
 ## Nested Lists
 
-Lists can nest lists. To do this, simply insert the list nested inside a list item by **two or more spaces or one tab** for each level of nesting. The number of spaces (or one tab) per indent level must be consistent across levels of nesting within a list, but it does not need to be consistent across lists in a Markua document. So, to be clear, if you nest a list with two spaces, any further nested list must also use two spaces. If you nest a list with one tab, any further nested list must also use one tab. If you violate this rule, the Markua Processor must output the entire attempt at a nested list as just a paragraph with line breaks. This way, Markua does not prevent an author from writing a paragraph which looks a lot like a nested list but is not one. (All the leading space will be ignored, of course.)
+Lists can nest lists. To do this, simply insert the list nested inside a list item by **two or more spaces** (not tabs, as discussed later) for each level of nesting. The number of spaces per indent level must be consistent across levels of nesting within a list, but it does not need to be consistent across lists in a Markua document. So, to be clear, if you nest a list with two spaces, any further nested list must also use two spaces. If you violate this rule, the Markua Processor must output the entire attempt at a nested list as just a paragraph with line breaks. This way, Markua does not prevent an author from writing a paragraph which looks a lot like a nested list but is not one. (All the leading space will be ignored, of course.)
 
 There is a limit of **FOUR** levels of nesting, including the outermost list. In an ebook, you don't have infinite space--especially on phones.
 
@@ -2450,7 +2451,89 @@ Here's the same example but with more four spaces for each level:
 * Baz
 ~~~
 
-Here's the same example but with one tab for each level:
+## Tabs Are Not Allowed Before The Number or Bullet
+
+Tabs **cannot** be used **before** the bullet or number of a list item.
+
+I like tabs, but this is forbidden for a very simple reason: it would be impossible to reason about what level a list item is in, since tab stops can vary.
+
+For example, consider a bulleted list (not legal Markua) which looked like this:
+
+~~~
+* Foo
+  * Bar
+    * Baz
+      * Lorem
+	* Tab
+        * Ipsum
+          * Dolor
+~~~
+Or consider the numbered list (again, not legal Markua) equivalent:
+
+~~~
+1. Foo
+  1. Bar
+    1. Baz
+      1. Lorem
+	1. Tab
+        1. Ipsum
+          1. Dolor
+~~~
+
+In both cases, the list item "Tab" was inserted with a tab; the rest of the list items were inserted with spaces.
+
+At what level is Tab?  The same level as Ipsum? If the tab stops were bigger or smaller, you may think it's at the same level as Baz, Lorem or Dolor.
+
+As such, tabs are forbidden before the bullet or number of a list item. A Markua Processor *MUST* raise an error if it encounters such a tab.
+
+Note that with blank lines things are trickier, since a blank line is used to produce a multiple-paragraph list item.
+
+In the next two lists, the list item "Tab" was inserted with a tab; the rest of the list items were inserted with spaces.
+
+This is the bulleted list version:
+
+~~~
+* Foo
+
+  * Bar
+
+    * Baz
+
+      * Lorem
+
+	* Tab
+
+        * Ipsum
+
+          * Dolor
+~~~
+
+This is the numbered list version:
+
+~~~
+1. Foo
+
+  1. Bar
+
+    1. Baz
+
+      1. Lorem
+
+	1. Tab
+
+        1. Ipsum
+
+          1. Dolor
+~~~
+
+If we treated the tab characters as just whitespace used to indent ... TODO
+
+
+BUT - you never need to know whether some whitespace was produced by spaces or tabs. The effect must always be the same.
+
+isn't true...
+
+TODO - remove this? - Here's the same example but with one tab for each level:
 
 ~~~
 * Foo
@@ -2552,21 +2635,58 @@ You can nest block content and have multiple-paragraph list items inside numbere
 
 Note that with both single and multiple paragraph list items, for either numbered or bulleted lists, you need to indent the block element by at least the number of spaces or tabs to line it up exactly with the start of the list item that contains it. So, if you do `* Foo`, any block element must be indented by at least two spaces; if you do `*  Foo`, any block element must be indented by at least three spaces, etc.
 
-You can also use a tab to indent subsequent list items. Tabs which are used to indent always parsed as 4 spaces (??? - or more?)
+You can also use a tab to indent subsequent paragraphs in a multiple-paragraph list item.
 
 ~~~
-1. This is paragraph 1 in the first list item.
+1. This is paragraph 1 in the first list item in a top-level list..
 
-    This is paragraph 2 in the first list item.
+	This is paragraph 2 in the first list item in a top-level list..
 
-2. Baz
+2. This is paragraph 1 in the second list item in a top-level list..
+~~~
 
-   1. ...
+
+~~~
+1. This is the first list item in a top-level list.
+
+  1. This is the first list item in a list nested under the first list item.
+
+	This is paragraph 2 in a list item in a list nested under the first list item.
+
+  2. This is the second list item in a list nested under the first list item.
+
+2. This is the second list item in a top-level list.
 ~~~
 
 The reason to support mixing tabs and spaces is simple: basically no author types a tab key after the period in a numbered list or the asterisk or hyphen in a bulleted list, but many authors do type a tab key to indent things. So, the primary use case of tabs involves mixing tabs and spaces, i.e. using one or two spaces after the number or bullet in the first paragraph of each list item, and using tabs to indent any subsequent subsequent paragraphs in a multiple-paragraph list item.
 
 Banning the most common use case of something because it does not seem consistent just to make things nicer on implementors of Markua Processors is a bad idea.
+
+
+TODO - any amount of whitespace
+
+~~~
+1. This is the first list item in list 1.
+
+  1. This is the first list item in list 2.
+
+    1. This is the first list item in list 3.
+
+      1. This is the first list item in list 4.
+
+        1. This is the first list item in list 5.
+
+ This is paragraph 2 in a list _.
+
+  2. This is the second list item in a list nested under the first list item.
+
+2. This is the second list item in a top-level list.
+~~~
+
+
+
+
+
 
 Specifically, the following is ok:
 
@@ -2615,6 +2735,60 @@ TODO - even if tabs were parsed as 4 spaces, you'd get cases where this wasn't "
 ~~~
 
 TODO - because of this, it would be best to just say that any indentation continues?
+
+
+# TODO
+
+
+TODO: it would be really nice to not need to indent code blocks in list items.
+
+TODO: mixing tabs and spaces? treating tabs as 4 spaces for containment???
+
+TODO: must you really indent by at least the same number of spaces? 10. Foo would require a 3-space indent, which is terrible.
+
+The code block parsing strips the number of spaces that the beginning of the block was indented by.
+
+
+
+
+
+This is ok:
+
+~~~
+9. This is paragraph 1 in the first list item.
+   This is still paragraph 1 in the first list item.
+10. This is paragraph 1 in the second list item.
+    This is still paragraph 1 in the second list item.
+~~~
+
+1. foo
+
+   bar
+
+1. bar
+
+   bar
+
+1. baz
+
+1. foo
+
+1. bar
+
+
+
+
+1. one
+
+1. two
+
+   continue
+
+1. three
+
+   continue
+
+1. four
 
 
 
@@ -4808,56 +4982,3 @@ I'd also like to thank Assaf Arkin, Alberto De Lucca, André Bacci, Ann Chia-hui
 Perhaps most important, Markua is benefiting from years of feedback about Leanpub Flavoured Markdown from many Leanpub authors. If it wasn't for these authors, there would be no Markua.
 
 Finally, I would like to thank my wife Caroline and my son Evan: while this is not as long as my other books, a lot of thought and effort went into it, and a lot of sacrifice. Thanks very much.
-
-# TODO
-
-
-TODO: it would be really nice to not need to indent code blocks in list items.
-
-TODO: mixing tabs and spaces? treating tabs as 4 spaces for containment???
-
-TODO: must you really indent by at least the same number of spaces? 10. Foo would require a 3-space indent, which is terrible.
-
-The code block parsing strips the number of spaces that the beginning of the block was indented by.
-
-
-
-
-
-This is ok:
-
-~~~
-9. This is paragraph 1 in the first list item.
-   This is still paragraph 1 in the first list item.
-10. This is paragraph 1 in the second list item.
-    This is still paragraph 1 in the second list item.
-~~~
-
-1. foo
-
-   bar
-
-1. bar
-
-   bar
-
-1. baz
-
-1. foo
-
-1. bar
-
-
-
-
-1. one
-
-1. two
-
-   continue
-
-1. three
-
-   continue
-
-1. four
