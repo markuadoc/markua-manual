@@ -2285,6 +2285,17 @@ A normal paragraph followed by a list:
 3. list one item three
 ~~~
 
+A normal paragraph followed by a list, which will confuse anyone reading the manuscript:
+
+~~~
+1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+
+
+2. list one item one
+3. list one item two
+4. list one item three
+~~~
+
 A normal paragraph followed by a list:
 
 ~~~
@@ -2296,6 +2307,19 @@ A normal paragraph followed by a list:
 2. list one item two
 
 3. list one item three
+~~~
+
+A normal paragraph followed by a list, which will confuse anyone reading the manuscript:
+
+~~~
+1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+
+
+2. list one item one
+
+3. list one item two
+
+4. list one item three
 ~~~
 
 ## Nested Lists
