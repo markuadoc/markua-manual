@@ -2384,7 +2384,7 @@ Here's the same example but with one tab for each level:
 * Baz
 ~~~
 
-If you try to nest a fifth level of nesting (or more), the Markua Processor will simply interpret the additional levels as forced newlines, and keep them at the fourth level.
+If you try to nest a fifth level of nesting (or more), the Markua Processor must simply interpret the additional levels as forced newlines, and keep them at the fourth level.
 
 ## Nesting Block Elements in List Items
 
@@ -2422,8 +2422,7 @@ You can nest block content inside numbered lists:
 
 You do not need to have blank lines after single-paragraph list items, even if there are forced linebreaks in them.
 
-
-You do need to indent.
+TODO: it would be really nice to not need to indent code blocks in list items.
 
 TODO: mixing tabs and spaces? treating tabs as 4 spaces for containment???
 
