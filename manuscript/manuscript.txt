@@ -1923,12 +1923,14 @@ Markua supports bulleted lists, numbered lists and definition lists.
 
 Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
+The bulleted and numbered lists are actually split into three types of lists: flat, nested and complex. The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of flat, nested and complex bulleted and numbered lists, which will contain examples of both. Finally, advanced numbering rules for numbered lists are specified.
+
 {#bulleted-lists}
 ## Bulleted Lists
 
-Markua lets you make a bulleted list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by 1 or more spaces or 1 tab, followed by text content. (Markua does not allow more than 1 tab here, since that's what tab stops are for.) You can't mix and match asterisks and hyphens in the same list. Here's how this looks:
+Markua lets you make a bulleted list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by one space, followed by text content. You can't mix and match asterisks and hyphens in the same list. Here's how this looks:
 
-You can build a list out of items starting with an asterisk and one space:
+You can build a bulleted list out of items starting with an asterisk and one space:
 
 ~~~
 * foo
@@ -1936,27 +1938,24 @@ You can build a list out of items starting with an asterisk and one space:
 * baz
 ~~~
 
-You can build a list out of items starting with a hyphen and one tab:
+You can build a bulleted list out of items starting with a hyphen and one space:
 
 ~~~
--	one
--	two
--	three
+- one
+- two
+- three
 ~~~
 
-Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
+Markua could have chosen only the asterisk (`*`) or the hyphen (`-`), but this would be too prescriptive.
 
-These are the specific rules for bulleted lists:
+To make a bulleted list in Markua:
 
 * Start each list item a bullet which is either an asterisk (`*`) or a hyphen (`-`).
 * You can't mix and match asterisks and hyphens in the same list.
-* 1 or more spaces or one tab is allowed after each bullet.
-* You cannot mix tabs and spaces: if a tab is used after a bullet, tabs must be used after each bullet.
-* If spaces are used after each bullet, the same number of spaces must be used after each bullet in the list.
-* A varied number of spaces or tabs or a mixture of tabs and spaces does not create a bulleted list. Instead, it creates a paragraph with line breaks inside it.
+* Only one space is allowed after each bullet. Just as with headings, there is no reason to support any other number.
 * A single element bulleted list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk or hyphen would be even stupider.
 
-In terms of style guidance, the preferred bullet type in Markua is the asterisk, and the preferred whitespace after the bullet is one space.
+In terms of style guidance, the preferred bullet type in Markua is the asterisk.
 
 {#numbered-lists}
 ## Numbered Lists
@@ -1978,11 +1977,12 @@ The following choices of numbering system are supported:
 
 Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
 
-To make a numbered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by a period or a right-parenthesis, followed by 1 or more spaces or 1 tab, followed by text content. (Again, Markua does not allow more than 1 tab here, since that's what tab stops are for.)
+To make a numbered list in Markua:
 
-Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex.
-
-Note that there are one or more spaces after the period. Unlike with a bulleted list, the number of spaces does **not** need to be the same after each number and period or parenthesis (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
+* Start two or more consecutive lines with either a consecutive or the same number, letter or Roman numeral. Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. These are discussed later.
+* Follow the number with either a period or a right-parenthesis.
+* Follow the period or parenthesis with exactly one space. Markua very deliberately does not allow more than one space following the period or right-parenthesis: if your list grows to 10 items, you should not waste time adding a space to items 1-9 to line their content up with item 10; similarly, if your list grows to 100 items you should not waste time adding yet another space to items 1-99 to line their content up with item 100. So, Markua just forbids more than one space after the period or parenthesis.
+* Follow the space with text content.
 
 This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections.
 
@@ -2002,15 +2002,7 @@ Ascending decimal numbers starting from 1, with parentheses used instead of peri
 3) baz
 ~~~
 
-Ascending decimal numbers followed by periods starting from a higher number, with enough spaces to line everything up:
-
-~~~
-9.  foo
-10. bar
-11. baz
-~~~
-
-Ascending decimal numbers followed by periods starting from a higher number, with the same number of spaces after each period:
+Ascending decimal numbers followed by periods starting from a higher number:
 
 ~~~
 9. foo
@@ -2018,15 +2010,7 @@ Ascending decimal numbers followed by periods starting from a higher number, wit
 11. baz
 ~~~
 
-Ascending decimal numbers followed by parentheses starting from a higher number, with enough spaces to line everything up:
-
-~~~
-9)  foo
-10) bar
-11) baz
-~~~
-
-Ascending decimal numbers followed by parentheses starting from a higher number, with the same number of spaces after each parenthesis:
+Ascending decimal numbers followed by parentheses starting from a higher number:
 
 ~~~
 9) foo
@@ -2077,12 +2061,20 @@ K. baz
 Ascending uppercase Roman numerals:
 
 ~~~
-I.   foo
-II.  bar
+I. foo
+II. bar
 III. baz
 ~~~
 
-## In Markua, A Single-Element Numbered List is Not a List
+Ascending lowercase Roman numerals:
+
+~~~
+i. foo
+ii. bar
+iii. baz
+~~~
+
+### In Markua, A Single-Element Numbered List is Not a List
 
 Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
 
@@ -2101,6 +2093,313 @@ The answer is simple: in Markua, **single-element numbered lists are not lists**
 So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses.
 
 This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
+
+## Flat Lists
+
+Now we turn our attention to flat, nested and complex lists, starting with the flat list.
+
+A flat list is the simplest type of bulleted or numbered list. All the examples of bulleted and numbered lists above were flat lists.
+
+Besides the formatting rules for bulleted or numbered lists, the rules for a flat list are:
+
+* It does not nest other lists.
+* There are no blank lines in list items. Each list item in a flat list is one paragraph.
+* You can add single newlines in the list items. These do not create new paragraphs; they are forced line breaks only.
+* You can insert resources in list items.
+* You must indent subsequent lines with spaces (not tabs) to line up with the content of the line above. This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
+
+If you violate any of these rules, the Markua Processor must just interpret your list as normal paragraph content with line breaks.
+
+This is a flat numbered list which contains five list items. It includes an inline code resource, a local code resource, and multiple-line list items.
+
+~~~
+This is a paragraph.
+
+1. This is the first item in the list.
+   ```ruby
+   puts "hello"
+   ```
+   This is still part of the first item in the list.
+2. This is the second item in the list.
+   {format: ruby}
+   ![Hello, World](hello.rb)
+   This is still part of the second item in the list.
+3. This is the third item in the list.
+   This is still part of the third item in the list.
+4. This is the fourth item in the list.
+   This is still part of the fourth item in the list.
+5. This is the fifth item in the list.
+
+This is a paragraph.
+~~~
+
+This is a flat bulleted list with the same complexity:
+
+~~~
+This is a paragraph.
+
+* This is the first item in the list.
+  ```ruby
+  puts "hello"
+  ```
+  This is still part of the first item in the list.
+* This is the second item in the list.
+  {format: ruby}
+  ![Hello, World](hello.rb)
+  This is still part of the second item in the list.
+* This is the third item in the list.
+  This is still part of the third item in the list.
+* This is the fourth item in the list.
+  This is still part of the fourth item in the list.
+* This is the fifth item in the list.
+
+This is a paragraph.
+~~~
+
+## Nested Lists
+
+A Nested List is the simplest type of bulleted or numbered list that supports nested lists inside list items. A nested list uses one tab per indentation level. If you use spaces, what you are creating is a Complex List, which is discussed next.
+
+Besides the formatting rules for bulleted or numbered lists, the rules for a nested list are:
+
+* It is a list which can nest other lists.
+* You must use 1 tab per indentation level. (If you use spaces, what you are creating is a Complex List, discussed next.)
+* You can't mix and match spaces and tabs for indentation in the same list.
+* There can be no blank lines in list items
+
+*
+
+* There are no blank lines in list items. Each list item in a flat list is one paragraph.
+* You can add single newlines in the list items. These do not create new paragraphs; they are forced line breaks only.
+* You can insert resources in list items.
+* You must indent subsequent lines with spaces (not tabs) to line up with the content of the line above. This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
+
+If you violate any of these rules, the Markua Processor must just interpret your list as normal paragraph content with line breaks.
+
+
+
+
+
+
+Example:
+
+~~~
+1. foo
+	a) lorem
+		i. lorem
+			- point one
+			- point two
+		ii. ipsum
+		iii. dolor
+	b) ipsum
+	c) dolor
+2. bar
+3. baz
+~~~
+
+Rules:
+- either 2-4 spaces or 1 tab per indent level (can't mix and match spaces and tabs in the same list)
+- no newlines in list items
+
+
+## Complex Lists
+
+Do we support not indenting code???
+
+Example:
+
+~~~
+This is a paragraph.
+
+1. foo
+```
+puts "hello"
+```
+2. bar
+3. baz
+
+This is a paragraph.
+~~~
+
+Complex lists contain multiple-paragraph list items, and/or block content such as resources--especially inline code resources. With these types of complex content, and with
+
+- spaces only, no tabs for nested lists or for aligning block elements
+- *, space, content
+- 1. space, content
+- to add subsequent paragraphs or block elements (incl. inline code resources) to the list item, start with spaces >= beginning of content
+- the amount of space before the delimiters (one of `` ` ~ - _ ``) is removed from the lines of the code block
+
+1. foo
+
+2. bar
+
+   lorem
+
+   1. foo
+   2. bar
+
+   ipsum
+
+
+
+# xxx
+
+1. Tab lists: tabs are used to line up nesting levels, then you add spaces to align content within nesting level
+  a) *, space, content
+  b) 1. space, content
+  c) to add subsequent paragraphs or block elements to the list item, \t only (same number as indented by, plus either one tab or >= 2 spaces)
+
+2. Spaces lists:
+  a) *, space, content
+  b) 1. space, content
+  c) to add subsequent paragraphs or block elements (incl. inline code resources) to the list item, spaces only (>= beginning of content)
+  d) the amount of space before the delimiters (one of `` ` ~ - _ ``) is removed from the lines of the code block
+
+
+1. Foo
+
+	Bar
+
+	1. Nested Foo
+
+		Bar
+
+
+
+* Foo
+* Bar
+	* Foo
+	  Bar
+	* Bar
+	  Bar
+	* Bar
+
+
+
+1. foo
+  bar
+
+
+
+
+1. foo
+   bar
+10. lorem
+
+    10. a
+
+        2. b
+
+    ipsum
+
+
+
+
+
+~~~
+1. foo
+
+  2. bar
+
+    3. baz
+
+   ```
+   puts "foo"
+   ```
+
+2. bar
+
+3. baz
+~~~
+
+
+
+3. Content Nested
+
+
+
+
+
+
+
+
+
+* foo
+  * foo
+    * foo
+    * foo
+  * foo
+* bar
+* baz
+
+
+
+i. foo
+
+ii. foo
+
+iii. foo
+
+  bar
+
+  i. foo
+
+  ii. foo
+
+      foo
+
+iv. foo
+
+
+
+
+
+
+1. foo
+
+10. foo
+
+1. bar
+
+  1. baz
+
+  100. bar
+
+    100. bar
+
+    foo
+
+    1. lorem
+
+      1. ipsum
+
+
+
+
+
+1. EITHER ALL tabs OR ALL spaces before the * or 1. delimiters and to indent multiple-paragraph list items.
+
+2.
+
+To line up tabs,
+
+
+
+1. Foo
+
+	Bar
+
+
+
+2. nesting: blockquote, resources / figures
+
+
+
+
+
+
+
+
 
 ## Numbered List Numbering Rules
 
@@ -2157,7 +2456,7 @@ Speaking of clock faces, I have bad news for fans of watches and antique clocks:
 * The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
 * The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
 
-It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
+It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-Roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
 
 In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
 
@@ -2464,6 +2763,7 @@ For example, consider a bulleted list (not legal Markua) which looked like this:
   * Bar
     * Baz
       * Lorem
+    * Tab
 	* Tab
         * Ipsum
           * Dolor
@@ -2515,6 +2815,10 @@ This is the numbered list version:
 
   1. Bar
 
+  auoeaoeu
+
+    Bar
+
     1. Baz
 
       1. Lorem
@@ -2529,6 +2833,20 @@ This is the numbered list version:
 If we treated the tab characters as just whitespace used to indent ... TODO
 
 
+1. Foo
+	1. Lorem
+
+		Foo
+
+		Foo
+
+		Foo
+
+	2. Ipsum
+2. Bar
+3. Baz
+
+
 BUT - you never need to know whether some whitespace was produced by spaces or tabs. The effect must always be the same.
 
 isn't true...
@@ -2538,6 +2856,9 @@ TODO - remove this? - Here's the same example but with one tab for each level:
 ~~~
 * Foo
 	1. One
+
+  bar
+
 	2. Two
 		a. This is 2a
 			- point one
@@ -2558,6 +2879,21 @@ If you try to nest a fifth level of nesting (or more), the Markua Processor must
 Nested lists are just an example of nesting block elements inside list items.
 
 Other block elements such as figures can also be inserted nested inside list items. This is true for both single paragraph list items (with no blank lines between them) and multiple-paragraph list items (with a single blank line between each list item).
+
+
+
+
+
+
+* Foo
+
+      * Lorem
+
+
+
+
+
+
 
 ### Single-Paragraph List Items
 
@@ -2635,6 +2971,13 @@ You can nest block content and have multiple-paragraph list items inside numbere
 
 Note that with both single and multiple paragraph list items, for either numbered or bulleted lists, you need to indent the block element by at least the number of spaces or tabs to line it up exactly with the start of the list item that contains it. So, if you do `* Foo`, any block element must be indented by at least two spaces; if you do `*  Foo`, any block element must be indented by at least three spaces, etc.
 
+
+1. This is paragraph 1 in the first list item in a top-level list..
+
+	This is paragraph 2 in the first list item in a top-level list..
+
+2. This is paragraph 1 in the second list item in a top-level list..
+
 You can also use a tab to indent subsequent paragraphs in a multiple-paragraph list item.
 
 ~~~
@@ -2704,7 +3047,6 @@ Specifically, the following is not ok, and will result in the start of a new par
 
 TODO - this sucks. Counterintuitive.
 
-~~~
 1. foo
 2. bar
   1. foo
@@ -2747,10 +3089,6 @@ TODO: mixing tabs and spaces? treating tabs as 4 spaces for containment???
 TODO: must you really indent by at least the same number of spaces? 10. Foo would require a 3-space indent, which is terrible.
 
 The code block parsing strips the number of spaces that the beginning of the block was indented by.
-
-
-
-
 
 This is ok:
 
