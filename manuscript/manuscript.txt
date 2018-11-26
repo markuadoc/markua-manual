@@ -1720,17 +1720,18 @@ So, with poetry taken care of, the question of prose remains.
 
 There are the four principles of Markua's whitespace handling:
 
-1. No invisible formatting is allowed. If you can't see it, it has no effect.
+1. You must always be able to look at a Markua document and know exactly what is produced. No invisible formatting is allowed. If you can't see it, it has no effect.
 2. Paragraphs and sentences should be handled consistently, regardless of indentation and spaces after periods.
 3. Manual whitespace formatting should be discouraged.
 4. Newlines are newlines; spaces are spaces. These are different things.
 
 These simple goals have far-reaching consequences:
 
-1. Whitespace at the end of a line or file is ignored.
-2. It doesn't matter how many spaces you add after a sentence.
-3. All consecutive newlines after the second newline are ignored.
-4. You can't manually wrap text with newlines being used as though they are spaces, but you can add forced line breaks without hacks.
+1. You never need to know whether some whitespace was produced by spaces or tabs. The effect must always be the same.
+2. Whitespace at the end of a line or file is ignored.
+3. It doesn't matter how many spaces you add after a sentence.
+4. All consecutive blank lines after the first blank line are ignored when separating paragraphs, and all consecutive blank lines after the second blank line are ignored when separating lists.
+5. You can't manually wrap text with newlines being used as though they are spaces, but you can add forced line breaks without hacks.
 
 Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
 
@@ -1831,6 +1832,10 @@ This would be a lot easier to determine if all authors typed two spaces at the e
 However, many authors type one space at the end of their sentences. So, a Markua Processor should use heuristics to determine what is the end of a sentence and what is not.
 
 Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
+
+### Spaces and Tabs Can Be Used Interchangably In Multiple-Paragraph List Items
+
+Lists are discussed next. This is just to emphasize that you never need to know whether some whitespace was produced by spaces or tabs. Again, the effect must be the same.
 
 # Lists
 
