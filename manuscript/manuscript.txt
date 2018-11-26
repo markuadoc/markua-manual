@@ -1897,7 +1897,7 @@ To make a numbered list in Markua, you start one or more consecutive lines with 
 
 Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex.
 
-Note that there are one or more spaces after the period. Unlike with a bulleted list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
+Note that there are one or more spaces after the period. Unlike with a bulleted list, the number of spaces does **not** need to be the same after each number and period or parenthesis (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
 
 This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections.
 
@@ -1917,12 +1917,36 @@ Ascending decimal numbers starting from 1, with parentheses used instead of peri
 3) baz
 ~~~
 
-Ascending decimal numbers starting from a higher number:
+Ascending decimal numbers followed by periods starting from a higher number, with enough spaces to line everything up:
 
 ~~~
 9.  foo
 10. bar
 11. baz
+~~~
+
+Ascending decimal numbers followed by periods starting from a higher number, with the same number of spaces after each period:
+
+~~~
+9. foo
+10. bar
+11. baz
+~~~
+
+Ascending decimal numbers followed by parentheses starting from a higher number, with enough spaces to line everything up:
+
+~~~
+9)  foo
+10) bar
+11) baz
+~~~
+
+Ascending decimal numbers followed by parentheses starting from a higher number, with the same number of spaces after each parenthesis:
+
+~~~
+9) foo
+10) bar
+11) baz
 ~~~
 
 Descending decimal numbers:
@@ -1973,50 +1997,7 @@ II.  bar
 III. baz
 ~~~
 
-The full set of numbering rules for numbered lists are specified in an [appendix](#numbered-list-numbering-rules). However, it's important to emphasize what happens with single-element numbered lists.
-
-### Blank Lines in Lists
-
-You can optionally...
-
-One list:
-
-~~~
-* foo
-* bar
-* baz
-~~~
-
-One list:
-
-~~~
-* foo
-
-* bar
-
-* baz
-~~~
-
-Two lists:
-
-~~~
-* foo
-
-
-* bar
-
-* baz
-~~~
-
-Two blank lines is a new list.
-
-We ignore leading whitespace for paragraphs.
-
-The code block parsing strips the number of spaces that the beginning of the block was indented by.
-
-
-
-### In Markua, A Single-Element Numbered List is Not a List
+## In Markua, A Single-Element Numbered List is Not a List
 
 Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
 
@@ -2036,6 +2017,67 @@ So, in Markua, the automatic creation of a numbered list only happens if you hav
 
 This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
+## Numbered List Numbering Rules
+
+There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
+
+If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
+
+In theory, Markua supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive number, either increasing or decreasing.
+2. Every item in the list begins with the same number.
+
+This is not actually quite true.
+
+See, the notion of "consecutive" is easy to explain and to check for decimal numbers, either in increasing or decreasing order. `1, 2, 3, ...`, `456, 457, 458, ...`, or `5, 4, 3` are all easily verified as consecutive, both by humans and computers.
+
+However, Markua also supports numbered lists using uppercase and lowercase alphabetical numbering, as well as uppercase and lowercase Roman numeral numbering, and in increasing or decreasing order.
+
+In the case of alphabetical numbering, checking "consecutive" is harder. It's relatively straightforward for the first 26 items, but then all bets are off. In case you're curious, here is the sequence used in HTML for increasing alphabetical numbering:
+
+`a, b, ..., z, aa, ab, ..., az, ba, bb, ... bz, za, zb, ..., zz, aaa, aab, ..., aaz, aba, abb, ...`
+
+In terms of Roman numerals, it's even worse. I'm sure that someone in a Classics department (or in the NFL) knows the algorithm by heart, but I don't.
+
+So, what are Markua authors and implementors of Markua Processors to do?
+
+Markua makes this simpler by specifying the following rules.
+
+Markua *actually* supports creating a numbered list based on a different set of conditions based on the numbering type.
+
+For decimal numbers, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive number, either increasing or decreasing.
+2. Every item in the list begins with `1.`
+
+For uppercase and lowercase alphabetical numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase, or `Z.` for uppercase. (This way, implementors of Markua Processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
+2. Every item in the list begins with `a.` for lowercase letters or `A.` for uppercase letters.
+
+These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single-element list beginning with "AA" instead!
+
+For uppercase and lowercase Roman numeral numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive Roman numeral, followed by a period, and the lettering does not extend past `xii.` for lowercase Roman numerals or `XII.` for uppercase Roman numerals. To be clear, this means that the only valid consecutive lowercase Roman numerals are `i, ii, iii, iv, v, vi, vii, viii, ix, x, xi, xii`, and that the only valid consecutive uppercase Roman numerals are `I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII`.
+2. Every item in the list begins with `i.` for lowercase Roman numerals or `I.` for uppercase Roman numerals.
+
+The combination of the rules for Roman numeral numbering means that you can have an arbitrarily long Roman numeral list starting from `i.` or `I.`, but that implementors of Markua Processors don't need to write code to figure out whether `MCMLXXV` is a valid Roman numeral, and what the consecutive Roman numeral sequence after it is.
+
+If you're wondering why I picked `xii` and `XII` for the last consecutive lowercase and uppercase Roman numerals to respect: this is Roman numeral 12, and the main usage of Roman numerals in modern life is in clock faces.
+
+Speaking of clock faces, I have bad news for fans of watches and antique clocks:
+
+* The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
+* The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
+
+It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
+
+In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
+
+If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
+
 {#multi-paragraph-list-items}
 ## Multi-Paragraph List Items
 
@@ -2049,30 +2091,212 @@ If lists were simple, they would contain be a bunch of simple one-line list item
 
 However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this. If a list is going to contain list items with multiple paragraphs, then there should be blank lines between each list item.
 
-As with Markdown, every paragraph in a list item after the first one must be indented by the appropriate number of spaces (or one tab) to line up with the first paragraph. This lets the Markua Processor know that the list is not over, but is instead being continued.
+As with Markdown, every paragraph in a list item after the first one must be indented by at least as many spaces or tabs to line up with the first paragraph of the list item. This lets the Markua Processor know that the list is not over, but is instead being continued.
 
 The following is legal Markdown and legal Markua:
 
 ~~~
 Here's a paragraph before the list.
 
-1.  This is the first paragraph in the first list item. Yay!
+1. This is the first paragraph in the first list item. Yay!
 
-    This is a second paragraph in the first list item.
+   This is a second paragraph in the first list item.
 
-2.  The second list item is simple.
+2. The second list item is simple.
 
-3.  The third list item has three paragraphs. This is the first paragraph.
-    This is still part of the first paragraph.
+3. The third list item has three paragraphs. This is the first paragraph.
+   This is still part of the first paragraph.
 
-    Here's the second paragraph in the third list item.
+   Here's the second paragraph in the third list item.
 
-    Here's the third paragraph in the third list item.
+   Here's the third paragraph in the third list item.
 
 Here's a paragraph after the list.
 ~~~
 
 Just as with normal non-list-item text, a single newline functions as a forced line break within the list item in question. As with any paragraph, any leading whitespace after the line break is ignored, so you should line up your list item paragraphs.
+
+Note that Markua ignores leading whitespace for paragraphs. Because of this, you can add *extra* whitespace, which will be ignored. The following example produces identical output to the preceding one:
+
+~~~
+Here's a paragraph before the list.
+
+1. This is the first paragraph in the first list item. Yay!
+
+    This is a second paragraph in the first list item.
+
+2. The second list item is simple.
+
+3. The third list item has three paragraphs. This is the first paragraph.
+      This is still part of the first paragraph.
+
+         Here's the second paragraph in the third list item.
+
+            Here's the third paragraph in the third list item.
+
+Here's a paragraph after the list.
+~~~
+
+Don't write Markua which looks like this, however. Seriously.
+
+### Blank Lines in Lists
+
+It is legal to add single blank lines in between list items. The rule for blank lines between list items is simple, but different from Markdown:
+
+One blank line continues the list; two blank lines ends the list and starts a new list.
+
+There are a few good reasons for this:
+
+1. Since paragraphs are separated by blank lines, and since lists support multiple-paragraph list items, you really want to be able to add a blank line at the end of a multiple-paragraph list item for symmetry. Otherwise, you're stuck writing something ugly like this:
+
+   ~~~
+   1. foo
+
+      bar
+   2. baz
+   ~~~
+
+   It just looks wrong to have more internal space in a list item than between list items, so the Markua spec should not require it to be the case. So, Markua supports the following preferred way:
+
+   ~~~
+   1. foo
+
+      bar
+
+   2. baz
+   ~~~
+
+2. If you can add a blank line at the end of a multiple-paragraph list item, you should be allowed to add a blank line at the end of a single-paragraph list item.
+
+3. There is no reason to be able to add two blank lines in between list items. However, there are reasons to wish to have two lists in a row in a document. So, two blank lines in between two list items stops the previous list and starts a new list. Note, however, that two blank lines between single-element numbered lists would not produce two numbered lists, since, again, in Markua **single-element numbered lists are not lists**.
+
+This all sounds a bit complex, but it actually results in behaviour which is as unsurprising as possible to the author. This is shown by the following examples:
+
+This is one list:
+
+~~~
+* list one item one
+* list one item two
+* list one item three
+~~~
+
+This is one list:
+
+~~~
+* list one item one
+
+* list one item two
+
+* list one item three
+~~~
+
+These are two lists:
+
+~~~
+* list one item one
+* list one item two
+* list one item three
+
+
+* list two item one
+* list two item two
+* list two item three
+~~~
+
+These are two lists:
+
+~~~
+* list one item one
+
+* list one item two
+
+* list one item three
+
+
+* list two item one
+
+* list two item two
+
+* list two item three
+~~~
+
+These are two lists:
+
+~~~
+* list one item one
+
+
+* list two item one
+* list two item two
+* list two item three
+~~~
+
+These are two lists:
+
+~~~
+* list one item one
+
+
+* list two item one
+
+* list two item two
+
+* list two item three
+~~~
+
+These are two lists:
+
+~~~
+1. list one item one
+2. list one item two
+3. list one item three
+
+
+1. list two item one
+2. list two item two
+3. list two item three
+~~~
+
+These are two lists:
+
+~~~
+1. list one item one
+
+2. list one item two
+
+3. list one item three
+
+
+1. list two item one
+
+2. list two item two
+
+3. list two item three
+~~~
+
+A normal paragraph followed by a list:
+
+~~~
+1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+
+
+1. list one item one
+2. list one item two
+3. list one item three
+~~~
+
+A normal paragraph followed by a list:
+
+~~~
+1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+
+
+1. list one item one
+
+2. list one item two
+
+3. list one item three
+~~~
 
 ## Nested Lists
 
@@ -2174,6 +2398,19 @@ You can nest block content inside numbered lists:
 
 You do not need to have blank lines after single-paragraph list items, even if there are forced linebreaks in them.
 
+
+You do need to indent.
+
+TODO: mixing tabs and spaces? treating tabs as 4 spaces for containment???
+
+TODO: must you really indent by at least the same number of spaces? 10. Foo would require a 3-space indent, which is terrible.
+
+The code block parsing strips the number of spaces that the beginning of the block was indented by.
+
+
+
+
+
 This is ok:
 
 ~~~
@@ -2259,7 +2496,13 @@ You can nest block content and have multiple-paragraph list items inside numbere
 3. Baz
 ~~~
 
-Note that with both single and multiple paragraph list items, for either numbered or bulleted lists, you need to indent the block element by at least the number of spaces (or one tab) to line it up exactly with the start of the list item that contains it. So, if you do `* Foo`, any block element must be indented by at least two spaces; if you do `*  Foo`, any block element must be indented by at least three spaces, etc. Note that tabs can only be used if you do a tab after the period; if you do a space after the period, you must use the correct number of spaces to line it up. We cannot tell how big your tab, so you can never mix tabs and spaces.
+Note that with both single and multiple paragraph list items, for either numbered or bulleted lists, you need to indent the block element by at least the number of spaces or tabs to line it up exactly with the start of the list item that contains it. So, if you do `* Foo`, any block element must be indented by at least two spaces; if you do `*  Foo`, any block element must be indented by at least three spaces, etc.
+
+TODO: You can also use a tab to indent subsequent list items. A tab is always parsed as 4 spaces.
+
+The reason to support mixing tabs and spaces is simple: basically no author types a tab key after the period in a numbered list or the asterisk or hyphen in a bulleted list, but many authors do type a tab key to indent things. So, the primary use case of tabs involves mixing tabs and spaces, i.e. using one or two spaces after the number or bullet in the first paragraph of each list item, and using tabs to indent any subsequent subsequent paragraphs in a multiple-paragraph list item.
+
+Banning the most common use case of something because it does not seem consistent just to make things nicer on implementors of Markua Processors is a bad idea.
 
 Specifically, the following is ok:
 
@@ -4377,68 +4620,6 @@ Besides differences with Markdown in general, Markua also has a number of specif
 9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
 10. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
-
-{#numbered-list-numbering-rules}
-## Numbered List Numbering Rules
-
-There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
-
-If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
-
-In theory, Markua supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive number, either increasing or decreasing.
-2. Every item in the list begins with the same number.
-
-This is not actually quite true.
-
-See, the notion of "consecutive" is easy to explain and to check for decimal numbers, either in increasing or decreasing order. `1, 2, 3, ...`, `456, 457, 458, ...`, or `5, 4, 3` are all easily verified as consecutive, both by humans and computers.
-
-However, Markua also supports numbered lists using uppercase and lowercase alphabetical numbering, as well as uppercase and lowercase Roman numeral numbering, and in increasing or decreasing order.
-
-In the case of alphabetical numbering, checking "consecutive" is harder. It's relatively straightforward for the first 26 items, but then all bets are off. In case you're curious, here is the sequence used in HTML for increasing alphabetical numbering:
-
-`a, b, ..., z, aa, ab, ..., az, ba, bb, ... bz, za, zb, ..., zz, aaa, aab, ..., aaz, aba, abb, ...`
-
-In terms of Roman numerals, it's even worse. I'm sure that someone in a Classics department (or in the NFL) knows the algorithm by heart, but I don't.
-
-So, what are Markua authors and implementors of Markua Processors to do?
-
-Markua makes this simpler by specifying the following rules.
-
-Markua *actually* supports creating a numbered list based on a different set of conditions based on the numbering type.
-
-For decimal numbers, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive number, either increasing or decreasing.
-2. Every item in the list begins with `1.`
-
-For uppercase and lowercase alphabetical numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase, or `Z.` for uppercase. (This way, implementors of Markua Processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
-2. Every item in the list begins with `a.` for lowercase letters or `A.` for uppercase letters.
-
-These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single-element list beginning with "AA" instead!
-
-For uppercase and lowercase Roman numeral numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive Roman numeral, followed by a period, and the lettering does not extend past `xii.` for lowercase Roman numerals or `XII.` for uppercase Roman numerals. To be clear, this means that the only valid consecutive lowercase Roman numerals are `i, ii, iii, iv, v, vi, vii, viii, ix, x, xi, xii`, and that the only valid consecutive uppercase Roman numerals are `I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII`.
-2. Every item in the list begins with `i.` for lowercase Roman numerals or `I.` for uppercase Roman numerals.
-
-The combination of the rules for Roman numeral numbering means that you can have an arbitrarily long Roman numeral list starting from `i.` or `I.`, but that implementors of Markua Processors don't need to write code to figure out whether `MCMLXXV` is a valid Roman numeral, and what the consecutive Roman numeral sequence after it is.
-
-If you're wondering why I picked `xii` and `XII` for the last consecutive lowercase and uppercase Roman numerals to respect: this is Roman numeral 12, and the main usage of Roman numerals in modern life is in clock faces.
-
-Speaking of clock faces, I have bad news for fans of watches and antique clocks:
-
-* The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
-* The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
-
-It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
-
-In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
-
-If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
 {#concatenating-details}
 ## Example of Why One Blank Line Is Added When Concatenating Manuscript Files
