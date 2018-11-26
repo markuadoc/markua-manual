@@ -2521,7 +2521,17 @@ You can nest block content and have multiple-paragraph list items inside numbere
 
 Note that with both single and multiple paragraph list items, for either numbered or bulleted lists, you need to indent the block element by at least the number of spaces or tabs to line it up exactly with the start of the list item that contains it. So, if you do `* Foo`, any block element must be indented by at least two spaces; if you do `*  Foo`, any block element must be indented by at least three spaces, etc.
 
-TODO: You can also use a tab to indent subsequent list items. A tab is always parsed as 4 spaces.
+TODO: You can also use a tab to indent subsequent list items. Tabs which are used to indent always parsed as 4 spaces (??? - or more?)
+
+~~~
+1. This is paragraph 1 in the first list item.
+
+    This is paragraph 2 in the first list item.
+
+2. Baz
+
+   1. ...
+~~~
 
 The reason to support mixing tabs and spaces is simple: basically no author types a tab key after the period in a numbered list or the asterisk or hyphen in a bulleted list, but many authors do type a tab key to indent things. So, the primary use case of tabs involves mixing tabs and spaces, i.e. using one or two spaces after the number or bullet in the first paragraph of each list item, and using tabs to indent any subsequent subsequent paragraphs in a multiple-paragraph list item.
 
@@ -2541,6 +2551,8 @@ Specifically, the following is ok:
 
 Specifically, the following is not ok, and will result in the start of a new paragraph with "This is paragraph 2 in the first list item.":
 
+TODO - this sucks. Counterintuitive.
+
 ~~~
 9. This is paragraph 1 in the first list item.
 
@@ -2551,8 +2563,23 @@ Specifically, the following is not ok, and will result in the start of a new par
    This is paragraph 2 in the second list item.
 ~~~
 
-Also, at the end of a multiple-paragraph list item, there must be a blank line before the start of the next numbered or bulleted list item.
+TODO - even if tabs were parsed as 4 spaces, you'd get cases where this wasn't "enough" spaces to line it up:
 
+~~~
+12345. This is paragraph 1 in the first list item.
+
+       This is paragraph 2 in the first list item.
+
+12346. This is paragraph 1 in the second list item.
+
+    This would like to be paragraph 2 in the second list item.
+~~~
+
+TODO - because of this, it would be best to just say that any indentation continues?
+
+
+
+Also, at the end of a multiple-paragraph list item, there must be a blank line before the start of the next numbered or bulleted list item.
 
 ~~~
 9. This is paragraph 1 in the first list item.
