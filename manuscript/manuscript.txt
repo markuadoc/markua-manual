@@ -1919,7 +1919,7 @@ Markua supports bulleted lists, numbered lists and definition lists.
 
 Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
-The bulleted and numbered lists are actually split into three types of lists: flat, tabbed and complex. The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of flat, tabbed and complex bulleted and numbered lists, which will contain examples of both. Finally, advanced numbering rules for numbered lists are specified.
+The bulleted and numbered lists are actually split into two types of lists: simple and complex. The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of simple and complex bulleted and numbered lists, which will contain examples of both. Finally, advanced numbering rules for numbered lists are specified.
 
 {#bulleted-lists}
 ## Bulleted Lists
@@ -2090,300 +2090,9 @@ So, in Markua, the automatic creation of a numbered list only happens if you hav
 
 This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
-## Flat Lists
+### Numbered List Numbering Rules
 
-Now we turn our attention to flat, tabbed and complex lists, starting with the flat list.
-
-A flat list is the simplest type of bulleted or numbered list. All the examples of bulleted and numbered lists above were flat lists.
-
-Besides the formatting rules for bulleted or numbered lists, the rules for a flat list are:
-
-* It does not nest other lists.
-* There are no blank lines in list items. Each list item in a flat list is one paragraph.
-* You can add single newlines in the list items. These do not create new paragraphs; they are forced line breaks only.
-* You can insert resources in list items.
-* You must indent subsequent lines with spaces (not tabs) to line up with the content of the line above. This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
-
-If you violate any of these rules, the Markua Processor must just interpret your list as normal paragraph content with line breaks.
-
-This is a flat numbered list which contains five list items. It includes an inline code resource, a local code resource, and multiple-line list items.
-
-~~~
-This is a paragraph.
-
-1. This is the first item in the list.
-   ```ruby
-   puts "hello"
-   ```
-   This is still part of the first item in the list.
-2. This is the second item in the list.
-   {format: ruby}
-   ![Hello, World](hello.rb)
-   This is still part of the second item in the list.
-3. This is the third item in the list.
-   This is still part of the third item in the list.
-4. This is the fourth item in the list.
-   This is still part of the fourth item in the list.
-5. This is the fifth item in the list.
-
-This is a paragraph.
-~~~
-
-This is a flat bulleted list with the same complexity:
-
-~~~
-This is a paragraph.
-
-* This is the first item in the list.
-  ```ruby
-  puts "hello"
-  ```
-  This is still part of the first item in the list.
-* This is the second item in the list.
-  {format: ruby}
-  ![Hello, World](hello.rb)
-  This is still part of the second item in the list.
-* This is the third item in the list.
-  This is still part of the third item in the list.
-* This is the fourth item in the list.
-  This is still part of the fourth item in the list.
-* This is the fifth item in the list.
-
-This is a paragraph.
-~~~
-
-## Tabbed Lists
-
-A tabbed list is the simplest type of bulleted or numbered list that supports lists nested inside list items. A tabbed list uses one tab per indentation level. If you use spaces for indentation, what you are creating is a complex list, which is discussed next.
-
-Besides the formatting rules for bulleted or numbered lists, the rules for a tabbed list are:
-
-* It is a list which can nest other lists.
-* You must use exactly one tab per indentation level.
-* You cannot use spaces to indent list items.
-* Each list item in a tabbed list is one paragraph.
-* All list items must fit one one line. Not only can there be no blank lines in list items, there can be no newlines at all.
-* You cannot insert resources in list items. The reason for this is that you would have to use tabs to line them up, and this would not line up nicely with the content of the list items.
-
-If you violate any of these rules, the Markua Processor must just interpret your list as normal paragraph content with line breaks.
-
-This is an example of a tabbed list:
-
-~~~
-1. foo
-	a) lorem
-		i. unus
-			- one
-			- two
-			- three
-		ii. duo
-		iii. tres
-	b) ipsum
-	c) dolor
-2. bar
-3. baz
-~~~
-
-## Complex Lists
-
-Do we support not indenting code???
-
-Example:
-
-~~~
-This is a paragraph.
-
-1. foo
-```
-puts "hello"
-```
-2. bar
-3. baz
-
-This is a paragraph.
-~~~
-
-Complex lists contain multiple-paragraph list items, and/or block content such as resources--especially inline code resources. With these types of complex content, and with
-
-- spaces only, no tabs for tabbed lists or for aligning block elements
-- *, space, content
-- 1. space, content
-- to add subsequent paragraphs or block elements (incl. inline code resources) to the list item, start with spaces >= beginning of content
-- the amount of space before the delimiters (one of `` ` ~ - _ ``) is removed from the lines of the code block
-
-1. foo
-
-2. bar
-
-   lorem
-
-   1. foo
-   2. bar
-
-   ipsum
-
-
-
-# xxx
-
-1. Tab lists: tabs are used to line up nesting levels, then you add spaces to align content within nesting level
-  a) *, space, content
-  b) 1. space, content
-  c) to add subsequent paragraphs or block elements to the list item, \t only (same number as indented by, plus either one tab or >= 2 spaces)
-
-2. Spaces lists:
-  a) *, space, content
-  b) 1. space, content
-  c) to add subsequent paragraphs or block elements (incl. inline code resources) to the list item, spaces only (>= beginning of content)
-  d) the amount of space before the delimiters (one of `` ` ~ - _ ``) is removed from the lines of the code block
-
-
-1. Foo
-
-	Bar
-
-	1. Nested Foo
-
-		Bar
-
-
-
-* Foo
-* Bar
-	* Foo
-	  Bar
-	* Bar
-	  Bar
-	* Bar
-
-
-
-1. foo
-  bar
-
-
-
-
-1. foo
-   bar
-10. lorem
-
-    10. a
-
-        2. b
-
-    ipsum
-
-
-
-
-
-~~~
-1. foo
-
-  2. bar
-
-    3. baz
-
-   ```
-   puts "foo"
-   ```
-
-2. bar
-
-3. baz
-~~~
-
-
-
-3. Content Nested
-
-
-
-
-
-
-
-
-
-* foo
-  * foo
-    * foo
-    * foo
-  * foo
-* bar
-* baz
-
-
-
-i. foo
-
-ii. foo
-
-iii. foo
-
-  bar
-
-  i. foo
-
-  ii. foo
-
-      foo
-
-iv. foo
-
-
-
-
-
-
-1. foo
-
-10. foo
-
-1. bar
-
-  1. baz
-
-  100. bar
-
-    100. bar
-
-    foo
-
-    1. lorem
-
-      1. ipsum
-
-
-
-
-
-1. EITHER ALL tabs OR ALL spaces before the * or 1. delimiters and to indent multiple-paragraph list items.
-
-2.
-
-To line up tabs,
-
-
-
-1. Foo
-
-	Bar
-
-
-
-2. nesting: blockquote, resources / figures
-
-
-
-
-
-
-
-
-
-## Numbered List Numbering Rules
+*This section is highly technical, and can be skipped or quickly skimmed by almost all authors. It's probably only interesting to someone writing a Markua Processor.*
 
 There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
 
@@ -2444,22 +2153,238 @@ In Markua, list numbers must **all** either be **consecutive**, given the type o
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
-{#multi-paragraph-list-items}
-## Multi-Paragraph List Items
+## Simple Lists
 
-If lists were simple, they would contain be a bunch of simple one-line list items like:
+Both bulleted and numbered lists can either be simple lists or complex lists. Whereas bulleted and numbered lists were all about the list delimiter, simple and complex lists are all about the indentation and newlines. Yes, this distinction comes down to the ancient computer science debate of tabs versus spaces.
+
+A simple list uses one tab per indentation level. If you use spaces for indentation, what you are creating is a complex list, which is discussed next.
+
+Besides the formatting rules for bulleted or numbered lists, the rules for a simple list are:
+
+* There are no newlines in list items. Each list item in a simple list is one paragraph with no forced line breaks or blank lines.
+* You cannot insert resources in list items. These are inserted after forced line breaks or blank lines, both of which require newlines, and there are no newlines in list items.
+* There is a maximum of **four** levels of nesting of lists, including the outermost list. (So, you can have three levels of nested lists under each outermost list item.)
+* The first indentation level is no indentation: it is at the left margin.
+* You must use exactly one tab per nested indentation level.  (So, the number of tabs you can have is 0, 1, 2 or 3.)
+* You cannot use spaces to indent list items.
+
+All the examples of bulleted and numbered lists above were flat lists, which is just a simple list with every item at the outermost level.
+
+This is an example of a simple list which has the maximum number (four) of levels of nested list:
 
 ~~~
-* This is simple.
-* So is this.
-* This too!
+1. foo
+	a) lorem
+		i. unus
+			- one
+			- two
+			- three
+		ii. duo
+		iii. tres
+	b) ipsum
+	c) dolor
+2. bar
+3. baz
 ~~~
 
-However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this. If a list is going to contain list items with multiple paragraphs, then there should be blank lines between each list item.
+## Complex Lists
 
-As with Markdown, every paragraph in a list item after the first one must be indented by at least as many spaces or tabs to line up with the first paragraph of the list item. This lets the Markua Processor know that the list is not over, but is instead being continued.
+Whereas simple lists use tabs for indentation and cannot have newlines within list items, a complex list uses spaces for indentation levels and can have newlines within list items.
 
-The following is legal Markdown and legal Markua:
+Besides the formatting rules for bulleted or numbered lists, the rules for a complex list are:
+
+* Each list item in a complex list can be one or more paragraphs, and each paragraph can contain forced line breaks. Specifically, there can be forced line breaks (formed by single newlines) and blank lines (formed by exactly two consecutive newlines) in list items.
+* You can insert resources in list items. These are inserted after forced line breaks or blank lines.
+* After any forced line break or blank line, the content must be lined up with the content in the above line using the appropriate number of spaces (not tabs). This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
+* There is a maximum of **four** levels of nesting of lists, including the outermost list. So, you can have three levels of nested lists under each outermost list item.
+* The first indentation level is no indentation: it is at the left margin.
+* You must use at least 2 spaces per indentation level. The amount of indentation inside a list item is not arbitrary; it is completely determined by how many spaces you need to line up with the content in the first line of the list item.
+* You cannot use tabs to indent list items or line up content in list items.
+
+As an aside, flat lists are also a complex list with every item at the outermost level. (A flat list is a special type of list which conforms to the rules for both a simple list and a complex list.)
+
+If you violate the rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal paragraph content with line breaks.
+
+A complex list can do everything a simple list can do. This is a complex list which is the equivalent of the nested list above:
+
+~~~
+1. foo
+   a) lorem
+      i. unus
+         - one
+         - two
+         - three
+      ii. duo
+      iii. tres
+   b) ipsum
+   c) dolor
+2. bar
+3. baz
+~~~
+
+However, a complex list can a lot more as well.
+
+You can add optional blank lines between nested lists, just for readability:
+
+~~~
+1. foo
+
+   a) lorem
+      i. unus
+         - one
+         - two
+         - three
+      ii. duo
+      iii. tres
+
+   b) ipsum
+
+   c) dolor
+
+2. bar
+
+3. baz
+~~~
+
+You can make multiple paragraph list items using blank lines, and add forced line breaks using single newlines:
+
+~~~
+1. This is the first paragraph in the first item in the list.
+
+   This is the second paragraph in the first item in the list. It is followed by a nested list.
+
+   a) lorem
+      i. unus
+         - This is part of the first list item in a nested list.
+	   This is still part of the first list item in a nested list, with a forced line break.
+         - two
+         - three
+      ii. duo
+      iii. tres
+
+   b) ipsum
+
+   c) dolor
+
+2. bar
+
+3. baz
+~~~
+
+Note that the amount of space to indent is determined by the content, and that is determined by the width of the number:
+
+~~~
+9. This is the first item in the list.
+   This is still part of the first item in the list.
+   a) lorem
+   b) ipsum
+   c) dolor
+10. This is the second item in the list.
+    This is still part of the second item in the list.
+    a) lorem
+    b) ipsum
+    c) dolor
+~~~
+
+This is a numbered list which contains five list items. It includes an inline code resource, a local code resource, and multiple-line list items:
+
+~~~
+1. This is part of the first item in the list.
+   ```ruby
+   puts "hello"
+   ```
+   This is still part of the first item in the list.
+2. This is the second item in the list.
+   {format: ruby}
+   ![Hello, World](hello.rb)
+   This is still part of the second item in the list.
+3. This is the third item in the list.
+   This is still part of the third item in the list.
+4. This is the fourth item in the list.
+   This is still part of the fourth item in the list.
+5. This is the fifth item in the list.
+~~~
+
+This is a bulleted list with the same complexity:
+
+~~~
+* This is part of the first item in the list.
+  ```ruby
+  puts "hello"
+  ```
+  This is still part of the first item in the list.
+* This is the second item in the list.
+  {format: ruby}
+  ![Hello, World](hello.rb)
+  This is still part of the second item in the list.
+* This is the third item in the list.
+  This is still part of the third item in the list.
+* This is the fourth item in the list.
+  This is still part of the fourth item in the list.
+* This is the fifth item in the list.
+~~~
+
+Neither the numbered or bulleted list above had multiple paragraphs in it, just forced line breaks. This is what those lists look like with multiple paragraphs instead...
+
+The numbered list:
+
+~~~
+1. This is part of the first item in the list.
+
+   ```ruby
+   puts "hello"
+   ```
+
+   This is still part of the first item in the list.
+
+2. This is the second item in the list.
+
+   {format: ruby}
+   ![Hello, World](hello.rb)
+
+   This is still part of the second item in the list.
+
+3. This is the third item in the list.
+
+   This is still part of the third item in the list.
+
+4. This is the fourth item in the list.
+
+   This is still part of the fourth item in the list.
+
+5. This is the fifth item in the list.
+~~~
+
+The bulleted list:
+
+~~~
+* This is part of the first item in the list.
+
+  ```ruby
+  puts "hello"
+  ```
+
+  This is still part of the first item in the list.
+
+* This is the second item in the list.
+
+  {format: ruby}
+  ![Hello, World](hello.rb)
+
+  This is still part of the second item in the list.
+
+* This is the third item in the list.
+
+  This is still part of the third item in the list.
+
+* This is the fourth item in the list.
+
+  This is still part of the fourth item in the list.
+
+* This is the fifth item in the list.
+~~~
+
+To reiterate, blank lines (two newlines) make paragraphs, and forced line breaks (single newlines) stay in the same paragraph.
 
 ~~~
 Here's a paragraph before the list.
@@ -2468,7 +2393,7 @@ Here's a paragraph before the list.
 
    This is a second paragraph in the first list item.
 
-2. The second list item is simple.
+2. The second list item is boring.
 
 3. The third list item has three paragraphs. This is the first paragraph.
    This is still part of the first paragraph.
@@ -2480,65 +2405,44 @@ Here's a paragraph before the list.
 Here's a paragraph after the list.
 ~~~
 
-Just as with normal non-list-item text, a single newline functions as a forced line break within the list item in question. As with any paragraph, any leading whitespace after the line break is ignored, so you should line up your list item paragraphs.
+### Blank Lines in Complex Lists
 
-Note that Markua ignores leading whitespace for paragraphs. Because of this, you can add *extra* whitespace, which will be ignored. The following example produces identical output to the preceding one:
+#### Single Blank Lines Within Complex List Items
+
+It is legal to add single blank lines in between list items, to separate the list item into multiple paragraphs.
+
+If there is a blank line within a list item, there **must** also be a blank line at the end of the list item.
+
+The reason for this is simple: since paragraphs are separated by blank lines, and since lists support multiple-paragraph list items, you want to be able to add a blank line at the end of a multiple-paragraph list item for symmetry. Otherwise, you're stuck writing something ugly like this:
 
 ~~~
-Here's a paragraph before the list.
+1. foo
 
-1. This is the first paragraph in the first list item. Yay!
-
-    This is a second paragraph in the first list item.
-
-2. The second list item is simple.
-
-3. The third list item has three paragraphs. This is the first paragraph.
-      This is still part of the first paragraph.
-
-         Here's the second paragraph in the third list item.
-
-            Here's the third paragraph in the third list item.
-
-Here's a paragraph after the list.
+   bar
+2. baz
 ~~~
 
-Don't write Markua which looks like this, however. Seriously.
+The above example is so ugly it's not a legal Markua complex list, and instead must be interpreted as paragraphs.
 
-### Blank Lines in Lists
+The correct way to write it is:
 
-It is legal to add single blank lines in between list items. The rule for blank lines between list items is simple, but different from Markdown:
+~~~
+1. foo
 
-One blank line continues the list; two blank lines ends the list and starts a new list.
+   bar
 
-There are a few good reasons for this:
+2. baz
+~~~
 
-1. Since paragraphs are separated by blank lines, and since lists support multiple-paragraph list items, you really want to be able to add a blank line at the end of a multiple-paragraph list item for symmetry. Otherwise, you're stuck writing something ugly like this:
+#### Two Consecutive Blank Lines End A Complex List
 
-   ~~~
-   1. foo
+Whereas one blank line can be used in between list items for spacing, two blank lines always end a list and start a new block element, such as a paragraph or a new list.
 
-      bar
-   2. baz
-   ~~~
-
-   It just looks wrong to have more internal space in a list item than between list items, so the Markua spec should not require it to be the case. So, Markua supports the following preferred way:
-
-   ~~~
-   1. foo
-
-      bar
-
-   2. baz
-   ~~~
-
-2. If you can add a blank line at the end of a multiple-paragraph list item, you should be allowed to add a blank line at the end of a single-paragraph list item.
-
-3. There is no reason to be able to add two blank lines in between list items. However, there are reasons to wish to have two lists in a row in a document. So, two blank lines in between two list items stops the previous list and starts a new list. Note, however, that two blank lines between single-element numbered lists would not produce two numbered lists, since, again, in Markua **single-element numbered lists are not lists**.
+There is no reason to be able to add two blank lines in between list items. However, there are reasons to wish to have two lists in a row in a document. So, two blank lines in between two list items stops the previous list and starts a new list. Note, however, that two blank lines between single-element numbered lists would not produce two numbered lists, since, again, in Markua **single-element numbered lists are not lists**.
 
 This all sounds a bit complex, but it actually results in behaviour which is as unsurprising as possible to the author. This is shown by the following examples:
 
-This is one list:
+This is one (simple or complex) list:
 
 ~~~
 * list one item one
@@ -2546,7 +2450,7 @@ This is one list:
 * list one item three
 ~~~
 
-This is one list:
+This is one list. Since there are blank lines, it's a complex list:
 
 ~~~
 * list one item one
@@ -2556,7 +2460,7 @@ This is one list:
 * list one item three
 ~~~
 
-These are two lists:
+These are two (simple or complex) lists:
 
 ~~~
 * list one item one
@@ -2569,7 +2473,7 @@ These are two lists:
 * list two item three
 ~~~
 
-These are two lists:
+These are two complex lists:
 
 ~~~
 * list one item one
@@ -2586,7 +2490,7 @@ These are two lists:
 * list two item three
 ~~~
 
-These are two lists:
+These are two (simple or complex) lists, the first being a one-element list and the second being a three-element list:
 
 ~~~
 * list one item one
@@ -2597,7 +2501,7 @@ These are two lists:
 * list two item three
 ~~~
 
-These are two lists:
+These are two lists, the first being a one-element simple or complex list and the second being a three-element complex list:
 
 ~~~
 * list one item one
@@ -2610,7 +2514,7 @@ These are two lists:
 * list two item three
 ~~~
 
-These are two lists:
+These are two (simple or complex) lists:
 
 ~~~
 1. list one item one
@@ -2623,7 +2527,7 @@ These are two lists:
 3. list two item three
 ~~~
 
-These are two lists:
+These are two complex lists:
 
 ~~~
 1. list one item one
@@ -2640,7 +2544,7 @@ These are two lists:
 3. list two item three
 ~~~
 
-A normal paragraph followed by a list:
+This is a normal paragraph followed by a list:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2651,7 +2555,7 @@ A normal paragraph followed by a list:
 3. list one item three
 ~~~
 
-A normal paragraph followed by a list, which will confuse anyone reading the manuscript:
+This is also a normal paragraph followed by a list, which will confuse anyone reading the manuscript:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2662,7 +2566,7 @@ A normal paragraph followed by a list, which will confuse anyone reading the man
 4. list one item three
 ~~~
 
-A normal paragraph followed by a list:
+This is also a normal paragraph followed by a complex list, so don't do it:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2675,7 +2579,7 @@ A normal paragraph followed by a list:
 3. list one item three
 ~~~
 
-A normal paragraph followed by a list, which will confuse anyone reading the manuscript:
+Again, this is a normal paragraph followed by a complex list, which will confuse anyone reading the manuscript:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2688,446 +2592,21 @@ A normal paragraph followed by a list, which will confuse anyone reading the man
 4. list one item three
 ~~~
 
-## Nested Lists
-
-Lists can nest lists. To do this, simply insert the list nested inside a list item by **two or more spaces** (not tabs, as discussed later) for each level of nesting. The number of spaces per indent level must be consistent across levels of nesting within a list, but it does not need to be consistent across lists in a Markua document. So, to be clear, if you nest a list with two spaces, any further nested list must also use two spaces. If you violate this rule, the Markua Processor must output the entire attempt at a nested list as just a paragraph with line breaks. This way, Markua does not prevent an author from writing a paragraph which looks a lot like a nested list but is not one. (All the leading space will be ignored, of course.)
-
-There is a limit of **FOUR** levels of nesting, including the outermost list. In an ebook, you don't have infinite space--especially on phones.
-
-You can nest any kind of list inside any kind of list.
-
-This example shows the maximum four levels of nesting, using two spaces for each level:
-
-~~~
-* Foo
-  1. One
-  2. Two
-    a. This is 2a
-      - point one
-      - point two
-    b. This is 2b
-  3. Three
-* Bar
-  i.   Lorem
-  ii.  Ipsum
-  iii. Dolor
-* Baz
-~~~
-
-Here's the same example but with more four spaces for each level:
-
-~~~
-* Foo
-    1. One
-    2. Two
-        a. This is 2a
-            - point one
-            - point two
-        b. This is 2b
-    3. Three
-* Bar
-    i.   Lorem
-    ii.  Ipsum
-    iii. Dolor
-* Baz
-~~~
-
-## Tabs Are Not Allowed Before The Number or Bullet
-
-Tabs **cannot** be used **before** the bullet or number of a list item.
-
-I like tabs, but this is forbidden for a very simple reason: it would be impossible to reason about what level a list item is in, since tab stops can vary.
-
-For example, consider a bulleted list (not legal Markua) which looked like this:
-
-~~~
-* Foo
-  * Bar
-    * Baz
-      * Lorem
-    * Tab
-	* Tab
-        * Ipsum
-          * Dolor
-~~~
-Or consider the numbered list (again, not legal Markua) equivalent:
-
-~~~
-1. Foo
-  1. Bar
-    1. Baz
-      1. Lorem
-	1. Tab
-        1. Ipsum
-          1. Dolor
-~~~
-
-In both cases, the list item "Tab" was inserted with a tab; the rest of the list items were inserted with spaces.
-
-At what level is Tab?  The same level as Ipsum? If the tab stops were bigger or smaller, you may think it's at the same level as Baz, Lorem or Dolor.
-
-As such, tabs are forbidden before the bullet or number of a list item. A Markua Processor *MUST* raise an error if it encounters such a tab.
-
-Note that with blank lines things are trickier, since a blank line is used to produce a multiple-paragraph list item.
-
-In the next two lists, the list item "Tab" was inserted with a tab; the rest of the list items were inserted with spaces.
-
-This is the bulleted list version:
-
-~~~
-* Foo
-
-  * Bar
-
-    * Baz
-
-      * Lorem
-
-	* Tab
-
-        * Ipsum
-
-          * Dolor
-~~~
-
-This is the numbered list version:
-
-~~~
-1. Foo
-
-  1. Bar
-
-  auoeaoeu
-
-    Bar
-
-    1. Baz
-
-      1. Lorem
-
-	1. Tab
-
-        1. Ipsum
-
-          1. Dolor
-~~~
-
-If we treated the tab characters as just whitespace used to indent ... TODO
-
-
-1. Foo
-	1. Lorem
-
-		Foo
-
-		Foo
-
-		Foo
-
-	2. Ipsum
-2. Bar
-3. Baz
-
-
-BUT - you never need to know whether some whitespace was produced by spaces or tabs. The effect must always be the same.
-
-isn't true...
-
-TODO - remove this? - Here's the same example but with one tab for each level:
-
-~~~
-* Foo
-	1. One
-
-  bar
-
-	2. Two
-		a. This is 2a
-			- point one
-			- point two
-		b. This is 2b
-	3. Three
-* Bar
-	i.   Lorem
-	ii.  Ipsum
-	iii. Dolor
-* Baz
-~~~
+### TODO
 
 If you try to nest a fifth level of nesting (or more), the Markua Processor must simply interpret the additional levels as forced newlines, and keep them at the fourth level.
 
-## Nesting Block Elements in List Items
-
-Nested lists are just an example of nesting block elements inside list items.
-
-Other block elements such as figures can also be inserted nested inside list items. This is true for both single paragraph list items (with no blank lines between them) and multiple-paragraph list items (with a single blank line between each list item).
-
-
-
-
-
-
-* Foo
-
-      * Lorem
-
-
-
-
-
-
-
-### Single-Paragraph List Items
-
-You can nest block content inside bulleted lists:
-
-~~~
-* Foo
-  ```ruby
-  puts "hello"
-  ```
-* Bar
-  {alt: "too large to fit in the alt text"}
-  ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
-* Baz
-~~~
-
-You can nest block content inside numbered lists:
-
-~~~
-1. Foo
-   ```ruby
-   puts "hello"
-   ```
-2. Bar
-   {alt: "too large to fit in the alt text"}
-   ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
-3. Baz
-~~~
-
-You do not need to have blank lines after single-paragraph list items, even if there are forced linebreaks in them.
-
-### Multiple-Paragraph List Items
-
-You can nest block content and have multiple-paragraph list items inside bulleted lists:
-
-~~~
-* This is paragraph 1 in the first list item.
-
-  ```ruby
-  puts "hello"
-  ```
-
-  This is paragraph 2 in the first list item.
-
-* This is paragraph 1 in the second list item.
-
-  {alt: "too large to fit in the alt text"}
-  ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
-
-  This is paragraph 2 in the second list item.
-
-* Baz
-~~~
-
-You can nest block content and have multiple-paragraph list items inside numbered lists:
-
-~~~
-1. This is paragraph 1 in the first list item.
-
-   ```ruby
-   puts "hello"
-   ```
-
-   This is paragraph 2 in the first list item.
-
-2. This is paragraph 1 in the second list item.
-
-   {alt: "too large to fit in the alt text"}
-   ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
-
-   This is paragraph 2 in the second list item.
-
-3. Baz
-~~~
-
-Note that with both single and multiple paragraph list items, for either numbered or bulleted lists, you need to indent the block element by at least the number of spaces or tabs to line it up exactly with the start of the list item that contains it. So, if you do `* Foo`, any block element must be indented by at least two spaces; if you do `*  Foo`, any block element must be indented by at least three spaces, etc.
-
-
-1. This is paragraph 1 in the first list item in a top-level list..
-
-	This is paragraph 2 in the first list item in a top-level list..
-
-2. This is paragraph 1 in the second list item in a top-level list..
-
-You can also use a tab to indent subsequent paragraphs in a multiple-paragraph list item.
-
-~~~
-1. This is paragraph 1 in the first list item in a top-level list..
-
-	This is paragraph 2 in the first list item in a top-level list..
-
-2. This is paragraph 1 in the second list item in a top-level list..
-~~~
-
-
-~~~
-1. This is the first list item in a top-level list.
-
-  1. This is the first list item in a list nested under the first list item.
-
-	This is paragraph 2 in a list item in a list nested under the first list item.
-
-  2. This is the second list item in a list nested under the first list item.
-
-2. This is the second list item in a top-level list.
-~~~
-
-The reason to support mixing tabs and spaces is simple: basically no author types a tab key after the period in a numbered list or the asterisk or hyphen in a bulleted list, but many authors do type a tab key to indent things. So, the primary use case of tabs involves mixing tabs and spaces, i.e. using one or two spaces after the number or bullet in the first paragraph of each list item, and using tabs to indent any subsequent subsequent paragraphs in a multiple-paragraph list item.
-
-Banning the most common use case of something because it does not seem consistent just to make things nicer on implementors of Markua Processors is a bad idea.
-
-
-TODO - any amount of whitespace
-
-~~~
-1. This is the first list item in list 1.
-
-  1. This is the first list item in list 2.
-
-    1. This is the first list item in list 3.
-
-      1. This is the first list item in list 4.
-
-        1. This is the first list item in list 5.
-
- This is paragraph 2 in a list _.
-
-  2. This is the second list item in a list nested under the first list item.
-
-2. This is the second list item in a top-level list.
-~~~
-
-
-
-
-
-
-Specifically, the following is ok:
-
-~~~
-9. This is paragraph 1 in the first list item.
-
-   This is paragraph 2 in the first list item.
-
-10. This is paragraph 1 in the second list item.
-
-    This is paragraph 2 in the second list item.
-~~~
-
-Specifically, the following is not ok, and will result in the start of a new paragraph with "This is paragraph 2 in the first list item.":
-
-TODO - this sucks. Counterintuitive.
-
-1. foo
-2. bar
-  1. foo
-  2. bar
-  1. foo
-    3. foo
-
-~~~
-9. This is paragraph 1 in the first list item.
-
-  This is paragraph 2 in the first list item.
-
-10. This is paragraph 1 in the second list item.
-
-   This is paragraph 2 in the second list item.
-~~~
-
-TODO - even if tabs were parsed as 4 spaces, you'd get cases where this wasn't "enough" spaces to line it up:
-
-~~~
-12345. This is paragraph 1 in the first list item.
-
-       This is paragraph 2 in the first list item.
-
-12346. This is paragraph 1 in the second list item.
-
-    This would like to be paragraph 2 in the second list item.
-~~~
-
-TODO - because of this, it would be best to just say that any indentation continues?
-
-
-# TODO
-
+the amount of space before the delimiters (one of `` ` ~ - _ ``) is removed from the lines of the code block
 
 TODO: it would be really nice to not need to indent code blocks in list items.
 
-TODO: mixing tabs and spaces? treating tabs as 4 spaces for containment???
-
-TODO: must you really indent by at least the same number of spaces? 10. Foo would require a 3-space indent, which is terrible.
-
 The code block parsing strips the number of spaces that the beginning of the block was indented by.
-
-This is ok:
-
-~~~
-9. This is paragraph 1 in the first list item.
-   This is still paragraph 1 in the first list item.
-10. This is paragraph 1 in the second list item.
-    This is still paragraph 1 in the second list item.
-~~~
-
-1. foo
-
-   bar
-
-1. bar
-
-   bar
-
-1. baz
-
-1. foo
-
-1. bar
-
-
-
-
-1. one
-
-1. two
-
-   continue
-
-1. three
-
-   continue
-
-1. four
-
-
-
-Also, at the end of a multiple-paragraph list item, there must be a blank line before the start of the next numbered or bulleted list item.
-
-~~~
-9. This is paragraph 1 in the first list item.
-   This is still paragraph 1 in the first list item.
-10. This is paragraph 1 in the second list item.
-    This is still paragraph 1 in the second list item.
-~~~
-
-
-
-Doing this correctly ensures the continuation of the list.
 
 ## Definition Lists
 
-Definition lists are supported in Markua. With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more important than tables.
+Definition lists are also supported in Markua. While they are called lists, and are in this section, they are an entirely different animal from bulleted and numbered / simple and complex lists.
+
+With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more important than tables.
 
 To define a definition list in Markua, use the following syntax:
 
