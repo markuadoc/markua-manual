@@ -1910,6 +1910,7 @@ However, many authors type one space at the end of their sentences. So, a Markua
 
 Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
 
+{#lists}
 # Lists
 
 Markua supports two types of lists, bulleted lists and numbered lists, which can be formatted as either simple or complex lists.
@@ -2645,6 +2646,7 @@ When the code itself is output, the number of spaces that the list was indented 
 
 So, when this list is output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
 
+{#definition-lists}
 # Definition Lists
 
 Definition lists are also supported in Markua. Definition lists are related to lists, but they are neither flat, simple nor complex. Instead, they are what they are: definition lists.
