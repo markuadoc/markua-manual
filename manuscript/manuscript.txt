@@ -2166,21 +2166,23 @@ If you want to prevent a list from being created with consecutive numbered items
 {#simple-lists}
 ## Simple Lists
 
-Both bulleted and numbered lists can either be simple lists or complex lists. Whereas bulleted and numbered lists were all about the list delimiter, simple and complex lists are all about the indentation and newlines. Yes, this distinction comes down to the ancient computer science debate of tabs versus spaces.
+Both bulleted and numbered lists can either be simple lists or complex lists. Whereas bulleted and numbered lists were all about the list delimiter, simple and complex lists are all about the indentation and newlines.
 
-A simple list uses one tab per indentation level. If you use spaces for indentation, what you are creating is a complex list, which is discussed next.
+Yes, this distinction essentially comes down to the ancient computer science debate of tabs versus spaces.
+
+**A simple list uses one tab per indentation level.**
+
+If you use spaces for indentation, what you are creating is a complex list, which is discussed next.
 
 Besides the formatting rules for bulleted or numbered lists, the rules for a simple list are:
 
 * There are no newlines in list items. Each list item in a simple list is one paragraph with no forced line breaks or blank lines.
-* You cannot insert resources in list items. These are inserted after forced line breaks or blank lines, both of which require newlines, and there are no newlines in list items.
+* You cannot insert resources in list items. These are inserted after forced line breaks or blank lines, both of which require newlines, and there are no newlines in list items of simple lists.
 * There is a maximum of **four** levels of nesting of lists, including the outermost list. (So, you can have three levels of nested lists under each outermost list item.)
-* If you try to nest a fifth level of nesting (or more), the Markua Processor must simply interpret the additional levels as forced newlines, and keep them at the fourth level.
+* If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
 * The first indentation level is no indentation: it is at the left margin.
 * You must use exactly one tab per nested indentation level.  (So, the number of tabs you can have is 0, 1, 2 or 3.)
 * You cannot use spaces to indent list items.
-
-All the examples of bulleted and numbered lists above were flat lists, which is just a simple list with every item at the outermost level.
 
 This is an example of a simple list which has the maximum number (four) of levels of nested list:
 
@@ -2199,9 +2201,15 @@ This is an example of a simple list which has the maximum number (four) of level
 3. baz
 ~~~
 
+## Flat Lists
+
+The examples of bulleted and numbered lists in the [Bulleted Lists](#bulleted-lists) and [Numbered Lists](#numbered-lists) sections above were *flat lists*, which did not contain any indentation. Every item in a flat list is at the outermost level, and there are no newlines in list items. A flat list is a special case, in that it conforms to all the rules for *both* a simple list and a complex list. A flat list is so simple that it is not just a simple list, it's also a complex list. (Whoa.)
+
 ## Complex Lists
 
-Whereas simple lists use tabs for indentation and cannot have newlines within list items, a complex list uses spaces for indentation levels and can have newlines within list items.
+Whereas simple lists use tabs for indentation and cannot have newlines within list items, **a complex list uses spaces for indentation levels and can have newlines within list items**.
+
+Using spaces allows for a lot more complex formatting of list items which is still understandable, including lining up nested resources and multiple-paragraph list items. So, these are called complex lists not "spaces lists", since the distinguishing feature is the complexity supported by the spaces, not the spaces themselves.
 
 Besides the formatting rules for bulleted or numbered lists, the rules for a complex list are:
 
@@ -2209,14 +2217,12 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a com
 * You can insert resources in list items. These are inserted after forced line breaks or blank lines.
 * After any forced line break or blank line, the content must be lined up with the content in the above line using the appropriate number of spaces (not tabs). This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
 * There is a maximum of **four** levels of nesting of lists, including the outermost list. So, you can have three levels of nested lists under each outermost list item.
-* If you try to nest a fifth level of nesting (or more), the Markua Processor must simply interpret the additional levels as forced newlines, and keep them at the fourth level.
+* If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
 * The first indentation level is no indentation: it is at the left margin.
-* You must use at least 2 spaces per indentation level. The amount of indentation inside a list item is not arbitrary; it is completely determined by how many spaces you need to line up with the content in the first line of the list item.
+* You must use spaces to line up the content after newlines in a list item with the start of the content in the first line of the list item. So, the amount of indentation inside a list item is actually *not* arbitrary; it is completely determined by how many spaces you need to line up with the content in the first line of the list item. For a bulleted list this will always be 2 spaces (1 for the `*` or `-`, followed by 1 for the space); for a numbered list this will always be at least 3 spaces (1 or more for the number/letter/Roman numeral, 1 for the `.` or `)`, and 1 for the space).
 * You cannot use tabs to indent list items or line up content in list items.
 
-As an aside, flat lists are also a complex list with every item at the outermost level. (A flat list is a special type of list which conforms to the rules for both a simple list and a complex list.)
-
-If you violate the rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal paragraph content with line breaks.
+Whereas if you attempt to nest more than four levels of nesting, the Markua Processor must raise an error, if you violate the indentation rules or newline rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal paragraph content with line breaks. The reason for this is simple: every paragraph which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Anything other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
 
 A complex list can do everything a simple list can do. This is a complex list which is the equivalent of the nested list above:
 
@@ -2237,7 +2243,7 @@ A complex list can do everything a simple list can do. This is a complex list wh
 
 However, a complex list can a lot more as well.
 
-You can add optional blank lines between nested lists, just for readability:
+You can add optional blank lines between some or all of the nested lists, just for readability:
 
 ~~~
 1. foo
@@ -2269,7 +2275,7 @@ You can make multiple paragraph list items using blank lines, and add forced lin
    a) lorem
       i. unus
          - This is part of the first list item in a nested list.
-	   This is still part of the first list item in a nested list, with a forced line break.
+           This is still part of the first list item in a nested list, with a forced line break.
          - two
          - three
       ii. duo
@@ -2426,7 +2432,7 @@ It is legal to add single blank lines in between list items, to separate the lis
 
 If there is a blank line within a list item, there **must** also be a blank line at the end of the list item.
 
-The reason for this is simple: since paragraphs are separated by blank lines, and since lists support multiple-paragraph list items, you want to be able to add a blank line at the end of a multiple-paragraph list item for symmetry. Otherwise, you're stuck writing something ugly like this:
+The reason for this is simple: since paragraphs are separated by blank lines, and since lists support multiple-paragraph list items, you need to add a blank line at the end of a multiple-paragraph list item for symmetry. Otherwise, you can write something ugly like this:
 
 ~~~
 1. foo
@@ -2451,11 +2457,11 @@ The correct way to write it is:
 
 Whereas one blank line can be used in between list items for spacing, two blank lines always end a list and start a new block element, such as a paragraph or a new list.
 
-There is no reason to be able to add two blank lines in between list items. However, there are reasons to wish to have two lists in a row in a document. So, two blank lines in between two list items stops the previous list and starts a new list. Note, however, that two blank lines between single-element numbered lists would not produce two numbered lists, since, again, in Markua **single-element numbered lists are not lists**.
+There is no reason to be able to add two blank lines in between list items. However, there are reasons to wish to have two lists in a row in a Markua document. So, two blank lines in between two list items stops the previous list and starts a new list. Note, however, that two blank lines between single-element numbered lists would not produce two numbered lists, since, again, in Markua single-element numbered lists are not lists.
 
 This all sounds a bit complex, but it actually results in behaviour which is as unsurprising as possible to the author. This is shown by the following examples:
 
-This is one (simple or complex) list:
+This is one flat list, which is both as simple list and a complex list:
 
 ~~~
 * list one item one
@@ -2473,7 +2479,7 @@ This is one list. Since there are blank lines, it's a complex list:
 * list one item three
 ~~~
 
-These are two (simple or complex) lists:
+These are two flat lists. Again, flat lists are both simple lists and complex lists:
 
 ~~~
 * list one item one
@@ -2486,7 +2492,7 @@ These are two (simple or complex) lists:
 * list two item three
 ~~~
 
-These are two complex lists:
+These are two flat lists:
 
 ~~~
 * list one item one
@@ -2503,7 +2509,7 @@ These are two complex lists:
 * list two item three
 ~~~
 
-These are two (simple or complex) lists, the first being a one-element list and the second being a three-element list:
+These are two flat lists. The first is a one-element list; the second is a three-element list:
 
 ~~~
 * list one item one
@@ -2514,7 +2520,7 @@ These are two (simple or complex) lists, the first being a one-element list and 
 * list two item three
 ~~~
 
-These are two lists, the first being a one-element simple or complex list and the second being a three-element complex list:
+These are also two flat lists. The first is a one-element list; the second is a three-element list:
 
 ~~~
 * list one item one
@@ -2527,7 +2533,7 @@ These are two lists, the first being a one-element simple or complex list and th
 * list two item three
 ~~~
 
-These are two (simple or complex) lists:
+These are two flat lists, which are both simple lists and complex lists:
 
 ~~~
 1. list one item one
@@ -2540,7 +2546,7 @@ These are two (simple or complex) lists:
 3. list two item three
 ~~~
 
-These are two complex lists:
+These are two flat lists:
 
 ~~~
 1. list one item one
@@ -2557,7 +2563,7 @@ These are two complex lists:
 3. list two item three
 ~~~
 
-This is a normal paragraph followed by a list:
+This is a normal paragraph followed by a flat list:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2568,7 +2574,7 @@ This is a normal paragraph followed by a list:
 3. list one item three
 ~~~
 
-This is also a normal paragraph followed by a list, which will confuse anyone reading the manuscript:
+This is also a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example will confuse anyone reading your manuscript:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2579,7 +2585,7 @@ This is also a normal paragraph followed by a list, which will confuse anyone re
 4. list one item three
 ~~~
 
-This is also a normal paragraph followed by a complex list, so don't do it:
+This is also a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example will confuse anyone reading your manuscript:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2592,7 +2598,7 @@ This is also a normal paragraph followed by a complex list, so don't do it:
 3. list one item three
 ~~~
 
-Again, this is a normal paragraph followed by a complex list, which will confuse anyone reading the manuscript:
+Again, this is a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example will confuse anyone reading your manuscript:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2631,15 +2637,13 @@ For example, in the following list, the inline code blocks are indented by three
 2. This is the second item in the list.
 ~~~
 
-When the code itself is output, the number of spaces that the list was indented by should be subtracted from the output.
+When the code itself is output, the number of spaces that the list was indented by must be subtracted from the output by the Markua Processor.
 
-So, when this list was output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
+So, when this list is output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
 
 ## Definition Lists
 
-Definition lists are also supported in Markua. While they are called lists, and are in this section, they are an entirely different animal from bulleted and numbered / simple and complex lists.
-
-With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more important than tables.
+Definition lists are also supported in Markua. While they are called lists, and are in this section, they are an entirely different animal from the bulleted and numbered list types. Definition lists are not flat lists, simple lists or complex lists--they are just definition lists.
 
 To define a definition list in Markua, use the following syntax:
 
@@ -2697,6 +2701,8 @@ Here's a paragraph after the list.
 ~~~
 
 Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored. Like list items, definition list items are not poetry.
+
+With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more useful than tables in many Markua documents.
 
 # Block Elements
 
