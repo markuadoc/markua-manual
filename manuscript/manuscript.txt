@@ -1970,14 +1970,13 @@ The following choices of numbering system are supported:
 4. Uppercase Roman numerals
 5. Lowercase Roman numerals
 
-Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
+Unlike in Markdown, in Markua the number that begins the list in the manuscript is the *same* number that begins the list in the output.
 
 To make a numbered list in Markua:
 
-* Start two or more consecutive lines with either a consecutive or the same number, letter or Roman numeral. Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. These are discussed later.
-* Follow the number with either a period or a right-parenthesis.
-* Follow the period or parenthesis with exactly one space. Markua very deliberately does not allow more than one space following the period or right-parenthesis: if your list grows to 10 items, you should not waste time adding a space to items 1-9 to line their content up with item 10; similarly, if your list grows to 100 items you should not waste time adding yet another space to items 1-99 to line their content up with item 100. So, Markua just forbids more than one space after the period or parenthesis.
-* Follow the space with text content.
+* Start two or more consecutive lines with either a consecutive or the same number, letter or Roman numeral, each followed by either a period or right parenthesis, then exactly one space, then text content.
+* Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. These are discussed later.
+* You need to follow the period or parenthesis with exactly one space. Markua very deliberately does not allow more than one space following the period or right-parenthesis: if your list grows to 10 or more items, you should not waste time adding a space to items 1-9 to line their content up with item 10; similarly, if your list grows to 100 or more items you should not waste time adding yet another space to items 1-99 to line their content up with item 100. So, Markua just forbids more than one space after the period or parenthesis.
 
 This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections.
 
@@ -2069,29 +2068,41 @@ ii. bar
 iii. baz
 ~~~
 
-### In Markua, A Single-Element Numbered List is Not a List
+### In Markua, There Are No Single-Element Numbered Lists
 
 Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
 
 `1986. What a great season.`
 
-This would produce a single-element numbered list starting with `1.`--which in my opinion, is a blatant violation of the Principle of Least Surprise.
+In Markdown, this would produce the following single-element numbered list:
 
-Now, in Markua, if we supported single-element numbered lists, this would produce a single-element numbered list starting with `1986.`--which would be almost as bad as in Markdown.
+`1. What a great season.`
+
+In my opinion, is a blatant violation of the Principle of Least Surprise.
+
+Now, in Markua, if we supported single-element numbered lists, this would produce a single-element numbered list:
+
+`1986. What a great season.`
+
+This wouldn't be almost as bad as what Markdown does!
 
 (By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1986\. What a great season.` to avoid this.)
 
 But what to do?
 
-The answer is simple: in Markua, **single-element numbered lists are not lists**. This is true for numbered lists only--single-element bulleted lists and single-element definition lists are both lists. (In the case of a bulleted list it's stupid, but the alternative is stupider. In the case of a definition list there's actually a legitimate usage of a single-element definition list: a single definition.)
+The answer is simple:
 
-So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses.
+In Markua, **there are no single-element numbered lists**.
 
-This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
+This is true for numbered lists only--single-element bulleted lists and single-element definition lists are both lists. (In the case of a bulleted list it's stupid, but the alternative is stupider. In the case of a definition list there's actually a legitimate usage of a single-element definition list: a single definition.)
+
+So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with consecutive or identical numbers, letters or Roman numerals, followed by a periods or right parenthesis, followed by a space, followed by text content.
+
+This still has some possibly incorrect interpretations, but these will be a *lot* more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
 
 ### Numbered List Numbering Rules
 
-*This section is highly technical, and can be skipped or quickly skimmed by almost all authors. It's probably only interesting to someone writing a Markua Processor.*
+*This section is highly technical, and can be [skipped](#simple-lists) or quickly skimmed by almost all authors. It's probably only interesting to someone writing a Markua Processor.*
 
 There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
 
@@ -2152,6 +2163,7 @@ In Markua, list numbers must **all** either be **consecutive**, given the type o
 
 If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
+{#simple-lists}
 ## Simple Lists
 
 Both bulleted and numbered lists can either be simple lists or complex lists. Whereas bulleted and numbered lists were all about the list delimiter, simple and complex lists are all about the indentation and newlines. Yes, this distinction comes down to the ancient computer science debate of tabs versus spaces.
