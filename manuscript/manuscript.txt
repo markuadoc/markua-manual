@@ -1912,11 +1912,13 @@ Regardless of how it made the determination about whether a sentence has ended, 
 
 # Lists
 
-Markua supports bulleted lists, numbered lists and definition lists.
+Markua supports three types of lists: bulleted lists, numbered lists and definition lists.
 
-Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
+All definition lists have the same format. Bulleted lists and numbered lists, however, can be formatted as either simple or complex lists.
 
-The bulleted and numbered lists are actually split into two types of lists: simple and complex. The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of simple and complex bulleted and numbered lists, which will contain examples of both. Finally, advanced numbering rules for numbered lists are specified.
+The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of simple and complex lists, which will contain examples of both. Finally, definition lists are discussed.
+
+A> Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
 {#bulleted-lists}
 ## Bulleted Lists
