@@ -1796,20 +1796,17 @@ So, with poetry taken care of, the question of prose remains.
 
 There are the four principles of Markua's whitespace handling:
 
-1. You must always be able to look at a Markua document and know exactly what is produced. No invisible formatting is allowed. If you can't see it, it has no effect.
+1. You should be able to look at a Markua document and know what is produced. Invisible formatting is frowned upon.
 2. Paragraphs and sentences should be handled consistently, regardless of indentation and spaces after periods.
 3. Manual whitespace formatting should be discouraged.
 4. Newlines are newlines; spaces are spaces. These are different things.
 
 These simple goals have far-reaching consequences:
 
-1. You never need to know whether some whitespace was produced by spaces or tabs. The effect must always be the same.
-2. Tabs which are used for indentation (i.e. starting from the beginning of a line, with no text before them in the line) are treated as four (yes, 4) spaces. - TODO
-TODO
-3. Whitespace at the end of a line or file is ignored.
-4. It doesn't matter how many spaces you add after a sentence.
-5. All consecutive blank lines after the first blank line are ignored when separating paragraphs, and all consecutive blank lines after the second blank line are ignored when separating lists.
-6. You can't manually wrap text with newlines being used as though they are spaces, but you can add forced line breaks without hacks.
+1. Whitespace at the end of a line or file is ignored.
+2. It doesn't matter how many spaces you add after a sentence.
+3. All consecutive blank lines after the first blank line are ignored when separating paragraphs, and all consecutive blank lines after the second blank line are ignored when separating lists.
+4. You can't manually wrap text with newlines being used as though they are spaces, but you can add forced line breaks without hacks.
 
 Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
 
@@ -2164,6 +2161,7 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a sim
 * There are no newlines in list items. Each list item in a simple list is one paragraph with no forced line breaks or blank lines.
 * You cannot insert resources in list items. These are inserted after forced line breaks or blank lines, both of which require newlines, and there are no newlines in list items.
 * There is a maximum of **four** levels of nesting of lists, including the outermost list. (So, you can have three levels of nested lists under each outermost list item.)
+* If you try to nest a fifth level of nesting (or more), the Markua Processor must simply interpret the additional levels as forced newlines, and keep them at the fourth level.
 * The first indentation level is no indentation: it is at the left margin.
 * You must use exactly one tab per nested indentation level.  (So, the number of tabs you can have is 0, 1, 2 or 3.)
 * You cannot use spaces to indent list items.
@@ -2197,6 +2195,7 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a com
 * You can insert resources in list items. These are inserted after forced line breaks or blank lines.
 * After any forced line break or blank line, the content must be lined up with the content in the above line using the appropriate number of spaces (not tabs). This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
 * There is a maximum of **four** levels of nesting of lists, including the outermost list. So, you can have three levels of nested lists under each outermost list item.
+* If you try to nest a fifth level of nesting (or more), the Markua Processor must simply interpret the additional levels as forced newlines, and keep them at the fourth level.
 * The first indentation level is no indentation: it is at the left margin.
 * You must use at least 2 spaces per indentation level. The amount of indentation inside a list item is not arbitrary; it is completely determined by how many spaces you need to line up with the content in the first line of the list item.
 * You cannot use tabs to indent list items or line up content in list items.
@@ -2592,15 +2591,35 @@ Again, this is a normal paragraph followed by a complex list, which will confuse
 4. list one item three
 ~~~
 
-### TODO
+### Parsing of Inline Code Resources Inside List Items
 
-If you try to nest a fifth level of nesting (or more), the Markua Processor must simply interpret the additional levels as forced newlines, and keep them at the fourth level.
+When inserting a code resource as an inline resource in a list item, it must be indented to line up with the list item content it is a sibling of.
 
-the amount of space before the delimiters (one of `` ` ~ - _ ``) is removed from the lines of the code block
+For example, in the following list, the inline code blocks are indented by three spaces:
 
-TODO: it would be really nice to not need to indent code blocks in list items.
+~~~
+1. This is part of the first item in the list.
 
-The code block parsing strips the number of spaces that the beginning of the block was indented by.
+   ```ruby
+   puts "hello"
+   ```
+
+   This is still part of the first item in the list.
+
+   ```java
+   public class Hello {
+       public static void main(String[] args) {
+           System.out.println("hello");
+       }
+   }
+   ```
+
+2. This is the second item in the list.
+~~~
+
+When the code itself is output, the number of spaces that the list was indented by should be subtracted from the output.
+
+So, when this list was output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
 
 ## Definition Lists
 
@@ -3943,7 +3962,27 @@ At the beginning of a line, an opening curly brace (`{`) starts an attribute lis
 
 So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`. (Note that this does not apply inside code or other resources: Markua does not process anything inside them.)
 
-Similarly, a backtick is special. In text content (such as this paragraph), a backtick starts an inline span resource such as a code resource. And three backticks on a line by themselves start a code block. So, to show a literal backtick in a span, you preface it with a backslash (`\`).
+Similarly, a backtick is special. In text content (such as this paragraph), a backtick starts an inline span resource such as a code resource. And three backticks on a line by themselves start a code block.
+
+## Code Spans and Backticks (`` ` ``)
+
+You can create a code span by using pairs of 1, 2 or 3 backticks to surround a span of text within a paragaph, like this:
+
+~~~
+This paragraph has a Ruby `puts "hello"` code span inside it.
+~~~
+
+You cannot show a literal backtick in a normal code span, however, since you cannot backslash escape anything inside it. Inside a code span, a backslash is just a backslash.
+
+~~~
+This paragraph has a Ruby `puts "hello\tworld"` code span inside it.
+~~~
+
+So, if you want to output a backtick in a code span, you need to delimit the code span using two backticks:
+
+~~~
+This paragraph has a code span with literal backticks `` `say hello` `` in it.
+~~~
 
 {#unicode-entities}
 ## Unicode Entities with `\u`
