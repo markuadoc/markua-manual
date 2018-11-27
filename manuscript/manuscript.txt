@@ -1913,17 +1913,13 @@ However, many authors type one space at the end of their sentences. So, a Markua
 
 Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
 
-### Spaces and Tabs Can Be Used Interchangably In Multiple-Paragraph List Items
-
-Lists are discussed next. This is just to emphasize that you never need to know whether some whitespace was produced by spaces or tabs. Again, the effect must be the same.
-
 # Lists
 
 Markua supports bulleted lists, numbered lists and definition lists.
 
 Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
-The bulleted and numbered lists are actually split into three types of lists: flat, nested and complex. The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of flat, nested and complex bulleted and numbered lists, which will contain examples of both. Finally, advanced numbering rules for numbered lists are specified.
+The bulleted and numbered lists are actually split into three types of lists: flat, tabbed and complex. The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of flat, tabbed and complex bulleted and numbered lists, which will contain examples of both. Finally, advanced numbering rules for numbered lists are specified.
 
 {#bulleted-lists}
 ## Bulleted Lists
@@ -2096,7 +2092,7 @@ This still has some possibly incorrect interpretations, but these will be a lot 
 
 ## Flat Lists
 
-Now we turn our attention to flat, nested and complex lists, starting with the flat list.
+Now we turn our attention to flat, tabbed and complex lists, starting with the flat list.
 
 A flat list is the simplest type of bulleted or numbered list. All the examples of bulleted and numbered lists above were flat lists.
 
@@ -2156,51 +2152,37 @@ This is a paragraph.
 This is a paragraph.
 ~~~
 
-## Nested Lists
+## Tabbed Lists
 
-A Nested List is the simplest type of bulleted or numbered list that supports nested lists inside list items. A nested list uses one tab per indentation level. If you use spaces, what you are creating is a Complex List, which is discussed next.
+A tabbed list is the simplest type of bulleted or numbered list that supports lists nested inside list items. A tabbed list uses one tab per indentation level. If you use spaces for indentation, what you are creating is a complex list, which is discussed next.
 
-Besides the formatting rules for bulleted or numbered lists, the rules for a nested list are:
+Besides the formatting rules for bulleted or numbered lists, the rules for a tabbed list are:
 
 * It is a list which can nest other lists.
-* You must use 1 tab per indentation level. (If you use spaces, what you are creating is a Complex List, discussed next.)
-* You can't mix and match spaces and tabs for indentation in the same list.
-* There can be no blank lines in list items
-
-*
-
-* There are no blank lines in list items. Each list item in a flat list is one paragraph.
-* You can add single newlines in the list items. These do not create new paragraphs; they are forced line breaks only.
-* You can insert resources in list items.
-* You must indent subsequent lines with spaces (not tabs) to line up with the content of the line above. This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
+* You must use exactly one tab per indentation level.
+* You cannot use spaces to indent list items.
+* Each list item in a tabbed list is one paragraph.
+* All list items must fit one one line. Not only can there be no blank lines in list items, there can be no newlines at all.
+* You cannot insert resources in list items. The reason for this is that you would have to use tabs to line them up, and this would not line up nicely with the content of the list items.
 
 If you violate any of these rules, the Markua Processor must just interpret your list as normal paragraph content with line breaks.
 
-
-
-
-
-
-Example:
+This is an example of a tabbed list:
 
 ~~~
 1. foo
 	a) lorem
-		i. lorem
-			- point one
-			- point two
-		ii. ipsum
-		iii. dolor
+		i. unus
+			- one
+			- two
+			- three
+		ii. duo
+		iii. tres
 	b) ipsum
 	c) dolor
 2. bar
 3. baz
 ~~~
-
-Rules:
-- either 2-4 spaces or 1 tab per indent level (can't mix and match spaces and tabs in the same list)
-- no newlines in list items
-
 
 ## Complex Lists
 
@@ -2223,7 +2205,7 @@ This is a paragraph.
 
 Complex lists contain multiple-paragraph list items, and/or block content such as resources--especially inline code resources. With these types of complex content, and with
 
-- spaces only, no tabs for nested lists or for aligning block elements
+- spaces only, no tabs for tabbed lists or for aligning block elements
 - *, space, content
 - 1. space, content
 - to add subsequent paragraphs or block elements (incl. inline code resources) to the list item, start with spaces >= beginning of content
