@@ -1912,13 +1912,11 @@ Regardless of how it made the determination about whether a sentence has ended, 
 
 # Lists
 
-Markua supports three types of lists: bulleted lists, numbered lists and definition lists.
+Markua supports two types of lists, bulleted lists and numbered lists, which can be formatted as either simple or complex lists.
 
-All definition lists have the same format. Bulleted lists and numbered lists, however, can be formatted as either simple or complex lists.
+The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of simple and complex lists, which will contain examples of both.
 
-The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of simple and complex lists, which will contain examples of both. Finally, definition lists are discussed.
-
-A> Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
+Note that Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
 {#bulleted-lists}
 ## Bulleted Lists
@@ -2084,7 +2082,7 @@ Now, in Markua, if we supported single-element numbered lists, this would produc
 
 `1986. What a great season.`
 
-This wouldn't be almost as bad as what Markdown does!
+This wouldn't be as bad as what Markdown does, but it wouldn't be good either! Exactly how stupid it would look would be determined by how numbered lists were formatted by the Markua Processor, but it certainly would look wrong.
 
 (By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1986\. What a great season.` to avoid this.)
 
@@ -2092,9 +2090,9 @@ But what to do?
 
 The answer is simple:
 
-In Markua, **there are no single-element numbered lists**.
+**In Markua, there are no single-element numbered lists**. If you try to make one, it just turns into a paragraph.
 
-This is true for numbered lists only--single-element bulleted lists and single-element definition lists are both lists. (In the case of a bulleted list it's stupid, but the alternative is stupider. In the case of a definition list there's actually a legitimate usage of a single-element definition list: a single definition.)
+This is true for numbered lists only--single-element bulleted lists are lists. (It's stupid, but the alternative would be stupider.)
 
 So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with consecutive or identical numbers, letters or Roman numerals, followed by a periods or right parenthesis, followed by a space, followed by text content.
 
@@ -2106,7 +2104,7 @@ This still has some possibly incorrect interpretations, but these will be a *lot
 
 There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
 
-If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
+If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a forced line break for each single newline. In this instance, the output directly matches the input, including all the numbering.
 
 In theory, Markua supports creating a numbered list when either of the following two conditions occur:
 
@@ -2203,7 +2201,11 @@ This is an example of a simple list which has the maximum number (four) of level
 
 ## Flat Lists
 
-The examples of bulleted and numbered lists in the [Bulleted Lists](#bulleted-lists) and [Numbered Lists](#numbered-lists) sections above were *flat lists*, which did not contain any indentation. Every item in a flat list is at the outermost level, and there are no newlines in list items. A flat list is a special case, in that it conforms to all the rules for *both* a simple list and a complex list. A flat list is so simple that it is not just a simple list, it's also a complex list. (Whoa.)
+The examples of bulleted and numbered lists in the [Bulleted Lists](#bulleted-lists) and [Numbered Lists](#numbered-lists) sections above were *flat lists*, which did not contain any indentation.
+
+Every item in a flat list is at the outermost level, and there are no newlines in list items. A flat list is a special case, in that it conforms to all the rules for *both* a simple list and a complex list.
+
+A flat list is so simple that it is not just a simple list, it's also a complex list. Whoa.
 
 ## Complex Lists
 
@@ -2224,7 +2226,7 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a com
 
 Whereas if you attempt to nest more than four levels of nesting, the Markua Processor must raise an error, if you violate the indentation rules or newline rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal paragraph content with line breaks. The reason for this is simple: every paragraph which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Anything other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
 
-A complex list can do everything a simple list can do. This is a complex list which is the equivalent of the nested list above:
+You can do everything with a complex list that you can do with a simple list. This is a complex list which is the equivalent of the nested list above:
 
 ~~~
 1. foo
@@ -2241,7 +2243,7 @@ A complex list can do everything a simple list can do. This is a complex list wh
 3. baz
 ~~~
 
-However, a complex list can a lot more as well.
+However, you can do a lot more with a complex list as well.
 
 You can add optional blank lines between some or all of the nested lists, just for readability:
 
@@ -2533,7 +2535,7 @@ These are also two flat lists. The first is a one-element list; the second is a 
 * list two item three
 ~~~
 
-These are two flat lists, which are both simple lists and complex lists:
+These are two flat lists:
 
 ~~~
 1. list one item one
@@ -2563,10 +2565,10 @@ These are two flat lists:
 3. list two item three
 ~~~
 
-This is a normal paragraph followed by a flat list:
+This is a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example shows the correctness of this decision:
 
 ~~~
-1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+1986. What a great season.
 
 
 1. list one item one
@@ -2574,7 +2576,7 @@ This is a normal paragraph followed by a flat list:
 3. list one item three
 ~~~
 
-This is also a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example will confuse anyone reading your manuscript:
+This is also a normal paragraph followed by a flat list, since, again, single-element numbered lists are not lists. This highly-contrived example will confuse anyone reading your manuscript:
 
 ~~~
 1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
@@ -2585,10 +2587,10 @@ This is also a normal paragraph followed by a flat list, since single-element nu
 4. list one item three
 ~~~
 
-This is also a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example will confuse anyone reading your manuscript:
+This is also a normal paragraph followed by a flat list, but this more-contrived example would confuse anyone reading your manuscript:
 
 ~~~
-1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+1. This is actually a paragraph not a list.
 
 
 1. list one item one
@@ -2598,10 +2600,10 @@ This is also a normal paragraph followed by a flat list, since single-element nu
 3. list one item three
 ~~~
 
-Again, this is a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example will confuse anyone reading your manuscript:
+Again, this is also a normal paragraph followed by a flat list, but this even-more-contrived example would confuse anyone reading your manuscript:
 
 ~~~
-1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+1. This is actually a paragraph not a list.
 
 
 2. list one item one
@@ -2641,9 +2643,9 @@ When the code itself is output, the number of spaces that the list was indented 
 
 So, when this list is output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
 
-## Definition Lists
+# Definition Lists
 
-Definition lists are also supported in Markua. While they are called lists, and are in this section, they are an entirely different animal from the bulleted and numbered list types. Definition lists are not flat lists, simple lists or complex lists--they are just definition lists.
+Definition lists are also supported in Markua. Definition lists are related to lists, but they are neither flat, simple nor complex. Instead, they are what they are: definition lists.
 
 To define a definition list in Markua, use the following syntax:
 
@@ -2675,10 +2677,12 @@ term
 : definition
 ~~~
 
-Finally, like list items, each definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definition list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
+Finally, like list items in complex lists, each definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definition list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
+
+You can nest resources inside a definition list. You cannot nest definition lists inside definition list items, however--that would be highly confusing.
 
 ~~~
-Here's a paragraph before the list.
+Here's a paragraph before the definition list.
 
 one
 : This is the first definition of one. It's one paragraph.
@@ -2687,15 +2691,29 @@ one
   This is a second paragraph in the second definition of one.
 
 two
-: The second list item is simple.
+: The second definition list item is simple.
 
 three
-: The third list item has three paragraphs.
-  This is still part of the first paragraph.
+: The third definition list item has three paragraphs.
+  This is definition still part of the first paragraph.
 
-  Here's the second paragraph in the third list item.
+  Here's the second paragraph in the third definition list item.
 
-  Here's the third paragraph in the third list item.
+  Here's the third paragraph in the third definition list item.
+
+ruby
+: Here is some Ruby code.
+
+  ```ruby
+  puts "hello"
+  ```
+
+  Here is some more Ruby code.
+
+  {format: ruby}
+  ![Hello, World](hello.rb)
+
+  That's as simple as it gets.
 
 Here's a paragraph after the list.
 ~~~
