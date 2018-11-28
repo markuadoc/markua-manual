@@ -1771,7 +1771,7 @@ In that table, column A is left-aligned, column B is centered and column C is ri
 The following is the supported attribute for table resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
 `column-widths`
-: The column widths, from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Examples: `{column-widths: "10,30,*,10"}`, `{column-widths: "10,*,40,*"}`. If the sums exceed 100 (ignoring the `*`s), the Markua Processor must raise an error.
+: The column widths, from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Examples: `{column-widths: "10,30,*,10"}`, `{column-widths: "10,*,40,*"}`. If the sums exceed 100 (ignoring the `*`s), the Markua Processor must raise an error. Every specified value must be at least 1, and every * must compute to at least 1, or the Markua Processor must raise an error.
 
 `style`
 : The style of the table. Values can be `simple`, `grid` or any other value. All Markua Processors must support values of `simple` and `grid` for tables. The default is `simple`. A Markua Processor may use whatever formatting it wants with `simple`, but it should be clear which cells are part of the table header, body and footer. A Markua Processor may also use whatever formatting it wants with `grid`, but it must show grid lines around each table cell. If a Markua Processor does not recognize the value of the `style`, it must format it as `simple` instead of producing an error. (It can, however, produce a warning.)
@@ -1980,6 +1980,8 @@ To make a numbered list in Markua:
 * Start two or more consecutive lines with either a consecutive or the same number, letter or Roman numeral, each followed by either a period or right parenthesis, then exactly one space, then text content.
 * Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. These are discussed later.
 * You need to follow the period or parenthesis with exactly one space. Markua very deliberately does not allow more than one space following the period or right-parenthesis: if your list grows to 10 or more items, you should not waste time adding a space to items 1-9 to line their content up with item 10; similarly, if your list grows to 100 or more items you should not waste time adding yet another space to items 1-99 to line their content up with item 100. So, Markua just forbids more than one space after the period or parenthesis. Besides the time saved, the increased consistency is a benefit.
+
+Note that a Markua Processor must output the same number, letter or Roman numeral which is in the manuscript. A Markua Processor may choose to respect the parentheses versus period decision, or it may choose to use all periods or all parentheses, or it may choose to use parentheses in, say, PDF, but use periods in, say, HTML, EPUB and MOBI. There is no formal, official mapping of Markua to any output format, to encourage competition and dynamic ecosystem of Markua Processors.
 
 This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections.
 
@@ -2501,7 +2503,7 @@ These are two flat lists. Again, flat lists are both simple lists and complex li
 * list two item three
 ~~~
 
-These are two flat lists:
+These are two complex lists:
 
 ~~~
 * list one item one
@@ -2555,7 +2557,7 @@ These are two flat lists:
 3. list two item three
 ~~~
 
-These are two flat lists:
+These are two complex lists:
 
 ~~~
 1. list one item one
@@ -2594,7 +2596,7 @@ This is also a normal paragraph followed by a flat list, since, again, single-el
 4. list one item three
 ~~~
 
-This is also a normal paragraph followed by a flat list, but this more-contrived example would confuse anyone reading your manuscript:
+This is also a normal paragraph followed by a complex list, but this more-contrived example would confuse anyone reading your manuscript:
 
 ~~~
 1. This is actually a paragraph not a list.
@@ -2607,7 +2609,7 @@ This is also a normal paragraph followed by a flat list, but this more-contrived
 3. list one item three
 ~~~
 
-Again, this is also a normal paragraph followed by a flat list, but this even-more-contrived example would confuse anyone reading your manuscript:
+Again, this is also a normal paragraph followed by a complex list, but this even-more-contrived example would confuse anyone reading your manuscript:
 
 ~~~
 1. This is actually a paragraph not a list.
@@ -2729,6 +2731,27 @@ Here's a paragraph after the list.
 Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored. Like list items, definition list items are not poetry.
 
 With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more useful than tables in many Markua documents.
+
+Finally, with definition lists, one thing you often want to do is link to a specific definition, not just to the list itself. This is useful to do, since in a document with many definitions, it's helpful if the reader scrolls to the right spot or opens to the right page.
+
+To do this, just define an id on the element itself, and then link to it. Note that the first attribute list is actually for the definition list itself, and the remaining ones are for the items. So, you can't add an attribute list to the first element of a definition list which applies just to it. (TODO - Note to Leanpub authors: id attributes on definition list items do not work yet.)
+
+~~~
+
+{#definitions}
+foo
+: This is foo.
+
+{#bar}
+bar
+: This is bar.
+
+{#baz}
+baz
+: This is baz.
+~~~
+
+A Markua Processor
 
 # Block Elements
 
@@ -4785,6 +4808,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 
 - Table alignment does not work as specified. This is being fixed in the next couple of weeks.
 - The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
+- Definition list id attributes on definition list items do not work yet.
 - Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
 - There is no more type attribute on quizzes. Quizzes are always marked.
