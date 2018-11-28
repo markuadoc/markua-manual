@@ -1977,7 +1977,7 @@ Unlike in Markdown, in Markua the number that begins the list in the manuscript 
 
 To make a numbered list in Markua:
 
-* Start two or more consecutive lines with either a consecutive or the same number, letter or Roman numeral, each followed by either a period or right parenthesis, then exactly one space, then text content.
+* Start two or more consecutive lines with either a consecutive (e.g. `1.`, `2.`, `3.`) or the first (e.g. `1.`, `1.`, `1.`)  number, letter or Roman numeral, each followed by either a period or right parenthesis, then exactly one space, then text content.
 * Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. These are discussed later.
 * You need to follow the period or parenthesis with exactly one space. Markua very deliberately does not allow more than one space following the period or right-parenthesis: if your list grows to 10 or more items, you should not waste time adding a space to items 1-9 to line their content up with item 10; similarly, if your list grows to 100 or more items you should not waste time adding yet another space to items 1-99 to line their content up with item 100. So, Markua just forbids more than one space after the period or parenthesis. Besides the time saved, the increased consistency is a benefit.
 
@@ -4822,7 +4822,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support updates to en dashes, em dashes, scene breaks and page breaks.
 - Support parentheses in numbered lists
 - Remove HTML comment syntax, since the CriticMarkup comment syntax is enough.
-- Support question alternates (?1, ?1).
 - Support the other directives.
 - Support `cite` and `url` on blockquotes.
 - Use `table-of-contents` not `toc`.
