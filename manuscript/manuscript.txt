@@ -1440,7 +1440,22 @@ The header is separated from the body cells by a section separator, i.e. a row o
 
 The header and footer rows are both optional. The following are also legal tables...
 
-Just content rows:
+A header row and three body rows:
+
+~~~
+{type: table, optional: attribute_list}
+|============|============|============|
+| Header A   | Header B   | Header C   |
+|============|============|============|
+| Body A1    | Body B1    | Body C1    |
+|------------|------------|------------|
+| Body A2    | Body B2    | Body C2    |
+|------------|------------|------------|
+| Body A3    | Body B3    | Body C3    |
+|============|============|============|
+~~~
+
+Just body rows:
 
 ~~~
 |============|============|============|
@@ -1452,7 +1467,7 @@ Just content rows:
 |============|============|============|
 ~~~
 
-Header, one content row, footer:
+Header, one body row, footer:
 
 ~~~
 |============|============|============|
@@ -1492,7 +1507,7 @@ No header:
 |============|============|============|
 ~~~
 
-If there are only two rows separated by a section separator, they are interpreted as a header and a content row:
+If there are only two rows separated by a section separator, they are interpreted as a header and a body row:
 
 ~~~
 |============|============|============|
@@ -1502,7 +1517,7 @@ If there are only two rows separated by a section separator, they are interprete
 |============|============|============|
 ~~~
 
-If there are only two rows separated by a row separator, they are just two content rows:
+If there are only two rows separated by a row separator, they are just two body rows:
 
 ~~~
 |============|============|============|
@@ -1512,7 +1527,7 @@ If there are only two rows separated by a row separator, they are just two conte
 |============|============|============|
 ~~~
 
-If there is only one row, it is interpreted as a content row, not a header row:
+If there is only one row, it is interpreted as a body row, not a header row:
 
 ~~~
 |============|============|============|
@@ -1634,7 +1649,7 @@ The cells in the first row of a table header, table body or table footer must ha
 
 So, if you want every other cell in a column to have a different alignment than the first non-header cell in that column, each of them must have the overridden alignment. This would not be true if alignment overrides cascaded downward, but that would confuse a lot more people than helping this small edge case.
 
-Since the alignment is done on the separator row above the first content row, it even works to align a column with no header or footer. The following columns are also left-, center-, and right-aligned respectively:
+Since the alignment is done on the separator row above the first body row, it even works to align a column with no header or footer. The following columns are also left-, center-, and right-aligned respectively:
 
 ~~~
 |:===========|:==========:|===========:|
