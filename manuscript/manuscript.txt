@@ -1802,7 +1802,7 @@ The actual syntax to define a Markua table, either in an external file or inline
 
 The reason for this complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
 
-Markua makes the following compromise: Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) table syntax in Markua documents.
+Markua documents must support only Markua table syntax. Tables are complex enough without other table syntaxes cluttering things up. Any other table syntax must be interpreted as paragraph text.
 
 {#whitespace}
 # Whitespace: Spaces, Tabs and Newlines
