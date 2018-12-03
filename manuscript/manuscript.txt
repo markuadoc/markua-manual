@@ -4838,7 +4838,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Be stricter about headers (#foo should not start a chapter, blank lines before and after, etc)
 - Support inline resources
 - Support type attribute on resources
-- Support image attributes fullbleed, height, cite, url
+- Support image attributes align, cite, url
 - Decide what we are doing with the cite and url attributes
 - Specifically forbid local video resources
 - Support video attributes embed, fullbleed, wrap, height, width
