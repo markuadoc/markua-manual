@@ -645,16 +645,14 @@ We will discuss the supported and the default attributes for images, and then sh
 
 Note that regardless of the image location, a Markua Processor can embed the image in the output format. For example, a web image does not need to be loaded from the web every time; it can be inlined in the output by the Markua Processor. A Markua Processor can also process images such that all images are placed on the web with URLs, and the images are loaded by the reader from the web.
 
-Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, `wrap` and `align` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
+Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, and `align` or `float` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
 
 #### Supported Attributes for Images
-
-(TODO - Leanpub authors: The `align` attribute does not currently work. Use the `float` attribute instead if you want text to wrap. Also, with `float`, the only currently-supported values are `left`, `right` and `middle`.)
 
 The following are the supported attributes for image resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
 `align`
-: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. Combined with `width`, `height` and `wrap`, this provides basic image formatting. A Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead.
+: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. The default is `middle`. Combined with `width` and `height`, this provides basic image formatting. When `align` is specified, text goes above and below the image, but the image and its surrounding whitespace occupies the entire width of the page. In terms of the specific values of `align`, a Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead.
 
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
@@ -663,10 +661,10 @@ The following are the supported attributes for image resources, in addition to t
 : An image can have a citation. A Markua Processor is free to combine this citation with the caption attribute or display it separately.
 
 `float`
-: The `float` can be `left`, `right`, `middle`, `inside` or `outside`, just like the values of `align`. Setting `float` functions to set the value of `align`, and also to set `wrap` to `true`. If `float` is specified, it is an error to specify either `align` or `wrap`, since `float` is assigning both values.
+: The `float` can be `left`, `right`, `inside` or `outside`. These attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Markua Processors such as Leanpub can export InDesign files.)
 
 `fullbleed`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height`, `wrap` and `align` attributes are used instead and margins are respected.
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
 
 `height`
 : The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}` or `{height: 70%}`.
@@ -676,9 +674,6 @@ The following are the supported attributes for image resources, in addition to t
 
 `width`
 : The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}` or `{width: 70%}`.
-
-`wrap`
-: `true` or `false`. This specifies whether text wraps around the image, or whether it is only above or below the image. The default is `false`.
 
 Note that if only one of `width` and `height` are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both `width` and `height` are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both `width` and `height`.)
 
@@ -773,16 +768,16 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 #### Supported Attributes for Video
 
-The following are the supported attributes for video resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support. Note that the `caption`, `class`, `wrap`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
+The following are the supported attributes for video resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support. Note that the `caption`, `class`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
+
+`align`
+: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. This applies to the `poster` image for the video, and works just like it does with images.
 
 `embed`
 : true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like youtube which disallows this. In this case, this should function like a link to external web page which (youtube app etc). A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
 
-`wrap`
-: `true` or `false`. This applies to the `poster` image for the video, and works just like it does with images.
-
-`align`
-: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. This applies to the `poster` image for the video, and works just like it does with images.
+`float`
+: The `float` can be `left`, `right`, `inside` or `outside`.  This applies to the `poster` image for the video, and works just like it does with images. It is an error to specify both `align` and `float`.
 
 `fullbleed`
 : `true` or `false`. The default is `false`.  This applies to the `poster` image for the video, and works just like it does with images.
@@ -4836,7 +4831,7 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
-- The `align` attribute does not currently work. Use the `float` attribute instead if you want text to wrap around an image.
+- The `align` attribute does not currently work.
 - With `float`, the only currently-supported values are `left`, `right` and `middle`; `inside` and `outside` do not work.
 - Table alignment does not work as specified. This is being fixed in the next couple of weeks.
 - The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
@@ -4873,7 +4868,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support image attributes align, cite, url
 - Decide what we are doing with the cite and url attributes
 - Specifically forbid local video resources
-- Support video attributes embed, fullbleed, wrap, height, width
+- Support video attributes embed, fullbleed, height, width
 - Support dashed attributes for code resources line-numbers, number-from, crop-start, crop-end
 - Support three-tildes defaults to text, backticks default to guess approach
 - Support inline math with format attribute
