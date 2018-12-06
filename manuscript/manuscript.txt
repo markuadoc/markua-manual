@@ -661,7 +661,7 @@ The following are the supported attributes for image resources, in addition to t
 : An image can have a citation. A Markua Processor is free to combine this citation with the caption attribute or display it separately.
 
 `float`
-: The `float` can be `left`, `right`, `inside` or `outside`. These attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Markua Processors such as Leanpub can export InDesign files.)
+: The `float` can be `left`, `right`, `inside` or `outside`. These attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Markua Processors such as Leanpub can export InDesign files.
 
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
