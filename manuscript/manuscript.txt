@@ -652,7 +652,7 @@ Images have some of the only non-semantic formatting in Markua. Images can have 
 The following are the supported attributes for image resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
 `align`
-: The `align` can be `left`, `right` or `middle`. The default is `middle`. Combined with `width` and `height`, this provides basic image formatting. When `align` is specified, text goes above and below the image, but the image and its surrounding whitespace occupies the entire width of the page. In terms of the specific values of `align`, a Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. Note that `inside` and `outside` are not supported for `align`.
+: The `align` can be `left`, `right` or `middle`. The default is `middle`. Combined with `width` and `height`, this provides basic image formatting. When `align` is specified, text goes above and below the image, but the image and its surrounding whitespace occupies the entire width of the page. In terms of the specific values of `align`, a Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. Finally, note that `inside` and `outside` are not supported for `align`. If you are using those attributes, chances are you should be floating the text around the image by using the `float` attribute, not the `align` attribute.
 
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
@@ -4834,9 +4834,6 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
-- The `align` attribute does not currently work.
-- With `float`, the only currently-supported values are `left`, `right` and `middle`; `inside` and `outside` do not work.
-- Table alignment does not work as specified. This is being fixed in the next couple of weeks.
 - The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
 - Definition list id attributes on definition list items do not work yet.
 - Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
