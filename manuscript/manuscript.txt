@@ -2223,7 +2223,7 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a sim
 * If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
 * The first indentation level is no indentation: it is at the left margin.
 * You must use exactly one tab per nested indentation level.  (So, the number of tabs you can have is 0, 1, 2 or 3.)
-* You cannot use spaces to indent list items.
+* You cannot use spaces to indent list items. Simple lists only contain tabs.
 
 This is an example of a simple list which has the maximum number (four) of levels of nested list:
 
@@ -2265,7 +2265,9 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a com
 * If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
 * The first indentation level is no indentation: it is at the left margin.
 * You must use spaces to line up the content after newlines in a list item with the start of the content in the first line of the list item. So, the amount of indentation inside a list item is actually *not* arbitrary; it is completely determined by how many spaces you need to line up with the content in the first line of the list item. For a bulleted list this will always be 2 spaces (1 for the `*` or `-`, followed by 1 for the space); for a numbered list this will always be at least 3 spaces (1 or more for the number/letter/Roman numeral, 1 for the `.` or `)`, and 1 for the space).
-* You cannot use tabs to indent list items or line up content in list items.
+* You cannot use tabs to indent list items or line up content in list items. Complex lists only contain spaces. If you use a text editor which converts tabs to spaces, then if you attempt to create a simple list, what you actually are doing is creating a complex list. However, if all tabs are converted to (the same number of) spaces, any simple list becomes a valid complex list.
+
+A> Yes, this is one of the reasons why simple lists cannot contain newlines inside list items. If that was allowed, the natural thing to do would be to support using tabs and spaces to align complex content in those list items. However, what this would also result in would be that converting tabs to spaces could break a list: if we allowed tabs to be used to align subsequent paragraphs in a list item, then converting those tabs to spaces could, in certain cases, result in an incorrect number of spaces being used. This would then result in a valid list becoming an invalid list. A common text editor setting which modifies formatting in an invisible way should not be able to break a Markua document, so forcing tab-indented lists to be simple lists ensures that this is the case. This is preferable to either banning tabs (since many people prefer tabs) or to attempting to support complex lists using tabs (which would be both brittle and confusing).
 
 As discussed, if you attempt to nest more than four levels of nesting, the Markua Processor must raise an error. However, if you violate the indentation rules or newline rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal non-list content, such as a paragraph with line breaks. The reason for this is simple: every block element which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which actually causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Any other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
 
