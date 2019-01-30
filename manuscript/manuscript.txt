@@ -187,8 +187,84 @@ Markua is very strict about its heading syntax:
 3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem traditionally, but which might be these days.)
 4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
 5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will be caught, since it will look like an obvious error in the book.
+6. Tabs **cannot** be used to separate the pound signs and the heading text. Despite the increased conceptual consistency with list formatting, this would make Markua documents ugly and less consistent. The tradeoff is not worth it.
 
-To learn more about the [design goals of Markua headings](#heading-design-goals) and the [differences between Markua and Markdown headings](#heading-diffs), see the appendix.
+## Design Goals of Markua Headings
+
+The following are the design goals of Markua headings:
+
+1. From looking at a heading in a Markua manuscript, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
+2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged in essentially the correct way.
+3. The number of leading pound signs must match the level of heading.
+4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
+5. The syntax to create parts must be as economical as possible.
+6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
+7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
+8. Books with parts and chapters must be able to have the same number of levels of sub-sections, without arbitrarily losing the ability to create a sub-sub-sub-sub-section.
+9. Documents can have parts, chapters and sections just like books.
+
+The design of Markua headings meets these requirements, in a better way than any other design I could come up with.
+
+## Differences with Markdown Headings
+
+Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`. In Markdown, you can create the 6 HTML heading levels using Markdown syntax.
+
+What Markua does is to use a subset of the Markdown heading syntax, and then reinterpret those headings as specifying the heading levels that define the structure of the book.
+
+Markua is also a lot more strict about heading syntax than Markdown. In Markdown, not only are there two syntaxes (atx and Setext) for making headings, what's worse is that [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings are not supported.
+
+To understand Markua headings and the differences with Markdown headings, it's helpful to understand the atx and Setext headings of Markdown.
+
+{#setext_headings}
+### Setext Headings in Markdown
+
+In the Setext-style of Markdown headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
+
+These are some Setext headers in Markdown:
+
+~~~
+This is an h1
+=============
+
+This is also an h1 (really)
+=
+
+This is an h2
+-------------
+
+This is also an h2 (really)
+-
+~~~
+
+There are two main issues with this style of heading in Markdown:
+
+1. It is inconsistent: It only supports defining `h1` and `h2`; to define h3 and below, the atx style of heading must be used.
+2. It is confusing: Authors are confused about how many equals or minus signs you need to use. (As we saw above, the answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
+
+{#atx_headings}
+### atx Headings in Markdown
+
+In Markdown, the other heading syntax is "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown. To create an atx heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text, followed optionally by whitespace and any number of `#` characters. The number of `#` characters determines the level of heading.
+
+These are some atx headers in Markdown:
+
+~~~
+# This is an h1
+
+# This is also an h1 ####################
+
+## This is an h2
+
+## This is also an h2 ###################
+
+### This is an h3
+
+### This is also an h3 ##################
+~~~
+
+Note that all the trailing `#` characters are ignored and are not part of the heading text.
+
+From reading this, you'll recognize that Markua headings are a subset of Markdown's atx headers.
 
 {#paragraphs}
 # Paragraphs and Blank Lines
@@ -288,7 +364,7 @@ Note that **exactly** three backticks or three tildes must be used to insert an 
 A figure can also have attributes. The supported attributes vary based on the type of resource, but all figures support the `caption`, `class`, `format`, `title` and `type` attributes. (As such, these five attributes are not shown on the specific resource types below.)
 
 `caption`
-: This is text which is shown near the figure, typically above or below it. A Markua Processor can choose where to position captions based on any criteria it chooses. For example, a Markua Processor can position all captions above or below figures, or use a different behaviour based on the resource format. Note that the figure caption itself may contain the Markua text formatting specified earlier in the [Text Formatting](#text-formatting) chapter.
+: This is text which is shown near the figure, typically above or below it. A Markua Processor can choose where to position captions based on any criteria it chooses. For example, a Markua Processor can position all captions above or below figures, or use a different behaviour based on the resource format. Note that the figure caption itself may contain the Markua text formatting specified earlier in the [Text Formatting](#text-formatting) chapter. If no `caption` is provided but a `title` is provided, then the `title` should be used as the caption: it does not make sense to refer to a figure with a title, but for the figure itself to have no caption.
 
 `class`
 : Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
@@ -480,9 +556,15 @@ Inline Resource
 
 If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. Implementors of Markua Processors must ensure they do NOT support navigating upward with `../` in paths.
 
-A file called `foo.jpg` in the `resources` directory is referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+* A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+* A file called `bar.png` in a subdirectory `images` of the resources directory should be referenced as `![](images/bar.png)`--not as `![](/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
-A file called `bar.png` in a subdirectory `images` of the resources directory is referenced as `![](images/bar.png)`--not as `![](/images/bar.png)`, `![](resources/images/bar.png)` or  `![](/resources/images/bar.png)`.
+Note, however, that a Markua processor must ignore the part of a path which starts with `resources/`. So, you can also do the following:
+
+* A file called `foo.jpg` in the `resources` directory can be referenced as `![](resources/foo.jpg)`.
+* A file called `bar.png` in a subdirectory `images` of the resources directory can be referenced as `![](resources/images/bar.png)`.
+
+The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path.
 
 Nested directory trees work as well. A file called `foo.rb` in a `ch1/examples/ruby` directory tree inside the `resources` directory is referenced as `![](ch1/examples/ruby/foo.rb)`.
 
@@ -569,40 +651,37 @@ We will discuss the supported and the default attributes for images, and then sh
 
 Note that regardless of the image location, a Markua Processor can embed the image in the output format. For example, a web image does not need to be loaded from the web every time; it can be inlined in the output by the Markua Processor. A Markua Processor can also process images such that all images are placed on the web with URLs, and the images are loaded by the reader from the web.
 
-Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, `wrap` and `align` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
+Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, and `align` or `float` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
 
 #### Supported Attributes for Images
 
 The following are the supported attributes for image resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
+`align`
+: The `align` can be `left`, `right` or `middle`. The default is `middle`. Combined with `width` and `height`, this provides basic image formatting. When `align` is specified, text goes above and below the image, but the image and its surrounding whitespace occupies the entire width of the page. In terms of the specific values of `align`, a Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. Finally, note that `inside` and `outside` are not supported for `align`. If you are using those attributes, chances are you should be floating the text around the image by using the `float` attribute, not the `align` attribute.
+
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
-`wrap`
-: `true` or `false`. This specifies whether text wraps around the image, or whether it is only above or below the image. The default is determined by the value of the `align` attribute. If there is no value set for `align` or if the `align` is `middle`, the default value of `wrap` is `false`. Otherwise (if the `align` is `left`, `right`, `inside` or `outside`), the default value of `wrap` is true. If `true`, the Markua Processor should ensure that text flows around the image, based on the value of the `align` attribute. Note that a Markua Processor may force `wrap` to be `false` if `align` is `middle`, since flowing text around both sides of an image does not work well on some output formats.
-
-`align`
-: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. Combined with `width`, `height` and `wrap`, this provides basic image formatting. A Markua Processor must interpret `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead. Finally, note that the value of `middle` may cause a Markua Processor to ignore the value of `wrap` and consider `wrap` to be false.
-
-`float`
-: A Markua Processor may support `float` as a synonym for `align`. If both `float` and `align` are specified, `float` must be ignored.
-
-`fullbleed`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height`, `wrap` and `align` attributes are used instead and margins are respected.
-
-`height`
-: The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100.
-
 `cite`
 : An image can have a citation. A Markua Processor is free to combine this citation with the caption attribute or display it separately.
+
+`float`
+: The `float` can be `left`, `right`, `inside` or `outside`. The `left` and `right` attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Markua Processors such as Leanpub can export InDesign files. Also, note that `float` supports `inside` or `outside`, but `align` does not. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead.
+
+`fullbleed`
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
+
+`height`
+: The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}` or `{height: 70%}`.
 
 `url`
 : An image can have a URL, which is the URL of the `cite` attribute if present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote.
 
 `width`
-: The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100.
+: The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}` or `{width: 70%}`.
 
-Note that if only one of width and height are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both width and height are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both width and height.)
+Note that if only one of `width` and `height` are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both `width` and `height` are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both `width` and `height`.)
 
 For an example of the `cite` and `url` attributes, consider the following hypothetical image:
 
@@ -695,16 +774,16 @@ We will discuss the supported and the default attributes for videos, and then sh
 
 #### Supported Attributes for Video
 
-The following are the supported attributes for video resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support. Note that the `caption`, `class`, `wrap`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
+The following are the supported attributes for video resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support. Note that the `caption`, `class`, `fullbleed`, `height` and `width` attributes apply to the `poster` image for the video--not to the video itself during playback.
+
+`align`
+: The `align` can be `left`, `right` or `middle`. This applies to the `poster` image for the video, and works just like it does with images.
 
 `embed`
 : true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like youtube which disallows this. In this case, this should function like a link to external web page which (youtube app etc). A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
 
-`wrap`
-: `true` or `false`. This applies to the `poster` image for the video, and works just like it does with images.
-
-`align`
-: The `align` can be `left`, `right`, `middle`, `inside` or `outside`. This applies to the `poster` image for the video, and works just like it does with images.
+`float`
+: The `float` can be `left`, `right`, `inside` or `outside`.  This applies to the `poster` image for the video, and works just like it does with images. It is an error to specify both `align` and `float`.
 
 `fullbleed`
 : `true` or `false`. The default is `false`.  This applies to the `poster` image for the video, and works just like it does with images.
@@ -714,6 +793,9 @@ The following are the supported attributes for video resources, in addition to t
 
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it. Finally, if a Markua Processor is embedding a web video from a web video service (e.g. YouTube) which has a known algorithm for the location of the poster images for its videos, the Markua Processor may choose to use that poster image if a `poster` attribute is not explicitly specified. However, if a poster attribute is specified, then it must be used by the Markua Processor.
+
+`poster-format`
+: The format of the `poster` image, if it exists. If this attribute is not specified, the format of the `poster` is inferred from the `poster` image file extension. This attribute needs to exist only to support `poster` images which do not have file extensions.
 
 `transcript`
 : The URL or path to a transcript of the video, which should be shown or dictated to people who cannot view video. This helps people with visual disabilities view course material, and helps with ADA compliance. For example, what Leanpub does with a `transcript` is as follows: a URL is linked to in the caption (but in a way which does not affect the Table of Contents), and a path is assumed to be a path to a Markua file which is then used to produce a web page at a public URL, which then is also linked to in the caption in a way which does not affect the Table of Contents. With the Markua files for transcripts, Leanpub only supports certain resource types to be included in the transcript files themselves. Specifically, images, video, audio are not supported, but code, poetry, math and tables are supported. When Leanpub generates a transcript, the URLs are publicly accessible but obscure. Identical transcripts should not make duplicate transcript files on the web, and using a new UUID every time would violate this. However, not changing the transcript URL when its content changed could lead to bad outcomes. So, the URL of a transcript on the web should be scoped to the book and affected both by its filename and its content. What Leanpub does is: (filename minus extension minus period plus hyphen plus the SHA hash).html. Including the filename eliminates collisions if filenames are unique but the hashes are not.
@@ -831,6 +913,8 @@ The default value of the `format` attribute for a code resource inserted as a fi
 If the code resource is a local or web resource, it defaults to `guess`.
 
 If the code resource is an inline resource, the default varies based on the delimiter. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the code language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
+
+Finally, note that there is a `default-code-language` setting on the entire Markua document. The value of this setting only affects local resources, web resources or inline resources inserted with backticks--it has no effect on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
 
 #### Local Code Resources
 
@@ -1337,44 +1421,68 @@ The syntax to insert a table defined in an external file on the local filesystem
 
 The table_path lists the path to the external file which defines the table.
 
+The following are the principles of Markua tables:
+
+1. Formatting never applies to anything above it.
+2. Use the fewest formatting characters possible.
+3. Use the fewest attributes possible.
+
 To insert a table defined inline, you just insert it:
 
 ~~~
-{type: table, optional: attribute_list}
+{optional: attribute_list}
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
+|------------|------------|------------|
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
 ~~~
 
+You don't need `type: table` when the table is defined inline, of course, since it's clear.
+
 The header is separated from the body cells by a section separator, i.e. a row of `=` signs and `|` characters. Every row of cells is separated by a row separator, i.e. a row of `-` signs and `|` characters. The `|` characters **MUST** line up and **MUST** start and end each line. The header and footer rows are both optional, of course.
 
 The header and footer rows are both optional. The following are also legal tables...
 
-Just content rows:
-
-~~~
-|============|============|============|
-| Content A1 | Content B1 | Content C1 |
-|------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
-|------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
-|============|============|============|
-~~~
-
-Header, one content row, footer:
+A header row and three body rows:
 
 ~~~
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
+|------------|------------|------------|
+| Body A2    | Body B2    | Body C2    |
+|------------|------------|------------|
+| Body A3    | Body B3    | Body C3    |
+|============|============|============|
+~~~
+
+Just body rows:
+
+~~~
+|============|============|============|
+| Body A1    | Body B1    | Body C1    |
+|------------|------------|------------|
+| Body A2    | Body B2    | Body C2    |
+|------------|------------|------------|
+| Body A3    | Body B3    | Body C3    |
+|============|============|============|
+~~~
+
+Header, one body row, footer:
+
+~~~
+|============|============|============|
+| Header A   | Header B   | Header C   |
+|============|============|============|
+| Body A1    | Body B1    | Body C1    |
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
@@ -1386,11 +1494,11 @@ No footer:
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 ~~~
 
@@ -1398,73 +1506,201 @@ No header:
 
 ~~~
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
 ~~~
 
-If there are only two rows separated by a section separator, they are interpreted as a header and a content row:
+If there are only two rows separated by a section separator, they are interpreted as a header and a body row:
 
 ~~~
 |============|============|============|
 | Header A   | Header B   | Header C   |
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |============|============|============|
 ~~~
 
-If there are only two rows separated by a row separator, they are just two content rows:
+If there are only two rows separated by a row separator, they are just two body rows:
 
 ~~~
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |============|============|============|
 ~~~
 
-If there is only one row, it is interpreted as a content row, not a header row:
+If there is only one row, it is interpreted as a body row, not a header row:
 
 ~~~
 |============|============|============|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |============|============|============|
 ~~~
 
-You may initially balk at typing row separators. My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
-
-You can also specify left, center and right alignment of columns with colons in the header separator row, just as with simple tables. The following columns are left-, center-, and right-aligned respectively:
+Finally, headers and footers can have multiple rows in them. This won't be used that frequently, but it is fully supported:
 
 ~~~
-|=============|==============|=============|
-| Header A    | Header B     | Header C    |
+|============|============|============|
+| Header A1  | Header B1  | Header C1  |
+|------------|------------|------------|
+| Header A2  | Header B2  | Header C2  |
+|------------|------------|------------|
+| Header A3  | Header B3  | Header C3  |
+|============|============|============|
+| Body A1    | Body B1    | Body C1    |
+|------------|------------|------------|
+| Body A2    | Body B2    | Body C2    |
+|------------|------------|------------|
+| Body A3    | Body B3    | Body C3    |
+|------------|------------|------------|
+| Body A4    | Body B4    | Body C4    |
+|============|============|============|
+| Footer A1  | Footer B1  | Footer C1  |
+|------------|------------|------------|
+| Footer A2  | Footer B2  | Footer C2  |
+|------------|------------|------------|
+| Footer A3  | Footer B3  | Footer C3  |
+|============|============|============|
+~~~
+
+You may initially think that typing row separators would be annoying. My recommended approach is to write the table first, and then copy and paste the row separators. If you get the column widths wrong, updating row separators is a headache, and you'll end up copying and pasting them anyway.
+
+#### Table Column Alignment
+
+You can also specify the left, center and right alignment of columns. This can be done separately for the header, for the body, and for the footer. Also, any individual table cell--except the first one in the header, body or footer--can override the column alignment of the header, body, and footer.
+
+This is in keeping with the principles that formatting never applies to anything above it, and to use the fewest formatting characters possible.
+
+The exact rules will be specified shortly, but it helps to start with a few examples.
+
+This table has a left-aligned column with a header of Header A, a centered column with a header of Header B, and a right-aligned column with a header of Header C:
+
+~~~
 |:============|:============:|============:|
-| Content A1  | Content B1   | Content C1  |
+| Header A    | Header B     | Header C    |
+|=============|==============|=============|
+| Body A1     | Body B1      | Body C1     |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
 ~~~
 
-Since the alignment is done on the separator row above the first content row, it even works to align a column with no header or footer. The following columns are also left-, center-, and right-aligned respectively:
+By default, all cells in the table header, body and footer are left-aligned.
+
+So, the following table has left-aligned headers, but its body columns are left-, center-, and right-aligned respectively:
+
+~~~
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Body A1     | Body B1      | Body C1     |
+|-------------|--------------|-------------|
+| Body A2     | Body B2      | Body C2     |
+|-------------|--------------|-------------|
+| Body A3     | Body B3      | Body C3     |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
+You can use different alignments for the header and the body of the table.
+
+This table is just like the previous one, but it has left-aligned (Header A), centered (Header B) and right-aligned (Header C) header columns, with right-aligned, left-aligned and then centered body columns.
+
+~~~
+|:============|:============:|============:|
+| Header A    | Header B     | Header C    |
+|============:|:=============|:===========:|
+| Body A1     | Body B1      | Body C1     |
+|-------------|--------------|-------------|
+| Body A2     | Body B2      | Body C2     |
+|-------------|--------------|-------------|
+| Body A3     | Body B3      | Body C3     |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
+You can also override the alignment of an individual cell. This table is just like the previous one, but its Body B2 cell is overridden to be centered not left-aligned:
+
+~~~
+|:============|:============:|============:|
+| Header A    | Header B     | Header C    |
+|============:|:=============|:===========:|
+| Body A1     | Body B1      | Body C1     |
+|-------------|:------------:|-------------|
+| Body A2     | Body B2      | Body C2     |
+|-------------|--------------|-------------|
+| Body A3     | Body B3      | Body C3     |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
+Formatting a separator row (`====`) cascades downward. Header alignent cascades into the body and footer; body alignment cascades into the footer.
+
+However, individual cell separater row (`----`) footing does NOT cascade downward. It overrides an individual cell only; it does not change the column alignment going forward. In the above table, Body B3 is left-aligned (like its body column) not centered (like Body B2).
+
+This has the following consequence:
+
+The cells in the first row of a table header, table body or table footer must have the same alignment as the header, body or footer column they are in. They are used to define the alignment, not override it. If you need other cells in the table header, body or footer to have different alignments, those must do the overriding.
+
+So, if you want every other cell in a column to have a different alignment than the first non-header cell in that column, each of them must have the overridden alignment. This would not be true if alignment overrides cascaded downward, but that would confuse a lot more people than helping this small edge case.
+
+Since the alignment is done on the separator row above the first body row, it even works to align a column with no header or footer. The following columns are also left-, center-, and right-aligned respectively:
 
 ~~~
 |:===========|:==========:|===========:|
-| Content A1 | Content B1 | Content C1 |
+| Body A1    | Body B1    | Body C1    |
 |------------|------------|------------|
-| Content A2 | Content B2 | Content C2 |
+| Body A2    | Body B2    | Body C2    |
 |------------|------------|------------|
-| Content A3 | Content B3 | Content C3 |
+| Body A3    | Body B3    | Body C3    |
 |============|============|============|
 ~~~
+
+You can override alignments anywhere.
+
+The following table has left-aligned (A), centered (B) and right-aligned (C) header and footer columns, with right-aligned (A), left-aligned (B) and then centered (C) body columns--and it also overrides Header B2 to be right-aligned, Body A2 to be centered and Footer C2 to be left-aligned:
+
+~~~
+|:===========|:==========:|===========:|
+| Header A1  | Header B1  | Header C1  |
+|------------|-----------:|------------|
+| Header A2  | Header B2  | Header C2  |
+|------------|------------|------------|
+| Header A3  | Header B3  | Header C3  |
+|===========:|:===========|:==========:|
+| Body A1    | Body B1    | Body C1    |
+|:----------:|------------|------------|
+| Body A2    | Body B2    | Body C2    |
+|------------|------------|------------|
+| Body A3    | Body B3    | Body C3    |
+|------------|------------|------------|
+| Body A4    | Body B4    | Body C4    |
+|:===========|:==========:|===========:|
+| Footer A1  | Footer B1  | Footer C1  |
+|------------|------------|:-----------|
+| Footer A2  | Footer B2  | Footer C2  |
+|------------|------------|------------|
+| Footer A3  | Footer B3  | Footer C3  |
+|============|============|============|
+~~~
+
+However, just because you can, doesn't mean that you should.
+
+#### Multiple-line rows, row spans and column spans
 
 You can have more than one row of content in cells, and there is no ambiguity since each row of cells is separated with a row of `-` signs and `|` characters:
 
@@ -1472,14 +1708,14 @@ You can have more than one row of content in cells, and there is no ambiguity si
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
-| Content A1  | Content B1   | Content C1  |
-| is really   | is longer    |             |
+| Body A1     | Body B1      | Body C1     |
+| is really   | is here      |             |
 | really      |              |             |
 | long        |              |             |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1491,11 +1727,29 @@ You can specify a column span just by skipping a `|` in the appropriate place:
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
-| Content A1 and B1 Merged   | Content C1  |
+| Body A1 and B1 Merged      | Body C1     |
 |-------------|--------------|-------------|
-| Content A2  | Content B2   | Content C2  |
+| Body A2     | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
+|=============|==============|=============|
+| Footer A    | Footer B     | Footer C    |
+|=============|==============|=============|
+~~~
+
+Note that the alignment of the cell in the merged columns is that of its leftmost column, if no override is done. So, in the above table, Body A1 and B1 Merged is left-aligned not centered.
+
+Now, if you want to override the alignment on a merged cell, you do that in the leftmost cell. So, in the below table, Body A2 and B2 Merged is centered not left-aligned.
+
+~~~
+|=============|==============|=============|
+| Header A    | Header B     | Header C    |
+|:============|:============:|============:|
+| Body A1     | Body B1      | Body C1     |
+|:-----------:|--------------|-------------|
+| Body A2 and B2 Merged      | Body C2     |
+|-------------|--------------|-------------|
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1507,11 +1761,11 @@ You can specify a row span just by skipping a part-row of `-` signs in the appro
 |=============|==============|=============|
 | Header A    | Header B     | Header C    |
 |:============|:============:|============:|
-| Content A1  | Content B1   | Content C1  |
+| Body A1     | Body B1      | Body C1     |
 | and A2      |--------------|-------------|
-| Merged      | Content B2   | Content C2  |
+| Merged      | Body B2      | Body C2     |
 |-------------|--------------|-------------|
-| Content A3  | Content B3   | Content C3  |
+| Body A3     | Body B3      | Body C3     |
 |=============|==============|=============|
 | Footer A    | Footer B     | Footer C    |
 |=============|==============|=============|
@@ -1523,34 +1777,53 @@ You can also individually align cells with colons in the `-` part-row **above** 
 |=============|===============|=============|
 | Header A    | Header B      | Header C    |
 |:============|:=============:|============:|
-| Content A1 and B1 Merged    | Content C1  |
+| Body A1 and B1 Merged       | Body C1     |
 |------------:|:--------------|-------------|
-| Content A2  | Content B2    | Content C2  |
+| Body A2     | Body B2       | Body C2     |
 |:-----------:| and B3 Merged |-------------|
-| Content A3  |               | Content C3  |
+| Body A3     |               | Body C3     |
 |=============|===============|=============|
 | Footer A    | Footer B      | Footer C    |
 |=============|===============|=============|
 ~~~
 
-In that table, column A is left-aligned, column B is center-aligned and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is center-aligned and merged cell B2 and B3 is left-aligned.
+In that table, column A is left-aligned, column B is centered and column C is right-aligned. However, cell A2 is right-aligned, cell A3 is centered and merged cell B2 and B3 is left-aligned.
 
+{#table-attributes}
 #### Supported Attributes for Tables
 
 The following is the supported attribute for table resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
-`widths`
-: Tables have a `widths` attribute, which sizes the column widths from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Example: `{widths: "10,30,*,10"}`, `{widths: "10,*,40,*}`. If the sums exceed 100 (ignoring the `*`s), the widths attribute values must be ignored.
+`column-widths`
+: The column widths, from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Examples: `{column-widths: "10,30,*,10"}`, `{column-widths: "10,*,40,*"}`. If the sums exceed 100 (ignoring the `*`s), the Markua Processor must raise an error. Every specified value must be at least 1, and every * must compute to at least 1, or the Markua Processor must raise an error.
 
-Just as with images, the `class` can be used by Markua Processors to provide the appropriate styling. (In fact, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.)
+`style`
+: The style of the table. Values can be `simple`, `grid` or any other value. All Markua Processors must support values of `simple` and `grid` for tables. The default is `simple`. A Markua Processor may use whatever formatting it wants with `simple`, but it should be clear which cells are part of the table header, body and footer. A Markua Processor may also use whatever formatting it wants with `grid`, but it must show grid lines around each table cell. If a Markua Processor does not recognize the value of the `style`, it must format it as `simple` instead of producing an error. (It can, however, produce a warning.)
 
-#### Optional Simpler Table Syntax Support
+`width`
+: The width of the table, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}` or `{width: 70%}`.
 
-The actual syntax to define a Markua table, either in an external file or inline, is slightly more complex than other excellent Markdown table syntaxes, such as the table syntax defined by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table) and extended by [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/).
+A Markua Processor may do whatever it wants when outputting a table. For example, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.
 
-The reason for this complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
+#### A Markua Processor May Optionally Support The GitHub Flavored Markdown Table Syntax
 
-Markua makes the following compromise: Markdown Processors are free to support alternative Markdown table syntaxes **in addition to** the Markua table syntax. For example, Leanpub also supports the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) table syntax in Markua documents.
+The Markua specification only defines one table syntax. Tables are complex enough without other table syntaxes cluttering things up.
+
+However, if a Markua Processor understands the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) table syntax, which is based on the syntax originally specified by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table), then it may support it as well.
+
+There are many Markdown documents in the world which use the GitHub Flavored Markdown table syntax, and implementors of Markua Processors may wish to support them.
+
+There is no requirement for a Markua Processor to support any table syntax except that defined by the Markua specification, however.
+
+Also, another good reason to support the GitHub Flavored Markdown table syntax is that the Markua table syntax is more complex than the GitHub Flavored Markdown table syntax. The reason for this complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
+
+Since Markua tables support increased complexity, there were three choices for how to handle the simple cases:
+
+a) Define a separate "simple" table syntax as part of the Markua spec. This would be similar to the simple versus complex lists.
+b) Just use the same Markua table syntax for every type of table.
+c) Allow alternate table syntaxes to be supported by Markua processors.
+
+Frankly, there is no perfect decision here. Choice (a) may be the best solution; choice (b) is the simplest and most opinionated; choice (c) is the most pragmatic. In this case, pragmatism wins: it's arguably better to just optionally support the GitHub Flavored Markdown table syntax verbatim than for Markua to define a "simple" table syntax which is incompatible with it.
 
 {#whitespace}
 # Whitespace: Spaces, Tabs and Newlines
@@ -1563,7 +1836,7 @@ So, with poetry taken care of, the question of prose remains.
 
 There are the four principles of Markua's whitespace handling:
 
-1. No invisible formatting is allowed. If you can't see it, it has no effect.
+1. You should be able to look at a Markua document and know what is produced. Invisible formatting is frowned upon.
 2. Paragraphs and sentences should be handled consistently, regardless of indentation and spaces after periods.
 3. Manual whitespace formatting should be discouraged.
 4. Newlines are newlines; spaces are spaces. These are different things.
@@ -1572,7 +1845,7 @@ These simple goals have far-reaching consequences:
 
 1. Whitespace at the end of a line or file is ignored.
 2. It doesn't matter how many spaces you add after a sentence.
-3. All consecutive newlines after the second newline are ignored.
+3. All consecutive blank lines after the first blank line are ignored when separating paragraphs, and all consecutive blank lines after the second blank line are ignored when separating lists.
 4. You can't manually wrap text with newlines being used as though they are spaces, but you can add forced line breaks without hacks.
 
 Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
@@ -1645,13 +1918,13 @@ This is especially important with the whitespace at the end of a file: trailing 
 
 ## Spaces and Tabs
 
-### Spaces and Tabs at the Beginning of a Line are Removed
+### Spaces and Tabs at the Beginning of a Line are Only to Determine List Containment, and Extra Spaces are Removed
 
-Markua handles spaces and tabs at the beginning of a line similarly to Markdown: it is only used to determine whether the content is in the paragraph or some nested block element (e.g. a nested list).
+Spaces and tabs at the beginning of a line are only used to determine whether the content is contained in a list item--or, in the case of a nested list, which list the list item is contained in.
 
-So, you can't manually indent any lines in a paragraph in Markua, even after a forced line break.
+Besides this, in a paragraph, any manual indentation (using spaces or tabs at the beginning of a line) is just removed. This is even true after a forced line break, using a single newline.
 
-If you want to write a poem in Markua, start a poetry resource with `___` or `---`. This will have the added benefit of allowing your poetry to be formatted using special font sizes and margins, to be more poetic than prose.
+So, if you're writing a sonnet, you can't manually indent the last two lines just by hitting Enter and adding two spaces at the beginning of the line. Instead, you need to use a [poetry resource](#poetry). To do this, you start a poetry resource with `___` or `---`. This will have the added benefit of allowing your poetry to be formatted using special font sizes and margins, to be more poetic than prose.
 
 ### Spaces and Tabs at the End of a Line are Removed
 
@@ -1677,18 +1950,21 @@ However, many authors type one space at the end of their sentences. So, a Markua
 
 Regardless of how it made the determination about whether a sentence has ended, if a Markua Processor decides that something is, in fact, the end of a sentence, it must output the same amount of space every time. This can be one space, one and a half spaces, two spaces or some other amount.
 
+{#lists}
 # Lists
 
-Markua supports bulleted lists, numbered lists and definition lists.
+Markua supports two types of lists, bulleted lists and numbered lists, which can be formatted as either simple or complex lists.
 
-Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
+The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of simple and complex lists, which will contain examples of both.
+
+Note that Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
 {#bulleted-lists}
 ## Bulleted Lists
 
-Markua lets you make a bulleted list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by 1-4 spaces or 1 tab, followed by text content. You can't mix and match asterisks and hyphens in the same list. Here's how this looks:
+Markua lets you make a bulleted list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by one space, followed by text content. You can't mix and match asterisks and hyphens in the same list.
 
-You can build a list out of items starting with an asterisk and one space:
+You can build a bulleted list out of items starting with an asterisk and one space:
 
 ~~~
 * foo
@@ -1696,27 +1972,24 @@ You can build a list out of items starting with an asterisk and one space:
 * baz
 ~~~
 
-You can build a list out of items starting with a hyphen and one tab:
+You can build a bulleted list out of items starting with a hyphen and one space:
 
 ~~~
--    one
--    two
--    three
+- one
+- two
+- three
 ~~~
 
-Markua could have chosen only the asterisk (`*`) or the hyphen (`-`) and only one amount of spaces or tabs after it, but this would be too prescriptive. Markua is as opinionated as possible, but that would have been overkill.
+Markua could have supported just one of the asterisk or the hyphen, but this would have been too prescriptive.
 
-These are the specific rules for bulleted lists:
+To make a bulleted list in Markua:
 
-* Start each list item a bullet which is either an asterisk (`*`) or a hyphen (`-`).
+* Start each list item with either an asterisk (`*`) or a hyphen (`-`).
 * You can't mix and match asterisks and hyphens in the same list.
-* Between 1 and 4 spaces or one tab is allowed after each bullet.
-* You cannot mix tabs and spaces: if a tab is used after a bullet, tabs must be used after each bullet.
-* If spaces are used after each bullet, the same number of spaces must be used after each bullet in the list.
-* A varied number of spaces or tabs or a mixture of tabs and spaces does not create a bulleted list. Instead, it creates a paragraph with line breaks inside it.
-* A single element bulleted list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk or hyphen would be even stupider.
+* Only one space is allowed after each bullet. Just as with headings, there is no reason to support any other number of spaces, and the increased consistency is a benefit.
+* A single-element bulleted list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk or hyphen would be even stupider.
 
-In terms of style guidance, the preferred bullet type in Markua is the asterisk, and the preferred whitespace after the bullet is one space.
+In terms of style guidance, the preferred bullet type in Markua is the asterisk.
 
 {#numbered-lists}
 ## Numbered Lists
@@ -1736,17 +2009,19 @@ The following choices of numbering system are supported:
 4. Uppercase Roman numerals
 5. Lowercase Roman numerals
 
-Unlike in Markdown, in Markua **the number that begins the list in the manuscript is the number that begins the list in the output**.
+Unlike in Markdown, in Markua the number that begins the list in the manuscript is the *same* number that begins the list in the output.
 
-To make a numbered list in Markua, you start one or more consecutive lines with either a consecutive number or the same number (or letter or roman numeral), followed by a period or a right-parenthesis, followed by between 1 and 4 spaces or 1 tab, followed by text content.
+To make a numbered list in Markua:
 
-Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex.
+* Start two or more consecutive lines with either a consecutive (e.g. `1.`, `2.`, `3.`) or the first (e.g. `1.`, `1.`, `1.`)  number, letter or Roman numeral, each followed by either a period or right parenthesis, then exactly one space, then text content.
+* Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. These are discussed later.
+* You need to follow the period or parenthesis with exactly one space. Markua very deliberately does not allow more than one space following the period or right-parenthesis: if your list grows to 10 or more items, you should not waste time adding a space to items 1-9 to line their content up with item 10; similarly, if your list grows to 100 or more items you should not waste time adding yet another space to items 1-99 to line their content up with item 100. So, Markua just forbids more than one space after the period or parenthesis. Besides the time saved, the increased consistency is a benefit.
 
-Note that there are one or more spaces after the period. Unlike with a bulleted list, the number of spaces does not need to be the same after each item (since numbers may have 2 or more digits, so a variable number of spaces may be desired to line everything up).
+Note that a Markua Processor must output the same number, letter or Roman numeral which is in the manuscript. A Markua Processor may choose to respect the parentheses versus period decision, or it may choose to use all periods or all parentheses, or it may choose to use parentheses in, say, PDF, but use periods in, say, HTML, EPUB and MOBI. There is no formal, official mapping of Markua to any output format, to encourage competition and dynamic ecosystem of Markua Processors.
 
 This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections.
 
-Ascending decimal numbers starting from 1:
+You can build a numbered list out of ascending decimal numbers starting from 1:
 
 ~~~
 1. foo
@@ -1754,7 +2029,7 @@ Ascending decimal numbers starting from 1:
 3. baz
 ~~~
 
-Ascending decimal numbers starting from 1, with parentheses used instead of periods:
+You can build a numbered list out of ascending decimal numbers starting from 1, with parentheses used instead of periods:
 
 ~~~
 1) foo
@@ -1762,15 +2037,23 @@ Ascending decimal numbers starting from 1, with parentheses used instead of peri
 3) baz
 ~~~
 
-Ascending decimal numbers starting from a higher number:
+You can build a numbered list out of ascending decimal numbers followed by periods starting from a higher number:
 
 ~~~
-9.  foo
+9. foo
 10. bar
 11. baz
 ~~~
 
-Descending decimal numbers:
+You can build a numbered list out of ascending decimal numbers followed by parentheses starting from a higher number:
+
+~~~
+9) foo
+10) bar
+11) baz
+~~~
+
+You can build a numbered list out of descending decimal numbers:
 
 ~~~
 3. foo
@@ -1778,7 +2061,7 @@ Descending decimal numbers:
 1. baz
 ~~~
 
-Identical decimal numbers for the lazy (producing 1, 2, 3):
+You can build a numbered list out of identical decimal numbers, if you are lazy (producing 1, 2, 3):
 
 ~~~
 1. foo
@@ -1786,7 +2069,7 @@ Identical decimal numbers for the lazy (producing 1, 2, 3):
 1. baz
 ~~~
 
-Ascending lowercase letters:
+You can build a numbered list out of ascending lowercase letters:
 
 ~~~
 a. foo
@@ -1794,7 +2077,7 @@ b. bar
 c. baz
 ~~~
 
-Ascending lowercase letters, with parentheses used instead of periods:
+You can build a numbered list out of ascending lowercase letters, with parentheses used instead of periods:
 
 ~~~
 a) foo
@@ -1802,7 +2085,7 @@ b) bar
 c) baz
 ~~~
 
-Ascending uppercase letters:
+You can build a numbered list out of ascending uppercase letters:
 
 ~~~
 I. foo
@@ -1810,145 +2093,607 @@ J. bar
 K. baz
 ~~~
 
-Ascending uppercase Roman numerals:
+You can build a numbered list out of ascending uppercase Roman numerals:
 
 ~~~
-I.   foo
-II.  bar
+I. foo
+II. bar
 III. baz
 ~~~
 
-The full set of numbering rules for numbered lists are specified in an [appendix](#numbered-list-numbering-rules). However, it's important to emphasize what happens with single-element numbered lists.
+You can build a numbered list out of ascending lowercase Roman numerals:
 
-### In Markua, A Single-Element Numbered List is Not a List
+~~~
+i. foo
+ii. bar
+iii. baz
+~~~
+
+### In Markua, There Are No Single-Element Numbered Lists
 
 Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
 
 `1986. What a great season.`
 
-This would produce a single-element numbered list starting with `1.`--which in my opinion, is a blatant violation of the Principle of Least Surprise.
+In Markdown, this would produce the following single-element numbered list:
 
-Now, in Markua, if we supported single-element numbered lists, this would produce a single-element numbered list starting with `1986.`--which would be almost as bad as in Markdown.
+`1. What a great season.`
 
-(By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1986\. What a great season.` to avoid this.)
+In my opinion, is a blatant violation of the Principle of Least Surprise. (By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1986\. What a great season.` to avoid this.)
+
+Now, if Markua supported single-element numbered lists, this would produce a single-element numbered list:
+
+`1986. What a great season.`
+
+This wouldn't be as bad as what Markdown does, but it wouldn't be good either! Exactly how stupid it would look would be determined by how numbered lists were formatted by the Markua Processor, but it certainly would look wrong.
 
 But what to do?
 
-The answer is simple: in Markua, **single-element numbered lists are not lists**. This is true for numbered lists only--single-element bulleted lists and single-element definition lists are both lists. (In the case of a bulleted list it's stupid, but the alternative is stupider. In the case of a definition list there's actually a legitimate usage of a single-element definition list: a single definition.)
+The answer is simple:
 
-So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with numbers and periods or parentheses.
+**In Markua, there are no single-element numbered lists**.
 
-This still has some possibly incorrect interpretations, but these will be a lot more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua will feel more like programming than writing.
+If you try to make one, it just turns into a paragraph.
 
-{#multi-paragraph-list-items}
-## Multi-Paragraph List Items
+This is true for numbered lists only--single-element bulleted lists are lists. (It's stupid, but the alternative would have been stupider.)
 
-If lists were simple, they would contain be a bunch of simple one-line list items like:
+So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with consecutive or identical numbers, letters or Roman numerals, followed by a period or right parenthesis, followed by a space, followed by text content.
+
+This still has some possibly incorrect interpretations, but these will be a *lot* more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua would feel more like programming than writing.
+
+### Numbered List Numbering Rules
+
+*This section is highly technical, and can be [skipped](#simple-lists) or quickly skimmed by almost all authors. It's probably only interesting to someone writing a Markua Processor.*
+
+There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
+
+If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a forced line break for each single newline. In this instance, the output directly matches the input, including all the numbering.
+
+In theory, Markua supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive number, either increasing or decreasing.
+2. Every item in the list begins with the same number.
+
+This is not actually quite true.
+
+See, the notion of "consecutive" is easy to explain and to check for decimal numbers, either in increasing or decreasing order. `1, 2, 3, ...`, `456, 457, 458, ...`, or `5, 4, 3` are all easily verified as consecutive, both by humans and computers.
+
+However, Markua also supports numbered lists using uppercase and lowercase alphabetical numbering, as well as uppercase and lowercase Roman numeral numbering, and in increasing or decreasing order.
+
+In the case of alphabetical numbering, checking "consecutive" is harder. It's relatively straightforward for the first 26 items, but then all bets are off. In case you're curious, here is the sequence used in HTML for increasing alphabetical numbering:
+
+`a, b, ..., z, aa, ab, ..., az, ba, bb, ... bz, za, zb, ..., zz, aaa, aab, ..., aaz, aba, abb, ...`
+
+In terms of Roman numerals, it's even worse. I'm sure that someone in a Classics department (or in the NFL) knows the algorithm by heart, but I don't.
+
+So, what are Markua authors and implementors of Markua Processors to do?
+
+Markua makes this simpler by specifying the following rules.
+
+Markua *actually* supports creating a numbered list based on a different set of conditions based on the numbering type.
+
+For decimal numbers, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive number, either increasing or decreasing.
+2. Every item in the list begins with `1.`
+
+For uppercase and lowercase alphabetical numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase, or `Z.` for uppercase. (This way, implementors of Markua Processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
+2. Every item in the list begins with `a.` for lowercase letters or `A.` for uppercase letters.
+
+These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single-element list beginning with "AA" instead!
+
+For uppercase and lowercase Roman numeral numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
+
+1. Every item in the list begins with a consecutive Roman numeral, followed by a period, and the lettering does not extend past `xii.` for lowercase Roman numerals or `XII.` for uppercase Roman numerals. To be clear, this means that the only valid consecutive lowercase Roman numerals are `i, ii, iii, iv, v, vi, vii, viii, ix, x, xi, xii`, and that the only valid consecutive uppercase Roman numerals are `I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII`.
+2. Every item in the list begins with `i.` for lowercase Roman numerals or `I.` for uppercase Roman numerals.
+
+The combination of the rules for Roman numeral numbering means that you can have an arbitrarily long Roman numeral list starting from `i.` or `I.`, but that implementors of Markua Processors don't need to write code to figure out whether `MCMLXXV` is a valid Roman numeral, and what the consecutive Roman numeral sequence after it is.
+
+If you're wondering why I picked `xii` and `XII` for the last consecutive lowercase and uppercase Roman numerals to respect: this is Roman numeral 12, and the main usage of Roman numerals in modern life is in clock faces.
+
+Speaking of clock faces, I have bad news for fans of watches and antique clocks:
+
+* The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
+* The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
+
+It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-Roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
+
+In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
+
+If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
+
+{#simple-lists}
+## Simple Lists
+
+Both bulleted and numbered lists can either be simple lists or complex lists. Whereas the distinction between bulleted and numbered lists was based on the list delimiter, simple and complex lists are distinguished by the indentation and newlines.
+
+Yes, this distinction essentially comes down to the ancient computer science debate of tabs versus spaces.
+
+**A simple list uses one tab per nested indentation level.**
+
+If you use spaces for indentation, what you are creating is a complex list, which is discussed next.
+
+Besides the formatting rules for bulleted or numbered lists, the rules for a simple list are:
+
+* There are no newlines in list items. Each list item in a simple list is one paragraph with no forced line breaks or blank lines.
+* You cannot insert resources with attribute lists in list items. These are inserted after forced line breaks or blank lines, both of which require newlines, and there are no newlines in list items of simple lists.
+* There is a maximum of **four** levels of nesting of lists, including the outermost list. (So, you can have three levels of nested lists under each outermost list item.)
+* If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
+* The first indentation level is no indentation: it is at the left margin.
+* You must use exactly one tab per nested indentation level.  (So, the number of tabs you can have is 0, 1, 2 or 3.)
+* You cannot use spaces to indent list items. Simple lists only contain tabs.
+
+This is an example of a simple list which has the maximum number (four) of levels of nested list:
 
 ~~~
-* This is simple.
-* So is this.
-* This too!
+1. foo
+	a) lorem
+		i. unus
+			- one
+			- two
+			- three
+		ii. duo
+		iii. tres
+	b) ipsum
+	c) dolor
+2. bar
+3. baz
 ~~~
 
-However, in Markdown, list items can contain multiple paragraphs, and it makes sense for Markua to support this. If a list is going to contain list items with multiple paragraphs, then there should be blank lines between each list item.
+## Flat Lists
 
-As with Markdown, every paragraph in a list item after the first one must be indented by four spaces or one tab. This lets the Markua Processor know that the list is not over, but is instead being continued.
+The examples of bulleted and numbered lists in the [Bulleted Lists](#bulleted-lists) and [Numbered Lists](#numbered-lists) sections above were *flat lists*, which did not contain any indentation.
 
-The following is legal Markdown and legal Markua:
+Every item in a flat list is at the outermost level, and there are no newlines in list items. A flat list is a special case, in that it conforms to all the rules for *both* a simple list and a complex list.
+
+A flat list is so simple that it is not just a simple list, it's also a complex list. *Whoa.*
+
+## Complex Lists
+
+Whereas simple lists use tabs for indentation and cannot have newlines within list items, **a complex list uses spaces for indentation levels and can have newlines within list items**.
+
+Using spaces allows for a lot more complex formatting of list items which is still understandable, including lining up nested resources and multiple-paragraph list items. So, these are called complex lists not "spaces lists", since the distinguishing feature is the complexity supported by the spaces, not the spaces themselves.
+
+Besides the formatting rules for bulleted or numbered lists, the rules for a complex list are:
+
+* Each list item in a complex list can be one or more paragraphs, and each paragraph can contain forced line breaks. Specifically, there can be forced line breaks (formed by single newlines) and blank lines (formed by exactly two consecutive newlines) in list items.
+* You can insert resources with attribute lists in list items. These are inserted after forced line breaks or blank lines.
+* After any forced line break or blank line, the content must be lined up with the content in the above line using the appropriate number of spaces (not tabs). This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
+* There is a maximum of **four** levels of nesting of lists, including the outermost list. So, you can have three levels of nested lists under each outermost list item.
+* If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
+* The first indentation level is no indentation: it is at the left margin.
+* You must use spaces to line up the content after newlines in a list item with the start of the content in the first line of the list item. So, the amount of indentation inside a list item is actually *not* arbitrary; it is completely determined by how many spaces you need to line up with the content in the first line of the list item. For a bulleted list this will always be 2 spaces (1 for the `*` or `-`, followed by 1 for the space); for a numbered list this will always be at least 3 spaces (1 or more for the number/letter/Roman numeral, 1 for the `.` or `)`, and 1 for the space).
+* You cannot use tabs to indent list items or line up content in list items. Complex lists only contain spaces. If you use a text editor which converts tabs to spaces, then if you attempt to create a simple list, what you actually are doing is creating a complex list. However, if all tabs are converted to (the same number of) spaces, any simple list becomes a valid complex list.
+
+A> Yes, this is one of the reasons why simple lists cannot contain newlines inside list items. If that was allowed, the natural thing to do would be to support using tabs and spaces to align complex content in those list items. However, what this would also result in would be that converting tabs to spaces could break a list: if we allowed tabs to be used to align subsequent paragraphs in a list item, then converting those tabs to spaces could, in certain cases, result in an incorrect number of spaces being used. This would then result in a valid list becoming an invalid list. A common text editor setting which modifies formatting in an invisible way should not be able to break a Markua document, so forcing tab-indented lists to be simple lists ensures that this is the case. This is preferable to either banning tabs (since many people prefer tabs) or to attempting to support complex lists using tabs (which would be both brittle and confusing).
+
+As discussed, if you attempt to nest more than four levels of nesting, the Markua Processor must raise an error. However, if you violate the indentation rules or newline rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal non-list content, such as a paragraph with line breaks. The reason for this is simple: every block element which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which actually causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Any other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
+
+You can do everything with a complex list that you can do with a simple list. This is a complex list which is the equivalent of the nested list above:
+
+~~~
+1. foo
+   a) lorem
+      i. unus
+         - one
+         - two
+         - three
+      ii. duo
+      iii. tres
+   b) ipsum
+   c) dolor
+2. bar
+3. baz
+~~~
+
+However, you can do a lot more with a complex list as well.
+
+You can add optional blank lines between some or all of the nested lists, just for readability:
+
+~~~
+1. foo
+
+   a) lorem
+      i. unus
+         - one
+         - two
+         - three
+      ii. duo
+      iii. tres
+
+   b) ipsum
+
+   c) dolor
+
+2. bar
+
+3. baz
+~~~
+
+You can make multiple paragraph list items using blank lines, and add forced line breaks using single newlines:
+
+~~~
+1. This is the first paragraph in the first item in the list.
+
+   This is the second paragraph in the first item in the list. It is followed by a nested list.
+
+   a) lorem
+      i. unus
+         - This is part of the first list item in a nested list.
+           This is still part of the first list item in a nested list, with a forced line break.
+         - two
+         - three
+      ii. duo
+      iii. tres
+
+   b) ipsum
+
+   c) dolor
+
+2. bar
+
+3. baz
+~~~
+
+Note that the amount of space to indent is determined by the content, and that is determined by the width of the number:
+
+~~~
+9. This is the first item in the list.
+   This is still part of the first item in the list.
+   a) lorem
+   b) ipsum
+   c) dolor
+10. This is the second item in the list.
+    This is still part of the second item in the list.
+    a) lorem
+    b) ipsum
+    c) dolor
+~~~
+
+This is a numbered list which contains five list items. It includes an inline code resource, a local code resource, and multiple-line list items:
+
+~~~
+1. This is part of the first item in the list.
+   ```ruby
+   puts "hello"
+   ```
+   This is still part of the first item in the list.
+2. This is the second item in the list.
+   {format: ruby}
+   ![Hello, World](hello.rb)
+   This is still part of the second item in the list.
+3. This is the third item in the list.
+   This is still part of the third item in the list.
+4. This is the fourth item in the list.
+   This is still part of the fourth item in the list.
+5. This is the fifth item in the list.
+~~~
+
+This is a bulleted list with the same complexity:
+
+~~~
+* This is part of the first item in the list.
+  ```ruby
+  puts "hello"
+  ```
+  This is still part of the first item in the list.
+* This is the second item in the list.
+  {format: ruby}
+  ![Hello, World](hello.rb)
+  This is still part of the second item in the list.
+* This is the third item in the list.
+  This is still part of the third item in the list.
+* This is the fourth item in the list.
+  This is still part of the fourth item in the list.
+* This is the fifth item in the list.
+~~~
+
+Neither the numbered or bulleted list above had multiple paragraphs in it, just forced line breaks. This is what those lists look like with multiple paragraphs instead...
+
+This is the numbered list version:
+
+~~~
+1. This is part of the first item in the list.
+
+   ```ruby
+   puts "hello"
+   ```
+
+   This is still part of the first item in the list.
+
+2. This is the second item in the list.
+
+   {format: ruby}
+   ![Hello, World](hello.rb)
+
+   This is still part of the second item in the list.
+
+3. This is the third item in the list.
+
+   This is still part of the third item in the list.
+
+4. This is the fourth item in the list.
+
+   This is still part of the fourth item in the list.
+
+5. This is the fifth item in the list.
+~~~
+
+This is the bulleted list version:
+
+~~~
+* This is part of the first item in the list.
+
+  ```ruby
+  puts "hello"
+  ```
+
+  This is still part of the first item in the list.
+
+* This is the second item in the list.
+
+  {format: ruby}
+  ![Hello, World](hello.rb)
+
+  This is still part of the second item in the list.
+
+* This is the third item in the list.
+
+  This is still part of the third item in the list.
+
+* This is the fourth item in the list.
+
+  This is still part of the fourth item in the list.
+
+* This is the fifth item in the list.
+~~~
+
+To reiterate, single blank lines (two newlines) make paragraphs, and forced line breaks (single newlines) stay in the same paragraph.
 
 ~~~
 Here's a paragraph before the list.
 
-1.  This is the first paragraph in the first list item. Yay!
+1. This is the first paragraph in the first list item. Yay!
 
-    This is a second paragraph in the first list item.
+   This is a second paragraph in the first list item.
 
-2.  The second list item is simple.
+2. The second list item is boring.
 
-3.  The third list item has three paragraphs.
-    This is still part of the first paragraph.
+3. The third list item has three paragraphs. This is the first paragraph.
+   This is still part of the first paragraph.
 
-    Here's the second paragraph in the third list item.
+   Here's the second paragraph in the third list item.
 
-    Here's the third paragraph in the third list item.
+   Here's the third paragraph in the third list item.
 
 Here's a paragraph after the list.
 ~~~
 
-Just as with normal non-list-item text, a single newline functions as a forced line break within the list item in question. However, to encourage the text to be lined up nicely in the list item, any leading whitespace after the line break is ignored. This is different from the whitespace being preserved after single newlines in paragraphs. That rule exists to support poetry, and if there's one thing that lists are not, it's poetry.
+### Blank Lines in Complex Lists
 
-## Nested Lists
+#### Single Blank Lines Within Complex List Items
 
-Lists can nest lists. To do this, simply insert the list nested inside a list item by 2 spaces for each level of nesting.
+It is legal to add single blank lines in between list items, to separate the list item into multiple paragraphs.
 
-There is a limit of **THREE** levels of nesting, including the outermost list. In an ebook, you don't have infinite space--especially on phones. You can nest any kind of list inside any kind of list.
+If there is a blank line within a list item, there **must** also be a blank line at the end of the list item.
 
-This example shows the maximum three levels of nesting:
-
-~~~
-* Foo
-  1. One
-  2. Two
-    a. This is 2a
-    b. This is 2b
-  3. Three
-* Bar
-  i.   Lorem
-  ii.  Ipsum
-  iii. Dolor
-* Baz
-~~~
-
-If you try to nest a fourth level of nesting (or more), the Markua Processor will simply interpret the additional levels as forced newlines and manual indentation.
-
-## Nesting Block Elements in List Items
-
-Nested lists are just an example of nesting block elements inside list items.
-
-Other block elements such as figures can also be inserted nested inside list items. This is true for both single paragraph list items (with no blank lines between them) and multiple-paragraph list items (with a single blank line between each list item).
-
-### Single-Paragraph List Items
+The reason for this is simple: since paragraphs are separated by blank lines, and since lists support multiple-paragraph list items, you need to add a blank line at the end of a multiple-paragraph list item for symmetry. Otherwise, you can write something ugly like this:
 
 ~~~
-* Foo
-  ```ruby
-  puts "hello"
-  ```
-* Bar
-  {alt: "too large to fit in the alt text"}
-  ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
-* Baz
+1. foo
+
+   bar
+2. baz
 ~~~
 
-In the single paragraph list items case, indenting the block element is optional but recommended.
+The above example is so ugly it's not a legal Markua complex list, and instead must be interpreted as paragraphs.
 
-### Multiple-Paragraph List Items
+The correct way to write it is:
 
 ~~~
-* This is paragraph 1 in the first list item.
+1. foo
 
-  ```ruby
-  puts "hello"
-  ```
+   bar
 
-  This is paragraph 2 in the first list item.
-
-* This is paragraph 1 in the second list item.
-
-  {alt: "too large to fit in the alt text"}
-  ![Proof of Fermat's Last Theorem](fermat-proof.mathml)
-
-  This is paragraph 2 in the second list item.
-
-* Baz
+2. baz
 ~~~
 
-In the case of multiple paragraph list items, you need to indent the block element by the same four spaces (or one tab) that you use to indent subsequent paragraphs in the list item. Doing this ensures the continuation of the list.
+#### Two Consecutive Blank Lines End A Complex List
 
-## Definition Lists
+Whereas one blank line can be used in between list items for spacing or between other list item content to separate it into paragraphs, two blank lines always end a list and start a new block element, such as a paragraph or a new list.
 
-Definition lists are supported in Markua. With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more important than tables.
+There is no reason to be able to add two blank lines in between list items. However, there are reasons to wish to have two lists in a row in a Markua document. So, two blank lines in between two list items stops the previous list and starts a new list. There is no need to use some kind of garbage syntax to separate lists--just add an extra blank line.
+
+Note, however, that two blank lines between single-element numbered lists would actually not produce two numbered lists since, again, in Markua single-element numbered lists *are not lists*.
+
+This all sounds a bit complex, but it actually results in behaviour which is as unsurprising as possible to the author, and a lot less surprising than standard Markdown. This is shown by the following examples...
+
+This is one flat list, which is both as simple list and a complex list:
+
+~~~
+* list one item one
+* list one item two
+* list one item three
+~~~
+
+This is one list. Since there are blank lines, it's a complex list:
+
+~~~
+* list one item one
+
+* list one item two
+
+* list one item three
+~~~
+
+These are two flat lists. Again, flat lists are both simple lists and complex lists:
+
+~~~
+* list one item one
+* list one item two
+* list one item three
+
+
+* list two item one
+* list two item two
+* list two item three
+~~~
+
+These are two complex lists:
+
+~~~
+* list one item one
+
+* list one item two
+
+* list one item three
+
+
+* list two item one
+
+* list two item two
+
+* list two item three
+~~~
+
+These are two flat lists. The first is a one-element list; the second is a three-element list:
+
+~~~
+* list one item one
+
+
+* list two item one
+* list two item two
+* list two item three
+~~~
+
+These are also two flat lists. The first is a one-element list; the second is a three-element list:
+
+~~~
+* list one item one
+
+
+* list two item one
+
+* list two item two
+
+* list two item three
+~~~
+
+These are two flat lists:
+
+~~~
+1. list one item one
+2. list one item two
+3. list one item three
+
+
+1. list two item one
+2. list two item two
+3. list two item three
+~~~
+
+These are two complex lists:
+
+~~~
+1. list one item one
+
+2. list one item two
+
+3. list one item three
+
+
+1. list two item one
+
+2. list two item two
+
+3. list two item three
+~~~
+
+This is a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example shows the correctness of this decision:
+
+~~~
+1986. What a great season.
+
+
+1. list one item one
+2. list one item two
+3. list one item three
+~~~
+
+This is also a normal paragraph followed by a flat list, since, again, single-element numbered lists are not lists. This highly-contrived example will confuse anyone reading your manuscript:
+
+~~~
+1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
+
+
+2. list one item one
+3. list one item two
+4. list one item three
+~~~
+
+This is also a normal paragraph followed by a complex list, but this more-contrived example would confuse anyone reading your manuscript:
+
+~~~
+1. This is actually a paragraph not a list.
+
+
+1. list one item one
+
+2. list one item two
+
+3. list one item three
+~~~
+
+Again, this is also a normal paragraph followed by a complex list, but this even-more-contrived example would confuse anyone reading your manuscript:
+
+~~~
+1. This is actually a paragraph not a list.
+
+
+2. list one item one
+
+3. list one item two
+
+4. list one item three
+~~~
+
+### Parsing of Inline Code Resources Inside List Items
+
+When inserting a code resource as an inline resource in a list item, it must be indented to line up with the list item content it is a sibling of.
+
+For example, in the following list, the inline code blocks are indented by three spaces:
+
+~~~
+1. This is part of the first item in the list.
+
+   ```ruby
+   puts "hello"
+   ```
+
+   This is still part of the first item in the list.
+
+   ```java
+   public class Hello {
+       public static void main(String[] args) {
+           System.out.println("hello");
+       }
+   }
+   ```
+
+2. This is the second item in the list.
+~~~
+
+When the code itself is output, the number of spaces that the list was indented by must be subtracted from the output by the Markua Processor.
+
+So, when this list is output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
+
+{#definition-lists}
+# Definition Lists
+
+Definition lists are also supported in Markua. Definition lists are related to lists, but they are neither flat, simple nor complex. Instead, they are what they are: definition lists.
 
 To define a definition list in Markua, use the following syntax:
 
@@ -1980,10 +2725,12 @@ term
 : definition
 ~~~
 
-Finally, like list items, each definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definition list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
+Finally, like list items in complex lists, each definition list item can contain newlines and multiple paragraphs. What you do here is indent the subsequent lines by the same amount of space as the initial line. (If you do not indent the subsequent lines, then you're ending the definition list and just starting a new paragraph.) As with list items, one newline is a forced line break; two newlines is a new paragraph:
+
+You can nest resources inside a definition list. You cannot nest definition lists inside definition list items, however--that would be highly confusing.
 
 ~~~
-Here's a paragraph before the list.
+Here's a paragraph before the definition list.
 
 one
 : This is the first definition of one. It's one paragraph.
@@ -1992,20 +2739,57 @@ one
   This is a second paragraph in the second definition of one.
 
 two
-: The second list item is simple.
+: The second definition list item is simple.
 
 three
-: The third list item has three paragraphs.
-  This is still part of the first paragraph.
+: The third definition list item has three paragraphs.
+  This is definition still part of the first paragraph.
 
-  Here's the second paragraph in the third list item.
+  Here's the second paragraph in the third definition list item.
 
-  Here's the third paragraph in the third list item.
+  Here's the third paragraph in the third definition list item.
+
+ruby
+: Here is some Ruby code.
+
+  ```ruby
+  puts "hello"
+  ```
+
+  Here is some more Ruby code.
+
+  {format: ruby}
+  ![Hello, World](hello.rb)
+
+  That's as simple as it gets.
 
 Here's a paragraph after the list.
 ~~~
 
 Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored. Like list items, definition list items are not poetry.
+
+With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more useful than tables in many Markua documents.
+
+Finally, with definition lists, one thing you often want to do is link to a specific definition, not just to the list itself. This is useful to do, since in a document with many definitions, it's helpful if the reader scrolls to the right spot or opens to the right page.
+
+To do this, just define an id on the element itself, and then link to it. Note that the first attribute list is actually for the definition list itself, and the remaining ones are for the items. So, you can't add an attribute list to the first element of a definition list which applies just to it. (TODO - Note to Leanpub authors: id attributes on definition list items do not work yet.)
+
+~~~
+
+{#definitions}
+foo
+: This is foo.
+
+{#bar}
+bar
+: This is bar.
+
+{#baz}
+baz
+: This is baz.
+~~~
+
+A Markua Processor
 
 # Block Elements
 
@@ -2525,7 +3309,7 @@ Just like with quiz, with an exercise the `id` attribute is **required**. This i
 
 A quiz or exercise can contain any Markua content, not just questions and answers. This is true regardless of whether the quiz or exercise is in a MOOC, an ebook or on paper. Note that video and audio resources don't work so well on paper, however.
 
-If a quiz or exercise starts with a chapter heading (starting with a `# `) immediately after the `{quiz}` or `{exercise}` line, this heading's content should be considered the name of the quiz or exercise. This can be used in a list of quizzes or exercises produced by the Markua Processor.
+If a quiz or exercise starts with any type of heading immediately after the `{quiz}` or `{exercise}` line, this heading's content should be considered the name of the quiz or exercise. This can be used in a list of quizzes or exercises produced by the Markua Processor. Typically the heading will be a chapter heading (`# `), but section headings (`## `) and lower headings also are supported. (The reason for this is that quizzes are sometimes top-level things, and other times are nested inside chapters, sections or sub-sections. Some course authors would correctly feel that the quiz should have the appropriate level of heading given their position in the document.
 
 Example:
 
@@ -3102,10 +3886,12 @@ There are two parts to making a crosslink.
 
 There are two ways to define an id:
 
-1. Using an id attribute `{id: some-id}` in an attribute list which can contain other attributes.
-2. Using a shorter "syntactic sugar" approach when the id is by itself: `{#some-id}`
+1. Using an id attribute `{id: some-id}`
+2. Using a shorter "syntactic sugar" approach: `{#some-id}`
 
-The shorter approach is preferred. The main reason the `{id: some-id}` syntax is supported is that it allows it to be added in with other attributes in a larger attribute list. You **CANNOT** add the `{#some-id}` to an attribute list.
+The shorter "syntactic sugar" approach is usually preferred. However, it can look a bit odd in an attribute list with other attributes in it. So, in that case, the `{id: some-id}` syntax is preferred.
+
+W> Note for Leanpub authors: The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list.
 
 In terms of the value of an `id`, it has some special restrictions:
 
@@ -3283,7 +4069,27 @@ At the beginning of a line, an opening curly brace (`{`) starts an attribute lis
 
 So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`. (Note that this does not apply inside code or other resources: Markua does not process anything inside them.)
 
-Similarly, a backtick is special. In text content (such as this paragraph), a backtick starts an inline span resource such as a code resource. And three backticks on a line by themselves start a code block. So, to show a literal backtick in a span, you preface it with a backslash (`\`).
+Similarly, a backtick is special. In text content (such as this paragraph), a backtick starts an inline span resource such as a code resource. And three backticks on a line by themselves start a code block.
+
+## Code Spans and Backticks (`` ` ``)
+
+You can create a code span by using pairs of 1, 2 or 3 backticks to surround a span of text within a paragaph, like this:
+
+~~~
+This paragraph has a Ruby `puts "hello"` code span inside it.
+~~~
+
+You cannot show a literal backtick in a normal code span, however, since you cannot backslash escape anything inside it. Inside a code span, a backslash is just a backslash.
+
+~~~
+This paragraph has a Ruby `puts "hello\tworld"` code span inside it.
+~~~
+
+So, if you want to output a backtick in a code span, you need to delimit the code span using two backticks:
+
+~~~
+This paragraph has a code span with literal backticks `` `say hello` `` in it.
+~~~
 
 {#unicode-entities}
 ## Unicode Entities with `\u`
@@ -3758,7 +4564,7 @@ If a Markua Processor also provides a UI to define settings which are specified 
 : The owner of the copyright.
 
 `default-code-language`
-: The default language that code is. The default is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`.
+: The default language that code which is a local resource, web resource or inline resource inserted with backticks is interpreted as. The default value is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`. Finally, note that the value of this setting only affects local resources, web resources or inline resources inserted with backticks--it has no effect on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
@@ -3920,85 +4726,6 @@ Markua supports this method of inserting block elements.
 
 However, Markua is more than just a way of producing HTML. Markua is a way of authoring books. HTML is just one of the many output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua [supports this too](#inserting-into-paras).
 
-{#heading-design-goals}
-## Design Goals of Markua Headings
-
-The following are the design goals of Markua headings:
-
-1. From looking at a heading in a Markua manuscript, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
-2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged in essentially the correct way.
-3. The number of leading pound signs must match the level of heading.
-4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
-5. The syntax to create parts must be as economical as possible.
-6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
-7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
-8. Books with parts and chapters must be able to have the same number of levels of sub-sections, without arbitrarily losing the ability to create a sub-sub-sub-sub-section.
-9. Documents can have parts, chapters and sections just like books.
-
-The design of Markua headings meets these requirements, in a better way than any other design I could come up with.
-
-{#heading-diffs}
-## Differences with Markdown Headings
-
-Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`. In Markdown, you can create the 6 HTML heading levels using Markdown syntax.
-
-What Markua does is to use a subset of the Markdown heading syntax, and then reinterpret those headings as specifying the heading levels that define the structure of the book.
-
-Markua is also a lot more strict about heading syntax than Markdown. In Markdown, not only are there two syntaxes (atx and Setext) for making headings, what's worse is that [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings are not supported.
-
-To understand Markua headings and the differences with Markdown headings, it's helpful to understand the atx and Setext headings of Markdown.
-
-{#setext_headings}
-### Setext Headings in Markdown
-
-In the Setext-style of Markdown headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
-
-These are some Setext headers in Markdown:
-
-~~~
-This is an h1
-=============
-
-This is also an h1 (really)
-=
-
-This is an h2
--------------
-
-This is also an h2 (really)
--
-~~~
-
-There are two main issues with this style of heading in Markdown:
-
-1. It is inconsistent: It only supports defining `h1` and `h2`; to define h3 and below, the atx style of heading must be used.
-2. It is confusing: Authors are confused about how many equals or minus signs you need to use. (As we saw above, the answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
-
-{#atx_headings}
-### atx Headings in Markdown
-
-In Markdown, the other heading syntax is "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown. To create an atx heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text, followed optionally by whitespace and any number of `#` characters. The number of `#` characters determines the level of heading.
-
-These are some atx headers in Markdown:
-
-~~~
-# This is an h1
-
-# This is also an h1 ####################
-
-## This is an h2
-
-## This is also an h2 ###################
-
-### This is an h3
-
-### This is also an h3 ##################
-~~~
-
-Note that all the trailing `#` characters are ignored and are not part of the heading text.
-
-From reading this, you'll recognize that Markua headings are a subset of Markdown's atx headers.
-
 ## Differences with Leanpub Flavoured Markdown
 
 Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM):
@@ -4013,7 +4740,7 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
 
-6. In LFM, we had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a center-aligned blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a {class: center} attribute.
+6. In LFM, we had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a {class: center} attribute.
 
 7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
@@ -4022,68 +4749,6 @@ Besides differences with Markdown in general, Markua also has a number of specif
 9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
 10. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
-
-{#numbered-list-numbering-rules}
-## Numbered List Numbering Rules
-
-There are a number of rules about what does and does not trigger the creation of a numbered list. These rules are designed to help authors stay sane when writing in Markua, and also to help implementors of Markua Processors stay sane. In all cases, the first number, letter or Roman numeral is the start of the list numbering. This never changes.
-
-If, because of the correct application of these rules, a numbered list is not created, what happens is that a paragraph is created instead, with a break tag for each single newline. In this instance, the output directly matches the input, including all the numbering.
-
-In theory, Markua supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive number, either increasing or decreasing.
-2. Every item in the list begins with the same number.
-
-This is not actually quite true.
-
-See, the notion of "consecutive" is easy to explain and to check for decimal numbers, either in increasing or decreasing order. `1, 2, 3, ...`, `456, 457, 458, ...`, or `5, 4, 3` are all easily verified as consecutive, both by humans and computers.
-
-However, Markua also supports numbered lists using uppercase and lowercase alphabetical numbering, as well as uppercase and lowercase Roman numeral numbering, and in increasing or decreasing order.
-
-In the case of alphabetical numbering, checking "consecutive" is harder. It's relatively straightforward for the first 26 items, but then all bets are off. In case you're curious, here is the sequence used in HTML for increasing alphabetical numbering:
-
-`a, b, ..., z, aa, ab, ..., az, ba, bb, ... bz, za, zb, ..., zz, aaa, aab, ..., aaz, aba, abb, ...`
-
-In terms of Roman numerals, it's even worse. I'm sure that someone in a Classics department (or in the NFL) knows the algorithm by heart, but I don't.
-
-So, what are Markua authors and implementors of Markua Processors to do?
-
-Markua makes this simpler by specifying the following rules.
-
-Markua *actually* supports creating a numbered list based on a different set of conditions based on the numbering type.
-
-For decimal numbers, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive number, either increasing or decreasing.
-2. Every item in the list begins with `1.`
-
-For uppercase and lowercase alphabetical numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive letter, followed by a period, and the lettering does not extend past `z.` for lowercase, or `Z.` for uppercase. (This way, implementors of Markua Processors don't need to check the `aa`, case, and authors writing in Markua don't need to remember it.)
-2. Every item in the list begins with `a.` for lowercase letters or `A.` for uppercase letters.
-
-These rules mean you can't start a list with `aa.` or higher. This is preferable to Markua having many variants of the Markdown `1986.` problem. If you want to write a paragraph starting with "AA.", to write a dramatic statement about either anti-aircraft fire or alcoholism, you would be really surprised to have created a single-element list beginning with "AA" instead!
-
-For uppercase and lowercase Roman numeral numbering, Markua actually supports creating a numbered list when either of the following two conditions occur:
-
-1. Every item in the list begins with a consecutive Roman numeral, followed by a period, and the lettering does not extend past `xii.` for lowercase Roman numerals or `XII.` for uppercase Roman numerals. To be clear, this means that the only valid consecutive lowercase Roman numerals are `i, ii, iii, iv, v, vi, vii, viii, ix, x, xi, xii`, and that the only valid consecutive uppercase Roman numerals are `I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII`.
-2. Every item in the list begins with `i.` for lowercase Roman numerals or `I.` for uppercase Roman numerals.
-
-The combination of the rules for Roman numeral numbering means that you can have an arbitrarily long Roman numeral list starting from `i.` or `I.`, but that implementors of Markua Processors don't need to write code to figure out whether `MCMLXXV` is a valid Roman numeral, and what the consecutive Roman numeral sequence after it is.
-
-If you're wondering why I picked `xii` and `XII` for the last consecutive lowercase and uppercase Roman numerals to respect: this is Roman numeral 12, and the main usage of Roman numerals in modern life is in clock faces.
-
-Speaking of clock faces, I have bad news for fans of watches and antique clocks:
-
-* The only supported version of the Roman numeral 4 is the subtractive `iv` (in lowercase) or `IV` (in uppercase); the additive `iiii` or `IIII` form is not supported.
-* The only supported version of the Roman numeral 9 is the subtractive `ix` (in lowercase) or `IX` (in uppercase); the additive `viiii` or `VIIII` form is not supported.
-
-It turns out that the question of additive versus subtractive forms of Roman numerals is actually interesting; see [this article](http://mentalfloss.com/article/24578/why-do-some-clocks-use-roman-numeral-iiii) and [this Wikipedia entry](https://en.wikipedia.org/wiki/Roman_numerals) for a starting point.
-
-In Markua, list numbers must **all** either be **consecutive**, given the type of numbering that is used, or **the same as the first number**. Otherwise, the list is interpreted as a paragraph with a bunch of break tags in it, and lines starting with the numbers given. The principle is the following: the numbers which are shown in the manuscript must be the same as those in the output, or the numbers must be clearly intended to be numbered list numbers. Otherwise, a list will not be produced.
-
-If you want to prevent a list from being created with consecutive numbered items separated by single newlines, the backslash escape in front of the period used in Markdown to prevent lists also works in Markua. However, it is needed a lot less often.
 
 {#concatenating-details}
 ## Example of Why One Blank Line Is Added When Concatenating Manuscript Files
@@ -4179,6 +4844,11 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
+- The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
+- Definition list id attributes on definition list items do not work yet.
+- Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
+- There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
+- There is no more type attribute on quizzes. Quizzes are always marked.
 - Support Nested Lists.
 - Support Nesting Block Elements in List Items. Ensure that nesting code resources works.
 - Confirm ids work on definition list items.
@@ -4203,10 +4873,10 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Be stricter about headers (#foo should not start a chapter, blank lines before and after, etc)
 - Support inline resources
 - Support type attribute on resources
-- Support image attributes fullbleed, height, cite, url
+- Support image attributes align, cite, url
 - Decide what we are doing with the cite and url attributes
 - Specifically forbid local video resources
-- Support video attributes embed, fullbleed, wrap, height, width
+- Support video attributes embed, fullbleed, height, width
 - Support dashed attributes for code resources line-numbers, number-from, crop-start, crop-end
 - Support three-tildes defaults to text, backticks default to guess approach
 - Support inline math with format attribute
