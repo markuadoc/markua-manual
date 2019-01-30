@@ -4854,7 +4854,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Confirm ids work on definition list items.
 - Add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub.
 - Ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
-- Support tables in external files.
 - Support poetry in external files and poetry resources in general.
 - Support updates to en dashes, em dashes, scene breaks and page breaks.
 - Support parentheses in numbered lists
@@ -4865,7 +4864,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support `exercise-answers` and `quiz-answers`.
 - Auto-create `images`, `audio`, `video`, `code`, `math` and `tables` directories in resources directory.
 - Support `cite` and `url` attributes on images.
-- Vary the code format default based on delimiter.
 - Tables seem to [mess up the alignment](#tables) of some text after them.
 - The kerning on figure captions is a disaster. It looks like one word!
 - Support crosslinks on spans
@@ -4892,7 +4890,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support scene breaks and page-breaks
 - Support blockquotes inside of a paragraph
 - Support cite and url attributes for blockquotes
-- Support the quiz or exercise chapter heading being considered the name of the quiz or exercise.
 - Does this quiz or exercise heading show up in the ToC?
 - Support ids and other attributes on span elements
 - Support smart crosslinks
@@ -4901,11 +4898,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support CriticMarkup.
 - Support index entries and index generation.
 - Support language directives
-- Support Section directives
-- Finish Leanpub for Courses
 - Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
-- Support `{answer}` blocks in quizzes
-- Only support Sample.txt in LFM books, not Markua books
 - Investigate regression of formatting in caption attributes of figures; should support text formatting
 
 {#acknowledgments}
