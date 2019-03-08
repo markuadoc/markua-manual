@@ -3471,17 +3471,28 @@ The following are errors in a question where a `choose-answers` attribute is use
 
 ### Multiple Selection Questions
 
-A multiple selection question has 2 or more answer choices, and 1 or more true answer choices.
+A multiple selection question has 2 or more answer choices, and 1 or more `true` answer choices.
 
-The correct answer choices are specified with T; incorrect answer choices are specified with F.
+The `true` answer choices are specified with T; `false` answer choices are specified with F.
 
 W> Leanpub authors: This question type is not yet supported in Leanpub.
 
-To get the question 100% correct, however, you must select **ALL** answers which are true (not just one of them) and **NONE** of the answers which are false. As discussed later, the `mark` attribute determines whether the the marking is all-or-nothing (with the `binary` value) or whether a partial credit can be earned (with the `ratio`) value.
+To get the question 100% correct, however, you must select **ALL** answers which are `true` (not just one of them) and **NONE** of the answers which are `false`. As discussed later, the `mark` attribute determines whether the the marking is all-or-nothing (with the `binary` value) or whether a partial credit can be earned (with the `ratio`) value.
 
-Regardless of the value of the `mark` attribute, to get any score for a multiple selection question, at least one answer choice must be selected. Leaving a multiple selection question blank always gets zero points, even if the `mark` attribute is `ratio`. Otherwise, if a test had nothing but multiple selection questions with `ratio`-marked questions, with half the answers true and half the answers false, you could get 50% on the test by just handing it in blank!
+Regardless of the value of the `mark` attribute, to get any score for a multiple selection question, at least one answer choice must be selected. Leaving a multiple selection question blank always gets zero points, even if the `mark` attribute is `ratio`. Otherwise, if a test had nothing but multiple selection questions with `ratio`-marked questions, with half the answers `true` and half the answers `false`, you could get 50% on the test by just handing it in blank!
 
-Example:
+#### Supported Attributes on Multiple Selection Questions
+
+`mark`
+: `binary` or `ratio`. The default is `binary`. This sets the marking behaviour of the specific multiple selection question. If `binary`, the question is all or nothing: you either get full points for the question, or a 0 on the question. To get full points, you must select every true choice and none of the false choices. If `ratio`, you get a fractional score defined as `(number of true choices selected + number of false choices not selected) / (total number of choices)`. This fraction is then multiplied by the points that the question is worth to compute the points that you received on the question. Note that regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank is always completely wrong, earning no credit for the correctly-not-selected false choices.
+
+`points`
+: The number of points the question is worth. This number can be 0 or higher. The default is 1. The `mark` attribute is used to determine how the points are computed. Again, regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank always earns 0 points.
+
+`random-choice-order`
+: `true` or `false`. The default is `false`. This sets the behaviour of the specific multiple selection question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
+
+#### Examples of Multiple Selection Questions
 
 ```
 ? Which of these are animals?
@@ -3501,19 +3512,11 @@ T) pear
 F) rice
 ```
 
-To get this question 100% correct, you must select all of `apple`, `peach` and `pear`, and none of `cow`, `lettuce` or `rice`.
+Here the first question defaults to `binary` and 1 point; the second question is `ratio` and 2 points.
 
-#### Supported Attributes on Multiple Choice Questions
+To get the first question correct, you must select `cow`, and neither of `apple` or `lettuce`.
 
-`mark`
-: `binary` or `ratio`. The default is `binary`. This sets the marking behaviour of the specific multiple selection question. If `binary`, the question is all or nothing: you either get full points for the question, or a 0 on the question. To get full points, you must select every true choice and none of the false choices. If `ratio`, you get a fractional score defined as `(number of true choices selected + number of false choices not selected) / (total number of choices)`. This fraction is then multiplied by the points that the question is worth to compute the points that you received on the question. Note that regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank is always completely wrong, earning no credit for the correctly-not-selected false choices. So, in the above example, if the `mark` attribute had been `binary`, the only way to get any points for the question would be to select `apple`, `peach` and `pear`, and to leave `cow`, `lettuce` and `rice` all unselected. However, the `mark` is not `binary`; it is `ratio`. So, if you selected `apple`, `peach` and `rice`, then the score would be computed as follows: ((2 correctly-selected true choices + 2 correctly-not-selected false choices) / 6 choices) * 2 points = (4/6) * 2 points = 1.5 points. (You get just as much credit for correctly not selecting `cow` and `lettuce` as you do for correctly selecting `apple` and `peach`.)
-
-`points`
-: The number of points the question is worth. This number can be 0 or higher. The default is 1. The `mark` attribute is used to determine how the points are computed. Again, regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank always earns 0 points.
-
-`random-choice-order`
-: `true` or `false`. The default is `false`. This sets the behaviour of the specific multiple selection question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
-
+To get this second question 100% correct, you must select all of `apple`, `peach` and `pear`, and none of `cow`, `lettuce` or `rice`. For this question, if the `mark` attribute had been `binary`, the only way to get any points for it would be to select `apple`, `peach` and `pear`, and to leave `cow`, `lettuce` and `rice` all unselected. However, the `mark` is not `binary`; it is `ratio`. So, if you selected `apple`, `peach` and `rice`, then the score would be computed as follows: ((2 correctly-selected true choices + 2 correctly-not-selected false choices) / 6 choices) * 2 points = (4/6) * 2 points = 1.5 points. Since at least one choice was selected, you get just as much credit for correctly *not selecting* `cow` and `lettuce` as you do for correctly *selecting* `apple` and `peach`.
 
 ### Fill In The Blank Questions
 
