@@ -3117,6 +3117,38 @@ B> This is a warning blurb.
 B> This is an exercise blurb.
 ~~~
 
+These are *also* equivalent to:
+
+~~~
+{blurb, class: discussion}
+This is a discussion blurb.
+{/blurb}
+
+{blurb, class: error}
+This is an error blurb.
+{/blurb}
+
+{blurb, class: information}
+This is an information blurb.
+{/blurb}
+
+{blurb, class: question}
+This is a question blurb.
+{/blurb}
+
+{blurb, class: tip}
+This is a tip blurb.
+{/blurb}
+
+{blurb, class: warning}
+This is a warning blurb.
+{/blurb}
+
+{blurb, class: exercise}
+This is an exercise blurb.
+{/blurb}
+~~~
+
 Note that `Q>` and `X>` are a bit controversial:
 
 * `Q>` defines a blurb which is formatted like a question, but `{quiz}` (discussed later) defines a quiz, and quizzes have actual numbered questions in them. It is unfortunate that the words `quiz` and `question` both start with the letter `Q`, and that the `question` blurb is not the same thing as a question in a quiz.
