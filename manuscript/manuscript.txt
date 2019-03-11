@@ -38,7 +38,7 @@ This is its specification.
 
 ## Note for Leanpub Authors
 
-Leanpub authors please [read this first](#leanpub-authors) to see an incomplete list of what we still need to build in Leanpub. Also, please note that statements about Leanpub for Courses are "forward-looking statements" -- Leanpub for Courses is currently in private beta. To request access to the beta, email hello@leanpub.com.
+Leanpub authors please [read this first](#leanpub-authors) to see an incomplete list of what we still need to build in Leanpub.
 
 ## What is Markua?
 
@@ -4919,9 +4919,13 @@ To stay current on Markua progress, follow [@markuadoc](https://twitter.com/mark
 {#leanpub-authors}
 ## A Note For Leanpub Authors
 
-If you're reading this, you are a really, *really* early adopter of Markua.
+If you're reading this, you are an early adopter of Markua.
 
-Markua support is currently in an **EARLY BETA** on Leanpub. Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for about 7 years. Below, I'm briefly listing what does and does not work in Leanpub's current Markua support. Arguably this should not be done in this spec, but I'm doing it here until Leanpub fully supports Markua for two reasons:
+Markua support is currently in an early beta on Leanpub.
+
+Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for over 8 years.
+
+Below, I'm briefly listing what does and does not work in Leanpub's current Markua support. Arguably this should not be done in this spec, but I'm doing it here until Leanpub fully supports Markua for two reasons:
 
 1. It will save Leanpub authors who are reading this spec a lot of pain.
 2. It will give readers of the spec a sense of which parts of the Markua spec have been tested, and which have not.
