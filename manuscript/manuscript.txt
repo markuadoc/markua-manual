@@ -110,13 +110,13 @@ Markua is a plain text format designed for the writing of books. Books have vari
 Here's how to do basic, semantic text formatting.
 
 Italic
-: To produce *italic text*, surround it with either `_one underscore_` or `*one asterisk*`.
+: To produce *italic text*, surround it with either `*one asterisk*` or `_one underscore_`.
 
 Bold
-: To produce **bold text**, surround it with either `__two underscores__` or `**two asterisks**`.
+: To produce **bold text**, surround it with either `**two asterisks**` or `__two underscores__`.
 
 Bold + Italic
-: To produce ***bold + italic text***, surround it with either `___three underscores___` or `***three asterisks***`.
+: To produce ***bold + italic text***, surround it with either `***three asterisks***` or `___three underscores___`.
 
 Underline
 : To produce ____underlined text____, surround it with `____four underscores____`. This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually preferable to use italic instead of underline. However, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
