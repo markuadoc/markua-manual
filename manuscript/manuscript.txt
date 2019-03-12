@@ -189,6 +189,8 @@ Markua is very strict about its heading syntax:
 5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will be caught, since it will look like an obvious error in the book.
 6. Tabs **cannot** be used to separate the pound signs and the heading text. Despite the increased conceptual consistency with list formatting, this would make Markua documents ugly and less consistent. The tradeoff is not worth it.
 
+If a heading is not formatted correctly, the heading is just interpreted as pargraph text, and the formatting characters are output verbatim.
+
 ## Design Goals of Markua Headings
 
 The following are the design goals of Markua headings:
