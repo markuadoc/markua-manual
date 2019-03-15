@@ -561,12 +561,12 @@ If local resources are used, all local resources must be stored inside a `resour
 * A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
 * A file called `bar.png` in a subdirectory `images` of the resources directory should be referenced as `![](images/bar.png)`--not as `![](/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
-Note, however, that a Markua processor must ignore the part of a path which starts with `resources/`. So, you can also do the following:
+Note, however, that a Markua processor **MUST** ignore the part of a path which starts with `resources/`. So, you can also do the following:
 
-* A file called `foo.jpg` in the `resources` directory can be referenced as `![](resources/foo.jpg)`.
-* A file called `bar.png` in a subdirectory `images` of the resources directory can be referenced as `![](resources/images/bar.png)`.
+* A file called `foo.jpg` in the `resources` directory can also be referenced as `![](resources/foo.jpg)`.
+* A file called `bar.png` in a subdirectory `images` of the resources directory can also be referenced as `![](resources/images/bar.png)`.
 
-The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path.
+The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path. One unfortunate consequence of this, however, is that you cannot have a directory called `resources` inside the `resources` directory. So, any paths which are `resources/resources/` are illegal. Everything has tradeoffs, and this is the pragmatic choice.
 
 Nested directory trees work as well. A file called `foo.rb` in a `ch1/examples/ruby` directory tree inside the `resources` directory is referenced as `![](ch1/examples/ruby/foo.rb)`.
 
