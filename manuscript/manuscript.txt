@@ -38,7 +38,7 @@ This is its specification.
 
 ## Note for Leanpub Authors
 
-Leanpub authors please [read this first](#leanpub-authors) to see an incomplete list of what we still need to build in Leanpub. Also, please note that statements about Leanpub for Courses are "forward-looking statements" -- Leanpub for Courses is currently in private beta. To request access to the beta, email hello@leanpub.com.
+Leanpub authors please [read this first](#leanpub-authors) to see an incomplete list of what we still need to build in Leanpub.
 
 ## What is Markua?
 
@@ -110,13 +110,13 @@ Markua is a plain text format designed for the writing of books. Books have vari
 Here's how to do basic, semantic text formatting.
 
 Italic
-: To produce *italic text*, surround it with either `_one underscore_` or `*one asterisk*`.
+: To produce *italic text*, surround it with either `*one asterisk*` or `_one underscore_`.
 
 Bold
-: To produce **bold text**, surround it with either `__two underscores__` or `**two asterisks**`.
+: To produce **bold text**, surround it with either `**two asterisks**` or `__two underscores__`.
 
 Bold + Italic
-: To produce ***bold + italic text***, surround it with either `___three underscores___` or `***three asterisks***`.
+: To produce ***bold + italic text***, surround it with either `***three asterisks***` or `___three underscores___`.
 
 Underline
 : To produce ____underlined text____, surround it with `____four underscores____`. This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually preferable to use italic instead of underline. However, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
@@ -188,6 +188,8 @@ Markua is very strict about its heading syntax:
 4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
 5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will be caught, since it will look like an obvious error in the book.
 6. Tabs **cannot** be used to separate the pound signs and the heading text. Despite the increased conceptual consistency with list formatting, this would make Markua documents ugly and less consistent. The tradeoff is not worth it.
+
+If a heading is not formatted correctly, the heading is just interpreted as pargraph text, and the formatting characters are output verbatim.
 
 ## Design Goals of Markua Headings
 
@@ -559,12 +561,12 @@ If local resources are used, all local resources must be stored inside a `resour
 * A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
 * A file called `bar.png` in a subdirectory `images` of the resources directory should be referenced as `![](images/bar.png)`--not as `![](/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
-Note, however, that a Markua processor must ignore the part of a path which starts with `resources/`. So, you can also do the following:
+Note, however, that a Markua processor **MUST** ignore the part of a path which starts with `resources/`. So, you can also do the following:
 
-* A file called `foo.jpg` in the `resources` directory can be referenced as `![](resources/foo.jpg)`.
-* A file called `bar.png` in a subdirectory `images` of the resources directory can be referenced as `![](resources/images/bar.png)`.
+* A file called `foo.jpg` in the `resources` directory can also be referenced as `![](resources/foo.jpg)`.
+* A file called `bar.png` in a subdirectory `images` of the resources directory can also be referenced as `![](resources/images/bar.png)`.
 
-The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path.
+The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path. One unfortunate consequence of this, however, is that you cannot have a directory called `resources` inside the `resources` directory. So, any paths which are `resources/resources/` are illegal. Everything has tradeoffs, and this is the pragmatic choice.
 
 Nested directory trees work as well. A file called `foo.rb` in a `ch1/examples/ruby` directory tree inside the `resources` directory is referenced as `![](ch1/examples/ruby/foo.rb)`.
 
@@ -673,13 +675,13 @@ The following are the supported attributes for image resources, in addition to t
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
 
 `height`
-: The height of the image, in percentage of page content area height (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}` or `{height: 70%}`.
+: The height of the image, in percentage of page content area height (respecting margins). This is specified as a number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}`, `{height: 70%}`, `{height: "70.5%"}` or `{height: 70.5%}`.
 
 `url`
 : An image can have a URL, which is the URL of the `cite` attribute if present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote.
 
 `width`
-: The width of the image, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}` or `{width: 70%}`.
+: The width of the image, in percentage of page content area width (respecting margins). This is specified as an number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
 
 Note that if only one of `width` and `height` are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both `width` and `height` are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both `width` and `height`.)
 
@@ -1792,16 +1794,18 @@ In that table, column A is left-aligned, column B is centered and column C is ri
 {#table-attributes}
 #### Supported Attributes for Tables
 
+If there are any errors with the supported attributes for tables, such as the `column-widths` not adding up correctly or missing `%` signs, the Markua Processor must add these errors to a list of errors and warnings that it shows the author, and just output the table with either the erroneous attribute not set or with none of the attributes set.
+
 The following is the supported attribute for table resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
 `column-widths`
-: The column widths, from left to right as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Examples: `{column-widths: "10,30,*,10"}`, `{column-widths: "10,*,40,*"}`. If the sums exceed 100 (ignoring the `*`s), the Markua Processor must raise an error. Every specified value must be at least 1, and every * must compute to at least 1, or the Markua Processor must raise an error.
+: The column widths as a comma-separated list of numbers (integers and/or floats) and/or `*` symbols, from left to right, as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Examples: `{column-widths: "10%,30%,*,10%"}`, `{column-widths: "10%,*,40%,*"}`, `{column-widths: "10%, 30%, *, 12.5%"}`, `{column-widths: "95%, *, *"}`. The numbers used for the column-widths percentages must sum to exactly 100 (if only numbers are used), or to less than 100 (if there are any `*`s used). Every specified value must be at least 1, and every `*` must compute to at least 1. The number of values (numbers or `*`s) must match the number of columns. Like with the `width` attribute, the percentage sign (%) is required, to make it absolutely clear that these are not measurements in pixels or points. Finally, the list may contain optional whitespace before and/or after each comma.
 
 `style`
 : The style of the table. Values can be `simple`, `grid` or any other value. All Markua Processors must support values of `simple` and `grid` for tables. The default is `simple`. A Markua Processor may use whatever formatting it wants with `simple`, but it should be clear which cells are part of the table header, body and footer. A Markua Processor may also use whatever formatting it wants with `grid`, but it must show grid lines around each table cell. If a Markua Processor does not recognize the value of the `style`, it must format it as `simple` instead of producing an error. (It can, however, produce a warning.)
 
 `width`
-: The width of the table, in percentage of page content area width (respecting margins). This is specified as an integer between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}` or `{width: 70%}`.
+: The width of the table, in percentage of page content area width (respecting margins). This is specified as a number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
 
 A Markua Processor may do whatever it wants when outputting a table. For example, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.
 
@@ -3117,6 +3121,38 @@ B> This is a warning blurb.
 B> This is an exercise blurb.
 ~~~
 
+These are *also* equivalent to:
+
+~~~
+{blurb, class: discussion}
+This is a discussion blurb.
+{/blurb}
+
+{blurb, class: error}
+This is an error blurb.
+{/blurb}
+
+{blurb, class: information}
+This is an information blurb.
+{/blurb}
+
+{blurb, class: question}
+This is a question blurb.
+{/blurb}
+
+{blurb, class: tip}
+This is a tip blurb.
+{/blurb}
+
+{blurb, class: warning}
+This is a warning blurb.
+{/blurb}
+
+{blurb, class: exercise}
+This is an exercise blurb.
+{/blurb}
+~~~
+
 Note that `Q>` and `X>` are a bit controversial:
 
 * `Q>` defines a blurb which is formatted like a question, but `{quiz}` (discussed later) defines a quiz, and quizzes have actual numbered questions in them. It is unfortunate that the words `quiz` and `question` both start with the letter `Q`, and that the `question` blurb is not the same thing as a question in a quiz.
@@ -3341,6 +3377,12 @@ That's it for this quiz, and this MOOC!
 {/quiz}
 ~~~
 
+## An Empty Quiz or Exercise is Not an Error
+
+A quiz or exercise which contains no questions is not an error. Instead, a if a Markua Processor encounters a quiz or exercise with no questions it must filter the quiz or exercise from the output, optionally providing a warning to the author.
+
+This lets authors create placeholders for quizzes or exercises in their courses before the quizzes or exercises are ready, which is potentially very useful in an in-progress course.
+
 ## A Malformed Quiz or Exercise is an Error
 
 If a Markua Processor encounters a malformed quiz or exercise it must treat this as an error and not generate the output from the Markua document. Quizzes and exercises are not something that should ever be produced in a broken state.
@@ -3390,13 +3432,14 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 
 As [discussed above](#quiz-headings), there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz or exercise itself, using the normal Markua formatting for a chapter heading.
 
-## Question Types: Multiple Choice, Fill In The Blank, Written
+## Question Types: Multiple Choice, Multiple Selection, Fill In The Blank, Written
 
-There are three types of questions supported by Markua.
+There are four types of questions supported by Markua.
 
 1. Multiple Choice
-2. Fill In The Blank
-3. Written
+2. Multiple Selection
+3. Fill In The Blank
+4. Written
 
 These types are not specified by a `{type}` attribute. Instead, they are inferred from properties of the answers or from other attributes of the question.
 
@@ -3457,10 +3500,59 @@ The following are errors in a question where a `choose-answers` attribute is use
 : This is described above. If `choose-answers` is used, `random-choice-order` is forced to true.
 
 `points`
-: The number of points the question is worth.
+: The number of points the question is worth. This number can be 0 or higher. The default is 1.
 
 `random-choice-order`
 : `true` or `false`. The default is `false`, unless `choose-answers` is used. This sets the behaviour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
+
+### Multiple Selection Questions
+
+A multiple selection question has 2 or more answer choices, and 1 or more `true` answer choices.
+
+W> Leanpub authors: This question type is not yet supported in Leanpub.
+
+The `true` answer choices are specified with `T`; `false` answer choices are specified with `F`.
+
+To get the question 100% correct, you must select **ALL** answers which are `true` (not just one of them) and **NONE** of the answers which are `false`. As discussed later, the `mark` attribute determines whether the the marking is all-or-nothing (with the `binary` value) or whether a partial credit can be earned (with the `ratio`) value.
+
+Regardless of the value of the `mark` attribute, to get any score for a multiple selection question, at least one answer choice must be selected. Leaving a multiple selection question blank always gets zero points, even if the `mark` attribute is `ratio`. Otherwise, if a test had nothing but multiple selection questions with `ratio`-marked questions, with half the answers `true` and half the answers `false`, you could get 50% on the test by just handing it in blank!
+
+#### Supported Attributes on Multiple Selection Questions
+
+`mark`
+: `binary` or `ratio`. The default is `binary`. This sets the marking behaviour of the specific multiple selection question. If `binary`, the question is all or nothing: you either get full points for the question, or a 0 on the question. To get full points, you must select every `true` choice and none of the `false` choices. If `ratio`, you get a fractional score defined as `(number of true choices selected + number of false choices not selected) / (total number of choices)`. This fraction is then multiplied by the `points` that the question is worth to compute the `points` that you received on the question. Note that regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank is always completely wrong, earning no credit for the correctly-not-selected `false` choices.
+
+`points`
+: The number of points the question is worth. This number can be 0 or higher. The default is 1. The `mark` attribute is used to determine how the points are computed. Again, regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank always earns 0 points.
+
+`random-choice-order`
+: `true` or `false`. The default is `false`. This sets the behaviour of the specific multiple selection question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
+
+#### Examples of Multiple Selection Questions
+
+```
+? Which of these are animals?
+
+F) apple
+T) cow
+F) lettuce
+
+{mark: ratio, points: 2}
+? Which of these are fruits?
+
+T) apple
+F) cow
+F) lettuce
+T) peach
+T) pear
+F) rice
+```
+
+Here the first question defaults to `binary` and 1 point; the second question is `ratio` and 2 points.
+
+To get the first question correct, you must select `cow`, and neither of `apple` or `lettuce`.
+
+To get this second question 100% correct, you must select all of `apple`, `peach` and `pear`, and none of `cow`, `lettuce` or `rice`. For this question, if the `mark` attribute had been `binary`, the only way to get any points for it would be to select `apple`, `peach` and `pear`, and to leave `cow`, `lettuce` and `rice` all unselected. However, the `mark` is not `binary`; it is `ratio`. So, if you selected `apple`, `peach` and `rice`, then the score would be computed as follows: ((2 correctly-selected true choices + 2 correctly-not-selected false choices) / 6 choices) * 2 points = (4/6) * 2 points = 1.5 points. Since at least one choice was selected, you get just as much credit for correctly not selecting `cow` and `lettuce` as you do for correctly selecting `apple` and `peach`. If an instructor thinks this is too lenient, then `binary` is the choice for them!
 
 ### Fill In The Blank Questions
 
@@ -3510,7 +3602,7 @@ So, the format of the answer values in a fill in the blank question is out of sc
 #### Supported Attributes on Fill In The Blank Questions
 
 `points`
-: The number of points the question is worth. This number can be 0 or higher.
+: The number of points the question is worth. This number can be 0 or higher. The default is 1.
 
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them.
@@ -3576,7 +3668,7 @@ end
 Note that only one of `words`, `lines` or `pages` may be provided. Providing more than one is an error.
 
 `points`
-: The number of points the question is worth. A Markua Processor generating a MOOC may override this. For example, when generating a MOOC, Leanpub overrides all written questions to have a points attribute of 0, regardless of what (if anything) is specified for this attribute by the author.
+: The number of points the question is worth. This number can be 0 or higher. The default is 1. A Markua Processor generating a MOOC may override this. For example, when generating a MOOC, Leanpub overrides all written questions to have a points attribute of 0, regardless of what (if anything) is specified for this attribute by the author.
 
 `words`
 : The maximum number of words the answer can be. Obviously this is more useful for online quizzes than paper ones.
@@ -3660,7 +3752,7 @@ Over the past decade, there has been a steady growth of interest in courses deli
 3. Exercises, with answers provided to the student
 4. Quizzes, with answers used to automatically mark the quiz
 
-It turns out the four things in this list all work perfectly in a Markua document. So, not only can Markua be used to easily create a textbook which includes video, audio, images and quizzes, it is also an amazingly simple and flexible way of creating a MOOC. A MOOC is essentially just a textbook which is executable, plus discussion forums and credentials. For example, [Leanpub](https://leanpub.com) authors can click one button[^fwdstmt] to create a massive open online course (MOOC), complete with automated marking for all the quizzes in the course, entirely from one Markua source document.
+It turns out the four things in this list all work perfectly in a Markua document. So, not only can Markua be used to easily create a textbook which includes video, audio, images and quizzes, it is also an amazingly simple and flexible way of creating a MOOC. A MOOC is essentially just a textbook which is executable, plus discussion forums and credentials. For example, [Leanpub](https://leanpub.com) authors can click one button to create a massive open online course (MOOC), complete with automated marking for all the quizzes in the course, entirely from one Markua source document.
 
 The fact that a Markua document can be used to create an online course or MOOC means that certain aspects of the syntax for quizzes and exercises are more robust than they would otherwise. One example of this is question alternates.
 
@@ -4831,9 +4923,13 @@ To stay current on Markua progress, follow [@markuadoc](https://twitter.com/mark
 {#leanpub-authors}
 ## A Note For Leanpub Authors
 
-If you're reading this, you are a really, *really* early adopter of Markua.
+If you're reading this, you are an early adopter of Markua.
 
-Markua support is currently in an **EARLY BETA** on Leanpub. Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for about 7 years. Below, I'm briefly listing what does and does not work in Leanpub's current Markua support. Arguably this should not be done in this spec, but I'm doing it here until Leanpub fully supports Markua for two reasons:
+Markua support is currently in an early beta on Leanpub.
+
+Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for over 8 years.
+
+Below, I'm briefly listing what does and does not work in Leanpub's current Markua support. Arguably this should not be done in this spec, but I'm doing it here until Leanpub fully supports Markua for two reasons:
 
 1. It will save Leanpub authors who are reading this spec a lot of pain.
 2. It will give readers of the spec a sense of which parts of the Markua spec have been tested, and which have not.
@@ -4844,6 +4940,7 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
+- Support Multiple Selection questions
 - The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
 - Definition list id attributes on definition list items do not work yet.
 - Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
