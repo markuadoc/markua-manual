@@ -1,6 +1,6 @@
 {mainmatter}
 
-# The Magical Typewriter!
+# The Magical Typewriter
 
 Imagine you owned a magical typewriter.
 
@@ -3563,6 +3563,18 @@ For a fill in the blank question with more than one acceptable answer value, eac
 Instead of alternating acceptable answer values with semicolons, the acceptable answer value can instead be exactly one regular expression (regex). A Markua Processor should interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. (This is exactly one regex, not n of them separated by semicolons, since regular expressions are powerful enough that all alternating of matches can be done within them.)
 
 Support for regular expression marking of fill in the blank questions is optional. Also, the particular format of the regular expression is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
+
+
+TODO
+
+```
+{points: 2}
+? Where's the Eiffel Tower?
+
+!2 /Paris/
+!1 /paris/i
+!.5 /France/i
+```
 
 Examples:
 
