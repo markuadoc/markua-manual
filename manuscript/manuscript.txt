@@ -2776,7 +2776,9 @@ With the rise of mobile and the narrower screen reading experience becoming the 
 
 Finally, with definition lists, one thing you often want to do is link to a specific definition, not just to the list itself. This is useful to do, since in a document with many definitions, it's helpful if the reader scrolls to the right spot or opens to the right page.
 
-To do this, just define an id on the element itself, and then link to it. Note that the first attribute list is actually for the definition list itself, and the remaining ones are for the items. So, you can't add an attribute list to the first element of a definition list which applies just to it. (TODO - Note to Leanpub authors: id attributes on definition list items do not work yet.)
+To do this, just define an id on the element itself, and then link to it. Note that the first attribute list is actually for the definition list itself, and the remaining ones are for the items. So, you can't add an attribute list to the first element of a definition list which applies just to it.
+
+W> Note to Leanpub authors: id attributes on definition list items do not work yet.
 
 ~~~
 
@@ -3558,23 +3560,14 @@ To get this second question 100% correct, you must select all of `apple`, `peach
 
 A fill in the blank question consists of a question and an answer. The answer is specified by `! ` and then the acceptable values of that answer.
 
-For a fill in the blank question with more than one acceptable answer value, each legal answer value is separated by a space, followed by a semicolon, followed by a space (` ; `). (To put an actual space, followed by a semicolon, followed by a space in a single fill in the blank answer value, the semicolon must be backslash-escaped (` \; `).)
+For a fill in the blank question with more than one acceptable answer value, there are two legal ways to specify the answer choices:
 
-Instead of alternating acceptable answer values with semicolons, the acceptable answer value can instead be exactly one regular expression (regex). A Markua Processor should interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. (This is exactly one regex, not n of them separated by semicolons, since regular expressions are powerful enough that all alternating of matches can be done within them.)
+1. On the same answer line: Each legal answer value is separated by a space, followed by a semicolon, followed by a space (` ; `). (To put an actual space, followed by a semicolon, followed by a space in a single fill in the blank answer value, the semicolon must be backslash-escaped (` \; `).)
+2. On separate answer lines: Each legal answer value starts with `!`, optionally followed by the point value that answer is worth, and then the acceptable value(s) of that answer.
+
+Answer values can be simple text strings, or can optionally be regular expressions (regexes). A Markua Processor which supports regular expression marking must interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. (Yes, you can separate regular expressions with semicolons and have multiple of them for one answer value, since there's no reason not to support this and since it may lead to simpler regular expressions. However, if you're good at regular expressions, you can also combine them into one regular expression, of course.
 
 Support for regular expression marking of fill in the blank questions is optional. Also, the particular format of the regular expression is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
-
-
-TODO
-
-```
-{points: 2}
-? Where's the Eiffel Tower?
-
-!2 /Paris/
-!1 /paris/i
-!.5 /France/i
-```
 
 Examples:
 
@@ -3595,6 +3588,29 @@ Examples:
 ? Where's the Eiffel Tower?
 
 ! /(Paris|France)/i
+
+? Where's the Eiffel Tower?
+
+! /Paris/i ; /France/i
+
+{points: 2}
+? Where's the Eiffel Tower?
+
+! /Paris/i
+! /France/i
+
+{points: 2}
+? Where's the Eiffel Tower?
+
+!2 /Paris/
+!1 /paris/i
+!.5 /France/i
+
+{points: 2}
+? Where's the global capital of investment banking?
+
+!2 New York ; London
+!1 USA ; UK
 ~~~
 
 If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
@@ -3617,7 +3633,7 @@ So, the format of the answer values in a fill in the blank question is out of sc
 : The number of points the question is worth. This number can be 0 or higher. The default is 1.
 
 `case-sensitive`
-: `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them.
+: `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them. Note that this only applies to text string answers, not to regular expressions. For a regular expression to be case-insensitive, you must end it with an `i` after the closing backtick.
 
 ### Written Questions
 
