@@ -3483,7 +3483,7 @@ o) 300
 o) 500
 ```
 
-The `choose-answers` attribute specifies how many answer choices should be shown. This includes one of the correct answers (indicated with `C`), all of the mandatory incorrect answers (indicated with `m`) and as many of the optional incorrect answers (indicated with `o`) as are needed.
+The `choose-answers` attribute specifies how many answer choices should be shown. This includes exactly one of the correct answers (indicated with `C`), all of the mandatory incorrect answers (indicated with `m`) and as many of the optional incorrect answers (indicated with `o`) as are needed for the question to have the total number of answers as indicated by the `choose-answers` attribute.
 
 So, in the above example, either `453` or `454` will be shown, along with the mandatory incorrect answer choices `451` (a literary joke) and `1000` (a kilogram, not a pound) and one of the optional incorrect answers (`100`, `150`, `200`, `250`, `300` or `500`).
 
@@ -3491,8 +3491,8 @@ When a `choose-answers` attribute is used, the question will always have `random
 
 The following are errors in a question where a `choose-answers` attribute is used:
 - 0 correct (`C`) answers
-- not enough mandatory (`m`) or optional (`o`) incorrect answers for the `choose-answers`
-- if `choose-answers` is n, a number of mandatory (`m`) answers >= n
+- not enough mandatory (`m`) incorrect or optional (`o`) incorrect answers for the question to have the `choose-answers` number of answers
+- if `choose-answers` is n, a number of mandatory (`m`) incorrect answers >= n (since there needs to be one correct answer shown)
 - if `choose-answers` is n and the number of mandatory (`m`) answers is n - 1, then any optional (`o`) incorrect answers existing
 - answers starting with something other than `C`, `m` or `o`
 
