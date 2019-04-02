@@ -3583,7 +3583,7 @@ Examples:
 {case-sensitive: false}
 ? What's pi?
 
-! "The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416
+! "The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416 ; an irrational number
 
 ? Where's the Eiffel Tower?
 
@@ -3615,7 +3615,7 @@ Examples:
 
 If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
 
-As shown by the second last answer, acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`.
+As shown by the third answer (`"The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416; an irrational number`), acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`. Also, this answer shows that quotes are optional around text strings. The reason to use quotes is for clarity, or to ensure that any semicolons used are treated as semicolons instead of as answer choice delimiters. Semicolons inside quotes are just semicolons and do not need to be backslash-escaped. You do, however, need to backslash-escape a quote if you want it to be treated as a literal quote, instead of the start or end of a string.
 
 If you're a programmer, you may wonder what number types and formats are supported. Are they integers? Floating point numbers? Can you use scientific notation? And how are the numbers formatted? Are they US or Canadian numbers (`123,456.78`) or EU numbers (`123 456,78`)?  What if there's a number that means something different in the US and EU--does `123,456` mean `123456` or `123.456`?
 
@@ -3624,7 +3624,8 @@ These questions are made worse by the fact that Markua can be used to create hum
 So, the format of the answer values in a fill in the blank question is out of scope of the Markua Specification. The spec is simply that the answer values are separated by a space, a semicolon, and a space:
 
 ~~~
-! first legal answer value ; second legal answer value ; third legal answer value ; etc.
+! first legal answer value ; second legal answer value ; third legal answer value ; and so on
+! another answer value ; another answer value ; etc.
 ~~~
 
 #### Supported Attributes on Fill In The Blank Questions
