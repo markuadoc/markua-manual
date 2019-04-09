@@ -4578,7 +4578,7 @@ What authors write, the manuscript, is typically what goes into the text, or mai
 
 There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents, Foreword, Preface, etc.) which can come before the main text of the book. This is called "front matter". Some of the front matter comes before the Table of Contents and is not numbered; the rest of the front matter that comes after the Table of Contents gets numbered with Roman numerals.
 
-There's also a bunch of other stuff (acknowledgements, appendices, the index, etc) which can come after the main matter. This is called the "back matter".
+There's also a bunch of other stuff (acknowledgments, appendices, the index, etc) which can come after the main matter. This is called the "back matter".
 
 If Markua just relied on its headings support there would be no good way to accomplish the division of a manuscript into front matter, main matter and back matter. (We could try some convention about heading names, but that would be a highly objectionable, English-centric hack.) Furthermore, there would be no good way to determine which parts of the front matter got numbered and which did not.  Also, there would be no good way to give explicit hints to Markua Processors about how to style the various parts of a book.
 
@@ -4605,12 +4605,12 @@ The following values of the `section` directive can occur in front matter:
 * `tables`
 * `foreword`
 * `preface`
-* `acknowledgements`
+* `acknowledgments`
 * `introduction`
 * `abbreviations`
 * `chronology`
 
-The `{section: mainmatter}` value indicates that the front matter is over. It is the start of the first numbered page of the text. Note that the `acknowledgements`, `abbreviations` and `chronology` directives can also occur after the `{section: mainmatter}` directive, as a matter of style preference.
+The `{section: mainmatter}` value indicates that the front matter is over. It is the start of the first numbered page of the text. Note that the `acknowledgments`, `abbreviations` and `chronology` directives can also occur after the `{section: mainmatter}` directive, as a matter of style preference.
 
 The following values of the `section` directive can occur in back matter:
 
@@ -5027,8 +5027,8 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
 - Investigate regression of formatting in caption attributes of figures; should support text formatting
 
-{#acknowledgements}
-# Acknowledgements
+{#acknowledgments}
+# Acknowledgments
 
 I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help, especially from my Leanpub cofounders Scott Patten, Len Epp and Braden Simpson.
 
