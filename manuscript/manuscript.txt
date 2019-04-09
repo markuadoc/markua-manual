@@ -189,7 +189,7 @@ Markua is very strict about its heading syntax:
 5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will be caught, since it will look like an obvious error in the book.
 6. Tabs **cannot** be used to separate the pound signs and the heading text. Despite the increased conceptual consistency with list formatting, this would make Markua documents ugly and less consistent. The tradeoff is not worth it.
 
-If a heading is not formatted correctly, the heading is just interpreted as pargraph text, and the formatting characters are output verbatim.
+If a heading is not formatted correctly, the heading is just interpreted as paragraph text, and the formatting characters are output verbatim.
 
 ## Design Goals of Markua Headings
 
@@ -574,7 +574,7 @@ Again, you cannot navigate upward in paths with `../`: this would be a security 
 
 Markua does not specify whether there are any subdirectories of the `resources` directory, or what their names are. Since any subdirectories have their names as part of the path to the resource, implementations can do whatever they want. For example, Leanpub will create subdirectories of the `resources` directory for every type of resource (`images`, `audio`, `video`, `code`, `math` and `tables`), but this is not a requirement. (To be clear, the names of these directories have no meaning; they could be anything.)
 
-The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file centaining an export should contain a `resources` directory which contains an `images` subdirectory with the images.
+The local resources approach can also be used by hosted services. Internally, services can store resources wherever they want, but if they provide a download (say as a zip file) they should create the resources directory and provide the uploaded resources in that directory. If a nested structure is used, it should be exported that way--if a web service produces paths which reference images inside an images directory (e.g. as `images/foo.png`), then the zip file containing an export should contain a `resources` directory which contains an `images` subdirectory with the images.
 
 ### Web Resources
 
@@ -1149,7 +1149,7 @@ Markua specifies only one specific file extension to be associated with a type o
 The following are the supported attributes for poetry resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
 
 `monospaced`
-: `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, the Markua Processor must use a monospaced font to output the poetry. If false, the Markua Processor may use whatever font (proportional or monospaced) it is configured to use to output poeetry.
+: `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, the Markua Processor must use a monospaced font to output the poetry. If false, the Markua Processor may use whatever font (proportional or monospaced) it is configured to use to output poetry.
 
 Note that inside a poetry resource, Markua [text formatting](#text-formatting) still applies. You can't do arbitrary Markua stuff like headings, images and tables, but you can do the text formatting like bold, italic, strikethrough, etc. So, if you want to write poetry involving asterisks and underscores, use a code block.
 
@@ -1206,7 +1206,7 @@ There are two types of delimiters that can be used to insert a poetry resource i
 
 This way, you can vary the default value of `monospaced` without having to type an attribute list--attribute lists aren't very poetic!
 
-To repeat: regardles of the value of the `monospaced` attribute, all whitespace is respected in a poetry resource. So, you can indent the last two lines of a sonnet without requiring a monospaced font.
+To repeat: regardless of the value of the `monospaced` attribute, all whitespace is respected in a poetry resource. So, you can indent the last two lines of a sonnet without requiring a monospaced font.
 
 The following example shows how you can get different default behaviour without an attribute list required:
 
@@ -1265,7 +1265,7 @@ Math can be a local, web or inline resource, just like any other resource, and t
 
 Per the [table](#resource-types-and-formats) of resource types and formats, the following types of math resources can be supported by Markua Processors: LaTeX math or MathML.
 
-Note that Markua procesors do not need to support either math markup syntax (LaTeX math or MathML). If a Markua Processor does not support a math markup syntax, it should simply render the text of the math resource as unformatted monospaced text, much like a code resource of format `text`.
+Note that Markua processors do not need to support either math markup syntax (LaTeX math or MathML). If a Markua Processor does not support a math markup syntax, it should simply render the text of the math resource as unformatted monospaced text, much like a code resource of format `text`.
 
 #### Supported Attributes for Math
 
@@ -1650,9 +1650,9 @@ You can also override the alignment of an individual cell. This table is just li
 |=============|==============|=============|
 ~~~
 
-Formatting a separator row (`====`) cascades downward. Header alignent cascades into the body and footer; body alignment cascades into the footer.
+Formatting a separator row (`====`) cascades downward. Header alignment cascades into the body and footer; body alignment cascades into the footer.
 
-However, individual cell separater row (`----`) footing does NOT cascade downward. It overrides an individual cell only; it does not change the column alignment going forward. In the above table, Body B3 is left-aligned (like its body column) not centered (like Body B2).
+However, individual cell separator row (`----`) footing does NOT cascade downward. It overrides an individual cell only; it does not change the column alignment going forward. In the above table, Body B3 is left-aligned (like its body column) not centered (like Body B2).
 
 This has the following consequence:
 
@@ -1936,7 +1936,7 @@ Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua.
 
 ### Internal Spaces are Collapsed to One Space, Except At the End of Sentences
 
-Markua handles internal whitespace in a paragpraph in a similar way to Markdown:
+Markua handles internal whitespace in a paragraph in a similar way to Markdown:
 
 First, in Markua and Markdown, multiple internal spaces or tabs in the the middle of a sentence are all collapsed to one space.
 
@@ -3660,7 +3660,7 @@ Examples:
 ? Why is doubleplusungood the worst?
 ```
 
-Since a written question can have long answers, this increases the likelihood that typing these anwers after a bunch of `! ` delimiters will be a pain. So, written quesions (and **only** written questions) support answers in the form of `{answer} ... {/answer}`, like this:
+Since a written question can have long answers, this increases the likelihood that typing these answers after a bunch of `! ` delimiters will be a pain. So, written questions (and **only** written questions) support answers in the form of `{answer} ... {/answer}`, like this:
 
 ~~~
 {quiz, points: 0, id: "quiz3"}
@@ -3756,7 +3756,7 @@ For example, here's how Leanpub handles hints:
 
 A Markua Processor has many degrees of freedom in terms of whether, and how, to output quizzes and exercises.
 
-For example, when outputting an online course or MOOC, the Markua Processor can basically do whatever it wants. It can choose to ouptut an ebook of the course material only, and put all quizzes and exercises only in the online version. Or it can choose to put all the quizzes only in the online version, and include the exercises in the ebook version as well. Or it can include the quizzes and exercises in the ebook version, but only include the answers for the exercises in the ebook version.
+For example, when outputting an online course or MOOC, the Markua Processor can basically do whatever it wants. It can choose to output an ebook of the course material only, and put all quizzes and exercises only in the online version. Or it can choose to put all the quizzes only in the online version, and include the exercises in the ebook version as well. Or it can include the quizzes and exercises in the ebook version, but only include the answers for the exercises in the ebook version.
 
 If, on the other hand, a Markua Processor is outputting a textbook, it may choose to output the quizzes in an entirely separate ebook or print-ready PDF, for use in physical classrooms.
 
@@ -3791,7 +3791,7 @@ In an online course or MOOC, some professors might not want every question the s
 
 To create question alternates, every question in the quiz (not just those with alternates) must be numbered sequentially, starting from 1, using a `?#` syntax. This is a question mark followed by the number of the question, e.g. `?1, ?2, ?3`. The questions in a quiz are numbered using sequential positive integers starting from 1: 1, 2, 3, etc.
 
-The alternates are specifyied by providing the same number for multiple questions, e.g. `?1, ?1, ?1, ?2, ?3, ?4, ?4, ?5`. When the actual quiz is given, only one of the questions for the given question number is used.
+The alternates are specified by providing the same number for multiple questions, e.g. `?1, ?1, ?1, ?2, ?3, ?4, ?4, ?5`. When the actual quiz is given, only one of the questions for the given question number is used.
 
 Note that only the first question with a given number may have a `points` attribute--since all other alternates must use the same points value, specifying it would be pointless.
 
@@ -4149,7 +4149,7 @@ Note that resources, chapters and sections all have implicit numbering. So, #n a
 {#charsub}
 ## Character Substitution (`X--` for X—, `X --` for X –, `...` for …)
 
- All Markua documents are written in UTF-8, so to produce any Unicode chracter, it possible to just use the proper Unicode characters. However, in certain cases, it's desirable for Markua to specify automatic replacement of certain combinations of characters with a Unicode replacement. If a Markua Processor encounters one of these combinations of characters outside of a code block, the Markua Processor must replace the combination of characters with the appropriate Unicode character in the output.
+ All Markua documents are written in UTF-8, so to produce any Unicode character, it possible to just use the proper Unicode characters. However, in certain cases, it's desirable for Markua to specify automatic replacement of certain combinations of characters with a Unicode replacement. If a Markua Processor encounters one of these combinations of characters outside of a code block, the Markua Processor must replace the combination of characters with the appropriate Unicode character in the output.
 
 `--`
 : To produce an em dash (—), what is thought of by non-typography people as a "dash" or a "long dash", you can just type two hyphens (`--`) directly after a non-space character. You can also use the proper Unicode character, U+2014, of course. The following all produce em dashes: `foo--bar, foo-- bar, foo--`.
@@ -4164,7 +4164,7 @@ Note that resources, chapters and sections all have implicit numbering. So, #n a
 
 A Markua Processor may replace the `"` character with the appropriate "curly quote" at its discretion. This lets `"typography"` become `“typography”`, and `it's` become `it’s` as appropriate.
 
-Note that this is an optional behaviour: a Markua Procesor may support this fully, only in some output formats, or not at all.
+Note that this is an optional behaviour: a Markua Processor may support this fully, only in some output formats, or not at all.
 
 Also, note that it is **NEVER** acceptable for a Markua Processor to do this, or *any* character substitution, to text inside a code block or code span. In almost all instances this would completely break the code. (If you wonder how I got curly quotes into the code spans for `“typography”` and `it’s` above, it's because I pasted them into the manuscript that way. Just as a Markua Processor doesn't make straight quotes curly in a code span, it doesn't make curly quotes straight in a code span either.)
 
@@ -4194,7 +4194,7 @@ Similarly, a backtick is special. In text content (such as this paragraph), a ba
 
 ## Code Spans and Backticks (`` ` ``)
 
-You can create a code span by using pairs of 1, 2 or 3 backticks to surround a span of text within a paragaph, like this:
+You can create a code span by using pairs of 1, 2 or 3 backticks to surround a span of text within a paragraph, like this:
 
 ~~~
 This paragraph has a Ruby `puts "hello"` code span inside it.
@@ -4255,7 +4255,7 @@ The emoji support in Markua makes me :smile:.
 When outputting a sentence containing emoji inserted using the `:emoji_name:` syntax, the Markua Processor can either:
 
 1. Output the emoji as a span image (right in the flow of the text with no line breaks before or after it) with the `:emoji_name:` (including the colons) as alt text.
-2. Output the emoji using an emoji-aware font, having mapped the emoji name to some Unicode code point using some cannoical table somewhere. There are online resources such as <http://www.webpagefx.com/tools/emoji-cheat-sheet/> which may be a starting point for any Markua Processor wishing to do this.
+2. Output the emoji using an emoji-aware font, having mapped the emoji name to some Unicode code point using some canonical table somewhere. There are online resources such as <http://www.webpagefx.com/tools/emoji-cheat-sheet/> which may be a starting point for any Markua Processor wishing to do this.
 3. Output the `:emoji_name:` as an inline code span showing the `:emoji_name:` verbatim.
 4. Output a "missing image" character, if it does not recognize the given emoji.
 
@@ -4334,7 +4334,7 @@ Regarding #2 and #3: Any line outside of a code resource which starts with an op
 
 The keys of attributes must consist exclusively of lowercase letters, hyphens (`-`) and underscores (`_`). Uppercase letters are not permitted in attribute keys: a Markua Processor must treat uppercase letters in attribute keys as an error.
 
-If a key is duplicated in an attribute list, the first key value is used and subsequent ones are ignored. A Markua Processor should add a warning in its list of warnings, which are *not* output in the ouptut itself.
+If a key is duplicated in an attribute list, the first key value is used and subsequent ones are ignored. A Markua Processor should add a warning in its list of warnings, which are *not* output in the output itself.
 
 ### Attribute Values
 
@@ -4578,7 +4578,7 @@ What authors write, the manuscript, is typically what goes into the text, or mai
 
 There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents, Foreword, Preface, etc.) which can come before the main text of the book. This is called "front matter". Some of the front matter comes before the Table of Contents and is not numbered; the rest of the front matter that comes after the Table of Contents gets numbered with Roman numerals.
 
-There's also a bunch of other stuff (acknowledgments, appendices, the index, etc) which can come after the main matter. This is called the "back matter".
+There's also a bunch of other stuff (acknowledgements, appendices, the index, etc) which can come after the main matter. This is called the "back matter".
 
 If Markua just relied on its headings support there would be no good way to accomplish the division of a manuscript into front matter, main matter and back matter. (We could try some convention about heading names, but that would be a highly objectionable, English-centric hack.) Furthermore, there would be no good way to determine which parts of the front matter got numbered and which did not.  Also, there would be no good way to give explicit hints to Markua Processors about how to style the various parts of a book.
 
@@ -4605,12 +4605,12 @@ The following values of the `section` directive can occur in front matter:
 * `tables`
 * `foreword`
 * `preface`
-* `acknowledgments`
+* `acknowledgements`
 * `introduction`
 * `abbreviations`
 * `chronology`
 
-The `{section: mainmatter}` value indicates that the front matter is over. It is the start of the first numbered page of the text. Note that the `acknowledgments`, `abbreviations` and `chronology` directives can also occur after the `{section: mainmatter}` directive, as a matter of style preference.
+The `{section: mainmatter}` value indicates that the front matter is over. It is the start of the first numbered page of the text. Note that the `acknowledgements`, `abbreviations` and `chronology` directives can also occur after the `{section: mainmatter}` directive, as a matter of style preference.
 
 The following values of the `section` directive can occur in back matter:
 
@@ -4759,7 +4759,7 @@ Books have different abstractions than HTML. All abstractions [leak](http://www.
 
 ## Why the Name "Markua"?
 
-When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which refenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
+When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which referenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
 
 ## Plain Text Encoding in UTF-8
 
@@ -4786,7 +4786,7 @@ To be clear: the Markua Specification defines the syntax and semantics of a plai
 
 Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output PDF, EPUB, MOBI, HTML and InDesign all from the same Markua source document. None of these output formats is required to be supported by a given Markua Processor. To be useful, however, a Markua Processor should output *some* output format. (For the programmers: `/dev/null` is not a good Markua Processor.)
 
-Not only are there no required output formats for a Markua Processor, the mapping from a Markua document to any output format is also not formally specifed--not even for HTML.
+Not only are there no required output formats for a Markua Processor, the mapping from a Markua document to any output format is also not formally specified--not even for HTML.
 
 ## No Canonical HTML Mapping
 
@@ -4795,7 +4795,7 @@ There are a number of reasons that the Markua specification does not contain a c
 1. The main reason that the mapping from Markua to HTML is not specified is that **HTML is not special**; it's just **one possible output format** of a Markua Processor. Specifying the mapping from Markua to HTML but not to other output formats would be inconsistent and wrong.
 2. HTML and HTML5 are evolving specifications. Including a mapping to one specific version of them would be arbitrary, and would force the Markua Specification to be constantly updated or become dated. The Markua Specification is intended to be stable.
 3. HTML5 has certain strong opinions toward concepts like emphasis, whitespace, paragraphs and lists which I do not agree with. If I was to specify a canonical mapping to HTML5, I would either have to adopt positions I don't agree with or fight battles I have no interest in winning. Life is too short to do either.
-4. By not specifying an HTML mapping, this maximizes implementation flexibility and encourages competition among implementers of Markua Processors. Markua is very feature-rich, and specifying every single detail of the HTML output would highly limit flexibility. It doesn't make much sense to only specify the HTML output for a subset of the Markua specification: it's all-or-nothing, so I choose nothing.
+4. By not specifying an HTML mapping, this maximizes implementation flexibility and encourages competition among implementors of Markua Processors. Markua is very feature-rich, and specifying every single detail of the HTML output would highly limit flexibility. It doesn't make much sense to only specify the HTML output for a subset of the Markua specification: it's all-or-nothing, so I choose nothing.
 5. This specification is long enough as it is.
 
 Obviously, Leanpub has a mapping from Markua to HTML5: we use it to produce the EPUB versions of our ebooks. An incomplete version of this mapping is specified in the book [An Unofficial Mapping from Markua to HTML5](https://leanpub.com/markua-html5-mapping). As the title of that book suggests, that mapping, and any mapping that we specify, is just one possible mapping from Markua to HTML5. In the delightful phrasing of the W3C, it is "non-normative".
@@ -5027,8 +5027,8 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
 - Investigate regression of formatting in caption attributes of figures; should support text formatting
 
-{#acknowledgments}
-# Acknowledgments
+{#acknowledgements}
+# Acknowledgements
 
 I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help, especially from my Leanpub cofounders Scott Patten, Len Epp and Braden Simpson.
 
