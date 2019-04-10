@@ -4199,31 +4199,83 @@ Placeholders are a simple text-replace templating system which allow you to defi
 
 Since this is a fairly niche requirement, the syntax is designed in a way that authors should never inadvertently trigger it unless they intend to. It is similar to the footnote syntax.
 
-To insert a placeholder text which has been defined elsewhere, you simply do this:
+Placeholder definitions can occur before or after the placeholder insertions. Implementors of Markua Processors are encouraged to deal with placeholders in a pre-processing step.
+
+Placeholders can be defined and inserted as span or block elements.
+
+### Placeholder Identifiers
+
+The identifier for a placeholder must conform to `/[a-zA-Z][a-zA-Z0-9_-]*/`. That is, it starts with a lowercase or uppercase letter `[a-zA-Z]`, followed by 0 or more letters, numbers, underscores or hyphens `[a-zA-Z0-9_-]*`.
+
+### Span Placeholders
+
+#### Span Placeholder Definition
+
+To define a span placeholder, you create a block element consisting of two opening curly braces (`{{`), followed by the placeholder identifier, followed by two closing curly braces (`}}`), followed by a colon (`:`), followed by one space, followed by the span placeholder definition:
 
 ~~~
-{{a_placeholder}}
+other stuff
 
-This spec is copyright {{author}}.
+{{a_span_placeholder}}: This is the span placeholder definition which can have **Markua formatting** and reference {{other_span_placeholders}} but not block placeholders.
+
+other stuff
 ~~~
 
-Specifically, to insert a placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`).
+A span placeholder definition can have Markua formatting and can reference other span placeholders.
 
-Placeholders can be inserted as either block or span elements. (A placeholder is a span element, which can be inserted inside a block, or as the entire content of a block.)
+However, block placeholder references and circular placeholder references are obviously forbidden as content of span placeholder definitions.
 
-To define a placeholder, you do this:
+#### Span Placeholder Usage
+
+A span placeholder can then be used either in a span context or in a block context.
+
+Specifically, to insert a span placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`).
 
 ~~~
-{{^the_placeholder}}
+Here's a span placeholder as the only content of a block:
+
+{{a_span_placeholder}}
+
+Here's the same span placeholder {{a_span_placeholder}} being used in a span context.
+~~~
+
+### Block Placeholders
+
+#### Block Placeholder Definition
+
+To define a block placeholder, you create a block element consisting of two opening curly braces (`{{`), followed by the placeholder identifier, followed by two closing curly braces (`}}`), followed by the block placeholder content, followed by a newline, followed by two opening curly braces (`{{`), followed by a forward slash (`/`), followed by the placeholder identifier, followed by two closing curly braces (`}}`):
+
+~~~
+other stuff
+
+{{a_block_placeholder}}
 This is the placeholder content.
 
-It can include *any type of Markua formatting* and can **even** include {{other_placeholder_references}}.
+It can include *any type of Markua formatting* and can **even** include {{span_placeholder_references}}.
+
+It can also include block placeholder references:
+
+{{some_other_block_placeholder}}
 
 Note that circular placeholder references are obviously forbidden.
-{{/the_placeholder}}
+{{/a_block_placeholder}}
+
+other stuff
 ~~~
 
-Placeholder definitions can occur before or after the placeholder insertions. Implementors of Markua Processors are encouraged to deal with placeholders in a pre-processing step.
+#### Block Placeholder Usage
+
+A block placeholder can then be used only in a block context. It cannot be used in a span context.
+
+Specifically, to insert a block placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`). The only difference is that this must be in a block context by itself, with at least one blank line above or below it.
+
+~~~
+Here's a block placeholder as the only content of a block:
+
+{{a_block_placeholder}}
+
+You cannot insert that block placeholder in a span context like in this paragraph.
+~~~
 
 ## Soft Hyphen
 
