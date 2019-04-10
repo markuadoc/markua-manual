@@ -3940,6 +3940,8 @@ Some text [then a span]{and: an, attribute: list} attached to the span.
 
 You can use any attribute list on this span, and you can also just use the id syntactic sugar `{#theid}` on this span. The most common uses of this are to add `id`s or index entries, which are discussed later.
 
+Note, however, that you cannot start a normal span with a caret (`^`): this creates a `[^footnote]` instead. (Footnotes are discussed below.)
+
 ### Sometimes a Square Bracket is Just a Square Bracket
 
 If there are no round brackets or curly braces immediately after some text in square brackets, the text in square brackets is just that: text in square brackets. In this case, the square brackets are output as normal text.
