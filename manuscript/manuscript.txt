@@ -4193,6 +4193,38 @@ Note that this is an optional behaviour: a Markua Processor may support this ful
 
 Also, note that it is **NEVER** acceptable for a Markua Processor to do this, or *any* character substitution, to text inside a code block or code span. In almost all instances this would completely break the code. (If you wonder how I got curly quotes into the code spans for `“typography”` and `it’s` above, it's because I pasted them into the manuscript that way. Just as a Markua Processor doesn't make straight quotes curly in a code span, it doesn't make curly quotes straight in a code span either.)
 
+## Placeholders
+
+Placeholders are a simple text-replace templating system which allow you to define boilerplate in one place, and easily insert it in other places. For books like novels, these obviously have no place. However, for books, courses and other types of documents produced by large organizations, there is an absolute need for placeholders.
+
+Since this is a fairly niche requirement, the syntax is designed in a way that authors should never inadvertently trigger it unless they intend to. It is similar to the footnote syntax.
+
+To insert a placeholder text which has been defined elsewhere, you simply do this:
+
+~~~
+{{a_placeholder}}
+
+This spec is copyright {{author}}.
+~~~
+
+Specifically, to insert a placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`).
+
+Placeholders can be inserted as either block or span elements. (A placeholder is a span element, which can be inserted inside a block, or as the entire content of a block.)
+
+To define a placeholder, you do this:
+
+~~~
+{{^the_placeholder}}
+This is the placeholder content.
+
+It can include *any type of Markua formatting* and can **even** include {{other_placeholder_references}}.
+
+Note that circular placeholder references are obviously forbidden.
+{{/the_placeholder}}
+~~~
+
+Placeholder definitions can occur before or after the placeholder insertions. Implementors of Markua Processors are encouraged to deal with placeholders in a pre-processing step.
+
 ## Soft Hyphen
 
 In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hyphenation can be done.
@@ -4211,7 +4243,7 @@ My name is Rumpel\-stiltskin.
 
 Curly braces and backticks are special in Markua.
 
-At the beginning of a line, an opening curly brace (`{`) starts an attribute list. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block.
+At the beginning of a line, an opening curly brace (`{`) starts an attribute list, and two openining curly braces (`{{`) start a placeholder. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block.
 
 So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`. (Note that this does not apply inside code or other resources: Markua does not process anything inside them.)
 
