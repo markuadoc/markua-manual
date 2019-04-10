@@ -3557,7 +3557,7 @@ To get this second question 100% correct, you must select all of `apple`, `peach
 
 ### Fill In The Blank Questions
 
-A fill in the blank question consists of a question and a set of answers. Each answer is specified by `!`, an optional points value, a space, and then a semicolon-separated list of the acceptable values of that answer. Each answer value can be a text string (quoted or not) or a regular expression (regex).
+A fill in the blank question consists of a question and a set of answers. Each answer is specified by `!`, an optional points value, a space, and then a semicolon-separated list of the acceptable values of that answer. Each answer value can be a text string (quoted or not) or a regular expression (regex). If a points value is not specified for an answer, the answer is worth full points.
 
 Support for regular expression answer values is optional. However, a Markua Processor which supports regular expression marking must interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. Note that the particular format of the regular expression used is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
 
@@ -3624,31 +3624,31 @@ Examples:
 !.5 /France/i
 
 {points: 2}
+? Where's the Eiffel Tower?
+
+! /Paris/
+!1 /paris/i
+!.5 /France/i
+
+{points: 2}
 ? Where's the global capital of investment banking?
 
 !2 New York ; London
 !1 USA ; UK
 ~~~
 
-If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
-
 As shown by the answer (`"The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416; an irrational number`), acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`. Also, this answer shows that quotes are optional around text strings. The reason to use quotes is for clarity, or to ensure that any semicolons used are treated as semicolons instead of as answer choice delimiters. Semicolons inside quotes are just semicolons and do not need to be backslash-escaped. You do, however, need to backslash-escape a quote if you want it to be treated as a literal quote, instead of the start or end of a string.
+
+If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
 
 If you're a programmer, you may wonder what number types and formats are supported. Are they integers? Floating point numbers? Can you use scientific notation? And how are the numbers formatted? Are they US or Canadian numbers (`123,456.78`) or EU numbers (`123 456,78`)?  What if there's a number that means something different in the US and EU--does `123,456` mean `123456` or `123.456`?
 
-These questions are made worse by the fact that Markua can be used to create human-marked paper quizzes as well as automatically-marked MOOCs. So, specifying rules which made the syntax unambiguous for MOOCs would mean that the answers for human-marked paper quizzes could not be specified with a tolerable amount of ambiguity.
-
-So, the format of the answer values in a fill in the blank question is out of scope of the Markua Specification. The spec is simply that the answer values are separated by a space, a semicolon, and a space:
-
-~~~
-! first legal answer value ; second legal answer value ; third legal answer value ; and so on
-! another answer value ; another answer value ; etc.
-~~~
+These questions are made worse by the fact that Markua can be used to create human-marked paper quizzes as well as automatically-marked MOOCs. So, specifying rules which made the syntax unambiguous for MOOCs would mean that the answers for human-marked paper quizzes could not be specified with a tolerable amount of ambiguity. So, the format of the answer values in a fill in the blank question is out of scope of the Markua Specification.
 
 #### Supported Attributes on Fill In The Blank Questions
 
 `points`
-: The number of points the question is worth. This number can be 0 or higher. The default is 1.
+: The number of points the question is worth. This number can be 0 or higher. The default is the 1. The answers must either not specify points (in which case they are worth the full value of points that the question is worth), or they must specify points between 0 and the `points` value.
 
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them. Note that this only applies to text string answers, not to regular expressions. For a regular expression to be case-insensitive, you must end it with an `i` after the closing backtick.
