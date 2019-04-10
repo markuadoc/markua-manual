@@ -4348,10 +4348,40 @@ Note that you can skip the space between the colon and the value: the following 
 An attribute list can be inserted into a Markua document in one of three ways:
 
 1. Immediately above a block element (e.g. heading, figure, aside, blurb, quiz, etc.), with **one newline** separating it from the block element.
-2. Immediately after a span element (e.g. a word, italicized phrase, etc.), with **no spaces** separating it from the span element.
+2. Immediately after a span element (e.g. a word, italicized phrase, etc.) in normal paragraphs and in similarly-simple contexts, with **no spaces** separating it from the span element.
 3. On a line by itself, with one blank line above and below it. In this format, the attribute list contains [directives](#directives).
 
 Regarding #2 and #3: Any line outside of a code resource which starts with an opening curly brace `{` and ends with a closing curly brace `}` is assumed to be an attribute list, and will not be output by a Markua Processor. If you want to start a line with a literal opening curly brace `{` you need to preface it with a backslash (`\`).
+
+Regarding #2: There is some deliberate ambiguity here. If a Markua processor cannot handle the attribute list (including just an id attribute added with {#id_syntactic_sugar} in the given context, it should just ignore the attribute list and add a warning to any list of warnings when generating the book. For example, Leanpub does not support attribute lists in headers or in captions. So, in Leanpub, you cannot do this:
+
+~~~
+# Chapter One{#one}
+
+That doesn't work.
+
+# Chapter{id: chapter-two} Two
+
+That doesn't work either.
+
+You also cannot say ![here's a horse{#horse} image](images/horse.jpg) in Leanpub.
+~~~
+
+In both cases, what you want to do is just define the attribute list on the outer element:
+
+~~~
+{#one}
+# Chapter One
+
+That works.
+
+{id: chapter-two}
+# Chapter Two
+
+That works too.
+
+You also can say ![here's a horse image](images/horse.jpg){#horse} in Leanpub.
+~~~
 
 ### Attribute Keys
 
