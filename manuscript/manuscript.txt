@@ -185,11 +185,10 @@ Markua is very strict about its heading syntax:
 1. In Markua, to make a part heading you make a heading like `# Title #`--the heading starts with exactly one pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
 2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading.
 3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem traditionally, but which might be these days.)
-4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them.
-5. If there is only a single newline after the heading, a Markua Processor must consider the subsequent text to be part of the heading. If a Table of Contents is generated, the newline is converted into a space. This rule means that the entire contents of the next paragraph will be part of the heading, which will be caught, since it will look like an obvious error in the book.
-6. Tabs **cannot** be used to separate the pound signs and the heading text. Despite the increased conceptual consistency with list formatting, this would make Markua documents ugly and less consistent. The tradeoff is not worth it.
+4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them. If a heading does not have these blank lines, it is not a heading, and any `#` characters are output as normal text with no warning.
+5. Tabs **cannot** be used to separate the pound signs and the heading text. Despite the increased conceptual consistency with list formatting, this would make Markua documents ugly and less consistent. The tradeoff is not worth it.
 
-If a heading is not formatted correctly, the heading is just interpreted as paragraph text, and the formatting characters are output verbatim.
+If a heading is not formatted correctly, the heading is just interpreted as paragraph text, and any formatting characters are output verbatim.
 
 ## Design Goals of Markua Headings
 
@@ -3558,16 +3557,13 @@ To get this second question 100% correct, you must select all of `apple`, `peach
 
 ### Fill In The Blank Questions
 
-A fill in the blank question consists of a question and an answer. The answer is specified by `! ` and then the acceptable values of that answer.
+A fill in the blank question consists of a question and a set of answers. Each answer is specified by `!`, an optional points value, a space, and then a semicolon-separated list of the acceptable values of that answer. Each answer value can be a text string (quoted or not) or a regular expression (regex).
 
-For a fill in the blank question with more than one acceptable answer value, there are two legal ways to specify the answer choices:
+Support for regular expression answer values is optional. However, a Markua Processor which supports regular expression marking must interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. Note that the particular format of the regular expression used is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
 
-1. On the same answer line: Each legal answer value is separated by a space, followed by a semicolon, followed by a space (` ; `). (To put an actual space, followed by a semicolon, followed by a space in a single fill in the blank answer value, the semicolon must be backslash-escaped (` \; `).)
-2. On separate answer lines: Each legal answer value starts with `!`, optionally followed by the point value that answer is worth, and then the acceptable value(s) of that answer.
+Finally, note that you can separate regular expressions with semicolons, just like any other answer value. There's no reason not to support this, and it may lead to simpler regular expressions. However, if you're good at regular expressions, you can also combine them into one regular expression, of course.
 
-Answer values can be simple text strings, or can optionally be regular expressions (regexes). A Markua Processor which supports regular expression marking must interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. (Yes, you can separate regular expressions with semicolons and have multiple of them for one answer value, since there's no reason not to support this and since it may lead to simpler regular expressions. However, if you're good at regular expressions, you can also combine them into one regular expression, of course.
-
-Support for regular expression marking of fill in the blank questions is optional. Also, the particular format of the regular expression is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Markua Processors could, for example, use Perl or JavaScript regular expressions.
+Note that since a semicolon is used to separate answer values, to provide an actual semicolon as part of an answer value you must either put the answer value in quotes, use a backslash-escape `\;` or make the semicolon part of a regular expression.
 
 Examples:
 
@@ -3580,10 +3576,31 @@ Examples:
 
 ! New York ; London
 
+? What's the global capital of investment banking?
+
+! "New York" ; "London"
+
+? What's the global capital of investment banking?
+
+! New York
+! London
+
+? What's the global capital of investment banking?
+
+! "New York"
+! "London"
+
 {case-sensitive: false}
 ? What's pi?
 
 ! "The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416 ; an irrational number
+
+{case-sensitive: false}
+? What's pi?
+
+! "The ratio of a circle's circumference to its diameter"
+! 3.14 ... 3.1416
+! an irrational number
 
 ? Where's the Eiffel Tower?
 
@@ -3615,7 +3632,7 @@ Examples:
 
 If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
 
-As shown by the third answer (`"The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416; an irrational number`), acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`. Also, this answer shows that quotes are optional around text strings. The reason to use quotes is for clarity, or to ensure that any semicolons used are treated as semicolons instead of as answer choice delimiters. Semicolons inside quotes are just semicolons and do not need to be backslash-escaped. You do, however, need to backslash-escape a quote if you want it to be treated as a literal quote, instead of the start or end of a string.
+As shown by the answer (`"The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416; an irrational number`), acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`. Also, this answer shows that quotes are optional around text strings. The reason to use quotes is for clarity, or to ensure that any semicolons used are treated as semicolons instead of as answer choice delimiters. Semicolons inside quotes are just semicolons and do not need to be backslash-escaped. You do, however, need to backslash-escape a quote if you want it to be treated as a literal quote, instead of the start or end of a string.
 
 If you're a programmer, you may wonder what number types and formats are supported. Are they integers? Floating point numbers? Can you use scientific notation? And how are the numbers formatted? Are they US or Canadian numbers (`123,456.78`) or EU numbers (`123 456,78`)?  What if there's a number that means something different in the US and EU--does `123,456` mean `123456` or `123.456`?
 
@@ -3642,7 +3659,7 @@ A written question corresponds to short answer, long answer or essay questions i
 
 A question is interpreted as a written question if either the `words`, `lines` or `pages` attribute is specified, if there is no answer provided, or if an answer is provided using the `{answer}` syntax discussed shortly.
 
-Note that an answer may be provided in a written question. If this is done, the answer is not matched like a fill in the blank answer. Instead, the answer is essentially a "note to markers", whether those markers are underpaid graduate students or unpaid AIs. Markua does not specify any microformat for this note to markers.
+Note that an answer may be provided in a written question. If this is done, the answer is not split into answer choices and values like a fill in the blank answer. Instead, the answer is essentially a "note to markers", whether those markers are underpaid graduate students or unpaid AIs. Markua does not specify any microformat for this note to markers: it is just Markua text, kind of like a blockquote (but with each line starting with `!` not `>`).
 
 A Markua Processor generating a MOOC may handle written questions at its own discretion, including not including them or giving them a `points` value of 0.
 
@@ -3652,15 +3669,25 @@ Examples:
 {quiz, id: "quiz3"}
 
 {pages: 2, points: 10}
-? Why is 2017 like *1984*?
+? Why is 2019 like *1984*?
 
 ! If the student mentions Newspeak, give them an extra mark.
 
 {words: 100, points: 2}
 ? Why is doubleplusungood the worst?
+
+{lines: 10}
+? Can you have multiple line answers in a written question?
+
+! You bet you can!
+!
+! You can separate them with blank lines,
+! and without blank lines.
+!
+! This is like a blockquote, which uses `>` characters.
 ```
 
-Since a written question can have long answers, this increases the likelihood that typing these answers after a bunch of `! ` delimiters will be a pain. So, written questions (and **only** written questions) support answers in the form of `{answer} ... {/answer}`, like this:
+Since a written question can have long answers, this increases the likelihood that typing these answers after a bunch of `! ` delimiters will be a pain. So, written questions (and **only** written questions) also support answers in the form of `{answer} ... {/answer}`, like this:
 
 ~~~
 {quiz, points: 0, id: "quiz3"}
@@ -3685,16 +3712,12 @@ def triple(y)
 end
 ```
 {/answer}
-
-? Show how to evaluate 2 + 2 in irb.
-
-! `2 + 2`
 {/quiz}
 ~~~
 
 #### Supported Attributes on Written Questions
 
-Note that only one of `words`, `lines` or `pages` may be provided. Providing more than one is an error.
+Note that only one of `words`, `lines` or `pages` may be provided. Providing more than one is an error. Providing none of them means that the question is a fill in the blank question, not a written question.
 
 `points`
 : The number of points the question is worth. This number can be 0 or higher. The default is 1. A Markua Processor generating a MOOC may override this. For example, when generating a MOOC, Leanpub overrides all written questions to have a points attribute of 0, regardless of what (if anything) is specified for this attribute by the author.
