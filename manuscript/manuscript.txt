@@ -4193,6 +4193,90 @@ Note that this is an optional behaviour: a Markua Processor may support this ful
 
 Also, note that it is **NEVER** acceptable for a Markua Processor to do this, or *any* character substitution, to text inside a code block or code span. In almost all instances this would completely break the code. (If you wonder how I got curly quotes into the code spans for `“typography”` and `it’s` above, it's because I pasted them into the manuscript that way. Just as a Markua Processor doesn't make straight quotes curly in a code span, it doesn't make curly quotes straight in a code span either.)
 
+## Placeholders
+
+Placeholders are a simple text-replace templating system which allow you to define boilerplate in one place, and easily insert it in other places. For books like novels, these obviously have no place. However, for books, courses and other types of documents produced by large organizations, there is an absolute need for placeholders.
+
+Since this is a fairly niche requirement, the syntax is designed in a way that authors should never inadvertently trigger it unless they intend to. It is similar to the footnote syntax.
+
+Placeholder definitions can occur before or after the placeholder insertions. Implementors of Markua Processors are encouraged to deal with placeholders in a pre-processing step.
+
+Placeholders can be defined and inserted as span or block elements.
+
+### Placeholder Identifiers
+
+The identifier for a placeholder must conform to `/[a-zA-Z][a-zA-Z0-9_-]*/`. That is, it starts with a lowercase or uppercase letter `[a-zA-Z]`, followed by 0 or more letters, numbers, underscores or hyphens `[a-zA-Z0-9_-]*`.
+
+### Span Placeholders
+
+#### Span Placeholder Definition
+
+To define a span placeholder, you create a block element consisting of two opening curly braces (`{{`), followed by the placeholder identifier, followed by two closing curly braces (`}}`), followed by a colon (`:`), followed by one space, followed by the span placeholder definition:
+
+~~~
+other stuff
+
+{{a_span_placeholder}}: This is the span placeholder definition which can have **Markua formatting** and reference {{other_span_placeholders}} but not block placeholders.
+
+other stuff
+~~~
+
+A span placeholder definition can have Markua formatting and can reference other span placeholders.
+
+However, block placeholder references and circular placeholder references are obviously forbidden as content of span placeholder definitions.
+
+#### Span Placeholder Usage
+
+A span placeholder can then be used either in a span context or in a block context.
+
+Specifically, to insert a span placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`).
+
+~~~
+Here's a span placeholder as the only content of a block:
+
+{{a_span_placeholder}}
+
+Here's the same span placeholder {{a_span_placeholder}} being used in a span context.
+~~~
+
+### Block Placeholders
+
+#### Block Placeholder Definition
+
+To define a block placeholder, you create a block element consisting of two opening curly braces (`{{`), followed by the placeholder identifier, followed by two closing curly braces (`}}`), followed by the block placeholder content, followed by a newline, followed by two opening curly braces (`{{`), followed by a forward slash (`/`), followed by the placeholder identifier, followed by two closing curly braces (`}}`):
+
+~~~
+other stuff
+
+{{a_block_placeholder}}
+This is the placeholder content.
+
+It can include *any type of Markua formatting* and can **even** include {{span_placeholder_references}}.
+
+It can also include block placeholder references:
+
+{{some_other_block_placeholder}}
+
+Note that circular placeholder references are obviously forbidden.
+{{/a_block_placeholder}}
+
+other stuff
+~~~
+
+#### Block Placeholder Usage
+
+A block placeholder can then be used only in a block context. It cannot be used in a span context.
+
+Specifically, to insert a block placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`). The only difference is that this must be in a block context by itself, with at least one blank line above or below it.
+
+~~~
+Here's a block placeholder as the only content of a block:
+
+{{a_block_placeholder}}
+
+You cannot insert that block placeholder in a span context like in this paragraph.
+~~~
+
 ## Soft Hyphen
 
 In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hyphenation can be done.
@@ -4211,7 +4295,7 @@ My name is Rumpel\-stiltskin.
 
 Curly braces and backticks are special in Markua.
 
-At the beginning of a line, an opening curly brace (`{`) starts an attribute list. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block.
+At the beginning of a line, an opening curly brace (`{`) starts an attribute list, and two openining curly braces (`{{`) start a placeholder. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block.
 
 So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`. (Note that this does not apply inside code or other resources: Markua does not process anything inside them.)
 
