@@ -1808,26 +1808,6 @@ The following is the supported attribute for table resources, in addition to the
 
 A Markua Processor may do whatever it wants when outputting a table. For example, a Markua Processor may choose to transform the table into an image, for maximum ebook reader compatibility--but at the expense of accessibility support in newer ebook readers.
 
-#### A Markua Processor May Optionally Support The GitHub Flavored Markdown Table Syntax
-
-The Markua specification only defines one table syntax. Tables are complex enough without other table syntaxes cluttering things up.
-
-However, if a Markua Processor understands the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) table syntax, which is based on the syntax originally specified by [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#table), then it may support it as well.
-
-There are many Markdown documents in the world which use the GitHub Flavored Markdown table syntax, and implementors of Markua Processors may wish to support them.
-
-There is no requirement for a Markua Processor to support any table syntax except that defined by the Markua specification, however.
-
-Also, another good reason to support the GitHub Flavored Markdown table syntax is that the Markua table syntax is more complex than the GitHub Flavored Markdown table syntax. The reason for this complexity is as follows: since Markua does not support inline HTML, Markua tables need to be able to support all table features required. It's not possible to just define a syntax for the simple cases and fall back to inline HTML for the complex cases. So, Markua tables need to support cells that span multiple rows and columns, and need to support alignment both of columns and of individual cells.
-
-Since Markua tables support increased complexity, there were three choices for how to handle the simple cases:
-
-a) Define a separate "simple" table syntax as part of the Markua spec. This would be similar to the simple versus complex lists.
-b) Just use the same Markua table syntax for every type of table.
-c) Allow alternate table syntaxes to be supported by Markua processors.
-
-Frankly, there is no perfect decision here. Choice (a) may be the best solution; choice (b) is the simplest and most opinionated; choice (c) is the most pragmatic. In this case, pragmatism wins: it's arguably better to just optionally support the GitHub Flavored Markdown table syntax verbatim than for Markua to define a "simple" table syntax which is incompatible with it.
-
 {#whitespace}
 # Whitespace: Spaces, Tabs and Newlines
 
