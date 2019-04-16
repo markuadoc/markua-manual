@@ -323,13 +323,13 @@ Finally, if any resource is missing during book generation, a Markua processor c
 
 ## Resource Insertion Methods
 
-Resources can be inserted either as spans or as figures. All resources can be inserted as figures, but only inline `code` and `math` resources can be inserted as spans.
-
-We will discuss figures first and then spans.
+Resources can be inserted either as figures or as spans.
 
 ### Figures
 
-When a resource is properly inserted as a figure, the resource is inserted with at least one newline before and after it.
+All resources can be inserted as figures. Figures are the normal case for how a resource is inserted. In many Markua books and documents, they will make up the bulk or the entirety of the resources.
+
+To insert a resource as a figure, there must be at least one newline before and after it.
 
 A figure can either be top-level (with a blank line before and after it), or it can be contained in a paragraph. The ways that figures and other block elements can be inserted in paragraphs as [discussed in depth](#inserting-into-paras) later.
 
@@ -469,7 +469,11 @@ Again, both of these are not good Markua: attribute values should be specified o
 
 ### Spans
 
-Two types of resources can be inserted as inline spans: code resources of format `text`, and math resources.
+There are three types of resources which can be inserted as spans:
+
+1. Inline `code` resources.
+2. A `math` resource.
+3. An `image` resource without figure attributes, such as captions.
 
 An inline code resource of `text` format can be inserted as a span using the following syntax:
 
@@ -483,7 +487,27 @@ An inline math resource of `latex` format can be inserted as a span using the fo
 It's a single backtick `followed by inline resource content`$ and then a single backtick and dollar sign.
 ~~~
 
-The [code](#code) and [math](#math) resources are described more fully later. (You can actually insert a math resource of `mathml` format as a span, but that's really verbose!)
+The [code](#code) and [math](#math) resources are described more fully later.
+
+#### Span Attribute Lists Can Be Used To Set The Format
+
+By default, the format of an inline resource is `text` for code and `latex` for math (with `$` after the closing backtick). For an image, it is determined by the file extension.
+
+However, span attribute lists can be used to set the format explicitly.
+
+For example, this resource would be treated as LaTeX math:
+
+~~~
+Yada yada `some LaTeX math here`{format: latex} yada yada.
+~~~
+
+This resource would be treated as MathML math:
+
+~~~
+Yada yada `some MathML math here`{format: mathml} yada yada.
+~~~
+
+(You can actually insert a math resource of `mathml` format as a span, but that's really verbose!)
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple. However, to support rare use cases, any span can have an attribute list. The attribute list on a span is specified immediately after the closing backtick. Examples of this are shown in the code and math sections.
 
@@ -499,9 +523,29 @@ code {
 
 Finally, if you wish to insert an image in the middle of a sentence, chances are you are trying to insert an emoji. Emoji have special support in Markua, described [here](#emoji).
 
-### Figures That Look Like Spans
+### Inserting Resources Into a Span Context
 
-If a local or web resource is inserted with no newlines before or after it, the resource is **NOT** inserted as a span. Instead, it is treated as though there was one newline before and after the resource, and the resource is inserted as a figure with a single line break before and after it.
+In Markua, resources can be inserted into a span context (within a paragraph or other block element) or into a block context (with blank lines above and below it).
+
+Now, it doesn't make sense for many types of resources to be inserted into, say, the middle of a sentence. Specifically, the only ones where this really does make sense is images without captions: the rise of emoji hos shown that there is an entirely mainstream use for inserting images mid-sentence, with no captions or other formatting around the image.
+
+So, the rules for inserting resources into a span context are as follows:
+
+1. Any resource can be inserted into a span context, such as the middle of a paragraph.
+2. Any resource with a caption which is inserted into a span context is treated as though there is a single newline before and after it, causing it to be inserted as a figure within the span context.
+3. The following resource types, when they do not have a caption, can be inserted into a span context without causing single newlines to implicitly precede and follow them:
+  a) a `image` without a caption, regardless of location or format
+  b) a `math` resource, regardless of location or format
+  c) a single-line inline `code` resource
+4. All other resources cause single newlines to implicitly precede and follow them when being inserted into a span context.
+
+In terms of inserting resources into a block context: all resource types and formats can be inserted into a block context, with and without captions.
+
+
+If a resource is inserted in a span context, and it can fit in the span context, it is inserted as a span, with whitespace before and after it. Examples of resources which can fit in a span context are images without captions, video without captions (since an image is used as a placeholder), single-line code samples and single lines of poetry.  Now, there are certain types of resources which, when inserted into a span context, cause the addition of single newlines before and after the resource. These include any resource with a caption, any type of table, a multi-line code sample, any math example, and multi-line poetry.
+
+
+If a local or web resource is inserted with no newlines before or after it,
 
 The following two paragraphs are equivalent:
 
@@ -595,31 +639,30 @@ Both the type and the format can be specified in an attribute list, by the respe
 The type and the format can also be inferred from the file extension and, in the case of web resources, the URL. The following table shows the mapping of file extensions to the default `format` and `type` inferred. Note that these are just defaults: a resource can be set to be any type and format using the attribute list, and this overrides what is inferred from the file extension.
 
 {caption: "Formats Mapped to Resource Types"}
-|-----------|--------------|----------|---------------------|
-| Extension | `format`     | `type`   | Description         |
-|-----------|--------------|----------|---------------------|
-| `.aac`    | `aac`        | `audio`  | AAC audio           |
-| `.m4a`    | `aac`        | `audio`  | AAC audio           |
-| `.mp3`    | `mp3`        | `audio`  | MP3 audio           |
-| `.oga`    | `ogg`        | `audio`  | Ogg Vorbis          |
-| `.ogg`    | `ogg`        | `audio`  | Ogg Vorbis          |
-| `.wav`    | `wav`        | `audio`  | WAV audio           |
-| `.wave`   | `wav`        | `audio`  | WAV audio           |
-| `.txt`    | `text`       | `code`   | Unformatted code    |
-| (other)   | `guess`      | `code`   | Formatted code      |
-| `.gif`    | `gif`        | `image`  | GIF image           |
-| `.jpeg`   | `jpeg`       | `image`  | JPEG image          |
-| `.jpg`    | `jpeg`       | `image`  | JPEG image          |
-| `.png`    | `png`        | `image`  | PNG image           |
-| `.svg`    | `svg`        | `image`  | SVG image           |
-| `.svgz`   | `svgz`       | `image`  | Zipped SVG          |
-| `.mathml` | `mathml`     | `math`   | MathML math         |
-| `.tex`    | `latex`      | `math`   | LaTeX math          |
-| `.text`   | `poetry`     | `poetry` | Poetry              |
-| `.tbl`    | `table`      | `table`  | Markua table        |
-| `.mp4`    | `mp4`        | `video`  | MP4 video           |
-| `.webm`   | `webm`       | `video`  | WebM video          |
-|-----------|--------------|----------|---------------------|
+| Extension    | `format`     | `type`   | Description         |
+| :----------- | :----------: | :------: | ------------------- |
+| `.asciimath` | `asciimath`  | `math`   | AsciiMath math      |
+| `.aac`       | `aac`        | `audio`  | AAC audio           |
+| `.m4a`       | `aac`        | `audio`  | AAC audio           |
+| `.mp3`       | `mp3`        | `audio`  | MP3 audio           |
+| `.oga`       | `ogg`        | `audio`  | Ogg Vorbis          |
+| `.ogg`       | `ogg`        | `audio`  | Ogg Vorbis          |
+| `.wav`       | `wav`        | `audio`  | WAV audio           |
+| `.wave`      | `wav`        | `audio`  | WAV audio           |
+| `.txt`       | `text`       | `code`   | Unformatted code    |
+| (other)      | `guess`      | `code`   | Formatted code      |
+| `.gif`       | `gif`        | `image`  | GIF image           |
+| `.jpeg`      | `jpeg`       | `image`  | JPEG image          |
+| `.jpg`       | `jpeg`       | `image`  | JPEG image          |
+| `.png`       | `png`        | `image`  | PNG image           |
+| `.svg`       | `svg`        | `image`  | SVG image           |
+| `.svgz`      | `svgz`       | `image`  | Zipped SVG          |
+| `.mathml`    | `mathml`     | `math`   | MathML math         |
+| `.tex`       | `latex`      | `math`   | LaTeX math          |
+| `.text`      | `poetry`     | `poetry` | Poetry              |
+| `.tbl`       | `table`      | `table`  | Markua table        |
+| `.mp4`       | `mp4`        | `video`  | MP4 video           |
+| `.webm`      | `webm`       | `video`  | WebM video          |
 
 Note that these file extensions are case-insensitive. Also, note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
@@ -677,21 +720,12 @@ The following are the supported attributes for image resources, in addition to t
 : The height of the image, in percentage of page content area height (respecting margins). This is specified as a number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}`, `{height: 70%}`, `{height: "70.5%"}` or `{height: 70.5%}`.
 
 `url`
-: An image can have a URL, which is the URL of the `cite` attribute if present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote.
+: An image can have a URL, which is the URL of the `cite` attribute if present, and the URL that the image itself links to, if the `cite` attribute is not present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote. The use of the `url` attribute is discussed further below.
 
 `width`
 : The width of the image, in percentage of page content area width (respecting margins). This is specified as an number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
 
 Note that if only one of `width` and `height` are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both `width` and `height` are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both `width` and `height`.)
-
-For an example of the `cite` and `url` attributes, consider the following hypothetical image:
-
-```
-{alt: "a slice of chocolate cake", cite: "Peter's Food Photography", url: "http://peterarmstrong.com/pictures/1.jpg"}
-![A Piece of Cake](cake.jpg)
-```
-
-The `caption` is "A Piece of Cake", and the question of what to do with the `cite` and `url` attributes is dependent on the implementation of the Markua Processor.
 
 #### Local Images
 
@@ -755,6 +789,118 @@ Here's a paragraph before the figure.
 
 Here's a paragraph after the figure.
 ~~~
+
+#### Images, Attributes and Links
+
+As discussed previously, images support `url`, `cite` and `alt` attributes. Images also support captions, like all resources inserted as figures.
+
+As discussed previously, the exact question of what to do with `cite` and `url` attributes is dependent on the implementation of the Markua Processor. This can also vary based on context. The following examples will make this clear, using Leanpub as an example.
+
+##### Setting the `url` Attribute
+
+```
+{url: "http://peterarmstrong.com/pictures/1.jpg"}
+![](cake.jpg)
+```
+
+Here's what Leanpub will do with these attributes:
+
+1. There is no caption.
+2. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
+
+##### Setting the `caption` and `url` Attributes
+
+```
+{url: "http://peterarmstrong.com/pictures/1.jpg"}
+![A Piece of Cake](cake.jpg)
+```
+
+Here's what Leanpub will do with these attributes:
+
+1. The caption is "A Piece of Cake" (no quotes).
+2. The caption will link to <https://peterarmstrong.com/pictures/1.jpg>.
+3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
+
+##### Setting the `caption` and `url` Attributes
+
+```
+{caption: "A Piece of Cake", url: "http://peterarmstrong.com/pictures/1.jpg"}
+![](cake.jpg)
+```
+
+This is identical to the previous example. It doesn't matter which way the `caption` attribute is set; it's the same.
+
+To be redundant, here's what Leanpub will do with these attributes:
+
+1. The caption is "A Piece of Cake" (no quotes).
+2. The caption will link to <https://peterarmstrong.com/pictures/1.jpg>.
+3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
+
+##### Setting the `alt`, `caption` and `url` Attributes
+
+```
+{alt: "a slice of chocolate cake", url: "http://peterarmstrong.com/pictures/1.jpg"}
+![A Piece of Cake](cake.jpg)
+```
+
+Here's what Leanpub will do with these attributes:
+
+1. The caption is "A Piece of Cake" (no quotes).
+2. The caption will link to <https://peterarmstrong.com/pictures/1.jpg>.
+3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
+4. The text "a slice of chocolate cake" will be provided as alt text (for accessibility) in all output formats which support it.
+
+##### Setting the `url`, `caption` and `alt` Text
+
+```
+{alt: "a slice of chocolate cake", cite: "Peter's Food Photography", url: "http://peterarmstrong.com/pictures/1.jpg"}
+![A Piece of Cake](cake.jpg)
+```
+
+Here's what Leanpub will do with these attributes:
+
+1. The caption will become "A Piece of Cake — Peter's Food Photography". Specifically, the caption text will be the value of the `caption` attribute, followed by a space, an em dash, a space, and the value of the `cite` attribute.
+2. The "Peter's Food Photography" part will link to <https://peterarmstrong.com/pictures/1.jpg>.
+3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
+4. The alt text will be provided as alt text in HTML output, for accessibility support.
+
+##### Adding a Link Around an Image
+
+Besides using `url` attrubites to create links out of images, you can also use the Markua link syntax around an images itself. This is the standard Markdown link syntax which Markua inherited unchanged.
+
+So, you can do the following:
+
+```
+[![A Piece of Cake](cake.jpg)](https://peterarmstrong.com/pictures/1.jpg)
+```
+
+Frankly, this syntax has enough line noise to remind me a bit of JWZ's "now you have two problems" [joke](https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/) about regular expressions.
+
+What this is doing is inserting an image as a resource with a caption `![A Piece of Cake](cake.jpg)` and then wrapping the entire thing with a link. If you think of the image resource as `r`, this is just `[r](https://peterarmstrong.com/pictures/1.jpg)`. Simple!
+
+Now, if you want to do this, you can. Chances are you'll only want to do this if you've been writing Markdown for years, or if you really hate attribute lists. If neither of those is true for you, you'll probably prefer to just use a `url` attribute.
+
+Note that you can also use a span `url` attribute, if you are inserting an image inline:
+
+```
+Yada yada ![foo](bar.png){url:"http://leanpub.com"} yada yada.
+```
+
+Whether this is better or worse than the line noise version is a matter of taste:
+
+```
+Yada yada [![foo](bar.png)](http://leanpub.com) yada yada.
+```
+
+Now, if you combine both of them, the Markua processor should use the outer link, and add an error to a list of warnings or errors:
+
+```
+Yada yada [![foo](bar.png){url:"http://leanpub.com"}](http://markua.com) yada yada.
+```
+
+Here, this would link to `http://markua.com`, not `http://leanpub.com`, and the Markua Processor should add an error.
+
+However, to be clear: never write Markua like this.
 
 {#video}
 ### Video
@@ -1305,61 +1451,71 @@ Note that in the above examples of figures, the text in the square brackets is t
 
 #### Inline Math Resources
 
-Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. Both LaTeX math and MathML can be inserted inline as a figure or as a span.
+Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. LaTeX math, AsciiMath and MathML can be inserted inline as a span or figure.
 
 ##### Span
 
-There is syntactic sugar for LaTeX math which is inserted as a span:
+Being able to insert a math resource as a span is important, as it lets you write things like one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside sentences. This can be done with LaTeX math, AsciiMath, or (in theory) MathML.
+
+To insert math as inline math, use a `$` after closing backtick for LaTeX math, an `@` after the closing backtick for AsciiMath, or an attribute list specifying a `format` of `latex`, `asciimath` or `mathml`. If none of these is done, the content of the backticks is treated as code and is output verbatim as monospaced text.
+
+###### LaTeX math
+
+There is syntactic sugar for LaTeX math which is inserted as a span, using the `$` character after the closing backtick:
 
 ~~~
-Yada yada `some math here`$ yada yada.
+Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside a sentence.
 ~~~
 
 The `$` character indicates the inline resource is LaTeX math.
 
-Here's an example of LaTeX math inserted as a span:
+If you don't like syntactic sugar, you can also use {format: latex} after the inline span resource:
 
 ~~~
-One of the kinematic equations is `d = v_i t + \frac{1}{2} a t^2`$ this one.
+Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`{format: latex} inside a sentence.
 ~~~
 
-If you don't like syntactic sugar, you can also do a lot of typing to insert math as LaTeX math:
+###### AsciiMath
+
+[AsciiMath](http://asciimath.org/) is a way of producing simple MathML equations, using about 1% of the typing. It's more terse than LaTeX math.
+
+There is syntactic sugar for AsciiMath which is inserted as a span, using the `@` character after the closing backtick:
 
 ~~~
-Yada yada `some math here`{format: latex} yada yada.
+Here's one of the kinematic equations `d = v_i t + 1/2 at^2`@ inside a sentence.
 ~~~
 
-Or, if you *really* like typing, you can insert MathML as an inline resource inserted as a span:
+The `@` character indicates the inline resource is AsciiMath.
+
+If you don't like syntactic sugar, you can also use {format: asciimath} after the inline span resource:
 
 ~~~
-Yada yada `really verbose MathML here`{format: mathml} yada yada.
+Here's one of the kinematic equations `d = v_i t + 1/2 at^2`{format: asciimath} inside a sentence.
 ~~~
 
-As with code resources, note that this is syntactic salt for MathML, since I consider MathML to be too verbose to be productively inserted as a span resource. However, just as with code resources, since any span can have an attribute list attached to it, there is no reason to explicitly forbid specifying a format of `mathml` in the attribute list.
+###### MathML
 
-Finally, if there is no `$` character after the closing backtick and no attribute list specifying a format of `latex` or `mathml`, the content of the backticks is treated as code and is output verbatim as monospaced text.
+Technically you can insert MathML as an inline span resource, as long as you remove all the newlines. There is no syntactic sugar for this, since it is almost always a bad idea:
+
+~~~
+Yada yada `<some><mathml><here></here></mathml></some>`{format: mathml} yada yada.
+~~~
+
+No, that's not really MathML syntax. For an exmaple of some, see this [Wikipedia page](https://en.wikipedia.org/wiki/MathML).
+
+While it would almost always be a bad idea to insert MathML as a span resource, it would also be a bad idea to forbid it in the Markua spec.
+
+If you're going to insert MathML, it should be inserted as a figure, with newlines used inside the MathML to format it in a somewhat readable way.
 
 ##### Figure
 
-Both LaTeX math and MathML can be inserted inline as a figure.
+Both LaTeX math, AsciiMath and MathML can be inserted inline as a figure.
 
-LaTeX math can be inserted by specifying either `latex` or `$` after three backticks, or by specifying an attribute list of `{format: latex}`.
+* LaTeX math can be inserted by specifying either `latex` or `$` after three backticks, or by specifying an attribute list of `{format: latex}`.
+* AsciiMath can be inserted by specifying either `asciimath` or `@` after three backticks, or by specifying an attribute list of `{format: asciimath}`.
+* MathML math can be inserted by specifying `mathml` after three backticks, or by specifying an attribute list of `{format: mathml}`.
 
-MathML math can be inserted by specifying `mathml` after three backticks, or by specifying an attribute list of `{format: mathml}`.
-
-LaTeX math:
-
-~~~
-Here's a paragraph before the figures.
-
-```latex
-\left|\sum_{i=1}^n a_ib_i\right|
-\le
-\left(\sum_{i=1}^n a_i^2\right)^{1/2}
-\left(\sum_{i=1}^n b_i^2\right)^{1/2}
-```
-
-Here's the same thing, with even more syntactic sugar:
+All three let you produce mathematical equations like this:
 
 ```$
 \left|\sum_{i=1}^n a_ib_i\right|
@@ -1368,40 +1524,227 @@ Here's the same thing, with even more syntactic sugar:
 \left(\sum_{i=1}^n b_i^2\right)^{1/2}
 ```
 
-Here's a paragraph after the figures.
-~~~
+###### LaTeX math
 
-This is a slightly-reformatted example of MathML math from [Wikipedia](http://en.wikipedia.org/wiki/MathML):
+Here's how you do this using LaTeX math...
+
+Here's the version with the syntactic sugar for the format after the backticks:
 
 ~~~
-```mathml
-<apply>
-  <plus/>
-  <apply>
-    <times/>
-    <ci>a</ci>
-    <apply><power/><ci>x</ci><cn>2</cn></apply>
-  </apply>
-  <apply>
-    <times/>
-    <ci>b</ci>
-    <ci>x</ci>
-  </apply>
-  <ci>c</ci>
-</apply>
+Here's a paragraph before the figure.
+
+```$
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
 ```
+
+Here's a paragraph after the figure.
 ~~~
 
-Here's the start of the same thing with a verbose attribute list:
+Here's the same thing, with the full format after the backticks:
 
 ~~~
+Here's a paragraph before the figure.
+
+```latex
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing again, with a full attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latex}
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+###### AsciiMath
+
+Here's how you do this using AsciiMath...
+
+Here's the version with the syntactic sugar for the format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```@
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing, with the full format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```asciimath
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing again, with a full attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: asciimath}
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+If you wonder why I'm a fan of AsciiMath: I actually got that right on the first try at the [AsciiMath website](http://asciimath.org/).
+
+###### MathML
+
+There is no syntactic sugar for MathML.
+
+Here's the MathML version, with the full format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```mathml
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mstyle displaystyle="true">
+    <mrow>
+      <mo>|</mo>
+      <mrow>
+        <mrow>
+          <munderover>
+            <mo>&#x2211;</mo>
+            <mrow>
+              <mi>i</mi>
+              <mo>=</mo>
+              <mn>1</mn>
+            </mrow>
+            <mi>n</mi>
+          </munderover>
+        </mrow>
+        <msub>
+          <mi>a</mi>
+          <mi>i</mi>
+        </msub>
+        <msub>
+          <mi>b</mi>
+          <mi>i</mi>
+        </msub>
+      </mrow>
+      <mo>|</mo>
+    </mrow>
+    <mo>&#x2264;</mo>
+    <msup>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <munderover>
+            <mo>&#x2211;</mo>
+            <mrow>
+              <mi>i</mi>
+              <mo>=</mo>
+              <mn>1</mn>
+            </mrow>
+            <mi>n</mi>
+          </munderover>
+        </mrow>
+        <mrow>
+          <msubsup>
+            <mi>a</mi>
+            <mi>i</mi>
+            <mn>2</mn>
+          </msubsup>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+      <mrow>
+        <mfrac>
+          <mn>1</mn>
+          <mn>2</mn>
+        </mfrac>
+      </mrow>
+    </msup>
+    <msup>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <munderover>
+            <mo>&#x2211;</mo>
+            <mrow>
+              <mi>i</mi>
+              <mo>=</mo>
+              <mn>1</mn>
+            </mrow>
+            <mi>n</mi>
+          </munderover>
+        </mrow>
+        <mrow>
+          <msubsup>
+            <mi>b</mi>
+            <mi>i</mi>
+            <mn>2</mn>
+          </msubsup>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+      <mrow>
+        <mfrac>
+          <mn>1</mn>
+          <mn>2</mn>
+        </mfrac>
+      </mrow>
+    </msup>
+  </mstyle>
+</math>
+```
+
+Here's a paragraph after the figure.
+~~~
+
+In case you're wondering: no, I didn't type this in. Instead, I did this:
+
+1. I wrote the AsciiMath in the previous section.
+2. I went to the [AsciiMath](http://asciimath.org/) website and pasted it in the Input field.
+3. I chose Show Math As > MathML Code for the Rendering field.
+
+MathML is excellent as an output format for AsciiMath.
+
+Here's the same thing again, with a full attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
 {format: mathml}
 ```
-<apply>
-  <plus/>
-  (identical code omitted)
-</apply>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mstyle displaystyle="true">
+    (...identical code omitted for brevity...)
+  </mstyle>
+</math>
 ```
+
+Here's a paragraph after the figure.
 ~~~
 
 {#tables}
@@ -5088,6 +5431,7 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
+- Support everything in Images, Attributes and Links section
 - Support Multiple Selection questions
 - The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
 - Definition list id attributes on definition list items do not work yet.
