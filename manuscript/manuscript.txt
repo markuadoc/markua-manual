@@ -471,11 +471,11 @@ Again, both of these are not good Markua: attribute values should be specified o
 
 There are three types of resources which can be inserted as spans:
 
-1. Inline `code` resources.
-2. A `math` resource.
+1. Single-line inline code resources.
+2. A `math` resource (regardless of location) without a caption.
 3. An `image` resource without figure attributes, such as captions.
 
-An inline code resource of `text` format can be inserted as a span using the following syntax:
+An inline code resource can be inserted as a span using the following syntax:
 
 ~~~
 It's a single backtick `followed by inline resource content` and then a single backtick.
@@ -484,7 +484,13 @@ It's a single backtick `followed by inline resource content` and then a single b
 An inline math resource of `latex` format can be inserted as a span using the following syntax:
 
 ~~~
-It's a single backtick `followed by inline resource content`$ and then a single backtick and dollar sign.
+It's a single backtick `followed by inline resource content`$ and then a single backtick and dollar sign (`$`).
+~~~
+
+An inline math resource of `asciimath` format can be inserted as a span using the following syntax:
+
+~~~
+It's a single backtick `followed by inline resource content`@ and then a single backtick and an at sign (`@`).
 ~~~
 
 The [code](#code) and [math](#math) resources are described more fully later.
@@ -495,10 +501,21 @@ By default, the format of an inline resource is `text` for code and `latex` for 
 
 However, span attribute lists can be used to set the format explicitly.
 
-For example, this resource would be treated as LaTeX math:
+For example, this resource would be formatted as Ruby code:
+~~~
+Yada yada `puts "hi"`{format: ruby} yada yada.
+~~~
+
+This resource would be treated as LaTeX math:
 
 ~~~
 Yada yada `some LaTeX math here`{format: latex} yada yada.
+~~~
+
+This resource would be treated as AsciiMath:
+
+~~~
+Yada yada `some AsciiMath math here`{format: asciimath} yada yada.
 ~~~
 
 This resource would be treated as MathML math:
@@ -507,7 +524,7 @@ This resource would be treated as MathML math:
 Yada yada `some MathML math here`{format: mathml} yada yada.
 ~~~
 
-(You can actually insert a math resource of `mathml` format as a span, but that's really verbose!)
+Yes, you can actually insert a math resource of `mathml` format as a span, but it's so verbose that it's a bad idea. You're much better off using AsciiMath or LaTeX math for spans.
 
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple. However, to support rare use cases, any span can have an attribute list. The attribute list on a span is specified immediately after the closing backtick. Examples of this are shown in the code and math sections.
 
@@ -534,16 +551,14 @@ So, the rules for inserting resources into a span context are as follows:
 1. Any resource can be inserted into a span context, such as the middle of a paragraph.
 2. Any resource with a caption which is inserted into a span context is treated as though there is a single newline before and after it, causing it to be inserted as a figure within the span context.
 3. The following resource types, when they do not have a caption, can be inserted into a span context without causing single newlines to implicitly precede and follow them:
-  a) a `image` without a caption, regardless of location or format
-  b) a `math` resource, regardless of location or format
-  c) a single-line inline `code` resource
+   a) a `image` without a caption, regardless of location or format
+   b) a `math` resource, regardless of location or format
+   c) a single-line inline `code` resource
 4. All other resources cause single newlines to implicitly precede and follow them when being inserted into a span context.
 
 In terms of inserting resources into a block context: all resource types and formats can be inserted into a block context, with and without captions.
 
-
 If a resource is inserted in a span context, and it can fit in the span context, it is inserted as a span, with whitespace before and after it. Examples of resources which can fit in a span context are images without captions, video without captions (since an image is used as a placeholder), single-line code samples and single lines of poetry.  Now, there are certain types of resources which, when inserted into a span context, cause the addition of single newlines before and after the resource. These include any resource with a caption, any type of table, a multi-line code sample, any math example, and multi-line poetry.
-
 
 If a local or web resource is inserted with no newlines before or after it,
 
@@ -1059,9 +1074,11 @@ The default value of the `format` attribute for a code resource inserted as a fi
 
 If the code resource is a local or web resource, it defaults to `guess`.
 
-If the code resource is an inline resource, the default varies based on the delimiter. With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the code language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
+If the code resource is an inline resource, the default varies based on the delimiter, and whether the code is inserted as a span or as a block.
 
-Finally, note that there is a `default-code-language` setting on the entire Markua document. The value of this setting only affects local resources, web resources or inline resources inserted with backticks--it has no effect on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
+With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the code language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
+
+The default value of block code resources inserted with three backticks can be overridden from `guess` to some other value by setting by the `default-code-language` attribute on the entire Markua document. (This attribute has no effect on resources inserted with three tildes.) The default value of code span resources inserted as spans with single backticks can be overridden from the default value of `text` to some other value by setting the `default-code-span-language` on the entire Markua document.
 
 #### Local Code Resources
 
@@ -1786,7 +1803,9 @@ The only difference between Markua simple tables and GFM tables is that in Marku
 
 Markua simple tables are best specified first by examples, and then the rules. These examples are similar to those from GFM, since the goal was to be as close to GFM as possible, without the pipe issue.
 
-The following is how you create a simple table in Markua:
+Note that simple tables may leave an optional single-space gap between the separator hyphens and the pipes, for consistency with GFM. (With GFM, the examples all leave spaces, but it works both ways.)
+
+The following is how you create a simple table in Markua, with the spaces:
 
 ~~~
 {optional: attribute_list}
@@ -1797,7 +1816,16 @@ The following is how you create a simple table in Markua:
 | Body A3    | Body B3    | Body C3    |
 ~~~
 
-Note that simple tables must leave a single-space gap between the separator hyphens and the pipes, for consistency with GFM.
+The following is how you create a simple table in Markua, without the spaces:
+
+~~~
+{optional: attribute_list}
+| Header A   | Header B   | Header C   |
+|------------|------------|------------|
+| Body A1    | Body B1    | Body C1    |
+| Body A2    | Body B2    | Body C2    |
+| Body A3    | Body B3    | Body C3    |
+~~~
 
 You don't need `type: table` when the table is defined inline, of course, since it's clear.
 
@@ -5279,7 +5307,10 @@ If a Markua Processor also provides a UI to define settings which are specified 
 : The owner of the copyright.
 
 `default-code-language`
-: The default language that code which is a local resource, web resource or inline resource inserted with backticks is interpreted as. The default value is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`. Finally, note that the value of this setting only affects local resources, web resources or inline resources inserted with backticks--it has no effect on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
+: The default language that code which is a local resource, web resource or inline resource inserted as a block with three backticks is interpreted as. The default value is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`. Finally, note that the value of this setting only affects local resources, web resources or inline resources inserted as a block with three backticks--it has no effect on code spans, or on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
+
+`default-code-span-language`
+: The default language that code which an inline code span resource is foramtted as. The default is `text`. If you set this to `ruby`, it is the equivalent of setting `{format: ruby}` as an inline attribute list on every code span resource by default, e.g. `` `puts "hi"`{format: ruby} ``. If you need to override a specific resource to not be ruby, you would set `{format: text}`.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
