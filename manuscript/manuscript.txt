@@ -368,7 +368,7 @@ A figure can also have attributes. The supported attributes vary based on the ty
 : This is text which is shown near the figure, typically above or below it. A Markua Processor can choose where to position captions based on any criteria it chooses. For example, a Markua Processor can position all captions above or below figures, or use a different behaviour based on the resource format. Note that the figure caption itself may contain the Markua text formatting specified earlier in the [Text Formatting](#text-formatting) chapter. If no `caption` is provided but a `title` is provided, then the `title` should be used as the caption: it does not make sense to refer to a figure with a title, but for the figure itself to have no caption.
 
 `class`
-: Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes (e.g. theorems, lemmas, etc).
+: Any attribute list supports a class attribute. When used in figures, this is the class of the figure. This can be used for styling, and it can also be used by Markua Processors which wish to group figures by classes, such as theorems or lemmas.
 
 `format`
 : This is the resource format. Different resource types have different legal values for format.
@@ -866,7 +866,7 @@ Here's what Leanpub will do with these attributes:
 
 ##### Adding a Link Around an Image
 
-Besides using `url` attrubites to create links out of images, you can also use the Markua link syntax around an images itself. This is the standard Markdown link syntax which Markua inherited unchanged.
+Besides using `url` attributes to create links out of images, you can also use the Markua link syntax around an images itself. This is the standard Markdown link syntax which Markua inherited unchanged.
 
 So, you can do the following:
 
@@ -927,7 +927,7 @@ The following are the supported attributes for video resources, in addition to t
 : The `align` can be `left`, `right` or `middle`. This applies to the `poster` image for the video, and works just like it does with images.
 
 `embed`
-: true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like youtube which disallows this. In this case, this should function like a link to external web page which (youtube app etc). A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
+: true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like YouTube which disallows this. In this case, this should function like a link to external web page which (YouTube app etc). A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
 
 `float`
 : The `float` can be `left`, `right`, `inside` or `outside`.  This applies to the `poster` image for the video, and works just like it does with images. It is an error to specify both `align` and `float`.
