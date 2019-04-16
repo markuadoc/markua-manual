@@ -927,7 +927,7 @@ The following are the supported attributes for video resources, in addition to t
 : The `align` can be `left`, `right` or `middle`. This applies to the `poster` image for the video, and works just like it does with images.
 
 `embed`
-: true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like YouTube which disallows this. In this case, this should function like a link to external web page which (YouTube app etc). A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
+: true or false. If true, then you can actually embed the video file or reference it and play it. If false, then it's from a site like YouTube which disallows this. In this case, this should function like a link to external web page, but open an appropriate app (e.g. the YouTube app) instead of a browser. A Markua Processor can be smart about defaults, and parse the URL to set the value of the `embed` attribute.
 
 `float`
 : The `float` can be `left`, `right`, `inside` or `outside`.  This applies to the `poster` image for the video, and works just like it does with images. It is an error to specify both `align` and `float`.
@@ -1501,7 +1501,7 @@ Technically you can insert MathML as an inline span resource, as long as you rem
 Yada yada `<some><mathml><here></here></mathml></some>`{format: mathml} yada yada.
 ~~~
 
-No, that's not really MathML syntax. For an exmaple of some, see this [Wikipedia page](https://en.wikipedia.org/wiki/MathML).
+No, that's not really MathML syntax. For an example of some, see this [Wikipedia page](https://en.wikipedia.org/wiki/MathML).
 
 While it would almost always be a bad idea to insert MathML as a span resource, it would also be a bad idea to forbid it in the Markua spec.
 
@@ -1897,7 +1897,7 @@ The following are the principles of complex tables in Markua:
 
 Because of these principles, anyone trying to write a complex table correctly should produce the same result.
 
-Note that complex tables support indivdiual alignment of each cell in the table, as well as of columns. Simple tables only support alignment of columns.
+Note that complex tables support individual alignment of each cell in the table, as well as of columns. Simple tables only support alignment of columns.
 
 The following is how you create a complex table in Markua:
 
@@ -2392,7 +2392,7 @@ Unlike Markdown, all trailing spaces at the end of a line are ignored by Markua.
 
 Markua handles internal whitespace in a paragraph in a similar way to Markdown:
 
-First, in Markua and Markdown, multiple internal spaces or tabs in the the middle of a sentence are all collapsed to one space.
+First, in Markua and Markdown, multiple internal spaces or tabs in the middle of a sentence are all collapsed to one space.
 
 However, a Markua Processor should be smart about interpreting what is the end of a sentence, and handle that specially.
 
@@ -3969,7 +3969,7 @@ W> Leanpub authors: This question type is not yet supported in Leanpub.
 
 The `true` answer choices are specified with `T`; `false` answer choices are specified with `F`.
 
-To get the question 100% correct, you must select **ALL** answers which are `true` (not just one of them) and **NONE** of the answers which are `false`. As discussed later, the `mark` attribute determines whether the the marking is all-or-nothing (with the `binary` value) or whether a partial credit can be earned (with the `ratio`) value.
+To get the question 100% correct, you must select **ALL** answers which are `true` (not just one of them) and **NONE** of the answers which are `false`. As discussed later, the `mark` attribute determines whether the marking is all-or-nothing (with the `binary` value) or whether a partial credit can be earned (with the `ratio`) value.
 
 Regardless of the value of the `mark` attribute, to get any score for a multiple selection question, at least one answer choice must be selected. Leaving a multiple selection question blank always gets zero points, even if the `mark` attribute is `ratio`. Otherwise, if a test had nothing but multiple selection questions with `ratio`-marked questions, with half the answers `true` and half the answers `false`, you could get 50% on the test by just handing it in blank!
 
@@ -4750,7 +4750,7 @@ My name is Rumpel\-stiltskin.
 
 Curly braces and backticks are special in Markua.
 
-At the beginning of a line, an opening curly brace (`{`) starts an attribute list, and two openining curly braces (`{{`) start a placeholder. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block.
+At the beginning of a line, an opening curly brace (`{`) starts an attribute list, and two opening curly braces (`{{`) start a placeholder. In the middle of a block element, an opening curly brace starts an index entry. And, at the top of a manuscript.txt file (if the single file approach is used), an opening curly brace starts a settings block.
 
 So, to use a curly brace as an actual curly brace character, you need to backslash-escape it like this: `\{`. (Note that this does not apply inside code or other resources: Markua does not process anything inside them.)
 
@@ -4790,7 +4790,7 @@ If a Markua Processor recognizes that a given Unicode character is not present i
 {#emoji}
 ## Emoji
 
-In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year [was](http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/), in fact, the Face with Tears of Joy emoji. You may think of it a a smiling face with tears of joy, but you can also can think of it as `\u1F602;`, which is its Unicode code point.
+In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year [was](http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/), in fact, the Face with Tears of Joy emoji. You may think of it as a smiling face with tears of joy, but you can also can think of it as `\u1F602;`, which is its Unicode code point.
 
 However, Unicode characters aren't the only way to do emoji. Another popular syntax for emoji is `:emoji_name:` -- that is a colon (`:`), followed by the underscore-separated name of the emoji, followed by a colon.
 
@@ -5172,7 +5172,7 @@ What authors write, the manuscript, is typically what goes into the text, or mai
 
 There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents, Foreword, Preface, etc.) which can come before the main text of the book. This is called "front matter". Some of the front matter comes before the Table of Contents and is not numbered; the rest of the front matter that comes after the Table of Contents gets numbered with Roman numerals.
 
-There's also a bunch of other stuff (acknowledgments, appendices, the index, etc) which can come after the main matter. This is called the "back matter".
+There's also a bunch of other stuff (acknowledgments, appendices, the index, etc.) which can come after the main matter. This is called the "back matter".
 
 If Markua just relied on its headings support there would be no good way to accomplish the division of a manuscript into front matter, main matter and back matter. (We could try some convention about heading names, but that would be a highly objectionable, English-centric hack.) Furthermore, there would be no good way to determine which parts of the front matter got numbered and which did not.  Also, there would be no good way to give explicit hints to Markua Processors about how to style the various parts of a book.
 
@@ -5232,7 +5232,7 @@ While these book `section` directives are mere hints, there are strict rules abo
 2. The book `section` directives are all optional; it is legal to have a Markua document with no book `section` directives.
 3. If any book section directives with values which occur in front matter are present, a `{section: mainmatter}` directive is required.
 
-Authors new to Markua can completely ignore all directives, including book `section` directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc, do they have to worry about book `section` directives. And using directives is very simple, despite how formally specified this section makes them.
+Authors new to Markua can completely ignore all directives, including book `section` directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc., do they have to worry about book `section` directives. And using directives is very simple, despite how formally specified this section makes them.
 
 {#settings}
 ## Settings
@@ -5353,7 +5353,7 @@ Books have different abstractions than HTML. All abstractions [leak](http://www.
 
 ## Why the Name "Markua"?
 
-When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which referenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these these properties, and I feel it is a really good brand for what I'm trying to accomplish.
+When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which referenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these properties, and I feel it is a really good brand for what I'm trying to accomplish.
 
 ## Plain Text Encoding in UTF-8
 
@@ -5591,7 +5591,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Our definition lists sometimes don't force newlines after the term, e.g. “type This is the resource type..."
 - SVG support
 - Support External and local tables, tables as resources in general
-- Be stricter about headers (#foo should not start a chapter, blank lines before and after, etc)
+- Be stricter about headers (#foo should not start a chapter, blank lines before and after, etc.)
 - Support inline resources
 - Support type attribute on resources
 - Support image attributes align, cite, url
