@@ -1725,7 +1725,7 @@ Here's a paragraph after the figure.
 In case you're wondering: no, I didn't type this in. Instead, I did this:
 
 1. I wrote the AsciiMath in the previous section.
-2. I went to the [AsciiMath](http://asciimath.org/) website and pasted it in the Input field.
+2. I went to the [AsciiMath](http://asciimath.org/) website and pasted `abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)` in the Input field.
 3. I chose Show Math As > MathML Code for the Rendering field.
 
 MathML is excellent as an output format for AsciiMath.
