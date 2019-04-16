@@ -1765,13 +1765,141 @@ The syntax to insert a table defined in an external file on the local filesystem
 
 The table_path lists the path to the external file which defines the table.
 
-The following are the principles of Markua tables:
+To insert a table defined inline, you just insert it by typing the table in an appropriate syntax.
+
+Markua supports two types of tables, simple tables and complex tables. Both simple tables and complex tables can be inserted inline, or as local or web resources. Both simple tables and complex tables have the same legal attributes, so they are discussed later.
+
+#### Simple Tables
+
+The following are the principles of simple tables in Markua:
 
 1. Formatting never applies to anything above it.
 2. Use the fewest formatting characters possible.
-3. Use the fewest attributes possible.
+3. Prioritize ease of writing over ease of reading.
+4. Use the fewest attributes possible.
+5. Be able to left-, center- and right- align columns.
+6. You can create a simple table even if you can't line anything up, say if you're using a variable-width font.
 
-To insert a table defined inline, you just insert it:
+Simple tables in Markua are virtually identical to GitHub Flavored Markdown (GFM) tables, as specified [here](https://help.github.com/en/articles/organizing-information-with-tables).
+
+The only difference between Markua simple tables and GFM tables is that in Markua simple tables you *must* start and end each the line with a pipe (`|`) character. In GFM, the starting and ending pipes are optional.
+
+Markua simple tables are best specified first by examples, and then the rules. These examples are similar to those from GFM, since the goal was to be as close to GFM as possible, without the pipe issue.
+
+The following is how you create a simple table in Markua:
+
+~~~
+{optional: attribute_list}
+| Header A   | Header B   | Header C   |
+| ---------- | ---------- | ---------- |
+| Body A1    | Body B1    | Body C1    |
+| Body A2    | Body B2    | Body C2    |
+| Body A3    | Body B3    | Body C3    |
+~~~
+
+Note that simple tables must leave a single-space gap between the separator hyphens and the pipes, for consistency with GFM.
+
+You don't need `type: table` when the table is defined inline, of course, since it's clear.
+
+Here are some examples of Markua simple tables...
+
+##### Basic Markua Simple Table
+
+The following is a simple table, which has been formatted to line up:
+
+```
+| Header 1  | Header 2  |
+| --------- | --------- |
+| Content 1 | Content 2 |
+| Content 3 | Content 4 |
+```
+
+##### Nothing Needs To Line Up
+
+The following is a simple table, which has not been formatted to line up:
+
+```
+| Header 1  | Header 2 |
+| --- | --- |
+| Content 1 | Content 2 |
+| Content 3 | Content 4 Can be Different Length |
+```
+
+Note that you need at least three hyphens (`-`) in each header separator cell, just as in GFM.
+
+##### Left, Middle and Right Alignment with Colons
+
+To specify column alignment, you add a colons to the header separator row, just as in GFM. You  still need at least three hyphens per header separator cell, just as in GFM.
+
+```
+| Left | Middle  | Right |
+| :--- |  :---:  |  ---: |
+| a    | b       | c     |
+| d    | e       | f     |
+```
+
+Note that the alignment of the cell content does not matter, and the cells do not need to line up. This can also be lazily or pathologically written, and it would be both correct and incomprehensible.
+
+```
+| Left | Middle | Right |
+| :--- | :---: |---: |
+| a | b | c |
+|    d |              e |   f   |
+```
+
+##### Pipes in Markua Simple Tables vs. GFM Tables
+
+The following is a table in GFM, but not in Markua:
+
+```
+header 1 | header 2
+-------- | --------
+content  | content
+more     | and more
+```
+
+You might think that it's clear this is a table, and that GFM gets it right. For that case, you would be correct.
+
+However, the following is a table in GFM:
+
+```
+foo | bar
+```
+
+Now, this case is a bit surprising. Having to write backslash-escape every `|` character is not an acceptable tradeoff, in my opinion.
+
+(It is obviously not a simple table in Markua, since there are no leading or trailing pipes.)
+
+Finally, the following two lines are also considered two tables in some Markdown parsers:
+
+```
+foo `|` bar
+
+foo \| bar
+```
+
+Since Markua requires leading and trailing pipes on each line, these are obviously not Markua simple tables.
+
+Because of the leading and trailing pipe requirement, the probability of accidentally creating a table in Markua is essentially zero.
+
+#### Complex Tables
+
+The following are the principles of complex tables in Markua:
+
+1. Formatting never applies to anything above it.
+2. Prioritize clarity and consistency over brevity.
+3. Prioritize ease of reading over ease of writing.
+4. Use the fewest attributes possible.
+5. Be able to left-, center- and right- align both columns and individual cells.
+6. Be able to support footers.
+7. Be able to specify multi-line header, cell and footer content.
+8. You must line everything up to create a complex table, so you must use a fixed-width font in your editor.
+
+Because of these principles, anyone trying to write a complex table correctly should produce the same result.
+
+Note that complex tables support indivdiual alignment of each cell in the table, as well as of columns. Simple tables only support alignment of columns.
+
+The following is how you create a complex table in Markua:
 
 ~~~
 {optional: attribute_list}
@@ -1787,6 +1915,8 @@ To insert a table defined inline, you just insert it:
 | Footer A   | Footer B   | Footer C   |
 |============|============|============|
 ~~~
+
+W> Unlike with simple tables, complex tables have the formatting hyphens or equals signs go all the way to the pipes (or, as you'll see later, to one character before if a colon is used to align the column or cell). They do not leave a single space gap between the formatting and the pipes.
 
 You don't need `type: table` when the table is defined inline, of course, since it's clear.
 
@@ -2135,6 +2265,8 @@ In that table, column A is left-aligned, column B is centered and column C is ri
 
 {#table-attributes}
 #### Supported Attributes for Tables
+
+The following attributes apply to both simple tables and complex tables.
 
 If there are any errors with the supported attributes for tables, such as the `column-widths` not adding up correctly or missing `%` signs, the Markua Processor must add these errors to a list of errors and warnings that it shows the author, and just output the table with either the erroneous attribute not set or with none of the attributes set.
 
