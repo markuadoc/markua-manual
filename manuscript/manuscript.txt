@@ -110,18 +110,18 @@ Markua is a plain text format designed for the writing of books. Books have vari
 Here's how to do basic, semantic text formatting.
 
 Italic
-: To produce *italic text*, surround it with `*one asterisk*`.
+: To produce *italic text*, surround it with `*one asterisk*`. You can also use `_one underscore_` if you set the global setting [`italicize-single-underscores`](#italicize-single-underscores) to have a value of `true`.
+
+Underline
+: To produce ____underlined text____, surround it with either `_one underscore_` or `____four underscores____`. Note that this is different from Markdown, in which `*one asterisk*` and `_one underscore_` both produce *italics*. However, ____underline____ is not *always* just a typewriter version of *italics*. In some languages and in some contexts, underlining serves a distinct, legitimate purpose--and having to use something like, say, four underscores every single time would be totally unacceptable. (Markdown gets this wrong in the same way that people who always use `<em>` instead of `<i>` get this wrong: even the W3C (!) has recognized that the [`<i>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-i-element) and the [`<em>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-em-element) serve different purposes--but in Markdown, you can only produce `<em>` tags, not `<i>` tags.) However, if you are coming from Markdown, and you are used to using `_single underscores_` to produce *italics*, you can set the global setting [`italicize-single-underscores`](#italicize-single-underscores) to have a value of `true` to preserve this behaviour, and then use `____four underscores____` to force an underline if needed. The default value of `italicize-single-underscores` is `false`, so that authors learning Markua can just learn the `_single underscore_` version before needing to learn about global settings.
+
+W> Currently in Leanpub, ____underlined text____ is only produced with four underscores in Markua. We're adding support for `_one underscore_` and the global `italicize-single-underscores` setting reasonably soon.
 
 Bold
 : To produce **bold text**, surround it with `**two asterisks**`.
 
 Bold + Italic
-: To produce ***bold + italic text***, surround it with `***three asterisks***`.
-
-Underline
-: To produce ____underlined text____, surround it with either `_one underscore_` or `____four underscores____`. Note that this is different from Markdown, in which `*one asterisk*` and `_one underscore_` both produce *italics*. However, ____underline____ is not *always* just a typewriter version of *italics*. In some languages and in some contexts, underlining serves a distinct, legitimate purpose--and having to use something like, say, four underscores every single time would be totally unacceptable. (Markdown gets this wrong in the same way that people who always use `<em>` instead of `<i>` get this wrong: even the W3C (!) has recognized that the [`<i>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-i-element) and the [`<em>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-em-element) serve different purposes--but in Markdown, you can only produce `<em>` tags, not `<i>` tags.) However, if you are coming from Markdown, and you are used to using `_single underscores_` to produce italics, you can set the global setting [`italicize-single-underscores`](#italicize-single-underscores) to have a value of `true` to preserve this behaviour, and then use `____four underscores____` to force an underline if needed. The default value of `italicize-single-underscores` is `false`, so that authors learning Markua can just learn the `_single underscore_` version before needing to learn about global settings.
-
-W> Currently in Leanpub, ____underlined text____ is only produced with four underscores in Markua. We're adding support for `_one underscore_` and the global `italicize-single-underscores` setting reasonably soon.
+: To produce ***bold + italic text***, surround it with `***three asterisks***`. You can also use `_**one underscore and two asterisks**_` or `**_two asterisks and one underscore_**` if you set the `italicize-single-underscores` global setting to have a value of `true`. (If you leave it at its default value of `false`, however, this will produce bold + underlined text.)
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
