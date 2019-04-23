@@ -115,6 +115,8 @@ Italic
 Underline
 : To produce ____underlined text____, surround it with either `_one underscore_` or `____four underscores____`. (The reason that `____four underscores____` is supported is for a way to produce an underline if the [`italicize-single-underscores`](#italicize-single-underscores) global setting is set to `true`.)
 
+W> Should I just scrap the four underscore force version???
+
 W> Currently in Leanpub, ____underlined text____ is only produced with four underscores in Markua. We're adding support for `_one underscore_` and the global `italicize-single-underscores` setting reasonably soon.
 
 Bold
