@@ -118,10 +118,16 @@ Underline
 W> Currently in Leanpub, ____underlined text____ is only produced with four underscores in Markua. We're adding support for `_one underscore_` and the global `italicize-single-underscores` setting reasonably soon.
 
 Bold
-: To produce **bold text**, surround it with `**two asterisks**`.
+: To produce **bold text**, surround it with either `**two asterisks**` or `__two underscores__`.
 
 Bold + Italic
-: To produce ***bold + italic text***, surround it with `***three asterisks***`. (You can also use `_**one underscore and two asterisks**_` or `**_two asterisks and one underscore_**` if you set the `italicize-single-underscores` global setting to have a value of `true`. If you leave it at its default value of `false`, however, this will produce bold + underlined text.)
+: To produce ***bold + italic text***, surround it with `***three asterisks***`. (You can also use `___three underscores___` if you set the `italicize-single-underscores` global setting to have a value of `true`. If you leave it at its default value of `false`, however, this will produce bold + underlined text.)
+
+Bold + Underline
+: To produce ____**bold + underlined text**____, surround it with `___three underscores___`, assuming you have left the  `italicize-single-underscores` global setting at its default value of `false`. If you have set it to true, you will need to either use `______six underscores______` or `____**four underscores and two asterisks**____`, both of which are disgusting.
+
+Bold + Italic + Underline
+: To produce ____***bold + italic + underlined***____ text, use `_***one underscore and three asterisks***_`.
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
