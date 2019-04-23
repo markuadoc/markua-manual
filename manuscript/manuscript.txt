@@ -122,10 +122,10 @@ Bold + Italic
 : To produce ***bold + italic text***, surround it with `***three asterisks***`.
 
 Bold + Underline
-: To produce ____**bold + underlined text**____, surround it with `___three underscores___`.
+: To produce ____**bold + underlined text**____, surround it with `___three underscores___`. (If `italicize-underlines` is set to true, this will also produce bold + italic text.)
 
 Bold + Italic + Underline
-: To produce ____***bold + italic + underlined***____ text, surround it with `____four underscores____` or `****four asterisks****`.
+: To produce ____***bold + italic + underlined***____ text, surround it with `____four underscores____` or `****four asterisks****`. (If `italicize-underlines` is set to true, this will just produce bold + italic text.)
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
@@ -5322,7 +5322,9 @@ If a Markua Processor also provides a UI to define settings which are specified 
 
 {#italicize-underlines}
 `italicize-underlines`
-: `true` or `false`. The default value is `false`, so that authors learning Markua can just learn the `_single underscore_` version to produce underlines, before needing to learn about global settings. If `italicize-underlines` is set to `true`, using single `_underscores_` to produce ____underlines____ actually produces *italics*. If `italicize-underlines` is set to `false` or left at the default value of `false`, using single `_underscores_` to produce ____underlines____ actually does produce underlines. This setting allows for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. It also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript.
+: `true` or `false`. The default value is `false`, so that authors learning Markua can just learn the `_single underscore_` version to produce underlines, before needing to learn about global settings. If `italicize-underlines` is set to `true`, using single `_underscores_` to produce ____underlines____ actually produces *italics* (not underline), using `___three underscores___` produces bold + italic (not bold + underline), and using `____four underscores____` also produces bold + italic )
+
+.  If `italicize-underlines` is set to `false` or left at the default value of `false`, using single `_underscores_` to produce ____underlines____ actually does produce underlines. This setting allows for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. It also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
