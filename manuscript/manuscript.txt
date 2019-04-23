@@ -110,16 +110,22 @@ Markua is a plain text format designed for the writing of books. Books have vari
 Here's how to do basic, semantic text formatting.
 
 Italic
-: To produce *italic text*, surround it with either `*one asterisk*` or `_one underscore_`.
+: To produce *italic text*, surround it with `*one asterisk*`.
+
+Underlined
+: To produce ____underlined text____, surround it with `_one underscore_`. (You can force underlines to produce italics, however. See below for details.)
 
 Bold
 : To produce **bold text**, surround it with either `**two asterisks**` or `__two underscores__`.
 
 Bold + Italic
-: To produce ***bold + italic text***, surround it with either `***three asterisks***` or `___three underscores___`.
+: To produce ***bold + italic text***, surround it with `***three asterisks***`.
 
-Underline
-: To produce ____underlined text____, surround it with `____four underscores____`. This is gross, but it's a tradeoff for Markdown compatibility: the one, two and three underscore choices were taken. Thankfully, it's usually preferable to use italic instead of underline. However, underline is not just a typewriter version of italics. In some languages, underlining serves a distinct, legitimate purpose.
+Bold + Underlined
+: To produce ____**bold + underlined text**____, surround it with `___three underscores___`.
+
+Bold + Italic + Underlined
+: To produce ____***bold + italic + underlined***____ text, surround it with `____four underscores____` or `****four asterisks****`.
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
@@ -130,7 +136,30 @@ Superscript
 Subscript
 : To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
-Note that if the asterisks and underscores needed to produce bold and italic are not nested correctly, they will be output as asterisks and underscores instead of producing formatting. This includes combinations like `**_this**_`, `*__this*__` or `__*this__*`.
+W> Currently in Leanpub, ____underlined text____ is produced with `____four underscores____` in Markua. When we add support for `_one underscore_` and the global `italicize-underlines` setting, the four underscores will become bold + italic + underlined.
+
+## The `italicize-underlines` Setting
+
+There is also an [`italicize-underlines`](#italicize-underlines) global setting, whose default value is `false`. If this setting is set to `true`, then all underlines become italics. If you are coming from Markdown, where both `*one asterisk*` and `_one underscore_` produce italics, your fingers may have learned the `_one underscore_` version. In that case, you may want to set this setting to true. Note that if `italicize-underlines` is set to `true`, `___three underscores___` will also produce bold + italic text, just like `***three asterisks***` does.
+
+## Nesting Formatting
+
+It is possible to nest formatting. It is almost never desirable to do this, however. But banning these combinations would be equally arbitrary.
+
+So, if the `italicize-underlines` global setting is `false`, the following combinations work:
+
+* italic + underlined: `*_this_*` or `_*this*_`
+* bold + italic: `__*this*__` or `*__this__*`
+* bold + underlined: `**_this_**` or `_**this**_`
+* bold + italic + underlined: `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
+
+If, however, the `italicize-underlines` global setting is `true`, the following all produce ***bold + italic***, since the underlines get converted to italics, and redundant underlines are ignored:
+
+`__*this*__`, `*__this__*`, `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
+
+Finally, if you incorrectly nest the asterisk and underscore formatting characters, then they are output verbatim as asterisks and underscores, instead of producing formatting. So, the following examples of incorrect nesting all output the asterisks and underscores verbatim:
+
+`*__this*__`, `__*this__*`, `**_this**_`, `_**this_**`, `_***this_***`, `*___this*___`, `***_this***_` or `___*this___*`
 
 {#headings}
 # Headings
@@ -5312,6 +5341,10 @@ If a Markua Processor also provides a UI to define settings which are specified 
 `default-code-span-language`
 : The default language that code which an inline code span resource is foramtted as. The default is `text`. If you set this to `ruby`, it is the equivalent of setting `{format: ruby}` as an inline attribute list on every code span resource by default, e.g. `` `puts "hi"`{format: ruby} ``. If you need to override a specific resource to not be ruby, you would set `{format: text}`.
 
+{#italicize-underlines}
+`italicize-underlines`
+: `true` or `false`. The default value is `false`, so that authors learning Markua can just learn the `_single underscore_` version to produce underlines, before needing to learn about global settings. If `italicize-underlines` is set to `true`, using single `_underscores_` to produce ____underlines____ actually produces *italics* (not underline). If `italicize-underlines` is `false`, using single `_underscores_` actually does produce underlines. This setting allows for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. It also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript.
+
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
 
@@ -5430,23 +5463,24 @@ Obviously, Leanpub has a mapping from Markua to HTML5: we use it to produce the 
 
 Markua has a number of differences from Markdown as defined by John Gruber. These are the main ones:
 
-1. Markdown supports inline HTML; [as discussed earlier, Markua does not](#no-inline-html).
-2. Markua defines many more types of numbered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list types and features.
-3. Unlike in Markdown, in Markua the number that begins the list in the manuscript is the number that begins the list in the output.
-4. Markdown does not specify a table syntax. Since Markdown supports inline HTML, it does not need to--if you want a table, you can simply use an inline HTML table. Since Markua does not support inline HTML, Markua defines a [table syntax](#tables).
-5. Images in Markua are inserted in essentially the same way they are in Markdown for what Markdown calls "inline images". Markdown's inline images are not to be confused with Markua's inline image support, which means to define an SVG image in the text of a Markua document. Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images. There are two main reasons for not supporting reference style resource syntax in Markua. First, resources in Markua are complex enough without also having a reference syntax for them. Second, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
-6. Markua supports definition lists; Markdown does not (except via inline HTML).
-7. Markdown lets you use a plus sign (`+`) before each item in an unordered ("bulleted" in Markua) list; Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`.
-8. Markdown does not support closing parentheses (`)`) as ordered ("numbered" in Markua) list delimiters; Markua does.
-9. Markua and Markdown handle spaces, newlines and indentation differently. This is discussed in the [Whitespace: Spaces, Tabs and Newlines](#whitespace) section.
-10. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
-11. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
-12. Markua and Markdown handle headings differently. This is discussed further below.
-13. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
-14. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
-15. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
-16. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
-17. In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML or horizontal rules. The `***` is used for scene breaks, `___` starts poetry, and `---` starts monospaced poetry.
+1. In Markdown, `*one asterisk*` and `_one underscore_` both produce *italics*. In Markua, `*one asterisk*` produces *italics*, and `_one underscore_` produces an ____underline____ unless the `italicize-underlines` global setting is set to true. The reason for this is simple: ____underline____ is not *always* just a typewriter version of *italics*. In some languages and in some contexts, underlining serves a distinct, legitimate purpose.
+2. Markdown supports inline HTML; [as discussed earlier, Markua does not](#no-inline-html).
+3. Markua defines many more types of numbered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list types and features.
+4. Unlike in Markdown, in Markua the number that begins the list in the manuscript is the number that begins the list in the output.
+5. Markdown does not specify a table syntax. Since Markdown supports inline HTML, it does not need to--if you want a table, you can simply use an inline HTML table. Since Markua does not support inline HTML, Markua defines a [table syntax](#tables).
+6. Images in Markua are inserted in essentially the same way they are in Markdown for what Markdown calls "inline images". Markdown's inline images are not to be confused with Markua's inline image support, which means to define an SVG image in the text of a Markua document. Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images. There are two main reasons for not supporting reference style resource syntax in Markua. First, resources in Markua are complex enough without also having a reference syntax for them. Second, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
+7. Markua supports definition lists; Markdown does not (except via inline HTML).
+8. Markdown lets you use a plus sign (`+`) before each item in an unordered ("bulleted" in Markua) list; Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`.
+9. Markdown does not support closing parentheses (`)`) as ordered ("numbered" in Markua) list delimiters; Markua does.
+10. Markua and Markdown handle spaces, newlines and indentation differently. This is discussed in the [Whitespace: Spaces, Tabs and Newlines](#whitespace) section.
+11. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
+12. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
+13. Markua and Markdown handle headings differently. This is discussed further below.
+14. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
+15. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+16. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
+17. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
+18. In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML or horizontal rules. The `***` is used for scene breaks, `___` starts poetry, and `---` starts monospaced poetry.
 
 ### Differences with Inserting Block Elements Inside Paragraphs
 
