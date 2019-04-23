@@ -121,6 +121,8 @@ Bold + Italic
 Underline
 : To produce ____underlined text____, surround it with either `_one underscore_` or `____four underscores____`. Note that this is different from Markdown, in which `*one asterisk*` and `_one underscore_` both produce *italics*. However, ____underline____ is not *always* just a typewriter version of *italics*. In some languages and in some contexts, underlining serves a distinct, legitimate purpose--and having to use something like, say, four underscores every single time would be totally unacceptable. (Markdown gets this wrong in the same way that people who always use `<em>` instead of `<i>` get this wrong: even the W3C (!) has recognized that the [`<i>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-i-element) and the [`<em>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-em-element) serve different purposes--but in Markdown, you can only produce `<em>` tags, not `<i>` tags.) However, if you are coming from Markdown, and you are used to using `_single underscores_` to produce italics, you can set the global setting [`italicize-single-underscores`](#italicize-single-underscores) to have a value of `true` to preserve this behaviour, and then use `____four underscores____` to force an underline if needed. The default value of `italicize-single-underscores` is `false`, so that authors learning Markua can just learn the `_single underscore_` version before needing to learn about global settings.
 
+W> Currently in Leanpub, ____underlined text____ is only produced with four underscores in Markua. We're adding support for `_one underscore_` and the global `italicize-single-underscores` setting reasonably soon.
+
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
 
@@ -131,8 +133,6 @@ Subscript
 : To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
 Note that if the asterisks and underscores needed to produce bold and italic are not nested correctly, they will be output as asterisks and underscores instead of producing formatting. This includes combinations like `**_this**_`, `*__this*__` or `__*this__*`.
-
-W> Currently in Leanpub, ____underlined text____ is produced with four underscores in Markua. We're fixing this.
 
 {#headings}
 # Headings
