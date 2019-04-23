@@ -110,14 +110,10 @@ Markua is a plain text format designed for the writing of books. Books have vari
 Here's how to do basic, semantic text formatting.
 
 Italic
-: To produce *italic text*, surround it with `*one asterisk*`. (You can also use `_one underscore_` if you set the global setting [`italicize-single-underscores`](#italicize-single-underscores) to have a value of `true`. If you are coming from Markdown, where both `*one asterisk*` and `_one underscore_` produce italics, your fingers may have learned the `_one underscore_` version. If so, you will probably want to do this.)
+: To produce *italic text*, surround it with `*one asterisk*`.
 
 Underline
-: To produce ____underlined text____, surround it with either `_one underscore_` or `____four underscores____`. (The reason that `____four underscores____` is supported is for a way to produce an underline if the [`italicize-single-underscores`](#italicize-single-underscores) global setting is set to `true`.)
-
-W> Should I just scrap the four underscore force version???
-
-W> Currently in Leanpub, ____underlined text____ is only produced with four underscores in Markua. We're adding support for `_one underscore_` and the global `italicize-single-underscores` setting reasonably soon.
+: To produce ____underlined text____, surround it with `_one underscore_`. (You can also use `_one underscore_` to italicize text instead of underlining it if you set the global setting [`italicize-underlines`](#italicize-underlines) to have a value of `true`. If you are coming from Markdown, where both `*one asterisk*` and `_one underscore_` produce italics, your fingers may have learned the `_one underscore_` version. In that case, you may want to do this.)
 
 Bold
 : To produce **bold text**, surround it with either `**two asterisks**` or `__two underscores__`.
@@ -129,7 +125,7 @@ Bold + Underline
 : To produce ____**bold + underlined text**____, surround it with `___three underscores___`.
 
 Bold + Italic + Underline
-: To produce ____***bold + italic + underlined***____ text, surround it with `****four asterisks****`.
+: To produce ____***bold + italic + underlined***____ text, surround it with `____four underscores____` or `****four asterisks****`.
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
@@ -140,7 +136,9 @@ Superscript
 Subscript
 : To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
-Note that if the asterisks and underscores needed to produce bold and italic are not nested correctly, they will be output as asterisks and underscores instead of producing formatting. This includes combinations like `**_this**_`, `*__this*__` or `__*this__*`.
+W> Currently in Leanpub, ____underlined text____ is produced with `____four underscores____` in Markua. We're removing this and adding support for `_one underscore_` and the global `italicize-underlines` setting reasonably soon.
+
+W> You cannot mix and match asterisks and underscores in Markua. So, you can't do things which seem reasonable to programmers like `*__this__*`, `**_this_**`, `_**this**_` or `*__this__*`. You also can't do pathological combinations like `**_this**_`, `_**this_**`, `*__this*__` or `__*this__*`. If you mix and match asterisks and underscores, they will be output verbatim, as asterisks and underscores, instead of producing formatting.
 
 {#headings}
 # Headings
@@ -5322,9 +5320,9 @@ If a Markua Processor also provides a UI to define settings which are specified 
 `default-code-span-language`
 : The default language that code which an inline code span resource is foramtted as. The default is `text`. If you set this to `ruby`, it is the equivalent of setting `{format: ruby}` as an inline attribute list on every code span resource by default, e.g. `` `puts "hi"`{format: ruby} ``. If you need to override a specific resource to not be ruby, you would set `{format: text}`.
 
-{#italicize-single-underscores}
-`italicize-single-underscores`
-: `true` or `false`. The default value is `false`, so that authors learning Markua can just learn the `_single underscore_` version to produce underlines, before needing to learn about global settings. If `italicize-single-underscores` is set to `true`, using single `_underscores_` to produce ____underlines____ actually produces *italics*. If `italicize-single-underscores` is set to `false` or left at the default value of `false`, using single `_underscores_` to produce ____underlines____ actually does produce underlines. Note that you can also produce ____underlines____ with `____four underscores____`; this always works, and is not affected by the value of this setting. This setting allows for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. It also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript. Finally, supporting both `_single underscores_` (which are affected by this setting) and `____four underscores____` (which are not affected by this setting) allows an author to have normal underlines get italicized but special cases not be italicized.
+{#italicize-underlines}
+`italicize-underlines`
+: `true` or `false`. The default value is `false`, so that authors learning Markua can just learn the `_single underscore_` version to produce underlines, before needing to learn about global settings. If `italicize-underlines` is set to `true`, using single `_underscores_` to produce ____underlines____ actually produces *italics*. If `italicize-underlines` is set to `false` or left at the default value of `false`, using single `_underscores_` to produce ____underlines____ actually does produce underlines. This setting allows for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. It also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
@@ -5444,7 +5442,7 @@ Obviously, Leanpub has a mapping from Markua to HTML5: we use it to produce the 
 
 Markua has a number of differences from Markdown as defined by John Gruber. These are the main ones:
 
-1. In Markdown, `*one asterisk*` and `_one underscore_` both produce *italics*. In Markua, `*one asterisk*` produces *italics*, and `_one underscore_` produces an ____underline____ unless the `italicize-single-underscores` global setting is set to true. The reason for this is simple: ____underline____ is not *always* just a typewriter version of *italics*. In some languages and in some contexts, underlining serves a distinct, legitimate purpose--and having to use something like, say, `____four underscores____` every single time would be totally unacceptable. (Markdown gets this wrong in the same way that people who always use `<em>` instead of `<i>` get this wrong: even the W3C (!) has recognized that the [`<i>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-i-element) and the [`<em>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-em-element) serve different purposes--but in Markdown, you can only produce `<em>` tags, not `<i>` tags.)
+1. In Markdown, `*one asterisk*` and `_one underscore_` both produce *italics*. In Markua, `*one asterisk*` produces *italics*, and `_one underscore_` produces an ____underline____ unless the `italicize-underlines` global setting is set to true. The reason for this is simple: ____underline____ is not *always* just a typewriter version of *italics*. In some languages and in some contexts, underlining serves a distinct, legitimate purpose--and having to use something like, say, `____four underscores____` every single time would be totally unacceptable. (Markdown gets this wrong in the same way that people who always use `<em>` instead of `<i>` get this wrong: even the W3C (!) has recognized that the [`<i>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-i-element) and the [`<em>` tag](https://www.w3.org/TR/html52/textlevel-semantics.html#the-em-element) serve different purposes--but in Markdown, you can only produce `<em>` tags, not `<i>` tags.)
 2. Markdown supports inline HTML; [as discussed earlier, Markua does not](#no-inline-html).
 3. Markua defines many more types of numbered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list types and features.
 4. Unlike in Markdown, in Markua the number that begins the list in the manuscript is the number that begins the list in the output.
