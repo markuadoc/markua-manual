@@ -2891,20 +2891,21 @@ Using spaces allows for a lot more complex formatting of list items which is sti
 
 Besides the formatting rules for bulleted or numbered lists, the rules for a complex list are:
 
+* Complex lists only contain spaces. You cannot use tabs to indent list items or line up content in list items. If you like hitting the tab key, ensure that you set your text editor to convert tabs to spaces.
 * Each list item in a complex list can be one or more paragraphs, and each paragraph can contain forced line breaks. Specifically, there can be forced line breaks (formed by single newlines) and blank lines (formed by exactly two consecutive newlines) in list items.
 * You can insert resources with attribute lists in list items. These are inserted after forced line breaks or blank lines.
-* After any forced line break or blank line, the content must be lined up with the content in the above line using the appropriate number of spaces (not tabs). This is slightly more annoying to type than if there were no indentation requirements, but it is a lot more pleasant for you to read later.
+* After any forced line break or blank line, the content (including a nested list) must be lined up with the beginning of the content in the above line using the appropriate number of spaces (not tabs). This rule is discussed further in the [Complex List Indentation](#complex-list-indentation) section below.
 * There is a maximum of **four** levels of nesting of lists, including the outermost list. So, you can have three levels of nested lists under each outermost list item.
 * If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
 * The first indentation level is no indentation: it is at the left margin.
-* You must use spaces to line up the content after newlines in a list item with the start of the content in the first line of the list item. So, the amount of indentation inside a list item is actually *not* arbitrary; it is completely determined by how many spaces you need to line up with the content in the first line of the list item. For a bulleted list this will always be 2 spaces (1 for the `*` or `-`, followed by 1 for the space); for a numbered list this will always be at least 3 spaces (1 or more for the number/letter/Roman numeral, 1 for the `.` or `)`, and 1 for the space).
-* You cannot use tabs to indent list items or line up content in list items. Complex lists only contain spaces. If you use a text editor which converts tabs to spaces, then if you attempt to create a simple list, what you actually are doing is creating a complex list. However, if all tabs are converted to (the same number of) spaces, any simple list becomes a valid complex list.
 
 A> Yes, this is one of the reasons why simple lists cannot contain newlines inside list items. If that was allowed, the natural thing to do would be to support using tabs and spaces to align complex content in those list items. However, what this would also result in would be that converting tabs to spaces could break a list: if we allowed tabs to be used to align subsequent paragraphs in a list item, then converting those tabs to spaces could, in certain cases, result in an incorrect number of spaces being used. This would then result in a valid list becoming an invalid list. A common text editor setting which modifies formatting in an invisible way should not be able to break a Markua document, so forcing tab-indented lists to be simple lists ensures that this is the case. This is preferable to either banning tabs (since many people prefer tabs) or to attempting to support complex lists using tabs (which would be both brittle and confusing).
 
 As discussed, if you attempt to nest more than four levels of nesting, the Markua Processor must raise an error. However, if you violate the indentation rules or newline rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal non-list content, such as a paragraph with line breaks. The reason for this is simple: every block element which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which actually causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Any other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
 
-You can do everything with a complex list that you can do with a simple list. This is a complex list which is the equivalent of the nested list above:
+### Complex List Examples
+
+You can do everything with a complex list that you can do with a simple list. This is a complex list which is the equivalent of the nested list from the simple list example above:
 
 ~~~
 1. foo
@@ -2920,31 +2921,6 @@ You can do everything with a complex list that you can do with a simple list. Th
 2. bar
 3. baz
 ~~~
-
-One gotcha is that the content must line up with the content of the preceding list item, which means that if you use Roman numeral delimiters you have some gross indentation adjustments you need to make:
-
-~~~
-1. foo
-   a) lorem
-      i. unus
-         - one
-         - two
-         - three
-      ii. duo
-          - one
-          - two
-          - three
-      iii. tres
-           - one
-           - two
-           - three
-   b) ipsum
-   c) dolor
-2. bar
-3. baz
-~~~
-
-W> !PA - This is actually pretty bad, since it looks like the nested lists are at different levels. Reconsider? (The two things which get me are this, and indenting two spaces not three spaces.)
 
 However, you can do a lot more with a complex list as well.
 
@@ -3347,6 +3323,131 @@ For example, in the following list, the inline code blocks are indented by three
 When the code itself is output, the number of spaces that the list was indented by must be subtracted from the output by the Markua Processor.
 
 So, when this list is output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
+
+{#complex-list-indentation}
+### Complex List Indentation
+
+The rule for complex list indentation is as follows:
+
+"After any forced line break or blank line, the content (including a nested list) must be lined up with the beginning of the content in the above line using the appropriate number of spaces (not tabs). This rule is discussed further in the [Complex List Indentation](#complex-list-indentation) section below."
+
+This rule is very strict, and it has a number of consequences.
+
+First, I want to explain why this rule is the way it is.
+
+The goal is to ensure that all complex lists look the same to every author or editor who works on a manuscript, regardless of their tab settings. Complex lists are, well, complex, and being able to reason clearly about them is important. So, the first goal of the formatting rules is to ensure maximum readability. This is why tabs are banned from complex lists.
+
+Next, in terms of the amount of indentation.
+
+The amount of indentation inside a complex list item is actually *not* arbitrary; **it is completely determined by how many spaces you need to line up with the content in the line above the list item**. For a bulleted list this will always be 2 spaces (1 for the `*` or `-`, followed by 1 for the space); for a numbered list this will always be at least 3 spaces (1 or more for the number/letter/Roman numeral, 1 for the `.` or `)`, and 1 for the space).
+
+Now, this has an important and slightly annoying consequence: while nested lists will always line up with the content of the list item, there are certain situations in which nested lists will not line up with each other.
+
+Specifically, there are three of them which are noteworthy:
+
+1. Numbered lists with decimal numbers which go above 9
+2. Numbered lists with uppercase or lowercase letters which go above z
+3. Numbered lists with Roman numerals
+
+These situations are shown below.
+
+Numbered lists with decimal numbers which go above 9:
+
+~~~
+8. foo
+   bar
+   a) lorem
+   b) ipsum
+9. foo
+   bar
+   a) lorem
+   b) ipsum
+10. foo
+    bar
+    a) lorem
+    b) ipsum
+11. foo
+    bar
+    a) lorem
+    b) ipsum
+~~~
+
+Numbered lists with uppercase or lowercase letters which go above z:
+
+~~~
+y) foo
+   bar
+   a) lorem
+   b) ipsum
+z) foo
+   bar
+   a) lorem
+   b) ipsum
+aa) foo
+    bar
+    a) lorem
+    b) ipsum
+ab) foo
+    bar
+    a) lorem
+    b) ipsum
+~~~
+
+Lists with Roman numerals:
+
+~~~
+i) foo
+   bar
+   a) lorem
+   b) ipsum
+ii) foo
+    bar
+    a) lorem
+    b) ipsum
+iii) foo
+     bar
+     a) lorem
+     b) ipsum
+iv) foo
+    bar
+    a) lorem
+    b) ipsum
+v) foo
+   bar
+   a) lorem
+   b) ipsum
+~~~
+
+Now, frankly, the Roman numeral example looks pretty bad. However, nesting anything inside Roman numerals looks bad. For example, if complex lists in Markua worked with a constant amount of spaces, then they would not line up with the content of the list items.
+
+~~~
+This is not a Markua list, and will be output a really ugly paragraph with a bunch of forced line breaks:
+
+i) foo
+   bar
+   a) lorem
+   b) ipsum
+ii) foo
+    bar
+   a) lorem
+   b) ipsum
+iii) foo
+     bar
+   a) lorem
+   b) ipsum
+iv) foo
+    bar
+   a) lorem
+   b) ipsum
+v) foo
+   bar
+   a) lorem
+   b) ipsum
+
+Again, the above is not a list.
+~~~
+
+So, if you like Roman numerals, my personal advice is to use them either in simple lists (since tabs always line up) or as the lowest level of indentation in a complex list.
 
 {#definition-lists}
 # Definition Lists
