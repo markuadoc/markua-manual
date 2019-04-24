@@ -2649,7 +2649,7 @@ So, in Markua, the automatic creation of a numbered list only happens if you hav
 
 This still has some possibly incorrect interpretations, but these will be a *lot* more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua would feel more like programming than writing.
 
-#### A Single-Element Numbered List With A Parenthesis IS a Numbered List
+#### A Single-Element Numbered List With A Parenthesis Is a Numbered List
 
 This **is** a numbered list:
 
@@ -2711,7 +2711,7 @@ Yada yada yada
 Yada yada yada
 ```
 
-#### A Single-Element Numbered List Which Contains A List IS A Numbered List
+#### A Single-Element Numbered List Which Contains A List Is A Numbered List
 
 This is a numbered list:
 
@@ -2740,7 +2740,7 @@ Yada yada yada
 ```
 
 
-#### A Single-Element Numbered List Which Is Contained in A List IS A Numbered List
+#### A Single-Element Numbered List Which Is Contained in A List Is A Numbered List
 
 This is a numbered list, including the `a) hello` part at the bottom.
 
