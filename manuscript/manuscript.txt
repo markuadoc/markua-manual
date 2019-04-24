@@ -113,7 +113,7 @@ Italic
 : To produce *italic text*, surround it with `*one asterisk*`.
 
 Underlined
-: To produce ____underlined text____, surround it with `_one underscore_`. (You can force underlines to produce italics, however. See below for details.)
+: To produce ____underlined text____, surround it with `_one underscore_`. (You can force **all** underlines to produce *italic text*, however. See the [`italicize-underlines`](#italicize-underlines) global setting for details.)
 
 Bold
 : To produce **bold text**, surround it with either `**two asterisks**` or `__two underscores__`.
@@ -136,30 +136,7 @@ Superscript
 Subscript
 : To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
 
-W> Currently in Leanpub, ____underlined text____ is produced with `____four underscores____` in Markua. When we add support for `_one underscore_` and the global `italicize-underlines` setting, the four underscores will become bold + italic + underlined.
-
-## The `italicize-underlines` Setting
-
-There is also an [`italicize-underlines`](#italicize-underlines) global setting, whose default value is `false`. If this setting is set to `true`, then all underlines become italics. If you are coming from Markdown, where both `*one asterisk*` and `_one underscore_` produce italics, your fingers may have learned the `_one underscore_` version. In that case, you may want to set this setting to true. Note that if `italicize-underlines` is set to `true`, `___three underscores___` will also produce bold + italic text, just like `***three asterisks***` does.
-
-## Nesting Formatting
-
-It is possible to nest formatting. It is almost never desirable to do this, however. But banning these combinations would be equally arbitrary.
-
-So, if the `italicize-underlines` global setting is `false`, the following combinations work:
-
-* italic + underlined: `*_this_*` or `_*this*_`
-* bold + italic: `__*this*__` or `*__this__*`
-* bold + underlined: `**_this_**` or `_**this**_`
-* bold + italic + underlined: `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
-
-If, however, the `italicize-underlines` global setting is `true`, the following all produce ***bold + italic***, since the underlines get converted to italics, and redundant underlines are ignored:
-
-`__*this*__`, `*__this__*`, `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
-
-Finally, if you incorrectly nest the asterisk and underscore formatting characters, then they are output verbatim as asterisks and underscores, instead of producing formatting. So, the following examples of incorrect nesting all output the asterisks and underscores verbatim:
-
-`*__this*__`, `__*this__*`, `**_this**_`, `_**this_**`, `_***this_***`, `*___this*___`, `***_this***_` or `___*this___*`
+W> Currently in Leanpub, ____underlined text____ is produced with `____four underscores____` in Markua. When we add support for `_one underscore_` and the global `italicize-underlines` setting, the four underscores will become bold + italic + underlined as described above.
 
 {#headings}
 # Headings
@@ -5343,7 +5320,7 @@ If a Markua Processor also provides a UI to define settings which are specified 
 
 {#italicize-underlines}
 `italicize-underlines`
-: `true` or `false`. The default value is `false`, so that authors learning Markua can just learn the `_single underscore_` version to produce underlines, before needing to learn about global settings. If `italicize-underlines` is set to `true`, using single `_underscores_` to produce ____underlines____ actually produces *italics* (not underline). If `italicize-underlines` is `false`, using single `_underscores_` actually does produce underlines. This setting allows for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. It also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript.
+: `true` or `false`. The default value is `false`. If this setting is `false`, then underlined text **can** be produced by the Markua Processor: `_one underscore_` produces underlined text, `___three underscores___` produces ____**bold + underlined text**____, and `____four underscores____` or `****four asterisks****` produces ____***bold + italic + underlined***____ text. If this setting is `true`, then underlined text cannot be produced by the Markua Processor: `_one underscore_` produces italicized text (just like one asterisk), `___three underscores___` produces ____**bold + italicized text**____ (just like three asterisks), and `____four underscores____` or `****four asterisks****` **also** produces ____**bold + italicized text**____ (just like three asterisks). There are two reasons that the default value of this setting is `false`. First, and foremost, it's a better choice. Being able to underline text is better than not being able to do so. Second, it enables authors learning Markua to learn the syntax to produce underlines, before needing to learn about global settings. The reason that this setting exists at all is for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. If you are coming from Markdown, where both `*one asterisk*` and `_one underscore_` produce italics, your fingers may have learned the `_one underscore_` version. In that case, you may want to set this setting to true, either permanently, or while you get used to typing asterisks. This setting also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
@@ -5400,6 +5377,27 @@ The following settings are defined by Markua, but only make sense in the context
 
 `default-random-question-order`
 : `true` or `false`. The default is `false`. This sets the default behaviour of the quiz or exercise. If `true`, the questions are randomly arranged; if `false`, they are presented in the order written.
+
+# Edge Cases
+
+## Nesting Formatting
+
+It is possible to nest formatting. It is almost never desirable to do this, however. But banning these combinations would be equally arbitrary.
+
+So, if the `italicize-underlines` global setting is `false`, the following combinations work:
+
+* italic + underlined: `*_this_*` or `_*this*_`
+* bold + italic: `__*this*__` or `*__this__*`
+* bold + underlined: `**_this_**` or `_**this**_`
+* bold + italic + underlined: `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
+
+If, however, the `italicize-underlines` global setting is `true`, the following all produce ***bold + italic***, since the underlines get converted to italics, and redundant underlines are ignored:
+
+`__*this*__`, `*__this__*`, `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
+
+Finally, if you incorrectly nest the asterisk and underscore formatting characters, then they are output verbatim as asterisks and underscores, instead of producing formatting. So, the following examples of incorrect nesting all output the asterisks and underscores verbatim:
+
+`*__this*__`, `__*this__*`, `**_this**_`, `_**this_**`, `_***this_***`, `*___this*___`, `***_this***_` or `___*this___*`
 
 {backmatter}
 
