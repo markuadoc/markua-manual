@@ -2601,7 +2601,7 @@ ii. bar
 iii. baz
 ~~~
 
-### In Markua, There Are No Single-Element Numbered Lists
+### In Markua, It's Hard to Accidentally Make a Numbered List
 
 Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
 
@@ -2621,17 +2621,158 @@ This wouldn't be as bad as what Markdown does, but it wouldn't be good either! E
 
 But what to do?
 
-The answer is simple:
+What Markua does is define a number of common-sense use cases which *do* make numbered lists, and then backs out the rule which results. The resulting rule is as follows:
 
-**In Markua, there are no single-element numbered lists**.
+**In Markua, a single element numbered list is a numbered list if at least one of the following is true: it uses a parenthesis for its delimiter, it contains a nested list, or it is itself a child of some list item in a list.**
 
-If you try to make one, it just turns into a paragraph.
+So, something like this is not a list in between two paragraphs. Instead, it's three paragraphs, like you would expect:
+
+```
+Yada yada yada
+
+1986. What a great season.
+
+Yada yada yada
+```
 
 This is true for numbered lists only--single-element bulleted lists are lists. (It's stupid, but the alternative would have been stupider.)
+
+```
+Yada yada yada
+
+* This is a list
+
+Yada yada yada
+```
 
 So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with consecutive or identical numbers, letters or Roman numerals, followed by a period or right parenthesis, followed by a space, followed by text content.
 
 This still has some possibly incorrect interpretations, but these will be a *lot* more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua would feel more like programming than writing.
+
+#### A Single-Element Numbered List With A Parenthesis IS a Numbered List
+
+This **is** a numbered list:
+
+```
+Yada yada yada
+
+1) Foo
+
+Yada yada yada
+```
+
+This **is** a numbered list:
+
+```
+Yada yada yada
+
+1986) Foo
+
+Yada yada yada
+```
+
+This is **not** a numbered list:
+
+```
+Yada yada yada
+
+1\) Foo
+
+Yada yada yada
+```
+
+This is **not** a numbered list:
+
+```
+Yada yada yada
+
+1986\) Foo
+
+Yada yada yada
+```
+
+This is **not** a numbered list:
+
+```
+Yada yada yada
+
+1. Foo
+
+Yada yada yada
+```
+
+This is **not** a numbered list:
+
+```
+Yada yada yada
+
+1986. Foo
+
+Yada yada yada
+```
+
+#### A Single-Element Numbered List Which Contains A List IS A Numbered List
+
+This is a numbered list:
+
+```
+Yada yada yada
+
+1. Foo
+   a) foo
+   b) bar
+   c) baz
+
+Yada yada yada
+```
+
+This is a numbered list:
+
+```
+Yada yada yada
+
+1986. Foo
+      a) foo
+      b) bar
+      c) baz
+
+Yada yada yada
+```
+
+
+#### A Single-Element Numbered List Which Is Contained in A List IS A Numbered List
+
+This is a numbered list, including the `a) hello` part at the bottom.
+
+```
+Yada yada yada
+
+1. Foo
+   a) foo
+   b) bar
+   c) baz
+2. Bar
+   a) foo
+   b) bar
+   c) baz
+3. Baz
+   a) hello
+
+Yada yada yada
+```
+
+This is a numbered list:
+
+```
+Yada yada yada
+
+1986. Foo
+      a) foo
+      b) bar
+      c) baz
+
+Yada yada yada
+```
 
 ### Numbered List Numbering Rules
 
