@@ -2921,6 +2921,31 @@ You can do everything with a complex list that you can do with a simple list. Th
 3. baz
 ~~~
 
+One gotcha is that the content must line up with the content of the preceding list item, which means that if you use Roman numeral delimiters you have some gross indentation adjustments you need to make:
+
+~~~
+1. foo
+   a) lorem
+      i. unus
+         - one
+         - two
+         - three
+      ii. duo
+          - one
+          - two
+          - three
+      iii. tres
+           - one
+           - two
+           - three
+   b) ipsum
+   c) dolor
+2. bar
+3. baz
+~~~
+
+W> !PA - This is actually pretty bad, since it looks like the nested lists are at different levels. Reconsider? (The two things which get me are this, and indenting two spaces not three spaces.)
+
 However, you can do a lot more with a complex list as well.
 
 You can add optional blank lines between some or all of the nested lists, just for readability:
