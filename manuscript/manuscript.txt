@@ -4876,6 +4876,8 @@ Note that order of definition and use does not matter: crosslinks will work rega
 
 ### Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
 
+W> Leanpub authors: this has not been implemented yet
+
 Chapters, sections and figures with captions often have two useful properties for writers:
 
 1. A name which is often short and useful to reference.
@@ -5943,7 +5945,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support cite and url attributes for blockquotes
 - Does this quiz or exercise heading show up in the ToC?
 - Support ids and other attributes on span elements
-- Support smart crosslinks
+- Support Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
 - Support Emoji
 - Support Font Awesome in emoji syntax, such as `:fa-leanpub:`
 - Support CriticMarkup.
