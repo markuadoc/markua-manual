@@ -6,39 +6,21 @@
 
 Imagine you owned a magical typewriter.
 
-When you used this magical typewriter, you wrote with fewer distractions. You
-didn't just write faster, you wrote better.
+When you used this magical typewriter, you wrote with fewer distractions. You didn't just write faster, you wrote better.
 
-With your magical typewriter, you never worried about layout. The book formatted
-itself.
+With your magical typewriter, you never worried about layout. The book formatted itself.
 
-You could hit a key on your magical typewriter to create an ebook from your
-manuscript with one click.
+You could hit a key on your magical typewriter to create an ebook from your manuscript with one click.
 
-All ebook formats would be created, and they'd all look good. You'd have PDF for
-computers, MOBI for Kindle, and EPUB for everywhere else. The book would look
-great on phones.
+All ebook formats would be created, and they'd all look good. You'd have PDF for computers, MOBI for Kindle, and EPUB for everywhere else. The book would look great on phones.
 
-With your magical typewriter, you could publish your book before it was even
-done, and get feedback from readers all over the world. You could automatically
-share book updates with them. You would press one key on your magical typewriter
-to publish a new version, and all your readers would have it instantly.
+With your magical typewriter, you could publish your book before it was even done, and get feedback from readers all over the world. You could automatically share book updates with them. You would press one key on your magical typewriter to publish a new version, and all your readers would have it instantly.
 
-With your magical typewriter, you could easily compare your current manuscript
-to any other version of your manuscript that had ever existed.
+With your magical typewriter, you could easily compare your current manuscript to any other version of your manuscript that had ever existed.
 
-If you decided to make a print book, you could press a key on your magical
-typewriter to get a print-ready PDF. All you would need to do is add a cover.
-Or, if you wanted to work with a designer or publisher, you could press a
-different key to generate InDesign. They could then use this as a starting point
-for producing a beautiful print book.
+If you decided to make a print book, you could press a key on your magical typewriter to get a print-ready PDF. All you would need to do is add a cover. Or, if you wanted to work with a designer or publisher, you could press a different key to generate InDesign. They could then use this as a starting point for producing a beautiful print book.
 
-Your magical typewriter could even transform your completed book manuscript into
-a course that anyone in the world could take. All you'd need to do is to
-add some quizzes and exercises and then press a key for your magical typewriter
-to publish a massive open online course (MOOC) for you. The quizzes and exercises
-would mark themselves, and students would get certificates based on how well
-they did.
+Your magical typewriter could even transform your completed book manuscript into a course that anyone in the world could take. All you'd need to do is to add some quizzes and exercises and then press a key for your magical typewriter to publish a massive open online course (MOOC) for you. The quizzes and exercises would mark themselves, and students would get certificates based on how well they did.
 
 With your magical typewriter, you'd only have to do one thing:
 
@@ -48,19 +30,17 @@ Wouldn't it be great if such a magical typewriter existed?
 
 It does. At [Leanpub](https://leanpub.com), we're building it.
 
-But there's one requirement for this magical typewriter to exist: a simple,
-coherent, open source, free, plain text format for a book or course manuscript.
+But there's one requirement for this magical typewriter to exist: a simple, coherent, open source, free, plain text format for a book or course manuscript.
 
 This simple format will be the basis for the magical typewriter.
 
 This simple format is called Markua.
 
-This is its specification.
+This is its user manual.
 
 ## How to Write a Novel in Markua
 
-The Markua specification is long. However, the amount you need to learn to get
-started is actually very short.
+The Markua Manual is long. However, the amount you need to learn to get started is actually very short.
 
 This example shows everything you need to know to write a novel in Markua:
 
@@ -82,17 +62,11 @@ This is a paragraph in a new chapter.
 
 Specifically, these are the rules:
 
-1. Paragraphs are separated from other paragraphs by blank lines.
-   (To add a blank line, add two consecutive newlines.)
-2. To make a chapter heading, start a line with a pound sign (`#`), followed by
-   a space and the name of the chapter.
-3. To add a thematic break (also known as a scene break), put three asterisks
-   (`* * *`) on a line with only whitespace.
-4. Chapter headings and thematic breaks are separated from paragraphs by single
-   newlines or blank lines. Blank lines are preferred for readability.
-5. By default, single newlines in paragraphs turn into single spaces in the
-   output, so you can manually wrap your paragraphs with newlines if you want.
-   It's optional, however, and typically a waste of time.
+1. Paragraphs are separated from other paragraphs by blank lines. (To add a blank line, add two consecutive newlines.)
+2. To make a chapter heading, start a line with a pound sign (`#`), followed by a space and the name of the chapter.
+3. To add a thematic break (also known as a scene break), put three asterisks (`* * *`) on a line with only whitespace.
+4. Chapter headings and thematic breaks are separated from paragraphs by single newlines or blank lines. Blank lines are preferred for readability.
+5. By default, single newlines in paragraphs turn into single spaces in the output, so you can manually wrap your paragraphs with newlines if you want. It's optional, however, and typically a waste of time.
 6. Use `*one asterisk*` for italic and `**two asterisks**` for bold.
 7. All other text and punctuation is typed normally.
 
@@ -100,8 +74,7 @@ That's it!
 
 ## How to Write a Computer Programming Book in Markua
 
-The following example shows basically everything you need to know to write a
-computer programming book in Markua:
+The following example shows basically everything you need to know to write a computer programming book in Markua:
 
 ~~~
 # Chapter One
@@ -164,16 +137,11 @@ You can also include single lines of code like `puts "hello"` in paragraphs.
 Finally, you can do that with math `d = v_i t + \frac{1}{2} a t^2`$ too.
 ~~~
 
-As you can see, there is more syntax, including bulleted and numbered lists,
-definition lists, tables, block quotes, external and inline code samples,
-inline math, etc. However, even with all this, the Markua document remains
-readable. Exactly how all of this syntax works is explained in the spec.
+As you can see, there is more syntax, including bulleted and numbered lists, definition lists, tables, block quotes, external and inline code samples, inline math, etc. However, even with all this, the Markua document remains readable. Exactly how all of this syntax works is explained in the spec.
 
 ## How to Write a Course (MOOC) in Markua
 
-To write a course in Markua, you can start from scratch or from a book
-manuscript already formatted in Markua. Literally, all you need to do to turn a
-book written in Markua into a course is to add some quizzes.
+To write a course in Markua, you can start from scratch or from a book manuscript already formatted in Markua. Literally, all you need to do to turn a book written in Markua into a course is to add some quizzes.
 
 The following is a complete course, written in Markua:
 
@@ -219,8 +187,7 @@ c) 7
 
 # Lesson Two: Geography
 
-This quiz shows two fill in the blank questions, with multiple answers and with
-a regex answer.
+This quiz shows two fill in the blank questions, with multiple answers and with a regex answer.
 
 {quiz, id: quiz2}
 ? What's the global capital of investment banking?
@@ -234,224 +201,107 @@ a regex answer.
 {/quiz}
 ```
 
-As this example shows, the syntax for writing normal content is the same as for
-books. All that's different is the addition of quizzes and exercises.
+As this example shows, the syntax for writing normal content is the same as for books. All that's different is the addition of quizzes and exercises.
 
-Quizzes and exercises have the same type of content. However, with quizzes the
-marks count toward your mark in the course, and with exercises they don't count.
-For MOOCs, Leanpub currently supports multiple choice and fill in the blank questions.
+Quizzes and exercises have the same type of content. However, with quizzes the marks count toward your mark in the course, and with exercises they don't count. For MOOCs, Leanpub currently supports multiple choice and fill in the blank questions.
 
-A multiple choice question has 2 or more answer choices, and 1 correct answer
-choice. The correct answer choice is in a capital letter; incorrect answer
-choices have lowercase letters.
+A multiple choice question has 2 or more answer choices, and 1 correct answer choice. The correct answer choice is in a capital letter; incorrect answer choices have lowercase letters.
 
-A fill in the blank question consists of a question and a set of answers.
-You can even use regular expressions for the answers.
+A fill in the blank question consists of a question and a set of answers. You can even use regular expressions for the answers.
 
-As explained in the spec, there are more types of questions, and more options
-with these types of questions. However, what is shown above is enough to create
-a full MOOC out of a Markua book.
+As explained in the spec, there are more types of questions, and more options with these types of questions. However, what is shown above is enough to create a full MOOC out of a Markua book.
 
 ## Markua: Markdown for Books and Courses
 
 Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
 
-Markua is simple and powerful. When you are writing using Markua, you are
-writing, not programming. Once you understand Markua's syntax, it fades into the
-background.
+Markua is simple and powerful. When you are writing using Markua, you are writing, not programming. Once you understand Markua's syntax, it fades into the background.
 
-Markua is based on [Markdown](http://daringfireball.net/projects/markdown/).
-Markdown is a plain text format for writing text which can be transformed by
-Markdown processors into HTML. Markdown was created by John Gruber, with help
-from Aaron Swartz. Markdown was described by John Gruber as follows:
+Markua is based on [Markdown](http://daringfireball.net/projects/markdown/). Markdown is a plain text format for writing text which can be transformed by Markdown processors into HTML. Markdown was created by John Gruber, with help from Aaron Swartz. Markdown was described by John Gruber as follows:
 
-> Markdown is a text-to-HTML conversion tool for web writers. Markdown allows
-you to write using an easy-to-read, easy-to-write plain text format, then
-convert it to structurally valid XHTML (or HTML).
+> Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
 
-The primary reason that Markdown is a great way to write is that it was designed
-to be this way:
+The primary reason that Markdown is a great way to write is that it was designed to be this way:
 
-> The overriding design goal for Markdown's formatting syntax is to make it as
-readable as possible. The idea is that a Markdown-formatted document should be
-publishable as-is, as plain text, without looking like it's been marked up with
-tags or formatting instructions. While Markdown's syntax has been influenced by
-several existing text-to-HTML filters, the single biggest source of inspiration
-for Markdown's syntax is the format of plain text email.
+> The overriding design goal for Markdown's formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions. While Markdown's syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown's syntax is the format of plain text email.
 
-Markua is a plain text format. Markua is basically Markdown, minus all inline
-HTML except comments, plus a number of extensions to support everything you need
-to write a book or create a course.
+Markua is a plain text format. Markua is basically Markdown, minus all inline HTML except comments, plus a number of extensions to support everything you need to write a book or create a course.
 
-Markua manuscripts, called Markua documents, can be written however you want. On
-a computer, you can use any text editor you want. Beginning authors can use
-simple programs like Notepad or TextEdit or "distraction-free" programs like
-iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or
-VSCode. Since Markua is very similar to Markdown, many programs which
-support Markdown should already do a decent job of supporting Markua by default.
+Markua manuscripts, called Markua documents, can be written however you want. On a computer, you can use any text editor you want. Beginning authors can use simple programs like Notepad or TextEdit or "distraction-free" programs like iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or VSCode. Since Markua is very similar to Markdown, many programs which support Markdown should already do a decent job of supporting Markua by default.
 
-Markua maps Markdown syntax to book concepts, and then adds some new syntax and
-concepts of its own.
+Markua maps Markdown syntax to book concepts, and then adds some new syntax and concepts of its own.
 
-Markua documents can be automatically transformed into every popular type of ebook
-format. The computer programs which do this transformation are called Markua
-Processors. These programs understand both Markua syntax and how to generate the
-various output formats. An example Markua Processor is Leanpub: Leanpub can
-output PDF, EPUB, MOBI and HTML from the same Markua document, and can even
-output print-ready PDFs and InDesign files from them as well.
+Markua documents can be automatically transformed into every popular type of ebook format. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats. An example Markua Processor is Leanpub: Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document, and can even output print-ready PDFs and InDesign files from them as well.
 
-Markua has been developed with extensive real-world testing and feedback. Markua
-has been used by Leanpub authors for years, both to create books and massive
-open online courses (MOOCs).
+Markua has been developed with extensive real-world testing and feedback. Markua has been used by Leanpub authors for years, both to create books and massive open online courses (MOOCs).
 
 Markua's three main contributions are the following:
 
-1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-   (parts, chapters, sections, sub-sections, etc.), which provides the ability
-   for Markua Processors like Leanpub to produce an ebook from a Markua
-   manuscript with one click.
-2. The unified resource and attribute list syntax, which lets Markua handle
-   audio, code, math and video in the same way that it does images, and which
-   supports inline, local and web resource locations.
-3. The mapping of book structures to courses, and the creation of a plain-text
-   based microformat for course quizzes and exercises, which supports automated
-   marking and automated production of everything which is required for a MOOC.
+1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures (parts, chapters, sections, sub-sections, etc.), which provides the ability for Markua Processors like Leanpub to produce an ebook from a Markua manuscript with one click.
+2. The unified resource and attribute list syntax, which lets Markua handle audio, code, math and video in the same way that it does images, and which supports inline, local and web resource locations.
+3. The mapping of book structures to courses, and the creation of a plain-text based microformat for course quizzes and exercises, which supports automated marking and automated production of everything which is required for a MOOC.
 
-If you have written something (say blog posts or lecture notes) in Markdown, you
-can use a Markua Processor, such as Leanpub, to turn them into an ebook or
-course with one click. Then, as you go down the path of enhancing the manuscript
-and adding things which only make sense in books or courses, this process will
-feel like decorating, not converting.
+If you have written something (say blog posts or lecture notes) in Markdown, you can use a Markua Processor, such as Leanpub, to turn them into an ebook or course with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books or courses, this process will feel like decorating, not converting.
 
-The goal is for writers who are familiar with Markdown to feel that Markdown
-somehow grew an understanding of book and course concepts.
+The goal is for writers who are familiar with Markdown to feel that Markdown somehow grew an understanding of book and course concepts.
 
 ## Why the Name "Markua"?
 
-When I set out to specify Markua, I realized I needed a name. I wanted a name
-that conveyed the love that I have for Markdown while not implying endorsement
-by John Gruber in any way. I also did not want a name which referenced Leanpub:
-Markua is a standalone specification with its own identity, which anyone
-(including Leanpub competitors) can freely implement. Finally, I was on vacation
-in Hawaii when I named Markua, and I wanted something that sounded happy,
-friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
-I also wanted a name that had its .com domain name available, and that was short
-and spellable, for branding purposes. The Markua name had all these properties.
+When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the love that I have for Markdown while not implying endorsement by John Gruber in any way. I also did not want a name which referenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name had all these properties.
 
 ## The Markua Manual vs. The Markua Specification
 
-This is the Markua Manual. Its purpose is to explain how to write in Markua on
-Leanpub.
+This is the Markua Manual. Its purpose is to explain how to write in Markua on Leanpub.
 
 You will want to read this book if:
 
 1. You are a Leanpub author.
-2. You are writing in Markua, or are considering switching to Markua from
-   Leanpub Flavoured Markdown.
+2. You are writing in Markua, or are considering switching to Markua from Leanpub Flavoured Markdown.
 3. You want to see how to write in Markua on Leanpub today.
 
-This book explains how to use the parts of Markua which **CURRENTLY** work on
-Leanpub:
+This book explains how to use the parts of Markua which **CURRENTLY** work on Leanpub:
 
 * Everything you read about in this book should just work.
-* Everything in Markua which is not yet supported on Leanpub is just omitted,
-as though it does not exist.
+* Everything in Markua which is not yet supported on Leanpub is just omitted, as though it does not exist.
 
-The formal specification of Markua is contained in a separate document called
-[The Markua Specification](http://markua.com). It is available on the Markua
-website, not as an ebook.
+The formal specification of Markua is contained in a separate document called [The Markua Specification](http://markua.com). It is available on the Markua website, not as an ebook.
 
 You will want to read the [The Markua Specification](http://markua.com) if:
 
 1. You are a computer programmer and you like reading specs.
 2. You want to see a mapping of Markua to HTML.
-3. You want to see every planned feature in Markua, not just what works in
-   Leanpub today.
-4. You want to see the planned differences with the previous and current
-   versions of Markua on Leanpub, including what the differences with what
-   is explained here.
+3. You want to see every planned feature in Markua, not just what works in Leanpub today.
+4. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including what the differences with what is explained here.
 
 ## Differences with Leanpub Flavoured Markdown (LFM)
 
-Besides differences with Markdown in general, Markua also has a number of
-specific differences with Leanpub Flavoured Markdown (LFM).
+Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM).
 
 These are the top 9 differences between Markua and LFM:
 
-1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
-   attribute list on an atx or Setext heading.
-2. In LFM, there is a special syntax for inserting code samples:
-   `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code
-   is just a resource, and the LFM syntax is not supported.
-3. In LFM, to mark code as added or removed, the magic words were
-   `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and
-   `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`,
-   `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
-4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This
-   looks nice to people who like LaTeX, and looks like nothing else in
-   Markdown. In Markua, however, math is just another resource, and that
-   LaTeX-inspired syntax for wrapping math resources is not supported.
-5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with
-   blurbs (`B>`).
-6. LFM had the `C>` syntax to center text, but we didn't have the same effect on
-   generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just
-   syntactic sugar for a centered blurb, for greater consistency. Because of
-   this, the blurb also gets the ability to be centered by adding a
-   `{class: center}` attribute.
-7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua,
-   and neither is a `{dir}` attribute in general: any given language is either a
-   left-to-right or a right-to-left language, so specifying the language is
-   sufficient.
-8. LFM used Sample.txt to define the sample content. Markua moves the definition
-   of what constitutes sample content into a `{sample: true}` attribute on
-   parts, chapters and sections. So, in Markua, inclusion in the sample is at
-   the content level, not the file level. This helps avoid a number of bugs that
-   could happen with including at the file level, if a file did not clearly
-   break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not
-   supported for books which use Markua.)
-9. LFM used Book.txt to define the book content. In Markua, the way that the
-   list of manuscript files is defined is considered out of scope of the Markua
-   specification itself. (Leanpub still uses the Book.txt approach to specify
-   which files are in a book, but other Markua Processors could use other
-   approaches.)
+1. In LFM, parts are created with `-# Part`. In Markua, parts are created an attribute list on an atx or Setext heading.
+2. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource, and the LFM syntax is not supported.
+3. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
+4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
+5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
+6. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
+7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
+8. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+9. LFM used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
-Besides these differences, there are a number of smaller ones, which you will
-discover if you compare the Markua Spec to the
-[Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Spec to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
 
-## A Note for Leanpub Authors
+## Acknowledgments
 
-If you're a Leanpub author writing in Markua, the
-[Leanpub's Markua Implementation Status](#appendix-leanpub-s-markua-implementation-status)
-appendix may be particularly relevant for you.
+I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help, especially from my Leanpub cofounders [Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp) and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead developer of Leanpub's book generation engine (both the LFM and Markua versions), and he has given me both the most and the best feedback about Markua over the years that I've been working on it.
 
-## Markua Spec Acknowledgments
+Perhaps most important, Markua is built on Markdown. So, Markua literally would not exist without John Gruber and Aaron Swartz. Markua is now also using the CommonMark spec as its starting point, so I am really grateful to John MacFarlane (the author of the CommonMark spec) and the team behind CommonMark and `cmark`. I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
 
-I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of
-Markua, but I'm getting lots of help, especially from my Leanpub cofounders
-[Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp)
-and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead
-developer of Leanpub's book generation engine (both the LFM and Markua versions),
-and he has given me both the most and the best feedback about Markua over the
-years that I've been working on it.
+Markua is also benefitting from years of feedback about Leanpub Flavoured Markdown and Markua, from many incredibly helpful and patient Leanpub authors. If it wasn't for these authors, there would be no Leanpub, and no Markua.
 
-Perhaps most important, Markua is built on Markdown. So, Markua literally would
-not exist without John Gruber and Aaron Swartz. Markua is now also using the
-CommonMark spec as its starting point, so I am really grateful to John MacFarlane
-(the author of the CommonMark spec) and the team behind CommonMark and `cmark`.
-I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub
-Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
+I'd also like to thank my father, who read some of the very early manuscripts when this was a standalone spec and gave me feedback.
 
-Markua is also benefitting from years of feedback about Leanpub Flavoured
-Markdown and Markua, from many incredibly helpful and patient Leanpub authors.
-If it wasn't for these authors, there would be no Leanpub, and no Markua.
-
-I'd also like to thank my father, who read some of the very early manuscripts
-when this was a standalone spec and gave me feedback.
-
-Finally, I would like to thank my wife Caroline and my son Evan: while this is
-not as long as my other books, a lot of thought and effort went into it, and a
-lot of sacrifice. Thanks very much.
+Finally, I would like to thank my wife Caroline and my son Evan: while this is not as long as my other books, a lot of thought and effort went into it, and a lot of sacrifice. Thanks very much.
 
 {#text-formatting}
 # Text Formatting
