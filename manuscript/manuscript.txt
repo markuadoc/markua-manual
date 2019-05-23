@@ -3943,7 +3943,7 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
-8. In LFM, we had a `{pagebreak}` directive. This is currently replaced by `===`, but it is actually going back to `{pagebreak}`.
+8. In LFM, we had a `{pagebreak}` directive. This is currently absent, but it will probably return.
 
 9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Leanpubs could use other approaches.)
 
