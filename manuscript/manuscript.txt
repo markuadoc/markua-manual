@@ -1473,10 +1473,6 @@ A Markua Processor may do whatever it wants when outputting a table. For example
 
 The goal for the handling of normal whitespace (spaces, tabs and newlines) in Markua is for everything to just work.
 
-Note that these decisions about normal whitespace handling are decisions about prose, not poetry. Poetry has its own rules, and in poetry, all whitespace is preserved unchanged. The way this is accomplished is that poetry, whether in an external file or in the body of a Markua document itself, is handled as a [poetry resource](#poetry).
-
-So, with poetry taken care of, the question of prose remains.
-
 There are the four principles of Markua's whitespace handling:
 
 1. You should be able to look at a Markua document and know what is produced. Invisible formatting is frowned upon.
@@ -1542,16 +1538,13 @@ ___
 That empty poetry block is 3 lines long, so it adds three poetic blank lines to the output.
 ~~~
 
-{#concatenating}
 ### One Blank Line Is Added When Concatenating Manuscript Files
 
 A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by Leanpub to produce one temporary manuscript file, and that one file is used as the input.
 
-Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** (i.e. one blank line) added between the end of each file and the beginning of the next file.
+Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they are concatenated together with **two newlines** (i.e. one blank line) added between the end of each file and the beginning of the next file.
 
 This is needed in order to separate the content of the two files with one blank line between them, in order to prevent a number of surprises for authors. Note that because of this rule, a paragraph (or any other block element) cannot span multiple manuscript files.
-
-To see why this is essential, see the [appendix](#concatenating-details).
 
 ### All Blank Lines at the Beginning and End of a File are Removed
 
@@ -1566,8 +1559,6 @@ This is especially important with the whitespace at the end of a file: trailing 
 Spaces and tabs at the beginning of a line are only used to determine whether the content is contained in a list item--or, in the case of a nested list, which list the list item is contained in.
 
 Besides this, in a paragraph, any manual indentation (using spaces or tabs at the beginning of a line) is just removed. This is even true after a forced line break, using a single newline.
-
-So, if you're writing a sonnet, you can't manually indent the last two lines just by hitting Enter and adding two spaces at the beginning of the line. Instead, you need to use a [poetry resource](#poetry). To do this, you start a poetry resource with `___` or `---`. This will have the added benefit of allowing your poetry to be formatted using special font sizes and margins, to be more poetic than prose.
 
 ### Spaces and Tabs at the End of a Line are Removed
 
@@ -4340,73 +4331,3 @@ Besides differences with Markdown in general, Markua also has a number of specif
 9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
 10. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
-
-{#concatenating-details}
-## Example of Why One Blank Line Is Added When Concatenating Manuscript Files
-
-As [discussed](#concatenating), one blank line is added when concatenating multiple manuscript files. To see why this rule is important, consider the following single-file Markua manuscript:
-
-{caption: manuscript.txt}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-
-# Chapter Two
-
-Yada yada yada.
-~~~
-
-Suppose instead a multiple-file approach was used, in which there were two files, ch1.txt and ch2.txt, with the following content:
-
-{caption: ch1.txt}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-~~~
-
-{caption: ch2.txt}
-~~~
-# Chapter Two
-
-Yada yada yada.
-~~~
-
-If Markua did not add any newlines between files, then these files would produce the following manuscript:
-
-{caption: Incorrect Temporary Auto-Created Manuscript #1}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.# Chapter Two
-
-Yada yada yada.
-~~~
-
-If Markua only added one newline when concatenating, this would produce the following manuscript:
-
-{caption: Incorrect Temporary Auto-Created Manuscript #2}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-# Chapter Two
-
-Yada yada yada.
-~~~
-
-However, since Markua requires that headings be separated by blank lines above and below them, the Chapter Two heading would not be a heading. It would be considered part of the previous paragraph! This would be very surprising and the source of a number of bugs. Worse, since a number of text editors such as Emacs have a "strip blank lines at the end of files" setting, it would be possible to introduce such a bug if Markua simply relied on blank lines being added to the end of a file by the author.
-
-So, because of the blank line rule, concatenating the files produces the same manuscript as the single-file manuscript above:
-
-{caption: Correct Temporary Auto-Created Manuscript}
-~~~
-# Chapter One
-
-Lorem ipsum dolor.
-
-# Chapter Two
-
-Yada yada yada.
-~~~
