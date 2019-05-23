@@ -456,7 +456,7 @@ If you're familiar with Markdown syntax, you'll note that the syntax for local a
 
 Tables are also resources, and can also be local, web or inline. However, the table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
 
-Finally, if any resource is missing during book generation, a Markua processor can either fail to generate the book or can insert something like the "missing image" often seen on web pages into the book. This behaviour is up to the implementor of the Markua processor, and could even be something which is configurable by the author. (In general, a Markua Processor should error if the author is trying to do something unsupported, and should recover if the author is trying to do something which is supported, but in an erroneous way.)
+Finally, if any resource is missing during book generation, Leanpub will insert something like the "missing image" often seen on web pages into the book.
 
 ## Resource Insertion Methods
 
@@ -753,7 +753,7 @@ If local resources are used, all local resources must be stored inside a `resour
 * A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
 * A file called `bar.png` in a subdirectory `images` of the resources directory should be referenced as `![](images/bar.png)`--not as `![](/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
-Note, however, that a Markua processor **MUST** ignore the part of a path which starts with `resources/`. So, you can also do the following:
+Note, however, that Leanpub also ignores the part of a path which starts with `resources/`. So, you can also do the following:
 
 * A file called `foo.jpg` in the `resources` directory can also be referenced as `![](resources/foo.jpg)`.
 * A file called `bar.png` in a subdirectory `images` of the resources directory can also be referenced as `![](resources/images/bar.png)`.
@@ -1451,9 +1451,7 @@ me   ow
 
 Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
 
-Per the [table](#resource-types-and-formats) of resource types and formats, the following types of math resources can be supported by Markua Processors: LaTeX math or MathML.
-
-Note that Markua processors do not need to support either math markup syntax (LaTeX math or MathML). If a Markua Processor does not support a math markup syntax, it should simply render the text of the math resource as unformatted monospaced text, much like a code resource of format `text`.
+Leanpub currently only supports LaTeX math.
 
 #### Supported Attributes for Math
 
@@ -1464,43 +1462,15 @@ The following is the supported attribute for math resources, in addition to the 
 
 Note that for math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `latex` for LaTeX math and `mathml` for MathML math.
 
-#### Local Math Resources
-
-Local math resources can be inserted as a figure. In all the following examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
-
-~~~
-Here's a paragraph before the figure.
-
-{alt: "too large to fit in the alt text"}
-![Proof of Fermat's Last Theorem](fermat-proof.mathml)
-
-Here's a paragraph after the figure.
-~~~
-
-#### Web Math Resources
-
-This is identical to how local math resources work, including the significance of file extensions. The only difference is that the files are on the web.
-
-~~~
-Here's a paragraph before the figure.
-
-{alt: "too large to fit in the alt text"}
-![Proof of Fermat's Last Theorem](http://markua.com/fermat-proof.tex)
-
-Here's a paragraph after the figure.
-~~~
-
-Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
-
 #### Inline Math Resources
 
 Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. LaTeX math, AsciiMath and MathML can be inserted inline as a span or figure.
 
 ##### Span
 
-Being able to insert a math resource as a span is important, as it lets you write things like one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside sentences. This can be done with LaTeX math, AsciiMath, or (in theory) MathML.
+Being able to insert a math resource as a span is important, as it lets you write things like one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside sentences. This can be done with LaTeX math.
 
-To insert math as inline math, use a `$` after closing backtick for LaTeX math, an `@` after the closing backtick for AsciiMath, or an attribute list specifying a `format` of `latex`, `asciimath` or `mathml`. If none of these is done, the content of the backticks is treated as code and is output verbatim as monospaced text.
+To insert math as inline math, use a `$` after closing backtick for LaTeX math.
 
 ###### LaTeX math
 
@@ -1518,45 +1488,9 @@ If you don't like syntactic sugar, you can also use {format: latex} after the in
 Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`{format: latex} inside a sentence.
 ~~~
 
-###### AsciiMath
-
-[AsciiMath](http://asciimath.org/) is a way of producing simple MathML equations, using about 1% of the typing. It's more terse than LaTeX math.
-
-There is syntactic sugar for AsciiMath which is inserted as a span, using the `@` character after the closing backtick:
-
-~~~
-Here's one of the kinematic equations `d = v_i t + 1/2 at^2`@ inside a sentence.
-~~~
-
-The `@` character indicates the inline resource is AsciiMath.
-
-If you don't like syntactic sugar, you can also use {format: asciimath} after the inline span resource:
-
-~~~
-Here's one of the kinematic equations `d = v_i t + 1/2 at^2`{format: asciimath} inside a sentence.
-~~~
-
-###### MathML
-
-Technically you can insert MathML as an inline span resource, as long as you remove all the newlines. There is no syntactic sugar for this, since it is almost always a bad idea:
-
-~~~
-Yada yada `<some><mathml><here></here></mathml></some>`{format: mathml} yada yada.
-~~~
-
-No, that's not really MathML syntax. For an example of some, see this [Wikipedia page](https://en.wikipedia.org/wiki/MathML).
-
-While it would almost always be a bad idea to insert MathML as a span resource, it would also be a bad idea to forbid it in the Markua spec.
-
-If you're going to insert MathML, it should be inserted as a figure, with newlines used inside the MathML to format it in a somewhat readable way.
-
 ##### Figure
 
-Both LaTeX math, AsciiMath and MathML can be inserted inline as a figure.
-
-* LaTeX math can be inserted by specifying either `latex` or `$` after three backticks, or by specifying an attribute list of `{format: latex}`.
-* AsciiMath can be inserted by specifying either `asciimath` or `@` after three backticks, or by specifying an attribute list of `{format: asciimath}`.
-* MathML math can be inserted by specifying `mathml` after three backticks, or by specifying an attribute list of `{format: mathml}`.
+LaTeX math can be inserted inline as a figure, by specifying either `latex` or `$` after three backticks, or by specifying an attribute list of `{format: latex}`.
 
 All three let you produce mathematical equations like this:
 
@@ -1612,179 +1546,6 @@ Here's a paragraph before the figure.
 \le
 \left(\sum_{i=1}^n a_i^2\right)^{1/2}
 \left(\sum_{i=1}^n b_i^2\right)^{1/2}
-```
-
-Here's a paragraph after the figure.
-~~~
-
-###### AsciiMath
-
-Here's how you do this using AsciiMath...
-
-Here's the version with the syntactic sugar for the format after the backticks:
-
-~~~
-Here's a paragraph before the figure.
-
-```@
-abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
-```
-
-Here's a paragraph after the figure.
-~~~
-
-Here's the same thing, with the full format after the backticks:
-
-~~~
-Here's a paragraph before the figure.
-
-```asciimath
-abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
-```
-
-Here's a paragraph after the figure.
-~~~
-
-Here's the same thing again, with a full attribute list:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: asciimath}
-```
-abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
-```
-
-Here's a paragraph after the figure.
-~~~
-
-If you wonder why I'm a fan of AsciiMath: I actually got that right on the first try at the [AsciiMath website](http://asciimath.org/).
-
-###### MathML
-
-There is no syntactic sugar for MathML.
-
-Here's the MathML version, with the full format after the backticks:
-
-~~~
-Here's a paragraph before the figure.
-
-```mathml
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mstyle displaystyle="true">
-    <mrow>
-      <mo>|</mo>
-      <mrow>
-        <mrow>
-          <munderover>
-            <mo>&#x2211;</mo>
-            <mrow>
-              <mi>i</mi>
-              <mo>=</mo>
-              <mn>1</mn>
-            </mrow>
-            <mi>n</mi>
-          </munderover>
-        </mrow>
-        <msub>
-          <mi>a</mi>
-          <mi>i</mi>
-        </msub>
-        <msub>
-          <mi>b</mi>
-          <mi>i</mi>
-        </msub>
-      </mrow>
-      <mo>|</mo>
-    </mrow>
-    <mo>&#x2264;</mo>
-    <msup>
-      <mrow>
-        <mo>(</mo>
-        <mrow>
-          <munderover>
-            <mo>&#x2211;</mo>
-            <mrow>
-              <mi>i</mi>
-              <mo>=</mo>
-              <mn>1</mn>
-            </mrow>
-            <mi>n</mi>
-          </munderover>
-        </mrow>
-        <mrow>
-          <msubsup>
-            <mi>a</mi>
-            <mi>i</mi>
-            <mn>2</mn>
-          </msubsup>
-        </mrow>
-        <mo>)</mo>
-      </mrow>
-      <mrow>
-        <mfrac>
-          <mn>1</mn>
-          <mn>2</mn>
-        </mfrac>
-      </mrow>
-    </msup>
-    <msup>
-      <mrow>
-        <mo>(</mo>
-        <mrow>
-          <munderover>
-            <mo>&#x2211;</mo>
-            <mrow>
-              <mi>i</mi>
-              <mo>=</mo>
-              <mn>1</mn>
-            </mrow>
-            <mi>n</mi>
-          </munderover>
-        </mrow>
-        <mrow>
-          <msubsup>
-            <mi>b</mi>
-            <mi>i</mi>
-            <mn>2</mn>
-          </msubsup>
-        </mrow>
-        <mo>)</mo>
-      </mrow>
-      <mrow>
-        <mfrac>
-          <mn>1</mn>
-          <mn>2</mn>
-        </mfrac>
-      </mrow>
-    </msup>
-  </mstyle>
-</math>
-```
-
-Here's a paragraph after the figure.
-~~~
-
-In case you're wondering: no, I didn't type this in. Instead, I did this:
-
-1. I wrote the AsciiMath in the previous section, i.e. `abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)`.
-2. I went to the [AsciiMath](http://asciimath.org/) website and pasted it in the Input field.
-3. I chose Show Math As > MathML Code for the Rendering field.
-
-MathML is excellent as an output format for AsciiMath.
-
-Here's the same thing again, with a full attribute list:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: mathml}
-```
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mstyle displaystyle="true">
-    (...identical code omitted for brevity...)
-  </mstyle>
-</math>
 ```
 
 Here's a paragraph after the figure.
@@ -3888,7 +3649,7 @@ The hint starts on a line with a percent sign (`%`) followed by a single space. 
 
 Hints can span multiple lines, if each line starts with a `%` sign. This is similar to Markdown handles block quotes with `>`.
 
-The hint can be used by a Markua processor to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Markua processor. However, if it's not supported, it must be ignored.
+The hint can be used by a Leanpub to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Leanpub. However, if it's not supported, it must be ignored.
 
 ~~~
 ? What's 1 + 2?
@@ -4506,7 +4267,7 @@ An attribute list can be inserted into a Markua document in one of three ways:
 
 Regarding #2 and #3: Any line outside of a code resource which starts with an opening curly brace `{` and ends with a closing curly brace `}` is assumed to be an attribute list, and will not be output by a Markua Processor. If you want to start a line with a literal opening curly brace `{` you need to preface it with a backslash (`\`).
 
-Regarding #2: There is some deliberate ambiguity here. If a Markua processor cannot handle the attribute list (including just an id attribute added with {#id_syntactic_sugar} in the given context, it should just ignore the attribute list and add a warning to any list of warnings when generating the book. For example, Leanpub does not support attribute lists in headers or in captions. So, in Leanpub, you cannot do this:
+Regarding #2: There is some deliberate ambiguity here. If a Leanpub cannot handle the attribute list (including just an id attribute added with {#id_syntactic_sugar} in the given context, it should just ignore the attribute list and add a warning to any list of warnings when generating the book. For example, Leanpub does not support attribute lists in headers or in captions. So, in Leanpub, you cannot do this:
 
 ~~~
 # Chapter One{#one}
