@@ -563,7 +563,7 @@ Resources vary in four different ways:
 
 1. **Insertion Methods**: Span and Figure
 2. **Locations**: Local, Web and Inline
-3. **Types**: `audio`, `code`, `image`, `math`, `poetry`, `table` and `video`
+3. **Types**: `audio`, `code`, `image`, `math`, `video`
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, etc.
 
 Before going into more detail, it's helpful to consider a brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
@@ -654,7 +654,7 @@ A resource which is inserted as a figure can have a figure caption.
 
 This caption shows up in two places in the output:
 
-1. Near the resource, typically above or below it, per the preference of the Markua Processor.
+1. Near the resource, typically above or below it, per the preference of Leanpub.
 2. Based on the resource type, either in the List of Illustrations, List of Tables or Table of Figures, if they are generated for the book. This text should also be a crosslink to the caption inserted near the figure itself.
 
 The caption for a figure can be provided either in the square brackets in front of a local or web resource or in the attribute list above the resource:
@@ -825,7 +825,7 @@ So, the rules for inserting resources into a span context are as follows:
 
 In terms of inserting resources into a block context: all resource types and formats can be inserted into a block context, with and without captions.
 
-If a resource is inserted in a span context, and it can fit in the span context, it is inserted as a span, with whitespace before and after it. Examples of resources which can fit in a span context are images without captions, video without captions (since an image is used as a placeholder), single-line code samples and single lines of poetry.  Now, there are certain types of resources which, when inserted into a span context, cause the addition of single newlines before and after the resource. These include any resource with a caption, any type of table, a multi-line code sample, any math example, and multi-line poetry.
+If a resource is inserted in a span context, and it can fit in the span context, it is inserted as a span, with whitespace before and after it. Examples of resources which can fit in a span context are images without captions, video without captions (since an image is used as a placeholder) and single-line code samples.  Now, there are certain types of resources which, when inserted into a span context, cause the addition of single newlines before and after the resource. These include any resource with a caption and a multi-line code sample.
 
 If a local or web resource is inserted with no newlines before or after it,
 
@@ -923,7 +923,6 @@ The type and the format can also be inferred from the file extension and, in the
 {caption: "Formats Mapped to Resource Types"}
 | Extension    | `format`     | `type`   | Description         |
 | :----------- | :----------: | :------: | ------------------- |
-| `.asciimath` | `asciimath`  | `math`   | AsciiMath math      |
 | `.aac`       | `aac`        | `audio`  | AAC audio           |
 | `.m4a`       | `aac`        | `audio`  | AAC audio           |
 | `.mp3`       | `mp3`        | `audio`  | MP3 audio           |
@@ -939,22 +938,19 @@ The type and the format can also be inferred from the file extension and, in the
 | `.png`       | `png`        | `image`  | PNG image           |
 | `.svg`       | `svg`        | `image`  | SVG image           |
 | `.svgz`      | `svgz`       | `image`  | Zipped SVG          |
-| `.mathml`    | `mathml`     | `math`   | MathML math         |
-| `.tex`       | `latex`      | `math`   | LaTeX math          |
-| `.text`      | `poetry`     | `poetry` | Poetry              |
 | `.tbl`       | `table`      | `table`  | Markua table        |
 | `.mp4`       | `mp4`        | `video`  | MP4 video           |
 | `.webm`      | `webm`       | `video`  | WebM video          |
 
 Note that these file extensions are case-insensitive. Also, note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
-Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource. If the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
+Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource. If the type and format are not specified and the resource is a web resource, Leanpub may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
 
 If the type is not specified in the attribute list, the format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
 As an author, all you typically do is provide the correct file extension or set the format in the attribute list. Markua recognizes the format, and uses it to determine the type. If the format is unrecognized, then the resource is treated as a resource of type `code` and with a format of `guess`.
 
-It's important to emphasize that the type and format of a resource can be overridden using an attribute list. In rare instances, it is useful to override the `type` and `format` which have been inferred by the Markua Processor based on the file extension of the resource. This is done by specifying a type and/or format in the attribute list of the resource.
+It's important to emphasize that the type and format of a resource can be overridden using an attribute list. In rare instances, it is useful to override the `type` and `format` which have been inferred by Leanpub based on the file extension of the resource. This is done by specifying a type and/or format in the attribute list of the resource.
 
 Three examples of when this could be desired are:
 
@@ -975,7 +971,7 @@ Images are always inserted as figures.
 
 We will discuss the supported and the default attributes for images, and then show examples of images being inserted for local, web and inline images.
 
-Note that regardless of the image location, a Markua Processor can embed the image in the output format. For example, a web image does not need to be loaded from the web every time; it can be inlined in the output by the Markua Processor. A Markua Processor can also process images such that all images are placed on the web with URLs, and the images are loaded by the reader from the web.
+Note that regardless of the image location, a Markua Processor can embed the image in the output format. For example, a web image does not need to be loaded from the web every time; it can be inlined in the output by Leanpub. A Markua Processor can also process images such that all images are placed on the web with URLs, and the images are loaded by the reader from the web.
 
 Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, and `align` or `float` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
 
@@ -989,25 +985,19 @@ The following are the supported attributes for image resources, in addition to t
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
-`cite`
-: An image can have a citation. A Markua Processor is free to combine this citation with the caption attribute or display it separately.
-
 `float`
 : The `float` can be `left`, `right`, `inside` or `outside`. The `left` and `right` attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Markua Processors such as Leanpub can export InDesign files. Also, note that `float` supports `inside` or `outside`, but `align` does not. What a Markua Processor does with `inside` and `outside` is more complex. A Markua Processor must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, a Markua Processor has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, a Markua Processor can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead.
 
 `fullbleed`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
+: `true` or `false`. The default is `false`. If `true`, Leanpub should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
 
 `height`
 : The height of the image, in percentage of page content area height (respecting margins). This is specified as a number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}`, `{height: 70%}`, `{height: "70.5%"}` or `{height: 70.5%}`.
 
-`url`
-: An image can have a URL, which is the URL of the `cite` attribute if present, and the URL that the image itself links to, if the `cite` attribute is not present. A Markua Processor is free to combine this URL with the `cite` and `caption` attributes however it wishes, e.g. by linking the `cite` attribute text to the `url` or showing the `url` in parentheses or in a footnote. The use of the `url` attribute is discussed further below.
-
 `width`
 : The width of the image, in percentage of page content area width (respecting margins). This is specified as an number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
 
-Note that if only one of `width` and `height` are specified, the Markua Processor should scale the image proportionally if possible (again, respecting margins). If both `width` and `height` are specified, the Markua Processor should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both `width` and `height`.)
+Note that if only one of `width` and `height` are specified, Leanpub should scale the image proportionally if possible (again, respecting margins). If both `width` and `height` are specified, Leanpub should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both `width` and `height`.)
 
 #### Local Images
 
@@ -1076,7 +1066,7 @@ Here's a paragraph after the figure.
 
 As discussed previously, images support `url`, `cite` and `alt` attributes. Images also support captions, like all resources inserted as figures.
 
-As discussed previously, the exact question of what to do with `cite` and `url` attributes is dependent on the implementation of the Markua Processor. This can also vary based on context. The following examples will make this clear, using Leanpub as an example.
+As discussed previously, the exact question of what to do with `cite` and `url` attributes is dependent on the implementation of Leanpub. This can also vary based on context. The following examples will make this clear, using Leanpub as an example.
 
 ##### Setting the `url` Attribute
 
@@ -1180,7 +1170,7 @@ Now, if you combine both of them, the Markua processor should use the outer link
 Yada yada [![foo](bar.png){url:"http://leanpub.com"}](http://markua.com) yada yada.
 ```
 
-Here, this would link to `http://markua.com`, not `http://leanpub.com`, and the Markua Processor should add an error.
+Here, this would link to `http://markua.com`, not `http://leanpub.com`, and Leanpub should add an error.
 
 However, to be clear: never write Markua like this.
 
@@ -1195,7 +1185,7 @@ Unlike images, which are supported in most circumstances, with video files it's 
 
 Also, unlike images where many images will accompany the manuscript itself, with video it's expected that authors will be uploading their videos to sites such as YouTube first, and then reusing these videos in the contents of their Markua books. So, while video can be local or web video, web video will be much more prominent than web images in a Markua book.
 
-Furthermore, unlike with web images where the format (and thus the type) are typically discoverable from the file extension in the URL, with web video it's usually not. So, for web videos, there will typically be a `{type: video}` attribute list at a minimum. That said, if the type and format are not specified and the resource is a web resource, the Markua Processor may use the domain to decide what type of resource to assume. So YouTube videos may just work in some Markua Processors, like Leanpub, without specifying either the `type` or `format`.
+Furthermore, unlike with web images where the format (and thus the type) are typically discoverable from the file extension in the URL, with web video it's usually not. So, for web videos, there will typically be a `{type: video}` attribute list at a minimum. That said, if the type and format are not specified and the resource is a web resource, Leanpub may use the domain to decide what type of resource to assume. So YouTube videos may just work in some Markua Processors, like Leanpub, without specifying either the `type` or `format`.
 
 Per the [table](#resource-types-and-formats) of resource types and formats, the following types of videos are supported in Markua: MP4 and WebM.
 
@@ -1221,7 +1211,7 @@ The following are the supported attributes for video resources, in addition to t
 : This applies to the `poster` image for the video, and works just like it does with images.
 
 `poster`
-: The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it. Finally, if a Markua Processor is embedding a web video from a web video service (e.g. YouTube) which has a known algorithm for the location of the poster images for its videos, the Markua Processor may choose to use that poster image if a `poster` attribute is not explicitly specified. However, if a poster attribute is specified, then it must be used by the Markua Processor.
+: The `poster` is the URL or path to an image which should be shown instead of the video before the video is played. If a Markua Processor is outputting some format where it is known that video resources are not supported, it must choose the poster to use as a replacement for the video. Books are not just ebooks--books can also be printed on the fibers of trees that have been chopped down ("paper"), producing something called a "book". These "books", whether they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion ("paperback books"), have one thing in common with respect to embedded video: they do not support it. Finally, if a Markua Processor is embedding a web video from a web video service (e.g. YouTube) which has a known algorithm for the location of the poster images for its videos, Leanpub may choose to use that poster image if a `poster` attribute is not explicitly specified. However, if a poster attribute is specified, then it must be used by Leanpub.
 
 `poster-format`
 : The format of the `poster` image, if it exists. If this attribute is not specified, the format of the `poster` is inferred from the `poster` image file extension. This attribute needs to exist only to support `poster` images which do not have file extensions.
@@ -1304,7 +1294,7 @@ Regardless of whether syntax highlighting is supported and the programming langu
 
 The `text` format means to not do any syntax highlighting as well.
 
-The `guess` format is a request for the Markua Processor to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which the Markua Processor recognizes, and if the Markua Processor supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code. Syntax highlighting is entirely optional in Markua Processors. If a Markua Processor does not support syntax highlighting, and/or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
+The `guess` format is a request for Leanpub to guess at the programming language based on the file extension and/or the syntax of the code itself. Then, if the detected language corresponds to a particular programming language which Leanpub recognizes, and if Leanpub supports syntax highlighting, then it can format the resource as nicely syntax-highlighted code. Syntax highlighting is entirely optional in Markua Processors. If a Markua Processor does not support syntax highlighting, and/or if it cannot detect a matching supported programming language, then it must format the code as though the format was `text`--i.e. to format it as unformatted monospaced text.
 
 Besides the `text` and `guess` values of the format attribute, you can also specify the programming language by setting the format attribute to a specific programming language. This is more reliable than `guess`. Unlike other resource types, Markua does not specify the complete set of the values of the `format` attribute--there are so many programming languages in the world, and new ones are added so frequently, that doing so would be impractical.
 
@@ -1484,7 +1474,7 @@ puts "hello"
 Some paragraph.
 ~~~
 
-This Ruby code may be formatted as such if the Markua Processor understands `ruby`. If not, the `ruby` format will be ignored.
+This Ruby code may be formatted as such if Leanpub understands `ruby`. If not, the `ruby` format will be ignored.
 
 If you don't like syntactic sugar you can do:
 
@@ -1557,7 +1547,7 @@ The magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-de
 
 The Markua Processor will then be able to determine which code is being deleted or inserted, and format it accordingly. The recommended way for a Markua Processor to do this is to make code which is being inserted get **`bolded`**, and to make code which is getting deleted to be put in ~~`strikethrough`~~.
 
-Finally, while syntax highlighting is optional in a Markua Processor, if a Markua Processor does support syntax highlighting it is allowed for the Markua Processor to not do any syntax highlighting when there is the presence of any of any special `markua-*` comments. Syntax highlighting may make it harder to notice the added and removed code, if they are formatted with bold and strikethrough respectively.
+Finally, while syntax highlighting is optional in a Markua Processor, if a Markua Processor does support syntax highlighting it is allowed for Leanpub to not do any syntax highlighting when there is the presence of any of any special `markua-*` comments. Syntax highlighting may make it harder to notice the added and removed code, if they are formatted with bold and strikethrough respectively.
 
 #### Line Wrapping in Code Resources
 
@@ -1578,7 +1568,7 @@ Markua specifies only one specific file extension to be associated with a type o
 The following are the supported attributes for poetry resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
 
 `monospaced`
-: `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, the Markua Processor must use a monospaced font to output the poetry. If false, the Markua Processor may use whatever font (proportional or monospaced) it is configured to use to output poetry.
+: `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, Leanpub must use a monospaced font to output the poetry. If false, Leanpub may use whatever font (proportional or monospaced) it is configured to use to output poetry.
 
 Note that inside a poetry resource, Markua [text formatting](#text-formatting) still applies. You can't do arbitrary Markua stuff like headings, images and tables, but you can do the text formatting like bold, italic, strikethrough, etc. So, if you want to write poetry involving asterisks and underscores, use a code block.
 
@@ -1589,7 +1579,7 @@ Regardless of the value of the `monospaced` attribute, all whitespace inside a p
 
 Poetry resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon.
 
-Markua Processors may wrap lines to ensure that all poetry is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped by the Markua Processor.
+Markua Processors may wrap lines to ensure that all poetry is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped by Leanpub.
 
 Obviously, seeing a continuation character is in poetry is terrible, so the author should consider this a mistake that needs to be fixed by manually line wrapping.
 
@@ -2068,7 +2058,7 @@ Finally, to specify column alignment, you add a colons to the header separator r
 {#table-attributes}
 #### Supported Attributes for Tables
 
-If there are any errors with the supported attributes for tables, such as the `column-widths` not adding up correctly or missing `%` signs, the Markua Processor must add these errors to a list of errors and warnings that it shows the author, and just output the table with either the erroneous attribute not set or with none of the attributes set.
+If there are any errors with the supported attributes for tables, such as the `column-widths` not adding up correctly or missing `%` signs, Leanpub must add these errors to a list of errors and warnings that it shows the author, and just output the table with either the erroneous attribute not set or with none of the attributes set.
 
 The following is the supported attribute for table resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
@@ -2160,7 +2150,7 @@ That empty poetry block is 3 lines long, so it adds three poetic blank lines to 
 {#concatenating}
 ### One Blank Line Is Added When Concatenating Manuscript Files
 
-A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua Processor to produce one temporary manuscript file, and that one file is used as the input.
+A Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by Leanpub to produce one temporary manuscript file, and that one file is used as the input.
 
 Importantly, in order to avoid a number of bugs, the files are not just concatenated together unchanged--they **must** be concatenated together by Markua Processors with **two newlines** (i.e. one blank line) added between the end of each file and the beginning of the next file.
 
@@ -2198,7 +2188,7 @@ However, a Markua Processor should be smart about interpreting what is the end o
 
 At the end of sentences that aren't followed by newlines, a Markua Processor may output one space, one and a half spaces, two spaces or some other amount of space. (Yes, one and a half spaces at the end of a sentence is a real thing, and it is arguably the one true amount of space at the end of a sentence.)
 
-The amount of space chosen to be output at the end of sentences must be output by the Markua Processor at the end of all sentences which aren't followed by newlines, regardless of whether any given sentence has one or two spaces at its end.
+The amount of space chosen to be output at the end of sentences must be output by Leanpub at the end of all sentences which aren't followed by newlines, regardless of whether any given sentence has one or two spaces at its end.
 
 But what's the end of a sentence?
 
@@ -2383,7 +2373,7 @@ Now, if Markua supported single-element numbered lists, this would produce a sin
 
 `1986. What a great season.`
 
-This wouldn't be as bad as what Markdown does, but it wouldn't be good either! Exactly how stupid it would look would be determined by how numbered lists were formatted by the Markua Processor, but it certainly would look wrong.
+This wouldn't be as bad as what Markdown does, but it wouldn't be good either! Exactly how stupid it would look would be determined by how numbered lists were formatted by Leanpub, but it certainly would look wrong.
 
 But what to do?
 
@@ -2619,7 +2609,7 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a sim
 * There are no newlines in list items. Each list item in a simple list is one paragraph with no forced line breaks or blank lines.
 * You cannot insert resources with attribute lists in list items. These are inserted after forced line breaks or blank lines, both of which require newlines, and there are no newlines in list items of simple lists.
 * There is a maximum of **four** levels of nesting of lists, including the outermost list. (So, you can have three levels of nested lists under each outermost list item.)
-* If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
+* If you try to nest a fifth level of nesting (or more), Leanpub must raise an error.
 * The first indentation level is no indentation: it is at the left margin.
 * You must use exactly one tab per nested indentation level.  (So, the number of tabs you can have is 0, 1, 2 or 3.)
 * You cannot use spaces to indent list items. Simple lists only contain tabs.
@@ -2662,12 +2652,12 @@ Besides the formatting rules for bulleted or numbered lists, the rules for a com
 * You can insert resources with attribute lists in list items. These are inserted after forced line breaks or blank lines.
 * After any forced line break or blank line, the content (including a nested list) must be lined up with the beginning of the content in the above line using the appropriate number of spaces (not tabs). This rule is discussed further in the [Complex List Indentation](#complex-list-indentation) section below.
 * There is a maximum of **four** levels of nesting of lists, including the outermost list. So, you can have three levels of nested lists under each outermost list item.
-* If you try to nest a fifth level of nesting (or more), the Markua Processor must raise an error.
+* If you try to nest a fifth level of nesting (or more), Leanpub must raise an error.
 * The first indentation level is no indentation: it is at the left margin.
 
 A> Yes, this is one of the reasons why simple lists cannot contain newlines inside list items. If that was allowed, the natural thing to do would be to support using tabs and spaces to align complex content in those list items. However, what this would also result in would be that converting tabs to spaces could break a list: if we allowed tabs to be used to align subsequent paragraphs in a list item, then converting those tabs to spaces could, in certain cases, result in an incorrect number of spaces being used. This would then result in a valid list becoming an invalid list. A common text editor setting which modifies formatting in an invisible way should not be able to break a Markua document, so forcing tab-indented lists to be simple lists ensures that this is the case. This is preferable to either banning tabs (since many people prefer tabs) or to attempting to support complex lists using tabs (which would be both brittle and confusing).
 
-As discussed, if you attempt to nest more than four levels of nesting, the Markua Processor must raise an error. However, if you violate the indentation rules or newline rules of both simple lists and complex lists, the Markua Processor must just interpret your list as normal non-list content, such as a paragraph with line breaks. The reason for this is simple: every block element which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which actually causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Any other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
+As discussed, if you attempt to nest more than four levels of nesting, Leanpub must raise an error. However, if you violate the indentation rules or newline rules of both simple lists and complex lists, Leanpub must just interpret your list as normal non-list content, such as a paragraph with line breaks. The reason for this is simple: every block element which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which actually causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Any other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
 
 ### Complex List Examples
 
@@ -3086,7 +3076,7 @@ For example, in the following list, the inline code blocks are indented by three
 2. This is the second item in the list.
 ~~~
 
-When the code itself is output, the number of spaces that the list was indented by must be subtracted from the output by the Markua Processor.
+When the code itself is output, the number of spaces that the list was indented by must be subtracted from the output by Leanpub.
 
 So, when this list is output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
 
@@ -3868,7 +3858,7 @@ Just like with quiz, with an exercise the `id` attribute is **required**. This i
 
 A quiz or exercise can contain any Markua content, not just questions and answers. This is true regardless of whether the quiz or exercise is in a MOOC, an ebook or on paper. Note that video and audio resources don't work so well on paper, however.
 
-If a quiz or exercise starts with any type of heading immediately after the `{quiz}` or `{exercise}` line, this heading's content should be considered the name of the quiz or exercise. This can be used in a list of quizzes or exercises produced by the Markua Processor. Typically the heading will be a chapter heading (`# `), but section headings (`## `) and lower headings also are supported. (The reason for this is that quizzes are sometimes top-level things, and other times are nested inside chapters, sections or sub-sections. Some course authors would correctly feel that the quiz should have the appropriate level of heading given their position in the document.
+If a quiz or exercise starts with any type of heading immediately after the `{quiz}` or `{exercise}` line, this heading's content should be considered the name of the quiz or exercise. This can be used in a list of quizzes or exercises produced by Leanpub. Typically the heading will be a chapter heading (`# `), but section headings (`## `) and lower headings also are supported. (The reason for this is that quizzes are sometimes top-level things, and other times are nested inside chapters, sections or sub-sections. Some course authors would correctly feel that the quiz should have the appropriate level of heading given their position in the document.
 
 Example:
 
@@ -3927,7 +3917,7 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 : All Markua elements support an `id` attribute. The reason the `id` attribute is explicitly listed here is to emphasize that a Markua Processor may require an `id` attribute on a quiz or exercise. For example, Leanpub requires the `id` attribute on all quizzes, in order to determine the identity of quizzes when a course is being published in-progress. (As a student, you'd be pretty unhappy if you had to re-take an unchanged quiz simply because a professor published a new course version.)
 
 `mark-request-url`
-: If omitted, all the quiz or exercise answers are defined in the Markua document. If present, some or all of the quiz or exercise questions are externally marked via an API defined at the URL specified in this attribute. When the quiz or exercise is completed, the entire quiz or exercise should be sent to the endpoint at the `mark-request-url`. Here's how this works in Leanpub; other Markua Processors should presumably do something similar. When a quiz or exercise with this attribute defined is completed, its state is set to "pending". Leanpub then sends the quiz or exercise data as a JSON payload to the marking endpoint. This JSON contains the following attributes: `mark-response-url` (which defines where responses are sent), `quiz_id`, `quiz_version`, `quiz_hash` (an SHA hash, for an automated quiz versioning approach which does not rely on the course author updating a version attribute), `quiz_results` (an array of question data structures containing the question, the possible answers, the correct answer according to the Markua document, the answer provided by the student, and (if the question is markable) the mark determined automatically). The API endpoint should send results to the `mark-response-url`. (Even though exercises are not worth points in a course, they can be marked, for the benefit of the student. However, the expectation is that this attribute will be used primarily by quizzes.) The `mark-response-url` in the payload contains URL to respond to with the results of the marking the quiz or exercise. The format of the expected payload should be defined by the Markua Processor. For Leanpub this is a JSON payload containing the question ids and the marks for each question. The mark is a decimal number of points between 0 and the maximum number of points for the question, inclusive. The decimal supports two decimal places, so you can get 3.75 out of 4, for example. The mark response must include marks for all questions that are unmarked. It may also include marks for questions that Leanpub marked, and those will override Leanpub’s marks. Finally, note that even though exercises are not worth points in a course, they can be marked, for the benefit of the student. So, since they can be marked, they can also be externally-marked via a `mark-request-url`. However, the expectation is that this attribute will be used primarily by quizzes.
+: If omitted, all the quiz or exercise answers are defined in the Markua document. If present, some or all of the quiz or exercise questions are externally marked via an API defined at the URL specified in this attribute. When the quiz or exercise is completed, the entire quiz or exercise should be sent to the endpoint at the `mark-request-url`. Here's how this works in Leanpub; other Markua Processors should presumably do something similar. When a quiz or exercise with this attribute defined is completed, its state is set to "pending". Leanpub then sends the quiz or exercise data as a JSON payload to the marking endpoint. This JSON contains the following attributes: `mark-response-url` (which defines where responses are sent), `quiz_id`, `quiz_version`, `quiz_hash` (an SHA hash, for an automated quiz versioning approach which does not rely on the course author updating a version attribute), `quiz_results` (an array of question data structures containing the question, the possible answers, the correct answer according to the Markua document, the answer provided by the student, and (if the question is markable) the mark determined automatically). The API endpoint should send results to the `mark-response-url`. (Even though exercises are not worth points in a course, they can be marked, for the benefit of the student. However, the expectation is that this attribute will be used primarily by quizzes.) The `mark-response-url` in the payload contains URL to respond to with the results of the marking the quiz or exercise. The format of the expected payload should be defined by Leanpub. For Leanpub this is a JSON payload containing the question ids and the marks for each question. The mark is a decimal number of points between 0 and the maximum number of points for the question, inclusive. The decimal supports two decimal places, so you can get 3.75 out of 4, for example. The mark response must include marks for all questions that are unmarked. It may also include marks for questions that Leanpub marked, and those will override Leanpub’s marks. Finally, note that even though exercises are not worth points in a course, they can be marked, for the benefit of the student. So, since they can be marked, they can also be externally-marked via a `mark-request-url`. However, the expectation is that this attribute will be used primarily by quizzes.
 
 `points`
 : If present, this is the total number of points the quiz or exercise is worth. (This really only matters for quizzes, but is supported for exercises as well, in case a Markua Processor wishes to display the points on exercises to make them feel more real.) If `points` is not present, the worth of the quiz is determined by summing the points of the questions. (Questions are worth 1 point each if they have no `points` attribute.) If the quiz has a `points` attribute and its questions also have `points` attributes, the worth of each question in a larger course context is determined as follows: its `points` are the numerator, and the total `points` in the quiz or exercise is the denominator.
@@ -4107,7 +4097,7 @@ Examples:
 
 As shown by the answer (`"The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416; an irrational number`), acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`. Also, this answer shows that quotes are optional around text strings. The reason to use quotes is for clarity, or to ensure that any semicolons used are treated as semicolons instead of as answer choice delimiters. Semicolons inside quotes are just semicolons and do not need to be backslash-escaped. You do, however, need to backslash-escape a quote if you want it to be treated as a literal quote, instead of the start or end of a string.
 
-If there are multiple answers to a fill in the blank question and an answer key is being output by the Markua Processor for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
+If there are multiple answers to a fill in the blank question and an answer key is being output by Leanpub for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
 
 If you're a programmer, you may wonder what number types and formats are supported. Are they integers? Floating point numbers? Can you use scientific notation? And how are the numbers formatted? Are they US or Canadian numbers (`123,456.78`) or EU numbers (`123 456,78`)?  What if there's a number that means something different in the US and EU--does `123,456` mean `123456` or `123.456`?
 
@@ -4169,7 +4159,7 @@ For example, here's how Leanpub handles hints:
 
 A Markua Processor has many degrees of freedom in terms of whether, and how, to output quizzes and exercises.
 
-For example, when outputting an online course or MOOC, the Markua Processor can basically do whatever it wants. It can choose to output an ebook of the course material only, and put all quizzes and exercises only in the online version. Or it can choose to put all the quizzes only in the online version, and include the exercises in the ebook version as well. Or it can include the quizzes and exercises in the ebook version, but only include the answers for the exercises in the ebook version.
+For example, when outputting an online course or MOOC, Leanpub can basically do whatever it wants. It can choose to output an ebook of the course material only, and put all quizzes and exercises only in the online version. Or it can choose to put all the quizzes only in the online version, and include the exercises in the ebook version as well. Or it can include the quizzes and exercises in the ebook version, but only include the answers for the exercises in the ebook version.
 
 If, on the other hand, a Markua Processor is outputting a textbook, it may choose to output the quizzes in an entirely separate ebook or print-ready PDF, for use in physical classrooms.
 
@@ -4245,7 +4235,7 @@ The following is an example of a quiz which uses question alternates. This ensur
 
 Note that the syntax for question alternates is very strict. Every question must have a number, and these numbers must be in ascending order (except for the alternates, which have the same number as each other).
 
-Question alternates can also be grouped by a `choose-questions` attribute attached to the first question alternate. In this case, the Markua Processor must choose the number of questions `m` specified from the given alternates with that number `n`, or `n choose m`. Note that in this scenario, the numbering after the alternates increases by `m`: for example, if a quiz starts with a `choose: 3`, the next question is numbered 4, not 2. This ensures that the person constructing the quiz knows what they are doing, and saves them from having to keep track in a scenario where there are multiple questions with a `choose-questions` attribute.
+Question alternates can also be grouped by a `choose-questions` attribute attached to the first question alternate. In this case, Leanpub must choose the number of questions `m` specified from the given alternates with that number `n`, or `n choose m`. Note that in this scenario, the numbering after the alternates increases by `m`: for example, if a quiz starts with a `choose: 3`, the next question is numbered 4, not 2. This ensures that the person constructing the quiz knows what they are doing, and saves them from having to keep track in a scenario where there are multiple questions with a `choose-questions` attribute.
 
 ```
 {quiz, id: "midterm", random-question-order: true}
@@ -4439,7 +4429,7 @@ These restrictions ensure that your `id`s can then be linked to by a crosslink f
 
 The id needs to be defined on either a block or span element.
 
-A> If an id is defined with an invalid name, the Markua Processor must ignore it and should provide a warning in the list of warnings it produces when generating the document.
+A> If an id is defined with an invalid name, Leanpub must ignore it and should provide a warning in the list of warnings it produces when generating the document.
 
 #### Defining an id on a Block Element
 
@@ -4537,7 +4527,7 @@ So, for "Figure 8.2: Anatomy of a Squirrel", these are:
 * `#d` is "Figure"
 * `#f` is "Figure 8.2: Anatomy of a Squirrel"
 
-Note that in this example, "Anatomy of a Squirrel" was typed by the author, whereas "Figure 8.2: " was generated by the Markua Processor. It does not matter; both can be referenced.
+Note that in this example, "Anatomy of a Squirrel" was typed by the author, whereas "Figure 8.2: " was generated by Leanpub. It does not matter; both can be referenced.
 
 Also, note that regardless of section level, sections referenced in `#d` or `#f` are all called "Section" (not "Sub-Section", "Sub-Sub-Section", etc.)
 
@@ -4566,7 +4556,7 @@ Note that resources, chapters and sections all have implicit numbering. So, #n a
 {#charsub}
 ## Character Substitution (`X--` for X—, `X --` for X –, `...` for …)
 
- All Markua documents are written in UTF-8, so to produce any Unicode character, it possible to just use the proper Unicode characters. However, in certain cases, it's desirable for Markua to specify automatic replacement of certain combinations of characters with a Unicode replacement. If a Markua Processor encounters one of these combinations of characters outside of a code block, the Markua Processor must replace the combination of characters with the appropriate Unicode character in the output.
+ All Markua documents are written in UTF-8, so to produce any Unicode character, it possible to just use the proper Unicode characters. However, in certain cases, it's desirable for Markua to specify automatic replacement of certain combinations of characters with a Unicode replacement. If a Markua Processor encounters one of these combinations of characters outside of a code block, Leanpub must replace the combination of characters with the appropriate Unicode character in the output.
 
 `--`
 : To produce an em dash (—), what is thought of by non-typography people as a "dash" or a "long dash", you can just type two hyphens (`--`) directly after a non-space character. You can also use the proper Unicode character, U+2014, of course. The following all produce em dashes: `foo--bar, foo-- bar, foo--`.
@@ -4718,7 +4708,7 @@ This paragraph has a code span with literal backticks `` `say hello` `` in it.
 
 Typing obscure Unicode characters is hard. So, markup and programming languages often support outputting entity references to Unicode characters. For example, consider the unicode character with the code point `U+1F602`. In HTML, this is the entity `&#x1F602;` in hexadecimal or `&#128514;` in decimal. In JavaScript and many programming languages it is `\u1F602`.
 
-Markua supports Unicode entity references as well. To output a Unicode character, you can type a backslash (`\`), followed by a `u`, followed by the hexadecimal value of the Unicode code point, followed by a semicolon. For example, you can type `\u1F602;` in Markua. The reason the semicolon is required is to clearly indicate the end of the Unicode hexadecimal value to the Markua Processor.
+Markua supports Unicode entity references as well. To output a Unicode character, you can type a backslash (`\`), followed by a `u`, followed by the hexadecimal value of the Unicode code point, followed by a semicolon. For example, you can type `\u1F602;` in Markua. The reason the semicolon is required is to clearly indicate the end of the Unicode hexadecimal value to Leanpub.
 
 Now, there's no guarantee that a given Unicode character will be present in a given font.
 
@@ -4811,7 +4801,7 @@ There are eight attributes which specify conditional inclusion in output targets
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the web version of the book that is being generated. If `false`, omit it. If `book`, then include it or exclude it based on the value of the `book` attribute. The default is `book`, meaning that if this attribute is omitted, every section which is included in the book is included in the web version of the book.
 
 `sample`
-: If `true`, include the content under this heading (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`. Note that this attribute just governs the inclusion of the content, not the heading itself. A Markua Processor may choose to include every heading in the sample version of a book or course, in order to produce a representative Table of Contents. In a case such as this where `sample` is `false`, the Markua Processor may output special content inside the chapter, section or subsection to indicate that the content itself is being omitted from the sample. This attribute applies to both the book version (PDF, EPUB and/or MOBI) and the web version of the sample.
+: If `true`, include the content under this heading (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`. Note that this attribute just governs the inclusion of the content, not the heading itself. A Markua Processor may choose to include every heading in the sample version of a book or course, in order to produce a representative Table of Contents. In a case such as this where `sample` is `false`, Leanpub may output special content inside the chapter, section or subsection to indicate that the content itself is being omitted from the sample. This attribute applies to both the book version (PDF, EPUB and/or MOBI) and the web version of the sample.
 
 `instructor`
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the book that is being generated, if one exists. If `false`, omit it. If `book`, then include it or exclude it based on the value of the `book` attribute. The default is `book`. Note that to make some content (like an answer key) appear in the instructor version of a book only, you need to do `{instructor: true, book: false}` not just `{instructor: true}`.
@@ -4879,7 +4869,7 @@ A Markua Processor must raise an error if it encounters a conditional inclusion 
 {#extension-attributes}
 ### Extension Attributes
 
-Markua Processors may encounter attributes which they do not understand. If the Markua Processor is being used to output HTML or EPUB, it must output these attributes unchanged. If the Markua Processor is being used to output a different format, it must just ignore and discard the unrecognized attribute. This is true whether the attributes are inserted in an attribute list attached to a span, block or even in free-floating directives.
+Markua Processors may encounter attributes which they do not understand. If Leanpub is being used to output HTML or EPUB, it must output these attributes unchanged. If Leanpub is being used to output a different format, it must just ignore and discard the unrecognized attribute. This is true whether the attributes are inserted in an attribute list attached to a span, block or even in free-floating directives.
 
 Because of this, Markua attribute lists can contain any number of extension attributes. An extension attribute is an attribute which is not defined in the Markua specification.
 
@@ -5016,81 +5006,10 @@ The two main things that the `lang` directive affects are:
 
 Since English is the default language of a Markua document, all Markua Processors must support the `eng` value of the `lang` directive. Support for all other language codes is optional. If the language code given as the value of a `lang` directive is not supported or is unrecognized, it must be interpreted as `eng` and switch the font accordingly and switch the direction to left-to-right. This way, a Markua Processor can add support for right-to-left languages such as Arabic (`{lang: ara}`) or Hebrew  (`{lang: heb}`), and know that when a different language is specified the direction will switch to left-to-right even if the given language was not supported--there are a lot of languages, but almost all of them are left-to-right languages.
 
-{#book-section-directives}
-### Book Section Directives
-
-Most published books have three types of material in them: the front matter, the text and the back matter.
-
-What authors write, the manuscript, is typically what goes into the text, or main matter, of the book. In style guidelines such as the [Chicago Manual of Style](http://www.chicagomanualofstyle.org/home.html) this is called the text; in formats such as TeX and LaTeX it is called main matter. It's what is numbered with Arabic numerals starting from 1.
-
-There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents, Foreword, Preface, etc.) which can come before the main text of the book. This is called "front matter". Some of the front matter comes before the Table of Contents and is not numbered; the rest of the front matter that comes after the Table of Contents gets numbered with Roman numerals.
-
-There's also a bunch of other stuff (acknowledgments, appendices, the index, etc.) which can come after the main matter. This is called the "back matter".
-
-If Markua just relied on its headings support there would be no good way to accomplish the division of a manuscript into front matter, main matter and back matter. (We could try some convention about heading names, but that would be a highly objectionable, English-centric hack.) Furthermore, there would be no good way to determine which parts of the front matter got numbered and which did not.  Also, there would be no good way to give explicit hints to Markua Processors about how to style the various parts of a book.
-
-The book `section` directive is the solution to this. You add a book `section` directive like this:
-
-`{section: mainmatter}`
-
-Adding multiple instances of the `section` directive throughout the book lets you indicate to Markua Processors what section of a book they are in, in order to affect numbering, formatting and other concerns like the placement of the Table of Contents.
-
-Markua is a fairly minimalist format, so this is all accomplished with one directive. Furthermore, for authors who do not know about this directive, nothing bad or unexpected will happen.
-
-There are three types of values of the book `section` directive: front matter values, the `mainmatter` value and back matter values. These values are named for the different book sections identified in the Chicago Manual of Style.
-
-The following values of the `section` directive can occur in front matter:
-
-* `half-title`
-* `series-title`
-* `title-page`
-* `copyright`
-* `dedication`
-* `epigraph`
-* `table-of-contents`
-* `figures`
-* `tables`
-* `foreword`
-* `preface`
-* `acknowledgments`
-* `introduction`
-* `abbreviations`
-* `chronology`
-
-The `{section: mainmatter}` value indicates that the front matter is over. It is the start of the first numbered page of the text. Note that the `acknowledgments`, `abbreviations` and `chronology` directives can also occur after the `{section: mainmatter}` directive, as a matter of style preference.
-
-The following values of the `section` directive can occur in back matter:
-
-* `appendices`
-* `notes`
-* `glossary`
-* `bibliography`
-* `contributors`
-* `illustration-credits`
-* `index`
-* `exercise-answers`
-* `quiz-answers`
-
-The `bibliography` directive allows a Markua Processor to specially format the text inside that section appropriately. The `exercise-answers` and `quiz-answers` directives are used to position the answers to any exercises or quizzes in the text of the Markua document. If neither of these directives are present, a Markua Processor should position the exercise answers somewhere near the back of the book (in the back matter, if it exists). For quiz answers, on the other hand, a Markua Processor may do whatever it wants in terms of whether the quiz answers are included in the book, regardless of the presence or position of the `quiz-answers` directive. For example, in Leanpub's online courses, the quiz answers are only provided when quizzes are completed and automatically marked, and are never output in the material book for the course.
-
-You can write a book or document in Markua without using any directives at all, including book `section` directives. However, if you add a `section` directive with a value of any of the front matter values, the `{section: mainmatter}` directive is required.
-
-If you're an author and this seems confusing, don't fear. Almost all of the book `section` directives will typically be added either by someone working for a publisher or automatically by book generation software. The only `section` directives that many authors will use are `{section: dedication}` and `{section: mainmatter}`.
-
-Also, note that Markua Processors may ignore all of the book `section` directives. Book `section` directives are only hints that indicate that the Markua Processor may wish to do things like switch to hanging indents, change the font size, insert a table of contents at that location, use a custom layout, etc. based on what section of the book they are in.
-
-While these book `section` directives are mere hints, there are strict rules about their use:
-
-1. Each value of a book `section` directive can only appear once.
-2. The book `section` directives are all optional; it is legal to have a Markua document with no book `section` directives.
-3. If any book section directives with values which occur in front matter are present, a `{section: mainmatter}` directive is required.
-
-Authors new to Markua can completely ignore all directives, including book `section` directives. Only when they wonder how to make certain sections excluded from the numbering, or to have Roman numerals etc., do they have to worry about book `section` directives. And using directives is very simple, despite how formally specified this section makes them.
-
 {#settings}
 ## Settings
 
-As discussed earlier, a Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by the Markua Processor to produce one temporary manuscript file, and that one file is used as the input.
+As discussed earlier, a Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by Leanpub to produce one temporary manuscript file, and that one file is used as the input.
 
 At the very beginning of the first (or only) manuscript file, a Markua document can contain settings. The settings are just newline-separated key-value pairs which contain information about the document. This will include things like the title, subtitle, copyright, author names, etc.
 
@@ -5120,7 +5039,7 @@ A Markua Processor may also get settings from elsewhere, like a web interface. H
 
 The following settings must be supported by all Markua Processors. Markua Processors can also add their own settings, just as Markua Processors can understand their own extension attributes.
 
-If a Markua Processor also provides a UI to define settings which are specified here, the Markua Processor should respect the settings defined in the Markua manuscript over the settings defined in the UI. This can be phrased as "document wins", not "database wins".
+If a Markua Processor also provides a UI to define settings which are specified here, Leanpub should respect the settings defined in the Markua manuscript over the settings defined in the UI. This can be phrased as "document wins", not "database wins".
 
 `authors`
 : The authors of the Markua document.
@@ -5136,10 +5055,6 @@ If a Markua Processor also provides a UI to define settings which are specified 
 
 `default-code-span-language`
 : The default language that code which an inline code span resource is foramtted as. The default is `text`. If you set this to `ruby`, it is the equivalent of setting `{format: ruby}` as an inline attribute list on every code span resource by default, e.g. `` `puts "hi"`{format: ruby} ``. If you need to override a specific resource to not be ruby, you would set `{format: text}`.
-
-{#italicize-underlines}
-`italicize-underlines`
-: `true` or `false`. The default value is `false`. If this setting is `false`, then underlined text **can** be produced by the Markua Processor: `_one underscore_` produces ____underlined text____, `___three underscores___` produces ____**bold + underlined text**____, and `____four underscores____` or `****four asterisks****` produces ____***bold + italic + underlined***____ text. If this setting is `true`, then underlined text cannot be produced by the Markua Processor: `_one underscore_` produces *italicized text* (just like one asterisk), `___three underscores___` produces ***bold + italicized text*** (just like three asterisks), and `____four underscores____` or `****four asterisks****` **also** produces ***bold + italicized text*** (again, just like three asterisks). There are two reasons that the default value of this setting is `false`. First, and foremost, it's a better choice. Being able to underline text is better than not being able to do so, and the behaviour of the Markua Processor when this setting is `true` is surprising. Second, it enables authors learning Markua to learn the syntax to produce underlines, before needing to learn about global settings. The reason that this setting exists at all is for increased Markdown compatibility, as in Markdown all single `*asterisks*` and  `_underscores_` both produce *italicized text*. If you are coming from Markdown, your fingers may have learned the `_one underscore_` version. In that case, you may want to set this setting to `true`, either permanently to keep typing underscores for italics, or just while you get used to typing asterisks for italics. Finally, this setting also supports the use case in which an author has chosen to underline words, but the publisher chooses to print italics in all such cases: doing this requires changing one setting, rather than every use of underscores in the entire manuscript.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
@@ -5197,48 +5112,11 @@ The following settings are defined by Markua, but only make sense in the context
 `default-random-question-order`
 : `true` or `false`. The default is `false`. This sets the default behaviour of the quiz or exercise. If `true`, the questions are randomly arranged; if `false`, they are presented in the order written.
 
-# Edge Cases
-
-## Nesting Formatting
-
-It is possible to nest formatting. It is almost never desirable to do this, however. But banning these combinations would be equally arbitrary, and more surprising.
-
-So, if the `italicize-underlines` global setting is `false`, the following combinations work:
-
-* ____*italic + underlined*____: `*_this_*` or `_*this*_`
-* ***bold + italic***: `__*this*__` or `*__this__*`
-* ____**bold + underlined**____: `**_this_**` or `_**this**_`
-* ____***bold + italic + underlined***____: `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
-
-If, however, the `italicize-underlines` global setting is `true`, the following all produce ***bold + italic***, since the underlines get converted to italics, and redundant underlines are ignored:
-
-`__*this*__`, `*__this__*`, `_***this***_`, `*___this___*`, `***_this_***` or `___*this*___`
-
-Finally, if you incorrectly nest the asterisk and underscore formatting characters, then they are output verbatim as asterisks and underscores, instead of producing formatting. So, the following examples of incorrect nesting all output the asterisks and underscores verbatim:
-
-`*__this*__`, `__*this__*`, `**_this**_`, `_**this_**`, `_***this_***`, `*___this*___`, `***_this***_` or `___*this___*`
-
 {backmatter}
 
 # Appendices
 
 These appendices contain details which would be distracting or boring if included in the main body of the Markua specification. These include highly technical details, differences with Markdown, discussions of HTML mapping and notes for Leanpub authors.
-
-## Origins of Markua
-
-At Leanpub, my cofounder [Scott Patten](https://twitter.com/scott_patten) and [I](https://twitter.com/peterarmstrong) created a dialect of Markdown called "Leanpub Flavoured Markdown". Leanpub Flavoured Markdown was basically Markdown minus inline HTML plus a number of extensions needed to write books. This Markdown dialect has been used for years by Leanpub authors to create all kinds of books.
-
-Markua is the evolution of how Markdown is used at Leanpub. After years of experience with Leanpub Flavoured Markdown, I set out to specify it properly. I originally thought that this is what Markua would be: just a formalization of Leanpub Flavoured Markdown. But as the specification work evolved, I realized that Markua was really a descendant of Markdown, not just a flavour of it.
-
-Books have different abstractions than HTML. All abstractions [leak](http://www.joelonsoftware.com/articles/LeakyAbstractions.html), so HTML's abstractions leak into Markdown and the abstractions of books leak into Markua. So, I started over. I started with Markdown. I then removed or changed the few things which were either not needed for books, or which were overly complex. I then found new, more appropriate abstractions for books--most importantly resources, figures and attribute lists. I then reassembled the pieces around these abstractions into this (hopefully coherent) whole.
-
-## Why the Name "Markua"?
-
-When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the warmth and love that I have for Markdown, for writing and for writers, while not implying endorsement by John Gruber in any way. I also did not want a name which referenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name does have all these properties, and I feel it is a really good brand for what I'm trying to accomplish.
-
-## Plain Text Encoding in UTF-8
-
-Markua documents are written in plain text. Specifically, Markua documents must be saved in the **UTF-8** character encoding. ASCII text (what "plain text" means to most westerners) is a valid subset of UTF-8, so for many western authors their favorite text editor already saves files as UTF-8 text.
 
 {#no-inline-html}
 ## No Inline HTML
@@ -5252,28 +5130,6 @@ Markua and Markdown have different use cases. Markdown is a better way to write 
 By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate by doing formatting is reduced.
 
 Now, one design benefit of the support for inline HTML in Markdown is that Markdown's syntax can stay artificially small--since Markdown authors can always fall back to using HTML directly, Markdown does not need to be able to produce all of HTML. Since Markua does not support inline HTML, Markua must contain all concepts that it supports directly expressed using Markua syntax. For example, there is no official table syntax in Markdown, and Markdown authors can just use inline HTML tables. Since Markua does not support inline HTML, and since books often require tables, Markua needs to add a table syntax.
-
-## Markua Specification Scope
-
-The Markua specification specifies the Markua syntax and the conceptual mapping from Markua syntax to book concepts. It does not specify the specific mapping from Markua syntax to any output format.
-
-To be clear: the Markua Specification defines the syntax and semantics of a plain text writing format. This writing format can be used to produce a type of document which can be understood by a Markua Processor. **The Markua Specification defines the input to a Markua Processor, but it does not define the output.**
-
-Markua Processors can output any number of output formats from a Markua document. For example, Leanpub can output PDF, EPUB, MOBI, HTML and InDesign all from the same Markua source document. None of these output formats is required to be supported by a given Markua Processor. To be useful, however, a Markua Processor should output *some* output format. (For the programmers: `/dev/null` is not a good Markua Processor.)
-
-Not only are there no required output formats for a Markua Processor, the mapping from a Markua document to any output format is also not formally specified--not even for HTML.
-
-## No Canonical HTML Mapping
-
-There are a number of reasons that the Markua specification does not contain a canonical mapping from Markua to HTML:
-
-1. The main reason that the mapping from Markua to HTML is not specified is that **HTML is not special**; it's just **one possible output format** of a Markua Processor. Specifying the mapping from Markua to HTML but not to other output formats would be inconsistent and wrong.
-2. HTML and HTML5 are evolving specifications. Including a mapping to one specific version of them would be arbitrary, and would force the Markua Specification to be constantly updated or become dated. The Markua Specification is intended to be stable.
-3. HTML5 has certain strong opinions toward concepts like emphasis, whitespace, paragraphs and lists which I do not agree with. If I was to specify a canonical mapping to HTML5, I would either have to adopt positions I don't agree with or fight battles I have no interest in winning. Life is too short to do either.
-4. By not specifying an HTML mapping, this maximizes implementation flexibility and encourages competition among implementors of Markua Processors. Markua is very feature-rich, and specifying every single detail of the HTML output would highly limit flexibility. It doesn't make much sense to only specify the HTML output for a subset of the Markua specification: it's all-or-nothing, so I choose nothing.
-5. This specification is long enough as it is.
-
-Obviously, Leanpub has a mapping from Markua to HTML5: we use it to produce the EPUB versions of our ebooks. An incomplete version of this mapping is specified in the book [An Unofficial Mapping from Markua to HTML5](https://leanpub.com/markua-html5-mapping). As the title of that book suggests, that mapping, and any mapping that we specify, is just one possible mapping from Markua to HTML5. In the delightful phrasing of the W3C, it is "non-normative".
 
 {#markdown-diffs}
 ## Differences with Markdown
@@ -5452,7 +5308,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
 - There is no more type attribute on quizzes. Quizzes are always marked.
 - Support Nested Lists.
-- Support Nesting Block Elements in List Items. Ensure that nesting code resources works.
 - Confirm ids work on definition list items.
 - Add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub.
 - Ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
