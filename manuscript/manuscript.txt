@@ -1510,8 +1510,6 @@ Markua handles two consecutive newlines identically to Markdown: they produce a 
 
 Similarly, Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
 
-When writing prose, there's basically no reason to add multiple blank lines. Worse, the most popular reason is a bad one: to hopefully accomplish a page break, or to make something look like a section break. However, Markua has special syntax for [scene breaks](#scene-breaks) and [page breaks](#page-breaks), which should be used for these purposes.
-
 If you absolutely must insert a bunch of newlines in a row, you can do this by starting a poetry block and doing so:
 
 ~~~
@@ -2642,30 +2640,6 @@ This is before the scene break.
 * * *
 
 This is after the scene break.
-~~~
-
-Leanpubs can take great liberties in how they output scene breaks. They can output a set number of asterisks, or an image, or whatever else they choose. Note that typically a scene break is not followed by a page break. However, to add this, you can simply add a manual page break after it.
-
-{#page-breaks}
-## Page Breaks (`===`)
-
-Three or more equals signs on a line by themselves, with or without spaces between them (e.g. `===`, `= = =`, `==========`, etc.), produce a page break.
-
-Page breaks are discouraged in Markua: when you're writing, unsemantic formatting is procrastination, and most page breaks are exactly this. Much like width and height attributes on images, however, page breaks are supported in Markua due to pragmatic concerns.
-
-Here is an example showing a page break following a paragraph, and a page break following a scene break:
-
-~~~
-This is before the page break.
-
-===
-
-This is on a new page, after the forced page break. It has a scene break and then a page break after it.
-
-* * *
-===
-
-This is on a new page, after the scene break and the forced page break.
 ~~~
 
 ## Blockquotes (`>`)
