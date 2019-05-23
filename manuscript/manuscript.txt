@@ -470,8 +470,6 @@ All resources can be inserted as figures. Figures are the normal case for how a 
 
 To insert a resource as a figure, there must be at least one newline before and after it.
 
-A figure can either be top-level (with a blank line before and after it), or it can be contained in a paragraph. The ways that figures and other block elements can be inserted in paragraphs as [discussed in depth](#inserting-into-paras) later.
-
 The syntax for a local resource or a web resource inserted as a figure is as follows:
 
 ~~~
@@ -706,7 +704,9 @@ Here's some text
 and more text.
 ~~~
 
-In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text. **The text in square brackets before a local or web resource is always the figure caption.** Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure, unless there are two newlines after it to start a new paragraph. This is discussed further [here](#inserting-into-paras). Even though both images above are inserted as figures, in the first case there is no way to specify alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined on the figure like this:
+In both cases, the `bar.png` image is inserted as a figure, and the text in the square brackets is the figure caption, not the alt text. **The text in square brackets before a local or web resource is always the figure caption.** Also, in both cases, the text which follows the figure is part of the same paragraph as the text which precedes the figure, unless there are two newlines after it to start a new paragraph.
+
+Even though both images above are inserted as figures, in the first case there is no way to specify alt text. This is why the implicit newline approach is inferior to using explicit newlines, since with explicit newlines an attribute list can be defined on the figure like this:
 
 ~~~
 Here's some text
@@ -3110,84 +3110,6 @@ B> So is GitHub, of course. Unicorns.
 ~~~
 
 In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon.
-
-{#inserting-into-paras}
-## Inserting Block Elements Inside Paragraphs
-
-Many block elements such as lists and figures can also be inserted nested in a paragraph. The way this is done is to add single newlines instead of blank lines.
-
-This example shows a list nested in the middle of a paragraph:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-* this list is
-* part of
-* paragraph two
-This sentence is also in paragraph two.
-
-This is paragraph three.
-~~~
-
-This example shows a figure which is an inline code resource nested in the middle of a paragraph:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-```ruby
-puts "hello world"
-```
-This sentence is also in paragraph two.
-
-This is paragraph three.
-~~~
-
-This example shows a figure which is a local code resource nested in the middle of a paragraph:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-{format: ruby}
-![Hello, World](hello.rb)
-This sentence is also in paragraph two.
-
-This is paragraph three.
-~~~
-
-This example shows figures which are local or web image resources nested in the middle of paragraphs. Note that as with all figures, the square bracket text in both cases is the figure caption (not alt text):
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-![A Piece of Cake](cake.jpg)
-This sentence is also in paragraph two.
-
-This sentence is in paragraph three.
-{alt: "a slice of chocolate cake"}
-![A Piece of Cake](http://markua.com/cake.jpg)
-This sentence is also in paragraph three.
-
-This is paragraph four.
-~~~
-
-It is possible to insert a block element as the last part of a paragraph by adding a single newline before it, but a blank line after it:
-
-~~~
-This is paragraph one.
-
-This sentence is in paragraph two.
-* this list is
-* part of
-* paragraph two
-
-This is paragraph three.
-~~~
-
-This works for most block elements, like lists, figures and tables. It does **NOT** work for definition lists, since those rely on blank lines in between elements.
 
 # Quizzes and Exercises
 
