@@ -281,7 +281,9 @@ This book explains how to use the parts of Markua which **CURRENTLY** work on Le
 * Everything you read about in this book should just work.
 * Everything in Markua which is not yet supported on Leanpub is just omitted, as though it does not exist.
 
-The formal specification of Markua is contained in a separate document called [The Markua Specification](http://markua.com). It is available on the Markua website, not as an ebook.
+The formal specification of Markua is contained in a separate document called [The Markua Specification](http://markua.com). It will soon be available on the Markua website, not as an ebook.
+
+The Markua Spec is based on the GitHub Flavored Markdown (GFM) Spec, which is based on the CommonMark Spec. The author of the CommonMark Spec is John MacFarlane. In the Markua Spec, Markua is specified as a set of modifications to CommonMark, for ease of comparison with CommonMark.
 
 You will want to read the [The Markua Specification](http://markua.com) if:
 
