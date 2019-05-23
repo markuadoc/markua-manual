@@ -266,7 +266,7 @@ The goal is for writers who are familiar with Markdown to feel that Markdown som
 
 When I set out to specify Markua, I realized I needed a name. I wanted a name that conveyed the love that I have for Markdown while not implying endorsement by John Gruber in any way. I also did not want a name which referenced Leanpub: Markua is a standalone specification with its own identity, which anyone (including Leanpub competitors) can freely implement. Finally, I was on vacation in Hawaii when I named Markua, and I wanted something that sounded happy, friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.) I also wanted a name that had its .com domain name available, and that was short and spellable, for branding purposes. The Markua name had all these properties.
 
-## The Markua Manual vs. The Markua Specification
+## The Markua Manual vs. The Markua Spec
 
 This is the Markua Manual. Its purpose is to explain how to write in Markua on Leanpub.
 
@@ -281,16 +281,17 @@ This book explains how to use the parts of Markua which **CURRENTLY** work on Le
 * Everything you read about in this book should just work.
 * Everything in Markua which is not yet supported on Leanpub is just omitted, as though it does not exist.
 
-The formal specification of Markua is contained in a separate document called [The Markua Specification](http://markua.com). It will soon be available on the Markua website, not as an ebook.
+The formal specification of Markua is contained in a separate document called [The Markua Spec](http://markua.com). It will soon be available on the Markua website, not as an ebook.
 
 The Markua Spec is based on the GitHub Flavored Markdown (GFM) Spec, which is based on the CommonMark Spec. The author of the CommonMark Spec is John MacFarlane. In the Markua Spec, Markua is specified as a set of modifications to CommonMark, for ease of comparison with CommonMark.
 
-You will want to read the [The Markua Spec](http://markua.com) if:
+You will want to read The Markua Spec (once it's online) if:
 
-1. You are a computer programmer and you like reading specs.
-2. You want to see a mapping of Markua to HTML.
-3. You want to see every planned feature in Markua, not just what works in Leanpub today.
-4. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including any differences with what is explained here.
+1. You are a computer programmer.
+2. You like reading specs.
+3. You want to see a mapping of Markua to HTML.
+4. You want to see every planned feature in Markua, not just what works in Leanpub today.
+5. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including any differences with what is explained here.
 
 ## Differences with Leanpub Flavoured Markdown (LFM)
 
