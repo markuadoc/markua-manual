@@ -975,7 +975,7 @@ The following are the supported attributes for video resources, in addition to t
 : The format of the `poster` image, if it exists. If this attribute is not specified, the format of the `poster` is inferred from the `poster` image file extension. This attribute needs to exist only to support `poster` images which do not have file extensions.
 
 `transcript`
-: The URL or path to a transcript of the video, which should be shown or dictated to people who cannot view video. This helps people with visual disabilities view course material, and helps with ADA compliance. For example, what Leanpub does with a `transcript` is as follows: a URL is linked to in the caption (but in a way which does not affect the Table of Contents), and a path is assumed to be a path to a Markua file which is then used to produce a web page at a public URL, which then is also linked to in the caption in a way which does not affect the Table of Contents. With the Markua files for transcripts, Leanpub only supports certain resource types to be included in the transcript files themselves. Specifically, images, video, audio are not supported, but code, poetry, math and tables are supported. When Leanpub generates a transcript, the URLs are publicly accessible but obscure. Identical transcripts should not make duplicate transcript files on the web, and using a new UUID every time would violate this. However, not changing the transcript URL when its content changed could lead to bad outcomes. So, the URL of a transcript on the web should be scoped to the book and affected both by its filename and its content. What Leanpub does is: (filename minus extension minus period plus hyphen plus the SHA hash).html. Including the filename eliminates collisions if filenames are unique but the hashes are not.
+: The URL or path to a transcript of the video, which should be shown or dictated to people who cannot view video. This helps people with visual disabilities view course material, and helps with ADA compliance. For example, what Leanpub does with a `transcript` is as follows: a URL is linked to in the caption (but in a way which does not affect the Table of Contents), and a path is assumed to be a path to a Markua file which is then used to produce a web page at a public URL, which then is also linked to in the caption in a way which does not affect the Table of Contents. With the Markua files for transcripts, Leanpub only supports certain resource types to be included in the transcript files themselves. Specifically, images, video, audio are not supported, but code and math are supported. When Leanpub generates a transcript, the URLs are publicly accessible but obscure. Identical transcripts should not make duplicate transcript files on the web, and using a new UUID every time would violate this. However, not changing the transcript URL when its content changed could lead to bad outcomes. So, the URL of a transcript on the web should be scoped to the book and affected both by its filename and its content. What Leanpub does is: (filename minus extension minus period plus hyphen plus the SHA hash).html. Including the filename eliminates collisions if filenames are unique but the hashes are not.
 
 `width`
 : This applies to the `poster` image for the video, and works just like it does with images.
@@ -1310,130 +1310,6 @@ Finally, while syntax highlighting is optional in a Markua Processor, if a Marku
 #### Line Wrapping in Code Resources
 
 Code resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon. Markua Processors may wrap lines to ensure that all code is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped. However, adding a continuation character is not a requirement, nor is the choice of which continuation character is used.
-
-{#poetry}
-### Poetry
-
-Poetry can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to poetry as to all other resources.
-
-Poetry can only be inserted as a figure. It cannot be inserted as a span resource, like code can.
-
-Markua specifies only one specific file extension to be associated with a type of `poetry`: the `.text` extension, which is for the format of `poetry`.
-
-{#supported-attributes-for-poetry}
-#### Supported Attributes for Poetry
-
-The following are the supported attributes for poetry resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support.
-
-`monospaced`
-: `true` or `false`. The default is `false`, except for a special case with inline poetry resources, discussed below. If `true`, Leanpub must use a monospaced font to output the poetry. If false, Leanpub may use whatever font (proportional or monospaced) it is configured to use to output poetry.
-
-Note that inside a poetry resource, Markua [text formatting](#text-formatting) still applies. You can't do arbitrary Markua stuff like headings, images and tables, but you can do the text formatting like bold, italic, strikethrough, etc. So, if you want to write poetry involving asterisks and underscores, use a code block.
-
-{#spacing-poetry-and-newlines}
-#### Spacing, Poetry and Newlines
-
-Regardless of the value of the `monospaced` attribute, all whitespace inside a poetry resource is respected. This includes all spaces and newlines, regardless of whether they are leading, internal or trailing spaces, and regardless of the number of consecutive newlines.
-
-Poetry resources should have newlines added by the author to ensure that automatic line wrapping is not relied upon.
-
-Markua Processors may wrap lines to ensure that all poetry is visible on a page, and *may* add continuation characters (like the backslash `\` character) in the output to indicate that a line has been automatically wrapped by Leanpub.
-
-Obviously, seeing a continuation character is in poetry is terrible, so the author should consider this a mistake that needs to be fixed by manually line wrapping.
-
-#### Local Poetry Resources
-
-Local poetry resources look like many other resources inserted as figures. The text in the square brackets is the figure caption, like it is in all figures.
-
-~~~
-Here's a Shakespearean sonnet:
-
-![Sonnet 130](sonnet130.text)
-
-Here's an E. E. Cummings poem:
-
-{monospaced: true}
-![I Will Be](iwillbe.text)
-~~~
-
-#### Web Poetry Resources
-
-Web poetry resources function identically to how local poetry resources work, including the significance of file extensions. The only differences is that the files are on the web.
-
-~~~
-Here's a Shakespearean sonnet:
-
-![Sonnet 130](http://markua.com/sonnet130.text)
-
-Here's a paragraph after the figure.
-~~~
-
-{#inline-poetry-resources}
-#### Inline Poetry Resources
-
-With an inline poetry resource, the default value of the `monospaced` attribute for a poetry resource varies based on the delimiter used.
-
-There are two types of delimiters that can be used to insert a poetry resource inline:
-
-`---`
-: With three hyphens, the default value of `monospaced` is `true`.
-
-`___`
-: With three underscores (`___`), the default value of `monospaced` is `false`.
-
-This way, you can vary the default value of `monospaced` without having to type an attribute list--attribute lists aren't very poetic!
-
-To repeat: regardless of the value of the `monospaced` attribute, all whitespace is respected in a poetry resource. So, you can indent the last two lines of a sonnet without requiring a monospaced font.
-
-The following example shows how you can get different default behaviour without an attribute list required:
-
-~~~
-Here's a Shakespearean sonnet:
-
-___
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-___
-
-Here's a pretend poem which wants a monospaced font:
-
----
-i
-  am
-      a        cat
-            a        l a z y          cat
-
-me   ow
----
-~~~
-
-Now, if you want to add captions to the poems which are inserted as inline resources, then you're stuck adding an attribute list after all:
-
-~~~
-Here's a Shakespearean sonnet:
-
-{caption: "Sonnet 130"}
-___
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-___
-
-Here's a pretend poem which wants a monospaced font:
-
-{caption: "Peter's Pretentious Poem"}
----
-i
-  am
-      a        cat
-            a        l a z y          cat
-
-me   ow
----
-~~~
 
 {#math}
 ### Math
@@ -3997,61 +3873,6 @@ Note that order of definition and use does not matter: crosslinks will work rega
 * If a Markua document contains duplicate `id` attribute values, the **first** one is used and the subsequent ones are ignored. A Markua Processor should output a warning about duplicate `id`s.
 * Crosslinks that reference an unused `id` may either be created as a (broken, non-functional) link or be created as normal text (not a link) by a Markua Processor. The Markua Processor may also output a warning about this somewhere, but not in the actual document text itself.
 
-### Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
-
-W> Leanpub authors: this has not been implemented yet
-
-Chapters, sections and figures with captions often have two useful properties for writers:
-
-1. A name which is often short and useful to reference.
-2. A number, if numbering is turned on.
-
-Whether the numbers exist is determined by the `number-chapters`, `number-parts` and `number-figures` attributes .
-
-In your writing, it's often desirable to refer to these figures from elsewhere in your book. When creating such a reference, it's helpful to be able to reference the title and number of the chapter, section or figure.
-
-A> Adding a reference to the page number would also be helpful in print, but it is obviously problematic in an ebook, since certain ebook formats have resizable text and since the page displayed by PDF readers is often different than the printed page number, because of front matter Roman numerals. So, Markua doesn't provide any special magical syntax to refer to a page number, in order to discourage it--if Markua did support a reference to a page number, then the next logical step would be to only do so in certain output formats, and then writing Markua text would feel like programming. Instead of this nightmare, a really smart Markua Processor could hypothetically (and with the author's permission) automatically add page number references to these references when producing a print-ready PDF.
-
-Here's how these references to titles and numbers work:
-
-* `#t` is for "title"
-* `#n` is for "number"
-* `#d` is for "description" (e.g. "Figure", "Chapter", "Section")
-* `#f` is for "full title"
-
-So, for "Figure 8.2: Anatomy of a Squirrel", these are:
-
-* `#t` is "Anatomy of a Squirrel"
-* `#n` is "8.2"
-* `#d` is "Figure"
-* `#f` is "Figure 8.2: Anatomy of a Squirrel"
-
-Note that in this example, "Anatomy of a Squirrel" was typed by the author, whereas "Figure 8.2: " was generated by Leanpub. It does not matter; both can be referenced.
-
-Also, note that regardless of section level, sections referenced in `#d` or `#f` are all called "Section" (not "Sub-Section", "Sub-Sub-Section", etc.)
-
-The expectation is that `#f` will be used by authors who don't mind verbosity, and #t and #n will be used by authors who prefer control and brevity. The #d is for very lazy authors who like saving keystrokes and/or who don't know whether their publisher will call the code samples "Listing", "Example" or some other word and want to protect themselves against extra work.
-
-The `code-sample-names`, `figure-names` and `table-names` settings control the words used to name things.
-
-Examples:
-
-~~~
-This is discussed in [section #n, #t](#crosslinks).
-
-This is discussed in [#f](#crosslinks).
-
-This is discussed in a [#d](#crosslinks) above.
-
-See [chapter #n](#span-elements), which is the best chapter in this book.
-
-This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this document.
-~~~
-
-The only way to reference the title and numbers is in crosslinks. There's no syntax to do so without creating a crosslink--a crosslink is more helpful, since it is clickable, and adding another syntax simply to be less helpful to the reader is a bad idea. Markua has enough syntax as it is.
-
-Note that resources, chapters and sections all have implicit numbering. So, #n always works even if numbering is off. However, you will confuse readers if you refer to numbering they cannot see. Also, if numbering is off, the `#f` must not include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
-
 {#charsub}
 ## Character Substitution (`X--` for X—, `X --` for X –, `...` for …)
 
@@ -4322,120 +4143,6 @@ For example, you can only say `{sample: true}` immediately above a heading. You 
 
 A Markua Processor must raise an error if it encounters a conditional inclusion attribute used incorrectly, so as to help the author understand how to properly use them.
 
-{#extension-attributes}
-### Extension Attributes
-
-Markua Processors may encounter attributes which they do not understand. If Leanpub is being used to output HTML or EPUB, it must output these attributes unchanged. If Leanpub is being used to output a different format, it must just ignore and discard the unrecognized attribute. This is true whether the attributes are inserted in an attribute list attached to a span, block or even in free-floating directives.
-
-Because of this, Markua attribute lists can contain any number of extension attributes. An extension attribute is an attribute which is not defined in the Markua specification.
-
-This encourages competition in the Markua ecosystem, while ensuring that Markua implementations do not choke on Markua input which goes beyond their capabilities.
-
-Extension attributes go far beyond adding icons to blurbs: they allow for specialized uses of Markua. Since CSS is so powerful, with creative uses of custom attributes and custom CSS, Markua documents can be transformed. Some obvious uses of extension attributes include adding CSS classes which can then be styled to set fonts, adding custom types to figures for things like lemmas and theorems, etc.
-
-This ensures that new attributes can be added to future versions of Markua without a negative effect on older Markua implementations. It also ensures that new versions of Markua can simply stop supporting attributes defined in this version of Markua without needing to specify anything special.
-
-## Index Entries
-
-Markua supports adding index entries via the attribute list syntax. Index entries let authors or indexers produce professional-looking indexes in Markua books.
-
-Index entries can either be attached to block or span elements using the same attribute list syntax. In fact, index entries can just be added as part of a larger attribute list.
-
-The actual syntax of what the value of an index entry looks like is [inspired by LaTeX](https://en.wikibooks.org/wiki/LaTeX/Indexing).
-
-The key of an index entry is `i`, for index.
-
-In its simplest form, an index entry is simply `{i: "hello"}`. Like any attribute list, you don't need a space between the colon and the quote--you can also do `{i:"hello"}`.
-
-These are the various formats of an index entry:
-
-~~~
-{i: hello}
-{i: "hello"}
-{i: "Armstrong, Peter"}
-{i: "Yahoo\!"}
-{i: "*hello*"}
-{i: "**hello**"}
-{i: "hello!Peter"}
-{i: "hello!*Peter*"}
-{i: "hello!**Peter**"}
-{i: "Peter|see{i:'hello'}"}
-{i: "Jen|seealso{i:'Jenny'}"}
-~~~
-
-Here's what they do:
-
-A> TODO - Leanpub: A few of these definition list items are broken, due to Leanpub bugs.
-
-`{i: hello}`
-: Adds an index entry for `hello`. If an index entry has no punctuation or formatting then it does not need quotes.
-
-`{i: "hello"}`
-: Adds an index entry for `hello`. Quotes are always fine to use, even when not required.
-
-`{i: "Armstrong, Peter"}`
-: Adds an index entry for `Armstrong, Peter`. The quotes are always omitted. Their function is to allow things like exclamation marks and other punctuation to be added without fear, in case you don't feel like learning which punctuation is safe.
-
-`{i: "Yahoo\!"}`
-: Adds an index entry for `Yahoo!`. Note that the exclamation mark must be backslash-escaped because `!` is a delimiter otherwise. The `|`, `{`, `}` and `\` characters also must be backslash-escaped.
-
-`{i: "*hello*"}`
-: Adds an index entry for `hello`, with `hello` in italics.
-
-`{i: "**hello**"}`
-: Adds an index entry for `hello`, with `hello` in bold.
-
-`{i: "hello!Peter"}`
-: Adds an index entry for `Peter` which is a sub-entry of `hello`.
-
-`{i: "hello!*Peter*"}`
-: Adds an index entry for `Peter` (with *Peter* in emphasis) which is a sub-entry of `hello`. Note that this cannot be combined with a see or seealso (the | syntax).
-
-`{i: "hello!**Peter**"}`
-: Adds an index entry for `Peter` (with **Peter** in strong emphasis) which is a sub-entry of `hello`. Note that this cannot be combined with a see or seealso (the | syntax).
-
-`{i: "Peter|see{i:'hello'}"}`
-: Adds an index entry for `Peter`, which references the index entry `hello` with the equivalent of "see" in the language of the book. Note that this cannot be combined with a sub-entry (the ! syntax).
-
-`{i: "Jen|seealso{i:'Jenny'}"}`
-: Adds an index entry for `Jen`, which references the index entry `Jenny` with the equivalent of "see also" in the language of the book. Note that this cannot be combined with a sub-entry (the ! syntax).
-
-Index entries are case sensitive. For example, `{i: "mark"}` and `{i: "Mark"}` are distinct entries. (The first is for a result or a smudge, the second is a person's name.)
-
-To attach an index entry to the start of a block, put it on its own line above a block:
-
-~~~
-{i: "hello"}
-I just came to say hello, hello, hello, hello
-~~~
-
-To attach an index entry to a word, just add the index entry after the word:
-
-~~~
-I just came to say hello{i: "hello"}, hello, hello, hello
-~~~
-
-To attach an index entry to a span element, just add the index entry after the span element:
-
-~~~
-The first program that a programmer writes in a language is usually *Hello World*{i: "Hello World"}
-~~~
-
-Index entries can have commas and other punctuation (except colons) in their definition:
-
-~~~
-My wife read some book about a whale by Herman Melville{i: "Melville, Herman"}.
-~~~
-
-Multiple index entries can exist in a block, or even a sentence:
-
-~~~
-Supposedly the great-great-great-granduncle of the musician Moby{i: "Moby"} was Herman
-Melville{i: "Melville, Herman"}, the author of a book about a whale{i: "Moby-Dick; or, The Whale"}.
-~~~
-
-Note that adding index entries is best left until the author is done writing the book. At that time, ids like {#myid} can be converted to {id: #myid, i: "blah"} if index entries are being added where ids already are.
-
 {#directives}
 ## Directives
 
@@ -4596,20 +4303,19 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 2. Markdown supports inline HTML; [as discussed earlier, Markua does not](#no-inline-html).
 3. Markua defines many more types of numbered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list types and features.
 4. Unlike in Markdown, in Markua the number that begins the list in the manuscript is the number that begins the list in the output.
-5. Markdown does not specify a table syntax. Since Markdown supports inline HTML, it does not need to--if you want a table, you can simply use an inline HTML table. Since Markua does not support inline HTML, Markua defines a [table syntax](#tables).
+5. Markdown does not specify a table syntax. Since Markdown supports inline HTML, it does not need to--if you want a table, you can simply use an inline HTML table. Since Markua does not support inline HTML, Markua uses the GFM [table syntax](#tables).
 6. Images in Markua are inserted in essentially the same way they are in Markdown for what Markdown calls "inline images". Markdown's inline images are not to be confused with Markua's inline image support, which means to define an SVG image in the text of a Markua document. Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images. There are two main reasons for not supporting reference style resource syntax in Markua. First, resources in Markua are complex enough without also having a reference syntax for them. Second, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
 7. Markua supports definition lists; Markdown does not (except via inline HTML).
 8. Markdown lets you use a plus sign (`+`) before each item in an unordered ("bulleted" in Markua) list; Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`.
 9. Markdown does not support closing parentheses (`)`) as ordered ("numbered" in Markua) list delimiters; Markua does.
-10. Markua and Markdown handle spaces, newlines and indentation differently. This is discussed in the [Whitespace: Spaces, Tabs and Newlines](#whitespace) section.
+10. Markua and Markdown currently handle spaces, newlines and indentation differently. This is discussed in the [Whitespace: Spaces, Tabs and Newlines](#whitespace) section.
 11. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
 12. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
 13. Markua and Markdown handle headings differently. This is discussed further below.
 14. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
 15. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
-16. The "four space indent" method of creating code blocks in Markdown is not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
+16. The "four space indent" method of creating code blocks in Markdown is currently not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
 17. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
-18. In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML or horizontal rules. The `***` is used for scene breaks, `___` starts poetry, and `---` starts monospaced poetry.
 
 ## Differences with Leanpub Flavoured Markdown
 
