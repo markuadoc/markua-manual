@@ -475,20 +475,6 @@ Finally, I would like to thank my wife Caroline and my son Evan: while this is
 not as long as my other books, a lot of thought and effort went into it, and a
 lot of sacrifice. Thanks very much.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {#text-formatting}
 # Text Formatting
 
@@ -502,7 +488,7 @@ Italic
 : To produce *italic text*, surround it with `*one asterisk*`.
 
 Underlined
-: To produce ____underlined text____, surround it with `_one underscore_`. (You can force **all** underlines to produce *italic text*, however. See the [`italicize-underlines`](#italicize-underlines) global setting for details.)
+: To produce _underlined text_, surround it with `_one underscore_`. (You can force **all** underlines to produce *italic text*, however. Just go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub, and select the **Italicize Underlines** checkbox.
 
 Bold
 : To produce **bold text**, surround it with either `**two asterisks**` or `__two underscores__`.
@@ -511,28 +497,26 @@ Bold + Italic
 : To produce ***bold + italic text***, surround it with `***three asterisks***`.
 
 Bold + Underlined
-: To produce ____**bold + underlined text**____, surround it with `___three underscores___`.
+: To produce ___bold + underlined text___, surround it with `___three underscores___`. (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Bold + Italic + Underlined
-: To produce ____***bold + italic + underlined***____ text, surround it with `____four underscores____` or `****four asterisks****`.
+: To produce ____bold + italic + underlined____ text, surround it with `____four underscores____`.  (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Strikethrough
-: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`. This is the same syntax as is used by both [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/) and by John Macfarlane's excellent [pandoc](http://johnmacfarlane.net/pandoc/README.html).
+: To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
 
 Superscript
-: To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`. (This is the same syntax as is used by pandoc.)
+: To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
 
 Subscript
 : To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
-
-W> Currently in Leanpub, ____underlined text____ is produced with `____four underscores____` in Markua. When we add support for `_one underscore_` and the global `italicize-underlines` setting, the four underscores will become bold + italic + underlined as described above.
 
 {#headings}
 # Headings
 
 Markua is a way of writing books. Books have things like chapters, sections and subsections. Sometimes books have parts, e.g. Part One and Part Two.
 
-Here's the way that headings are made in Markua:
+Here's the way that headings are currently made in Markua:
 
 ~~~
 # Part #
@@ -564,103 +548,16 @@ This is a paragraph.
 This is a paragraph.
 ~~~
 
-Specifically, to create a Markua heading, you put the following on a line by itself:
-
-* between one and six pound signs (`#`)
-* followed by exactly one space
-* followed by text
-* followed (only for parts) by exactly one space and exactly one pound sign
-
-A Markua heading usually needs a blank line above and below it. There are two exceptions: if it's at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.
-
-Making these headings divides your book or document into these divisions. If you add part headings, your book will have parts; if you don't, it won't. If you add chapter headings, your book will have chapters; if you don't, it won't.
-
-Markua is very strict about its heading syntax:
-
-1. In Markua, to make a part heading you make a heading like `# Title #`--the heading starts with exactly one pound sign and exactly one space, and ends with exactly one space and exactly one pound sign. No other combination of pound signs and spaces makes a part heading.
-2. Part headings end with a space and a pound sign, but other than that, headings cannot have optional pound signs at the end of them. Any other pound signs are considered to be text in the heading.
-3. All headings must start with between 1 and 6 pound signs (`#`) and then have exactly one space, followed by text. If any other number of spaces is used or if tabs are used, the text must be interpreted as a paragraph by a Markua Processor, not as a heading. (This ensures that Markua manuscripts look consistent for authors, and can be parsed more easily by Markua Processors. Also, if we allowed spaces to be omitted, you couldn't start paragraphs with a #hashtag--which has not been a problem traditionally, but which might be these days.)
-4. Headings must be separated from other block elements by blank lines (created by two newlines) both before and after them. Because of the way that Markua concatenates files, headings at the top of a Markua document automatically have a blank line above them, and headings at the bottom of a Markua document automatically have a blank line below them. So, headings at the top of a document only need a blank line below them, and headings at the bottom of a document only need a blank line above them. If a heading does not have these blank lines, it is not a heading, and any `#` characters are output as normal text with no warning.
-5. Tabs **cannot** be used to separate the pound signs and the heading text. Despite the increased conceptual consistency with list formatting, this would make Markua documents ugly and less consistent. The tradeoff is not worth it.
-
-If a heading is not formatted correctly, the heading is just interpreted as paragraph text, and any formatting characters are output verbatim.
-
-## Design Goals of Markua Headings
-
-The following are the design goals of Markua headings:
-
-1. From looking at a heading in a Markua manuscript, an author must be able to know exactly what it is. It's not acceptable to need to reference metadata to know what the headings mean.
-2. Only existing Markdown syntax can be used, to ensure that Markdown-aware tooling will work unchanged in essentially the correct way.
-3. The number of leading pound signs must match the level of heading.
-4. For a book with chapters only (no parts), the chapter headings must feel "top-level".
-5. The syntax to create parts must be as economical as possible.
-6. There must be only one way to create every level of heading. Headings structure Markua documents, and must be clear and unambiguous.
-7. It should be possible to switch back and forth between having parts in your book without having to modify all existing headings.
-8. Books with parts and chapters must be able to have the same number of levels of sub-sections, without arbitrarily losing the ability to create a sub-sub-sub-sub-section.
-9. Documents can have parts, chapters and sections just like books.
-
-The design of Markua headings meets these requirements, in a better way than any other design I could come up with.
-
-## Differences with Markdown Headings
-
-Markdown is a way of writing HTML, and HTML has 6 heading levels: `h1`, `h2`, `h3`, `h4`, `h5` and `h6`. In Markdown, you can create the 6 HTML heading levels using Markdown syntax.
-
-What Markua does is to use a subset of the Markdown heading syntax, and then reinterpret those headings as specifying the heading levels that define the structure of the book.
-
-Markua is also a lot more strict about heading syntax than Markdown. In Markdown, not only are there two syntaxes (atx and Setext) for making headings, what's worse is that [both of them can take many forms](http://daringfireball.net/projects/markdown/syntax#header). However, **in Markua there is exactly one way of making every type of heading**. It is a subset of the atx headings in Markdown; Setext headings are not supported.
-
-To understand Markua headings and the differences with Markdown headings, it's helpful to understand the atx and Setext headings of Markdown.
-
-{#setext_headings}
-### Setext Headings in Markdown
-
-In the Setext-style of Markdown headings, top level headings can be made by adding a row of equals signs `========` below the heading, and second level headings can be made by adding a row of minus signs `--------` below the heading.
-
-These are some Setext headers in Markdown:
+Note that we're changing the way that Part headings are done in a few months. When we do, they will look like this:
 
 ~~~
-This is an h1
-=============
+{class: part}
+# Part
 
-This is also an h1 (really)
-=
-
-This is an h2
--------------
-
-This is also an h2 (really)
--
+This is a paragraph.
 ~~~
 
-There are two main issues with this style of heading in Markdown:
-
-1. It is inconsistent: It only supports defining `h1` and `h2`; to define h3 and below, the atx style of heading must be used.
-2. It is confusing: Authors are confused about how many equals or minus signs you need to use. (As we saw above, the answer is 1, which looks disgusting.) Also, it's unclear whether you need to add a blank line below the row of equals signs or minus signs, and whether a heading is still produced if this is not done.
-
-{#atx_headings}
-### atx Headings in Markdown
-
-In Markdown, the other heading syntax is "atx" headers. The [atx format](http://www.aaronsw.com/2002/atx/intro) was created by Aaron Swartz in 2002, and is an important predecessor to Markdown. To create an atx heading, you put the following on a line by itself, with a blank line above and below it: between one and six pound signs (`#`), followed by one or more spaces or tabs, followed by text, followed optionally by whitespace and any number of `#` characters. The number of `#` characters determines the level of heading.
-
-These are some atx headers in Markdown:
-
-~~~
-# This is an h1
-
-# This is also an h1 ####################
-
-## This is an h2
-
-## This is also an h2 ###################
-
-### This is an h3
-
-### This is also an h3 ##################
-~~~
-
-Note that all the trailing `#` characters are ignored and are not part of the heading text.
-
-From reading this, you'll recognize that Markua headings are a subset of Markdown's atx headers.
+Everything else that is shown above will continue to work.
 
 {#paragraphs}
 # Paragraphs and Blank Lines
