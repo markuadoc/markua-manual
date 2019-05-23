@@ -912,83 +912,9 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-#### Images, Attributes and Links
-
-As discussed previously, images support `url`, `cite` and `alt` attributes. Images also support captions, like all resources inserted as figures.
-
-As discussed previously, the exact question of what to do with `cite` and `url` attributes is dependent on the implementation of Leanpub. This can also vary based on context. The following examples will make this clear, using Leanpub as an example.
-
-##### Setting the `url` Attribute
-
-```
-{url: "http://peterarmstrong.com/pictures/1.jpg"}
-![](cake.jpg)
-```
-
-Here's what Leanpub will do with these attributes:
-
-1. There is no caption.
-2. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
-
-##### Setting the `caption` and `url` Attributes
-
-```
-{url: "http://peterarmstrong.com/pictures/1.jpg"}
-![A Piece of Cake](cake.jpg)
-```
-
-Here's what Leanpub will do with these attributes:
-
-1. The caption is "A Piece of Cake" (no quotes).
-2. The caption will link to <https://peterarmstrong.com/pictures/1.jpg>.
-3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
-
-##### Setting the `caption` and `url` Attributes
-
-```
-{caption: "A Piece of Cake", url: "http://peterarmstrong.com/pictures/1.jpg"}
-![](cake.jpg)
-```
-
-This is identical to the previous example. It doesn't matter which way the `caption` attribute is set; it's the same.
-
-To be redundant, here's what Leanpub will do with these attributes:
-
-1. The caption is "A Piece of Cake" (no quotes).
-2. The caption will link to <https://peterarmstrong.com/pictures/1.jpg>.
-3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
-
-##### Setting the `alt`, `caption` and `url` Attributes
-
-```
-{alt: "a slice of chocolate cake", url: "http://peterarmstrong.com/pictures/1.jpg"}
-![A Piece of Cake](cake.jpg)
-```
-
-Here's what Leanpub will do with these attributes:
-
-1. The caption is "A Piece of Cake" (no quotes).
-2. The caption will link to <https://peterarmstrong.com/pictures/1.jpg>.
-3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
-4. The text "a slice of chocolate cake" will be provided as alt text (for accessibility) in all output formats which support it.
-
-##### Setting the `url`, `caption` and `alt` Text
-
-```
-{alt: "a slice of chocolate cake", cite: "Peter's Food Photography", url: "http://peterarmstrong.com/pictures/1.jpg"}
-![A Piece of Cake](cake.jpg)
-```
-
-Here's what Leanpub will do with these attributes:
-
-1. The caption will become "A Piece of Cake — Peter's Food Photography". Specifically, the caption text will be the value of the `caption` attribute, followed by a space, an em dash, a space, and the value of the `cite` attribute.
-2. The "Peter's Food Photography" part will link to <https://peterarmstrong.com/pictures/1.jpg>.
-3. The image itself will link to <https://peterarmstrong.com/pictures/1.jpg>.
-4. The alt text will be provided as alt text in HTML output, for accessibility support.
-
 ##### Adding a Link Around an Image
 
-Besides using `url` attributes to create links out of images, you can also use the Markua link syntax around an images itself. This is the standard Markdown link syntax which Markua inherited unchanged.
+You can also use the Markua link syntax around an images itself. This is the standard Markdown link syntax which Markua inherited unchanged.
 
 So, you can do the following:
 
@@ -999,30 +925,6 @@ So, you can do the following:
 Frankly, this syntax has enough line noise to remind me a bit of JWZ's "now you have two problems" [joke](https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/) about regular expressions.
 
 What this is doing is inserting an image as a resource with a caption `![A Piece of Cake](cake.jpg)` and then wrapping the entire thing with a link. If you think of the image resource as `r`, this is just `[r](https://peterarmstrong.com/pictures/1.jpg)`. Simple!
-
-Now, if you want to do this, you can. Chances are you'll only want to do this if you've been writing Markdown for years, or if you really hate attribute lists. If neither of those is true for you, you'll probably prefer to just use a `url` attribute.
-
-Note that you can also use a span `url` attribute, if you are inserting an image inline:
-
-```
-Yada yada ![foo](bar.png){url:"http://leanpub.com"} yada yada.
-```
-
-Whether this is better or worse than the line noise version is a matter of taste:
-
-```
-Yada yada [![foo](bar.png)](http://leanpub.com) yada yada.
-```
-
-Now, if you combine both of them, the Markua processor should use the outer link, and add an error to a list of warnings or errors:
-
-```
-Yada yada [![foo](bar.png){url:"http://leanpub.com"}](http://markua.com) yada yada.
-```
-
-Here, this would link to `http://markua.com`, not `http://leanpub.com`, and Leanpub should add an error.
-
-However, to be clear: never write Markua like this.
 
 {#video}
 ### Video
@@ -5005,30 +4907,6 @@ Markua has a number of differences from Markdown as defined by John Gruber. Thes
 17. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
 18. In Markdown, there are three types of ways of producing horizontal rules in HTML: by putting three or more asterisks (`***`), hyphens (`---`) or underscores (`___`) on a line by themselves, with or without spaces between them. Markua isn't in the business of producing HTML or horizontal rules. The `***` is used for scene breaks, `___` starts poetry, and `---` starts monospaced poetry.
 
-### Differences with Inserting Block Elements Inside Paragraphs
-
-In Markdown, lists and other block elements cannot be nested inside a paragraph. Instead, they all function like top-level siblings to a paragraph. This makes sense since Markdown is a way of producing HTML, and in HTML5 the W3C has [told anyone who wants to embed a list inside a paragraph to go pound sand](http://www.w3.org/TR/html5/grouping-content.html#the-p-element):
-
-> "The solution is to realise that a paragraph, in HTML terms, is not a logical concept, but a structural one. In the fantastic example above, there are actually five paragraphs as defined by this specification: one before the list, one for each bullet, and one after the list."
-
-So, basically, you can't embed a `<ul>` or `<ol>` inside a `<p>` tag in HTML5. Since Markdown is a way of producing HTML, you can't do it in Markdown either.
-
-In Markdown, a block element like a list or figure is a sibling of the paragraphs before or after it:
-
-~~~
-This is paragraph one.
-
-* this is a
-* sibling of
-* paragraphs one and two
-
-This is paragraph two.
-~~~
-
-Markua supports this method of inserting block elements.
-
-However, Markua is more than just a way of producing HTML. Markua is a way of authoring books. HTML is just one of the many output formats of Markua. And in books, there is a long history of embedding lists, code samples and figures in the middle of a paragraph--not in a separate top-level element, in the actual middle of the paragraph. So, Markua [supports this too](#inserting-into-paras).
-
 ## Differences with Leanpub Flavoured Markdown
 
 Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM):
@@ -5123,14 +5001,6 @@ Lorem ipsum dolor.
 Yada yada yada.
 ~~~
 
-## Markua Specification Status
-
-This is an in-progress, beta-quality specification. It is being constantly updated at <https://leanpub.com/markua>. To read the specification in PDF, EPUB, MOBI or HTML format, go there.
-
-To read the specification manuscript in Markua, see <https://github.com/markuadoc/markua>.
-
-To stay current on Markua progress, follow [@markuadoc](https://twitter.com/markuadoc) or [@peterarmstrong](https://twitter.com/peterarmstrong) on Twitter.
-
 {#leanpub-authors}
 ## A Note For Leanpub Authors
 
@@ -5203,32 +5073,3 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support language directives
 - Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
 - Investigate regression of formatting in caption attributes of figures; should support text formatting
-
-{#acknowledgments}
-# Acknowledgments
-
-I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of
-Markua, but I'm getting lots of help, especially from my Leanpub cofounders
-[Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp)
-and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead
-developer of Leanpub's book generation engine (both the LFM and Markua versions),
-and he has given me both the most and the best feedback about Markua over the
-years that I've been working on it.
-
-Perhaps most important, Markua is built on Markdown. So, Markua literally would
-not exist without John Gruber and Aaron Swartz. Markua is now also using the
-CommonMark spec as its starting point, so I am really grateful to John MacFarlane
-(the author of the CommonMark spec) and the team behind CommonMark and `cmark`.
-I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub
-Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
-
-Markua is also benefitting from years of feedback about Leanpub Flavoured
-Markdown and Markua, from many incredibly helpful and patient Leanpub authors.
-If it wasn't for these authors, there would be no Leanpub, and no Markua.
-
-I'd also like to thank my father, who read some of the very early manuscripts
-when this was a standalone spec and gave me feedback.
-
-Finally, I would like to thank my wife Caroline and my son Evan: while this is
-not as long as my other books, a lot of thought and effort went into it, and a
-lot of sacrifice. Thanks very much.
