@@ -297,17 +297,15 @@ You will want to read The Markua Spec (once it's online) if:
 
 Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM).
 
-These are the top 9 differences between Markua and LFM:
-
-1. In LFM, parts are created with `-# Part`. In Markua, parts are created an attribute list on an atx or Setext heading.
-2. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource, and the LFM syntax is not supported.
+1. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
+2. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
 3. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
 4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
 5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
 6. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
 7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
-8. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
-9. LFM used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua Spec itself. (Leanpub still uses the Book.txt approach to specify which files are in a book.)
+8. In LFM, we had a `{pagebreak}` directive. This is currently absent, but it will probably return.
+9. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
 
 Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Spec to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
 
@@ -3861,44 +3859,22 @@ Now, one design benefit of the support for inline HTML in Markdown is that Markd
 {#markdown-diffs}
 ## Differences with Markdown
 
-Markua has a number of differences from Markdown as defined by John Gruber. These are the main ones:
+Markua has a number of differences from Markdown as defined by John Gruber.
 
-1. In Markdown, `*one asterisk*` and `_one underscore_` both produce *italics*. In Markua, `*one asterisk*` produces *italics*, and `_one underscore_` produces an ____underline____ unless the `italicize-underlines` global setting is set to true. The reason for this is simple: ____underline____ is not *always* just a typewriter version of *italics*. In some languages and in some contexts, underlining serves a distinct, legitimate purpose.
+These are the main ones:
+
+1. In Markdown, `*one asterisk*` and `_one underscore_` both produce *italics*. In Markua, `*one asterisk*` produces *italics*, and `_one underscore_` produces an ____underline____ unless the `italicize-underlines` global setting is set to true.
 2. Markdown supports inline HTML; [as discussed earlier, Markua does not](#no-inline-html).
 3. Markua defines many more types of numbered list numbering than Markdown. In Markdown, the only type of numbering supported is decimal numbering starting from 1. If you need any more features, you need to use inline HTML. However, since Markua does not support inline HTML, Markua provides more list types and features.
 4. Unlike in Markdown, in Markua the number that begins the list in the manuscript is the number that begins the list in the output.
 5. Markdown does not specify a table syntax. Since Markdown supports inline HTML, it does not need to--if you want a table, you can simply use an inline HTML table. Since Markua does not support inline HTML, Markua uses the GFM [table syntax](#tables).
-6. Images in Markua are inserted in essentially the same way they are in Markdown for what Markdown calls "inline images". Markdown's inline images are not to be confused with Markua's inline image support, which means to define an SVG image in the text of a Markua document. Markdown's reference style image syntax is not supported in Markua for *any* type of resource--including images. There are two main reasons for not supporting reference style resource syntax in Markua. First, resources in Markua are complex enough without also having a reference syntax for them. Second, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in the blog post length of typical Markdown documents.
-7. Markua supports definition lists; Markdown does not (except via inline HTML).
-8. Markdown lets you use a plus sign (`+`) before each item in an unordered ("bulleted" in Markua) list; Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`.
-9. Markdown does not support closing parentheses (`)`) as ordered ("numbered" in Markua) list delimiters; Markua does.
-10. Markua and Markdown currently handle spaces, newlines and indentation differently. This is discussed in the [Whitespace: Spaces, Tabs and Newlines](#whitespace) section.
-11. In Markdown, lists and other block elements cannot be nested inside a paragraph; in Markua they can. This is discussed further below.
-12. Markdown's reference link syntax and its implicit link name shortcuts are not supported in Markua. Markdown is a way of writing HTML designed by bloggers, and links are so plentiful in that medium that it makes some sense to support four syntaxes to create links. In ebooks, however, links are not as prevalent, so it makes sense to be opinionated here. Furthermore, in something as large as a book, the potential for id collisions in link definitions using the reference link syntax is a lot higher than in a blog post.
-13. Markua and Markdown handle headings differently. This is discussed further below.
-14. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
-15. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
-16. The "four space indent" method of creating code blocks in Markdown is currently not supported in Markua. You cannot create an inline code figure this way. It may be slightly more pleasant to read, but it's obnoxious as hell to write, and it has terrible effects on the rest of the specification.
-17. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
-
-## Differences with Leanpub Flavoured Markdown
-
-Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM):
-
-1. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #`.
-
-2. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource, and the LFM syntax is not supported.
-
-3. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
-
-4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
-
-5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
-
-6. In LFM, we had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a {class: center} attribute.
-
-7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
-
-8. In LFM, we had a `{pagebreak}` directive. This is currently absent, but it will probably return.
-
-9. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+6. Markua supports definition lists; Markdown does not (except via inline HTML).
+7. Markdown lets you use a plus sign (`+`) before each item in an unordered ("bulleted" in Markua) list; Markua does not. Having three syntaxes is just overkill, so Markua drops the plus--it's far less common than the asterisk and hyphen. This is the same decision made by GitHub Flavored Markdown, which also [supports](https://help.github.com/articles/markdown-basics/) `*` and `-` but not `+`.
+8. Markdown does not support closing parentheses (`)`) as ordered ("numbered" in Markua) list delimiters; Markua does.
+9. Markua and Markdown currently handle spaces, newlines and indentation differently. This is discussed in the [Whitespace: Spaces, Tabs and Newlines](#whitespace) section.
+10. Markdown's reference link syntax and its implicit link name shortcuts are currently not supported in Markua.
+11. Markua's heading syntax is currently a subset of Markua's atx headers.
+12. The backtick syntax of adding inline code resources as spans is identical to the code span syntax of Markdown, however the optional attribute list is Markua-specific.
+13. The syntax for inline code resource figures is similar to the "fenced code blocks" syntax of many Markdown extensions, such as PHP Markdown Extra and GitHub Flavoured Markdown.
+14. The "four space indent" method of creating code blocks in Markdown is currently not supported in Markua.
+15. In Markdown links, a URL can be either absolute (starting with `http://` or `https://`) or relative (just referring to a path like /foo/bar.html), since relative URLs can make sense when writing blog posts which live on web servers. In Markua, however, all URLs must be absolute.
