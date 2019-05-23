@@ -232,21 +232,6 @@ a regex answer.
 
 ! /(Paris|France)/i
 {/quiz}
-
-# Lesson Three: Biology
-
-This one-question quiz shows a multiple selection question.
-
-{quiz, id: quiz3}
-? Which of these are fruits?
-
-T) apple
-F) cow
-F) lettuce
-T) peach
-T) pear
-F) rice
-{/quiz}
 ```
 
 As this example shows, the syntax for writing normal content is the same as for
@@ -254,8 +239,7 @@ books. All that's different is the addition of quizzes and exercises.
 
 Quizzes and exercises have the same type of content. However, with quizzes the
 marks count toward your mark in the course, and with exercises they don't count.
-For MOOCs, Markua supports multiple choice, fill in the blank and multiple
-selection questions.
+For MOOCs, Leanpub currently supports multiple choice and fill in the blank questions.
 
 A multiple choice question has 2 or more answer choices, and 1 correct answer
 choice. The correct answer choice is in a capital letter; incorrect answer
@@ -263,12 +247,6 @@ choices have lowercase letters.
 
 A fill in the blank question consists of a question and a set of answers.
 You can even use regular expressions for the answers.
-
-A multiple selection question makes learners select every true answer, and leave
-every false answer not selected.
-
-*(Leanpub authors: Leanpub currently only supports multiple choice and fill in
-the blank questions. Multiple selection questions are coming this summer.)*
 
 As explained in the spec, there are more types of questions, and more options
 with these types of questions. However, what is shown above is enough to create
@@ -3966,9 +3944,6 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 `show-answers`
 : This can be `all`, `incorrect` or `none`. It affects how answers are shown after a quiz or exercise is completed, say in a MOOC. For exercises, the default value is determined by the value of the `default-exercise-show-answers` global setting, with `all` being the default value of that attribute. For quizzes, the default value is determined by the value of the `default-quiz-show-answers` global setting, with `incorrect` being the default value of that attribute. Global settings are discussed later.
 
-`time-limit`
-: The time limit to finish the quiz, once started. The format is `XdYhZm`. For example, 3 days, 6 hours and 45 minutes is expressed as `3d6h45m`; 7 days is expressed as `7d`. The default is `7d`.
-
 `use-result`
 : `best` or `latest`. Whether the best result on the quiz is used, or the latest one. The default is the value of `default-quiz-use-result` on the course.
 
@@ -3977,14 +3952,12 @@ However, it is also an error to parse quiz syntax outside a quiz or exercise blo
 
 As [discussed above](#quiz-headings), there is no `title` or `caption` attribute for a quiz--you can just add a heading inside the quiz or exercise itself, using the normal Markua formatting for a chapter heading.
 
-## Question Types: Multiple Choice, Multiple Selection, Fill In The Blank, Written
+## Question Types: Multiple Choice, Fill In The Blank
 
-There are four types of questions supported by Markua.
+There are two types of questions supported by Leanpub:
 
 1. Multiple Choice
-2. Multiple Selection
-3. Fill In The Blank
-4. Written
+2. Fill In The Blank
 
 These types are not specified by a `{type}` attribute. Instead, they are inferred from properties of the answers or from other attributes of the question.
 
@@ -4049,55 +4022,6 @@ The following are errors in a question where a `choose-answers` attribute is use
 
 `random-choice-order`
 : `true` or `false`. The default is `false`, unless `choose-answers` is used. This sets the behaviour of the specific multiple choice question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
-
-### Multiple Selection Questions
-
-A multiple selection question has 2 or more answer choices, and 1 or more `true` answer choices.
-
-W> Leanpub authors: This question type is not yet supported in Leanpub.
-
-The `true` answer choices are specified with `T`; `false` answer choices are specified with `F`.
-
-To get the question 100% correct, you must select **ALL** answers which are `true` (not just one of them) and **NONE** of the answers which are `false`. As discussed later, the `mark` attribute determines whether the marking is all-or-nothing (with the `binary` value) or whether a partial credit can be earned (with the `ratio`) value.
-
-Regardless of the value of the `mark` attribute, to get any score for a multiple selection question, at least one answer choice must be selected. Leaving a multiple selection question blank always gets zero points, even if the `mark` attribute is `ratio`. Otherwise, if a test had nothing but multiple selection questions with `ratio`-marked questions, with half the answers `true` and half the answers `false`, you could get 50% on the test by just handing it in blank!
-
-#### Supported Attributes on Multiple Selection Questions
-
-`mark`
-: `binary` or `ratio`. The default is `binary`. This sets the marking behaviour of the specific multiple selection question. If `binary`, the question is all or nothing: you either get full points for the question, or a 0 on the question. To get full points, you must select every `true` choice and none of the `false` choices. If `ratio`, you get a fractional score defined as `(number of true choices selected + number of false choices not selected) / (total number of choices)`. This fraction is then multiplied by the `points` that the question is worth to compute the `points` that you received on the question. Note that regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank is always completely wrong, earning no credit for the correctly-not-selected `false` choices.
-
-`points`
-: The number of points the question is worth. This number can be 0 or higher. The default is 1. The `mark` attribute is used to determine how the points are computed. Again, regardless of whether the `mark` is `binary` or `ratio`, a question which is left blank always earns 0 points.
-
-`random-choice-order`
-: `true` or `false`. The default is `false`. This sets the behaviour of the specific multiple selection question. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written. If this attribute is omitted, its value is determined by the `random-choice-order` attribute on the quiz itself, which defaults to `false` if absent.
-
-#### Examples of Multiple Selection Questions
-
-```
-? Which of these are animals?
-
-F) apple
-T) cow
-F) lettuce
-
-{mark: ratio, points: 2}
-? Which of these are fruits?
-
-T) apple
-F) cow
-F) lettuce
-T) peach
-T) pear
-F) rice
-```
-
-Here the first question defaults to `binary` and 1 point; the second question is `ratio` and 2 points.
-
-To get the first question correct, you must select `cow`, and neither of `apple` or `lettuce`.
-
-To get this second question 100% correct, you must select all of `apple`, `peach` and `pear`, and none of `cow`, `lettuce` or `rice`. For this question, if the `mark` attribute had been `binary`, the only way to get any points for it would be to select `apple`, `peach` and `pear`, and to leave `cow`, `lettuce` and `rice` all unselected. However, the `mark` is not `binary`; it is `ratio`. So, if you selected `apple`, `peach` and `rice`, then the score would be computed as follows: ((2 correctly-selected true choices + 2 correctly-not-selected false choices) / 6 choices) * 2 points = (4/6) * 2 points = 1.5 points. Since at least one choice was selected, you get just as much credit for correctly not selecting `cow` and `lettuce` as you do for correctly selecting `apple` and `peach`. If an instructor thinks this is too lenient, then `binary` is the choice for them!
 
 ### Fill In The Blank Questions
 
@@ -4196,84 +4120,6 @@ These questions are made worse by the fact that Markua can be used to create hum
 
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them. Note that this only applies to text string answers, not to regular expressions. For a regular expression to be case-insensitive, you must end it with an `i` after the closing backtick.
-
-### Written Questions
-
-A written question corresponds to short answer, long answer or essay questions in traditional tests. It looks the same as a fill in the blank question, except the answer is optional.
-
-A question is interpreted as a written question if either the `words`, `lines` or `pages` attribute is specified, if there is no answer provided, or if an answer is provided using the `{answer}` syntax discussed shortly.
-
-Note that an answer may be provided in a written question. If this is done, the answer is not split into answer choices and values like a fill in the blank answer. Instead, the answer is essentially a "note to markers", whether those markers are underpaid graduate students or unpaid AIs. Markua does not specify any microformat for this note to markers: it is just Markua text, kind of like a blockquote (but with each line starting with `!` not `>`).
-
-A Markua Processor generating a MOOC may handle written questions at its own discretion, including not including them or giving them a `points` value of 0.
-
-Examples:
-
-```
-{quiz, id: "quiz3"}
-
-{pages: 2, points: 10}
-? Why is 2019 like *1984*?
-
-! If the student mentions Newspeak, give them an extra mark.
-
-{words: 100, points: 2}
-? Why is doubleplusungood the worst?
-
-{lines: 10}
-? Can you have multiple line answers in a written question?
-
-! You bet you can!
-!
-! You can separate them with blank lines,
-! and without blank lines.
-!
-! This is like a blockquote, which uses `>` characters.
-```
-
-Since a written question can have long answers, this increases the likelihood that typing these answers after a bunch of `! ` delimiters will be a pain. So, written questions (and **only** written questions) also support answers in the form of `{answer} ... {/answer}`, like this:
-
-~~~
-{quiz, points: 0, id: "quiz3"}
-
-{lines: 10}
-? Write a function in Ruby that takes an argument and returns three times that argument.
-
-{answer}
-The most straightforward way to do this is like this, since the last value evaluated in the function is returned:
-
-```ruby
-def triple(y)
-  y*3
-end
-```
-
-However, you can also explicitly say `return` if you like:
-
-```ruby
-def triple(y)
-  return y*3
-end
-```
-{/answer}
-{/quiz}
-~~~
-
-#### Supported Attributes on Written Questions
-
-Note that only one of `words`, `lines` or `pages` may be provided. Providing more than one is an error. Providing none of them means that the question is a fill in the blank question, not a written question.
-
-`points`
-: The number of points the question is worth. This number can be 0 or higher. The default is 1. A Markua Processor generating a MOOC may override this. For example, when generating a MOOC, Leanpub overrides all written questions to have a points attribute of 0, regardless of what (if anything) is specified for this attribute by the author.
-
-`words`
-: The maximum number of words the answer can be. Obviously this is more useful for online quizzes than paper ones.
-
-`lines`
-: The maximum number of lines the answer can be. Obviously this is more useful for paper quizzes than online ones. On paper, this is most useful for a short or long answer question.
-
-`pages`
-: The maximum number of pages the answer can be. Obviously this is more useful for paper quizzes than online ones. On paper, this is most useful for an essay question.
 
 ### Hints on Questions
 
@@ -4877,44 +4723,6 @@ Markua supports Unicode entity references as well. To output a Unicode character
 Now, there's no guarantee that a given Unicode character will be present in a given font.
 
 If a Markua Processor recognizes that a given Unicode character is not present in the font it is currently using, it may switch to a font that it knows will support that character. However, it is entirely acceptable for a Markua Processor to not do anything fancy, and to just attempt to output the character in the font it is using. In this case, what will typically happen is that the font will output a box in place of the missing character. These boxes are affectionately referred to as "tofu" by font people. (You may also encounter a diamond with a question mark in it in this case.)
-
-{#emoji}
-## Emoji
-
-In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year [was](http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/), in fact, the Face with Tears of Joy emoji. You may think of it as a smiling face with tears of joy, but you can also can think of it as `\u1F602;`, which is its Unicode code point.
-
-However, Unicode characters aren't the only way to do emoji. Another popular syntax for emoji is `:emoji_name:` -- that is a colon (`:`), followed by the underscore-separated name of the emoji, followed by a colon.
-
-What should Markua do?
-
-Well, first of all, this is *fantastic* news. Emoji are the single legitimate use case for an inline span image, but any syntax I could invent to specify alt text on an inline span image was either disgusting or was inconsistent with how images are inserted as figures with figure captions.
-
-So, now that emoji are on the rise and have two syntaxes to support them, this problem is solved: emoji can be inserted using either Unicode entities or the special emoji syntax, and the output generated by a Markua Processor is (hopefully) the emoji. So, there's no need for an inline span image syntax!
-
-Markua handles both emoji syntaxes, but it handles them differently.
-
-For the Unicode entity syntax, you just type the Unicode entity. For example, you could write the following sentence:
-
-```
-The emoji support in Markua makes me \u1F602;
-```
-
-Again, as discussed [above](#unicode-entities), there is no requirement for a Markua Processor to support a given Unicode character.
-
-With the `:emoji_name:` syntax, a similar, slightly less happy, sentence would be:
-
-```
-The emoji support in Markua makes me :smile:.
-```
-
-When outputting a sentence containing emoji inserted using the `:emoji_name:` syntax, the Markua Processor can either:
-
-1. Output the emoji as a span image (right in the flow of the text with no line breaks before or after it) with the `:emoji_name:` (including the colons) as alt text.
-2. Output the emoji using an emoji-aware font, having mapped the emoji name to some Unicode code point using some canonical table somewhere. There are online resources such as <http://www.webpagefx.com/tools/emoji-cheat-sheet/> which may be a starting point for any Markua Processor wishing to do this.
-3. Output the `:emoji_name:` as an inline code span showing the `:emoji_name:` verbatim.
-4. Output a "missing image" character, if it does not recognize the given emoji.
-
-Because of this, Markua's emoji support can also optionally be used by Markua Processors for a wide range of emoji. For example, a Markua Processor could output Font Awesome icons with an emoji syntax, such as `:fa-leanpub:` to output the Leanpub logo in Font Awesome. Since all Font Awesome icons have an `fa-` prefix, these are namespaced nicely.
 
 # Metadata
 
@@ -5638,7 +5446,6 @@ I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing]
 Here's a list of many of the parts of Markua which are still not supported in Leanpub:
 
 - Support everything in Images, Attributes and Links section
-- Support Multiple Selection questions
 - The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
 - Definition list id attributes on definition list items do not work yet.
 - Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
@@ -5664,8 +5471,6 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Support crosslinks on spans
 - Our definition lists sometimes don't force newlines after the term, e.g. “type This is the resource type..."
 - SVG support
-- Support External and local tables, tables as resources in general
-- Be stricter about headers (#foo should not start a chapter, blank lines before and after, etc.)
 - Support inline resources
 - Support type attribute on resources
 - Support image attributes align, cite, url
@@ -5688,9 +5493,7 @@ Here's a list of many of the parts of Markua which are still not supported in Le
 - Does this quiz or exercise heading show up in the ToC?
 - Support ids and other attributes on span elements
 - Support Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
-- Support Emoji
 - Support Font Awesome in emoji syntax, such as `:fa-leanpub:`
-- Support CriticMarkup.
 - Support index entries and index generation.
 - Support language directives
 - Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
