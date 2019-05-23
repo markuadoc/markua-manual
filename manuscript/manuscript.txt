@@ -288,7 +288,7 @@ You will want to read the [The Markua Specification](http://markua.com) if:
 1. You are a computer programmer and you like reading specs.
 2. You want to see a mapping of Markua to HTML.
 3. You want to see every planned feature in Markua, not just what works in Leanpub today.
-4. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including what the differences with what is explained here.
+4. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including any differences with what is explained here.
 
 ## Differences with Leanpub Flavoured Markdown (LFM)
 
@@ -3685,26 +3685,6 @@ For example, here's how Leanpub handles hints:
 5. We will also output the hints for exercises in the "material book" for a course, in a section near the end of the book. This will be linked to via crosslinks from each exercise.
 6. The answers page for a quiz or exercise will show the question, hint and answers for each question.
 
-## Markua Processor Behaviour
-
-A Markua Processor has many degrees of freedom in terms of whether, and how, to output quizzes and exercises.
-
-For example, when outputting an online course or MOOC, Leanpub can basically do whatever it wants. It can choose to output an ebook of the course material only, and put all quizzes and exercises only in the online version. Or it can choose to put all the quizzes only in the online version, and include the exercises in the ebook version as well. Or it can include the quizzes and exercises in the ebook version, but only include the answers for the exercises in the ebook version.
-
-If, on the other hand, a Markua Processor is outputting a textbook, it may choose to output the quizzes in an entirely separate ebook or print-ready PDF, for use in physical classrooms.
-
-If a Markua Processor does output a quiz or exercise, it needs to do so in a medium-appropriate way. This includes outputting multiple-choice questions without showing their answers, of course. The display of fill in the blank and essay questions varies greatly based on whether the question is in an online quiz or exercise, in an ebook or on paper.
-
-Markua Processors are encouraged to be creative here.
-
-However, there are some rules. If a given quiz or exercise is output by a Markua Processor in an ebook or a physical book, the following things must occur:
-
-1. The quiz or exercise must be output as questions-only, in the place in the document where the quiz was defined.
-2. The questions must be numbered sequentially, incrementing by 1 for each question.
-3. The questions must be numbered starting from the number specified by the `start-at` attribute if specified, or 1 if no `start-at` attribute is specified.
-4. The multiple choice options in any question must be converted into a set of choices which all look the same, so that the correct answer is not indicated. Converting all choice letters to lowercase is sufficient here.
-5. The answers, if provided, must be positioned somewhere separate from the questions, typically at the back of the book. This position can be controlled by the author using [book section directives](#book-section-directives), discussed later.
-
 ## Creating a Course or MOOC from a Markua Document
 
 Over the past decade, there has been a steady growth of interest in courses delivered over the internet at massive scale. These Massive Open Online Courses, or MOOCs, consist of essentially four things:
@@ -4189,20 +4169,6 @@ Here's a block placeholder as the only content of a block:
 You cannot insert that block placeholder in a span context like in this paragraph.
 ~~~
 
-## Soft Hyphen
-
-In certain rare situations, it's desirable to be able to give hints to a Markua Processor about where hyphenation can be done.
-
-This attribute makes me sad. However, it's a nod to reality. Hopefully this attribute is never used by authors writing the first draft of anything.
-
-To insert a soft hyphen, used a backslash followed by a hyphen:
-
-Example:
-
-~~~
-My name is Rumpel\-stiltskin.
-~~~
-
 ## Escaping Special Characters with Backslash (`\`)
 
 Curly braces and backticks are special in Markua.
@@ -4232,17 +4198,6 @@ So, if you want to output a backtick in a code span, you need to delimit the cod
 ~~~
 This paragraph has a code span with literal backticks `` `say hello` `` in it.
 ~~~
-
-{#unicode-entities}
-## Unicode Entities with `\u`
-
-Typing obscure Unicode characters is hard. So, markup and programming languages often support outputting entity references to Unicode characters. For example, consider the unicode character with the code point `U+1F602`. In HTML, this is the entity `&#x1F602;` in hexadecimal or `&#128514;` in decimal. In JavaScript and many programming languages it is `\u1F602`.
-
-Markua supports Unicode entity references as well. To output a Unicode character, you can type a backslash (`\`), followed by a `u`, followed by the hexadecimal value of the Unicode code point, followed by a semicolon. For example, you can type `\u1F602;` in Markua. The reason the semicolon is required is to clearly indicate the end of the Unicode hexadecimal value to Leanpub.
-
-Now, there's no guarantee that a given Unicode character will be present in a given font.
-
-If a Markua Processor recognizes that a given Unicode character is not present in the font it is currently using, it may switch to a font that it knows will support that character. However, it is entirely acceptable for a Markua Processor to not do anything fancy, and to just attempt to output the character in the font it is using. In this case, what will typically happen is that the font will output a box in place of the missing character. These boxes are affectionately referred to as "tofu" by font people. (You may also encounter a diamond with a question mark in it in this case.)
 
 # Metadata
 
@@ -4318,7 +4273,7 @@ As previously discussed, there is special syntactic sugar for ids: `{#foo}` is e
 Markua headings (part, chapter, section, sub-section, etc.) and figures can all have `title` attributes specified in an attribute list. This is text which overrides what is displayed for the heading or figure in the table of contents. For a heading, it is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the `caption` attribute for a resource) is not appropriate, say if it's too long.
 
 {#conditional-inclusion}
-### Conditional Inclusion Attributes on Headings: `book`, `sample`, etc.
+### Conditional Inclusion Attributes on Headings: `book`, `sample`
 
 Markua headings (and *only* headings) may have various attributes which specify which output formats their content (of the part, chapter, section, sub-section, etc.) should be included in. If the given attribute is not present, the default value of it is that specified by the nearest ancestor heading. If no such attribute is present at a top-level heading, the default is given by the default value for the attribute defined of Markua.
 
@@ -4327,26 +4282,8 @@ There are eight attributes which specify conditional inclusion in output targets
 `book`
 : If `true`, include this heading and its content (including nested sections, subsections, etc.) in the book (PDF, EPUB and/or MOBI) that is being generated. If `false`, omit it. The default is `true`. Setting this to `false` is an easy way to "comment out" a section of your book.
 
-`web`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the web version of the book that is being generated. If `false`, omit it. If `book`, then include it or exclude it based on the value of the `book` attribute. The default is `book`, meaning that if this attribute is omitted, every section which is included in the book is included in the web version of the book.
-
 `sample`
 : If `true`, include the content under this heading (including nested sections, subsections, etc.) in the sample of the book that is being generated. If `false`, omit it. The default is `false`. Note that this attribute just governs the inclusion of the content, not the heading itself. A Markua Processor may choose to include every heading in the sample version of a book or course, in order to produce a representative Table of Contents. In a case such as this where `sample` is `false`, Leanpub may output special content inside the chapter, section or subsection to indicate that the content itself is being omitted from the sample. This attribute applies to both the book version (PDF, EPUB and/or MOBI) and the web version of the sample.
-
-`instructor`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the book that is being generated, if one exists. If `false`, omit it. If `book`, then include it or exclude it based on the value of the `book` attribute. The default is `book`. Note that to make some content (like an answer key) appear in the instructor version of a book only, you need to do `{instructor: true, book: false}` not just `{instructor: true}`.
-
-`course`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the course material that is being generated. If `false`, omit it. If `book`, then include it or exclude it based on the value of the `book` attribute. The default is `book`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
-
-`course-web`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the web version of the course that is being generated. If `false`, omit it. If `web`, then include it or exclude it based on the value of the `web` attribute. The default is `web`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
-
-`course-sample`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the sample of the course material that is being generated. If `false`, omit it. If `sample`, then include it or exclude it based on the value of the `sample` attribute. The default is `sample`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
-
-`course-instructor`
-: If `true`, include this heading and its content (including nested sections, subsections, etc.) in the instructor version of the course material that is being generated, if one exists. If `false`, omit it. If `instructor`, then include it or exclude it based on the value of the `instructor` attribute. The default is `instructor`. The reason there is a separate attribute is in case the same version of a manuscript is powering both a book and a course. Our recommendation is to use git branches instead of this approach, however, since that is usually more flexible.
 
 This set of defaults means that by default, there is no book or course content included in the sample version of a book or course. As discussed, the headings themselves may all be included, in order to generate an appropriate Table of Contents for the sample book or course.
 
@@ -4778,76 +4715,3 @@ Lorem ipsum dolor.
 
 Yada yada yada.
 ~~~
-
-{#leanpub-authors}
-## A Note For Leanpub Authors
-
-If you're reading this, you are an early adopter of Markua.
-
-Markua support is currently in an early beta on Leanpub.
-
-Many portions of the Markua specification have not yet been implemented in Leanpub. In these cases, Markua will still function like [Leanpub Flavoured Markdown](https://leanpub.com/help/manual). Leanpub Flavoured Markdown has been used in Leanpub for over 8 years.
-
-Below, I'm briefly listing what does and does not work in Leanpub's current Markua support. Arguably this should not be done in this spec, but I'm doing it here until Leanpub fully supports Markua for two reasons:
-
-1. It will save Leanpub authors who are reading this spec a lot of pain.
-2. It will give readers of the spec a sense of which parts of the Markua spec have been tested, and which have not.
-
-If you are curious to try Markua, to see what currently works and what doesn't, now you can! We have now made Markua mode available to all Leanpub authors. This makes sense, since writing a book can take a long time.
-
-I'm publishing the Markua spec in-progress, since I believe in [Lean Publishing](https://leanpub.com/lean). (Lean Publishing is the act of publishing an in-progress book using lightweight tools and many iterations to get reader feedback, pivot until you have the right book and build traction once you do.)
-
-Here's a list of many of the parts of Markua which are still not supported in Leanpub:
-
-- Support everything in Images, Attributes and Links section
-- The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list. (This is also mentioned in the body of the spec. Once this works, remove it from both places.)
-- Definition list id attributes on definition list items do not work yet.
-- Quizzes and exercises: support `show-answers`, `default-exercise-show-answers` and `default-quiz-show-answers`
-- There are now `exercise` (unmarked) and `quiz` (marked) as separate elements, much like `aside` and `blurb` are separate.
-- There is no more type attribute on quizzes. Quizzes are always marked.
-- Support Nested Lists.
-- Confirm ids work on definition list items.
-- Add section directives to Leanpub, and convert the frontmatter and mainmatter directives in this spec to Markua section directives once supported in Leanpub.
-- Ensure that the `toc` directive is used to position the Table of Contents, so that people can add things like endorsement pages in advance of it, etc.
-- Support poetry in external files and poetry resources in general.
-- Support updates to en dashes, em dashes, scene breaks and page breaks.
-- Support parentheses in numbered lists
-- Remove HTML comment syntax, since the CriticMarkup comment syntax is enough.
-- Support the other directives.
-- Support `cite` and `url` on blockquotes.
-- Use `table-of-contents` not `toc`.
-- Support `exercise-answers` and `quiz-answers`.
-- Auto-create `images`, `audio`, `video`, `code`, `math` and `tables` directories in resources directory.
-- Support `cite` and `url` attributes on images.
-- Tables seem to [mess up the alignment](#tables) of some text after them.
-- The kerning on figure captions is a disaster. It looks like one word!
-- Support crosslinks on spans
-- Our definition lists sometimes don't force newlines after the term, e.g. “type This is the resource type..."
-- SVG support
-- Support inline resources
-- Support type attribute on resources
-- Support image attributes align, cite, url
-- Decide what we are doing with the cite and url attributes
-- Specifically forbid local video resources
-- Support video attributes embed, fullbleed, height, width
-- Support dashed attributes for code resources line-numbers, number-from, crop-start, crop-end
-- Support three-tildes defaults to text, backticks default to guess approach
-- Support inline math with format attribute
-- Support table widths attributes on columns
-- Support `-` for lists
-- Support tab instead of space for lists
-- Support descending lists
-- Support specs for all of the list types
-- Support multi-paragraph lists and whitespace
-- Support max list-nesting in Markua of three levels
-- Support scene breaks and page-breaks
-- Support blockquotes inside of a paragraph
-- Support cite and url attributes for blockquotes
-- Does this quiz or exercise heading show up in the ToC?
-- Support ids and other attributes on span elements
-- Support Referencing Chapter, Section and Figure Heading Names and Numbers in Crosslinks
-- Support Font Awesome in emoji syntax, such as `:fa-leanpub:`
-- Support index entries and index generation.
-- Support language directives
-- Support conditional inclusion targets for books and courses: `book`, `sample`, `instructor`, `course`, `course-sample` and `course-instructor`
-- Investigate regression of formatting in caption attributes of figures; should support text formatting
