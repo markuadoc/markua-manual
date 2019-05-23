@@ -3950,11 +3950,45 @@ A Markua Processor must raise an error if it encounters a conditional inclusion 
 {#directives}
 ## Directives
 
-Directives are switches which affect the future behaviour of a Markua Processor.
+Directives are switches which affect the future behaviour of Leanpub.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it. (There are two exceptions: if the directive is at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.)
 
 A directive does not have any kind of "closing tag"--it simply remains in effect for the rest of the Markua document, or until the directive is overridden by another use of the same directive with a different value.
+
+Currently the only directives supported by Leanpub are:
+
+* `{frontmatter}` (for Roman numeral numbering of things like a preface)
+* `{mainmatter}` (for the start of normal numbering)
+* `{backmatter}` (to indicate the start of back matter, like appendices)
+
+Here's an example:
+
+```
+{frontmatter}
+
+# Preface
+
+Foo
+
+{mainmatter}
+
+# Chapter One
+
+Bar
+
+# Chapter Two
+
+Baz
+
+{backmatter}
+
+# Appendix
+
+Hello world.
+```
+
+These directives have not yet been updated to `section` directives per the Markua Spec.
 
 {backmatter}
 
