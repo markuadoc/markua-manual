@@ -674,13 +674,11 @@ code {
 
 (There may be other CSS in future which meets this requirement, so this exact CSS is not a requirement for a Markua Processor to use. However, the behaviour that results when this CSS is added is a requirement for a Markua Processor.)
 
-Finally, if you wish to insert an image in the middle of a sentence, chances are you are trying to insert an emoji. Emoji have special support in Markua, described [here](#emoji).
-
 ### Inserting Resources Into a Span Context
 
 In Markua, resources can be inserted into a span context (within a paragraph or other block element) or into a block context (with blank lines above and below it).
 
-Now, it doesn't make sense for many types of resources to be inserted into, say, the middle of a sentence. Specifically, the only ones where this really does make sense is images without captions: the rise of emoji hos shown that there is an entirely mainstream use for inserting images mid-sentence, with no captions or other formatting around the image.
+Now, it doesn't make sense for many types of resources to be inserted into, say, the middle of a sentence. Specifically, the only ones where this really does make sense is images without captions: the rise of emoji has shown that there is an entirely mainstream use for inserting images mid-sentence, with no captions or other formatting around the image.
 
 So, the rules for inserting resources into a span context are as follows:
 
@@ -783,7 +781,7 @@ Inline resources can be of type `code`, `math` (regardless of format), `table`, 
 {#resource-types-and-formats}
 ## Resource Types and Formats
 
-There are seven types of resources: `audio`, `code`, `image`, `math`, `poetry`, `table` and `video`. Each type of resource has a number of supported formats. Any of the seven resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+Leanpub supports these types of resources: `audio`, `code`, `image` and `video`. Each type of resource has a number of supported formats. Any of the seven resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
 
 Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes.
 
@@ -792,13 +790,6 @@ The type and the format can also be inferred from the file extension and, in the
 {caption: "Formats Mapped to Resource Types"}
 | Extension    | `format`     | `type`   | Description         |
 | :----------- | :----------: | :------: | ------------------- |
-| `.aac`       | `aac`        | `audio`  | AAC audio           |
-| `.m4a`       | `aac`        | `audio`  | AAC audio           |
-| `.mp3`       | `mp3`        | `audio`  | MP3 audio           |
-| `.oga`       | `ogg`        | `audio`  | Ogg Vorbis          |
-| `.ogg`       | `ogg`        | `audio`  | Ogg Vorbis          |
-| `.wav`       | `wav`        | `audio`  | WAV audio           |
-| `.wave`      | `wav`        | `audio`  | WAV audio           |
 | `.txt`       | `text`       | `code`   | Unformatted code    |
 | (other)      | `guess`      | `code`   | Formatted code      |
 | `.gif`       | `gif`        | `image`  | GIF image           |
@@ -806,12 +797,8 @@ The type and the format can also be inferred from the file extension and, in the
 | `.jpg`       | `jpeg`       | `image`  | JPEG image          |
 | `.png`       | `png`        | `image`  | PNG image           |
 | `.svg`       | `svg`        | `image`  | SVG image           |
-| `.svgz`      | `svgz`       | `image`  | Zipped SVG          |
-| `.tbl`       | `table`      | `table`  | Markua table        |
-| `.mp4`       | `mp4`        | `video`  | MP4 video           |
-| `.webm`      | `webm`       | `video`  | WebM video          |
 
-Note that these file extensions are case-insensitive. Also, note that .mp4 is used for MP4 video, not MP4 AAC audio.
+Note that these file extensions are case-insensitive.
 
 Also, as discussed in the [code](#code) section, Markua Processors must interpret all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource. If the type and format are not specified and the resource is a web resource, Leanpub may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
 
