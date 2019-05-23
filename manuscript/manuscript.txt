@@ -2742,7 +2742,7 @@ That's it!
 
 ## Asides (`A>` or `{aside}`)
 
-Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides and for blurbs. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides or blurbs do not show up in a Table of Contents (if one is present), and they can also be formatted differently by Leanpubs.
+Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides and for blurbs. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides or blurbs do not show up in a Table of Contents (if one is present).
 
 We will consider asides first.
 
@@ -2962,7 +2962,7 @@ Note that `Q>` and `X>` are a bit controversial:
 
 There are issues, in both cases. However, the alternative is worse: removing the `Q>` or `X>` syntax would cause issues for every author who is familiar with, or has a manuscript formatted in, Leanpub Flavoured Markdown. This is not worth the reduced functionality, just to avoid one possible bit of confusion and one naming collision. So, the `Q>` and `X>` blurb syntactic sugar do exist, as do the `{class: question}` and `{class: exercise}` full blurb syntaxes.
 
-Also note that nothing in this section defines what Leanpub must *do* with the given class of blurb. Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb, but other Leanpubs are free to do something different.
+Also note that nothing in this section defines what Leanpub must *do* with the given class of blurb. Leanpub, for example, uses it to add an appropriate icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) at the left of the blurb.
 
 Finally, note that specifying a class in metadata overrides what the syntactic sugar does:
 
@@ -3212,7 +3212,7 @@ The following are errors in a question where a `choose-answers` attribute is use
 
 A fill in the blank question consists of a question and a set of answers. Each answer is specified by `!`, an optional points value, a space, and then a semicolon-separated list of the acceptable values of that answer. Each answer value can be a text string (quoted or not) or a regular expression (regex). If a points value is not specified for an answer, the answer is worth full points.
 
-Support for regular expression answer values is optional. However, Leanpub which supports regular expression marking must interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. Note that the particular format of the regular expression used is implementation-specific. For example, Leanpub uses Ruby regular expressions. Other Leanpubs could, for example, use Perl or JavaScript regular expressions.
+Support for regular expression answer values is optional. However, Leanpub which supports regular expression marking must interpret any answer which starts with a forward slash (`/`) and ends with a forward slash followed by some word characters (e.g. `i`) as being a regular expression. Note that Leanpub uses Ruby regular expressions.
 
 Finally, note that you can separate regular expressions with semicolons, just like any other answer value. There's no reason not to support this, and it may lead to simpler regular expressions. However, if you're good at regular expressions, you can also combine them into one regular expression, of course.
 
@@ -3299,50 +3299,6 @@ As shown by the answer (`"The ratio of a circle's circumference to its diameter"
 
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them. Note that this only applies to text string answers, not to regular expressions. For a regular expression to be case-insensitive, you must end it with an `i` after the closing backtick.
-
-### Hints on Questions
-
-Any question can contain a hint, regardless of question type or whether an answer is provided.
-
-The hint starts on a line with a percent sign (`%`) followed by a single space. It must follow the question, but it can come either before or after the answer choices.
-
-Hints can span multiple lines, if each line starts with a `%` sign. This is similar to Markdown handles block quotes with `>`.
-
-The hint can be used by a Leanpub to show to students at appropriate times, such as when they get the answer wrong or leave it blank. The exact specifics are implementation-dependent. Hint support is optional in a Leanpub. However, if it's not supported, it must be ignored.
-
-~~~
-? What's 1 + 2?
-
-% In a multiple choice question, if you're not sure, `c` is usually a good guess.
-
-a) 1
-b) 2
-C) 3
-d) 4
-
-? Explain the meaning of *The Myth of Sisyphus*.
-
-% Not the actual myth, the essay by Camus.
-%
-% For bonus points, speculate about Camus' life, death, and what he would have thought about autonomous cars.
-
-? Where's the Eiffel Tower?
-
-! /(Paris|France)/i
-
-% The answer must contain the city and/or country.
-~~~
-
-The hint can be a useful feature for Leanpub. There is a lot of discretion here for Leanpubs to compete on features.
-
-For example, here's how Leanpub handles hints:
-
-1. We will show the hint as a popup next to the question in the web and mobile quiz views.
-2. We will track if the student looked at the hint.
-3. We will not subtract points for looking at hints for Leanpub-marked questions.
-4. Whether the hint was used will be provided in the analytics, such as a CSV download that we make available to professors.
-5. We will also output the hints for exercises in the "material book" for a course, in a section near the end of the book. This will be linked to via crosslinks from each exercise.
-6. The answers page for a quiz or exercise will show the question, hint and answers for each question.
 
 ## Creating a Course or MOOC from a Markua Document
 
@@ -3774,7 +3730,7 @@ If a key is duplicated in an attribute list, the first key value is used and sub
 
 ### Attribute Values
 
-All attributes are text. Leanpubs should interpret text values of "true" and "false" as representing true and false. Quotes are optional for attribute values, and are only needed if the attribute value contains whitespace or special characters.
+All attributes are text. Leanpub interprets text values of "true" and "false" as representing true and false. Quotes are optional for attribute values, and are only needed if the attribute value contains whitespace or special characters.
 
 If a text attribute value contains a quote, it must be "escaped" with a backslash: e.g. `{caption: "\"Fresh\" Fish"}`
 
@@ -3945,6 +3901,4 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 8. In LFM, we had a `{pagebreak}` directive. This is currently absent, but it will probably return.
 
-9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Leanpubs could use other approaches.)
-
-10. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+9. In LFM, we used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
