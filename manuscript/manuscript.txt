@@ -137,7 +137,7 @@ You can also include single lines of code like `puts "hello"` in paragraphs.
 Finally, you can do that with math `d = v_i t + \frac{1}{2} a t^2`$ too.
 ~~~
 
-As you can see, there is more syntax, including bulleted and numbered lists, definition lists, tables, block quotes, external and inline code samples, inline math, etc. However, even with all this, the Markua document remains readable. Exactly how all of this syntax works is explained in the spec.
+As you can see, there is more syntax, including bulleted and numbered lists, definition lists, tables, block quotes, external and inline code samples, inline math, etc. However, even with all this, the Markua document remains readable. Exactly how all of this syntax works is explained later.
 
 ## How to Write a Course (MOOC) in Markua
 
@@ -209,7 +209,7 @@ A multiple choice question has 2 or more answer choices, and 1 correct answer ch
 
 A fill in the blank question consists of a question and a set of answers. You can even use regular expressions for the answers.
 
-As explained in the spec, there are more types of questions, and more options with these types of questions. However, what is shown above is enough to create a full MOOC out of a Markua book.
+As explained later, there are more types of questions, and more options with these types of questions. However, what is shown above is enough to create a full MOOC out of a Markua book.
 
 ## Markua: Markdown for Books and Courses
 
@@ -285,7 +285,7 @@ The formal specification of Markua is contained in a separate document called [T
 
 The Markua Spec is based on the GitHub Flavored Markdown (GFM) Spec, which is based on the CommonMark Spec. The author of the CommonMark Spec is John MacFarlane. In the Markua Spec, Markua is specified as a set of modifications to CommonMark, for ease of comparison with CommonMark.
 
-You will want to read the [The Markua Specification](http://markua.com) if:
+You will want to read the [The Markua Spec](http://markua.com) if:
 
 1. You are a computer programmer and you like reading specs.
 2. You want to see a mapping of Markua to HTML.
@@ -306,7 +306,7 @@ These are the top 9 differences between Markua and LFM:
 6. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
 7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 8. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
-9. LFM used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
+9. LFM used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua Spec itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
 Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Spec to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
 
@@ -2696,7 +2696,7 @@ A Markua Processor
 
 # Block Elements
 
-Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. Paragraphs, headings, figures and lists, all discussed earlier in this specification, are examples of block elements. Block elements are separated from each other by at least one blank line.
+Broadly speaking, Markua documents consist of three things: block elements, span elements and metadata. Paragraphs, headings, figures and lists, all discussed earlier, are examples of block elements. Block elements are separated from each other by at least one blank line.
 
 These are the remaining block elements defined by Markua.
 
@@ -3089,11 +3089,7 @@ Unlike other blurb types which have their origin in technical books, centering t
 
 ### Using Extension Attributes on Blurbs to add `icon` Support
 
-Markua Processors must ignore any attributes which they do not understand.
-
-Because of this, Markua attribute lists can contain any number of extension attributes. An extension attribute is an attribute which is not defined in the Markua specification, but which is understood by some specific Markua Processor.
-
-As an example of an extension attribute, Leanpub adds an `icon` attribute to blurbs. Markua does not specify that a blurb must support an `icon` attribute, or what it would mean if it did. However, Leanpub understands an `icon` attribute to reference an icon from Font Awesome. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
+Leanpub adds an `icon` attribute to blurbs. Markua does not specify that a blurb must support an `icon` attribute, or what it would mean if it did. However, Leanpub understands an `icon` attribute to reference an icon from Font Awesome. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
 
 ~~~
 {icon: car}
@@ -3106,7 +3102,7 @@ B> Yes, we're in Font Awesome!
 B> So is GitHub, of course. Unicorns.
 ~~~
 
-In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon. In a Markua implementation that does not understand the icon attribute, nothing will be generated for that attribute--it will be functionally equivalent to the attribute not being present.
+In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon.
 
 {#inserting-into-paras}
 ## Inserting Block Elements Inside Paragraphs
@@ -3483,12 +3479,6 @@ Examples:
 
 As shown by the answer (`"The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416; an irrational number`), acceptable answer values in a fill in the blank question can be of completely different types, and numeric answer values can be expressed as ranges (min <= x <= max), expressed as `min ... max`. Also, this answer shows that quotes are optional around text strings. The reason to use quotes is for clarity, or to ensure that any semicolons used are treated as semicolons instead of as answer choice delimiters. Semicolons inside quotes are just semicolons and do not need to be backslash-escaped. You do, however, need to backslash-escape a quote if you want it to be treated as a literal quote, instead of the start or end of a string.
 
-If there are multiple answers to a fill in the blank question and an answer key is being output by Leanpub for use by human markers, the acceptable values should be clearly distinguished from each other. The recommendation is to use a bulleted list of acceptable values, one per line, but there are no requirements here.
-
-If you're a programmer, you may wonder what number types and formats are supported. Are they integers? Floating point numbers? Can you use scientific notation? And how are the numbers formatted? Are they US or Canadian numbers (`123,456.78`) or EU numbers (`123 456,78`)?  What if there's a number that means something different in the US and EU--does `123,456` mean `123456` or `123.456`?
-
-These questions are made worse by the fact that Markua can be used to create human-marked paper quizzes as well as automatically-marked MOOCs. So, specifying rules which made the syntax unambiguous for MOOCs would mean that the answers for human-marked paper quizzes could not be specified with a tolerable amount of ambiguity. So, the format of the answer values in a fill in the blank question is out of scope of the Markua Specification.
-
 #### Supported Attributes on Fill In The Blank Questions
 
 `points`
@@ -3642,7 +3632,7 @@ A Markua Processor must treat any error in the numbering of question alternates 
 
 # Span Elements
 
-We've already seen many examples of span elements in this specification, especially in the resources section showing resources inserted as spans. These are the rest of them...
+We've already seen many examples of span elements, especially in the resources section showing resources inserted as spans. These are the rest of them...
 
 ## Links
 
@@ -3756,15 +3746,9 @@ You can only refer to a footnote or endnote once. You can't define a footnote or
 
 ### Footnotes and Endnotes Support Required for Paragraphs Only
 
-A Markua Processor must support footnote and endnote references inserted in normal paragraph content. However, that's it.
+Leanpub only supports footnote and endnote references inserted in normal paragraph content.
 
-However, sometimes authors want to get creative with their footnotes and endnotes. Sometimes they want to add them in headings, or in footnotes or endnotes themselves. This latter style has been used on rare occasions, most notably by David Foster Wallace.
-
-However, supporting inserting footnotes and endnotes in places other than normal paragraph content puts a hugely increased burden on implementors of Markua Processors. As such, there is no requirement for a Markua Processor to support inserting a footnote or endnote anywhere other than in normal paragraph content.
-
-Authors should **not** assume that a particular Markua Processor supports inserting a footnote or endnote anywhere other than in normal paragraph content unless its documentation specifically states that it does. For example, Leanpub only supports inserting footnotes or endnotes in normal paragraph content.
-
-A> In software, [abstractions leak](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/). Leanpub uses LaTeX for its PDF generation, and presumably many other Markua Processors will as well. In LaTeX, inserting footnotes or endnotes in places like headings, footnotes or endnotes is very problematic. So, it's optional. The best thing about writing a specification for something you are implementing is that there is often a very easy solution to a very difficult implementation problem!
+(Sometimes authors want to get creative with their footnotes and endnotes. Sometimes they want to add them in headings, or in footnotes or endnotes themselves. This latter style has been used on rare occasions, most notably by David Foster Wallace. However, that's difficult to implement, and is optional in Markua, so Leanpub has not done so.)
 
 {#crosslinks}
 ## Crosslinks and ids
@@ -4005,7 +3989,7 @@ This paragraph has a code span with literal backticks `` `say hello` `` in it.
 {#attributes}
 ## Attributes
 
-Attributes are used to do everything from specify the language of code blocks, add ids for crosslinking and even support extensions to Markua. We have already seen attributes throughout the specification in the attribute lists we have encountered.
+Attributes are used to do everything from specify the language of code blocks, add ids for crosslinking and even support extensions to Markua. We have already seen attributes in the attribute lists we have encountered.
 
 ### Attribute List Format
 
@@ -4269,8 +4253,6 @@ The following settings are defined by Markua, but only make sense in the context
 {backmatter}
 
 # Appendices
-
-These appendices contain details which would be distracting or boring if included in the main body of the Markua specification. These include highly technical details, differences with Markdown, discussions of HTML mapping and notes for Leanpub authors.
 
 {#no-inline-html}
 ## No Inline HTML
