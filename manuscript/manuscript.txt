@@ -2577,19 +2577,9 @@ iii) foo
      bar
    a) lorem
    b) ipsum
-iv) foo
-    bar
-   a) lorem
-   b) ipsum
-v) foo
-   bar
-   a) lorem
-   b) ipsum
 
 Again, the above is not a list.
 ~~~
-
-So, if you like Roman numerals, my personal advice is to use them either in simple lists (since tabs always line up) or as the lowest level of indentation in a complex list.
 
 {#definition-lists}
 # Definition Lists
@@ -4113,7 +4103,7 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 7. In LFM, we had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
 
-8. In LFM, we had a `{pagebreak}` directive. This is replaced by `===`.
+8. In LFM, we had a `{pagebreak}` directive. This is currently replaced by `===`, but it is actually going back to `{pagebreak}`.
 
 9. In LFM, we used Book.txt to define the book content. In Markua, the way that the list of manuscript files is defined is considered out of scope of the Markua specification itself. (Leanpub still uses the Book.txt approach to specify which files are in a book, but other Markua Processors could use other approaches.)
 
