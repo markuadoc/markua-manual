@@ -3784,7 +3784,7 @@ There are two ways to define an id:
 
 The shorter "syntactic sugar" approach is usually preferred. However, it can look a bit odd in an attribute list with other attributes in it. So, in that case, the `{id: some-id}` syntax is preferred.
 
-W> Note for Leanpub authors: The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list. You currently **CANNOT** add the `{#some-id}` to an attribute list.
+W> The `{#some-id}` syntax does not currently work when there are other attributes in the attribute list. So, in that case, you must currently use the `{id: some-id}` syntax if you are adding other attributes in a larger attribute list.
 
 In terms of the value of an `id`, it has some special restrictions:
 
@@ -3886,90 +3886,6 @@ A Markua Processor may replace the `"` character with the appropriate "curly quo
 Note that this is an optional behaviour: a Markua Processor may support this fully, only in some output formats, or not at all.
 
 Also, note that it is **NEVER** acceptable for a Markua Processor to do this, or *any* character substitution, to text inside a code block or code span. In almost all instances this would completely break the code. (If you wonder how I got curly quotes into the code spans for `“typography”` and `it’s` above, it's because I pasted them into the manuscript that way. Just as a Markua Processor doesn't make straight quotes curly in a code span, it doesn't make curly quotes straight in a code span either.)
-
-## Placeholders
-
-Placeholders are a simple text-replace templating system which allow you to define boilerplate in one place, and easily insert it in other places. For books like novels, these obviously have no place. However, for books, courses and other types of documents produced by large organizations, there is an absolute need for placeholders.
-
-Since this is a fairly niche requirement, the syntax is designed in a way that authors should never inadvertently trigger it unless they intend to. It is similar to the footnote syntax.
-
-Placeholder definitions can occur before or after the placeholder insertions. Implementors of Markua Processors are encouraged to deal with placeholders in a pre-processing step.
-
-Placeholders can be defined and inserted as span or block elements.
-
-### Placeholder Identifiers
-
-The identifier for a placeholder must conform to `/[a-zA-Z][a-zA-Z0-9_-]*/`. That is, it starts with a lowercase or uppercase letter `[a-zA-Z]`, followed by 0 or more letters, numbers, underscores or hyphens `[a-zA-Z0-9_-]*`.
-
-### Span Placeholders
-
-#### Span Placeholder Definition
-
-To define a span placeholder, you create a block element consisting of two opening curly braces (`{{`), followed by the placeholder identifier, followed by two closing curly braces (`}}`), followed by a colon (`:`), followed by one space, followed by the span placeholder definition:
-
-~~~
-other stuff
-
-{{a_span_placeholder}}: This is the span placeholder definition which can have **Markua formatting** and reference {{other_span_placeholders}} but not block placeholders.
-
-other stuff
-~~~
-
-A span placeholder definition can have Markua formatting and can reference other span placeholders.
-
-However, block placeholder references and circular placeholder references are obviously forbidden as content of span placeholder definitions.
-
-#### Span Placeholder Usage
-
-A span placeholder can then be used either in a span context or in a block context.
-
-Specifically, to insert a span placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`).
-
-~~~
-Here's a span placeholder as the only content of a block:
-
-{{a_span_placeholder}}
-
-Here's the same span placeholder {{a_span_placeholder}} being used in a span context.
-~~~
-
-### Block Placeholders
-
-#### Block Placeholder Definition
-
-To define a block placeholder, you create a block element consisting of two opening curly braces (`{{`), followed by the placeholder identifier, followed by two closing curly braces (`}}`), followed by the block placeholder content, followed by a newline, followed by two opening curly braces (`{{`), followed by a forward slash (`/`), followed by the placeholder identifier, followed by two closing curly braces (`}}`):
-
-~~~
-other stuff
-
-{{a_block_placeholder}}
-This is the placeholder content.
-
-It can include *any type of Markua formatting* and can **even** include {{span_placeholder_references}}.
-
-It can also include block placeholder references:
-
-{{some_other_block_placeholder}}
-
-Note that circular placeholder references are obviously forbidden.
-{{/a_block_placeholder}}
-
-other stuff
-~~~
-
-#### Block Placeholder Usage
-
-A block placeholder can then be used only in a block context. It cannot be used in a span context.
-
-Specifically, to insert a block placeholder, you use two opening curly braces (`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-` characters), followed by two closing curly braces (`}}`). The only difference is that this must be in a block context by itself, with at least one blank line above or below it.
-
-~~~
-Here's a block placeholder as the only content of a block:
-
-{{a_block_placeholder}}
-
-You cannot insert that block placeholder in a span context like in this paragraph.
-~~~
 
 ## Escaping Special Characters with Backslash (`\`)
 
@@ -4119,11 +4035,6 @@ This is included in the sample.
 
 What you read was just a sample. Why not buy the full book?
 
-{web: false}
-# Here's a Coupon!
-
-This coupon will show up in the book version, but not the web book version. It will have the default values for book (true) and sample (false).
-
 # Chapter Two
 
 This is not included in the sample.
@@ -4143,129 +4054,6 @@ Directives are switches which affect the future behaviour of a Markua Processor.
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it. (There are two exceptions: if the directive is at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.)
 
 A directive does not have any kind of "closing tag"--it simply remains in effect for the rest of the Markua document, or until the directive is overridden by another use of the same directive with a different value.
-
-### The `lang` Directive
-
-A book has a global `lang` [setting](#setting-keys-and-values), which defaults to `eng`, for English.
-
-However, many books are written in more than one language. Switching between languages in accomplished using the `lang` directive.
-
-For example, say I'm writing a book about Waka. If I want to switch to Japanese to display a poem I can do so using a `lang` directive `{lang: jpn}` and then switch back to English using `{lang: eng}`.
-
-The value of the `lang` directive must be a valid [ISO 639-3](https://en.wikipedia.org/wiki/ISO_639-3) language code.
-
-The two main things that the `lang` directive affects are:
-
-1. the direction of the text (left-to-right or right-to-left)
-2. the font used for the language
-
-Since English is the default language of a Markua document, all Markua Processors must support the `eng` value of the `lang` directive. Support for all other language codes is optional. If the language code given as the value of a `lang` directive is not supported or is unrecognized, it must be interpreted as `eng` and switch the font accordingly and switch the direction to left-to-right. This way, a Markua Processor can add support for right-to-left languages such as Arabic (`{lang: ara}`) or Hebrew  (`{lang: heb}`), and know that when a different language is specified the direction will switch to left-to-right even if the given language was not supported--there are a lot of languages, but almost all of them are left-to-right languages.
-
-{#settings}
-## Settings
-
-As discussed earlier, a Markua document can be written in one file or multiple manuscript files. If a manuscript is written in multiple files, these files are concatenated together by Leanpub to produce one temporary manuscript file, and that one file is used as the input.
-
-At the very beginning of the first (or only) manuscript file, a Markua document can contain settings. The settings are just newline-separated key-value pairs which contain information about the document. This will include things like the title, subtitle, copyright, author names, etc.
-
-These settings are enclosed in a "settings hash" in curly braces like this:
-
-~~~
-{
-title: Markua Specification
-authors: Peter Armstrong
-contributors: Scott Patten, Braden Simpson and Len Epp
-copyright: Peter Armstrong
-}
-
-# The Magical Typewriter
-
-Imagine you owned a magical typewriter...
-~~~
-
-The format of the metadata is one entry per line, with the keys and values separated by a colon and a space. Any whitespace at the beginning or end of the keys and values will be stripped. Only the first colon is important; subsequent colons on a line will just be part of the value.
-
-There is a blank line between the settings hash and the manuscript content.
-
-A Markua Processor may also get settings from elsewhere, like a web interface. However, in the case of a conflict, any settings specified in the settings hash must win.
-
-{#setting-keys-and-values}
-### Markua-Defined Settings
-
-The following settings must be supported by all Markua Processors. Markua Processors can also add their own settings, just as Markua Processors can understand their own extension attributes.
-
-If a Markua Processor also provides a UI to define settings which are specified here, Leanpub should respect the settings defined in the Markua manuscript over the settings defined in the UI. This can be phrased as "document wins", not "database wins".
-
-`authors`
-: The authors of the Markua document.
-
-`contributors`
-: Any contributors to the Markua document who are not authors.
-
-`copyright`
-: The owner of the copyright.
-
-`default-code-language`
-: The default language that code which is a local resource, web resource or inline resource inserted as a block with three backticks is interpreted as. The default value is `guess`, which means to guess at the code language based on the syntax encountered (or the file extension for external code samples), and attempt to syntax highlight appropriately. A good alternative is `text`, which means no syntax highlighting should be used, but the code should be in a monospaced font suitable for a programming language. Besides these options, you can specify a particular programming language used, such as `ruby` or `java`. If a Markua Processor does not recognize the programming language specified, it must format it as `text`. Finally, note that the value of this setting only affects local resources, web resources or inline resources inserted as a block with three backticks--it has no effect on code spans, or on inline resources inserted with tildes. The default language for inline resources delimited by three tildes is always `text`.
-
-`default-code-span-language`
-: The default language that code which an inline code span resource is foramtted as. The default is `text`. If you set this to `ruby`, it is the equivalent of setting `{format: ruby}` as an inline attribute list on every code span resource by default, e.g. `` `puts "hi"`{format: ruby} ``. If you need to override a specific resource to not be ruby, you would set `{format: text}`.
-
-`lang`
-: The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character language code of the language that the Markua document is written in. The default is `eng`.
-
-`number-chapters`
-: `true` or `false`. Default `true`. Whether the chapters are numbered.
-
-`number-figures`
-: `true` or `false`. Default `true`. Whether resources are numbered when inserted as figures. Note that different types of resources (e.g. code listings, tables, images, etc.) have different numbering.
-
-`number-sections`
-: `true` or `false`. Default `false`. Whether the sections (and sub-sections) are numbered.
-
-`restart-endnote-numbering`
-: `true` or `false`. Default `true`. Whether the endnote numbering is restarted at the end of a chapter.
-
-`restart-footnote-numbering`
-: `true` or `false`. Default `true`. Whether the footnote numbering is restarted at the end of a chapter.
-
-`title`
-: The title of the Markua document.
-
-`version`
-: The version of the Markua document. This is primarily intended for use when producing analytics for courses. The default is `0.1`.
-
-{#course-setting-keys-and-values}
-### Settings for Courses
-
-The following settings are defined by Markua, but only make sense in the context of a course. So, a Markua Processor which is not generating a course can ignore them.
-
-`course-attempts`
-: The number of allowed attempts on the course itself. The default is `1`.
-
-`course-completeness`
-: How "done" the course itself is. Expressed as a percentage, in decimal value. The default is `0`. A value of `100` or `100.0` is the maximum. A Markua Processor may do something smart when a course which is 100% complete changes the `id` values of a quiz or quizzes, since this will affect current students.
-
-`default-exercise-show-answers`
-: This can be `all` (the default), `incorrect` or `none`. It affects how answers are shown after an exercise is completed, say in a MOOC.
-
-`default-quiz-attempts`
-: The default number of allowed attempts on a quiz. The default is `1`. Note that for quizzes, a value of `0` means the quiz cannot be taken (yet). A value of `-1` means the quiz has an unlimited number of attempts. Setting either of these as the value of `default-quiz-attempts` is a legitimate value, and has the effect of changing the default value for all quizzes. Again, an exercise always has an unlimited number of attempts, so there is no corresponding `default-exercise-attempts` value.
-
-`default-quiz-auto-submit`
-: `true` or `false`. The default is `true`. If true, an incomplete quiz is submitted when the `time-limit` is expired. If false, it is not. Either way, an incomplete quiz counts as an attempt.
-
-`default-quiz-show-answers`
-: This can be `all`, `incorrect` (the default) or `none`. It affects how answers are shown after a quiz is completed, say in a MOOC.
-
-`default-quiz-use-result`
-: `best` or `latest`. The default is `best`. Whether the best result on the quiz is used, or the latest one.
-
-`default-random-choice-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of multiple choice questions. If `true`, the choices in the multiple choice question are randomly arranged; if `false`, they are presented in the order written.
-
-`default-random-question-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of the quiz or exercise. If `true`, the questions are randomly arranged; if `false`, they are presented in the order written.
 
 {backmatter}
 
