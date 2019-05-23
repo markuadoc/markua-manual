@@ -2673,13 +2673,32 @@ With the rise of mobile and the narrower screen reading experience becoming the 
 
 Finally, with definition lists, one thing you often want to do is link to a specific definition, not just to the list itself. This is useful to do, since in a document with many definitions, it's helpful if the reader scrolls to the right spot or opens to the right page.
 
-To do this, just define an id on the element itself, and then link to it. Note that the first attribute list is actually for the definition list itself, and the remaining ones are for the items. So, you can't add an attribute list to the first element of a definition list which applies just to it.
-
-W> Note to Leanpub authors: id attributes on definition list items do not work yet.
+To do this, just define a span id on the element itself, and then link to it.
 
 ~~~
+foo{#foo}
+: This is foo.
 
+bar{#bar}
+: This is bar.
+~~~
+
+Note that if you define an id attribute above the first definition list item, what you are doing is defining an id on the entire definition list. As such, this does not work on any subsequent list item: in the following definition list, the `{#definitions}` is the id of the definition list. It is not the id of foo.
+
+~~~
 {#definitions}
+foo{#foo}
+: This is foo.
+
+bar{#bar}
+: This is bar.
+~~~
+
+To be clear, the following is not legal Markua:
+
+~~~
+This is not legal.
+
 foo
 : This is foo.
 
@@ -2687,12 +2706,10 @@ foo
 bar
 : This is bar.
 
-{#baz}
-baz
-: This is baz.
+This is not legal.
 ~~~
 
-A Markua Processor
+If there was an id above foo, it would be legal, since it would be the id of the entire definition list. However, the id attribute above bar is not legal. Leanpub should ignore this id, and add an error to the list of errors.
 
 # Block Elements
 
