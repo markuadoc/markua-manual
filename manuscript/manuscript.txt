@@ -229,6 +229,23 @@ Markua is a plain text format. Markua is basically Markdown, minus all inline HT
 
 Markua manuscripts, called Markua documents, can be written however you want. On a computer, you can use any text editor you want. Beginning authors can use simple programs like Notepad or TextEdit or "distraction-free" programs like iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or VSCode. Since Markua is very similar to Markdown, many programs which support Markdown should already do a decent job of supporting Markua by default.
 
+Leanpub has 7 different writing modes.
+
+On Leanpub, these are the writing modes you can use to write in Markua:
+
+1. GitHub
+2. Bitbucket
+3. Dropbox
+4. In-Browser Text Editor
+
+You can also use Leanpub Flavoured Markdown (LFM) in these modes.
+
+On Leanpub, these writing modes do not support writing in Markua or in LFM:
+
+5. Visual Editor (it's WYSIWYG)
+6. Google Docs (it's WYSIWYG)
+7. Bring Your Own Book (you're uploading files)
+
 Markua maps Markdown syntax to book concepts, and then adds some new syntax and concepts of its own.
 
 Markua documents can be automatically transformed into every popular type of ebook format. The computer programs which do this transformation are called Markua Processors. These programs understand both Markua syntax and how to generate the various output formats. An example Markua Processor is Leanpub: Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document, and can even output print-ready PDFs and InDesign files from them as well.
@@ -241,7 +258,7 @@ Markua's three main contributions are the following:
 2. The unified resource and attribute list syntax, which lets Markua handle audio, code, math and video in the same way that it does images, and which supports inline, local and web resource locations.
 3. The mapping of book structures to courses, and the creation of a plain-text based microformat for course quizzes and exercises, which supports automated marking and automated production of everything which is required for a MOOC.
 
-If you have written something (say blog posts or lecture notes) in Markdown, you can use a Markua Processor, such as Leanpub, to turn them into an ebook or course with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books or courses, this process will feel like decorating, not converting.
+If you have written something (say blog posts or lecture notes) in Markdown, you can use Leanpub to turn them into an ebook or course with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books or courses, this process will feel like decorating, not converting.
 
 The goal is for writers who are familiar with Markdown to feel that Markdown somehow grew an understanding of book and course concepts.
 
