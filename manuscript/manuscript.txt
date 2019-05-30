@@ -2717,27 +2717,6 @@ Blockquotes can be multi-paragraph. To create a multi-paragraph blockquote, you 
 
 If a blockquote contains headings, these headings may be formatted by Leanpub differently than normal headings. Finally, if Leanpub is automatically generating a [Table of Contents](#toc) from chapter and section headings, any headings inside blockquotes should be ignored.
 
-A blockquote can have a citation. This is done via the attribute list, which can include a `cite` attribute with the text of the citation and a `url` attribute with the URL of the citation. If both are specified, the text of the citation is linked to the URL. If only the `cite` attribute is specified it is shown as text; if only the `url` is specified it is inserted as text with a link to itself.
-
-The attribute list can be used regardless of which syntax is used to insert the blockquote:
-
-~~~
-Lots of people have opinions about software.
-
-Here's the most famous recent one:
-
-{cite: "Marc Andreessen", url: "http://www.wsj.com/articles/SB10001424053111903480904576512250915629460"}
-> Software is eating the world.
-
-It's quoted a lot, so let's quote it again:
-
-{blockquote, cite: "Marc Andreessen", url: "http://www.wsj.com/articles/SB10001424053111903480904576512250915629460"}
-Software is eating the world.
-{/blockquote}
-
-That's it!
-~~~
-
 ## Asides (`A>` or `{aside}`)
 
 Since Markua is for writing books, including technical books, it needs not just a syntax for blockquotes--it also needs a syntax for asides and for blurbs. These syntaxes are very similar to the Markua syntax for blockquotes. Like blockquotes, any headings inside asides or blurbs do not show up in a Table of Contents (if one is present).
