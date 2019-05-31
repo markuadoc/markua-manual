@@ -2,7 +2,13 @@
 
 This is the user manual for Markua on Leanpub. It is copyright © 2014-2019 Peter Armstrong. All rights reserved.
 
-The Markua Specification is now based on CommonMark, and it will be posted at <http://markua.com> in the next few weeks.
+The Markua Spec is now based on CommonMark.
+
+The repository for the Markua Spec is here:
+https://github.com/markuadoc/markua-spec
+
+The website for the Markua Spec is here:
+http://markua.com
 
 Markua is being specified by Peter Armstrong and being implemented by Leanpub. The Markua specification is free and open for anyone to implement.
 
