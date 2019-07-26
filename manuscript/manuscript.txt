@@ -1508,19 +1508,21 @@ Markua handles two consecutive newlines identically to Markdown: they produce a 
 
 Similarly, Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
 
-If you absolutely must insert a bunch of newlines in a row, you can do this by starting a poetry block and doing so:
+If you absolutely must insert a bunch of newlines in a row, you can do this by starting a code block (with three tildes or backticks) and doing so:
 
-~~~
+```
 ...the end of a paragraph.
 
-___
-
-
-
-___
-
-That empty poetry block is 3 lines long, so it adds three poetic blank lines to the output.
 ~~~
+
+
+
+~~~
+
+That empty code block is 3 lines long, so it adds three blank lines of code to the output.
+```
+
+The question of backticks versus tildes just determines which font your blank lines of code will use, since it sets the default language to guess or text.
 
 ### One Blank Line Is Added When Concatenating Manuscript Files
 
@@ -1669,7 +1671,7 @@ ruby
 Here's a paragraph after the list.
 ~~~
 
-Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored. Like list items, definition list items are not poetry.
+Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored.
 
 With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more useful than tables in many Markua documents.
 
