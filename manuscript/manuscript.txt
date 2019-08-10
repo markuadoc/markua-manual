@@ -1477,6 +1477,8 @@ Whitespace handling is the largest difference between Markua and Markdown, so it
 
 ## Newlines
 
+A> NOTE: This section, like the rest of this document, describes the behaviour of the Markua Beta in Leanpub. This behaviour is **DIFFERENT** than [what is specified in the latest version of the Markua spec](http://markua.com/#differences-with-markua-beta). When the Markua Spec is fully implemented in Leanpub, there will be a way to preserve this behaviour (by specifying `soft-breaks: break`). This way, you won't have to make big changes to your books which have been written using the Markua beta on Leanpub.
+
 {#single-newlines}
 ### Single Newline = Forced Line Break
 
