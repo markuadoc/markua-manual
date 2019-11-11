@@ -281,11 +281,13 @@ This book explains how to use the parts of Markua which **CURRENTLY** work on Le
 * Everything you read about in this book should just work.
 * Everything in Markua which is not yet supported on Leanpub is just omitted, as though it does not exist.
 
-The formal specification of Markua is contained in a separate document called [The Markua Spec](http://markua.com). It will soon be available on the Markua website, not as an ebook.
+The formal specification of Markua is contained in a separate document called [The Markua Spec](http://markua.com). It is available on [the Markua website](http://markua.com).
+
+To be clear: the document you are currently reading describes the behaviour of the Markua Beta in Leanpub. This behaviour is occasionally **DIFFERENT** than [what is specified in the latest version of The Markua Spec](http://markua.com/#differences-with-markua-beta). When The Markua Spec is fully implemented in Leanpub, we plan to provide migration tools to update your books from the Markua Beta to the latest version of Markua.
 
 The Markua Spec is based on the GitHub Flavored Markdown (GFM) Spec, which is based on the CommonMark Spec. The author of the CommonMark Spec is John MacFarlane. In the Markua Spec, Markua is specified as a set of modifications to CommonMark, for ease of comparison with CommonMark.
 
-You will want to read The Markua Spec (once it's online) if:
+You may want to read The Markua Spec if:
 
 1. You are a computer programmer.
 2. You like reading specs.
@@ -1476,6 +1478,8 @@ These simple goals have far-reaching consequences:
 Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
 
 ## Newlines
+
+A> NOTE: This section, like the rest of this document, describes the behaviour of the Markua Beta in Leanpub. This behaviour is **DIFFERENT** than [what is specified in the latest version of the Markua spec](http://markua.com/#differences-with-markua-beta). When the Markua Spec is fully implemented in Leanpub, there will be a way to preserve this behaviour (by specifying `soft-breaks: break`). This way, you won't have to make big changes to your books which have been written using the Markua beta on Leanpub.
 
 {#single-newlines}
 ### Single Newline = Forced Line Break
