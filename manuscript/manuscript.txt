@@ -2558,8 +2558,6 @@ Here is some unrelated text.
 Here is some more unrelated text.
 ~~~
 
-Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#setting-keys-and-values) setting.
-
 ### Endnotes
 
 Books often have endnotes. Sometimes these are instead of footnotes, but other times, these are in addition to footnotes. So, it makes sense for Markua to define separate syntaxes for both, rather than just defining one "footnote or endnote" syntax and letting the author pick whether the notes are footnotes or endnotes via a global setting.
@@ -2579,8 +2577,6 @@ Then, you define the endnote later in the document, using the same square bracke
 ~~~
 
 Just as with footnotes, if you wish to write multiple paragraphs in an endnote, you must indent the subsequent paragraphs by four spaces or one tab.
-
-Whether the numbering of endnotes restarts every chapter is something that can be specified by the [`restart-endnote-numbering`](#setting-keys-and-values) setting.
 
 ### Single Reference to Footnotes and Endnotes
 
