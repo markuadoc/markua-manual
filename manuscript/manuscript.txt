@@ -229,22 +229,17 @@ Markua is a plain text format. Markua is basically Markdown, minus all inline HT
 
 Markua manuscripts, called Markua documents, can be written however you want. On a computer, you can use any text editor you want. Beginning authors can use simple programs like Notepad or TextEdit or "distraction-free" programs like iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or VSCode. Since Markua is very similar to Markdown, many programs which support Markdown should already do a decent job of supporting Markua by default.
 
-Leanpub has 7 different writing modes.
-
-On Leanpub, these are the writing modes you can use to write in Markua:
+Leanpub has 5 different writing modes:
 
 1. GitHub
 2. Bitbucket
 3. Dropbox
 4. In-Browser Text Editor
+5. Bring Your Own Book
 
-You can also use Leanpub Flavoured Markdown (LFM) in these modes.
+You can write in Markua in GitHub, Bitbucket, Dropbox and the In-Browser Text Editor writing modes. You can't write in Markua in the Bring Your Own Book writing mode, since you are just uploading already-generated ebooks in PDF, EPUB and/or MOBI.
 
-On Leanpub, these writing modes do not support writing in Markua or in LFM:
-
-5. Visual Editor (it's WYSIWYG)
-6. Google Docs (it's WYSIWYG)
-7. Bring Your Own Book (you're uploading files)
+(Leanpub also has two deprecated writing modes, our Google Docs writing mode and our Visual Editor writing mode. Neither of these can be used to write in Markua: instead, they are WYSIWYG.)
 
 Markua maps Markdown syntax to book concepts, and then adds some new syntax and concepts of its own.
 
