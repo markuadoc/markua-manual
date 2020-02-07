@@ -2869,7 +2869,7 @@ Leanpub must raise an error if it encounters a conditional inclusion attribute u
 {#directives}
 ## Directives
 
-Directives are switches which affect the future behaviour of Leanpub.
+Directives are switches which affect the parsing of a Markua document.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it. (There are two exceptions: if the directive is at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.)
 
