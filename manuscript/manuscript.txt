@@ -2,7 +2,7 @@
 
 # Don't Read This Book (Yet)
 
-This book will describe the behaviour of Leanpub when parsing Markua 0.29 documents. However, our beta support for Markua 0.29 is not released yet. So, until this is the case, you should read [the Markua 0.1 manual](https://leanpub.com/markua) instead, since that's the version of Markua currently supported on Leanpub.
+This book will describe the behaviour of Leanpub when parsing Markua 0.29 documents. However, our beta support for Markua 0.29 is not released yet. So, until this is the case, you should read [the Markua 0.1 manual](https://leanpub.com/markua/read) instead, since that's the version of Markua currently supported on Leanpub.
 
 # Introduction
 
