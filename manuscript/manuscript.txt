@@ -1,5 +1,9 @@
 {mainmatter}
 
+# Don't Read This Book (Yet)
+
+This book will describe the behaviour of Leanpub when parsing Markua 0.29 documents. However, our beta support for Markua 0.29 is not released yet. So, until this is the case, you should read [the Markua 0.1 manual](https://leanpub.com/markua) instead, since that's the version of Markua currently supported on Leanpub.
+
 # Introduction
 
 ## The Magical Typewriter
@@ -2090,7 +2094,7 @@ Quizzes or exercises in a textbook consist of two things:
 1. Questions, typically in the chapter itself.
 2. Answers, typically at the back of the book.
 
-The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices. The specific location that they are positioned can be controlled by the author using [book section directives](#book-section-directives), discussed later.
+The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices. The specific location that they are positioned can be controlled by the author using [book section directives](#directives), discussed later.
 
 There is only one syntax to create a quiz or exercise. For a quiz, it's by wrapping the quiz in `{quiz}` ... `{/quiz}`; for an exercise, it's by wrapping the exercise in `{exercise}` ... `{/exercise}`.
 
@@ -2869,7 +2873,7 @@ Leanpub must raise an error if it encounters a conditional inclusion attribute u
 {#directives}
 ## Directives
 
-Directives are switches which affect the future behaviour of Leanpub.
+Directives are switches which affect the parsing of a Markua document.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it. (There are two exceptions: if the directive is at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.)
 
