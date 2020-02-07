@@ -2094,7 +2094,7 @@ Quizzes or exercises in a textbook consist of two things:
 1. Questions, typically in the chapter itself.
 2. Answers, typically at the back of the book.
 
-The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices. The specific location that they are positioned can be controlled by the author using [book section directives](#directives), discussed later.
+The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices.
 
 There is only one syntax to create a quiz or exercise. For a quiz, it's by wrapping the quiz in `{quiz}` ... `{/quiz}`; for an exercise, it's by wrapping the exercise in `{exercise}` ... `{/exercise}`.
 
