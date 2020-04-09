@@ -305,16 +305,13 @@ Besides differences with Markdown in general, Markua also has a number of specif
 5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
 6. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
 7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
-8. In LFM, we had a `{pagebreak}` directive. This is currently absent, but it will probably return.
-9. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+8. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
 
-Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Spec to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Manual to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
 
 ## Acknowledgments
 
-I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help, especially from my Leanpub cofounders [Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp) and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead developer of Leanpub's book generation engine (both the LFM and Markua versions), and he has given me both the most and the best feedback about Markua over the years that I've been working on it.
-
-Perhaps most important, Markua is built on Markdown. So, Markua literally would not exist without John Gruber and Aaron Swartz. Markua is now also using the CommonMark spec as its starting point, so I am really grateful to John MacFarlane (the author of the CommonMark spec) and the team behind CommonMark and `cmark`. I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
+I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua. However, I'm standing on the shoulders of giants. Most important, Markua is built on Markdown. So, Markua literally would not exist without John Gruber and Aaron Swartz. Markua is now also using the CommonMark spec as its starting point, so I am really grateful to John MacFarlane (the author of the CommonMark spec) and the team behind CommonMark and `cmark`. I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
 
 Markua is also benefitting from years of feedback about Leanpub Flavoured Markdown and Markua, from many incredibly helpful and patient Leanpub authors. If it wasn't for these authors, there would be no Leanpub, and no Markua.
 
@@ -2912,6 +2909,23 @@ Hello world.
 ```
 
 These directives have not yet been updated to `section` directives per the Markua Spec.
+
+
+## Page Breaks
+
+Despite how much Markua encourages you to not worry about formatting, sometimes you really just need to add a page break. Pretending otherwise would not be pragmatic.
+
+So, Markua supports adding a page break with `{pagebreak}`. This looks a lot like a directive, but it's not, since it only has an effect once, not going forward.
+
+Here's an example:
+
+```
+foo
+
+{pagebreak}
+
+bar
+```
 
 {backmatter}
 
