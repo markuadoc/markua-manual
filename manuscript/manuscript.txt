@@ -739,7 +739,7 @@ Inline Resource
 
 If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. You cannot navigate upward with `../` in paths for security reasons.
 
-* A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+* A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. (Leanpub may support the `![](/resources/foo.jpg)` leading-slash syntax for now, but this is not guaranteed to be true in future.)
 * A file called `bar.png` in a subdirectory `images` of the resources directory should be referenced as `![](images/bar.png)`--not as `![](/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
 Note, however, that Leanpub also ignores the part of a path which starts with `resources/`. So, you can also do the following:
@@ -748,6 +748,8 @@ Note, however, that Leanpub also ignores the part of a path which starts with `r
 * A file called `bar.png` in a subdirectory `images` of the resources directory can also be referenced as `![](resources/images/bar.png)`.
 
 The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path. One unfortunate consequence of this, however, is that you cannot have a directory called `resources` inside the `resources` directory. So, any paths which are `resources/resources/` are illegal. Everything has tradeoffs, and this is the pragmatic choice.
+
+Note that **you cannot have spaces in the directory names**. If you have a directory called `foo bar` containing an image called `baz.png`, you will have a really bad time trying to refer to it. Instead, use hypens or underscores in your directory names: `foo_bar/baz.png` is fine, as is `foo-bar/baz.png`.
 
 Nested directory trees work as well. A file called `foo.rb` in a `ch1/examples/ruby` directory tree inside the `resources` directory is referenced as `![](ch1/examples/ruby/foo.rb)`.
 
