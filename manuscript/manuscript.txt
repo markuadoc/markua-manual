@@ -294,6 +294,8 @@ You may want to read The Markua Spec if:
 
 Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM).
 
+Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically Markdown plus some extensions minus inline HTML. So, Markua and Leanpub Flavoured Markdown are similar in that regard, in that neither supports inline HTML. To be clear, Leanpub does not support inline HTML, regardless of whether you use Markua (recommended) or Leanpub Flavoured Markdown (deprecated).
+
 1. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
 2. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
 3. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
@@ -304,6 +306,8 @@ Besides differences with Markdown in general, Markua also has a number of specif
 8. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
 
 Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Manual to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+
+Throughout the Markua manual, when I say "Markdown" I mean the format originally defined by John Gruber, best-specified by CommonMark and extended by formats such as GitHub Flavored Markdown. If I ever want to refer to Leanpub Flavoured Markdown, I will do so by saying "Leanpub Flavoured Markdown" or "LFM", not just "Markdown".
 
 ## Acknowledgments
 
@@ -2937,6 +2941,8 @@ Inline HTML, in which HTML is inserted directly in the content of a Markua docum
 HTML is just one possible output format, and other possible Markua output formats (such as PDF) are not based on HTML. If inline HTML was supported, Leanpub would have to support parsing and meaningfully outputting all of HTML syntax as well as all of Markua syntax.
 
 Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write a book. Since Markdown's only output format target is HTML, it might as well support inline HTML: generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free.
+
+Note that by "Markdown" in the previous paragraph, I mean the format originally defined by John Gruber, best-specified by CommonMark and extended by formats such as GitHub Flavored Markdown. All of these forms of Markdown DO support inline HTML. However, [Leanpub Flavoured Markdown](https://leanpub.com/lfm/read) does NOT support inline HTML, even though it has "Markdown" as part of its name. Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically Markdown plus some extensions minus inline HTML. So, Leanpub does not support inline HTML, regardless of whether you use Markua (recommended) or Leanpub Flavoured Markdown (deprecated).
 
 By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate by doing formatting is reduced.
 
