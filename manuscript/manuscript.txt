@@ -290,13 +290,13 @@ You may want to read The Markua Spec if:
 4. You want to see every planned feature in Markua, not just what works in Leanpub today.
 5. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including any differences with what is explained here.
 
-## Markua 0.1 and Markua 0.29
+## Markua 0.10 and Markua 0.29
 
-Leanpub currently uses Markua 0.1, which is what is documented in this manual. So, whenever this manual says "Markua" without a version specified, Markua 0.1 is intended.
+Leanpub currently uses Markua 0.1, which is what is documented in this manual. So, whenever this manual says "Markua" without a version specified, Markua 0.10 is intended.
 
 Leanpub will eventually support Markua 0.29, which is specified at <http://markua.com/>, but there is a lot of work to do first before even a beta of Markua 0.29 support can be launched.
 
-Markua 0.1 will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
+Markua 0.10 will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
 
 ## Differences with Leanpub Flavoured Markdown (LFM)
 
@@ -306,7 +306,7 @@ Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically M
 
 Leanpub Flavoured Markdown will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
 
-1. LFM supports the Setext style of Markdown headers (`=====` and `-----`) as well as the atx style of Markdown headers (`# Chapter`, `## Section`, etc.) Markua 0.1 only supports atx headers. Markua 0.29 will support the Setext and the atx style of Markdown headers. However, as discussed above, Leanpub currently supports Markua 0.1, not Markua 0.29. **So, if you have an existing Markdown document with a lot of Setext headers, you may be better off sticking with LFM for now.** (If, on the other hand, you've never heard of Setext headers and/or you don't use them, this will not be an issue for you.)
+1. LFM supports the Setext style of Markdown headers (`=====` and `-----`) as well as the atx style of Markdown headers (`# Chapter`, `## Section`, etc.) Markua 0.10 only supports atx headers. Markua 0.29 will support the Setext and the atx style of Markdown headers. However, as discussed above, Leanpub currently supports Markua 0.1, not Markua 0.29. **So, if you have an existing Markdown document with a lot of Setext headers, you may be better off sticking with LFM for now.** (If, on the other hand, you've never heard of Setext headers and/or you don't use them, this will not be an issue for you.)
 2. **In Markua 0.1, a single newline in a paragraph is always a forced line break.** This was a mistake, and it should have been configurable. For the reasoning about why a single newline is a forced line break, see [this](#single-newlines). In LFM, a single newline is handled the way that it is done in Markdown: it is treated as a single space, and not as a forced line break, unless the "two space hack" at the end of the line is used. Markua 0.29 will support configurable handling of single newlines, to be either treated as forced line breaks or as the way that they are treated in Markdown. However, as discussed, Leanpub currently supports Markua 0.1, not Markua 0.29. **So, if you have an existing Markdown document with a lot of single line breaks which you had added just to manually wrap paragraph text in your manuscript, you will DEFINITELY be better off sticking with LFM for now.**
 3. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
 4. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
