@@ -229,22 +229,17 @@ Markua is a plain text format. Markua is basically Markdown, minus all inline HT
 
 Markua manuscripts, called Markua documents, can be written however you want. On a computer, you can use any text editor you want. Beginning authors can use simple programs like Notepad or TextEdit or "distraction-free" programs like iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or VSCode. Since Markua is very similar to Markdown, many programs which support Markdown should already do a decent job of supporting Markua by default.
 
-Leanpub has 7 different writing modes.
-
-On Leanpub, these are the writing modes you can use to write in Markua:
+Leanpub has 5 different writing modes:
 
 1. GitHub
 2. Bitbucket
 3. Dropbox
 4. In-Browser Text Editor
+5. Bring Your Own Book
 
-You can also use Leanpub Flavoured Markdown (LFM) in these modes.
+You can write in Markua in GitHub, Bitbucket, Dropbox and the In-Browser Text Editor writing modes. You can't write in Markua in the Bring Your Own Book writing mode, since you are just uploading already-generated ebooks in PDF, EPUB and/or MOBI.
 
-On Leanpub, these writing modes do not support writing in Markua or in LFM:
-
-5. Visual Editor (it's WYSIWYG)
-6. Google Docs (it's WYSIWYG)
-7. Bring Your Own Book (you're uploading files)
+(Leanpub also has two deprecated writing modes, our Google Docs writing mode and our Visual Editor writing mode. Neither of these can be used to write in Markua: instead, they are WYSIWYG.)
 
 Markua maps Markdown syntax to book concepts, and then adds some new syntax and concepts of its own.
 
@@ -295,27 +290,40 @@ You may want to read The Markua Spec if:
 4. You want to see every planned feature in Markua, not just what works in Leanpub today.
 5. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including any differences with what is explained here.
 
+## Markua 0.10 and Markua 0.29
+
+Leanpub currently implements Markua 0.10, which is what is documented in this manual. So, whenever this manual says "Markua" without a version specified, Markua 0.10 is intended.
+
+Leanpub will eventually support Markua 0.29, which is specified at <http://markua.com/>, but there is a lot of work to do first before even a beta of Markua 0.29 support can be launched.
+
+Markua 0.10 will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
+
 ## Differences with Leanpub Flavoured Markdown (LFM)
 
 Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM).
 
-1. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
-2. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
-3. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
-4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
-5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
-6. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
-7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
-8. In LFM, we had a `{pagebreak}` directive. This is currently absent, but it will probably return.
-9. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically Markdown plus some extensions minus inline HTML. So, Markua and Leanpub Flavoured Markdown are similar in that regard, in that neither supports inline HTML. To be clear, Leanpub does not support inline HTML, regardless of whether you use Markua or Leanpub Flavoured Markdown.
 
-Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Spec to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+Leanpub Flavoured Markdown will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
+
+1. LFM supports the Setext style of Markdown headers (`=====` and `-----`) as well as the atx style of Markdown headers (`# Chapter`, `## Section`, etc.) Leanpub's implementation of Markua 0.10 only supports atx headers. Leanpub's implementation of Markua 0.29 will support the Setext and the atx style of Markdown headers. **So, if you have an existing Markdown document with a lot of Setext headers, you may be better off sticking with LFM for now.** (If, on the other hand, you've never heard of Setext headers and/or you don't use them, this will not be an issue for you.)
+2. **In Leanpub's implementation of Markua 0.10, a single newline in a paragraph is always a forced line break.** This was a mistake, and it should have been configurable. For the reasoning about why a single newline is a forced line break, see [this](#single-newlines). In LFM, a single newline is handled the way that it is done in Markdown: it is treated as a single space, and not as a forced line break, unless the "two space hack" at the end of the line is used. Leanpub's implementation of Markua 0.29 will support configurable handling of single newlines, to be either treated as forced line breaks or as the way that they are treated in Markdown. **So, if you have an existing Markdown document with a lot of single line breaks which you had added just to manually wrap paragraph text in your manuscript, you will DEFINITELY be better off sticking with LFM for now.**
+3. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
+4. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
+5. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
+6. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
+7. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
+8. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
+9. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
+10. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+
+Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Manual to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+
+Throughout the Markua manual, when I say "Markdown" I mean the format originally defined by John Gruber, best-specified by CommonMark and extended by formats such as GitHub Flavored Markdown. If I ever want to refer to Leanpub Flavoured Markdown, I will do so by saying "Leanpub Flavoured Markdown" or "LFM", not just "Markdown".
 
 ## Acknowledgments
 
-I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help, especially from my Leanpub cofounders [Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp) and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead developer of Leanpub's book generation engine (both the LFM and Markua versions), and he has given me both the most and the best feedback about Markua over the years that I've been working on it.
-
-Perhaps most important, Markua is built on Markdown. So, Markua literally would not exist without John Gruber and Aaron Swartz. Markua is now also using the CommonMark spec as its starting point, so I am really grateful to John MacFarlane (the author of the CommonMark spec) and the team behind CommonMark and `cmark`. I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
+I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua. However, I'm standing on the shoulders of giants. Most important, Markua is built on Markdown. So, Markua literally would not exist without John Gruber and Aaron Swartz. Markua is now also using the CommonMark spec as its starting point, so I am really grateful to John MacFarlane (the author of the CommonMark spec) and the team behind CommonMark and `cmark`. I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
 
 Markua is also benefitting from years of feedback about Leanpub Flavoured Markdown and Markua, from many incredibly helpful and patient Leanpub authors. If it wasn't for these authors, there would be no Leanpub, and no Markua.
 
@@ -743,7 +751,7 @@ Inline Resource
 
 If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. You cannot navigate upward with `../` in paths for security reasons.
 
-* A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+* A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. (Leanpub may support the `![](/resources/foo.jpg)` leading-slash syntax for now, but this is not guaranteed to be true in future.)
 * A file called `bar.png` in a subdirectory `images` of the resources directory should be referenced as `![](images/bar.png)`--not as `![](/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
 Note, however, that Leanpub also ignores the part of a path which starts with `resources/`. So, you can also do the following:
@@ -752,6 +760,8 @@ Note, however, that Leanpub also ignores the part of a path which starts with `r
 * A file called `bar.png` in a subdirectory `images` of the resources directory can also be referenced as `![](resources/images/bar.png)`.
 
 The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path. One unfortunate consequence of this, however, is that you cannot have a directory called `resources` inside the `resources` directory. So, any paths which are `resources/resources/` are illegal. Everything has tradeoffs, and this is the pragmatic choice.
+
+Note that **you cannot have spaces in the directory names**. If you have a directory called `foo bar` containing an image called `baz.png`, you will have a really bad time trying to refer to it. Instead, use hypens or underscores in your directory names: `foo_bar/baz.png` is fine, as is `foo-bar/baz.png`.
 
 Nested directory trees work as well. A file called `foo.rb` in a `ch1/examples/ruby` directory tree inside the `resources` directory is referenced as `![](ch1/examples/ruby/foo.rb)`.
 
@@ -820,7 +830,7 @@ We will discuss the supported and the default attributes for images, and then sh
 
 Note that regardless of the image location, Leanpub embeds the image in the output format.
 
-Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, and `align` or `float` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
+Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, and `align` or `float` attributes, or can be `fullbleed`. (However, our advice is to save your time and not use the `float` attribute. See below for details.) These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
 
 #### Supported Attributes for Images
 
@@ -833,7 +843,7 @@ The following are the supported attributes for image resources, in addition to t
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
 `float`
-: The `float` can be `left`, `right`, `inside` or `outside`. The `left` and `right` attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Leanpub can export InDesign files. Also, note that `float` supports `inside` or `outside`, but `align` does not. What Leanpub does with `inside` and `outside` is more complex. Leanpub must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, Leanpub has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, Leanpub can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead.
+: The `float` can be `left`, `right`, `inside` or `outside`. The `left` and `right` attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Leanpub can export InDesign files. Also, note that `float` supports `inside` or `outside`, but `align` does not. What Leanpub does with `inside` and `outside` is more complex. Leanpub must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, Leanpub has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, Leanpub can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead. Frankly, our recommendation about using the `float` attribute is to save your time and not do it. Floating images and wrapping text occasionally do work nicely, but more often than not they leave something to be desired. Basically, it really only works decently for small images, and not in conjunction with anything but normal paragraphs. Our PDF rendering is done by producing LaTeX from Markua. LaTeX is great, but its support for floating images requires some manual tweaking at times, and this is not something that Markua encourages or supports: Markua is all about fully-automated layout of books. Finally, for the people who read your book in EPUB on a phone, they will not care about, or benefit from, any work spent floating images.
 
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, Leanpub should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
@@ -2095,7 +2105,7 @@ Quizzes or exercises in a textbook consist of two things:
 1. Questions, typically in the chapter itself.
 2. Answers, typically at the back of the book.
 
-The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices. The specific location that they are positioned can be controlled by the author using [book section directives](#book-section-directives), discussed later.
+The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices.
 
 There is only one syntax to create a quiz or exercise. For a quiz, it's by wrapping the quiz in `{quiz}` ... `{/quiz}`; for an exercise, it's by wrapping the exercise in `{exercise}` ... `{/exercise}`.
 
@@ -2874,7 +2884,7 @@ Leanpub must raise an error if it encounters a conditional inclusion attribute u
 {#directives}
 ## Directives
 
-Directives are switches which affect the future behaviour of Leanpub.
+Directives are switches which affect the parsing of a Markua document.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it. (There are two exceptions: if the directive is at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.)
 
@@ -2914,6 +2924,23 @@ Hello world.
 
 These directives have not yet been updated to `section` directives per the Markua Spec.
 
+
+## Page Breaks
+
+Despite how much Markua encourages you to not worry about formatting, sometimes you really just need to add a page break. Pretending otherwise would not be pragmatic.
+
+So, Markua supports adding a page break with `{pagebreak}`. This looks a lot like a directive, but it's not, since it only has an effect once, not going forward.
+
+Here's an example:
+
+```
+foo
+
+{pagebreak}
+
+bar
+```
+
 {backmatter}
 
 # Appendices
@@ -2926,6 +2953,8 @@ Inline HTML, in which HTML is inserted directly in the content of a Markua docum
 HTML is just one possible output format, and other possible Markua output formats (such as PDF) are not based on HTML. If inline HTML was supported, Leanpub would have to support parsing and meaningfully outputting all of HTML syntax as well as all of Markua syntax.
 
 Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write a book. Since Markdown's only output format target is HTML, it might as well support inline HTML: generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free.
+
+Note that by "Markdown" in the previous paragraph, I mean the format originally defined by John Gruber, best-specified by CommonMark and extended by formats such as GitHub Flavored Markdown. All of these forms of Markdown DO support inline HTML. However, [Leanpub Flavoured Markdown](https://leanpub.com/lfm/read) does NOT support inline HTML, even though it has "Markdown" as part of its name. Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically Markdown plus some extensions minus inline HTML. So, Leanpub does not support inline HTML, regardless of whether you use Markua or Leanpub Flavoured Markdown.
 
 By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate by doing formatting is reduced.
 
