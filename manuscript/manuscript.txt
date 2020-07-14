@@ -2821,10 +2821,6 @@ If a text attribute value contains a quote, it must be "escaped" with a backslas
 
 As previously discussed, there is special syntactic sugar for ids: `{#foo}` is equivalent to `{id: foo}`. However, ids are just attributes.
 
-### `title` Attributes
-
-Markua headings (part, chapter, section, sub-section, etc.) and figures can all have `title` attributes specified in an attribute list. This is text which overrides what is displayed for the heading or figure in the table of contents. For a heading, it is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the `caption` attribute for a resource) is not appropriate, say if it's too long.
-
 {#conditional-inclusion}
 ### Conditional Inclusion Attributes on Headings: `book`, `sample`
 
