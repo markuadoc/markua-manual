@@ -681,7 +681,7 @@ If a resource is inserted in a span context, and it can fit in the span context,
 
 If a local or web resource is inserted with no newlines before or after it,
 
-The following two paragraphs are not equivalent:
+The following two paragraphs are equivalent:
 
 ~~~
 Here's some text ![Foo](bar.png) and more text.
