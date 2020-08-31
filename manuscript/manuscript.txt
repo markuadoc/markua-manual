@@ -655,20 +655,6 @@ This resource would be treated as LaTeX math:
 Yada yada `some LaTeX math here`{format: latex} yada yada.
 ~~~
 
-This resource would be treated as AsciiMath:
-
-~~~
-Yada yada `some AsciiMath math here`{format: asciimath} yada yada.
-~~~
-
-This resource would be treated as MathML math:
-
-~~~
-Yada yada `some MathML math here`{format: mathml} yada yada.
-~~~
-
-Yes, you can actually insert a math resource of `mathml` format as a span, but it's so verbose that it's a bad idea. You're much better off using AsciiMath or LaTeX math for spans.
-
 When a resource is inserted as a span, the resource is inserted as part of the flow of text of a paragraph with no newlines before or after it. A span resource is intended to be extremely short and simple. However, to support rare use cases, any span can have an attribute list. The attribute list on a span is specified immediately after the closing backtick. Examples of this are shown in the code and math sections.
 
 Note that inside a code span, whitespace is preserved. The reasoning here is simple: in source code, whitespace matters, so it must not get collapsed into a single space.
@@ -695,7 +681,7 @@ If a resource is inserted in a span context, and it can fit in the span context,
 
 If a local or web resource is inserted with no newlines before or after it,
 
-The following two paragraphs are equivalent:
+The following two paragraphs are not equivalent:
 
 ~~~
 Here's some text ![Foo](bar.png) and more text.
@@ -1326,11 +1312,11 @@ The following is the supported attribute for math resources, in addition to the 
 `alt`
 : The `alt` is the alt text, to be displayed when the mathematical equations cannot be shown. The default alt text for math is "math". This can be provided in the figure attribute list.
 
-Note that for math, the `format` is the name of the syntax used to write the mathematical equations. There are two special types of `format` for math baked into Markua: `latex` for LaTeX math and `mathml` for MathML math.
+Note that for math, the `format` is the name of the syntax used to write the mathematical equations. There is one special type of `format` for math baked into Markua: `latex` for LaTeX math.
 
 #### Inline Math Resources
 
-Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. LaTeX math, AsciiMath and MathML can be inserted inline as a span or figure.
+Inline math resources are the most flexible way to insert math. They are the only way to insert math as a span resource, and the most straightforward way to add short math examples as figures. LaTeX math can be inserted inline as a span or figure.
 
 ##### Span
 
@@ -1348,10 +1334,10 @@ Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside a 
 
 The `$` character indicates the inline resource is LaTeX math.
 
-If you don't like syntactic sugar, you can also use {format: latex} after the inline span resource:
+If you want to show the LaTeX math like code, you can use {format: latex} after the inline span resource:
 
 ~~~
-Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`{format: latex} inside a sentence.
+Here's one of the kinematic equations in LaTeX `d = v_i t + \frac{1}{2} a t^2`{format: latex}.
 ~~~
 
 ##### Figure
@@ -1386,7 +1372,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-Here's the same thing, with the full format after the backticks:
+If you want to show the highlighted LaTeX math like code, use the full format after the backticks:
 
 ~~~
 Here's a paragraph before the figure.
@@ -1401,7 +1387,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-Here's the same thing again, with a full attribute list:
+Here's the same thing, with a full attribute list:
 
 ~~~
 Here's a paragraph before the figure.
