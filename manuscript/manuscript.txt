@@ -1282,6 +1282,7 @@ Initialized empty Git repository in /path/to/repo
 ```
 ~~~
 
+{#marking-code-as-added-or-deleted}
 #### Marking Code as Added or Deleted
 
 Markua supports marking code as added or deleted, which can be helpful if you are writing a computer programming book and want to indicate what code should be added or removed to a larger program.
