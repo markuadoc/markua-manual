@@ -356,7 +356,7 @@ Bold + Underlined
 : To produce ___bold + underlined text___, surround it with `___three underscores___`. (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Bold + Italic + Underlined
-: To produce ____bold + italic + underlined____ text, surround it with `____four underscores____`.  (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
+: To produce _***bold + italic + underlined***_ text, surround it with `_***a combination of one underscore and three asterisks***_`, making sure to have the underscores on the outside. Conceptually, this is simple: you just make `***bold + italic text***`, and then surround that text with `_one underscore_` for the underline. (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
