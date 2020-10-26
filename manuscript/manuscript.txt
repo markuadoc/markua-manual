@@ -356,7 +356,7 @@ Bold + Underlined
 : To produce ___bold + underlined text___, surround it with `___three underscores___`. (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Bold + Italic + Underlined
-: To produce ____bold + italic + underlined____ text, surround it with `____four underscores____`.  (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
+: To produce _***bold + italic + underlined***_ text, surround it with `_***a combination of one underscore and three asterisks***_`, making sure to have the underscores on the outside. Conceptually, this is simple: you just make `***bold + italic text***`, and then surround that text with `_one underscore_` for the underline. (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
@@ -1282,6 +1282,7 @@ Initialized empty Git repository in /path/to/repo
 ```
 ~~~
 
+{#marking-code-as-added-or-deleted}
 #### Marking Code as Added or Deleted
 
 Markua supports marking code as added or deleted, which can be helpful if you are writing a computer programming book and want to indicate what code should be added or removed to a larger program.
@@ -1445,7 +1446,7 @@ If there are any errors with the supported attributes for tables, such as the `c
 The following is the supported attribute for table resources, in addition to the `type`, `format`, `caption` and `class` attributes which all resources support:
 
 `column-widths`
-: The column widths as a whitespace-separated list of numbers (integers and/or floats) and/or `*` symbols, from left to right, as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Examples: `{column-widths: "10%,30%,*,10%"}`, `{column-widths: "10%,*,40%,*"}`, `{column-widths: "10%, 30%, *, 12.5%"}`, `{column-widths: "95%, *, *"}`. The numbers used for the column-widths percentages must sum to exactly 100 (if only numbers are used), or to less than 100 (if there are any `*`s used). Every specified value must be at least 1, and every `*` must compute to at least 1. The number of values (numbers or `*`s) must match the number of columns. Like with the `width` attribute, the percentage sign (%) is required, to make it absolutely clear that these are not measurements in pixels or points.
+: **NOTE: There is currently a bug in Leanpub where this attribute is broken. We're working on fixing it.** The column widths as a comma-separated list of numbers (integers and/or floats) and/or `*` symbols, from left to right, as a percentage of the total table width. In this attribute value, * means for the column to use the remaining space, equally divided between it and any other column with the * attribute. Examples: `{column-widths: "10% 30% * 10%"}`, `{column-widths: "10% * 40% *"}`, `{column-widths: "10% 30% * 12.5%"}`, `{column-widths: "95% * *"}`. The numbers used for the column-widths percentages must sum to exactly 100 (if only numbers are used), or to less than 100 (if there are any `*`s used). Every specified value must be at least 1, and every `*` must compute to at least 1. The number of values (numbers or `*`s) must match the number of columns. Like with the `width` attribute, the percentage sign (%) is required, to make it absolutely clear that these are not measurements in pixels or points. Finally, the list may contain optional whitespace before and/or after each comma.
 
 `width`
 : The width of the table, in percentage of page content area width (respecting margins). This is specified as a number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
