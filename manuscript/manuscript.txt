@@ -912,12 +912,12 @@ You can also use the Markua link syntax around an images itself. This is the sta
 So, you can do the following:
 
 ```
-[![A Piece of Cake](cake.jpg)](https://peterarmstrong.com/pictures/1.jpg)
+[![A Piece of Cake](cake.jpg)](https://unsplash.com/photos/I48gnI1Qs5o)
 ```
 
 Frankly, this syntax has enough line noise to remind me a bit of JWZ's "now you have two problems" [joke](https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/) about regular expressions.
 
-What this is doing is inserting an image as a resource with a caption `![A Piece of Cake](cake.jpg)` and then wrapping the entire thing with a link. If you think of the image resource as `r`, this is just `[r](https://peterarmstrong.com/pictures/1.jpg)`. Simple!
+What this is doing is inserting an image as a resource with a caption `![A Piece of Cake](cake.jpg)` and then wrapping the entire thing with a link. If you think of the image resource as `r`, this is just `[r](https://unsplash.com/photos/I48gnI1Qs5o)`. Simple!
 
 {#video}
 ### Video
