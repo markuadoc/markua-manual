@@ -2064,6 +2064,8 @@ This is the only way to center text in Markua.
 
 Unlike other blurb types which have their origin in technical books, centering text has a wide range of uses. So, it could have been thought of as something different than a blurb. However, in terms of its behaviour and the way it's inserted, centered text is a blurb--whether it's inserted via syntactic sugar or via a class attribute on a normal blurb element. So, it's discussed here.
 
+Please note that centered blurbs do not support added icons, which are discussed in the next section.
+
 ### Using Extension Attributes on Blurbs to add `icon` Support
 
 Leanpub adds an `icon` attribute to blurbs. Markua does not specify that a blurb must support an `icon` attribute, or what it would mean if it did. However, Leanpub understands an `icon` attribute to reference an icon from Font Awesome. The value of this attribute is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.  So, in Leanpub, you can do this:
@@ -2080,6 +2082,8 @@ B> So is GitHub, of course. Unicorns.
 ~~~
 
 In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon.
+
+Please note that as mentioned in the previous section, you cannot add icons to centered blurbs.
 
 # Quizzes and Exercises
 
