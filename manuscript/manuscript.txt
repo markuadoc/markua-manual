@@ -3816,8 +3816,6 @@ Baz
 Hello world.
 ```
 
-These directives have not yet been updated to `section` directives per the Markua Spec.
-
 {backmatter}
 
 # Appendices
