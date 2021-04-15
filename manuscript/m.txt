@@ -1,5 +1,9 @@
 {mainmatter}
 
+# Don't Read This Book (Yet)
+
+This book will describe the behaviour of Leanpub when parsing Markua 0.29 documents. However, our beta support for Markua 0.29 is not released yet. So, until this is the case, you should read [the Markua 0.10 manual](https://leanpub.com/markua/read) instead, since that's the version of Markua currently supported on Leanpub.
+
 # Introduction
 
 ## The Magical Typewriter
@@ -229,22 +233,17 @@ Markua is a plain text format. Markua is basically Markdown, minus all inline HT
 
 Markua manuscripts, called Markua documents, can be written however you want. On a computer, you can use any text editor you want. Beginning authors can use simple programs like Notepad or TextEdit or "distraction-free" programs like iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or VSCode. Since Markua is very similar to Markdown, many programs which support Markdown should already do a decent job of supporting Markua by default.
 
-Leanpub has 7 different writing modes.
-
-On Leanpub, these are the writing modes you can use to write in Markua:
+Leanpub has 5 different writing modes:
 
 1. GitHub
 2. Bitbucket
 3. Dropbox
 4. In-Browser Text Editor
+5. Bring Your Own Book
 
-You can also use Leanpub Flavoured Markdown (LFM) in these modes.
+You can write in Markua in GitHub, Bitbucket, Dropbox and the In-Browser Text Editor writing modes. You can't write in Markua in the Bring Your Own Book writing mode, since you are just uploading already-generated ebooks in PDF, EPUB and/or MOBI.
 
-On Leanpub, these writing modes do not support writing in Markua or in LFM:
-
-5. Visual Editor (it's WYSIWYG)
-6. Google Docs (it's WYSIWYG)
-7. Bring Your Own Book (you're uploading files)
+(Leanpub also has two deprecated writing modes, our Google Docs writing mode and our Visual Editor writing mode. Neither of these can be used to write in Markua: instead, they are WYSIWYG.)
 
 Markua maps Markdown syntax to book concepts, and then adds some new syntax and concepts of its own.
 
@@ -281,11 +280,13 @@ This book explains how to use the parts of Markua which **CURRENTLY** work on Le
 * Everything you read about in this book should just work.
 * Everything in Markua which is not yet supported on Leanpub is just omitted, as though it does not exist.
 
-The formal specification of Markua is contained in a separate document called [The Markua Spec](http://markua.com). It will soon be available on the Markua website, not as an ebook.
+The formal specification of Markua is contained in a separate document called [The Markua Spec](http://markua.com). It is available on [the Markua website](http://markua.com).
+
+To be clear: the document you are currently reading describes the behaviour of the Markua Beta in Leanpub. This behaviour is occasionally **DIFFERENT** than [what is specified in the latest version of The Markua Spec](http://markua.com/#differences-with-markua-beta). When The Markua Spec is fully implemented in Leanpub, we plan to provide migration tools to update your books from the Markua Beta to the latest version of Markua.
 
 The Markua Spec is based on the GitHub Flavored Markdown (GFM) Spec, which is based on the CommonMark Spec. The author of the CommonMark Spec is John MacFarlane. In the Markua Spec, Markua is specified as a set of modifications to CommonMark, for ease of comparison with CommonMark.
 
-You will want to read The Markua Spec (once it's online) if:
+You may want to read The Markua Spec if:
 
 1. You are a computer programmer.
 2. You like reading specs.
@@ -293,27 +294,40 @@ You will want to read The Markua Spec (once it's online) if:
 4. You want to see every planned feature in Markua, not just what works in Leanpub today.
 5. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including any differences with what is explained here.
 
+## Markua 0.10 and Markua 0.29
+
+Leanpub currently implements Markua 0.10, which is what is documented in this manual. So, whenever this manual says "Markua" without a version specified, Markua 0.10 is intended.
+
+Leanpub will eventually support Markua 0.29, which is specified at <http://markua.com/>, but there is a lot of work to do first before even a beta of Markua 0.29 support can be launched.
+
+Markua 0.10 will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
+
 ## Differences with Leanpub Flavoured Markdown (LFM)
 
 Besides differences with Markdown in general, Markua also has a number of specific differences with Leanpub Flavoured Markdown (LFM).
 
-1. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
-2. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
-3. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
-4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
-5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
-6. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
-7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
-8. In LFM, we had a `{pagebreak}` directive. This is currently absent, but it will probably return.
-9. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically Markdown plus some extensions minus inline HTML. So, Markua and Leanpub Flavoured Markdown are similar in that regard, in that neither supports inline HTML. To be clear, Leanpub does not support inline HTML, regardless of whether you use Markua or Leanpub Flavoured Markdown.
 
-Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Spec to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+Leanpub Flavoured Markdown will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
+
+1. LFM supports the Setext style of Markdown headers (`=====` and `-----`) as well as the atx style of Markdown headers (`# Chapter`, `## Section`, etc.) Leanpub's implementation of Markua 0.10 only supports atx headers. Leanpub's implementation of Markua 0.29 will support the Setext and the atx style of Markdown headers. **So, if you have an existing Markdown document with a lot of Setext headers, you may be better off sticking with LFM for now.** (If, on the other hand, you've never heard of Setext headers and/or you don't use them, this will not be an issue for you.)
+2. **In Leanpub's implementation of Markua 0.10, a single newline in a paragraph is always a forced line break.** This was a mistake, and it should have been configurable. For the reasoning about why a single newline is a forced line break, see [this](#single-newlines). In LFM, a single newline is handled the way that it is done in Markdown: it is treated as a single space, and not as a forced line break, unless the "two space hack" at the end of the line is used. Leanpub's implementation of Markua 0.29 will support configurable handling of single newlines, to be either treated as forced line breaks or as the way that they are treated in Markdown. **So, if you have an existing Markdown document with a lot of single line breaks which you had added just to manually wrap paragraph text in your manuscript, you will DEFINITELY be better off sticking with LFM for now.**
+3. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
+4. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
+5. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
+6. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This looks nice to people who like LaTeX, and looks like nothing else in Markdown. In Markua, however, math is just another resource, and that LaTeX-inspired syntax for wrapping math resources is not supported.
+7. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with blurbs (`B>`).
+8. LFM had the `C>` syntax to center text, but we didn't have the same effect on generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just syntactic sugar for a centered blurb, for greater consistency. Because of this, the blurb also gets the ability to be centered by adding a `{class: center}` attribute.
+9. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua, and neither is a `{dir}` attribute in general: any given language is either a left-to-right or a right-to-left language, so specifying the language is sufficient.
+10. LFM used Sample.txt to define the sample content. Markua moves the definition of what constitutes sample content into a `{sample: true}` attribute on parts, chapters and sections. So, in Markua, inclusion in the sample is at the content level, not the file level. This helps avoid a number of bugs that could happen with including at the file level, if a file did not clearly break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not supported for books which use Markua.)
+
+Besides these differences, there are a number of smaller ones, which you will discover if you compare the Markua Manual to the [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+
+Throughout the Markua manual, when I say "Markdown" I mean the format originally defined by John Gruber, best-specified by CommonMark and extended by formats such as GitHub Flavored Markdown. If I ever want to refer to Leanpub Flavoured Markdown, I will do so by saying "Leanpub Flavoured Markdown" or "LFM", not just "Markdown".
 
 ## Acknowledgments
 
-I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua, but I'm getting lots of help, especially from my Leanpub cofounders [Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp) and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead developer of Leanpub's book generation engine (both the LFM and Markua versions), and he has given me both the most and the best feedback about Markua over the years that I've been working on it.
-
-Perhaps most important, Markua is built on Markdown. So, Markua literally would not exist without John Gruber and Aaron Swartz. Markua is now also using the CommonMark spec as its starting point, so I am really grateful to John MacFarlane (the author of the CommonMark spec) and the team behind CommonMark and `cmark`. I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
+I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of Markua. However, I'm standing on the shoulders of giants. Most important, Markua is built on Markdown. So, Markua literally would not exist without John Gruber and Aaron Swartz. Markua is now also using the CommonMark spec as its starting point, so I am really grateful to John MacFarlane (the author of the CommonMark spec) and the team behind CommonMark and `cmark`. I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
 
 Markua is also benefitting from years of feedback about Leanpub Flavoured Markdown and Markua, from many incredibly helpful and patient Leanpub authors. If it wasn't for these authors, there would be no Leanpub, and no Markua.
 
@@ -346,7 +360,7 @@ Bold + Underlined
 : To produce ___bold + underlined text___, surround it with `___three underscores___`. (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Bold + Italic + Underlined
-: To produce ____bold + italic + underlined____ text, surround it with `____four underscores____`.  (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
+: To produce _***bold + italic + underlined***_ text, surround it with `_***a combination of one underscore and three asterisks***_`, making sure to have the underscores on the outside. Conceptually, this is simple: you just make `***bold + italic text***`, and then surround that text with `_one underscore_` for the underline. (Also, go to `Author > Books > (your book) > Settings > Generation Settings` on Leanpub and ensure that the  **Italicize Underlines** checkbox is not selected.)
 
 Strikethrough
 : To produce ~~strikethrough text~~, surround it with `~~two tildes~~`.
@@ -741,7 +755,7 @@ Inline Resource
 
 If local resources are used, all local resources must be stored inside a `resources` directory, or one of its subdirectories. The `resources` directory is not part of the path to the resource. You cannot navigate upward with `../` in paths for security reasons.
 
-* A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`.
+* A file called `foo.jpg` in the `resources` directory should be referenced as `![](foo.jpg)`--not as `![](/foo.jpg)`, `![](resources/foo.jpg)` or  `![](/resources/foo.jpg)`. (Leanpub may support the `![](/resources/foo.jpg)` leading-slash syntax for now, but this is not guaranteed to be true in future.)
 * A file called `bar.png` in a subdirectory `images` of the resources directory should be referenced as `![](images/bar.png)`--not as `![](/images/bar.png)` or  `![](/resources/images/bar.png)`.
 
 Note, however, that Leanpub also ignores the part of a path which starts with `resources/`. So, you can also do the following:
@@ -750,6 +764,8 @@ Note, however, that Leanpub also ignores the part of a path which starts with `r
 * A file called `bar.png` in a subdirectory `images` of the resources directory can also be referenced as `![](resources/images/bar.png)`.
 
 The reason for this is that there are, and always will be, more Markdown-aware tools in the world than Markua-aware tools. So, supporting relative paths is a must, and a relative path does include the `resources/` part of that path. One unfortunate consequence of this, however, is that you cannot have a directory called `resources` inside the `resources` directory. So, any paths which are `resources/resources/` are illegal. Everything has tradeoffs, and this is the pragmatic choice.
+
+Note that **you cannot have spaces in the directory names**. If you have a directory called `foo bar` containing an image called `baz.png`, you will have a really bad time trying to refer to it. Instead, use hypens or underscores in your directory names: `foo_bar/baz.png` is fine, as is `foo-bar/baz.png`.
 
 Nested directory trees work as well. A file called `foo.rb` in a `ch1/examples/ruby` directory tree inside the `resources` directory is referenced as `![](ch1/examples/ruby/foo.rb)`.
 
@@ -818,7 +834,7 @@ We will discuss the supported and the default attributes for images, and then sh
 
 Note that regardless of the image location, Leanpub embeds the image in the output format.
 
-Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, and `align` or `float` attributes, or can be `fullbleed`. These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
+Images have some of the only non-semantic formatting in Markua. Images can have `width`, `height`, and `align` or `float` attributes, or can be `fullbleed`. (However, our advice is to save your time and not use the `float` attribute. See below for details.) These settings, which also apply to the posters for videos, are so universal when applied to images that it would be too purist for Markua to insist that the only way to format images was to add a `class` element, and then style the `class` of the image elsewhere. Markua is semantic, but it's also pragmatic: by providing a few basic ways to format images, it enables authors to make in-progress books look good enough to publish in-progress.
 
 #### Supported Attributes for Images
 
@@ -831,7 +847,7 @@ The following are the supported attributes for image resources, in addition to t
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
 
 `float`
-: The `float` can be `left`, `right`, `inside` or `outside`. The `left` and `right` attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Leanpub can export InDesign files. Also, note that `float` supports `inside` or `outside`, but `align` does not. What Leanpub does with `inside` and `outside` is more complex. Leanpub must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, Leanpub has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, Leanpub can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead.
+: The `float` can be `left`, `right`, `inside` or `outside`. The `left` and `right` attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Leanpub can export InDesign files. Also, note that `float` supports `inside` or `outside`, but `align` does not. What Leanpub does with `inside` and `outside` is more complex. Leanpub must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, Leanpub has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, Leanpub can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead. Frankly, our recommendation about using the `float` attribute is to save your time and not do it. Floating images and wrapping text occasionally do work nicely, but more often than not they leave something to be desired. Basically, it really only works decently for small images, and not in conjunction with anything but normal paragraphs. Our PDF rendering is done by producing LaTeX from Markua. LaTeX is great, but its support for floating images requires some manual tweaking at times, and this is not something that Markua encourages or supports: Markua is all about fully-automated layout of books. Finally, for the people who read your book in EPUB on a phone, they will not care about, or benefit from, any work spent floating images.
 
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, Leanpub should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
@@ -1477,6 +1493,8 @@ Whitespace handling is the largest difference between Markua and Markdown, so it
 
 ## Newlines
 
+A> NOTE: This section, like the rest of this document, describes the behaviour of the Markua Beta in Leanpub. This behaviour is **DIFFERENT** than [what is specified in the latest version of the Markua spec](http://markua.com/#differences-with-markua-beta). When the Markua Spec is fully implemented in Leanpub, there will be a way to preserve this behaviour (by specifying `soft-breaks: break`). This way, you won't have to make big changes to your books which have been written using the Markua beta on Leanpub.
+
 {#single-newlines}
 ### Single Newline = Forced Line Break
 
@@ -1508,19 +1526,21 @@ Markua handles two consecutive newlines identically to Markdown: they produce a 
 
 Similarly, Markua handles three or more consecutive newlines identically to Markdown: they produce one blank line, as though only two newlines had been typed.
 
-If you absolutely must insert a bunch of newlines in a row, you can do this by starting a poetry block and doing so:
+If you absolutely must insert a bunch of newlines in a row, you can do this by starting a code block (with three tildes or backticks) and doing so:
 
-~~~
+```
 ...the end of a paragraph.
 
-___
-
-
-
-___
-
-That empty poetry block is 3 lines long, so it adds three poetic blank lines to the output.
 ~~~
+
+
+
+~~~
+
+That empty code block is 3 lines long, so it adds three blank lines of code to the output.
+```
+
+The question of backticks versus tildes just determines which font your blank lines of code will use, since it sets the default language to guess or text.
 
 ### One Blank Line Is Added When Concatenating Manuscript Files
 
@@ -1571,933 +1591,27 @@ Regardless of how it made the determination about whether a sentence has ended, 
 {#lists}
 # Lists
 
-Markua supports two types of lists, bulleted lists and numbered lists, which can be formatted as either simple or complex lists.
-
-The basics of bulleted and numbered lists are discussed first. This is followed by a discussion of simple and complex lists, which will contain examples of both.
+Markua supports two types of lists, bulleted lists and numbered lists.
 
 Note that Markua distinguishes between "bulleted" and "numbered" lists, not between "unordered" and "ordered" lists (as is done by HTML and Markdown), since all lists have an order--otherwise they wouldn't be lists!
 
-{#bulleted-lists}
-## Bulleted Lists
-
-Markua lets you make a bulleted list by starting each list item with either an asterisk (`*`) or a hyphen (`-`), followed by one space, followed by text content. You can't mix and match asterisks and hyphens in the same list.
-
-You can build a bulleted list out of items starting with an asterisk and one space:
+Here are some lists:
 
 ~~~
+1. foo
+2. bar
+3. baz
+
 * foo
 * bar
 * baz
-~~~
-
-You can build a bulleted list out of items starting with a hyphen and one space:
-
-~~~
-- one
-- two
-- three
-~~~
-
-Markua could have supported just one of the asterisk or the hyphen, but this would have been too prescriptive.
-
-To make a bulleted list in Markua:
-
-* Start each list item with either an asterisk (`*`) or a hyphen (`-`).
-* You can't mix and match asterisks and hyphens in the same list.
-* Only one space is allowed after each bullet. Just as with headings, there is no reason to support any other number of spaces, and the increased consistency is a benefit.
-* A single-element bulleted list is a list: although it is a pretty stupid list, treating it as a literal paragraph starting with an asterisk or hyphen would be even stupider.
-
-In terms of style guidance, the preferred bullet type in Markua is the asterisk.
-
-{#numbered-lists}
-## Numbered Lists
-
-In Markua, a numbered list can vary the following:
-
-1. Numbering system
-2. Numbering direction (ascending or descending)
-3. Initial number (or letter, or Roman numeral)
-4. Period or parentheses after the number (or letter, or Roman numeral)
-
-The following choices of numbering system are supported:
-
-1. Decimal numbers
-2. Uppercase letters
-3. Lowercase letters
-4. Uppercase Roman numerals
-5. Lowercase Roman numerals
-
-Unlike in Markdown, in Markua the number that begins the list in the manuscript is the *same* number that begins the list in the output.
-
-To make a numbered list in Markua:
-
-* Start two or more consecutive lines with either a consecutive (e.g. `1.`, `2.`, `3.`) or the first (e.g. `1.`, `1.`, `1.`)  number, letter or Roman numeral, each followed by either a period or right parenthesis, then exactly one space, then text content.
-* Since Markua supports letters and Roman numerals as well as decimal numbers to start lists, the rules about using consecutive numbers or the same number are actually a bit complex. These are discussed later.
-* You need to follow the period or parenthesis with exactly one space. Markua very deliberately does not allow more than one space following the period or right-parenthesis: if your list grows to 10 or more items, you should not waste time adding a space to items 1-9 to line their content up with item 10; similarly, if your list grows to 100 or more items you should not waste time adding yet another space to items 1-99 to line their content up with item 100. So, Markua just forbids more than one space after the period or parenthesis. Besides the time saved, the increased consistency is a benefit.
-
-This set of examples shows many of the normal use cases of lists with the various numbering systems. For the edge cases, see the next sections.
-
-You can build a numbered list out of ascending decimal numbers starting from 1:
-
-~~~
-1. foo
-2. bar
-3. baz
-~~~
-
-You can build a numbered list out of ascending decimal numbers starting from 1, with parentheses used instead of periods:
-
-~~~
-1) foo
-2) bar
-3) baz
-~~~
-
-You can build a numbered list out of ascending decimal numbers followed by periods starting from a higher number:
-
-~~~
-9. foo
-10. bar
-11. baz
-~~~
-
-You can build a numbered list out of ascending decimal numbers followed by parentheses starting from a higher number:
-
-~~~
-9) foo
-10) bar
-11) baz
-~~~
-
-You can build a numbered list out of descending decimal numbers:
-
-~~~
-3. foo
-2. bar
-1. baz
-~~~
-
-You can build a numbered list out of identical decimal numbers, if you are lazy (producing 1, 2, 3):
-
-~~~
-1. foo
-1. bar
-1. baz
-~~~
-
-You can build a numbered list out of ascending lowercase letters:
-
-~~~
-a. foo
-b. bar
-c. baz
-~~~
-
-You can build a numbered list out of ascending lowercase letters, with parentheses used instead of periods:
-
-~~~
-a) foo
-b) bar
-c) baz
-~~~
-
-You can build a numbered list out of ascending uppercase letters:
-
-~~~
-I. foo
-J. bar
-K. baz
-~~~
-
-You can build a numbered list out of ascending uppercase Roman numerals:
-
-~~~
-I. foo
-II. bar
-III. baz
-~~~
-
-You can build a numbered list out of ascending lowercase Roman numerals:
-
-~~~
-i. foo
-ii. bar
-iii. baz
-~~~
-
-### In Markua, It's Hard to Accidentally Make a Numbered List
-
-Markdown has the interesting combination of supporting one element lists and ignoring the number that a list starts with. This means it's possible to inadvertently start a numbered list by beginning any line with a number followed by a period. The example that John Gruber [cites](http://daringfireball.net/projects/markdown/syntax) is the following:
-
-`1986. What a great season.`
-
-In Markdown, this would produce the following single-element numbered list:
-
-`1. What a great season.`
-
-In my opinion, is a blatant violation of the Principle of Least Surprise. (By the way, there is a very gross workaround in Markdown: you prefix the period with a backslash. So, you'd write `1986\. What a great season.` to avoid this.)
-
-Now, if Markua supported single-element numbered lists, this would produce a single-element numbered list:
-
-`1986. What a great season.`
-
-This wouldn't be as bad as what Markdown does, but it wouldn't be good either! Exactly how stupid it would look would be determined by how numbered lists were formatted by Leanpub, but it certainly would look wrong.
-
-But what to do?
-
-What Markua does is define a number of common-sense use cases which *do* make numbered lists, and then backs out the rule which results. The resulting rule is as follows:
-
-**In Markua, a single element numbered list is a numbered list if at least one of the following is true: it uses a parenthesis for its delimiter, it contains a nested list, or it is itself a child of some list item in a list.**
-
-So, something like this is not a list in between two paragraphs. Instead, it's three paragraphs, like you would expect:
-
-```
-Yada yada yada
-
-1986. What a great season.
-
-Yada yada yada
-```
-
-This is true for numbered lists only--single-element bulleted lists are lists. (It's stupid, but the alternative would have been stupider.)
-
-```
-Yada yada yada
-
-* This is a list
-
-Yada yada yada
-```
-
-So, in Markua, the automatic creation of a numbered list only happens if you have two or more lines starting with consecutive or identical numbers, letters or Roman numerals, followed by a period or right parenthesis, followed by a space, followed by text content.
-
-This still has some possibly incorrect interpretations, but these will be a *lot* more rare. This matters: if you get burned by the automatic list creation, and you feel that you have to think about whether you can start a sentence with a number, then writing in Markua would feel more like programming than writing.
-
-#### A Single-Element Numbered List With A Parenthesis Is a Numbered List
-
-This **is** a numbered list:
-
-```
-Yada yada yada
-
-1) Foo
-
-Yada yada yada
-```
-
-This **is** a numbered list:
-
-```
-Yada yada yada
-
-1986) Foo
-
-Yada yada yada
-```
-
-This is **not** a numbered list:
-
-```
-Yada yada yada
-
-1\) Foo
-
-Yada yada yada
-```
-
-This is **not** a numbered list:
-
-```
-Yada yada yada
-
-1986\) Foo
-
-Yada yada yada
-```
-
-This is **not** a numbered list:
-
-```
-Yada yada yada
-
-1. Foo
-
-Yada yada yada
-```
-
-This is **not** a numbered list:
-
-```
-Yada yada yada
-
-1986. Foo
-
-Yada yada yada
-```
-
-#### A Single-Element Numbered List Which Contains A List Is A Numbered List
-
-This is a numbered list:
-
-```
-Yada yada yada
-
-1. Foo
-   a) foo
-   b) bar
-   c) baz
-
-Yada yada yada
-```
-
-This is a numbered list:
-
-```
-Yada yada yada
-
-1986. Foo
-      a) foo
-      b) bar
-      c) baz
-
-Yada yada yada
-```
-
-
-#### A Single-Element Numbered List Which Is Contained in A List Is A Numbered List
-
-This is a numbered list, including the `a) hello` part at the bottom.
-
-```
-Yada yada yada
-
-1. Foo
-   a) foo
-   b) bar
-   c) baz
-2. Bar
-   a) foo
-   b) bar
-   c) baz
-3. Baz
-   a) hello
-
-Yada yada yada
-```
-
-This is a numbered list:
-
-```
-Yada yada yada
-
-1986. Foo
-      a) foo
-      b) bar
-      c) baz
-
-Yada yada yada
-```
-
-## Simple Lists
-
-Both bulleted and numbered lists can either be simple lists or complex lists. Whereas the distinction between bulleted and numbered lists was based on the list delimiter, simple and complex lists are distinguished by the indentation and newlines.
-
-Yes, this distinction essentially comes down to the ancient computer science debate of tabs versus spaces.
-
-**A simple list uses one tab per nested indentation level.**
-
-If you use spaces for indentation, what you are creating is a complex list, which is discussed next.
-
-Besides the formatting rules for bulleted or numbered lists, the rules for a simple list are:
-
-* There are no newlines in list items. Each list item in a simple list is one paragraph with no forced line breaks or blank lines.
-* You cannot insert resources with attribute lists in list items. These are inserted after forced line breaks or blank lines, both of which require newlines, and there are no newlines in list items of simple lists.
-* There is a maximum of **four** levels of nesting of lists, including the outermost list. (So, you can have three levels of nested lists under each outermost list item.)
-* If you try to nest a fifth level of nesting (or more), Leanpub must raise an error.
-* The first indentation level is no indentation: it is at the left margin.
-* You must use exactly one tab per nested indentation level.  (So, the number of tabs you can have is 0, 1, 2 or 3.)
-* You cannot use spaces to indent list items. Simple lists only contain tabs.
-
-This is an example of a simple list which has the maximum number (four) of levels of nested list:
-
-~~~
-1. foo
-	a) lorem
-		i. unus
-			- one
-			- two
-			- three
-		ii. duo
-		iii. tres
-	b) ipsum
-	c) dolor
-2. bar
-3. baz
-~~~
-
-## Flat Lists
-
-The examples of bulleted and numbered lists in the [Bulleted Lists](#bulleted-lists) and [Numbered Lists](#numbered-lists) sections above were *flat lists*, which did not contain any indentation.
-
-Every item in a flat list is at the outermost level, and there are no newlines in list items. A flat list is a special case, in that it conforms to all the rules for *both* a simple list and a complex list.
-
-A flat list is so simple that it is not just a simple list, it's also a complex list. *Whoa.*
-
-## Complex Lists
-
-Whereas simple lists use tabs for indentation and cannot have newlines within list items, **a complex list uses spaces for indentation levels and can have newlines within list items**.
-
-Using spaces allows for a lot more complex formatting of list items which is still understandable, including lining up nested resources and multiple-paragraph list items. So, these are called complex lists not "spaces lists", since the distinguishing feature is the complexity supported by the spaces, not the spaces themselves.
-
-Besides the formatting rules for bulleted or numbered lists, the rules for a complex list are:
-
-* Complex lists only contain spaces. You cannot use tabs to indent list items or line up content in list items. If you like hitting the tab key, ensure that you set your text editor to convert tabs to spaces.
-* Each list item in a complex list can be one or more paragraphs, and each paragraph can contain forced line breaks. Specifically, there can be forced line breaks (formed by single newlines) and blank lines (formed by exactly two consecutive newlines) in list items.
-* You can insert resources with attribute lists in list items. These are inserted after forced line breaks or blank lines.
-* After any forced line break or blank line, the content (including a nested list) must be lined up with the beginning of the content in the above line using the appropriate number of spaces (not tabs). This rule is discussed further in the [Complex List Indentation](#complex-list-indentation) section below.
-* There is a maximum of **four** levels of nesting of lists, including the outermost list. So, you can have three levels of nested lists under each outermost list item.
-* If you try to nest a fifth level of nesting (or more), Leanpub must raise an error.
-* The first indentation level is no indentation: it is at the left margin.
-
-A> Yes, this is one of the reasons why simple lists cannot contain newlines inside list items. If that was allowed, the natural thing to do would be to support using tabs and spaces to align complex content in those list items. However, what this would also result in would be that converting tabs to spaces could break a list: if we allowed tabs to be used to align subsequent paragraphs in a list item, then converting those tabs to spaces could, in certain cases, result in an incorrect number of spaces being used. This would then result in a valid list becoming an invalid list. A common text editor setting which modifies formatting in an invisible way should not be able to break a Markua document, so forcing tab-indented lists to be simple lists ensures that this is the case. This is preferable to either banning tabs (since many people prefer tabs) or to attempting to support complex lists using tabs (which would be both brittle and confusing).
-
-As discussed, if you attempt to nest more than four levels of nesting, Leanpub must raise an error. However, if you violate the indentation rules or newline rules of both simple lists and complex lists, Leanpub must just interpret your list as normal non-list content, such as a paragraph with line breaks. The reason for this is simple: every block element which is not a list violates the rules for lists--otherwise it would be a list! So, the only "this is not a list" property which actually causes an error is an attempt to add more that four levels of nesting to a simple or complex list. Any other mistake just results in the list being not a list, in order to be more permissive about how Markua documents can be formatted.
-
-### Complex List Examples
-
-You can do everything with a complex list that you can do with a simple list. This is a complex list which is the equivalent of the nested list from the simple list example above:
-
-~~~
-1. foo
-   a) lorem
-      i. unus
-         - one
-         - two
-         - three
-      ii. duo
-      iii. tres
-   b) ipsum
-   c) dolor
-2. bar
-3. baz
-~~~
-
-However, you can do a lot more with a complex list as well.
-
-You can add optional blank lines between some or all of the nested lists, just for readability:
-
-~~~
-1. foo
-
-   a) lorem
-      i. unus
-         - one
-         - two
-         - three
-      ii. duo
-      iii. tres
-
-   b) ipsum
-
-   c) dolor
-
-2. bar
-
-3. baz
-~~~
-
-You can make multiple paragraph list items using blank lines, and add forced line breaks using single newlines:
-
-~~~
-1. This is the first paragraph in the first item in the list.
-
-   This is the second paragraph in the first item in the list. It is followed by a nested list.
-
-   a) lorem
-      i. unus
-         - This is part of the first list item in a nested list.
-           This is still part of the first list item in a nested list, with a forced line break.
-         - two
-         - three
-      ii. duo
-      iii. tres
-
-   b) ipsum
-
-   c) dolor
-
-2. bar
-
-3. baz
-~~~
-
-Note that the amount of space to indent is determined by the content, and that is determined by the width of the number:
-
-~~~
-9. This is the first item in the list.
-   This is still part of the first item in the list.
-   a) lorem
-   b) ipsum
-   c) dolor
-10. This is the second item in the list.
-    This is still part of the second item in the list.
-    a) lorem
-    b) ipsum
-    c) dolor
-~~~
-
-This is a numbered list which contains five list items. It includes an inline code resource, a local code resource, and multiple-line list items:
-
-~~~
-1. This is part of the first item in the list.
-   ```ruby
-   puts "hello"
-   ```
-   This is still part of the first item in the list.
-2. This is the second item in the list.
-   {format: ruby}
-   ![Hello, World](hello.rb)
-   This is still part of the second item in the list.
-3. This is the third item in the list.
-   This is still part of the third item in the list.
-4. This is the fourth item in the list.
-   This is still part of the fourth item in the list.
-5. This is the fifth item in the list.
-~~~
-
-This is a bulleted list with the same complexity:
-
-~~~
-* This is part of the first item in the list.
-  ```ruby
-  puts "hello"
-  ```
-  This is still part of the first item in the list.
-* This is the second item in the list.
-  {format: ruby}
-  ![Hello, World](hello.rb)
-  This is still part of the second item in the list.
-* This is the third item in the list.
-  This is still part of the third item in the list.
-* This is the fourth item in the list.
-  This is still part of the fourth item in the list.
-* This is the fifth item in the list.
-~~~
-
-Neither the numbered or bulleted list above had multiple paragraphs in it, just forced line breaks. This is what those lists look like with multiple paragraphs instead...
-
-This is the numbered list version:
-
-~~~
-1. This is part of the first item in the list.
-
-   ```ruby
-   puts "hello"
-   ```
-
-   This is still part of the first item in the list.
-
-2. This is the second item in the list.
-
-   {format: ruby}
-   ![Hello, World](hello.rb)
-
-   This is still part of the second item in the list.
-
-3. This is the third item in the list.
-
-   This is still part of the third item in the list.
-
-4. This is the fourth item in the list.
-
-   This is still part of the fourth item in the list.
-
-5. This is the fifth item in the list.
-~~~
-
-This is the bulleted list version:
-
-~~~
-* This is part of the first item in the list.
-
-  ```ruby
-  puts "hello"
-  ```
-
-  This is still part of the first item in the list.
-
-* This is the second item in the list.
-
-  {format: ruby}
-  ![Hello, World](hello.rb)
-
-  This is still part of the second item in the list.
-
-* This is the third item in the list.
-
-  This is still part of the third item in the list.
-
-* This is the fourth item in the list.
-
-  This is still part of the fourth item in the list.
-
-* This is the fifth item in the list.
-~~~
-
-To reiterate, single blank lines (two newlines) make paragraphs, and forced line breaks (single newlines) stay in the same paragraph.
-
-~~~
-Here's a paragraph before the list.
-
-1. This is the first paragraph in the first list item. Yay!
-
-   This is a second paragraph in the first list item.
-
-2. The second list item is boring.
-
-3. The third list item has three paragraphs. This is the first paragraph.
-   This is still part of the first paragraph.
-
-   Here's the second paragraph in the third list item.
-
-   Here's the third paragraph in the third list item.
-
-Here's a paragraph after the list.
-~~~
-
-### Blank Lines in Complex Lists
-
-#### Single Blank Lines Within Complex List Items
-
-It is legal to add single blank lines in between list items, to separate the list item into multiple paragraphs.
-
-If there is a blank line within a list item, there **must** also be a blank line at the end of the list item.
-
-The reason for this is simple: since paragraphs are separated by blank lines, and since lists support multiple-paragraph list items, you need to add a blank line at the end of a multiple-paragraph list item for symmetry. Otherwise, you can write something ugly like this:
-
-~~~
-1. foo
-
-   bar
-2. baz
-~~~
-
-The above example is so ugly it's not a legal Markua complex list, and instead must be interpreted as paragraphs.
-
-The correct way to write it is:
-
-~~~
-1. foo
-
-   bar
-
-2. baz
-~~~
-
-#### Two Consecutive Blank Lines End A Complex List
-
-Whereas one blank line can be used in between list items for spacing or between other list item content to separate it into paragraphs, two blank lines always end a list and start a new block element, such as a paragraph or a new list.
-
-There is no reason to be able to add two blank lines in between list items. However, there are reasons to wish to have two lists in a row in a Markua document. So, two blank lines in between two list items stops the previous list and starts a new list. There is no need to use some kind of garbage syntax to separate lists--just add an extra blank line.
-
-Note, however, that two blank lines between single-element numbered lists would actually not produce two numbered lists since, again, in Markua single-element numbered lists *are not lists*.
-
-This all sounds a bit complex, but it actually results in behaviour which is as unsurprising as possible to the author, and a lot less surprising than standard Markdown. This is shown by the following examples...
-
-This is one flat list, which is both as simple list and a complex list:
-
-~~~
-* list one item one
-* list one item two
-* list one item three
-~~~
-
-This is one list. Since there are blank lines, it's a complex list:
-
-~~~
-* list one item one
-
-* list one item two
-
-* list one item three
-~~~
-
-These are two flat lists. Again, flat lists are both simple lists and complex lists:
-
-~~~
-* list one item one
-* list one item two
-* list one item three
-
-
-* list two item one
-* list two item two
-* list two item three
-~~~
-
-These are two complex lists:
-
-~~~
-* list one item one
-
-* list one item two
-
-* list one item three
-
-
-* list two item one
-
-* list two item two
-
-* list two item three
-~~~
-
-These are two flat lists. The first is a one-element list; the second is a three-element list:
-
-~~~
-* list one item one
-
 
-* list two item one
-* list two item two
-* list two item three
+- foo
+- bar
+- baz
 ~~~
 
-These are also two flat lists. The first is a one-element list; the second is a three-element list:
-
-~~~
-* list one item one
-
-
-* list two item one
-
-* list two item two
-
-* list two item three
-~~~
-
-These are two flat lists:
-
-~~~
-1. list one item one
-2. list one item two
-3. list one item three
-
-
-1. list two item one
-2. list two item two
-3. list two item three
-~~~
-
-These are two complex lists:
-
-~~~
-1. list one item one
-
-2. list one item two
-
-3. list one item three
-
-
-1. list two item one
-
-2. list two item two
-
-3. list two item three
-~~~
-
-This is a normal paragraph followed by a flat list, since single-element numbered lists are not lists. This example shows the correctness of this decision:
-
-~~~
-1986. What a great season.
-
-
-1. list one item one
-2. list one item two
-3. list one item three
-~~~
-
-This is also a normal paragraph followed by a flat list, since, again, single-element numbered lists are not lists. This highly-contrived example will confuse anyone reading your manuscript:
-
-~~~
-1. This is actually a paragraph not a list, since single-element numbered lists are not lists.
-
-
-2. list one item one
-3. list one item two
-4. list one item three
-~~~
-
-This is also a normal paragraph followed by a complex list, but this more-contrived example would confuse anyone reading your manuscript:
-
-~~~
-1. This is actually a paragraph not a list.
-
-
-1. list one item one
-
-2. list one item two
-
-3. list one item three
-~~~
-
-Again, this is also a normal paragraph followed by a complex list, but this even-more-contrived example would confuse anyone reading your manuscript:
-
-~~~
-1. This is actually a paragraph not a list.
-
-
-2. list one item one
-
-3. list one item two
-
-4. list one item three
-~~~
-
-### Parsing of Inline Code Resources Inside List Items
-
-When inserting a code resource as an inline resource in a list item, it must be indented to line up with the list item content it is a sibling of.
-
-For example, in the following list, the inline code blocks are indented by three spaces:
-
-~~~
-1. This is part of the first item in the list.
-
-   ```ruby
-   puts "hello"
-   ```
-
-   This is still part of the first item in the list.
-
-   ```java
-   public class Hello {
-       public static void main(String[] args) {
-           System.out.println("hello");
-       }
-   }
-   ```
-
-2. This is the second item in the list.
-~~~
-
-When the code itself is output, the number of spaces that the list was indented by must be subtracted from the output by Leanpub.
-
-So, when this list is output, in the first example, `puts "hello"` and `public class Hello {` would both start with no indentation, while the `       public static void main(String[] args) {` line would be output with 4 spaces of indentation, not 7.
-
-{#complex-list-indentation}
-### Complex List Indentation
-
-The rule for complex list indentation is as follows:
-
-"After any forced line break or blank line, the content (including a nested list) must be lined up with the beginning of the content in the above line using the appropriate number of spaces (not tabs). This rule is discussed further in the [Complex List Indentation](#complex-list-indentation) section below."
-
-This rule is very strict, and it has a number of consequences.
-
-First, I want to explain why this rule is the way it is.
-
-The goal is to ensure that all complex lists look the same to every author or editor who works on a manuscript, regardless of their tab settings. Complex lists are, well, complex, and being able to reason clearly about them is important. So, the first goal of the formatting rules is to ensure maximum readability. This is why tabs are banned from complex lists.
-
-Next, in terms of the amount of indentation.
-
-The amount of indentation inside a complex list item is actually *not* arbitrary; **it is completely determined by how many spaces you need to line up with the content in the line above the list item**. For a bulleted list this will always be 2 spaces (1 for the `*` or `-`, followed by 1 for the space); for a numbered list this will always be at least 3 spaces (1 or more for the number/letter/Roman numeral, 1 for the `.` or `)`, and 1 for the space).
-
-Now, this has an important and slightly annoying consequence: while nested lists will always line up with the content of the list item, there are certain situations in which nested lists will not line up with each other.
-
-Specifically, there are three of them which are noteworthy:
-
-1. Numbered lists with decimal numbers which go above 9
-2. Numbered lists with uppercase or lowercase letters which go above z
-3. Numbered lists with Roman numerals
-
-These situations are shown below.
-
-Numbered lists with decimal numbers which go above 9:
-
-~~~
-8. foo
-   bar
-   a) lorem
-   b) ipsum
-9. foo
-   bar
-   a) lorem
-   b) ipsum
-10. foo
-    bar
-    a) lorem
-    b) ipsum
-11. foo
-    bar
-    a) lorem
-    b) ipsum
-~~~
-
-Numbered lists with uppercase or lowercase letters which go above z:
-
-~~~
-y) foo
-   bar
-   a) lorem
-   b) ipsum
-z) foo
-   bar
-   a) lorem
-   b) ipsum
-aa) foo
-    bar
-    a) lorem
-    b) ipsum
-ab) foo
-    bar
-    a) lorem
-    b) ipsum
-~~~
-
-Lists with Roman numerals:
-
-~~~
-i) foo
-   bar
-   a) lorem
-   b) ipsum
-ii) foo
-    bar
-    a) lorem
-    b) ipsum
-iii) foo
-     bar
-     a) lorem
-     b) ipsum
-iv) foo
-    bar
-    a) lorem
-    b) ipsum
-v) foo
-   bar
-   a) lorem
-   b) ipsum
-~~~
-
-Now, frankly, the Roman numeral example looks pretty bad. However, nesting anything inside Roman numerals looks bad. For example, if complex lists in Markua worked with a constant amount of spaces, then they would not line up with the content of the list items.
-
-~~~
-This is not a Markua list, and will be output a really ugly paragraph with a bunch of forced line breaks:
-
-i) foo
-   bar
-   a) lorem
-   b) ipsum
-ii) foo
-    bar
-   a) lorem
-   b) ipsum
-iii) foo
-     bar
-   a) lorem
-   b) ipsum
-
-Again, the above is not a list.
-~~~
+For the exact rules about lists that Markua is going to support once it's fully-implemented on Leanpub, see <https://spec.commonmark.org/0.29/#lists>.
 
 {#definition-lists}
 # Definition Lists
@@ -2575,7 +1689,7 @@ ruby
 Here's a paragraph after the list.
 ~~~
 
-Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored. Like list items, definition list items are not poetry.
+Just as with list items, any leading whitespace after the line break is used to continue the definition list item, and is thus ignored.
 
 With the rise of mobile and the narrower screen reading experience becoming the new default, definition lists may end up being more useful than tables in many Markua documents.
 
@@ -2995,7 +2109,7 @@ Quizzes or exercises in a textbook consist of two things:
 1. Questions, typically in the chapter itself.
 2. Answers, typically at the back of the book.
 
-The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices. The specific location that they are positioned can be controlled by the author using [book section directives](#book-section-directives), discussed later.
+The questions in the chapter essentially are placed there like any other block element, such as an aside or blurb. The answers are positioned at the back of the book, along with other elements like the index and appendices.
 
 There is only one syntax to create a quiz or exercise. For a quiz, it's by wrapping the quiz in `{quiz}` ... `{/quiz}`; for an exercise, it's by wrapping the exercise in `{exercise}` ... `{/exercise}`.
 
@@ -3462,8 +2576,6 @@ Here is some unrelated text.
 Here is some more unrelated text.
 ~~~
 
-Whether the numbering of footnotes restarts every chapter is something that can be specified by the [`restart-footnote-numbering`](#setting-keys-and-values) setting.
-
 ### Endnotes
 
 Books often have endnotes. Sometimes these are instead of footnotes, but other times, these are in addition to footnotes. So, it makes sense for Markua to define separate syntaxes for both, rather than just defining one "footnote or endnote" syntax and letting the author pick whether the notes are footnotes or endnotes via a global setting.
@@ -3483,8 +2595,6 @@ Then, you define the endnote later in the document, using the same square bracke
 ~~~
 
 Just as with footnotes, if you wish to write multiple paragraphs in an endnote, you must indent the subsequent paragraphs by four spaces or one tab.
-
-Whether the numbering of endnotes restarts every chapter is something that can be specified by the [`restart-endnote-numbering`](#setting-keys-and-values) setting.
 
 ### Single Reference to Footnotes and Endnotes
 
@@ -3715,10 +2825,6 @@ If a text attribute value contains a quote, it must be "escaped" with a backslas
 
 As previously discussed, there is special syntactic sugar for ids: `{#foo}` is equivalent to `{id: foo}`. However, ids are just attributes.
 
-### `title` Attributes
-
-Markua headings (part, chapter, section, sub-section, etc.) and figures can all have `title` attributes specified in an attribute list. This is text which overrides what is displayed for the heading or figure in the table of contents. For a heading, it is analogous to the `title` attribute on a resource inserted as a figure, which specifies the text to use for the figure in the appropriate list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a heading does not have a title attribute, the text of the heading itself is used--which is quite often exactly what is desired. Use of a `title` attribute is always optional; it's only used when the default behaviour of using the heading text (or the `caption` attribute for a resource) is not appropriate, say if it's too long.
-
 {#conditional-inclusion}
 ### Conditional Inclusion Attributes on Headings: `book`, `sample`
 
@@ -3778,7 +2884,7 @@ Leanpub must raise an error if it encounters a conditional inclusion attribute u
 {#directives}
 ## Directives
 
-Directives are switches which affect the future behaviour of Leanpub.
+Directives are switches which affect the parsing of a Markua document.
 
 The syntax for directives is simple: they are just contained in an attribute list. The only difference is that the attribute list is inserted an a line by itself, with one blank line above and below it. (There are two exceptions: if the directive is at the beginning of a manuscript file, you can omit the blank line above it; if it's at the end of a manuscript file, you can omit the blank line below it.)
 
@@ -3818,6 +2924,23 @@ Hello world.
 
 These directives have not yet been updated to `section` directives per the Markua Spec.
 
+
+## Page Breaks
+
+Despite how much Markua encourages you to not worry about formatting, sometimes you really just need to add a page break. Pretending otherwise would not be pragmatic.
+
+So, Markua supports adding a page break with `{pagebreak}`. This looks a lot like a directive, but it's not, since it only has an effect once, not going forward.
+
+Here's an example:
+
+```
+foo
+
+{pagebreak}
+
+bar
+```
+
 {backmatter}
 
 # Appendices
@@ -3830,6 +2953,8 @@ Inline HTML, in which HTML is inserted directly in the content of a Markua docum
 HTML is just one possible output format, and other possible Markua output formats (such as PDF) are not based on HTML. If inline HTML was supported, Leanpub would have to support parsing and meaningfully outputting all of HTML syntax as well as all of Markua syntax.
 
 Markua and Markdown have different use cases. Markdown is a better way to write HTML; Markua is a better way to write a book. Since Markdown's only output format target is HTML, it might as well support inline HTML: generating HTML from HTML is as simple as passing the HTML through. From an implementation perspective, Markdown gets inline HTML support for free.
+
+Note that by "Markdown" in the previous paragraph, I mean the format originally defined by John Gruber, best-specified by CommonMark and extended by formats such as GitHub Flavored Markdown. All of these forms of Markdown DO support inline HTML. However, [Leanpub Flavoured Markdown](https://leanpub.com/lfm/read) does NOT support inline HTML, even though it has "Markdown" as part of its name. Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically Markdown plus some extensions minus inline HTML. So, Leanpub does not support inline HTML, regardless of whether you use Markua or Leanpub Flavoured Markdown.
 
 By not supporting inline HTML, Markua imposes more constraints on writers who would be tempted to use inline HTML for layout purposes. Since Markua does not support inline HTML, attempting to do complex layout in Markua using HTML is just not possible. And since it's not possible, the temptation to procrastinate by doing formatting is reduced.
 
