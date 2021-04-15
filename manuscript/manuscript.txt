@@ -2909,9 +2909,6 @@ Baz
 Hello world.
 ```
 
-These directives have not yet been updated to `section` directives per the Markua Spec.
-
-
 ## Page Breaks
 
 Despite how much Markua encourages you to not worry about formatting, sometimes you really just need to add a page break. Pretending otherwise would not be pragmatic.
