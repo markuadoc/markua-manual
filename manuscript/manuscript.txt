@@ -770,7 +770,7 @@ Inline resources can be of type `code`, `math` (regardless of format), `table`, 
 {#resource-types-and-formats}
 ## Resource Types and Formats
 
-Leanpub supports these types of resources: `audio`, `code`, `image` and `video`. Each type of resource has a number of supported formats. Any of the resource types can be inserted as a local resource, and many of the resource types can also be inserted as an inline resource or web resource.
+Leanpub supports these types of resources: `audio`, `code`, `image` and `video`. Each type of resource has a number of supported formats. Any of the seven resource types can be inserted as a local resource, and many of the resource types can also be inserted as an inline resource or web resource.
 
 Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes.
 
