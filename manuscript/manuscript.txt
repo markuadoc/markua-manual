@@ -1031,7 +1031,7 @@ The full version of the talk is here:
 {#code}
 ### Code
 
-Currently, code can only be a local or inline resource. Code as a web resource will be added to Markua 0.29. The same resource syntax applies to code as to all other resources.
+Currently, code can only be a local or inline resource. Web code resources do not currently work in Leanpub's Markua support, but will be added to Markua 0.29 when it is released. The same resource syntax applies to code as to all other resources.
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a code resource, it is ignored.
 
@@ -1129,10 +1129,6 @@ Here's a paragraph before the figure.
 
 Here's a paragraph after the figure.
 ~~~
-
-#### Web Code Resources
-
-Web code resources do not currently work in Leanpub's Markua support, but will be added to Markua 0.29 when it is released.
 
 {#inline-code-resources}
 #### Inline Code Resources
