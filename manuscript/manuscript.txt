@@ -440,9 +440,11 @@ Markua documents are written in plain text, either in one text file or multiple 
 Resources vary in four different ways:
 
 1. **Insertion Methods**: Span and Figure
-2. **Locations**: Local, Web and Inline
-3. **Types**: `audio`, `code`, `image`, `math`, `video`
+2. **Locations**: Local, Web[^web_caveat_one], and Inline
+3. **Types**: `audio`, `code`, `image`, `math`, `table`, and `video`
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, etc.
+
+[^web_caveat_one]: Currently, in Leanpub's Markua support only audio, images, and videos can be inserted using web locations. Functionality for code, math, and table resources with web locations will be added in Markua 0.29.
 
 Before going into more detail, it's helpful to consider a brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
@@ -465,7 +467,7 @@ The last figure in the example above showed an **attribute list**, which is a li
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown.
 
-Tables are also resources, and can also be local, web or inline. However, the table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
+Tables are also resources, but Leanpub's Markua currently only supports them to be inline. However, the table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
 
 Finally, if any resource is missing during book generation, Leanpub will insert something like the "missing image" often seen on web pages into the book.
 
@@ -702,14 +704,14 @@ Here's some text
 and more text.
 ~~~
 
-Finally, note that this is all true for all local or web resources, regardless of resource type. The following two paragraphs which contain a web code resource are also equivalent:
+Finally, note that this is all true for all local or web resources, regardless of resource type. The following two paragraphs, which contain a web video resource, are also equivalent:
 
 ~~~
-Hello in Ruby is a simple ![Hello World in Ruby](http://markua.com/hello.rb) statement.
+A palm tree swaying in the wind ![Palm tree in the wind](http://markua.com/palm_tree.mp4) followed by additional text.
 
-Hello in Ruby is a simple
-![Hello World in Ruby](http://markua.com/hello.rb)
-statement.
+A palm tree swaying in the wind
+![Palm tree in the wind](http://markua.com/palm_tree.mp4)
+followed by additional text.
 ~~~
 
 For the purpose of brevity, this point will not be explained in each section about different resource formats.
@@ -768,7 +770,7 @@ Inline resources can be of type `code`, `math` (regardless of format), `table`, 
 {#resource-types-and-formats}
 ## Resource Types and Formats
 
-Leanpub supports these types of resources: `audio`, `code`, `image` and `video`. Each type of resource has a number of supported formats. Any of the seven resource types can be inserted as a local resource or web resource, and many of the resource types can also be inserted as an inline resource.
+Leanpub supports these types of resources: `audio`, `code`, `image` and `video`. Each type of resource has a number of supported formats. Any of the resource types can be inserted as a local resource, and many of the resource types can also be inserted as an inline resource or web resource.
 
 Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes.
 
@@ -787,7 +789,7 @@ The type and the format can also be inferred from the file extension and, in the
 
 Note that these file extensions are case-insensitive.
 
-Also, as discussed in the [code](#code) section, Leanpub interprets all unspecified file extensions as specifying a resource of type code with a format of `guess`, unless the resource is a web resource. If the type and format are not specified and the resource is a web resource, Leanpub may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, a domain of `instagram.com` may be assumed to be of type `image`, and a domain of github.com may be assumed to be of type `code`.
+Also, as discussed in the [code](#code) section, Leanpub interprets all unspecified file extensions as specifying a resource of type code with a format of `guess`. If the type and format are not specified and the resource is a web resource, Leanpub may use the domain to decide what type of resource to assume. For example, a domain of `youtube.com` may be assumed to be of type `video`, and a domain of `instagram.com` may be assumed to be of type `image`.
 
 If the type is not specified in the attribute list, the format determines the type. The formats can either be specified by the `format` attribute or (in most cases) inferred from the file extension for local and web resources. (Inline resources obviously have no file extension, since they are contained in the body of a Markua manuscript file.)
 
@@ -1029,7 +1031,7 @@ The full version of the talk is here:
 {#code}
 ### Code
 
-Code can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
+Currently, code can only be a local or inline resource. Code as a web resource will be added to Markua 0.29. The same resource syntax applies to code as to all other resources.
 
 As discussed, code cannot have alt text. It's just text. If any alt text is provided for a code resource, it is ignored.
 
@@ -1049,7 +1051,7 @@ The default value of the format attribute for code is complex:
 
 1. For code which is inserted as a span (which is only supported with inline resources), the default format is `text`.
 2. For code which is inserted as a figure which is inserted as an inline resource using three tildes, the default format is `text`.
-3. For all other code, the default format is `guess`. This includes local and web resources inserted as figures, and code inserted as an inline figure using three backticks.
+3. For all other code, the default format is `guess`. This includes local resources inserted as figures and code inserted as an inline figure using three backticks.
 
 Note that the default format can be overridden by specifying it via an attribute list, or after the three backticks in syntactic sugar.
 
@@ -1074,7 +1076,7 @@ The following are the supported attributes for code resources, in addition to th
 
 The default value of the `format` attribute for a code resource inserted as a figure varies based on context.
 
-If the code resource is a local or web resource, it defaults to `guess`.
+If the code resource is a local resource, it defaults to `guess`.
 
 If the code resource is an inline resource, the default varies based on the delimiter, and whether the code is inserted as a span or as a block.
 
@@ -1130,29 +1132,7 @@ Here's a paragraph after the figure.
 
 #### Web Code Resources
 
-Web code resources function identically to how local code resources work, including the significance of file extensions. The only differences is that the files are on the web.
-
-This will be a type of code and a format of `guess` since the file extension is not specified:
-
-~~~
-![Hello World in Ruby](http://markua.com/hello.rb)
-~~~
-
-That is equivalent to:
-
-~~~
-{format: guess}
-![Hello World in Ruby](http://markua.com/hello.rb)
-~~~
-
-If you don't want to take chances you can do this:
-
-~~~
-{format: ruby}
-![Hello World in Ruby](http://markua.com/hello.rb)
-~~~
-
-Note that in the above examples of figures, the text in the square brackets is the figure caption, like it is in all figures.
+Web code resources do not currently work in Leanpub's Markua support, but will be added to Markua 0.29 when it is released.
 
 {#inline-code-resources}
 #### Inline Code Resources
@@ -1302,7 +1282,7 @@ Code resources should have newlines added by the author to ensure that automatic
 {#math}
 ### Math
 
-Math can be a local, web or inline resource, just like any other resource, and the same resource syntax applies to code as to all other resources.
+Currently, math can only be a local or inline resource. Math as a web resource will be added to Markua 0.29. The same resource syntax applies to math as to all other resources.
 
 Leanpub currently only supports LaTeX math.
 
