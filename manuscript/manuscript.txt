@@ -444,7 +444,7 @@ Resources vary in four different ways:
 3. **Types**: `audio`, `code`, `image`, `math`, `table`, and `video`
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, etc.
 
-A> NOTE: Currently, in Leanpub's Markua support, all resource types can be inserted as inline or local resources when it makes sense to do so. However, only audio, images, and videos can be inserted using web locations. Support for code, math, and table resources being inserted using web locations will be added in Markua 0.29, and for now they are limited to inline and local.
+A> NOTE: Currently, in Leanpub's Markua support, all resource types can be inserted as inline or local resources when it makes sense to do so. However, only audio, images, and videos can be inserted as web resources. Support for code, math, and table resources being inserted using web locations will be added in Markua 0.29, and for now they are limited to inline and local.
 
 Before going into more detail, it's helpful to consider a brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
