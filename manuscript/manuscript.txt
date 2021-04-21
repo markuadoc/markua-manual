@@ -467,7 +467,7 @@ The last figure in the example above showed an **attribute list**, which is a li
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown.
 
-Tables are also resources, but Leanpub's Markua currently only supports them to be inline resources. However, the table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
+Tables are also resources, but Leanpub's current Markua implementation, they are currently only supported as inline resources. The table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
 
 Finally, if any resource is missing during book generation, Leanpub will insert something like the "missing image" often seen on web pages into the book.
 
