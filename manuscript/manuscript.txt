@@ -444,7 +444,7 @@ Resources vary in four different ways:
 3. **Types**: `audio`, `code`, `image`, `math`, `table`, and `video`
 4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, etc.
 
-A> NOTE: Currently, in Leanpub's Markua support, all resource types can be inserted as inline or local resources when it makes sense to do so. However, only audio, images, and videos can be inserted using web locations. Support for code, math, and table resources being inserted using web locations will be added in Markua 0.29, and for now they are limited to inline or local (for code resources) or inline-only (for math and table resources).
+A> NOTE: Currently, in Leanpub's Markua support, all resource types can be inserted as inline or local resources when it makes sense to do so. However, only audio, images, and videos can be inserted as web resources. Support for code, math, and table resources being inserted using web locations will be added in Markua 0.29, and for now they are limited to inline and local.
 
 Before going into more detail, it's helpful to consider a brief example of Markua text which shows a number of resources being inserted. These resources have different insertion methods (span and figure), different locations (local, web and inline), different types (image, code) and different formats (png, jpg, ruby)--yet the syntax to insert them is compact and consistent:
 
@@ -467,7 +467,7 @@ The last figure in the example above showed an **attribute list**, which is a li
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local and web resources is similar to Markdown's inline image insertion syntax, and that the syntax for inline resources is similar to the fenced code blocks syntax from popular Markdown extensions including GitHub Flavoured Markdown.
 
-Tables are also resources, but in Leanpub's current Markua implementation they are currently only supported as inline resources. The table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
+Tables are also resources, but in Leanpub's current Markua implementation they are currently only supported as inline and local resources. The table syntax is more elaborate than the syntax for the other resource types, so we discuss tables [later](#tables).
 
 Finally, if any resource is missing during book generation, Leanpub will insert something like the "missing image" often seen on web pages into the book.
 
@@ -770,7 +770,7 @@ Inline resources can be of type `code`, `math` (regardless of format), `table`, 
 {#resource-types-and-formats}
 ## Resource Types and Formats
 
-Leanpub supports these types of resources: `audio`, `code`, `image` and `video`. Each type of resource has a number of supported formats. Any of the seven resource types can be inserted as a local resource, and many of the resource types can also be inserted as an inline resource or web resource.
+Leanpub supports these types of resources: `audio`, `code`, `image` and `video`. Each type of resource has a number of supported formats. Any of the seven resource types can be inserted as an inline or local resource, and many of the resource types can also be inserted as a web resource.
 
 Both the type and the format can be specified in an attribute list, by the respective `type` and `format` attributes.
 
