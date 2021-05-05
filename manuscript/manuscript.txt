@@ -442,7 +442,7 @@ Resources vary in four different ways:
 1. **Insertion Methods**: Span and Figure
 2. **Locations**: Local, Web, and Inline
 3. **Types**: `audio`, `code`, `image`, `math`, `table`, and `video`
-4. **Formats**: `png`, `m4a`, `mp3`, `ruby`, `latex`, etc.
+4. **Formats**: `png`, `mp4`, `mp3`, `ruby`, `latex`, etc.
 
 A> NOTE: Currently, in Leanpub's Markua support, all resource types can be inserted as inline or local resources when it makes sense to do so. However, only audio, images, and videos can be inserted as web resources. Support for code, math, and table resources being inserted using web locations will be added in Markua 0.29, and for now they are limited to inline and local.
 
@@ -1017,7 +1017,7 @@ The following are the supported attributes for audio resources, in addition to t
 ~~~
 The full version of the talk is here:
 
-![Full Talk](talk.m4a)
+![Full Talk](talk.mp3)
 ~~~
 
 #### Web Audio
@@ -1025,7 +1025,7 @@ The full version of the talk is here:
 ~~~
 The full version of the talk is here:
 
-![Full Talk](http://markua.com/talk.m4a)
+![Full Talk](http://markua.com/talk.mp3)
 ~~~
 
 {#code}
