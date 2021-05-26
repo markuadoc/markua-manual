@@ -2651,13 +2651,14 @@ While crosslinks defined as spans do work in paragraphs, they do not work in hea
 This span id in a header will not work!
 ~~~
 
-To define an `id` on a chapter or section heading, you must define it above the heading:
+To repeat: to define an `id` on a chapter or section heading, you **must** define it **immediately above** the heading.
+This is how you do it:
 
 ~~~
 {#chapter1}
 # Chapter 1
 
-This id on a header will work!
+This is how you define an `id` on a header.
 ~~~
 
 #### Defining an id on a Span Element
@@ -2692,7 +2693,7 @@ If you want to define an id on a span while also defining other attributes like 
 The [quick sly fox]{id: quick_sly, i: "Fox, Sly and Quick"} jumped over the lazy dogs.
 ~~~
 
-W> As discussed above, you cannot define id elements on span elements inside chapter or section headers.
+W> As discussed above, you cannot define `id` elements on span elements inside chapter or section headers.
 
 ### Referencing an `id` With a Crosslink
 
