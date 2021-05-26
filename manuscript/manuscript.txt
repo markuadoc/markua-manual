@@ -2672,8 +2672,6 @@ The word Markua{id: markua} has an id.
 Leanpub is based in **Victoria, BC, Canada**{id: victoria}.
 ~~~
 
-W> As discussed above, you cannot define id elements on span elements inside chapter or section headers.
-
 Here's how to use the shorter "syntactic sugar" approach to define an id attribute:
 
 ~~~
@@ -2693,6 +2691,8 @@ If you want to define an id on a span while also defining other attributes like 
 ~~~
 The [quick sly fox]{id: quick_sly, i: "Fox, Sly and Quick"} jumped over the lazy dogs.
 ~~~
+
+W> As discussed above, you cannot define id elements on span elements inside chapter or section headers.
 
 ### Referencing an `id` With a Crosslink
 
