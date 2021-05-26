@@ -2618,9 +2618,46 @@ Here's how to use the shorter "syntactic sugar" approach to define an id attribu
 This is a paragraph with the id of `some-id`.
 ~~~
 
+##### Defining an id on a Chapter or Section Header
+
+The various Markua headers (chapter, section, etc.) are block elements. So, you can define an id on them like this:
+
+~~~
+{#chapter1}
+# Chapter 1
+
+Here is chapter one...
+~~~
+
+Note that you **CANNOT** leave a blank line between the id attribute and what you are attaching it to. So, this **WILL NOT WORK:**
+
+~~~
+{#chapter1}
+
+# Chapter 1
+
+This will not work!
+~~~
+
 #### Defining an id on a Span Element
 
 To define an id on a span element you simply add the id definition immediately after the span element.
+
+{blurb, class: warning}
+# You Cannot Define `id` Attributes on Span Elements in Headers
+
+While crosslinks defined as spans do work in paragraphs, they do not work in headers.
+
+So, you cannot do this:
+
+~~~
+# Chapter 1 {#chapter1}
+
+This will currently not work!
+~~~
+
+To define an `id` on a chapter or section heading, define it above the heading, as shown above.
+{/blurb}
 
 Here's how to use the attribute list syntax to define an id attribute on a span element:
 
