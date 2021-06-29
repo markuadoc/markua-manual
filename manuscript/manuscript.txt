@@ -632,12 +632,6 @@ An inline math resource of `latex` format can be inserted as a span using the fo
 It's a single backtick `followed by inline resource content`$ and then a single backtick and dollar sign (`$`).
 ~~~
 
-An inline math resource of `asciimath` format can be inserted as a span using the following syntax:
-
-~~~
-It's a single backtick `followed by inline resource content`@ and then a single backtick and an at sign (`@`).
-~~~
-
 The [code](#code) and [math](#math) resources are described more fully later.
 
 #### Span Attribute Lists Can Be Used To Set The Format
