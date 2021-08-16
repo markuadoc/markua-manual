@@ -1,5 +1,7 @@
 # The Markua Manual
 
+This version is the "not invented here" lists version. It is obsolete, but is on a branch for reference.
+
 This is the user manual for Markua on Leanpub. It is copyright © 2014-2019 Peter Armstrong. All rights reserved.
 
 The Markua Specification is now based on CommonMark, and it will be posted at <http://markua.com> in the next few weeks.
