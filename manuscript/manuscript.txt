@@ -793,6 +793,14 @@ Web resources are identified by the absolute URL of the resource on the internet
 
 Inline resources can be of type `code`, `math` (regardless of format), `table`, or an `image` resources of `svg` format. Since an SVG image is just XML text, it can be contained inline in the text of a Markua document. This is not something that is true for binary resources like PNG or JPEG images or any type of audio or video file--these can only be local or web resources.
 
+Here is an example of how to insert an inline resource, in this case, a brief code sample:
+
+~~~
+```
+puts "hello world"
+```
+~~~
+
 {#resource-types-and-formats}
 ## Resource Types and Formats
 
