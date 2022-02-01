@@ -837,12 +837,37 @@ Three examples of when this could be desired are:
 2. When writing about a programming language which is not identified correctly by Leanpub, you may want to force the format of the language.
 3. When writing about LaTeX math, you may want to force the type to be `code` not `math`.
 
+Here is an example of how you would to 1. in the list above, where you want to treat a `.svg` file as a resource of type `code` instead of type `image`:
+
+```
+{type: code}
+![](palm-trees.svg)
+```
+
 We will now consider each of the types of resources in more detail, as well as the various formats that they support. We will also discuss the supported attributes for each resource type. Resources have different default attributes based on their type, format and insertion method.
 
 {#images}
 ### Images
 
 The syntax to insert an image is the same compact and consistent syntax that is used for any resource. Local and web resource locations are supported for any type of image; inline resource locations are supported for SVG images only.
+
+Here is an example of how you would insert an image with the filename "palm-trees.jpg":
+
+```
+![](palm-trees.jpg)
+```
+
+To add a caption to the image, type the caption in between the square brackets `[` `]`. Here is an example of adding the caption "Palm Trees" to the image:
+
+```
+![Palm Trees](palm-trees.jpg)
+```
+
+>A # A Note to Authors New to Writing in Plain Text
+>A When we show instructions in this manual like the following, for inserting an image:
+>A `![](palm-trees.jpg)`
+>A ...you have to add the square brackets `[` `]` **even if you are not including a caption**.
+>A This same principle applies to the other instructions in this manual: always do it just like we show you here!
 
 Per the [table](#resource-types-and-formats) of resource types and formats, the following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
 
