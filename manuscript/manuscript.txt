@@ -863,11 +863,11 @@ To add a caption to the image, type the caption in between the square brackets `
 ![Palm Trees](palm-trees.jpg)
 ```
 
->A # A Note to Authors New to Writing in Plain Text
->A When we show instructions in this manual like the following, for inserting an image:
->A `![](palm-trees.jpg)`
->A ...you have to add the square brackets `[` `]` **even if you are not including a caption**.
->A This same principle applies to the other instructions in this manual: always do it just like we show you here!
+A> # A Note to Authors New to Writing in Plain Text
+A> When we show instructions in this manual like the following, for inserting an image:
+A> `![](palm-trees.jpg)`
+A> ...you have to add the square brackets `[` `]` **even if you are not including a caption**.
+A> This same principle applies to the other instructions in this manual: always do it just like we show you here!
 
 Per the [table](#resource-types-and-formats) of resource types and formats, the following types of images are supported in Markua: GIF, PNG, JPEG, SVG and zipped SVG.
 
@@ -886,26 +886,68 @@ The following are the supported attributes for image resources, in addition to t
 `align`
 : The `align` can be `left`, `right` or `middle`. The default is `middle`. Combined with `width` and `height`, this provides basic image formatting. When `align` is specified, text goes above and below the image, but the image and its surrounding whitespace occupies the entire width of the page. In terms of the specific values of `align`, Leanpub interprets `left` as "on the left side of the page", `right` as "on the right side of the page" and `middle` as "in the middle of the content area of the page, respecting margins" in all cases. Finally, note that `inside` and `outside` are not supported for `align`. If you are using those attributes, chances are you should be floating the text around the image by using the `float` attribute, not the `align` attribute.
 
+Here is an example of how you would left-align an image:
+
+```
+{align: left}
+![Palm Trees](palm-trees.jpg)
+```
+
 `alt`
 : The `alt` is the alt text, to be displayed when the image cannot be shown. This is provided in the figure attribute list.
+
+Here is an example of how you would add alt text to an image:
+
+```
+{alt: "An image of palm trees"}
+![Palm Trees](palm-trees.jpg)
+```
 
 `float`
 : The `float` can be `left`, `right`, `inside` or `outside`. The `left` and `right` attribute values mean the same thing as they do with `align`. When `float` is specified, text flows around the image. It is an error to specify both `align` and `float`. Note that `middle` is not supported for `float`, since Markua is not a good choice for the types of advanced layouts which flow text on both sides of an image. For that, you should use something like InDesign; this is why Leanpub can export InDesign files. Also, note that `float` supports `inside` or `outside`, but `align` does not. What Leanpub does with `inside` and `outside` is more complex. Leanpub must interpret `inside` as "near the spine" and `outside` as "away from the spine" in a print book. In an ebook, however, Leanpub has some flexibility in terms of the meaning of `inside` and `outside`: it can either interpret `inside` as "left" or it can interpret `inside` as "left if the language is left-to-right, and right if the language is right-to-left". Similarly, Leanpub can either interpret `outside` as "right" or it can interpret `outside` as "right if the language is left-to-right, and left if the language is right-to-left". If that makes your head hurt, just use `left` and `right` instead. Frankly, our recommendation about using the `float` attribute is to save your time and not do it. Floating images and wrapping text occasionally do work nicely, but more often than not they leave something to be desired. Basically, it really only works decently for small images, and not in conjunction with anything but normal paragraphs. Our PDF rendering is done by producing LaTeX from Markua. LaTeX is great, but its support for floating images requires some manual tweaking at times, and this is not something that Markua encourages or supports: Markua is all about fully-automated layout of books. Finally, for the people who read your book in EPUB on a phone, they will not care about, or benefit from, any work spent floating images.
 
+Here is an example of how you would float an image to the right:
+
+```
+{float: right}
+![Palm Trees](palm-trees.jpg)
+```
+
 `fullbleed`
 : `true` or `false`. The default is `false`. If `true`, Leanpub should ensure that the image is the full size of the page, with no margins on the page. If `false`, the `width`, `height` and `align` attributes are used instead and margins are respected.
 
+Here is an example of how you would set an image to fullbleed:
+
+```
+{fullbleed: true}
+![Palm Trees](palm-trees.jpg)
+```
+
 `height`
 : The height of the image, in percentage of page content area height (respecting margins). This is specified as a number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{height: "70%"}`, `{height: 70%}`, `{height: "70.5%"}` or `{height: 70.5%}`.
+
+Here is an example of how you would set an image height to 50%:
+
+```
+{height: "50%"}
+![Palm Trees](palm-trees.jpg)
+```
 
 `width`
 : The width of the image, in percentage of page content area width (respecting margins). This is specified as an number (integer or float) between 1 and 100 followed by a percentage sign (%). The quotes are optional. So, you can say `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
 
 Note that if only one of `width` and `height` are specified, Leanpub should scale the image proportionally if possible (again, respecting margins). If both `width` and `height` are specified, Leanpub should scale the image accordingly, ignoring the aspect ratio. (So, it's almost always a bad idea to specify both `width` and `height`.)
 
+Here is an example of how you would set an image width to 75%:
+
+```
+{width: "75%"}
+![Palm Trees](palm-trees.jpg)
+```
+
 #### Local Images
 
-The following are some examples of local images:
+The following are some examples of local images, where the images are stored in the `resources` directory:
 
 ~~~
 Here's a paragraph before the first figure.
@@ -929,7 +971,7 @@ In the above example, the first and third images were directly in the `resources
 
 #### Web Images
 
-The following are some examples of web images:
+The following are some examples of web images, where the images are stored online:
 
 ~~~
 Here's a paragraph before the first figure.
@@ -969,6 +1011,8 @@ Here's a paragraph after the figure.
 ##### Adding a Link Around an Image
 
 You can also use the Markua link syntax around an images itself. This is the standard Markdown link syntax which Markua inherited unchanged.
+
+This lets people click an image, and then go to the linked web page:
 
 So, you can do the following:
 
