@@ -515,14 +515,46 @@ A figure can also have attributes. The supported attributes vary based on the ty
 `caption`
 : This is text which is shown near the figure, typically above or below it. Note that the figure caption itself may contain the Markua text formatting specified earlier in the [Text Formatting](#text-formatting) chapter. If no `caption` is provided but a `title` is provided, then the `title` should be used as the caption: it does not make sense to refer to a figure with a title, but for the figure itself to have no caption.
 
+Here is an example, adding the caption "Palm Trees" to the image with the filename "palm-trees.jpg":
+
+```
+{caption: "Palm Trees"}
+[](palm-trees.jpg)
+```
+
 `format`
 : This is the resource format. Different resource types have different legal values for format.
+
+Here is an example, specifying the format (in this case,the Ruby programming language) on a code sample:
+
+~~~
+{format: ruby}
+```
+puts "hello world"
+```
+~~~
 
 `title`
 : This is text which is displayed for the figure wherever the figure is listed (e.g. List of Illustrations, Table of Tables, etc.). If no `title` is provided, the `caption` should be used in those places.
 
+Here is an example, adding the caption "Palm Trees" to the image with the filename "palm-trees.jpg":
+
+```
+{title: "Palm Trees"}
+[](palm-trees.jpg)
+```
+
+*(Please note that this example will not work until we add support for e.g. List of Illustrations, Table of Tables, etc.)*
+
 `type`
 : This is the resource type. This is usually inferred from the format instead of being specified.
+
+Here is an example, adding the type "image" to the image with the filename "palm-trees.jpg":
+
+```
+{type: image}
+![](palm-trees.jpg)
+```
 
 Figures can have alt text and a figure caption. The alt text and figure caption are distinct things. We will discuss the figure caption first and the alt text second.
 
