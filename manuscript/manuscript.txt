@@ -1076,7 +1076,7 @@ If the code resource is an inline resource, the default varies based on the deli
 
 With three backticks the default format is `guess`, and with three tildes, the default format is `text`. This way, you can vary the default without having to type an attribute list: if you want the code language guessed at, use backticks; if you don't, use tildes. Of course, you can specify any attributes you wish with either delimiter, and specified attributes override default ones. The only reason there are different defaults are to make things easier to type. Programmers refer to such niceties as "syntactic sugar".
 
-The default value of block code resources inserted with three backticks can be overridden from `guess` to some other value by setting by the `default-code-language` attribute on the entire Markua document. (This attribute has no effect on resources inserted with three tildes.) The default value of code span resources inserted as spans with single backticks can be overridden from the default value of `text` to some other value by setting the `default-code-span-language` on the entire Markua document.
+The default value of block code resources inserted with three backticks can be overridden from `guess` to some other value by setting by the `default-code-language` attribute on the entire Markua document. (This attribute has no effect on resources inserted with three tildes.)
 
 #### Local Code Resources
 
