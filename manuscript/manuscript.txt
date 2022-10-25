@@ -3816,8 +3816,6 @@ Baz
 Hello world.
 ```
 
-<<<<<<< HEAD
-=======
 ## Page Breaks
 
 Despite how much Markua encourages you to not worry about formatting, sometimes you really just need to add a page break. Pretending otherwise would not be pragmatic.
@@ -3834,7 +3832,6 @@ foo
 bar
 ```
 
->>>>>>> v_0_29
 {backmatter}
 
 # Appendices
