@@ -3816,6 +3816,25 @@ Baz
 Hello world.
 ```
 
+<<<<<<< HEAD
+=======
+## Page Breaks
+
+Despite how much Markua encourages you to not worry about formatting, sometimes you really just need to add a page break. Pretending otherwise would not be pragmatic.
+
+So, Markua supports adding a page break with `{pagebreak}`. This looks a lot like a directive, but it's not, since it only has an effect once, not going forward.
+
+Here's an example:
+
+```
+foo
+
+{pagebreak}
+
+bar
+```
+
+>>>>>>> v_0_29
 {backmatter}
 
 # Appendices
