@@ -38,7 +38,7 @@ This simple format is called Markua.
 
 This is its user manual.
 
-## How to Write a Novel in Markua
+## How to Write a Novel in Markua 0.10
 
 The Markua Manual is long. However, the amount you need to learn to get started is actually very short.
 
@@ -65,8 +65,8 @@ Specifically, these are the rules:
 1. Paragraphs are separated from other paragraphs by blank lines. (To add a blank line, add two consecutive newlines.)
 2. To make a chapter heading, start a line with a pound sign (`#`), followed by a space and the name of the chapter.
 3. To add a thematic break (also known as a scene break), put three asterisks (`* * *`) on a line with only whitespace.
-4. Chapter headings and thematic breaks are separated from paragraphs by single newlines or blank lines. Blank lines are preferred for readability.
-5. By default, single newlines in paragraphs turn into single spaces in the output, so you can manually wrap your paragraphs with newlines if you want. It's optional, however, and typically a waste of time.
+4. Chapter headings and thematic breaks are separated from paragraphs by blank lines (two newlines), made by hitting the Enter or Return key twice.
+5. Single newlines in paragraphs turn into single newlines in the output, like if you hit the carriage return on a typewriter once.
 6. Use `*one asterisk*` for italic and `**two asterisks**` for bold.
 7. All other text and punctuation is typed normally.
 
@@ -290,13 +290,18 @@ You may want to read The Markua Spec if:
 4. You want to see every planned feature in Markua, not just what works in Leanpub today.
 5. You want to see the planned differences with the previous and current versions of Markua on Leanpub, including any differences with what is explained here.
 
-## Markua 0.10 and Markua 0.29
+## Markua 0.10 and Markua 0.30
 
-Leanpub currently implements Markua 0.10, which is what is documented in this manual. So, whenever this manual says "Markua" without a version specified, Markua 0.10 is intended.
+Leanpub currently supports two versions of Markua:
 
-Leanpub will eventually support Markua 0.29, which is specified at <http://markua.com/>, but there is a lot of work to do first before even a beta of Markua 0.29 support can be launched.
+1. Markua 0.10, which is what is documented in this manual
+2. Markua 0.30, which is what is specified at <http://markua.com/>
 
-Markua 0.10 will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
+So, whenever this manual says "Markua" without a version specified, Markua 0.10 is intended.
+
+Even though Markua 0.30 is in beta now (and is the default for new books), Markua 0.10 will still be supported on Leanpub for years.
+
+Finally, if you are creating a new book, we strongly recommend that you use Markua 0.30, not Markua 0.10. It has more features, is more configurable, and is built on a more modern foundation.
 
 ## Differences with Leanpub Flavoured Markdown (LFM)
 
@@ -304,10 +309,10 @@ Besides differences with Markdown in general, Markua also has a number of specif
 
 Leanpub Flavoured Markdown (the predecessor of Markua on Leanpub) is basically Markdown plus some extensions minus inline HTML. So, Markua and Leanpub Flavoured Markdown are similar in that regard, in that neither supports inline HTML. To be clear, Leanpub does not support inline HTML, regardless of whether you use Markua or Leanpub Flavoured Markdown.
 
-Leanpub Flavoured Markdown will still be supported on Leanpub for years after the Markua 0.29 beta is launched.
+Leanpub Flavoured Markdown will still be supported on Leanpub for years.
 
 1. LFM supports the Setext style of Markdown headers (`=====` and `-----`) as well as the atx style of Markdown headers (`# Chapter`, `## Section`, etc.) Leanpub's implementation of Markua 0.10 only supports atx headers. Leanpub's implementation of Markua 0.29 will support the Setext and the atx style of Markdown headers. **So, if you have an existing Markdown document with a lot of Setext headers, you may be better off sticking with LFM for now.** (If, on the other hand, you've never heard of Setext headers and/or you don't use them, this will not be an issue for you.)
-2. **In Leanpub's implementation of Markua 0.10, a single newline in a paragraph is always a forced line break.** This was a mistake, and it should have been configurable. For the reasoning about why a single newline is a forced line break, see [this](#single-newlines). In LFM, a single newline is handled the way that it is done in Markdown: it is treated as a single space, and not as a forced line break, unless the "two space hack" at the end of the line is used. Leanpub's implementation of Markua 0.29 will support configurable handling of single newlines, to be either treated as forced line breaks or as the way that they are treated in Markdown. **So, if you have an existing Markdown document with a lot of single line breaks which you had added just to manually wrap paragraph text in your manuscript, you will DEFINITELY be better off sticking with LFM for now.**
+2. **In Markua 0.10, a single newline in a paragraph is always a forced line break.** This was a mistake, and it should have been configurable. For the reasoning about why a single newline is a forced line break, see [this](#single-newlines). In LFM, a single newline is handled the way that it is done in Markdown: it is treated as a single space, and not as a forced line break, unless the "two space hack" at the end of the line is used. Leanpub's implementation of Markua 0.30 supports configurable handling of single newlines, to be either treated as forced line breaks or as the way that they are treated in Markdown. **So, if you have an existing Markdown document with a lot of single line breaks which you had added just to manually wrap paragraph text in your manuscript, you should DEFINITELY use Markua 0.30 not Markua 0.10.**
 3. In LFM, parts are created with `-#`. In Markua, parts are created with `# Part #` now, and will be created with an attribute list on an atx or Setext heading in future.
 4. In LFM, there is a special syntax for inserting code samples: `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code is just a resource with its own syntax for inserting from external files, and the LFM syntax is not supported.
 5. In LFM, to mark code as added or removed, the magic words were `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`, `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
