@@ -1540,11 +1540,13 @@ Leanpub may do whatever it wants when outputting a table. For example, Leanpub m
 {#whitespace}
 # Whitespace: Spaces, Tabs and Newlines
 
-The goal for the handling of normal whitespace (spaces, tabs and newlines) in Markua is for everything to just work.
+A> **If you do not like the decisions in this section, or if you want the behavior of single newlines to be configurable (to function either as forced line breaks like Markua 0.10, or as single spaces like Markdown), you should upgrade to Markua 0.30. (Markua 0.30 also makes the behavior of Markdown's "two space hack" configurable.) Markua 0.30 is the default for all new books. Markua 0.10 will still be supported for years, don't worry.**
 
-There are the four principles of Markua's whitespace handling:
+The goal for the handling of normal whitespace (spaces, tabs and newlines) in Markua 0.10 is for everything to just work.
 
-1. You should be able to look at a Markua document and know what is produced. Invisible formatting is frowned upon.
+There are the four principles of Markua 0.10's whitespace handling:
+
+1. You should be able to look at a Markua 0.10 document and know what is produced. Invisible formatting is frowned upon.
 2. Paragraphs and sentences should be handled consistently, regardless of indentation and spaces after periods.
 3. Manual whitespace formatting should be discouraged.
 4. Newlines are newlines; spaces are spaces. These are different things.
@@ -1556,11 +1558,9 @@ These simple goals have far-reaching consequences:
 3. All consecutive blank lines after the first blank line are ignored when separating paragraphs, and all consecutive blank lines after the second blank line are ignored when separating lists.
 4. You can't manually wrap text with newlines being used as though they are spaces, but you can add forced line breaks without hacks.
 
-Whitespace handling is the largest difference between Markua and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
+Whitespace handling is the largest difference between Markua 0.10 and Markdown, so it's discussed here, instead of in [the appendix](#markdown-diffs).
 
 ## Newlines
-
-A> NOTE: This section, like the rest of this document, describes the behaviour of the Markua Beta in Leanpub. This behaviour is **DIFFERENT** than [what is specified in the latest version of the Markua spec](http://markua.com/#differences-with-markua-beta). When the Markua Spec is fully implemented in Leanpub, there will be a way to preserve this behaviour (by specifying `soft-breaks: break`). This way, you won't have to make big changes to your books which have been written using the Markua beta on Leanpub.
 
 {#single-newlines}
 ### Single Newline = Forced Line Break in Markua 0.10 (configurable in Markua 0.30)
@@ -1569,7 +1569,7 @@ In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes w
 
 In Markua 0.10, however, a forced line break in the input is a forced line break in all output formats. This is true for paragraphs, lists, blockquotes, asides and blurbs.
 
-If you want the behavior of single newlines to be configurable (to function either as forced line breaks like Markua 0.10, or as single spaces like Markdown), you should upgrade to Markua 0.30. (Markua 0.30 also makes the behavior of Markdown's "two space hack" configurable.)
+Again, if you want the behavior of single newlines to be configurable (to function either as forced line breaks like Markua 0.10, or as single spaces like Markdown), you should upgrade to Markua 0.30. (Markua 0.30 also makes the behavior of Markdown's "two space hack" configurable.)
 
 The following is an example of Markua 0.10's single newlines:
 
