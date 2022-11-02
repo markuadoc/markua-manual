@@ -1563,19 +1563,15 @@ Whitespace handling is the largest difference between Markua and Markdown, so it
 A> NOTE: This section, like the rest of this document, describes the behaviour of the Markua Beta in Leanpub. This behaviour is **DIFFERENT** than [what is specified in the latest version of the Markua spec](http://markua.com/#differences-with-markua-beta). When the Markua Spec is fully implemented in Leanpub, there will be a way to preserve this behaviour (by specifying `soft-breaks: break`). This way, you won't have to make big changes to your books which have been written using the Markua beta on Leanpub.
 
 {#single-newlines}
-### Single Newline = Forced Line Break
+### Single Newline = Forced Line Break in Markua 0.10 (configurable in Markua 0.30)
 
 In Markdown, you can manually wrap headings, paragraphs, lists and blockquotes with single newlines with no effect on the HTML output. Markdown, like HTML, treats single newlines as equivalent to single spaces.
 
-In Markua, however, a forced line break in the input is a forced line break in all output formats. This is true for paragraphs, lists, blockquotes, asides and blurbs.
+In Markua 0.10, however, a forced line break in the input is a forced line break in all output formats. This is true for paragraphs, lists, blockquotes, asides and blurbs.
 
-In ancient history, some text editors did not automatically wrap lines of text, so manual wrapping of plain text files was a good thing to do. Also, for computer programmers, we still do not wrap our text when programming. However, for writing, automatic wrapping of paragraphs is essential for staying in the flow while writing, and for being able to edit your text without needing to re-wrap every line in a paragraph. This is one decision that even Microsoft Word gets right.
+If you want the behavior of single newlines to be configurable (to function either as forced line breaks like Markua 0.10, or as single spaces like Markdown), you should upgrade to Markua 0.30. (Markua 0.30 also makes the behavior of Markdown's "two space hack" configurable.)
 
-The decision in Markua to treat single newlines as forced line breaks means that Markua does *not* need to use the **horrible hack** that Markdown uses to output forced line breaks. In Markdown, to output a forced line break (a `<br/>` tag in HTML), you need to add two spaces at the end of the line, followed by a single newline. This means that it is **impossible** to look at a Markdown document with single newlines in it and understand what they mean: you need to find out if there are invisible formatting characters at the end of the line to find out if the newlines mean "newline" or "single space". Yuck!
-
-Worse, some text editors (like Emacs, the editor I use) can be configured to remove trailing spaces at the ends of lines automatically when a file is saved. So, it's possible for me to dramatically modify a Markdown document by simply opening it and saving it unedited. Yikes!
-
-The following is an example of Markua's single newlines:
+The following is an example of Markua 0.10's single newlines:
 
 ~~~
 I'm paragraph one. Yay!
