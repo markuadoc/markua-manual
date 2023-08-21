@@ -20,7 +20,7 @@ With your magical typewriter, you could easily compare your current manuscript t
 
 If you decided to make a print book, you could press a key on your magical typewriter to get a print-ready PDF. All you would need to do is add a cover. Or, if you wanted to work with a designer or publisher, you could press a different key to generate InDesign. They could then use this as a starting point for producing a beautiful print book.
 
-Your magical typewriter could even transform your completed book manuscript into a course that anyone in the world could take. All you'd need to do is to add some quizzes and exercises and then press a key for your magical typewriter to publish a massive open online course (MOOC) for you. The quizzes and exercises would mark themselves, and students would get certificates based on how well they did.
+Your magical typewriter could even transform your completed book manuscript into a course that anyone in the world could take. All you'd need to do is to add some quizzes and exercises and then press a key for your magical typewriter to publish an online course for you. The quizzes and exercises would mark themselves, and students would get certificates based on how well they did.
 
 With your magical typewriter, you'd only have to do one thing:
 
@@ -139,7 +139,7 @@ Finally, you can do that with math `d = v_i t + \frac{1}{2} a t^2`$ too.
 
 As you can see, there is more syntax, including bulleted and numbered lists, definition lists, tables, block quotes, external and inline code samples, inline math, etc. However, even with all this, the Markua document remains readable. Exactly how all of this syntax works is explained later.
 
-## How to Write a Course (MOOC) in Markua
+## How to Write a Course in Markua
 
 To write a course in Markua, you can start from scratch or from a book manuscript already formatted in Markua. Literally, all you need to do to turn a book written in Markua into a course is to add some quizzes.
 
@@ -203,13 +203,13 @@ This quiz shows two fill in the blank questions, with multiple answers and with 
 
 As this example shows, the syntax for writing normal content is the same as for books. All that's different is the addition of quizzes and exercises.
 
-Quizzes and exercises have the same type of content. However, with quizzes the marks count toward your mark in the course, and with exercises they don't count. For MOOCs, Leanpub currently supports multiple choice and fill in the blank questions.
+Quizzes and exercises have the same type of content. However, with quizzes the marks count toward your mark in the course, and with exercises they don't count. For courses, Leanpub currently supports multiple choice and fill in the blank questions.
 
 A multiple choice question has 2 or more answer choices, and 1 correct answer choice. The correct answer choice is in a capital letter; incorrect answer choices have lowercase letters.
 
 A fill in the blank question consists of a question and a set of answers. You can even use regular expressions for the answers.
 
-As explained later, there are more types of questions, and more options with these types of questions. However, what is shown above is enough to create a full MOOC out of a Markua book.
+As explained later, there are more types of questions, and more options with these types of questions. However, what is shown above is enough to create a full online course out of a Markua book.
 
 ## Markua: Markdown for Books and Courses
 
@@ -245,13 +245,13 @@ Markua maps Markdown syntax to book concepts, and then adds some new syntax and 
 
 Markua documents can be automatically transformed by Leanpub into every popular type of ebook format. Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document, and can even output print-ready PDFs and InDesign files from them as well.
 
-Markua has been developed with extensive real-world testing and feedback. Markua has been used by Leanpub authors for years, both to create books and massive open online courses (MOOCs).
+Markua has been developed with extensive real-world testing and feedback. Markua has been used by Leanpub authors for years, both to create books and online courses.
 
 Markua's three main contributions are the following:
 
 1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures (parts, chapters, sections, sub-sections, etc.), which provides the ability for Leanpub to produce an ebook from a Markua manuscript with one click.
 2. The unified resource and attribute list syntax, which lets Markua handle audio, code, math and video in the same way that it does images, and which supports inline, local and web resource locations.
-3. The mapping of book structures to courses, and the creation of a plain-text based microformat for course quizzes and exercises, which supports automated marking and automated production of everything which is required for a MOOC.
+3. The mapping of book structures to courses, and the creation of a plain-text based microformat for course quizzes and exercises, which supports automated marking and automated production of everything which is required for an online course.
 
 If you have written something (say blog posts or lecture notes) in Markdown, you can use Leanpub to turn them into an ebook or course with one click. Then, as you go down the path of enhancing the manuscript and adding things which only make sense in books or courses, this process will feel like decorating, not converting.
 
@@ -2167,7 +2167,7 @@ Please note that as mentioned in the previous section, you cannot add icons to c
 
 # Quizzes and Exercises
 
-The final two block elements that Markua provides are quizzes and exercises. These two block elements are very special, however, in that they enable a single Markua document to construct everything from traditional textbooks and paper-based quizzes to entire online courses (or MOOCs). So, they're discussed in their own chapter.
+The final two block elements that Markua provides are quizzes and exercises. These two block elements are very special, however, in that they enable a single Markua document to construct everything from traditional textbooks and paper-based quizzes to entire online courses. So, they're discussed in their own chapter.
 
 Quizzes and exercises are essentially the same. The only difference is that quizzes are intended to be marked, and exercises are not. Because of their similarities, they are discussed here together.
 
@@ -2221,7 +2221,7 @@ Just like with quiz, with an exercise the `id` attribute is **required**. This i
 {#quiz-headings}
 ## Quiz and Exercise Headings and Other Content
 
-A quiz or exercise can contain any Markua content, not just questions and answers. This is true regardless of whether the quiz or exercise is in a MOOC, an ebook or on paper. Note that video and audio resources don't work so well on paper, however.
+A quiz or exercise can contain any Markua content, not just questions and answers. This is true regardless of whether the quiz or exercise is in a course, an ebook or on paper. Note that video and audio resources don't work so well on paper, however.
 
 If a quiz or exercise starts with any type of heading immediately after the `{quiz}` or `{exercise}` line, this heading's content should be considered the name of the quiz or exercise. This can be used in a list of quizzes or exercises produced by Leanpub. Typically the heading will be a chapter heading (`# `), but section headings (`## `) and lower headings also are supported. (The reason for this is that quizzes are sometimes top-level things, and other times are nested inside chapters, sections or sub-sections. Some course authors would correctly feel that the quiz should have the appropriate level of heading given their position in the document.
 
@@ -2249,7 +2249,7 @@ Look at the Leanpub website and read the [pricing essay](https://leanpub.com/pri
 
 ! Answers could include "bootstrapped startup", the spec evolving, removing HTML mapping, etc.
 
-That's it for this quiz, and this MOOC!
+That's it for this quiz, and this course!
 
 **Thanks for taking my course!**
 {/quiz}
@@ -2458,22 +2458,22 @@ As shown by the answer (`"The ratio of a circle's circumference to its diameter"
 `case-sensitive`
 : `true` or `false`. The default is `true`. This sets the behaviour of the specific fill in the blank question. If `true`, the fill in the blank question answer is case-sensitive. If false, it is not. In the case of multiple acceptable answer values, this attribute applies to all of them. Note that this only applies to text string answers, not to regular expressions. For a regular expression to be case-insensitive, you must end it with an `i` after the closing backtick.
 
-## Creating a Course or MOOC from a Markua Document
+## Creating a Course from a Markua Document
 
-Over the past decade, there has been a steady growth of interest in courses delivered over the internet at massive scale. These Massive Open Online Courses, or MOOCs, consist of essentially four things:
+Over the past decade, there has been a steady growth of interest in courses delivered over the internet. These online courses consist of essentially four things:
 
 1. Reading material
 2. Video or audio lectures
 3. Exercises, with answers provided to the student
 4. Quizzes, with answers used to automatically mark the quiz
 
-It turns out the four things in this list all work perfectly in a Markua document. So, not only can Markua be used to easily create a textbook which includes video, audio, images and quizzes, it is also an amazingly simple and flexible way of creating a MOOC. A MOOC is essentially just a textbook which is executable, plus discussion forums and credentials. For example, [Leanpub](https://leanpub.com) authors can click one button to create a massive open online course (MOOC), complete with automated marking for all the quizzes in the course, entirely from one Markua source document.
+It turns out the four things in this list all work perfectly in a Markua document. So, not only can Markua be used to easily create a textbook which includes video, audio, images and quizzes, it is also an amazingly simple and flexible way of creating a course. An online course is essentially just a textbook which is executable, plus discussion forums and credentials. For example, [Leanpub](https://leanpub.com) authors can click one button to create an online course, complete with automated marking for all the quizzes in the course, entirely from one Markua source document.
 
-The fact that a Markua document can be used to create an online course or MOOC means that certain aspects of the syntax for quizzes and exercises are more robust than they would otherwise. One example of this is question alternates.
+The fact that a Markua document can be used to create an online course means that certain aspects of the syntax for quizzes and exercises are more robust than they would otherwise. One example of this is question alternates.
 
 ## Question Alternates
 
-In an online course or MOOC, some professors might not want every question the same, despite the fact that question order and answer order can be randomized. So, Markua supports question alternates, using a simple (if slightly ugly) syntax. Question alternates are only supported in quizzes, since they make no sense to include in exercises.
+In an online course, some professors might not want every question the same, despite the fact that question order and answer order can be randomized. So, Markua supports question alternates, using a simple (if slightly ugly) syntax. Question alternates are only supported in quizzes, since they make no sense to include in exercises.
 
 To create question alternates, every question in the quiz (not just those with alternates) must be numbered sequentially, starting from 1, using a `?#` syntax. This is a question mark followed by the number of the question, e.g. `?1, ?2, ?3`. The questions in a quiz are numbered using sequential positive integers starting from 1: 1, 2, 3, etc.
 
