@@ -1,6 +1,6 @@
 # The Markua Manual
 
-This is the user manual for Markua on Leanpub. It is copyright © 2014-2020 Peter Armstrong. All rights reserved.
+This is the user manual for Markua on Leanpub. It is copyright © 2014-2023 Peter Armstrong. All rights reserved.
 
 The Markua Spec is now based on CommonMark.
 
